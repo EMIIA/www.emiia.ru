@@ -10,11 +10,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="authoring-tool" content="Adobe_Animate_CC">
+<meta name="authoring-tool" content="ЭМИИА | EMIIA">
 <title>man1</title>
 <!-- write your code here -->
-<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="https://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css"/><script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+
+
+<script type="text/javascript"  charset="UTF-8"></script><link rel="stylesheet" crossorigin="ЭМИИА | EMIIA"/><script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
 <script src="https://emiia.github.io/svg/man3.js"></script>
+
+
 <script>
 var canvas, stage, exportRoot, anim_container, dom_overlay_container, fnStartAnimation;
 function init() {
