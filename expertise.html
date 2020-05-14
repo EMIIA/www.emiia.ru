@@ -83,20 +83,10 @@
   <!-- Top menu -->
 
   
-
-  
-  
-
 <div class="w3-top w3-center" href=https://www.emiia.ai z-index="3">
 
-
-
-
 <br/>
 <br/>
-
-
-
 
 <p><a href="https://www.emiia.ai"><img src="https://www.emiia.ai/animate6.svg" 
   width="30" height="35" alt="EMIIA" title="EMIIA AI — Cognitive Radio optics"
@@ -107,6 +97,412 @@
           </div>
       </div>
 
+  
+  
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+
+<style>
+
+
+
+
+
+
+@import url(https://emiia.ai/css?family=Montserrat:300,400,500,700);
+body {
+  font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: radial-gradient(circle, white, white);
+  font-size: 14px;
+
+}
+
+
+button:active, button:focus {
+  outline: none !important;
+}
+button::-moz-focus-inner {
+  border: 0 !important;
+}
+
+
+
+
+
+#header {
+  padding: 0rem;
+  position: fixed;
+  top: 19px;
+  z-index: 20000;
+  left: 1.4%;
+}
+
+#menu {
+  background: white;
+  height: 100%;
+  left: 0px;
+  opacity: 0;
+  overflow: hidden;
+  position: fixed;
+  text-align: left;
+  top: 0;
+  -webkit-transition: all 0.7s ease-in-out;
+  transition: all 0.7s ease-in-out;
+  visibility: hidden;
+  width: 100%;
+  z-index: 11000;
+  
+    
+  
+  
+  
+}
+#menu.open {
+  opacity: 1;
+  visibility: visible;
+}
+#menu.open li:nth-child(1) {
+  -webkit-animation-delay: 0.1s;
+          animation-delay: 0.1s;
+}
+#menu.open li:nth-child(2) {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+}
+#menu.open li:nth-child(3) {
+  -webkit-animation-delay: 0.3s;
+          animation-delay: 0.3s;
+}
+#menu.open li:nth-child(4) {
+  -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s;
+}
+#menu.open li:nth-child(5) {
+  -webkit-animation-delay: 0.5s;
+          animation-delay: 0.5s;
+}
+#menu.open li:nth-child(6) {
+  -webkit-animation-delay: 0.6s;
+          animation-delay: 0.6s;
+}
+#menu.open li:nth-child(7) {
+  -webkit-animation-delay: 0.7s;
+          animation-delay: 0.7s;
+}
+#menu.open li:nth-child(8) {
+  -webkit-animation-delay: 0.8s;
+          animation-delay: 0.8s;
+}
+#menu.open li:nth-child(9) {
+  -webkit-animation-delay: 0.9s;
+          animation-delay: 0.9s;
+}
+#menu.open li:nth-child(10) {
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+}
+#menu.open li {
+  -webkit-animation-duration: 1.0s;
+          animation-duration: 1.0s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-name: fadeInUp;
+          animation-name: fadeInUp;
+}
+#menu ul:hover a {
+  opacity: 0.5;
+}
+#menu ul a {
+  -webkit-transform: translateZ(0);
+  -webkit-transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+}
+#menu ul a:hover {
+  opacity: 1;
+}
+#menu .main-nav {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+#menu .main-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+
+
+
+/* Расстояние между строками */
+#menu .main-nav a {
+  color: black;
+  display: block;
+  font-size: 0 rem;
+  font-weight: bold;
+  padding: 0 rem 0 rem;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+
+
+
+
+
+
+
+
+
+#menu .main-nav a:first {
+  padding-top: 0;
+}
+#menu .menu-footer {
+  padding: 0rem;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+}
+#menu .menu-footer ul {
+  display: inline-block;
+  list-style: none;
+  margin: 0.1;
+  padding: 0;
+}
+#menu .menu-footer ul li {
+  display: inline;
+  margin: 0 0rem;
+}
+#menu .menu-footer a {
+  color: black;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+
+
+/* Контуры вокруг тега */
+.toggle-menu {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  float: left;
+  height: 50px;
+  outline: none;
+  padding: 0;
+  pointer-events: initial;
+  position: relative;
+  vertical-align: middle;
+  width: 50px;
+  z-index: 20000;
+  
+
+  
+}
+
+
+
+
+
+/* средний  тег горизонтальная полоса*/
+.toggle-menu span {
+  background-color: #000;
+  content: "";
+  display: block;
+  height: 0px;
+  right: calc(50% - 13px );
+  position: absolute;
+  top: calc(50% - 1px );
+  
+    
+
+  
+  
+  
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+  -webkit-transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  -webkit-transform 0.2s linear;
+  transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  -webkit-transform 0.2s linear;
+  transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  transform 0.2s linear;
+  transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  transform 0.2s linear, -webkit-transform 0.2s linear;
+  width: 24px;
+}
+
+
+
+
+
+
+
+
+
+/* Внутрений тег на закрытие толщина горизонтальной линии */
+.toggle-menu span:before, .toggle-menu span:after {
+  background-color: #000;
+  content: "";
+  display: block;
+  height: 1.2px;
+  position: absolute;
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+  -webkit-transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  -webkit-transform 0.2s linear;
+  transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  -webkit-transform 0.2s linear;
+  transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  transform 0.2s linear;
+  transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  transform 0.2s linear, -webkit-transform 0.2s linear;
+  width: 24px;
+}
+
+
+
+
+
+
+
+
+
+/* Толщина горизонтальных линий и толщина строк*/
+.toggle-menu span:before {
+  top: 3.7px;
+}
+.toggle-menu span:after {
+  top: -3.8px;
+}
+.toggle-menu.active span {
+  background-color: transparent;
+  -webkit-transition: background 0.2s ease-out;
+  transition: background 0.2s ease-out;
+}
+.toggle-menu.active span:before, .toggle-menu.active span:after {
+  -webkit-transition: top 0.2s ease-out, -webkit-transform 0.2s 0.2s ease-out;
+  transition: top 0.2s ease-out, -webkit-transform 0.2s 0.2s ease-out;
+  transition: top 0.2s ease-out, transform 0.2s 0.2s ease-out;
+  transition: top 0.2s ease-out, transform 0.2s 0.2s ease-out, -webkit-transform 0.2s 0.2s ease-out;
+}
+.toggle-menu.active span:before {
+  top: 0;
+  -webkit-transform: rotate3d(0, 0, 1, -45deg);
+          transform: rotate3d(0, 0, 1, -45deg);
+}
+.toggle-menu.active span:after {
+  top: 0;
+  -webkit-transform: rotate3d(0, 0, 1, 45deg);
+          transform: rotate3d(0, 0, 1, 45deg);
+}
+</style>
+
+
+
+
+
+
+
+
+
+<script>
+  window.console = window.console || function(t) {};
+</script>
+<script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+</head>
+<body translate="no">
+<header id="header">
+<nav class="nav">
+<button class="toggle-menu">
+<span></span>
+</button>
+</nav>
+</header>
+
+
+
+
+<div id="menu" class="">
+
+<nav class="footer-nav">
+
+
+<br/>
+    <br/>
+
+<a><p class="buttond" style="text-align: center"><a href="https://www.emiia.ai" target="_self" style="cursor: pointer; font-size:15.4px;  text-decoration: none; padding:0px; color:#3d85c6; background-color:transparent; border-radius:0px; border: 0px solid #000000; margin-left: 0%;"><img src="https://www.emiia.ai/logo.svg" width="150" height="35" alt="EMIIA"   title="EMIIA AI — Cognitive Radio optics" ></a></p></a>
+
+<br/>
+    <br/>
+
+
+
+
+
+<span style="color: black; font-size:18px; text-indent: 50px; "><p style="text-align: left, margin-left: 40px; "><a  href="https://www.emiia.ru/">Home</a>
+<br/>
+
+<span style="color: black; font-size:14px;">
+<p style="text-align: left"><a href="https://www.emiia.ru/contact.html">About</a>
+<br/>
+
+<span style="color: black; font-size:18px; "><p style="text-align: left margin-left: 40px;"><a  href="https://www.emiia.ru/contact.html">Contact</a>
+<br/>
+
+<span style="color: black; font-size:14px;">
+<p style="text-align: left"><a href="https://www.emiia.ru/media.html">Media</a>
+<br/>
+
+<span style="color: black; font-size:18px; "><p style="text-align: left margin-left: 40px;"><a  href="https://www.emiia.ru/projects.html">Projects</a>
+<br/>
+
+<span style="color: black; font-size:14px;">
+<p style="text-align: left"><a href="https://blog.emiia.ru/">Blog</a>
+<br/>
+
+<span style="color: black; font-size:14px;">
+<p style="text-align: left"><a href="https://emiia.github.io/1/support.html">Feedback</a>
+<br/>
+
+<span style="color: black; font-size:14px;">
+<p style="text-align: left"><a href="https://www.emiia.ru/radiooptics.html">Radio optics</a>
+<br/>
+
+<span style="color: black; font-size:14px;">
+<p style="text-align: left"><a href="https://www.emiia.ru/solutions.html">Solutions</a>
+<br/>
+
+<span style="color: black; font-size:14px;">
+<p style="text-align: left"><a href="https://github.com/EMIIA">Software</a></p>
+<br/>
+
+
+
+
+
+</div>
+</div>
+
+</nav>
+</div>
+
+<script src='https://emiia.ai/jquery.min.js'></script>
+<script id="rendered-js">
+$('.toggle-menu').click(function () {
+  $(this).toggleClass('active');
+  $('#menu').toggleClass('open');
+});
+//# sourceURL=pen.js
+    </script>
+</body>
+</html>
+
+  
   
 
 
@@ -316,7 +712,84 @@ a.ex5:hover, a.ex5:active {text-decoration: underline;}
   </div>
 </div>
 
- 
+
+
+
+
+
+<section>
+
+    <section id="services"  style="text-align: center">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="container">
+        <br/>
+<h2 data-aos="fade-up" data-aos-duration="3000">Рейтинги и каталоги</h2>
+
+         <p class="lead">ICT.Moscow: Цифровые решения разработчиков (#нейросеть, #машинное_обучение, #компьютерное_зрение, #искусственный_интеллект)</p>
+
+</a>
+   <span style="color: #3d85c6;"><p class="lead" style="text-align: center"><a href="https://ict.moscow/cards/?tags=%D0%BD%D0%B5%D0%B9%D1%80%D0%BE%D1%81%D0%B5%D1%82%D1%8C"><strong>Рейтинги&nbsp;</strong><svg xmlns="http://www.w3.org/2000/svg" width="10.283" height="14.283" viewBox="0 0 5.69 6.10"><path d="M2.282 5.26l2.250-2.231L2.292.902" fill="none" stroke="#3d85c6" stroke-width=".9" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+
+</a>
+
+  
+      </div>
+    </div>          
+</section>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<section>
+    <section id="services"  style="text-align: center">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="container">
+
+
+         
+           
+         <p class="lead">Каталог разработчиков цифровых решений #AI, ML, Big data (искусственный интеллект).</p>
+
+   <span style="color: #3d85c6;"><p class="lead" style="text-align: center"><a href="http://list.fintech-lab.ru/"><strong>Подробнее&nbsp;</strong><svg xmlns="http://www.w3.org/2000/svg" width="10.283" height="14.283" viewBox="0 0 5.69 6.10"><path d="M2.282 5.26l2.250-2.231L2.292.902" fill="none" stroke="#3d85c6" stroke-width=".9" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+
+</a>
+      </div>
+    </div>
+  
+  
+
+          
+</section>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        <br/>
+                <br/>
+        
+
+
+
 
 
 
@@ -328,7 +801,6 @@ a.ex5:hover, a.ex5:active {text-decoration: underline;}
       <div class="row">
         <div class="col-lg-8 mx-auto">
             <div class="container">
-        <br/>
 <h2 data-aos="fade-up" data-aos-duration="3000">Независимые экспертизы и заключения</h2>
 
          <p class="lead">Проведена экспертиза проекта в рамках международной программы "Стартап Казахстан" №06-19 от 21.02.2019, получены положительные экспертные заключения от Ассоциации интернета вещей №92 от 06.09.2019 и Отраслевого союза "Нейронет №346 от 14.05.2018.</p>
@@ -378,6 +850,10 @@ XI Международного салона изобретений и новы�
 
 
 
+
+
+
+
 <section>
 <div class="w3-content w3-section" style="max-width:600px">
   <img  src="https://emiia.github.io/1/emiia88.svg" style="width:100%">
@@ -388,7 +864,35 @@ XI Международного салона изобретений и новы�
   
   
 
-          
+
+<section>
+    <section id="services"  style="text-align: center">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="container">
+   
+   <br/>
+        <br/>
+   
+   <h2 data-aos="fade-up" data-aos-duration="3000">Обзоры и сравнения</h2>
+           
+         <p class="lead">Обзоры и экспертные сравнения технологии с мировыми аналогами от Hi-Tech Mail.ru, 3DNews Daily Digital Digest, ICT.Moscow.
+
+</p>
+
+<span style="color: #3d85c6;"><p class="lead" style="text-align: center"><a  href="https://hi-tech.mail.ru/news/crimean-scientists-vision-through-walls/"><strong>Hi-Tech&nbsp;</strong><svg  xmlns="http://www.w3.org/2000/svg" width="10.283" height="14.283" viewBox="0 0 5.69 6.10"><path d="M2.282 5.26l2.250-2.231L2.292.902" fill="none" stroke="#3d85c6" stroke-width=".9" stroke-linecap="round" stroke-linejoin="round"/></svg></a>&nbsp;&nbsp;&nbsp;<a  href="https://3dnews.ru/922717"><strong>3dNews&nbsp;</strong><svg xmlns="http://www.w3.org/2000/svg" width="10.283" height="14.283" viewBox="0 0 5.69 6.10"><path d="M2.282 5.26l2.250-2.231L2.292.902" fill="none" stroke="#3d85c6" stroke-width=".9" stroke-linecap="round" stroke-linejoin="round"/></svg></a>&nbsp;&nbsp;&nbsp;<a  href="https://ict.moscow/card/emiia/"><strong>ICT&nbsp;</strong><svg  xmlns="http://www.w3.org/2000/svg" width="10.283" height="14.283" viewBox="0 0 5.69 6.10"><path d="M2.282 5.26l2.250-2.231L2.292.902" fill="none" stroke="#3d85c6" stroke-width=".9" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+
+</a>
+      </div>
+    </div>
+         
+</section>
+  </div>
+</div>
+
+
+
 
 
 
@@ -429,9 +933,7 @@ XI Международного салона изобретений и новы�
       <div class="row">
         <div class="col-lg-8 mx-auto">
             <div class="container">
-
-
-         
+   
            
          <p class="lead">Агенство стратегических инициатив Leader-ID – информационная система поддержки лидеров и проектов, профиль участника:</p>
 
@@ -440,10 +942,7 @@ XI Международного салона изобретений и новы�
 </a>
       </div>
     </div>
-  
-  
-
-          
+         
 </section>
   </div>
 </div>
@@ -659,7 +1158,8 @@ function openCity(evt, cityName) {
 
 
 
-<div style="position: fixed; top: 7.4%; right: 18px; z-index: +20000;">
+<div style="position: fixed; top: 5.4%; right: 18px; z-index: +20000;">
+
   <a href="https://emiia.github.io/1/preorder.html" title="Preorder">
 <img src="https://www.emiia.ai/store.svg" />
 
@@ -678,411 +1178,6 @@ function openCity(evt, cityName) {
 
 
 
-<div class="container" style="position: fixed; top: 6%; left: 8px; z-index: +1;">
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-
-
-<style>
-
-
-
-
-
-
-@import url(https://emiia.ai/css?family=Montserrat:300,400,500,700);
-body {
-  font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background: radial-gradient(circle, white, white);
-  font-size: 14px;
-
-}
-
-
-button:active, button:focus {
-  outline: none !important;
-}
-button::-moz-focus-inner {
-  border: 0 !important;
-}
-
-
-
-
-
-#header {
-  padding: 0rem;
-}
-
-#menu {
-  background: white;
-  height: 100%;
-  left: 0px;
-  opacity: 0;
-  overflow: hidden;
-  position: fixed;
-  text-align: left;
-  top: 0;
-  -webkit-transition: all 0.7s ease-in-out;
-  transition: all 0.7s ease-in-out;
-  visibility: hidden;
-  width: 100%;
-  z-index: 1100;
-  
-    
-  
-  
-  
-}
-#menu.open {
-  opacity: 1;
-  visibility: visible;
-}
-#menu.open li:nth-child(1) {
-  -webkit-animation-delay: 0.1s;
-          animation-delay: 0.1s;
-}
-#menu.open li:nth-child(2) {
-  -webkit-animation-delay: 0.2s;
-          animation-delay: 0.2s;
-}
-#menu.open li:nth-child(3) {
-  -webkit-animation-delay: 0.3s;
-          animation-delay: 0.3s;
-}
-#menu.open li:nth-child(4) {
-  -webkit-animation-delay: 0.4s;
-          animation-delay: 0.4s;
-}
-#menu.open li:nth-child(5) {
-  -webkit-animation-delay: 0.5s;
-          animation-delay: 0.5s;
-}
-#menu.open li:nth-child(6) {
-  -webkit-animation-delay: 0.6s;
-          animation-delay: 0.6s;
-}
-#menu.open li:nth-child(7) {
-  -webkit-animation-delay: 0.7s;
-          animation-delay: 0.7s;
-}
-#menu.open li:nth-child(8) {
-  -webkit-animation-delay: 0.8s;
-          animation-delay: 0.8s;
-}
-#menu.open li:nth-child(9) {
-  -webkit-animation-delay: 0.9s;
-          animation-delay: 0.9s;
-}
-#menu.open li:nth-child(10) {
-  -webkit-animation-delay: 1s;
-          animation-delay: 1s;
-}
-#menu.open li {
-  -webkit-animation-duration: 1.0s;
-          animation-duration: 1.0s;
-  -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
-  -webkit-animation-name: fadeInUp;
-          animation-name: fadeInUp;
-}
-#menu ul:hover a {
-  opacity: 0.5;
-}
-#menu ul a {
-  -webkit-transform: translateZ(0);
-  -webkit-transition: opacity 0.3s ease-in-out;
-  transition: opacity 0.3s ease-in-out;
-}
-#menu ul a:hover {
-  opacity: 1;
-}
-#menu .main-nav {
-  position: relative;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
-}
-#menu .main-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-
-
-
-
-
-/* Расстояние между строками */
-#menu .main-nav a {
-  color: black;
-  display: block;
-  font-size: 0 rem;
-  font-weight: bold;
-  padding: 0 rem 0 rem;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
-
-
-
-
-
-
-
-
-
-#menu .main-nav a:first {
-  padding-top: 0;
-}
-#menu .menu-footer {
-  padding: 0rem;
-  bottom: 0;
-  left: 0;
-  position: absolute;
-  right: 0;
-}
-#menu .menu-footer ul {
-  display: inline-block;
-  list-style: none;
-  margin: 0.1;
-  padding: 0;
-}
-#menu .menu-footer ul li {
-  display: inline;
-  margin: 0 0rem;
-}
-#menu .menu-footer a {
-  color: black;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
-
-
-/* Контуры вокруг тега */
-.toggle-menu {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  display: inline-block;
-  float: right;
-  height: 50px;
-  outline: none;
-  padding: 0;
-  pointer-events: initial;
-  position: relative;
-  vertical-align: middle;
-  width: 50px;
-  z-index: 1110;
-  
-  
-  position: fixed; top: 4.6%; left: 7px; z-index: +20000;
-  
-}
-
-
-
-
-
-/* средний  тег горизонтальная полоса*/
-.toggle-menu span {
-  background-color: #000;
-  content: "";
-  display: block;
-  height: 0px;
-  right: calc(50% - 13px );
-  position: absolute;
-  top: calc(50% - 1px );
-  
-    
-  position: fixed; top: 9.5%; left: 18px; z-index: +20;
-  
-  
-  
-  -webkit-transform-origin: 50% 50%;
-          transform-origin: 50% 50%;
-  -webkit-transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  -webkit-transform 0.2s linear;
-  transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  -webkit-transform 0.2s linear;
-  transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  transform 0.2s linear;
-  transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  transform 0.2s linear, -webkit-transform 0.2s linear;
-  width: 24px;
-}
-
-
-
-
-
-
-
-
-
-/* Внутрений тег на закрытие толщина горизонтальной линии */
-.toggle-menu span:before, .toggle-menu span:after {
-  background-color: #000;
-  content: "";
-  display: block;
-  height: 1.2px;
-  position: absolute;
-  -webkit-transform-origin: 50% 50%;
-          transform-origin: 50% 50%;
-  -webkit-transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  -webkit-transform 0.2s linear;
-  transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  -webkit-transform 0.2s linear;
-  transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  transform 0.2s linear;
-  transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  transform 0.2s linear, -webkit-transform 0.2s linear;
-  width: 24px;
-}
-
-
-
-
-
-
-
-
-
-/* Толщина горизонтальных линий и толщина строк*/
-.toggle-menu span:before {
-  top: 3.7px;
-}
-.toggle-menu span:after {
-  top: -3.8px;
-}
-.toggle-menu.active span {
-  background-color: transparent;
-  -webkit-transition: background 0.2s ease-out;
-  transition: background 0.2s ease-out;
-}
-.toggle-menu.active span:before, .toggle-menu.active span:after {
-  -webkit-transition: top 0.2s ease-out, -webkit-transform 0.2s 0.2s ease-out;
-  transition: top 0.2s ease-out, -webkit-transform 0.2s 0.2s ease-out;
-  transition: top 0.2s ease-out, transform 0.2s 0.2s ease-out;
-  transition: top 0.2s ease-out, transform 0.2s 0.2s ease-out, -webkit-transform 0.2s 0.2s ease-out;
-}
-.toggle-menu.active span:before {
-  top: 0;
-  -webkit-transform: rotate3d(0, 0, 1, -45deg);
-          transform: rotate3d(0, 0, 1, -45deg);
-}
-.toggle-menu.active span:after {
-  top: 0;
-  -webkit-transform: rotate3d(0, 0, 1, 45deg);
-          transform: rotate3d(0, 0, 1, 45deg);
-}
-</style>
-
-
-
-
-
-
-
-
-
-<script>
-  window.console = window.console || function(t) {};
-</script>
-<script>
-  if (document.location.search.match(/type=embed/gi)) {
-    window.parent.postMessage("resize", "*");
-  }
-</script>
-</head>
-<body translate="no">
-<header id="header">
-<nav class="nav">
-<button class="toggle-menu">
-<span></span>
-</button>
-</nav>
-</header>
-
-
-
-
-<div id="menu" class="">
-
-<nav class="footer-nav">
-
-
-<br/>
-    <br/>
-
-<a><p class="buttond"  style="text-align: center"><a href="https://www.emiia.ai" target="_self" style="cursor: pointer; font-size:15.4px;  text-decoration: none; padding:0px; color:#3d85c6; background-color:transparent; border-radius:0px; border: 0px solid #000000; margin-left: 0%;"><img src="https://www.emiia.ai/logo.svg" width="150" height="35" alt="EMIIA"   title="EMIIA AI — Cognitive Radio optics" ></a></p></a>
-
-<br/>
-    <br/>
-
-
-
-
-
-<span style="color: black; font-size:18px; text-indent: 50px; "><p style="text-align: left, margin-left: 40px; "><a  href="https://www.emiia.ru/">Home</a>
-<br/>
-
-<span style="color: black; font-size:14px;">
-<p style="text-align: left"><a href="https://www.emiia.ru/contact.html">About</a>
-<br/>
-
-<span style="color: black; font-size:18px; "><p style="text-align: left margin-left: 40px;"><a  href="https://www.emiia.ru/contact.html">Contact</a>
-<br/>
-
-<span style="color: black; font-size:14px;">
-<p style="text-align: left"><a href="https://www.emiia.ru/media.html">Media</a>
-<br/>
-
-<span style="color: black; font-size:18px; "><p style="text-align: left margin-left: 40px;"><a  href="https://www.emiia.ru/projects.html">Projects</a>
-<br/>
-
-<span style="color: black; font-size:14px;">
-<p style="text-align: left"><a href="https://blog.emiia.ru/">Blog</a>
-<br/>
-
-<span style="color: black; font-size:14px;">
-<p style="text-align: left"><a href="https://emiia.github.io/1/support.html">Feedback</a>
-<br/>
-
-<span style="color: black; font-size:14px;">
-<p style="text-align: left"><a href="https://www.emiia.ru/radiooptics.html">Radio optics</a>
-<br/>
-
-<span style="color: black; font-size:14px;">
-<p style="text-align: left"><a href="https://www.emiia.ru/solutions.html">Solutions</a>
-<br/>
-
-<span style="color: black; font-size:14px;">
-<p style="text-align: left"><a href="https://github.com/EMIIA">Software</a></p>
-<br/>
-
-
-
-
-
-</div>
-</div>
-
-</nav>
-</div>
-
-<script src='https://emiia.ai/jquery.min.js'></script>
-<script id="rendered-js">
-$('.toggle-menu').click(function () {
-  $(this).toggleClass('active');
-  $('#menu').toggleClass('open');
-});
-//# sourceURL=pen.js
-    </script>
-</body>
-</html>
-
 
 </div>
 </div>
@@ -1094,17 +1189,3 @@ $('.toggle-menu').click(function () {
   
   
   </div>
-
-  
-  </section>
-  
-   </div>
-   </div>
-    </div>
-     </div>
-     
-     
-     
-</div>
-</div>
-</div>
