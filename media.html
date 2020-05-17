@@ -55,13 +55,16 @@
   <link rel="apple-touch-icon" sizes="180x180" href="https://www.emiia.ai/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://www.emiia.ai//favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="https://www.emiia.ai//favicon-16x16.png">
-<link rel="manifest" href="https://www.emiia.ru//site.webmanifest">
+<link rel="manifest" href="https://www.emiia.ru/site.webmanifest">
 <link rel="mask-icon" href="https://www.emiia.ai/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#2d89ef">
 <meta name="theme-color" content="#ffffff">
   
+
+
   
-    <link href="https://www.emiia.ru/aos.css" rel="stylesheet">
+  
+  <link href="https://www.emiia.ru/aos.css" rel="stylesheet">
   <link href="/aos.css" rel="stylesheet">
   
 
@@ -70,9 +73,10 @@
 
 
 
-    <link href="https://emiia.ai/emiia.css" rel="stylesheet">
+    <link href="https://www.emiia.ru/emiia.css" rel="stylesheet">
     
-<link href="https://emiia.ai/site/emiia.css" rel="stylesheet">
+	
+	<link href="/emiia.css" rel="stylesheet">
 
 
   <!-- Custom styles for this template -->
@@ -84,8 +88,6 @@
 
   
 
-  
-  
 
 <div class="w3-top w3-center" href=https://www.emiia.ai z-index="3">
 
@@ -102,10 +104,419 @@
   width="30" height="35" alt="EMIIA" title="EMIIA AI — Cognitive Radio optics"
   z-index="3" ></a></p>
 
-      <div class="w3-center w3-padding-16" href="https://www.emiia.ai">
+      <div class="w3-center " href="https://www.emiia.ai">
 
           </div>
       </div>
+
+  
+      
+      
+      
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+
+<style>
+
+
+
+
+
+
+@import url(https://emiia.ai/css?family=Montserrat:300,400,500,700);
+body {
+  font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: radial-gradient(circle, white, white);
+  font-size: 14px;
+
+}
+
+
+button:active, button:focus {
+  outline: none !important;
+}
+button::-moz-focus-inner {
+  border: 0 !important;
+}
+
+
+
+
+
+#header {
+  padding: 0rem;
+  position: fixed;
+  top: 19px;
+  z-index: 20000;
+  left: 1.4%;
+}
+
+#menu {
+  background: white;
+  height: 100%;
+  left: 0px;
+  opacity: 0;
+  overflow: hidden;
+  position: fixed;
+  text-align: left;
+  top: 0;
+  -webkit-transition: all 0.7s ease-in-out;
+  transition: all 0.7s ease-in-out;
+  visibility: hidden;
+  width: 100%;
+  z-index: 11000;
+  
+    
+  
+  
+  
+}
+#menu.open {
+  opacity: 1;
+  visibility: visible;
+}
+#menu.open li:nth-child(1) {
+  -webkit-animation-delay: 0.1s;
+          animation-delay: 0.1s;
+}
+#menu.open li:nth-child(2) {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+}
+#menu.open li:nth-child(3) {
+  -webkit-animation-delay: 0.3s;
+          animation-delay: 0.3s;
+}
+#menu.open li:nth-child(4) {
+  -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s;
+}
+#menu.open li:nth-child(5) {
+  -webkit-animation-delay: 0.5s;
+          animation-delay: 0.5s;
+}
+#menu.open li:nth-child(6) {
+  -webkit-animation-delay: 0.6s;
+          animation-delay: 0.6s;
+}
+#menu.open li:nth-child(7) {
+  -webkit-animation-delay: 0.7s;
+          animation-delay: 0.7s;
+}
+#menu.open li:nth-child(8) {
+  -webkit-animation-delay: 0.8s;
+          animation-delay: 0.8s;
+}
+#menu.open li:nth-child(9) {
+  -webkit-animation-delay: 0.9s;
+          animation-delay: 0.9s;
+}
+#menu.open li:nth-child(10) {
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+}
+#menu.open li {
+  -webkit-animation-duration: 1.0s;
+          animation-duration: 1.0s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-name: fadeInUp;
+          animation-name: fadeInUp;
+}
+#menu ul:hover a {
+  opacity: 0.5;
+}
+#menu ul a {
+  -webkit-transform: translateZ(0);
+  -webkit-transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+}
+#menu ul a:hover {
+  opacity: 1;
+}
+#menu .main-nav {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+#menu .main-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+
+
+
+/* Расстояние между строками */
+#menu .main-nav a {
+  color: black;
+  display: block;
+  font-size: 0 rem;
+  font-weight: bold;
+  padding: 0 rem 0 rem;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+
+
+
+
+
+
+
+
+
+#menu .main-nav a:first {
+  padding-top: 0;
+}
+#menu .menu-footer {
+  padding: 0rem;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+}
+#menu .menu-footer ul {
+  display: inline-block;
+  list-style: none;
+  margin: 0.1;
+  padding: 0;
+}
+#menu .menu-footer ul li {
+  display: inline;
+  margin: 0 0rem;
+}
+#menu .menu-footer a {
+  color: black;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+
+
+/* Контуры вокруг тега */
+.toggle-menu {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  float: left;
+  height: 50px;
+  outline: none;
+  padding: 0;
+  pointer-events: initial;
+  position: relative;
+  vertical-align: middle;
+  width: 50px;
+  z-index: 20000;
+  
+
+  
+}
+
+
+
+
+
+/* средний  тег горизонтальная полоса*/
+.toggle-menu span {
+  background-color: #000;
+  content: "";
+  display: block;
+  height: 0px;
+  right: calc(50% - 13px );
+  position: absolute;
+  top: calc(50% - 1px );
+  
+    
+
+  
+  
+  
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+  -webkit-transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  -webkit-transform 0.2s linear;
+  transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  -webkit-transform 0.2s linear;
+  transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  transform 0.2s linear;
+  transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  transform 0.2s linear, -webkit-transform 0.2s linear;
+  width: 24px;
+}
+
+
+
+
+
+
+
+
+
+/* Внутрений тег на закрытие толщина горизонтальной линии */
+.toggle-menu span:before, .toggle-menu span:after {
+  background-color: #000;
+  content: "";
+  display: block;
+  height: 1.2px;
+  position: absolute;
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+  -webkit-transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  -webkit-transform 0.2s linear;
+  transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  -webkit-transform 0.2s linear;
+  transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  transform 0.2s linear;
+  transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  transform 0.2s linear, -webkit-transform 0.2s linear;
+  width: 24px;
+}
+
+
+
+
+
+
+
+
+
+/* Толщина горизонтальных линий и толщина строк*/
+.toggle-menu span:before {
+  top: 3.7px;
+}
+.toggle-menu span:after {
+  top: -3.8px;
+}
+.toggle-menu.active span {
+  background-color: transparent;
+  -webkit-transition: background 0.2s ease-out;
+  transition: background 0.2s ease-out;
+}
+.toggle-menu.active span:before, .toggle-menu.active span:after {
+  -webkit-transition: top 0.2s ease-out, -webkit-transform 0.2s 0.2s ease-out;
+  transition: top 0.2s ease-out, -webkit-transform 0.2s 0.2s ease-out;
+  transition: top 0.2s ease-out, transform 0.2s 0.2s ease-out;
+  transition: top 0.2s ease-out, transform 0.2s 0.2s ease-out, -webkit-transform 0.2s 0.2s ease-out;
+}
+.toggle-menu.active span:before {
+  top: 0;
+  -webkit-transform: rotate3d(0, 0, 1, -45deg);
+          transform: rotate3d(0, 0, 1, -45deg);
+}
+.toggle-menu.active span:after {
+  top: 0;
+  -webkit-transform: rotate3d(0, 0, 1, 45deg);
+          transform: rotate3d(0, 0, 1, 45deg);
+}
+</style>
+
+
+
+
+
+
+
+
+
+<script>
+  window.console = window.console || function(t) {};
+</script>
+<script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+</head>
+<body translate="no">
+<header id="header">
+<nav class="nav">
+<button class="toggle-menu">
+<span></span>
+</button>
+</nav>
+</header>
+
+
+
+
+<div id="menu" class="">
+
+<nav class="footer-nav">
+
+
+<br/>
+    <br/>
+
+<a><p class="buttond" style="text-align: center"><a href="https://www.emiia.ai" target="_self" style="cursor: pointer; font-size:15.4px;  text-decoration: none; padding:0px; color:#3d85c6; background-color:transparent; border-radius:0px; border: 0px solid #000000; margin-left: 0%;"><img src="https://www.emiia.ai/logo.svg" width="150" height="35" alt="EMIIA"   title="EMIIA AI — Cognitive Radio optics" ></a></p></a>
+
+<br/>
+    <br/>
+
+
+
+
+
+<span style="color: black; font-size:18px; text-indent: 50px; "><p style="text-align: left, margin-left: 40px; "><a  href="https://www.emiia.ru/">Home</a>
+<br/>
+
+<span style="color: black; font-size:14px;">
+<p style="text-align: left"><a href="https://www.emiia.ru/contact.html">About</a>
+<br/>
+
+<span style="color: black; font-size:18px; "><p style="text-align: left margin-left: 40px;"><a  href="https://www.emiia.ru/contact.html">Contact</a>
+<br/>
+
+<span style="color: black; font-size:14px;">
+<p style="text-align: left"><a href="https://www.emiia.ru/media.html">Media</a>
+<br/>
+
+<span style="color: black; font-size:18px; "><p style="text-align: left margin-left: 40px;"><a  href="https://www.emiia.ru/projects.html">Projects</a>
+<br/>
+
+<span style="color: black; font-size:14px;">
+<p style="text-align: left"><a href="https://blog.emiia.ru/">Blog</a>
+<br/>
+
+<span style="color: black; font-size:14px;">
+<p style="text-align: left"><a href="https://emiia.github.io/1/support.html">Feedback</a>
+<br/>
+
+<span style="color: black; font-size:14px;">
+<p style="text-align: left"><a href="https://www.emiia.ru/radiooptics.html">Radio optics</a>
+<br/>
+
+<span style="color: black; font-size:14px;">
+<p style="text-align: left"><a href="https://www.emiia.ru/solutions.html">Solutions</a>
+<br/>
+
+<span style="color: black; font-size:14px;">
+<p style="text-align: left"><a href="https://github.com/EMIIA">Software</a></p>
+<br/>
+
+
+
+
+
+</div>
+</div>
+
+</nav>
+</div>
+
+<script src='https://www.emiia.ru/jquery.min.js'></script>
+	<script src='/jquery.min.js'></script>
+<script id="rendered-js">
+$('.toggle-menu').click(function () {
+  $(this).toggleClass('active');
+  $('#menu').toggleClass('open');
+});
+//# sourceURL=pen.js
+    </script>
+</body>
+</html>
+
 
   
 
@@ -189,7 +600,7 @@ outline: none;
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100%;
-  z-index: +20000;
+  z-index: 3;
   
   
 }
@@ -214,7 +625,6 @@ a.ex5:hover, a.ex5:active {text-decoration: underline;}
 
  <!-- EMIIA EMIIA EMIIA template -->
  
-
 
 
 
@@ -291,7 +701,7 @@ a.ex5:hover, a.ex5:active {text-decoration: underline;}
                 <br/>
                 <br/>
 
-         <p class="lead">ТАСС: "Технологию, позволяющую "видеть сквозь стены", представила компания ЭМИИА на ХI Международном салоне изобретений "Новое время"."</p>
+         <p class="lead">ТАСС: "Технологию, позволяющую "видеть сквозь стены", представила компания ЭМИИА на ХI Международном салоне изобретений "Новое время".</p>
          
          <a><p class="lead"><a href="http://tass.ru/nauka/2309033"/>http://tass.ru/nauka/2309033<p class="lead"></a><p/>
           <br/>
@@ -308,7 +718,7 @@ a.ex5:hover, a.ex5:active {text-decoration: underline;}
  
  
  
-          <p class="lead">Комсомольская правда: "Изобретена технология которую можно встроить в носимые гаджеты."</p>
+          <p class="lead">Комсомольская правда: "Изобретена технология которую можно встроить в носимые гаджеты".</p>
          
          <a><p class="lead"><a href="http://m.kp.ru/daily/26438.5/3312250/"/>http://m.kp.ru/daily/26438.5<wbr>/3312250/<p class="lead"></a><p/>
           <br/>
@@ -324,14 +734,14 @@ a.ex5:hover, a.ex5:active {text-decoration: underline;}
           <br/>
           
           
-                    <p class="lead">Regnum: "Технология позволяет сканировать передвижение людей, животных, веществ на расстоянии до 50 метров."
+                    <p class="lead">Regnum: "Технология позволяет сканировать передвижение людей, животных, веществ на расстоянии до 50 метров".
 </p>
          
          <p><p class="lead" class="word"><a href="https://regnum.ru/news/innovatio/1984265.html"/>https://regnum.ru/news/innovatio<wbr>/1984265.html<p class="lead"></a><p/>
           <br/>
           
           
-                              <p class="lead">3DNews Daily Digital Digest (3DNews): "В России создан прибор, позволяющий «видеть» сквозь стены."
+                              <p class="lead">3DNews Daily Digital Digest (3DNews): "В России создан прибор, позволяющий «видеть» сквозь стены".
 </p>
          
          <a><p class="lead"><a href="https://3dnews.ru/921275"/>https://3dnews.ru/921275<p class="lead"></a><p/>
@@ -340,7 +750,7 @@ a.ex5:hover, a.ex5:active {text-decoration: underline;}
           
  
  
- <p class="lead">Sputniknews: "The technology can scan the movement of people, animals and other things at a distance of 50 meters depending on the character of walls and obstacles. The principle is based on the Doppler effect, registering the distortion of a radio wave during the movement of objects,” the company’s CEO said."
+ <p class="lead">Sputniknews: "The technology can scan the movement of people, animals and other things at a distance of 50 meters depending on the character of walls and obstacles. The principle is based on the Doppler effect, registering the distortion of a radio wave during the movement of objects,” the company’s CEO said".
 </p>
          
          <a><p class="lead"><a href="https://sputniknews.com/science/201510031027974593-see-through-walls/"/>https://sputniknews.com/science/<wbr>201510031027974593-see-through-walls/<p class="lead"></a><p/>
@@ -348,14 +758,14 @@ a.ex5:hover, a.ex5:active {text-decoration: underline;}
           
           
           
-           <p class="lead">Hi-Tech Mail.ru: "Компания ЭМИИА представила инновационную технологию."
+           <p class="lead">Hi-Tech Mail.ru: "Компания ЭМИИА представила инновационную технологию".
 </p>
          
          <a><p class="lead"><a href="https://hi-tech.mail.ru/news/crimean-scientists-vision-through-walls/"/>https://hi-tech.mail.ru/news/crimean-<wbr>scientists-vision-through-walls/<p class="lead"></a><p/>
           <br/>
  
  
-            <p class="lead">ICT.Moscow: "Когнитивная радиооптика ЭМИИА – машинное зрение на принципах радиооптики с применением искусственных нейронных сетей. Встроенные нейросетевые решения ЭМИИА позволяют вычислить объем объекта и распознает его, по маркерам id, x, y, z наложенным на цифровые данные радиоволн, сопоставляя их с моделями контурных масок в базе данных."
+            <p class="lead">ICT.Moscow: "Когнитивная радиооптика ЭМИИА – машинное зрение на принципах радиооптики с применением искусственных нейронных сетей. Встроенные нейросетевые решения ЭМИИА позволяют вычислить объем объекта и распознает его, по маркерам id, x, y, z наложенным на цифровые данные радиоволн, сопоставляя их с моделями контурных масок в базе данных".
 </p>
          
          <a><p class="lead"><a href="https://ict.moscow/card/emiia/"/>https://ict.moscow/card/emiia/<p class="lead"></a><p/>
@@ -363,10 +773,18 @@ a.ex5:hover, a.ex5:active {text-decoration: underline;}
           
           
           
-                      <p class="lead">IXBT: "Довольно интересную разработку представили разработчики компании ЭМИИА."
+                      <p class="lead">IXBT: "Довольно интересную разработку представили разработчики компании ЭМИИА".
 </p>
          
          <a><p class="lead"><a href="https://www.ixbt.com/news/2015/10/05/simferopolskaja-kompanija-jemiia-predstavila-tehnologiju-pozvoljajushuju-videt-skvoz-steny.html"/>https://www.ixbt.com/news/<wbr>2015/10/05/<p class="lead"></a><p/>
+          <br/>
+          
+          
+          
+          <p class="lead">Академия Сколково: "ЭМИИА – когнитивная радиооптика".
+</p>
+         
+         <a><p class="lead"><a href="https://academy.sk.ru/foundation/energy/w/faq/3344.emiia_0a2014200a20_kognitivnaya-radiooptika.aspx"/>https://academy.sk.ru/foundation/<wbr>energy/w/faq/3344.emiia_0a2014<wbr>200a20_kognitivnaya-radiooptika<p class="lead"></a><p/>
           <br/>
  
  
@@ -550,6 +968,7 @@ function openCity(evt, cityName) {
 
 
 <script src="https://www.emiia.ru/aos.js"></script>
+<script src="/aos.js"></script>
 
 
 
@@ -584,7 +1003,8 @@ function openCity(evt, cityName) {
 
 
 
-<div style="position: fixed; top: 7.4%; right: 18px; z-index: +20000;">
+<div style="position: fixed; top: 1.9em; right: 1.3em; z-index: +20000;">
+
   <a href="https://emiia.github.io/1/preorder.html" title="Preorder">
 <img src="https://www.emiia.ai/store.svg" />
 
@@ -603,411 +1023,6 @@ function openCity(evt, cityName) {
 
 
 
-<div class="container" style="position: fixed; top: 6%; left: 8px; z-index: +1;">
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-
-
-<style>
-
-
-
-
-
-
-@import url(https://emiia.ai/css?family=Montserrat:300,400,500,700);
-body {
-  font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background: radial-gradient(circle, white, white);
-  font-size: 14px;
-
-}
-
-
-button:active, button:focus {
-  outline: none !important;
-}
-button::-moz-focus-inner {
-  border: 0 !important;
-}
-
-
-
-
-
-#header {
-  padding: 0rem;
-}
-
-#menu {
-  background: white;
-  height: 100%;
-  left: 0px;
-  opacity: 0;
-  overflow: hidden;
-  position: fixed;
-  text-align: left;
-  top: 0;
-  -webkit-transition: all 0.7s ease-in-out;
-  transition: all 0.7s ease-in-out;
-  visibility: hidden;
-  width: 100%;
-  z-index: 1100;
-  
-    
-  
-  
-  
-}
-#menu.open {
-  opacity: 1;
-  visibility: visible;
-}
-#menu.open li:nth-child(1) {
-  -webkit-animation-delay: 0.1s;
-          animation-delay: 0.1s;
-}
-#menu.open li:nth-child(2) {
-  -webkit-animation-delay: 0.2s;
-          animation-delay: 0.2s;
-}
-#menu.open li:nth-child(3) {
-  -webkit-animation-delay: 0.3s;
-          animation-delay: 0.3s;
-}
-#menu.open li:nth-child(4) {
-  -webkit-animation-delay: 0.4s;
-          animation-delay: 0.4s;
-}
-#menu.open li:nth-child(5) {
-  -webkit-animation-delay: 0.5s;
-          animation-delay: 0.5s;
-}
-#menu.open li:nth-child(6) {
-  -webkit-animation-delay: 0.6s;
-          animation-delay: 0.6s;
-}
-#menu.open li:nth-child(7) {
-  -webkit-animation-delay: 0.7s;
-          animation-delay: 0.7s;
-}
-#menu.open li:nth-child(8) {
-  -webkit-animation-delay: 0.8s;
-          animation-delay: 0.8s;
-}
-#menu.open li:nth-child(9) {
-  -webkit-animation-delay: 0.9s;
-          animation-delay: 0.9s;
-}
-#menu.open li:nth-child(10) {
-  -webkit-animation-delay: 1s;
-          animation-delay: 1s;
-}
-#menu.open li {
-  -webkit-animation-duration: 1.0s;
-          animation-duration: 1.0s;
-  -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
-  -webkit-animation-name: fadeInUp;
-          animation-name: fadeInUp;
-}
-#menu ul:hover a {
-  opacity: 0.5;
-}
-#menu ul a {
-  -webkit-transform: translateZ(0);
-  -webkit-transition: opacity 0.3s ease-in-out;
-  transition: opacity 0.3s ease-in-out;
-}
-#menu ul a:hover {
-  opacity: 1;
-}
-#menu .main-nav {
-  position: relative;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
-}
-#menu .main-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-
-
-
-
-
-/* Расстояние между строками */
-#menu .main-nav a {
-  color: black;
-  display: block;
-  font-size: 0 rem;
-  font-weight: bold;
-  padding: 0 rem 0 rem;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
-
-
-
-
-
-
-
-
-
-#menu .main-nav a:first {
-  padding-top: 0;
-}
-#menu .menu-footer {
-  padding: 0rem;
-  bottom: 0;
-  left: 0;
-  position: absolute;
-  right: 0;
-}
-#menu .menu-footer ul {
-  display: inline-block;
-  list-style: none;
-  margin: 0.1;
-  padding: 0;
-}
-#menu .menu-footer ul li {
-  display: inline;
-  margin: 0 0rem;
-}
-#menu .menu-footer a {
-  color: black;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
-
-
-/* Контуры вокруг тега */
-.toggle-menu {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  display: inline-block;
-  float: right;
-  height: 50px;
-  outline: none;
-  padding: 0;
-  pointer-events: initial;
-  position: relative;
-  vertical-align: middle;
-  width: 50px;
-  z-index: 1110;
-  
-  
-  position: fixed; top: 4.6%; left: 7px; z-index: +20000;
-  
-}
-
-
-
-
-
-/* средний  тег горизонтальная полоса*/
-.toggle-menu span {
-  background-color: #000;
-  content: "";
-  display: block;
-  height: 0px;
-  right: calc(50% - 13px );
-  position: absolute;
-  top: calc(50% - 1px );
-  
-    
-  position: fixed; top: 9.5%; left: 18px; z-index: +20;
-  
-  
-  
-  -webkit-transform-origin: 50% 50%;
-          transform-origin: 50% 50%;
-  -webkit-transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  -webkit-transform 0.2s linear;
-  transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  -webkit-transform 0.2s linear;
-  transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  transform 0.2s linear;
-  transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  transform 0.2s linear, -webkit-transform 0.2s linear;
-  width: 24px;
-}
-
-
-
-
-
-
-
-
-
-/* Внутрений тег на закрытие толщина горизонтальной линии */
-.toggle-menu span:before, .toggle-menu span:after {
-  background-color: #000;
-  content: "";
-  display: block;
-  height: 1.2px;
-  position: absolute;
-  -webkit-transform-origin: 50% 50%;
-          transform-origin: 50% 50%;
-  -webkit-transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  -webkit-transform 0.2s linear;
-  transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  -webkit-transform 0.2s linear;
-  transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  transform 0.2s linear;
-  transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,  transform 0.2s linear, -webkit-transform 0.2s linear;
-  width: 24px;
-}
-
-
-
-
-
-
-
-
-
-/* Толщина горизонтальных линий и толщина строк*/
-.toggle-menu span:before {
-  top: 3.7px;
-}
-.toggle-menu span:after {
-  top: -3.8px;
-}
-.toggle-menu.active span {
-  background-color: transparent;
-  -webkit-transition: background 0.2s ease-out;
-  transition: background 0.2s ease-out;
-}
-.toggle-menu.active span:before, .toggle-menu.active span:after {
-  -webkit-transition: top 0.2s ease-out, -webkit-transform 0.2s 0.2s ease-out;
-  transition: top 0.2s ease-out, -webkit-transform 0.2s 0.2s ease-out;
-  transition: top 0.2s ease-out, transform 0.2s 0.2s ease-out;
-  transition: top 0.2s ease-out, transform 0.2s 0.2s ease-out, -webkit-transform 0.2s 0.2s ease-out;
-}
-.toggle-menu.active span:before {
-  top: 0;
-  -webkit-transform: rotate3d(0, 0, 1, -45deg);
-          transform: rotate3d(0, 0, 1, -45deg);
-}
-.toggle-menu.active span:after {
-  top: 0;
-  -webkit-transform: rotate3d(0, 0, 1, 45deg);
-          transform: rotate3d(0, 0, 1, 45deg);
-}
-</style>
-
-
-
-
-
-
-
-
-
-<script>
-  window.console = window.console || function(t) {};
-</script>
-<script>
-  if (document.location.search.match(/type=embed/gi)) {
-    window.parent.postMessage("resize", "*");
-  }
-</script>
-</head>
-<body translate="no">
-<header id="header">
-<nav class="nav">
-<button class="toggle-menu">
-<span></span>
-</button>
-</nav>
-</header>
-
-
-
-
-<div id="menu" class="">
-
-<nav class="footer-nav">
-
-
-<br/>
-    <br/>
-
-<a><p class="buttond"  style="text-align: center"><a href="https://www.emiia.ai" target="_self" style="cursor: pointer; font-size:15.4px;  text-decoration: none; padding:0px; color:#3d85c6; background-color:transparent; border-radius:0px; border: 0px solid #000000; margin-left: 0%;"><img src="https://www.emiia.ai/logo.svg" width="150" height="35" alt="EMIIA"   title="EMIIA AI — Cognitive Radio optics" ></a></p></a>
-
-<br/>
-    <br/>
-
-
-
-
-
-<span style="color: black; font-size:18px; text-indent: 50px; "><p style="text-align: left, margin-left: 40px; "><a  href="https://www.emiia.ru/">Home</a>
-<br/>
-
-<span style="color: black; font-size:14px;">
-<p style="text-align: left"><a href="https://www.emiia.ru/contact.html">About</a>
-<br/>
-
-<span style="color: black; font-size:18px; "><p style="text-align: left margin-left: 40px;"><a  href="https://www.emiia.ru/contact.html">Contact</a>
-<br/>
-
-<span style="color: black; font-size:14px;">
-<p style="text-align: left"><a href="https://www.emiia.ru/media.html">Media</a>
-<br/>
-
-<span style="color: black; font-size:18px; "><p style="text-align: left margin-left: 40px;"><a  href="https://www.emiia.ru/projects.html">Projects</a>
-<br/>
-
-<span style="color: black; font-size:14px;">
-<p style="text-align: left"><a href="https://blog.emiia.ru/">Blog</a>
-<br/>
-
-<span style="color: black; font-size:14px;">
-<p style="text-align: left"><a href="https://emiia.github.io/1/support.html">Feedback</a>
-<br/>
-
-<span style="color: black; font-size:14px;">
-<p style="text-align: left"><a href="https://www.emiia.ru/radiooptics.html">Radio optics</a>
-<br/>
-
-<span style="color: black; font-size:14px;">
-<p style="text-align: left"><a href="https://www.emiia.ru/solutions.html">Solutions</a>
-<br/>
-
-<span style="color: black; font-size:14px;">
-<p style="text-align: left"><a href="https://github.com/EMIIA">Software</a></p>
-<br/>
-
-
-
-
-
-</div>
-</div>
-
-</nav>
-</div>
-
-<script src='https://emiia.ai/jquery.min.js'></script>
-<script id="rendered-js">
-$('.toggle-menu').click(function () {
-  $(this).toggleClass('active');
-  $('#menu').toggleClass('open');
-});
-//# sourceURL=pen.js
-    </script>
-</body>
-</html>
-
 
 </div>
 </div>
@@ -1019,17 +1034,3 @@ $('.toggle-menu').click(function () {
   
   
   </div>
-
-  
-  </section>
-  
-   </div>
-   </div>
-    </div>
-     </div>
-     
-     
-     
-</div>
-</div>
-</div>
