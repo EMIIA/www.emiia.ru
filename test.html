@@ -31,7 +31,7 @@
 <link rel="stylesheet" href="https://www.emiia.ru/lib/w3-colors-2017.css">
 
 
-
+<script src=”//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js”></script>
 
 
   
@@ -1657,7 +1657,6 @@ background-image: url("https://www.emiia.ai/animate58.svg");
 <section>
 
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1987,7 +1986,29 @@ function openCity(evt, cityName) {
 
 
 
- 
+ <script>
+$(function(){
+ ‘use strict’;
+$(‘#form’).on(‘submit’, function(e){
+ e.preventDefault();
+ var fd = new FormData( this );
+ $.ajax({
+ url: ‘send.php’,
+ type: ‘POST’,
+ contentType: false, 
+ processData: false, 
+ data: fd,
+ success: function(msg){
+if(msg == ‘ok’) {
+ alert('Отправлено');
+} else {
+ alert('Ошибка')
+}
+ }
+ });
+ });
+});
+</script>
  
 
 </body>
