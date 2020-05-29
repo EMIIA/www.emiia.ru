@@ -1,70 +1,60 @@
 <?php
-// Файлы phpmailer
-require 'PHPMailer.php';
-require 'SMTP.php';
-require 'Exception.php';
-
-// Переменные, которые отправляет пользователь
-$name = $_POST['name'];
-$email = $_POST['email'];
-$text = $_POST['text'];
-$file = $_FILES['myfile'];
-
-// Формирование самого письма
-$title = "Заголовок письма";
-$body = "
-<h2>Новое письмо</h2>
-<b>Имя:</b> $name<br>
-<b>Почта:</b> $email<br><br>
-<b>Сообщение:</b><br>$text
-";
-
-// Настройки PHPMailer
-$mail = new PHPMailer\PHPMailer\PHPMailer();
-try {
-    $mail->isSMTP();   
-    $mail->CharSet = "UTF-8";
-    $mail->SMTPAuth   = true;
-    //$mail->SMTPDebug = 2;
-    $mail->Debugoutput = function($str, $level) {$GLOBALS['status'][] = $str;};
-
-    // Настройки вашей почты
-    $mail->Host       = 'smtp.yandex.ru'; // SMTP сервера вашей почты
-    $mail->Username   = 'emonocle'; // Логин на почте
-    $mail->Password   = 'dollwlzumtjwdxgp'; // Пароль на почте
-    $mail->SMTPSecure = 'ssl';
-    $mail->Port       = 465;
-    $mail->setFrom('emonocle@yandex.ru', 'Имя отправителя'); // Адрес самой почты и имя отправителя
-
-    // Получатель письма
-    $mail->addAddress('vstarostin@yandex.ru');  
-
-    // Прикрипление файлов к письму
-if (!empty($file['name'][0])) {
-    for ($ct = 0; $ct < count($file['tmp_name']); $ct++) {
-        $uploadfile = tempnam(sys_get_temp_dir(), sha1($file['name'][$ct]));
-        $filename = $file['name'][$ct];
-        if (move_uploaded_file($file['tmp_name'][$ct], $uploadfile)) {
-            $mail->addAttachment($uploadfile, $filename);
-            $rfile[] = "Файл $filename прикреплён";
-        } else {
-            $rfile[] = "Не удалось прикрепить файл $filename";
-        }
-    }   
+//----Скрипт отправки почты через SMTP с использованием PHPMailer----
+//Импорт классов PHPMailer в глобальное пространство имен. Они должны быть в верхней части скрипта, а не внутри функции
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+if (!empty($_POST["contact-button"])) {
+$name = $_POST["contact-name"];
+$name = check_symbol($name, "Имя", "1", "/^[A-ZА-ЯЁ]+\z/iu");
+$email = $_POST["contact-email"];
+$email = check_symbol($email, "E-mail", "1", "/^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,6}\z/i");
+$subject = $_POST["contact-subject"];
+$subject = check_symbol($subject, "Тема сообщения", "1", "0");
+$comment = $_POST["contact-comment"];
+$comment = check_symbol($comment, "Текст сообщения", "1", "0");
+if (!empty($GLOBALS['alert'])) {
+$alert = 'Данные из формы не отправлены. Обнаружены следующие ошибки: \n'.$alert;
+include "alert.php";
 }
-// Отправка сообщения
-$mail->isHTML(true);
-$mail->Subject = $title;
-$mail->Body = $body;    
-
-// Проверяем отравленность сообщения
-if ($mail->send()) {$result = "success";} 
-else {$result = "error";}
-
-} catch (Exception $e) {
-    $result = "error";
-    $status = "Сообщение не было отправлено. Причина ошибки: {$mail->ErrorInfo}";
+else {
+//Подключение библиотеки
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/SMTP.php';
+$mail = new PHPMailer(); //Инициализация класса
+$from = 'feedback@avtobezugona.ru'; //Адрес почты, с которой идет отправка письма
+$to = 'admin@avtobezugona.ru'; //Адрес получателя
+$mail -> isSMTP(); //Применение протокола SMTP
+$mail -> Host = 'smtp.yandex.ru';//Адрес почтового сервера
+$mail -> SMTPAuth = true; //Включение режима авторизации
+$mail -> Username = 'emonocle'; //Логин от доменной почты, подключенной к стороннему почтовому сервису (в данном случае в Яндекс.Почта)
+$mail -> Password = 'dollwlzumtjwdxgp'; //Пароль от доменной почты
+$mail -> SMTPSecure = 'ssl'; //Протокол шифрования
+$mail -> Port = '465'; //Порт сервера SMTP
+$mail -> CharSet = 'UTF-8'; //Кодировка
+$mail -> setFrom($from, 'emonocle@yandex.ru'); //Адрес и имя отправителя
+$mail -> addAddress($to, 'vstarostin@emiia.ru'); //Адрес и имя получателя
+$mail -> isHTML (true); //Установка формата электронной почты в HTML
+$mail -> Subject = 'Отправлена форма обратной связи'; //Тема письма (заголовок)
+$mail -> Body = "
+<html>
+<body>
+<p>Имя отправителя: $name</p>
+<p>Адрес отправителя: $email</p>
+<p>Тема сообщения: $subject</p>
+<p>Содержание сообщения: $comment</p>
+</body>
+</html>
+"; //Содержимое письма
+$mail -> AltBody = 'Текст альтернативного письма'; //Альтернативное письмо в случае, если почтовый клиент не поддерживает формат HTML
+$mail -> SMTPDebug = 0; //Включение отладки SMTP: 0 - выкл (для штатного использования), 1 = сообщения клиента, 2 - сообщения клиента и сервера
+if ($mail -> send()) {
+$alert = 'Сообщение отправлено'; //Вывод сообщения в диалоговом окне браузера об успешной отправке письма
 }
-
-// Отображение результата
-echo json_encode(["result" => $result, "resultfile" => $rfile, "status" => $status]);
+else {
+$alert = 'Ошибка, письмо не может быть отправлено: '.$mail -> ErrorInfo; //Вывод сообщения об ошибке
+}
+include "alert.php";
+}
+}
+?>
