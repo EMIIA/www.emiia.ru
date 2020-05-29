@@ -1656,69 +1656,29 @@ background-image: url("https://www.emiia.ai/animate58.svg");
 
 <section>
 
+
+
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-* {box-sizing: border-box;}
-
-input[type=text], select, textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-top: 6px;
-  margin-bottom: 16px;
-  resize: vertical;
-}
-
-input[type=submit] {
-  background-color: #4CAF50;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-input[type=submit]:hover {
-  background-color: #45a049;
-}
-
-.container {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
-}
-</style>
+	<meta charset="UTF-8">
+	<title>PHPMAILER</title>
 </head>
 <body>
-
-<h3>Contact Form</h3>
-
-<div class="container">
-  <form action="/send.php">
-    <label for="fname">First Name</label>
-    <input type="text" id="fname" name="firstname" placeholder="Your name..">
-
-    <label for="lname">Last Name</label>
-    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
-
-    </select>
-
-    <label for="subject">Subject</label>
-    <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
-
-    <input type="submit" value="Submit">
-  </form>
-</div>
-
+<h2><a href="https://medium.com/@shpaginkirill/вменяемая-инструкция-к-phpmailer-отправка-писем-и-файлов-на-почту-b462f8ff9b5c">Вменяемая инструкция к PHPMailer “Отправка писем и файлов на почту”</a></h2>
+<form enctype="multipart/form-data" method="post" id="form" onsubmit="send(event, 'send.php')">
+ 	<p>Имя</p>
+ 	<input placeholder="Представьтесь" name="name" type="text" >
+ 	<p>Email</p>
+ 	<input placeholder="Укажите почту" name="email" type="text" >
+ 	<p>Сообщение</p>
+ 	<textarea name="text"></textarea>
+ 	<p>Прикрепить файлы</p>
+ 	<input type="file" name="myfile[]" multiple id="myfile">
+ 	<p><input value="Отправить" type="submit"></p>
+</form>
 </body>
-
 <script>
-// Отправка данных на сервер
 function send(event, php){
 console.log("Отправка запроса");
 event.preventDefault ? event.preventDefault() : event.returnValue = false;
@@ -1726,7 +1686,7 @@ var req = new XMLHttpRequest();
 req.open('POST', php, true);
 req.onload = function() {
 	if (req.status >= 200 && req.status < 400) {
-	json = JSON.parse(this.response); // Ебанный internet explorer 11
+		json = JSON.parse(this.response); // Ебанный internet explorer 11
     	console.log(json);
         
     	// ЗДЕСЬ УКАЗЫВАЕМ ДЕЙСТВИЯ В СЛУЧАЕ УСПЕХА ИЛИ НЕУДАЧИ
@@ -1746,6 +1706,7 @@ req.send(new FormData(event.target));
 }
 </script>
 </html>
+
 
 
 
