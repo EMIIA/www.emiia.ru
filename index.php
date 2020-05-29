@@ -22,13 +22,13 @@ require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/SMTP.php';
 $mail = new PHPMailer(); //Инициализация класса
-$from = 'feedback@avtobezugona.ru'; //Адрес почты, с которой идет отправка письма
-$to = 'admin@avtobezugona.ru'; //Адрес получателя
+$from = 'emonocle@yandex.ru'; //Адрес почты, с которой идет отправка письма
+$to = 'vstarostin@emiia.ru'; //Адрес получателя
 $mail -> isSMTP(); //Применение протокола SMTP
 $mail -> Host = 'smtp.yandex.ru';//Адрес почтового сервера
 $mail -> SMTPAuth = true; //Включение режима авторизации
-$mail -> Username = 'feedback@avtobezugona.ru'; //Логин от доменной почты, подключенной к стороннему почтовому сервису (в данном случае в Яндекс.Почта)
-$mail -> Password = '27MrDon89'; //Пароль от доменной почты
+$mail -> Username = 'emonocle'; //Логин от доменной почты, подключенной к стороннему почтовому сервису (в данном случае в Яндекс.Почта)
+$mail -> Password = 'wiwnssruvkjsbeda'; //Пароль от доменной почты
 $mail -> SMTPSecure = 'ssl'; //Протокол шифрования
 $mail -> Port = '465'; //Порт сервера SMTP
 $mail -> CharSet = 'UTF-8'; //Кодировка
