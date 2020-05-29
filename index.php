@@ -28,7 +28,7 @@ $mail -> isSMTP(); //Применение протокола SMTP
 $mail -> Host = 'smtp.yandex.ru';//Адрес почтового сервера
 $mail -> SMTPAuth = true; //Включение режима авторизации
 $mail -> Username = 'emonocle'; //Логин от доменной почты, подключенной к стороннему почтовому сервису (в данном случае в Яндекс.Почта)
-$mail -> Password = 'wiwnssruvkjsbeda'; //Пароль от доменной почты
+$mail -> Password = 'dollwlzumtjwdxgp'; //Пароль от доменной почты
 $mail -> SMTPSecure = 'ssl'; //Протокол шифрования
 $mail -> Port = '465'; //Порт сервера SMTP
 $mail -> CharSet = 'UTF-8'; //Кодировка
