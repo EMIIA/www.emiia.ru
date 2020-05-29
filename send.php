@@ -1,7 +1,7 @@
 <?php
 // Файлы phpmailer
-require 'class.phpmailer.php';
-require 'class.smtp.php';
+require 'PHPMailer.php';
+require 'SMTP.php';
 
 $name = $_POST['name'];
 $number = $_POST['number'];
