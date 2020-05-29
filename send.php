@@ -30,15 +30,15 @@ try {
 
     // Настройки вашей почты
     $mail->Host       = 'smtp.yandex.ru'; // SMTP сервера вашей почты
-    $mail->Username   = 'your_login'; // Логин на почте
-    $mail->Password   = 'password'; // Пароль на почте
+    $mail->Username   = 'emonocle'; // Логин на почте
+    $mail->Password   = 'dollwlzumtjwdxgp'; // Пароль на почте
     $mail->SMTPSecure = 'ssl';
     $mail->Port       = 465;
-    $mail->setFrom('mail@yandex.ru', 'Имя отправителя'); // Адрес самой почты и имя отправителя
+    $mail->setFrom('emonocle@yandex.ru', 'emonocle'); // Адрес самой почты и имя отправителя
 
     // Получатель письма
-    $mail->addAddress('youremail@yandex.ru');  
-    $mail->addAddress('youremail@gmail.com'); // Ещё один, если нужен
+    $mail->addAddress('vstarostin@yandex.ru');  
+    
 
     // Прикрипление файлов к письму
 if (!empty($file['name'][0])) {
