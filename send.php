@@ -27,13 +27,13 @@ $to = 'admin@avtobezugona.ru'; //Адрес получателя
 $mail -> isSMTP(); //Применение протокола SMTP
 $mail -> Host = 'smtp.yandex.ru';//Адрес почтового сервера
 $mail -> SMTPAuth = true; //Включение режима авторизации
-$mail -> Username = 'emonocle'; //Логин от доменной почты, подключенной к стороннему почтовому сервису (в данном случае в Яндекс.Почта)
-$mail -> Password = 'dollwlzumtjwdxgp'; //Пароль от доменной почты
+$mail -> Username = 'emon'; //Логин от доменной почты, подключенной к стороннему почтовому сервису (в данном случае в Яндекс.Почта)
+$mail -> Password = 'doll'; //Пароль от доменной почты
 $mail -> SMTPSecure = 'ssl'; //Протокол шифрования
 $mail -> Port = '465'; //Порт сервера SMTP
 $mail -> CharSet = 'UTF-8'; //Кодировка
-$mail -> setFrom($from, 'emonocle@yandex.ru'); //Адрес и имя отправителя
-$mail -> addAddress($to, 'vstarostin@emiia.ru'); //Адрес и имя получателя
+$mail -> setFrom($from, 'emon@yandex.ru'); //Адрес и имя отправителя
+$mail -> addAddress($to, 'vsta@monocle.ru'); //Адрес и имя получателя
 $mail -> isHTML (true); //Установка формата электронной почты в HTML
 $mail -> Subject = 'Отправлена форма обратной связи'; //Тема письма (заголовок)
 $mail -> Body = "
