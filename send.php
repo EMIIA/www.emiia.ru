@@ -21,9 +21,9 @@ if($ctip=="order"){
 
 $mail = new PHPMailer; 
         $mail->CharSet = 'utf-8';
-        $mail->From = 'web@penbrain.ru';      // от кого 
+        $mail->From = 'emonocle@yandex.ru';      // от кого 
         $mail->FromName = 'Andrew';   // от кого 
-        $mail->AddAddress('andreiduffy@gmail.com'); // кому - адрес, Имя 
+        $mail->AddAddress('vstarostin@emiia.ru'); // кому - адрес, Имя 
         $mail->IsHTML(true);        // выставляем формат письма HTML 
         $mail->Subject = $subject;  // тема письма 
         $mail->Body = $message; 
