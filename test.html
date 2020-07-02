@@ -1955,6 +1955,8 @@ function openCity(evt, cityName) {
       function t(fn, url, attr) {
         if (!fn()) d.write('<script asp-add-nonce="true" src="' + url + '" ' + attr + '></' + 'script>');
       }
+      t(preload, "~https://zapravki.yandex.ru/libs/preload.js", "async");
+      t(promise, "~https://zapravki.yandex.ru/libs/es6-promise.min.js", "defer");
 
 
     }(window, document));
