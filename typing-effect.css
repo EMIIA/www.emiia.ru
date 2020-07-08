@@ -6,7 +6,7 @@
   position: absolute;
   top: 70%;
   left: 50%;
-  transform: translate(-15%, -50%);
+  transform: translate(-14%, -50%);
 }
 .wrapper .item {
   visibility: hidden;
@@ -30,7 +30,7 @@
 .wrapper > div:after {
   content: "";
   width: 10px;
-  height: 4px;
+  height: 2px;
   display: block;
   background: #3f69aaff;
   color: #3f69aaff;
