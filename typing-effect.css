@@ -1,11 +1,13 @@
 .wrapper {
+.wrapper {
   padding: 10px;
   margin: 0 auto;
-  width: 500px;
+  max-width: 350px;
   text-align: center;
   position: absolute;
-  top: 55%;
-  left: 40%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .wrapper .item {
   visibility: hidden;
