@@ -6,7 +6,7 @@
   position: absolute;
   top: 70%;
   left: 50%;
-  transform: translate(-17%, -50%);
+  transform: translate(-17.5%, -50%);
 }
 .wrapper .item {
   visibility: hidden;
