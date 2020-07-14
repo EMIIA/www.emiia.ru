@@ -1,5 +1,5 @@
 .tech-slideshow {
-  height: 50px;
+  height: 24px;
   max-width: 800px;
   margin: 0 auto;
   position: relative;
@@ -8,7 +8,7 @@
 }
 
 .tech-slideshow > div {
-  height: 50px;
+  height: 24px;
   width: 2526px;
   background: url(https://www.emiia.ru/miet.png);
   position: absolute;
