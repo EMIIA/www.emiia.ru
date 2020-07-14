@@ -18,7 +18,7 @@
   transform: translate3d(0, 0, 0);
 }
 .tech-slideshow .mover-1 {
-  animation: moveSlideshow 30s linear infinite;
+  animation: moveSlideshow 16s linear infinite;
 }
 
 .tech-slideshow .mover-2 {
