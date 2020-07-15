@@ -25,11 +25,17 @@
 
 
 
+
+
+
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
 <link rel="stylesheet" href="https://www.emiia.ru/lib/w3-colors-2017.css">
+
+<link rel="stylesheet" href="https://www.emiia.ru/forms.css">
+<link rel="stylesheet" href="/forms.css">
 
 
 
@@ -1239,12 +1245,12 @@ background-image: url("https://www.emiia.ai/animate58.svg");
      
      
      
+
+
+
+ 
      
-     
-     
-     
-     
-     
+    
      
      
      
@@ -1745,21 +1751,84 @@ background-image: url("https://www.emiia.ai/animate58.svg");
 
 
 
-<span style="color: #3d85c6;"><p class="lead" style="text-align: center"><a  href="https://emiia.github.io/1/support.html" alt="Feedback"   title="Feedback"><strong>Обратная связь&nbsp;</strong><svg  xmlns="http://www.w3.org/2000/svg" width="10.283" height="14.283" viewBox="0 0 5.69 6.10"><path d="M2.282 5.26l2.250-2.231L2.292.902" fill="none" stroke="#3d85c6" stroke-width=".9" stroke-linecap="round" stroke-linejoin="round"/></svg></a>&nbsp;&nbsp;&nbsp;<a  href="https://www.emiia.ru/contact.html" alt="About"   title="About"><strong>О нас&nbsp;</strong><svg xmlns="http://www.w3.org/2000/svg" width="10.283" height="14.283" viewBox="0 0 5.69 6.10"><path d="M2.282 5.26l2.250-2.231L2.292.902" fill="none" stroke="#3d85c6" stroke-width=".9" stroke-linecap="round" stroke-linejoin="round"/></svg></a></a></p>
+<span style="color: #3d85c6;">
+
+<p class="lead" style="text-align: center"><a  href="https://www.emiia.ru/contact.html" alt="About"   title="About"><strong>О нас&nbsp;</strong><svg xmlns="http://www.w3.org/2000/svg" width="10.283" height="14.283" viewBox="0 0 5.69 6.10"><path d="M2.282 5.26l2.250-2.231L2.292.902" fill="none" stroke="#3d85c6" stroke-width=".9" stroke-linecap="round" stroke-linejoin="round"/></svg></a></a></p>
 
 
 
 
       </div>
     </div>  
+    
+    
+    
+    
+      </div>
+</div>
+</div>
+
+
+  </div>
+</div>
+
+  
+  </section>
+  
+  
+  
+
+         
+           </div>
+      </div>
+    </div>
 
 
   
- 
+ <br/>
+ <br/>
+   
+   
+   
+   
+     <section id="services" class="bg-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
         
+        
+        <h2 style="text-align: center">Обратная связь</h2> 
 
+<br/>
+<br/>
+<form id="contact-form">
+  
+				  <div class="form-group center-block">
+  					  <label for="inputName">Имя</label>
+    					<input type="text" class="form-control contact-input" id="inputName" placeholder="" name="name"/>
+				  </div>
+  <div class="form-group center-block">
+  					  <label for="inputEmail">E-mail</label>
+    					<input type="email" class="form-control contact-input" id="inputEmail" placeholder="" name="email"/>
+				  </div>
+  <div class="form-group center-block">
+					<label for="inputMessage">Сообщение</label>
+					<textarea id="inputMessage" class="form-control contact-input" rows="3" placeholder="" name="message"></textarea>
+				</div>
+                <br/>
+                
+  <div class="text-center">
+					    <button style="color: #3d85c6; font-size:18px;" class="btn btn-default" type="submit" value="Send">
+<p class="lead" style="text-align: center"><a   alt="About"   title="Send"><strong>Отправить&nbsp;</strong><svg xmlns="http://www.w3.org/2000/svg" width="10.283" height="12.283" viewBox="0 0 6.69 5.10"><path d="M2.282 5.26l2.250-2.231L2.292.902" fill="none" stroke="#3d85c6" stroke-width=".9" stroke-linecap="round" stroke-linejoin="round"/></svg></a></a></p>
+    <div style="color: black; font-size:16px;" class="alert alert-light center-block submit-fail display-none">Правильно заполните все поля формы!<br><a href="#"><i class="fa fa-long-arrow-left fa-4x"></i></a></div>
+    <div style="color: black; font-size:16px;" class="alert alert-light center-block submit-success display-none">Ваше сообщение отправлено!<br><a href="#"><i class="fa fa-long-arrow-left fa-4x"></i></a></div>
+				  </div>
+  <span></span>
+</form>
 
- 
+<span><a  style="text-align: left;  font-size:13px; color: black;"alt="ЭМИИА"   title="Call">Нажимая кнопку Отправить вы соглашетесь</a>
+
+<a style="color: #3d85c6; font-size:13px;" alt="ЭМИИА"   title="Privacy" href="https://www.emiia.ru/terms.html">с условиями.</a></a></a></p>
 
 
 
@@ -1787,8 +1856,6 @@ background-image: url("https://www.emiia.ai/animate58.svg");
            </div>
       </div>
     </div>  
-
-
 
 
 
@@ -1968,6 +2035,38 @@ function openCity(evt, cityName) {
 
 
 
+<script>
+$(document).ready(function() {
+  $('#contact-form').submit(function(e) {
+      var name = $('#inputName')
+      var email = $('#inputEmail')
+      var message = $('#inputMessage')
+    
+      if(name.val() == "" || email.val() == "" || message.val() == "") {
+        $('.submit-fail').fadeToggle(400);
+        return false;
+      }
+      else {
+        $.ajax({
+          method: 'POST',
+          url: 'https://formspree.io/xvowblyl',
+          data: $('#contact-form').serialize(),
+          datatype: 'json'
+        });
+        e.preventDefault();
+        $(this).get(0).reset();
+        $('.submit-success').fadeToggle(400);
+      }
+    });
+  
+  $('.submit-fail, .submit-success').click(function() {
+    $(this).hide();
+  })
+});
+</script>
+
+
+
 
 <script src="https://www.emiia.ru/aos.js"></script>
 <script src="/aos.js"></script>
@@ -1984,6 +2083,9 @@ function openCity(evt, cityName) {
 
  <script  src="https://www.emiia.ru/typing-effect.js"></script>
   <script  src="/typing-effect.js"></script>
+  
+  
+  
  
  
 
