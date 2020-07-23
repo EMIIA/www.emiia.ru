@@ -9,11 +9,10 @@ html, body {
   height: 300px;
   padding-top: 120px;
   box-sizing: border-box;
-  -webkit-animation: slide 60s linear infinite;
+  -webkit-animation: slide 20s linear infinite;
 }
 
 .hero-bkg-animated h1 {
-  font-family: sans-serif;
 }
 
 @-webkit-keyframes slide {
