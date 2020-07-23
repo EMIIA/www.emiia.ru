@@ -1,51 +1,29 @@
-img {
-  display: block;
-  width: 100%;
-}
-
-section {
-  width: 100%;
+.tech-slideshow {
+  height: 200px;
+  max-width: 100%;
+  margin: 0 auto;
   overflow: hidden;
+  transform: translate3d(0, 0, 0);
 }
 
-article {
-  display: flex;
-  width: 200%;
-  animation: bannermove 5s linear infinite;
+.tech-slideshow > div {
+  height: 100px;
+  width: 2526px;
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/collage.jpg);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  transform: translate3d(0, 0, 0);
+}
+.tech-slideshow .mover-1 {
+  animation: moveSlideshow 20s linear infinite;
 }
 
 
 
-div {
-  width: 100%;
-}
-
-ul {
-  display: flex;
-  background: red;
-  list-style-type: none;
-  padding-left: 0;
-  margin: 0;
-}
-
-li {
-  width: 100%;
-  background: blue;
-}
-
-li:nth-child(2) {
-  background: green;
-}
-
-li:nth-child(3) {
-  background: yellow;
-}
-
-@keyframes "bannermove" {
-  0% {
-    transform: translateX(-50%);
-  }
-  100% {
-    transform: translateX(0%);
+@keyframes moveSlideshow {
+  100% { 
+    transform: translateX(-66.6666%);  
   }
 }
