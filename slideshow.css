@@ -1,7 +1,8 @@
 .tech-slideshow {
   height: 200px;
-  max-width: 100%;
+  max-width: 800px;
   margin: 0 auto;
+  position: relative;
   overflow: hidden;
   transform: translate3d(0, 0, 0);
 }
