@@ -8,7 +8,7 @@
 }
 
 .tech-slideshow > div {
-  height: 100px;
+  height: 200px;
   width: 2526px;
   background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/collage.jpg);
   position: absolute;
@@ -18,7 +18,7 @@
   transform: translate3d(0, 0, 0);
 }
 .tech-slideshow .mover-1 {
-  animation: moveSlideshow 16s linear infinite;
+  animation: moveSlideshow 12s linear infinite;
 }
 
 
