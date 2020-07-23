@@ -9,13 +9,13 @@ html, body {
   height: 300px;
   padding-top: 120px;
   box-sizing: border-box;
-  -webkit-animation: slide 20s linear infinite;
+  -webkit-animation: slide 10s linear infinite;
 }
 
 .hero-bkg-animated h1 {
 }
 
 @-webkit-keyframes slide {
-    from { background-position: 0 0; }
-    to { background-position: -400px 0; }
+    from { background-position: 400px 0; }
+    to { background-position: 0 0; }
 }
