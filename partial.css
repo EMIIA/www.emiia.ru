@@ -2,17 +2,18 @@ html, body {
   margin: 0; padding: 0;
 }
 .hero-bkg-animated {
-  background: url(https://emiia.github.io/1/emiia109.png) repeat 0 0;
+  background: gray url(https://www.emiia.ru/geometry.png) repeat 0 0;
   width: 100%;
   margin: 0;
   text-align: center;
-  height: 500px;
+  height: 300px;
   padding-top: 120px;
   box-sizing: border-box;
-  -webkit-animation: slide 50s linear infinite;
+  -webkit-animation: slide 60s linear infinite;
 }
 
 .hero-bkg-animated h1 {
+  font-family: sans-serif;
 }
 
 @-webkit-keyframes slide {
