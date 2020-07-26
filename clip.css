@@ -1,13 +1,10 @@
 * {
-	box-sizing: border-box;
+  	box-sizing: border-box;
 	padding: 0;
 	margin: 0;
 }
-html {
-}
-body {
 
-}
+
 a {
 	text-decoration: none;
 }
@@ -73,6 +70,8 @@ li.current h3, li.current h3 + a {
 	transition-delay: 1s;
 	transform: translate3d(0, 0, 0);
 }
+
+
 li.current {
 	z-index: 1;
 	clip: rect(0, 100vw, 100vh, 0);
@@ -80,6 +79,8 @@ li.current {
 li.prev {
 	clip: rect(0, 0, 100vh, 0);
 }
+
+
 .slider nav {
 	position: absolute;
 	bottom: 5%;
@@ -88,6 +89,8 @@ li.prev {
 	text-align: center;
 	z-index: 10;
 }
+
+
 nav a {
 	display: inline-block;
 	margin: 0 1rem;
@@ -96,6 +99,9 @@ nav a {
 a.current_dot {
 	transform: scale(1.4);
 }
+
+
+
 @media screen and (max-width: 700px) {
 	.left {
 		width: 100%;
@@ -106,6 +112,3 @@ a.current_dot {
 		height: 70%;
 	}
 }
-
-
-.reset { with: auto; height: auto; padding: 0; /* etc */ }
