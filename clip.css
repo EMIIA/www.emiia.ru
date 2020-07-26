@@ -106,3 +106,6 @@ a.current_dot {
 		height: 70%;
 	}
 }
+
+
+.reset { with: auto; height: auto; padding: 0; /* etc */ }
