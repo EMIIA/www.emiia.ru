@@ -19,7 +19,6 @@ function heroAnimations() {
    	}
 	sliderImage[count-1].setAttribute('style', 'opacity: 1');
 	heroDetails[count-1].setAttribute('style', 'display: block');
-	navDot[count-1].setAttribute('style', 'background: #FEDC17');
 	var sliderFront = document.querySelector('.slider__background--front');
 	var sliderDetails = document.querySelectorAll('.slider__details');
 	setTimeout(function() {
