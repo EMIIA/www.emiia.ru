@@ -2,16 +2,13 @@ var count = 0;
 
 function heroAnimations() {
 	var heroDetails = document.querySelectorAll('.slider__details');
-	for (i=0; i<heroDetails.length; i++) {
-		heroDetails[i].setAttribute('style', 'display: none');
+	for (i=0; i<heroDetails.length; i++);
 	}
 	var navDot = document.querySelectorAll('.slider__navigation--dot');
-	for (i=0; i<navDot.length; i++) {
-		navDot[i].setAttribute('style', 'background: #CE2A2A');
+	for (i=0; i<navDot.length; i++);
 	}
 	var sliderImage = document.querySelectorAll('.slider__image');
-	for (i=0; i<sliderImage.length; i++) {
-		sliderImage[i].setAttribute('style', 'opacity: 0');
+	for (i=0; i<sliderImage.length; i++);
 	}
 	count++;
 	if (count > heroDetails.length) {
@@ -19,7 +16,6 @@ function heroAnimations() {
    	}
 	sliderImage[count-1].setAttribute('style', 'opacity: 1');
 	heroDetails[count-1].setAttribute('style', 'display: block');
-	navDot[count-1].setAttribute('style', 'background: #FEDC17');
 	var sliderFront = document.querySelector('.slider__background--front');
 	var sliderDetails = document.querySelectorAll('.slider__details');
 	setTimeout(function() {
