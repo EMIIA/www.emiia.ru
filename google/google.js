@@ -1,5 +1,5 @@
-var myApp = "https://script.google.com/macros/s/AKfycbyngFLiHEFC_bxkRRZrIynshh8Mc4xsw1IaerXHdmjof5tk-jg/exec";//URL нашего приложения
-var tasks = "1M1OKuBxGoDHsuzAcRcUqgWFFCRPdRUGiSepS3EWj6Bs";//уникальный идентификатор нашей таблицы
+var myApp = "https://script.google.com/macros/s/AKfycbzCkGjGALaL-6x-EPwzgJDuhBiAZgVwzvEF3-5cjn5UPTL-3OLC/exec";//URL нашего приложения
+var tasks = "1RtM_Z_BrHae6ar-0h-b5j2MvmMtVx-ez7yt5ZKoESus";//уникальный идентификатор нашей таблицы
 
 $( document ).ready(function() {//функция запускается, как только страница будет готова для просмотра пользователю
 	loadTasks ();//запускаем функцию для получения списка задач
