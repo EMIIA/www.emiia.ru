@@ -6,7 +6,8 @@ function heroAnimations() {
 		heroDetails[i].setAttribute('style', 'display: none');
 	}
 	var navDot = document.querySelectorAll('.slider__navigation--dot');
-	for (i=0; i<navDot.length; i++);
+	for (i=0; i<navDot.length; i++) {
+		navDot[i].setAttribute('style', 'background: #CE2A2A');
 	}
 	var sliderImage = document.querySelectorAll('.slider__image');
 	for (i=0; i<sliderImage.length; i++) {
