@@ -1,3 +1,4 @@
+var myApp = "https://script.google.com/macros/s/AKfycbyngFLiHEFC_bxkRRZrIynshh8Mc4xsw1IaerXHdmjof5tk-jg/exec";//URL нашего приложения
 var tasks = "1M1OKuBxGoDHsuzAcRcUqgWFFCRPdRUGiSepS3EWj6Bs";//уникальный идентификатор нашей таблицы
 
 $( document ).ready(function() {//функция запускается, как только страница будет готова для просмотра пользователю
