@@ -1,8 +1,14 @@
+body {
+	display: flex;
+	justify-content: center;
+}
+
+
 .loop_wrap {
   position: relative;
   display: -webkit-flex;
   display: flex;
-  width: 100vw;
+  width: 750px;
   height: 200px;
   overflow: hidden;
 }
@@ -12,6 +18,7 @@
   max-width: fit-content;
   height: 100%;
   will-change: transform;
+
 }
 
 .loop_wrap img:first-child {
