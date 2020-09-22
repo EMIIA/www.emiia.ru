@@ -376,14 +376,14 @@ a.ex5:hover, a.ex5:active {text-decoration: underline;}
 
 
 
-
 <!doctype html>
 <html class="zc-html">
 
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>EMIIA.AI</title>
   <script src="https://www.emiia.ru/app.js"></script>
+  
   <style>
     .chart--container {
       height: 100%;
@@ -396,24 +396,21 @@ a.ex5:hover, a.ex5:active {text-decoration: underline;}
     }
   </style>
 </head>
-​
+
 
 <body class="zc-body">
-  ​
+ 
   <div id="myChart" class="chart--container">
 
   </div>
 
   <script>
-    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"]; // window:load event for Javascript to run after HTML
-    // because this Javascript is injected into the document head
+
     window.addEventListener('load', () => {
-      // Javascript code to execute after DOM content
+  
 
-      zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+      zingchart.MODULESDIR = "https://www.emiia.ru/modules/";
 
-      // full ZingChart schema can be found here:
-      // https://www.zingchart.com/docs/api/json-configuration/
       let chartConfig = {
         type: 'radar',
         heatmap: {
