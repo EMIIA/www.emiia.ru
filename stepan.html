@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MCSLS6W');</script>
+<!-- End Google Tag Manager -->
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<base href="https://onebus.com.ua/"/>
+
+<meta name="keywords" content=". Компания Onebus" />
+<meta name="description" content="Компания «ONEBUS» - специалист по пассажирским перевозкам в Украине. Особенность нашего сервиса – это ежедневные рейсы в Москву и Польшу на комфортабельном микроавтобусе Mersedes Benz, в которых есть всё необходимое для поездок на дальние расстояния." />
+<link rel="canonical" href="https://onebus.com.ua/">
+<title>Компания Onebus</title>
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+<link href="css/nivo-slider.css" rel="stylesheet">
+<link href="css/lightslider.css" rel="stylesheet">	
+<link href="css/style_onebus.css" rel="stylesheet">
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->	
+	
+<link rel="ICON" href="favicon.ico" />
+<link rel="icon" href="60.png">
+<link rel="icon" sizes="76x76" href="76.png">
+<link rel="icon" sizes="120x120" href="120.png">
+<link rel="icon" sizes="152x152" href="152.png">
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css" />
+	
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>	
+<script type="text/javascript" src="/fancybox/jquery.fancybox.pack.js" ></script>
+<script type="text/javascript">
+jQuery(document).ready(function($){
+$(".fancybox,.gal").fancybox();
+});
+</script>
+<script type="text/javascript" src="/assets/modules/feedback_module/js/feedback_scr.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($){	
+$("#cartcon").fancybox({ href: '#cartcoiner' , wrapCSS: 'modal_tocart',maxWidth:750, minHeight:292 });//всплывающее окно «товар добавлен в корзину»
+$(".bc_btn").fancybox({ href: '#form_back_call', wrapCSS: 'modal_back_call'});//всплывающее окно «обратный звонок»
+$(".bc_btn_fix").fancybox({ href: '#form_back_call_fix', wrapCSS: 'modal_back_call_fix'});//всплывающее окно «обратный звонок»	
+$(".open_fb").fancybox({ href: '#form_feedbackWind', wrapCSS: 'modal_feedback' });// всплывающее окно «обратная связь»
+});
+</script>
+	
+	
+	</head>
+<body>
+	<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MCSLS6W"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<div id="cont" class="wrapper">
+<header>
+<div class="container">
+<div class="row">   
+<div class="col-xs-12 col-sm-4 col-md-3 col-lg-4">
+    <div class="logo"><a href="/" title="Onebus" ><img src="img/logo.png" alt="Onebus"/></a>  </div>  
+</div>
+<div class="col-xs-12 col-sm-8 col-md-3 col-lg-offset-1">
+    <div class="h-bc"><a class="bc_btn" href="#form_back_call">Заказать обратный звонок</a>
+
+<div style="display: none;">
+<div class="back-call" id="form_back_call">	
+<div class="back-call_ic"></div>
+<div class="back-call_t">Заказать обратный звонок</div>
+	<p id="msg_bc" class=""></p>
+
+	<form id="bcform" method="POST" class="back-call_form">
+		
+					<div><label class="back-call_lbl">Имя<span class="req">*</span></label>
+				<div><input class="back-call_it" name="name" type="text" maxlength="40" data-fl-check="1 " /></div>
+			</div>
+		
+		
+					<div><label class="back-call_lbl">Телефон<span class="req">*</span></label>		
+<div class="phone-bc-control">
+<div><select></select><input class="back-call_it" id="bc_phone" placeholder="+_(___)__-__-___" name="phone" type="text" maxlength="20" data-fl-check="1" /></div>	
+</div>				
+			</div>
+		
+			
+
+		<button class="back-call_btn-send" onclick="FBmodule.sendForm_bc('ru','','')" >Отправить</button>
+	</form>			
+</div>
+	
+<div id="bc_success">
+<div><p>Спасибо, Ваша заявка принята.</p><p>В ближайшее время менеджер свяжется с Вами.</p></div>
+</div>
+</div><script type="text/javascript">FBmodule.bc_goto = '/spasibo-za-zakaz.html'</script></div>  
+</div>  
+<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2 h-phone">
+    <div class="h-phone-ukr"><span class="phone-number vb">+38 (067) 329-32-99</span><span class="phone-number ">+38 (063) 714-40-28</span><span class="phone-number ">+38 (095) 473-05-72</span> </div>       
+</div>  
+<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2 h-phone">
+    
+		
+		
+		<div class="h-phone-rus"><span class="phone-number vb">+7 (926) 036-29-29</span></div><div class="h-phone-pl"><span class="phone-number ">+4 822 602-29-29</span></div>
+</div>
+<div class="col-xs-12 col-lg-8 nav-menu">    
+     <div class="navbar-header">
+         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+             <span class="sr-only">Меню</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+         </button>
+    </div>
+	<div class="clearfix"></div>	
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<ul class="nav nav-justified"><li class=""><a class="id_7" href="/o-nas.html"><span>О нас</span></a> </li>
+<li class=""><a class="id_8" href="/marshruty.html"><span>Маршруты</span></a> <ul><li><a href="/ukraina.html" title="Россия Украина" >Россия Украина</a></li>
+<li><a href="/rossiya.html" title="Украина-Россия" >Украина-Россия</a></li>
+<li><a href="/polsha.html" title="Украина-Польша" >Украина-Польша</a></li>
+</ul></li>
+<li class=""><a class="id_36" href="/otzyvy.html"><span>Отзывы</span></a> </li>
+<li class="last"><a class="id_9" href="/kontakty.html"><span>Контакты</span></a> </li>
+</ul>
+    </div><!-- /.navbar-collapse -->    
+</div> 
+</div>     
+</div>    
+<div class="phone-fix"><a class="bc_btn_fix bc_btn_fix_static" href="#form_back_call_fix"></a>
+
+<div style="display: none;">
+<div class="back-call" id="form_back_call_fix">	
+<div class="back-call_ic"><img src="assets/cache/images/120x125-photo5.582.png" /></div>
+<div class="back-call_t">У Вас есть вопросы? Мы Вам поможем!
+<p>Наш лучший менеджер позвонит Вам всего<br />
+через 10 минут. Это быстро и бесплатно!</p>
+</div>
+<div class="clearfix"></div>	
+	<p id="msg_bc_fix" class=""></p>
+
+	<form id="bcform_fix" method="POST" class="back-call_form">
+		
+		
+		
+					<div><label class="back-call_lbl">Телефон<span class="req">*</span></label>		
+<div class="phone-fix-control">
+<div><select></select><input class="back-call_it" id="bc_phone_fix" placeholder="+_(___)__-__-___" name="phone" type="text" maxlength="20" data-fl-check="1" /></div>	
+</div>				
+			</div>
+		
+			
+
+		<button class="back-call_btn-send" onclick="FBmodule.sendForm_bc('ru','','_fix')" >Жду звонка</button>
+	</form>			
+</div>
+	
+<div id="bc_success_fix">
+<div><p>Спасибо, Ваша заявка принята.</p><p>В ближайшее время менеджер свяжется с Вами.</p></div>
+</div>
+</div><script type="text/javascript">FBmodule.bc_goto = '/spasibo-za-zakaz.html'</script></div>
+</header>
+<div class="container">
+<div class="sldr">
+<div class="slider-wrapper ">
+<div id="slider" class="nivoSlider">
+<a href="https://onebus.com.ua/krivoj-rog-moskva.html" title="Компания Onebus"><img src="assets/cache/images/bannery/1140x330-ban.5cf.jpg" alt="Главная"/></a><a href="https://onebus.com.ua/novomoskovsk-moskva.html" title="Компания Onebus"><img src="assets/cache/images/bannery/1140x330-montazhnaya-oblast-8%281%29.08f.jpg" alt="Главная"/></a><a href="https://onebus.com.ua/kamenskoedneprodzerzhinsk-moskva.html" title="Компания Onebus"><img src="assets/cache/images/bannery/1140x330-ban1.574.png" alt="Главная"/></a><a href="https://onebus.com.ua/dnepr-moskva.html" title="Компания Onebus"><img src="assets/cache/images/bannery/1140x330-montazhnaya-oblast-9%281%29.128.jpg" alt="Главная"/></a>	
+</div>	
+</div>    
+</div>  
+<div class="form-main">
+<div style="">
+<div class="back-call" id="form_back_call_rt">	
+	<p id="msg_bc_rt" class=""></p>
+
+	<form id="bcform_rt" method="POST" class="back-call_form">
+		
+				<div class="col-xs-12 col-sm-6 col-lg-3"><div><label>Откуда</label>
+			<select name="additional_values_txt1" data-fl-check="1" >
+				<option>Кривой Рог</option><option>Каменское (Днепродзержинск)</option><option>Днепр</option><option>Новомосковск</option><option>Тула</option><option>Москва</option>
+			</select>				
+		</div></div>
+		<div class="col-xs-12 col-sm-6 col-lg-3"><div><label>Куда</label>
+			<select name="additional_values_txt2" data-fl-check="1" >
+				<option>Тула</option><option>Новомосковск</option><option>Москва</option><option>Кривой Рог</option><option>Каменское (Днепродзержинск)</option><option>Днепр</option>				
+			</select>				
+		</div></div>
+		
+				<div class="col-xs-12 col-sm-8 col-lg-4 it__date-phone">
+			<div class="back-call-phone-wp"><label class="back-call_lbl">Телефон<span class="req">*</span></label>
+				<div class="phone-control">
+					<div>
+						<select></select>
+						<input class="back-call_it" id="bc_phone_rt" name="phone" type="text" placeholder="Номер для связи" maxlength="20" data-fl-check="1" />
+					</div>								
+				</div>
+			</div>		
+				
+		<div id="datepaire"><label>Дата</label><input type="text" name="additional_values_data" placeholder="Дата" class="symb date" value="" data-fl-check="1" ></div></div>
+			
+
+		 <div class="col-xs-12 col-sm-4 col-lg-2"><button class="back-call_btn-send1" onclick="FBmodule.sendForm_bc('ru','','_rt')" >Забронировать</button></div>
+	</form>			
+</div>
+	
+<div style="display:none;" id="bc_success_rt">
+<div><p>Спасибо, Ваша заявка принята.</p><p>В ближайшее время менеджер свяжется с Вами.</p></div>
+</div>
+</div>	
+</div>		
+<div class="comfort">
+    <div class="title-wp"><div class="title">Возим с комфортом</div> </div>    
+    <div class="lists-comfort">
+        <div class="row">
+			 <div class="col-xs-6 col-sm-4 col-md-2">
+<div class="list-comfort">
+<div class="list-comfort_img"><img src="assets/cache/images/komfort/60x60-1.15d.png" alt="Телевизор" /></div>
+<div class="list-comfort_tx">Телевизор</div>                    
+</div>    
+</div>  <div class="col-xs-6 col-sm-4 col-md-2">
+<div class="list-comfort">
+<div class="list-comfort_img"><img src="assets/cache/images/komfort/60x60-2.15d.png" alt="Просмотр фильмов" /></div>
+<div class="list-comfort_tx">Просмотр фильмов</div>                    
+</div>    
+</div>  <div class="col-xs-6 col-sm-4 col-md-2">
+<div class="list-comfort">
+<div class="list-comfort_img"><img src="assets/cache/images/komfort/60x60-3.15d.png" alt="Обогрев салона" /></div>
+<div class="list-comfort_tx">Обогрев салона</div>                    
+</div>    
+</div>  <div class="col-xs-6 col-sm-4 col-md-2">
+<div class="list-comfort">
+<div class="list-comfort_img"><img src="assets/cache/images/komfort/60x60-4.0a0.png" alt="Кондиционер" /></div>
+<div class="list-comfort_tx">Кондиционер</div>                    
+</div>    
+</div>  <div class="col-xs-6 col-sm-4 col-md-2">
+<div class="list-comfort">
+<div class="list-comfort_img"><img src="assets/cache/images/komfort/60x60-5.0a0.png" alt="Бесплатный Wi-Fi" /></div>
+<div class="list-comfort_tx">Бесплатный Wi-Fi</div>                    
+</div>    
+</div>  <div class="col-xs-6 col-sm-4 col-md-2">
+<div class="list-comfort">
+<div class="list-comfort_img"><img src="assets/cache/images/komfort/60x60-6.4ea.png" alt="Удобные сидения" /></div>
+<div class="list-comfort_tx">Удобные сидения</div>                    
+</div>    
+</div>           
+        </div>
+    </div>
+</div>   
+<div class="popular">
+    <div class="title-wp"><a href="marshruty.html" class="title">Популярные направления</a> </div>  
+     <div class="lists-popular">
+        <div class="row">
+						 
+        </div>
+         <a href="marshruty.html" class="see-all_btn">Смотреть все маршруты</a>
+    </div>   
+</div> 
+<div class="content">
+    <div class="content-main">
+<p><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 10pt;">Компания &laquo;ONEBUS&raquo; - специалист по пассажирским перевозкам в Украине. Особенность нашего сервиса &ndash; это ежедневные рейсы в Москву на комфортабельном микроавтобусе Mersedes Benz, в которых есть всё необходимое для поездок на дальние расстояния.</span></p>
+<p><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 10pt;">Для того, чтобы каждый рейс проходил на высшем уровне, мы обеспечиваем пассажиров удобными 8-ми &nbsp;местными микроавтобусами с кондиционером, в которых можно отдохнуть, посмотреть телевизор или воспользоваться услугами бесплатного Wi-Fi,&nbsp;Usb подзарядки телефонов.</span></p>
+<p><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 10pt;">Мы регулируем температурный режим в салоне в зависимости от погоды за окном и времени года. Будьте уверенны: ни холодно, ни жарко Вам точно не будет!</span></p>
+<p><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 10pt;">Если у Вас появится желание остановиться &ndash; сообщите водителю и он сделает остановку на ближайшей станции заправки, на которых в обязательном порядке есть уютные кафе и чистые санузлы.</span></p>
+<p><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 10pt;">Вас что-то беспокоит во время поездки &ndash; открытое окно или люк, слишком шумный телевизор, громкая музыка, плохое самочувствие, не стесняйтесь оповестить об этом водителя. Мы устраним любые неудобства и сделаем всё возможное для того, чтобы эта поездка запомнилась Вам комфортом и высококлассным сервисом!</span></p>
+<p><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 10pt;">Вы всё еще сомневаетесь в своём решении? Давайте мы расскажем Вам, каковы преимущества работы с нами:</span></p>
+<ul>
+<li><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 10pt;">Безопасность передвижения. Можете положиться на нас!</span></li>
+<li><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 10pt;">Комфортные салоны авто, чистые и мягкие сиденья и располагающая атмосфера уюта.</span></li>
+<li><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 10pt;">Соотношение цены и качества при покупке билетов.</span></li>
+<li><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 10pt;">Бесплатный Интернет и просмотр ТВ.</span></li>
+<li><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 10pt;">Возможность остановки транспорта по требованию.</span></li>
+</ul>
+<p><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 10pt;">Пока Вы медлите &ndash; кто-то уже заказал свой билет. Звоните нам!</span></p>
+<p><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 10pt;">&nbsp;</span></p>
+<p><span style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 10pt;">&nbsp;</span></p>		
+    </div>
+</div>    
+</div> 
+</div> 	
+<footer id="footer">
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="f-menu">
+				<ul><li class=""><a class="id_7" href="/o-nas.html"><span>О нас</span></a> </li>
+<li class=""><a class="id_8" href="/marshruty.html"><span>Маршруты</span></a> </li>
+<li class=""><a class="id_36" href="/otzyvy.html"><span>Отзывы</span></a> </li>
+<li class="last"><a class="id_9" href="/kontakty.html"><span>Контакты</span></a> </li>
+</ul> 
+            </div> 
+            <div class="f-copyr">
+                «ONEBUS» — регулярные рейсы в Россию
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="f-city"></div>
+        </div>  
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="f-soc">
+                 <span>Мы в соц. сетях:</span>
+                <a href="https://fb.me/OneBus.com.ua" class="fb" title="Facebook" rel="nofollow" target="_blank"></a>
+                
+                <a href="https://www.instagram.com/onebus.com.ua/" class="in" title="Instagram" rel="nofollow" target="_blank"></a>
+                
+            </div>          
+        </div>         
+    </div>    
+</div>    
+</footer>			
+<script type="text/javascript" src="js/jquery.nivo.slider.js"></script>
+<script type="text/javascript">
+$(window).load(function() {
+$('#slider').nivoSlider();
+});
+</script> 
+<link rel="stylesheet" type="text/css" href="datepair/bootstrap-datepicker.standalone.min.css">
+<link rel="stylesheet" type="text/css" href="datepair/jquery.timepicker.css">
+<script src="datepair/bootstrap-datepicker.min.js"></script>   
+<script src="datepair/jquery.timepicker.min.js"></script>
+<script src="datepair/datepair.js"></script>
+
+<script>
+$.fn.datepicker.defaults.language = 'ru';
+$.fn.datepicker.dates['ru'] = {
+    days: ["Воскреcение", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Субота", "Воскреcение"],
+    daysShort: ["Воскр", "Понед", "Втор", "Сред", "Четв", "Пятн", "Суб", "Воскр"],
+    daysMin: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"],
+    months: [ "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" ],
+    monthsShort: [ "Янв", "Февр", "Март", "Апр", "Май", "Июн", "Июл", "Авг", "Сент", "Окт", "Нояб", "Дек" ],
+    today: "Сегодня"
+};
+
+ var datepickersOpt = {
+        dateFormat: 'd.mm.yyyy',
+		autoclose: true,
+        minDate: 149999999
+    }
+
+
+$(document).ready(function(){
+     $( ".date" ).datepicker({
+          format:'d.mm.yyyy', 
+          autoclose: true,
+		  startDate: new Date(), 	
+    }).datepicker( 'update', new Date() );
+	
+	//.datepicker('update', new Date()).datepicker( "option", "minDate", new Date());
+
+    $('.time').timepicker({
+        'minTime': '8:00',
+        'maxTime': '22:00',
+        'timeFormat': 'H:i',
+     //   'disableTimeRanges': 
+    }); 	
+	new Datepair(document.getElementById('datepaire'));
+});    
+</script>
+<script>
+function footerToBottom() {
+var browserHeight = $(window).height(),
+footerOuterHeight = $('#footer').outerHeight(true),
+mainHeightMarginPaddingBorder = $('#cont').outerHeight(true) - $('#cont').height();
+$('#cont').css({
+'min-height': browserHeight - footerOuterHeight - mainHeightMarginPaddingBorder + 21,
+});
+};
+footerToBottom();
+$(window).resize(function () {
+footerToBottom();
+});
+</script>
+
+<!--<script type="text/javascript" src="/fancybox/jquery.fancybox.pack.js" ></script>
+<script type="text/javascript">
+jQuery(document).ready(function($){
+$(".fancybox,.gal").fancybox();
+});
+</script>-->
+<script>
+$(window).load(function() {
+$('.load').fadeOut('slow');
+});
+</script>
+<!--<script type="text/javascript" src="/assets/modules/feedback_module/js/feedback_scr.js" async></script>-->
+<script type="text/javascript" src="/js/jquery.maskedinput.min.js" ></script>
+	
+<script type="text/javascript">
+jQuery(document).ready(function($){	
+//$("#cartcon").fancybox({ href: '#cartcoiner' , wrapCSS: 'modal_tocart',maxWidth:750, minHeight:292 });//всплывающее окно «товар добавлен в корзину»
+//$(".bc_btn").fancybox({ href: '#form_back_call', wrapCSS: 'modal_back_call'});//всплывающее окно «обратный звонок»
+//$(".bc_btn_fix").fancybox({ href: '#form_back_call_fix', wrapCSS: 'modal_back_call_fix'});//всплывающее окно «обратный звонок»	
+//$(".open_fb").fancybox({ href: '#form_feedbackWind', wrapCSS: 'modal_feedback' });// всплывающее окно «обратная связь»
+$("#ocShort_phone").mask('+38(999)99-99-999');// "Заказ в один клик" упрощёной формы
+$("#ocSHK_phone").mask('+38(999)99-99-999');// "Заказ в один клик"	
+//$("#oc_phone").mask('+38(999)99-99-999'); // "Заказ в один клик"
+//$("#bc_phone").mask('+38(999)99-99-999');// "Обратный звонок"
+//$("#bc_phone_rt").mask('+38(999)99-99-999');// "Перезвоните мне"	
+//$("#fb_phone").mask('+38(999)99-99-999');// "Обратная связь"	
+//$("#fbWind_phone").mask('+38(999)99-99-999');// "Обратная связь" 
+$("#cart_phone").mask('+38(999)99-99-999'); //Корзина
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+$(".phone-control").extendedMask();
+$(".phone-bc-control").extendedMask();
+$(".phone-fb-control").extendedMask();	
+$(".phone-oc-control").extendedMask();
+$(".phone-fix-control").extendedMask();	
+});
+</script>
+
+<script type="text/javascript" src="/js/jquery.maskedinput.min.js"></script>
+<script type="text/javascript" src="/assets/modules/MaskedInputModule/maskedinput.extension.php"></script>
+
+<script type="text/javascript" src="/js/isMobile.js"></script>
+<script>
+	if(isMobile.phone & $(window).width() <= 767) {
+		$('.phone-number').each(function() {
+			$(this).replaceWith(
+				$('<a href="tel:'+ $(this).text() + '" class="' + $(this).attr("class") + '">' + $(this).text() +'</a>')
+			);
+		});
+	}
+</script>
+
+<script type="text/javascript">
+ $('.bc_btn_fix').mouseover(function(){
+  $(this).addClass('bc_btn_fix_hover');
+  $(this).removeClass('bc_btn_fix_static');
+ });
+ $('.bc_btn_fix').mouseout(function(){
+  $(this).addClass('bc_btn_fix_static');
+  $(this).removeClass('bc_btn_fix_hover');
+ }); 
+</script>    
+</body>
+</html>
