@@ -64,7 +64,7 @@ const phrases = [
   'ASI',
   'Yandex Cloud Boost',
   'NTI',
-  'Huawei Xiaomi Glonass',
+  'Huawei Xiaomi nVIDIA',
   'MIET iotas',
   'FASIE'
 ]
