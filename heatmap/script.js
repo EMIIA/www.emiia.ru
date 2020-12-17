@@ -10,7 +10,7 @@ function init() {
 		antialias: true
 	});
 	renderer.setSize(ww, wh);
-	renderer.setClearColor(0x000000);
+	renderer.setClearColor(0xFFFFFF);
 
 	scene = new THREE.Scene();
 
