@@ -62,7 +62,7 @@ new ControlPanel(controlsElement, {
       minTrackingConfidence: 0.5
     })
     .add([
-      new StaticText({title: 'MediaPipe Pose'}),
+      new StaticText({title: 'EMIIA.AI Pose'}),
       fpsControl,
       new Toggle({title: 'Selfie Mode', field: 'selfieMode'}),
       new Toggle({title: 'Upper-body Only', field: 'upperBodyOnly'}),
