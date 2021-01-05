@@ -24,7 +24,7 @@
   letter-spacing: 1px;
   display: flex;
   align-items: flex-end;
-  font-weight: medium;
+  font-weight: Semi-Bold;
   color: #3f69aaff;
 }
 .wrapper > div:after {
