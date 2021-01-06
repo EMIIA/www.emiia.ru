@@ -1,0 +1,21 @@
+body {
+ background-color: #6290C3;
+ overflow: hidden;
+ text-align:center;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+}
+
+body,
+html {
+ height: 100%;
+ width: 100%;
+ margin: 0;
+ padding: 0;
+}
+
+.zdog-svg {
+	width: 100%;
+	height: 100%;
+}
