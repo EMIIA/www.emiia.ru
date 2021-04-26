@@ -66,8 +66,7 @@ const phrases = [
   'NTI',
   'Huawei Xiaomi nVIDIA',
   'MIET iotas',
-  'FASIE'
-  'Sber'
+  'FASIE Sber'
 ]
 
 const el = document.querySelector('.text')
