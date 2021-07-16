@@ -34,26 +34,26 @@
 
 
 <path id="path856" d="M16.635 5.68h6.658" fill="none" stroke="white" stroke-width=".254" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke-dasharray=".25381,.507621" stroke-dashoffset="0" stroke-opacity="1">
-	 <animate id="p1" attributeName="stroke-dashoffset" begin="0s;f1.end+0s" values="2000;0;2000" dur="1000s" 
+	 <animate id="p1" attributeName="stroke-dashoffset" begin="0s;f1.end+0s" repeatCount="indefinite" values="2000;0;2000" dur="1000s" 
 	 calcMode="linear"/>
      </path>
      
 
 <path d="M16.563 9.342h6.658" id="path856-9" fill="none" stroke="white" stroke-width=".254" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke-dasharray=".25381,.50762" stroke-dashoffset="0" stroke-opacity="1">
-<animate id="p1" attributeName="stroke-dashoffset" begin="0s;f1.end+0s" values="-2000;0;-2000" dur="1000s" 
+<animate id="p1" attributeName="stroke-dashoffset" begin="0s;f1.end+0s" repeatCount="indefinite" values="-2000;0;-2000" dur="1000s" 
 	 calcMode="linear"/>
      </path>
 
 
 
 <path d="M34.585 5.403h6.658" id="path856-1" fill="none" stroke="white" stroke-width=".254" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke-dasharray=".25381,.50762" stroke-dashoffset="0" stroke-opacity="1">
-	 <animate id="p1" attributeName="stroke-dashoffset" begin="0s;f1.end+0s" values="-2000;0;-2000" dur="1000s" 
+	 <animate id="p1" attributeName="stroke-dashoffset" begin="0s;f1.end+0s" repeatCount="indefinite" values="-2000;0;-2000" dur="1000s" 
 	 calcMode="linear"/>
      </path>
      
 
 <path id="path856-9-5" d="M34.554 9.342h6.658" fill="none" stroke="white" stroke-width=".254" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke-dasharray=".25381,.50762" stroke-dashoffset="0" stroke-opacity="1">
-<animate id="p1" attributeName="stroke-dashoffset" begin="0s;f1.end+0s" values="2000;0;2000" dur="1000s" 
+<animate id="p1" attributeName="stroke-dashoffset" begin="0s;f1.end+0s" repeatCount="indefinite" values="2000;0;2000" dur="1000s" 
 	 calcMode="linear"/>
      </path>
 
