@@ -57,9 +57,9 @@
      d="M49.625 6.619a.207.207 0 01-.29.014 3.552 3.552 0 00-4.791.015.207.207 0 11-.28-.305 3.963 3.963 0 015.346-.016.207.207 0 01.015.292z"
      id="wifi2"
      fill="white"
-     fill-opacity="0.1"
+     fill-opacity="0.3"
      stroke="white"
-     stroke-width="0.208"
+     stroke-width="0.0"
      stroke-miterlimit="5"
      stroke-dasharray="none"
      stroke-opacity="0" >
@@ -78,7 +78,7 @@
 		<animate
         id="three"
         attributeName="fill-opacity"
-        dur="500ms"
+        dur="400ms"
         values="0.5;1;0.5"
         calcMode="linear"
         begin="two.end+0.05s"/>   
@@ -97,7 +97,7 @@
      d="M48.544 7.799a.207.207 0 01-.29.015 1.96 1.96 0 00-2.532-.07.207.207 0 01-.257-.323 2.374 2.374 0 013.063.083.207.207 0 01.018.292z"
      id="wifi1"
      fill="white"
-     fill-opacity="0.1"
+     fill-opacity="0.3"
      stroke="white"
      stroke-width="0.00"
      stroke-miterlimit="5"
@@ -110,7 +110,7 @@
     		<animate
         id="two"
         attributeName="fill-opacity"
-        dur="500ms"
+        dur="400ms"
         values="0.5;1;0.5"
         calcMode="linear"
         begin="one.end+0.05s"/>   
@@ -295,7 +295,7 @@
     <animate
         id="one"
         attributeName="fill-opacity"
-        dur="500ms"
+        dur="400ms"
         values="0.5;1;0.5"
         calcMode="linear"
         begin="0s;four.end+0.05s"/> 
@@ -313,4 +313,5 @@
   
      
 </svg>
+
 
