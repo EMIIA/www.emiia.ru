@@ -1,61 +1,37 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
-   sodipodi:docname="sdk1.svg"
-   id="svg901"
-   version="1.1"
-   width="215.653"
-   height="51.717"
-   viewBox="0 0 57.058 13.683">
-  <metadata
-     id="metadata1626">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <defs
-     id="defs1624" />
-  <sodipodi:namedview
-     inkscape:current-layer="svg901"
-     inkscape:window-maximized="1"
-     inkscape:window-y="-11"
-     inkscape:window-x="-11"
-     inkscape:cy="10.023891"
-     inkscape:cx="110.13262"
-     inkscape:zoom="2.8215021"
-     showgrid="false"
-     id="namedview1622"
-     inkscape:window-height="1046"
-     inkscape:window-width="1920"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0"
-     guidetolerance="10"
-     gridtolerance="10"
-     objecttolerance="10"
-     borderopacity="1"
-     bordercolor="#666666"
-     pagecolor="#ffffff" />
-     
-     
-     
-     
-     
-     
-  <path
-     d="M49.625 6.619a.207.207 0 01-.29.014 3.552 3.552 0 00-4.791.015.207.207 0 11-.28-.305 3.963 3.963 0 015.346-.016.207.207 0 01.015.292z"
-     id="wifi2"
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg"     width="215.653"
+   height="51.717" viewBox="0 0 57.06 13.68">
+
+
+
+
+<title>3 signs</title>
+
+
+
+
+<path d="M13.74,12.67H8a2.45,2.45,0,0,1-2.45-2.45V4.47A2.45,2.45,0,0,1,8,2h5.76a2.45,2.45,0,0,1,2.45,2.45v5.76A2.45,2.45,0,0,1,13.74,12.67ZM8,2.09A2.38,2.38,0,0,0,5.6,4.47v5.76A2.38,2.38,0,0,0,8,12.61h5.76a2.38,2.38,0,0,0,2.38-2.38V4.47a2.38,2.38,0,0,0-2.38-2.38Z" style="fill:#fff"/><path d="M31.68,12.67H25.92a2.45,2.45,0,0,1-2.45-2.45V4.47A2.45,2.45,0,0,1,25.92,2h5.76a2.45,2.45,0,0,1,2.45,2.45v5.76A2.45,2.45,0,0,1,31.68,12.67ZM25.92,2.09a2.38,2.38,0,0,0-2.38,2.38v5.76a2.38,2.38,0,0,0,2.38,2.38h5.76a2.38,2.38,0,0,0,2.38-2.38V4.47a2.38,2.38,0,0,0-2.38-2.38Z" style="fill:#fff"/><path d="M49.65,12.67H43.9a2.45,2.45,0,0,1-2.45-2.45V4.47A2.45,2.45,0,0,1,43.9,2h5.76A2.45,2.45,0,0,1,52.1,4.47v5.76A2.45,2.45,0,0,1,49.65,12.67ZM43.9,2.09a2.38,2.38,0,0,0-2.38,2.38v5.76a2.38,2.38,0,0,0,2.38,2.38h5.76A2.38,2.38,0,0,0,52,10.22V4.47a2.38,2.38,0,0,0-2.38-2.38Z" style="fill:#fff"/><path d="M8.69,4.43h1.4a.35.35,0,0,1,.35.35V6.53H10.2V5.76H8.58v.77H8.34V4.78a.35.35,0,0,1,.35-.35ZM8.58,5.52H10.2V4.78a.11.11,0,0,0,0-.08.11.11,0,0,0-.08,0H8.7a.11.11,0,0,0-.08,0,.11.11,0,0,0,0,.08Z" style="fill:#fff"/><path d="M10.77,4.43h1.75a.35.35,0,0,1,.35.35V5.4a.35.35,0,0,1-.35.35H11v.79h-.24Zm1.86,1V4.79a.11.11,0,0,0-.11-.11H11.12a.11.11,0,0,0-.11.11V5.4a.1.1,0,0,0,0,.08.11.11,0,0,0,.08,0h1.39a.11.11,0,0,0,.08,0A.1.1,0,0,0,12.63,5.4Z" style="fill:#fff"/><path d="M13.08,6.53V4.43h.24v2.1Z" style="fill:#fff"/><path d="M9.54,8.54v.08H9.3V8.54a.11.11,0,0,0,0-.08.11.11,0,0,0-.08,0H7.8a.11.11,0,0,0-.11.11V9a.1.1,0,0,0,0,.08.11.11,0,0,0,.08,0h1.4a.35.35,0,0,1,.35.35v.47a.35.35,0,0,1-.35.35H7.79a.34.34,0,0,1-.25-.1.34.34,0,0,1-.1-.25V9.86h.24v.08A.11.11,0,0,0,7.8,10H9.19a.11.11,0,0,0,.11-.11V9.47a.1.1,0,0,0,0-.08.11.11,0,0,0-.08,0H7.79A.35.35,0,0,1,7.45,9V8.54a.35.35,0,0,1,.35-.35h1.4a.35.35,0,0,1,.35.35Z" style="fill:#fff"/><path d="M9.86,8.19h1.75a.35.35,0,0,1,.35.35v1.4a.35.35,0,0,1-.35.35H9.86Zm1.86,1.74V8.54a.11.11,0,0,0-.11-.11H10.21a.11.11,0,0,0-.11.11V9.94a.11.11,0,0,0,.11.11H11.6a.11.11,0,0,0,.11-.11Z" style="fill:#fff"/><path d="M14,8.19h.3l-.88,1,.88,1H14l-.78-.93h-.68v.93h-.24V8.19h.24v.93h.68Z" style="fill:#fff"/><path d="M31.21,4.74v.6H27V7.08h3.39v.6H27V9.41h4.22V10H26.39V4.74Z" style="fill:#fff"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<path d="M46.77,5.24a4,4,0,0,1,2.65,1,.29.29,0,0,1-.39.43,3.39,3.39,0,0,0-4.52,0,.29.29,0,0,1-.39-.43,4,4,0,0,1,2.65-1" 
+
+id="wifi2"
      fill="white"
      fill-opacity="0.3"
      stroke="white"
@@ -86,15 +62,14 @@
      
     </path> 
      
-     
-     
- 
- 
-     
-     
-     
-  <path
-     d="M48.544 7.799a.207.207 0 01-.29.015 1.96 1.96 0 00-2.532-.07.207.207 0 01-.257-.323 2.374 2.374 0 013.063.083.207.207 0 01.018.292z"
+
+
+
+
+
+<path d="M46.77,7a2.23,2.23,0,0,1,1.5.58.29.29,0,1,1-.39.43,1.66,1.66,0,0,0-2.22,0,.29.29,0,0,1-.39-.43A2.24,2.24,0,0,1,46.77,7" 
+
+
      id="wifi1"
      fill="white"
      fill-opacity="0.3"
@@ -115,183 +90,23 @@
         calcMode="linear"
         begin="one.end+0.05s"/>   
 
-  </path> 
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-  <rect
-     id="rect893"
-     stroke-dashoffset=".337"
-     stroke-linejoin="round"
-     stroke-width=".198"
-     stroke="#fff"
-     fill="none"
-     width="10.627"
-     height="10.532"
-     x="23.486"
-     y="2.113"
-     ry="2.506"
-     rx="2.328"
-     fill-opacity="1"
-     stroke-miterlimit="4"
-     stroke-dasharray="none"
-     stroke-opacity="1" />
-  <rect
-     rx="2.328"
-     ry="2.506"
-     y="2.106"
-     x="5.55"
-     height="10.532"
-     width="10.627"
-     fill="none"
-     stroke="#fff"
-     stroke-width=".198"
-     stroke-linejoin="round"
-     stroke-dashoffset=".337"
-     id="rect893-6"
-     stroke-miterlimit="4"
-     stroke-dasharray="none"
-     stroke-opacity="1"
-     fill-opacity="1" />
-  <g
-     aria-label="API"
-     id="text944"
-     style="line-height:1.25"
-     font-size="2.822"
-     font-family="Orbitron"
-     stroke-width=".265"
-     fill="#fff"
-     fill-opacity="1"
-     stroke="none"
-     stroke-opacity="1"
-     font-style="normal"
-     font-variant="normal"
-     font-weight="400"
-     font-stretch="normal">
-    <path
-       d="M8.837 4.76h1.354q.141 0 .24.1.099.098.099.24v1.692h-.229V6.05H8.727v.742h-.229V5.1q0-.141.099-.24t.24-.099zm-.11 1.062H10.3v-.723q0-.045-.033-.076-.032-.034-.077-.034H8.837q-.045 0-.08.034-.03.03-.03.076z"
-       style="-inkscape-font-specification:Orbitron"
-       id="path848" />
-    <path
-       d="M10.852 4.763h1.693q.141 0 .24.099t.099.24v.595q0 .142-.1.24-.098.1-.24.1H11.19q-.025 0-.11-.012v.767h-.228zm1.803.934v-.595q0-.045-.034-.076-.031-.034-.076-.034H11.19q-.045 0-.079.034-.03.03-.03.076v.595q0 .046.03.077.034.03.08.03h1.354q.045 0 .076-.03.034-.031.034-.077z"
-       style="-inkscape-font-specification:Orbitron"
-       id="path850" />
-    <path
-       d="M13.087 6.792V4.76h.228v2.032z"
-       style="-inkscape-font-specification:Orbitron"
-       id="path852" />
-  </g>
-  <g
-     aria-label="SDK"
-     id="text948"
-     style="line-height:1.25"
-     font-size="2.822"
-     font-family="Orbitron"
-     stroke-width=".265"
-     fill="#fff"
-     fill-opacity="1"
-     stroke="none"
-     stroke-opacity="1"
-     font-style="normal"
-     font-variant="normal"
-     font-weight="400"
-     font-stretch="normal">
-    <path
-       d="M9.778 8.86v.078h-.229V8.86q0-.045-.034-.076-.031-.034-.076-.034H8.084q-.045 0-.079.034-.03.031-.03.076v.455q0 .045.03.076.034.03.08.03h1.354q.141 0 .24.1.099.098.099.24v.454q0 .141-.1.24-.098.099-.24.099H8.085q-.14 0-.24-.1-.098-.098-.098-.24v-.078h.228v.079q0 .045.031.079.034.03.08.03H9.44q.045 0 .076-.03.034-.034.034-.08V9.76q0-.045-.034-.076-.031-.03-.076-.03H8.084q-.14 0-.24-.1-.098-.098-.098-.24V8.86q0-.14.098-.24.1-.098.24-.098H9.44q.141 0 .24.098.099.1.099.24z"
-       style="-inkscape-font-specification:Orbitron"
-       id="path855" />
-    <path
-       d="M10.086 8.52h1.693q.141 0 .24.1.099.098.099.24v1.354q0 .141-.099.24t-.24.099h-1.693zm1.803 1.694V8.859q0-.045-.034-.076-.03-.034-.076-.034h-1.354q-.046 0-.08.034-.03.031-.03.076v1.355q0 .045.03.079.034.03.08.03h1.354q.045 0 .076-.03.034-.034.034-.08z"
-       style="-inkscape-font-specification:Orbitron"
-       id="path857" />
-    <path
-       d="M14.08 8.52h.293l-.85 1.017.853 1.016h-.297l-.756-.9h-.655v.9h-.231V8.52h.231v.9h.655z"
-       style="-inkscape-font-specification:Orbitron"
-       id="path859" />
-  </g>
-  <rect
-     rx="2.328"
-     ry="2.506"
-     y="2.015"
-     x="41.461"
-     height="10.532"
-     width="10.627"
-     fill="none"
-     stroke="#fff"
-     stroke-width=".198"
-     stroke-linejoin="round"
-     stroke-dashoffset=".337"
-     id="rect893-1"
-     fill-opacity="1"
-     stroke-miterlimit="4"
-     stroke-dasharray="none"
-     stroke-opacity="1" />
-  <g
-     aria-label="E"
-     id="text864"
-     style="line-height:1.25"
-     transform="translate(-1.878 16.244)"
-     font-size="24.235"
-     font-family="sans-serif"
-     fill="#fff"
-     fill-opacity="1"
-     stroke="none"
-     stroke-width=".364"
-     stroke-opacity="1">
-    <path
-       d="M33.125-11.322v.588h-4.188v1.73h3.367v.597h-3.367v1.73h4.188v.59h-4.777v-5.235z"
-       style="-inkscape-font-specification:Orbitron"
-       id="path866"
-       font-style="normal"
-       font-variant="normal"
-       font-weight="400"
-       font-stretch="normal"
-       font-size="7.27"
-       font-family="Orbitron"
-       fill="#fff"
-       fill-opacity="1"
-       stroke="none"
-       stroke-width=".364"
-       stroke-opacity="1" />
-  </g>
-  
-  
-  
-  
-  
-  
-  <circle
-     r=".397"
-     cy="8.907"
-     cx="46.984"
-     
-     
-     
-          fill="white"
-     stroke="white"
-     id="dot"
-     
-     
-     
+  </path>
+
+
+
+<path d="M46.77,8.76a.45.45,0,1,1-.45.45.45.45,0,0,1,.45-.45" 
+
+     id="wifi1"
+     fill="white"
      fill-opacity="0.3"
-     stroke-width=".256"
-     stroke-linecap="round"
-     stroke-linejoin="round"
-     stroke-miterlimit="4"
+     stroke="white"
+     stroke-width="0.00"
+     stroke-miterlimit="5"
      stroke-dasharray="none"
-     stroke-opacity="0"
-     paint-order="markers fill stroke" >
-     
-    
-    
-    
+     stroke-opacity="1" >
+
+
+
     <animate
         id="one"
         attributeName="fill-opacity"
@@ -299,19 +114,12 @@
         values="0.5;1;0.5"
         calcMode="linear"
         begin="0s;four.end+0.05s"/> 
-    
-     
-     
-  </circle> 
-  
-  
-  
-  
-  
-  
-  
-  
-     
+
+
+
+</path> 
+
+
+
+
 </svg>
-
-
