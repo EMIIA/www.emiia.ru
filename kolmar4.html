@@ -1,0 +1,2477 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+ 
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        
+        
+        
+    <title>EMIIA.AI API: ГОК ДЕНИСОВСКИЙ - em_21.3089_965_it_87655...</title>    
+        
+        
+
+
+
+
+
+
+	
+	<link rel="manifest" href="manifest.json">
+
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="application-name" content="Колмар">
+<meta name="apple-mobile-web-app-title" content="Колмар">
+	<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#fff">
+<meta name="msapplication-starturl" content="/Denisovskiy/kolmar.html">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="icon" href="/Denisovskiy/icon.png">
+<link rel="apple-touch-icon" href="/Denisovskiy/icon.png">
+	
+	
+	
+	<link rel="manifest" href="/manifest.json">
+	
+	<script src="https://js.sentry-cdn.com/9c5feb5b248b49f79a585804c259febc.min.js" crossorigin="anonymous"></script>
+	
+	
+	
+    
+    
+    
+    
+    
+    <style>
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+</style>
+
+	<style>
+@import url('https://www.emiia.ru/css.css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+</style>
+
+  <style>  
+@import url('/css.css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+</style>
+
+<link rel="stylesheet" href="https://www.emiia.ru/cssfamily=Montserrat.css">
+<link rel="stylesheet" href="/cssfamily=Montserrat.css">
+
+    
+    
+  
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+    
+
+<script src="https://unpkg.com/threebox-plugin/dist/threebox.min.js" type="text/javascript"></script>
+
+
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.5.1/snap.svg-min.js'></script>
+
+
+
+	
+	
+	
+	
+	
+	
+
+
+
+
+<script src='https://mapbox.github.io/mapbox-gl-traffic/mapbox-gl-traffic.js'></script>
+    <link href='https://mapbox.github.io/mapbox-gl-traffic/mapbox-gl-traffic.css' rel='stylesheet' />
+
+
+
+
+
+
+
+
+<link href="https://api.mapbox.com/mapbox-assembly/mbx/v0.28.2/assembly.min.css" rel="stylesheet" />
+    <script src="https://api.mapbox.com/mapbox-assembly/mbx/v0.28.2/assembly.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css" rel="stylesheet" />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.1/mapbox-gl-geocoder.css" rel="stylesheet" />
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.1/mapbox-gl-geocoder.min.js"></script>
+
+
+
+
+</head>
+
+
+
+<style>
+ 
+ body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; background-color:#f8f9fa; }
+ 
+
+
+
+}
+
+.helpDiv {
+	width: auto;
+	left: 50%;
+	top: 0px;
+z-index: 2;
+	position: absolute;
+}
+
+.help {
+	background: rgba(0, 0, 0, 0.5);
+	color: #fff;
+	position: relative;
+	text-align: center;
+	top: 10px;
+	left: -50%;
+	padding: 5px 10px;
+	margin: 0;
+	font-size: 11px;
+	line-height: 18px;
+	border-radius: 3px;
+z-index: 2;
+	display: block;
+}
+
+/*these 3 clases will provide mapbox-like style for labels*/
+.toolTip {
+	border: 0.5px black solid;
+	display: inline-block;
+	background: white;
+	padding: 1px 6px;
+	font-family: "Montserrat", montserrat;
+    font: 11px/20px Montserrat, montserrat;
+    font-weight: 100;
+	font-size: 11px !important;
+}
+
+.marker {
+	max-width: 240px;
+	display: flex;
+	margin-bottom: 5em;
+	text-align: center;
+	color: black;
+}
+
+.mapboxgl-popup-tip {
+	margin-top: -1px;
+}
+
+.top-right-tools {
+	display: flex;
+	right: 40px;
+	z-index: 40;
+}
+
+.tools-i.mapboxgl-ctrl {
+	margin: 10px 20px 0 0;
+	display: inline-flex;
+}
+
+#toolsControl {
+	margin: 10px 20px 0 0;
+	display: inline-flex;
+}
+
+#toolsControl.mapboxgl-ctrl-group button + button, #toolsControl.mapboxgl-ctrl-group div + div {
+	border-left: 1px solid #ddd;
+	border-top: 0px;
+}
+
+
+
+ </style>
+
+
+
+
+
+
+
+    
+    
+    
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+	
+
+
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+<div id='map'></div>
+
+
+
+
+
+
+
+
+
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+
+
+
+
+
+
+
+
+*{margin:0;padding:0}body{font-family:-apple-system,Montserrat, montserrat;font-size:14px;font-weight:280;line-height:1.5}.is-loading{position:fixed;right:0;bottom:0;height:100%;text-align:center;color:#536580;text-shadow:0 2px 2px hsla(0,0%,100%,.4);
+
+a { 
+    text-decoration: none; /* Отменяем подчеркивание у ссылки */
+   } 
+
+
+background:hsla(0,0%,100%,.6);font-size:1.5rem;z-index:99999}.app-info,.is-loading{top:0;left:0;width:100%}.app-info{display:block;position:absolute;margin:0;padding:.5rem .75rem;background-color:transparent;color:#2b3441;
+
+z-index:1!important;box-sizing:border-box}.app-info *{text-shadow:0 2px 3px hsla(0,0%,100%,.6),0 -2px 3px hsla(0,0%,100%,.6)}.app-info h1{font-size:1rem;margin:.2rem 0;font-weight:400}
+
+.app-info h1 .lang-en{display:block;font-size:.875rem}.app-info p{font-size:.75rem;color:#545d6a}.app-info a{color:#536580;text-decoration:none}.app-info a:focus,.app-info a:hover{color:#495971;text-decoration:underline}.language-toggle-button{position:absolute;right:.75rem;top:.5rem;-webkit-appearance:none;padding:.5rem .75rem;color:#536580;background:hsla(0,0%,100%,.8);border:0;border-radius:4px;text-shadow:none;font-size:.75rem}.language-toggle-button:focus,.language-toggle-button:hover{color:#495971;background-color:#fff}.wrapper[lang*=zh-] [lang=en],.wrapper[lang=en] [lang*=zh-]{display:none}.mapContainer{position:absolute;top:0;left:0;right:0;bottom:0;width:100vw;height:100vh}.marker{background-image:url(/images/pin.svg);background-size:auto 100%;width:32px;height:32px;cursor:pointer}
+
+
+.mapboxgl-popup-content:not(:empty){box-shadow:0 0 10px 2px rgba(0,0,0,.1)}
+
+
+
+
+
+.mapboxgl-popup-content{font-size:1rem;font-weight: 100;border-radius:7px;padding:1rem;width:321px}[lang=en]
+
+
+
+
+
+.mapboxgl-popup-content{min-width:380px}.mapboxgl-popup .tag{font-size:.875rem;color:#545d6a;line-height:1.2}
+.mapboxgl-popup .tag[lang=en]{font-size:.75rem}.mapboxgl-popup h3{color:#2b3441;margin:.5rem 0;text-transform:capitalize;line-height:1.2}.mapboxgl-popup h3[lang=en]{font-size:.875rem}.mapboxgl-popup p{font-size:.875rem;color:#545d6a;margin-bottom:.25rem}.mapboxgl-popup p[lang=en]{font-size:.875rem}.mapboxgl-popup .divider{color:#efefef}
+
+.mapboxgl-popup a{color:#3D85C6;text-decoration:none}.mapboxgl-popup a:focus,.mapboxgl-popup a:hover{color:#3D85C6;text-decoration:none}.mapboxgl-popup-close-button{font-size:.0rem;padding:.0rem}
+/*# sourceMappingURL=main.9498309c.chunk.css.map */
+
+
+
+
+
+
+
+  
+
+
+
+a.mapboxgl-ctrl-logo{
+    width: 0;
+    height: 0;
+    margin: 0 0 -4px-4px;
+    display: block;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    overflow: hidden;
+    background-image: url(data:image/svg+xml;charset=utf-8,%3Csvg width='88' height='23' viewBox='0 0 88 23' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' fill-rule='evenodd'%3E %3Cdefs%3E %3Cpath id='logo' d='M11.5 2.25c5.105 0 9.25 4.145 9.25 9.25s-4.145 9.25-9.25 9.25-9.25-4.145-9.25-9.25 4.145-9.25 9.25-9.25zM6.997 15.983c-.051-.338-.828-5.802 2.233-8.873a4.395 4.395 0 013.13-1.28c1.27 0 2.49.51 3.39 1.42.91.9 1.42 2.12 1.42 3.39 0 1.18-.449 2.301-1.28 3.13C12.72 16.93 7 16 7 16l-.003-.017zM15.3 10.5l-2 .8-.8 2-.8-2-2-.8 2-.8.8-2 .8 2 2 .8z'/%3E %3Cpath id='text' d='M50.63 8c.13 0 .23.1.23.23V9c.7-.76 1.7-1.18 2.73-1.18 2.17 0 3.95 1.85 3.95 4.17s-1.77 4.19-3.94 4.19c-1.04 0-2.03-.43-2.74-1.18v3.77c0 .13-.1.23-.23.23h-1.4c-.13 0-.23-.1-.23-.23V8.23c0-.12.1-.23.23-.23h1.4zm-3.86.01c.01 0 .01 0 .01-.01.13 0 .22.1.22.22v7.55c0 .12-.1.23-.23.23h-1.4c-.13 0-.23-.1-.23-.23V15c-.7.76-1.69 1.19-2.73 1.19-2.17 0-3.94-1.87-3.94-4.19 0-2.32 1.77-4.19 3.94-4.19 1.03 0 2.02.43 2.73 1.18v-.75c0-.12.1-.23.23-.23h1.4zm26.375-.19a4.24 4.24 0 00-4.16 3.29c-.13.59-.13 1.19 0 1.77a4.233 4.233 0 004.17 3.3c2.35 0 4.26-1.87 4.26-4.19 0-2.32-1.9-4.17-4.27-4.17zM60.63 5c.13 0 .23.1.23.23v3.76c.7-.76 1.7-1.18 2.73-1.18 1.88 0 3.45 1.4 3.84 3.28.13.59.13 1.2 0 1.8-.39 1.88-1.96 3.29-3.84 3.29-1.03 0-2.02-.43-2.73-1.18v.77c0 .12-.1.23-.23.23h-1.4c-.13 0-.23-.1-.23-.23V5.23c0-.12.1-.23.23-.23h1.4zm-34 11h-1.4c-.13 0-.23-.11-.23-.23V8.22c.01-.13.1-.22.23-.22h1.4c.13 0 .22.11.23.22v.68c.5-.68 1.3-1.09 2.16-1.1h.03c1.09 0 2.09.6 2.6 1.55.45-.95 1.4-1.55 2.44-1.56 1.62 0 2.93 1.25 2.9 2.78l.03 5.2c0 .13-.1.23-.23.23h-1.41c-.13 0-.23-.11-.23-.23v-4.59c0-.98-.74-1.71-1.62-1.71-.8 0-1.46.7-1.59 1.62l.01 4.68c0 .13-.11.23-.23.23h-1.41c-.13 0-.23-.11-.23-.23v-4.59c0-.98-.74-1.71-1.62-1.71-.85 0-1.54.79-1.6 1.8v4.5c0 .13-.1.23-.23.23zm53.615 0h-1.61c-.04 0-.08-.01-.12-.03-.09-.06-.13-.19-.06-.28l2.43-3.71-2.39-3.65a.213.213 0 01-.03-.12c0-.12.09-.21.21-.21h1.61c.13 0 .24.06.3.17l1.41 2.37 1.4-2.37a.34.34 0 01.3-.17h1.6c.04 0 .08.01.12.03.09.06.13.19.06.28l-2.37 3.65 2.43 3.7c0 .05.01.09.01.13 0 .12-.09.21-.21.21h-1.61c-.13 0-.24-.06-.3-.17l-1.44-2.42-1.44 2.42a.34.34 0 01-.3.17zm-7.12-1.49c-1.33 0-2.42-1.12-2.42-2.51 0-1.39 1.08-2.52 2.42-2.52 1.33 0 2.42 1.12 2.42 2.51 0 1.39-1.08 2.51-2.42 2.52zm-19.865 0c-1.32 0-2.39-1.11-2.42-2.48v-.07c.02-1.38 1.09-2.49 2.4-2.49 1.32 0 2.41 1.12 2.41 2.51 0 1.39-1.07 2.52-2.39 2.53zm-8.11-2.48c-.01 1.37-1.09 2.47-2.41 2.47s-2.42-1.12-2.42-2.51c0-1.39 1.08-2.52 2.4-2.52 1.33 0 2.39 1.11 2.41 2.48l.02.08zm18.12 2.47c-1.32 0-2.39-1.11-2.41-2.48v-.06c.02-1.38 1.09-2.48 2.41-2.48s2.42 1.12 2.42 2.51c0 1.39-1.09 2.51-2.42 2.51z'/%3E %3C/defs%3E %3Cmask id='clip'%3E %3Crect x='0' y='0' width='100%25' height='100%25' fill='white'/%3E %3Cuse xlink:href='%23logo'/%3E %3Cuse xlink:href='%23text'/%3E %3C/mask%3E %3Cg id='outline' opacity='0.3' stroke='%23000' stroke-width='3'%3E %3Ccircle mask='url(%23clip)' cx='11.5' cy='11.5' r='9.25'/%3E %3Cuse xlink:href='%23text' mask='url(%23clip)'/%3E %3C/g%3E %3Cg id='fill' opacity='0.9' fill='%23fff'%3E %3Cuse xlink:href='%23logo'/%3E %3Cuse xlink:href='%23text'/%3E %3C/g%3E %3C/svg%3E);
+}
+
+
+
+
+.mapboxgl-popup {
+    z-index: 1;
+
+}
+
+
+
+
+
+
+.marker svg {
+  width: 100%;
+  height: 100%;
+}
+.marker{
+  pointer-events:none;
+}
+
+
+
+
+
+
+
+
+
+
+.mapboxgl-ctrl-bottom-left .mapboxgl-ctrl {
+    margin: 0 0 10px 20px;
+    float: left;
+}
+
+
+
+.mapboxgl-ctrl-scale {
+    background-color: hsla(0,0%,100%,.75);
+ 
+    border: 2px solid white;
+    border-top: #333;
+    border-radius: 10px;
+    padding: 0 6px;
+    color: #333;
+    box-sizing: border-box;
+  
+    font: 10px/20px Montserrat, montserrat;
+    font-weight: 400;
+    max-width: 7em;
+    max-height: 1.9em;
+
+    box-shadow: 0 0 10px 2px rgb(0 0 0 / 10%);
+}
+
+
+
+
+
+
+
+.mapboxgl-popup-content {
+
+ font-size: 0.8rem;
+font-weight: 100;
+ 
+    border-radius: 7px;
+    padding: 1rem;
+    
+    
+    width: max-content;
+    
+    
+    
+
+    
+    
+     font: 12px/20px Montserrat, montserrat;
+    font-weight: 100;
+    
+    @import url('https://www.emiia.ru/css.css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+
+    @import url('/css.css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+
+}
+
+
+
+
+@import url('https://www.emiia.ru/css.css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+
+
+  
+@import url('/css.css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+
+}
+
+</style>
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+<style>
+        /* Mapbox GL */
+.mapboxgl-ctrl-top-right .mapboxgl-ctrl {
+  margin: 12px 12px 0 0 !important;
+}
+.mapboxgl-ctrl-icon {
+  background-size: 18px 18px !important;
+  background-position: 6px 6px !important;
+  background-repeat: no-repeat !important;
+}
+.mapboxgl-ctrl-icon.mapboxgl-ctrl-compass > .mapboxgl-ctrl-compass-arrow {
+  height: 18px;
+  margin: 6px;
+  width: 18px;
+  background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8' standalone='yes'%3F%3E%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath fill='%231F3044'%0Ad='M5.5,14.2c-0.9,0.8-1.9,0-1.5-1l4-9c0.2-0.4,0.6-0.8,1-0.8s0.8,0.4,1,0.8l4,9c0.4,1-0.6,1.8-1.5,1l-3.5-3L5.5,14.2z'/%3E%3C/svg%3E");
+}
+.mapboxgl-ctrl-group {
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* only hide the logo if title=true is true */
+.has-title .mapboxgl-ctrl-logo {
+  display: none !important;
+}
+
+/* Mapbox GL geocoder */
+.mapboxgl-ctrl-geocoder--collapsed {
+  height: 30px !important;
+  min-width: 30px !important;
+  width: 30px !important;
+}
+.mapboxgl-ctrl-geocoder {
+  transition: none !important;
+}
+.mapboxgl-ctrl-geocoder input[type='text'] {
+  height: 30px;
+  padding: 3px 30px;
+}
+.mapboxgl-ctrl-geocoder--icon {
+  fill: #1f3044;
+  margin-top: -3px !important;
+}
+.geocoder-icon-close {
+  margin-top: 0;
+  display: block;
+}
+.mapboxgl-ctrl-geocoder--icon-loading {
+  background: white !important;
+  border-radius: 100% !important;
+  top: 5px !important;
+  right: 6px !important;
+  pointer-events: none !important;
+}
+.mapboxgl-ctrl-geocoder--icon-search {
+  left: 5px !important;
+  top: 7px !important;
+}
+@media only screen and (max-width: 640px) {
+  .mapbox-mark {
+    width: 30px;
+  }
+  .infobox-action {
+    display: none;
+  }
+}
+
+        </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+
+/**********************************************************/
+/****                                                  ****/
+/****                                                  ****/
+/****              THINGS TO CHANGE                    ****/
+center = [37.185186667198934, 55.971237678905304];
+zoomLevelOnStart = 17;
+geoReferenceWidthInMeters = 5;
+geoReferenceHeightInMeters = 5;
+imageURL =
+  "https://analytics.emiia.ai/svg/pin11.svg";
+
+
+
+
+mapboxgl.accessToken = 'pk.eyJ1IjoiZW1paWFhaSIsImEiOiJja21icnU4bHkyNGRwMnFrbjVvNXdtdGJ0In0.TcfxV21Ov7zOgvWvgPxzlA';
+
+
+
+
+
+
+    const monument = [37.174116713683134, 55.97723794736996];
+    
+    const monument1 = [37.185186667198948, 55.971237678905334];
+    
+    const monument2 = [37.174972381406434, 55.97733435811378];
+    
+    const monument3 = [37.181901053587905, 55.972527514284046];
+    
+const monument4 = [37.1816636649082, 55.9716578993187];
+
+const monument5 = [37.1807581725723, 55.97214054245342];
+
+
+
+
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/emiiaai/ckv9cvgm062s515nz08d6ceq0',
+    
+    
+center: [124.84149813652039,56.77460387079309],
+    zoom: 14.2,
+
+    
+    
+    
+       pitch: 60,
+       enableInstrumentile: true,
+
+    attributionControl: false,
+    bearing: 45,
+    
+
+    
+});
+
+
+
+
+
+
+// create the popup
+var popup = new mapboxgl.Popup({ offset: 25 })
+   .setHTML("<iframe width=320 height=200 src=https://www.emiia.ai/index.html?token=2.GtErfHCeAAcABc_H50WdWnkWZhJog9K6RBpaBlvUD9zSiDCX&amp;camera=0&amp;width=&amp;height=&amp;lang=ru frameborder=0 allow=accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture allowfullscreen></iframe>")
+   
+
+// create DOM element for the marker
+var el = document.createElement('div');
+el.id = 'marker5';
+
+// create the marker
+new mapboxgl.Marker(el)
+    .setLngLat(monument5)
+    .setPopup(popup) // sets a popup on this marker
+    .addTo(map);
+   
+    
+ el.style = " background-image: url('https://analytics.emiia.ai/svg/pin12.svg'); background-size: cover;  width: 50px;  height: 50px;  border-radius: 0%;  cursor: pointer; z-index: 1; top: -3em;";
+
+
+
+
+
+
+
+// create the popup
+var popup = new mapboxgl.Popup({ offset: 25 })
+   .setHTML("<iframe width=320 height=200 src=https://www.emiia.ai/?token=2.GtErfHCeAAcABc_H50WdWnkWZhJog9K6RBpaBlvUD9zSiDCX&amp;camera=0&amp;width=&amp;height=&amp;lang=ru frameborder=0 allow=accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture allowfullscreen></iframe>")
+   
+
+// create DOM element for the marker
+var el = document.createElement('div');
+el.id = 'marker4';
+
+// create the marker
+new mapboxgl.Marker(el)
+    .setLngLat(monument4)
+    .setPopup(popup) // sets a popup on this marker
+    .addTo(map);
+   
+    
+ el.style = " background-image: url('https://analytics.emiia.ai/svg/pin18.svg'); background-size: cover;  width: 50px;  height: 50px;  border-radius: 0%;  cursor: pointer; z-index: 1; top: -3em;";
+
+
+
+
+
+
+
+
+
+
+
+
+
+// create the popup
+var popup = new mapboxgl.Popup({ offset: 25 })
+   .setHTML("<iframe width=320 height=200 src=https://www.emiia.ai?token=2.GtErfHCeAAcABc_H50WdWnkWZhJog9K6RBpaBlvUD9zSiDCX&amp;camera=0&amp;width=&amp;height=&amp;lang=ru frameborder=0 allow=accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture allowfullscreen></iframe>")
+   
+
+// create DOM element for the marker
+var el = document.createElement('div');
+el.id = 'marker3';
+
+// create the marker
+new mapboxgl.Marker(el)
+    .setLngLat(monument3)
+    .setPopup(popup) // sets a popup on this marker
+    .addTo(map);
+   
+    
+ el.style = " background-image: url('https://analytics.emiia.ai/svg/pin14.svg'); background-size: cover;  width: 50px;  height: 50px;  border-radius: 0%;  cursor: pointer; z-index: 1; top: -3em;";
+
+
+
+
+
+
+
+// create the popup
+var popup = new mapboxgl.Popup({ offset: 25 })
+   .setHTML("<iframe width=320 height=200 src=https://www.emiia.ai?token=2.GtErfHCeAAcABc_H50WdWnkWZhJog9K6RBpaBlvUD9zSiDCX&amp;camera=0&amp;width=&amp;height=&amp;lang=ru frameborder=0 allow=accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture allowfullscreen></iframe>")
+   
+
+// create DOM element for the marker
+var el = document.createElement('div');
+el.id = 'marker2';
+
+// create the marker
+new mapboxgl.Marker(el)
+    .setLngLat(monument2)
+    .setPopup(popup) // sets a popup on this marker
+    .addTo(map);
+   
+    
+ el.style = " background-image: url('https://analytics.emiia.ai/svg/pin16.svg'); background-size: cover;  width: 50px;  height: 50px;  border-radius: 0%;  cursor: pointer; z-index: 1; top: -3em;";
+
+
+
+
+
+
+
+// create the popup
+var popup = new mapboxgl.Popup({ offset: 25 })
+   .setHTML("<iframe width=320 height=200 src=https://www.emiia.ai?token=2.GtErfHCeAAcABc_H50WdWnkWZhJog9K6RBpaBlvUD9zSiDCX&amp;camera=0&amp;width=&amp;height=&amp;lang=ru frameborder=0 allow=accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture allowfullscreen></iframe>")
+   
+
+// create DOM element for the marker
+var el = document.createElement('div');
+el.id = 'marker1';
+
+// create the marker
+new mapboxgl.Marker(el)
+    .setLngLat(monument1)
+    .setPopup(popup) // sets a popup on this marker
+    .addTo(map);
+   
+    
+ el.style = " background-image: url('https://analytics.emiia.ai/svg/pin10.svg'); background-size: cover;  width: 50px;  height: 50px;  border-radius: 0%;  cursor: pointer; z-index: 1; top: -3em;";
+
+
+
+
+ 
+ 
+ 
+// create the popup
+var popup = new mapboxgl.Popup({ offset: 25 })
+   .setHTML("<iframe width=320 height=200 src=https://mediaserver2.video.belrts.ru/cam-59313c1c83/embed.html?token=2.GtErfHCeAAcABc_H50WdWnkWZhJog9K6RBpaBlvUD9zSiDCX&amp;camera=0&amp;width=&amp;height=&amp;lang=ru frameborder=0 allow=accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture allowfullscreen></iframe>")
+   
+
+// create DOM element for the marker
+var el = document.createElement('div');
+el.id = 'marker';
+
+// create the marker
+new mapboxgl.Marker(el)
+    .setLngLat(monument)
+    .setPopup(popup) // sets a popup on this marker
+    .addTo(map);
+   
+    
+ el.style = " background-image: url('https://www.emiia.ai/emiia143.1.3.svg'); background-size: cover;  width: 110px;  height: 48px;  border-radius: 0%;  cursor: pointer; z-index: 1; top: -2em;";
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+    
+(new mapboxgl.NavigationControl());
+
+(new mapboxgl.GeolocateControl({
+    positionOptions: {
+        enableHighAccuracy: true
+    },
+    trackUserLocation: true
+}));
+
+
+
+
+
+
+
+
+
+const navigation = new mapboxgl.NavigationControl({
+    visualizePitch: false
+});
+map.addControl(navigation, 'top-right');
+
+
+
+const geolocate = new mapboxgl.GeolocateControl({
+    positionOptions: {
+        enableHighAccuracy: true
+    },
+    trackUserLocation: true
+});
+
+
+
+map.addControl(geolocate, 'top-right');
+    
+
+map.addControl(new MapboxTraffic());
+
+
+
+
+
+
+
+
+
+
+
+var scale = new mapboxgl.ScaleControl({
+    positionOptions: {
+        enableHighAccuracy: true
+    },
+    trackUserLocation: true
+});
+
+
+
+
+
+
+map.addControl(scale, 'bottom-left');
+
+
+    
+    
+var hoveredCountry;
+map.on('mousemove', 'country-fill', function (e) {
+    map.getCanvas().style.cursor = 'pointer';
+    if (e.features.length) {
+        if (hoveredCountry) {
+            map.setFeatureState({
+                source: 'countries',
+                id: hoveredCountry
+            }, {
+                hover: false
+            });
+        }
+        hoveredCountry = e.features[0].id;
+        map.setFeatureState({
+            source: 'countries',
+            id: hoveredCountry
+        }, {
+            hover: true
+        });
+    
+
+
+    }
+});
+
+
+
+
+map.on('load', function() {
+
+
+});
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+ <script>
+
+
+    map.on('load', () => {
+        map.addSource('floorplan', {
+            'type': 'geojson',
+            /*
+             * Each feature in this GeoJSON file contains values for
+             * `properties.height`, `properties.base_height`,
+             * and `properties.color`.
+             * In `addLayer` you will use expressions to set the new
+             * layer's paint properties based on these values.
+             */
+            'data': 'https://framework.emiia.ai/kolmar1.geojson'
+        });
+        map.addLayer({
+            'id': 'room-extrusion',
+            'type': 'fill-extrusion',
+            'source': 'floorplan',
+            'paint': {
+                // Get the `fill-extrusion-color` from the source `color` property.
+                'fill-extrusion-color': ['get', 'color'],
+
+                // Get `fill-extrusion-height` from the source `height` property.
+                'fill-extrusion-height': ['get', 'height'],
+
+                // Get `fill-extrusion-base` from the source `base_height` property.
+                'fill-extrusion-base': ['get', 'base_height'],
+
+                // Make extrusions slightly opaque to see through indoor walls.
+                'fill-extrusion-opacity': 0.6
+            }
+        });
+    });
+    
+    
+    
+    
+ </script>
+
+
+
+
+
+
+
+
+
+
+ <script>
+
+
+      map.on('load', () => {
+        map.addSource('trees', {
+          'type': 'geojson',
+          'data': 'https://framework.emiia.ai/sport3.geojson'
+        });
+
+        map.addLayer(
+          {
+            'id': 'trees-heat',
+            'type': 'heatmap',
+            'source': 'trees',
+            'maxzoom': 15,
+            'paint': {
+              // increase weight as diameter breast height increases
+              'heatmap-weight': {
+                'property': 'dbh',
+                'type': 'exponential',
+                'stops': [
+                  [1, 0],
+                  [62, 1]
+                ]
+              },
+              // increase intensity as zoom level increases
+              'heatmap-intensity': {
+                'stops': [
+                  [20, 1],
+                  [15, 3]
+                ]
+              },
+              // use sequential color palette to use exponentially as the weight increases
+              'heatmap-color': [
+                'interpolate',
+                ['linear'],
+                ['heatmap-density'],
+                0,
+                'rgba(236,222,239,0)',
+                0.2,
+                'rgb(208,209,230)',
+                0.4,
+                'rgb(166,189,219)',
+                0.6,
+                'rgb(103,169,207)',
+                0.8,
+                'rgb(28,144,153)'
+              ],
+              // increase radius as zoom increases
+              'heatmap-radius': {
+                'stops': [
+                  [11, 15],
+                  [15, 20]
+                ]
+              },
+              // decrease opacity to transition into the circle layer
+              'heatmap-opacity': {
+                'default': 1,
+                'stops': [
+                  [14, 1],
+                  [15, 0]
+                ]
+              }
+            }
+          },
+          'waterway-label'
+        );
+
+        map.addLayer(
+          {
+            'id': 'trees-point',
+            'type': 'circle',
+            'source': 'trees',
+            'maxzoom': 1,
+            'paint': {
+              // increase the radius of the circle as the zoom level and dbh value increases
+              'circle-radius': {
+                'property': 'dbh',
+                'type': 'exponential',
+                'stops': [
+                  [{ zoom: 15, value: 1 }, 5],
+                  [{ zoom: 15, value: 62 }, 10],
+                  [{ zoom: 22, value: 1 }, 20],
+                  [{ zoom: 22, value: 62 }, 50]
+                ]
+              },
+              'circle-color': {
+                'property': 'dbh',
+                'type': 'exponential',
+                'stops': [
+                  [0, 'rgba(61,133,198,0)'],
+                  [10, 'rgb(61,133,198)'],
+                  [20, 'rgb(61,133,198)'],
+                  [30, 'rgb(61,133,198)'],
+                  [40, 'rgb(61,133,198)'],
+                  [50, 'rgb(61,133,198)'],
+                  [60, 'rgb(61,133,198)']
+                ]
+              },
+              'circle-stroke-color': 'white',
+              'circle-stroke-width': 1,
+              'circle-opacity': {
+                'stops': [
+                  [10, 0],
+                  [15, 1]
+                ]
+              }
+            }
+          },
+          'waterway-label'
+        );
+        
+        
+        map.setLayerZoomRange('trees-point', 15, 18);
+        
+      });
+
+      // click on tree to view dbh in a popup
+      map.on('click', 'trees-point', (event) => {
+        new mapboxgl.Popup()
+          .setLngLat(event.features[0].geometry.coordinates)
+          .setHTML(`<strong></strong> ${event.features[0].properties.dbh}`)
+          .addTo(map);
+      });
+      
+      
+       
+      
+      
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+var geojson = {
+    "type": "FeatureCollection",
+    "features": [{
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+            "coordinates": [ 
+                [37.173735201358795, 55.977478209812496],
+                [37.173834443092346, 55.97750672397983],
+                [37.17424750328064, 55.97746770458765],
+                [37.174260914325714, 55.97744219188685],
+                [37.174118757247925, 55.97697395580151],
+                [37.17405706644058, 55.97695594660811],
+                [37.17366546392441, 55.97699646728148],
+                [37.173619866371155, 55.9770429909652],
+                [37.173735201358795, 55.977478209812496]
+            ],
+            "type": "LineString"
+        }
+    }]
+};
+
+const rainbow = [ 
+'#3d85c6',
+'red',
+'red',
+'red',
+'#3d85c6',
+'red',
+'red',
+'red' 
+];
+
+function makeGradient(i) {
+  const len = rainbow.length;
+  const sides = rainbow.reduce((a, b, j) => {
+    const pos = (j / len + i) % 1 || 1;
+    a[a.length - 1].push(pos);
+    a[a.length - 1].push(b);
+    if (pos + 1 / len > 1) {
+      a.push([]);
+      a[a.length - 1].push(pos - 1);
+      a[a.length - 1].push(b);      
+    }
+    return a;
+  }, [[]]);
+  
+  return ['interpolate', ['linear'], ['line-progress']].concat(
+    sides.reduce((a, b) => { return b.concat(a); }, []));
+}
+
+map.on('load', function () {
+    map.addSource('line', {
+        type: 'geojson',
+        lineMetrics: true,
+        data: geojson
+    });
+
+    map.addLayer({
+        type: 'line',
+        source: 'line',
+        id: 'line',
+        paint: {
+            'line-color': 'red',
+            'line-width': 3,
+            'line-gradient': makeGradient(0)
+        },
+        layout: {
+            'line-cap': 'round',
+            'line-join': 'round'
+        }
+    });
+  
+    setTimeout(() => {
+      let i = 0;
+      setInterval(() => {
+        i += 0.005;
+        map.setPaintProperty('line', 'line-gradient', makeGradient(i));
+      }, 1);
+    }, 1000); 
+    
+    
+     map.setLayerZoomRange('line', 15, 18);
+    
+    
+});
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+var svgContainer;
+var markerContainer = document.createElement("div");
+markerContainer.className = "marker";
+
+Snap.load(imageURL, function(f) {
+  Snap(markerContainer).append(f);
+  svgContainer = f.node;
+  new mapboxgl.Marker(markerContainer).setLngLat(center).addTo(map);
+});
+
+function getScale(n, m) {
+  var center = map.getCenter();
+  var zoom = map.getZoom();
+  var tmp =
+    156543.03392 * Math.cos(center.lat * Math.PI / 180) / Math.pow(2, zoom);
+  var meterSizeInPixelN = n / tmp;
+  var meterSizeInPixelM = m / tmp;
+  return [meterSizeInPixelN, meterSizeInPixelM];
+}
+
+function render() {
+  var pixelSizes = getScale(
+    geoReferenceWidthInMeters,
+    geoReferenceHeightInMeters
+  );
+  markerContainer.style.width = pixelSizes[0] + "px";
+  markerContainer.style.height = pixelSizes[1] + "px";
+  //svgContainer && (svgContainer.style.transform = "rotate(" + -map.getBearing() + "deg)");
+}
+
+// re-render our visualization whenever the view changes
+map.on("viewreset", render);
+map.on("zoom", render);
+map.on("drag", render);
+map.on("rotate", render);
+render();
+
+
+
+</script>
+
+
+
+
+
+
+    
+    
+    
+    
+
+  
+  
+  
+  
+  
+  
+  
+     <script> 
+    
+ map.on('load', () => {
+// Insert the layer beneath any symbol layer.
+const layers = map.getStyle().layers;
+const labelLayerId = layers.find(
+(layer) => layer.type === 'symbol' && layer.layout['text-field']
+).id;
+ 
+// The 'building' layer in the Mapbox Streets
+// vector tileset contains building height data
+// from OpenStreetMap.
+map.addLayer(
+{
+'id': 'add-3d-buildings',
+'source': 'composite',
+'source-layer': 'building',
+'filter': ['==', 'extrude', 'true'],
+'type': 'fill-extrusion',
+'minzoom': 15,
+'paint': {
+'fill-extrusion-color': '#aaa',
+ 
+// Use an 'interpolate' expression to
+// add a smooth transition effect to
+// the buildings as the user zooms in.
+'fill-extrusion-height': [
+'interpolate',
+['linear'],
+['zoom'],
+15,
+0,
+15.05,
+['get', 'height']
+],
+'fill-extrusion-base': [
+'interpolate',
+['linear'],
+['zoom'],
+15,
+0,
+15.05,
+['get', 'min_height']
+],
+'fill-extrusion-opacity': 0.0
+}
+},
+labelLayerId
+);
+});
+
+
+map.on('style.load', function () {
+			map.addLayer(createCustomLayer('3d-model', modelOrigin), '');
+            
+   
+		});
+    
+    
+  </script> 
+
+
+
+
+
+
+
+
+
+
+<script>
+
+map.on('load', function () {
+
+
+    // サークル設定
+    map.addSource('point_sample', {
+        type: 'geojson',
+        data: {
+            "type": "FeatureCollection",
+            "name": "sample",
+            "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+            "features": [
+                { "type": "Feature", "properties": { "field01": "一", "field02": "abcd", "field03": 5 }, "geometry": { "type": "Point", "coordinates": [ 139.766778945922852, 35.68198003744061 ] } },
+                { "type": "Feature", "properties": { "field01": "二", "field02": null, "field03": 7 }, "geometry": { "type": "Point", "coordinates": [ 139.762916564941406, 35.674310750817348 ] } },
+                { "type": "Feature", "properties": { "field01": "三", "field02": "kojsha", "field03": 9 }, "geometry": { "type": "Point", "coordinates": [ 139.763603210449219, 35.691391336319306 ] } }
+            ]
+        }
+    });
+
+    // スタイル設定
+    map.addLayer({
+        "id": "point_sample",
+        "type": "circle",
+        "source": "point_sample",
+        "layout": {},
+        "paint": {
+            'circle-color': "#FF0000",
+            'circle-radius': 10
+        }
+    });
+
+    // レイヤのズームレベル範囲設定
+    map.setLayerZoomRange('point_sample', 0, 12);
+});
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+
+
+ 
+
+// parameters to ensure the model is georeferenced correctly on the map
+		const modelOrigin = [37.18141536974409, 55.971764963320595, 0];
+        
+        
+        
+        
+        
+
+		function createCustomLayer(layerName, origin) {
+			let model;
+			//create the layer
+			let customLayer3D = {
+				id: layerName,
+				type: 'custom',
+				renderingMode: '3d',
+				onAdd: function (map, gl) {
+
+					// instantiate threebox
+					window.tb = new Threebox(
+						map,
+						gl,
+
+                        
+                        
+						{ defaultLights: true, enableSelectingObjects: true, enableDraggingObjects: true, enableRotatingObjects: true, enableTooltips: true }
+					);
+  
+                    
+                    let options = { type: 'gltf', obj: 'https://dl.dropboxusercontent.com/s/1x60j6c32oh35rc/dom_new_v15_1.glb', units: 'meters', scale: 900, anchor: 'center', rotation: { x: 90, y: 0, z: 0 } }        
+                    type: 'gltf',           
+                    
+				tb.loadObj(options, function (model) {
+						model.setCoords(origin);
+						model.addTooltip("Moscow 1938 Renovation", true);
+						tb.add(model);
+                         model.setRotation({ x: 0, y: 0, z: 180.7 });
+                         
+                         
+     
+
+                    // create two three.js lights to illuminate the model
+                    var directionalLight = new THREE.DirectionalLight(0xffffff);
+                    directionalLight.position.set(90, -90, 90).normalize();
+                    tb.scene.add(directionalLight);
+                     
+                    var directionalLight5 = new THREE.DirectionalLight(0xffffff);
+                    directionalLight5.position.set(-90, 90, 90).normalize();
+                    tb.scene.add(directionalLight5);
+                 
+					});
+                    
+                    
+
+				},
+				render: function (gl, matrix) {
+					tb.update();
+                    
+       
+				}
+                
+                
+  
+                
+                
+			};
+			return customLayer3D;
+
+		};
+        
+        
+        
+     map.on('style.load', function () {
+			map.addLayer(createCustomLayer('3d-model', modelOrigin), '');
+               
+        		
+   
+		});
+        
+        
+        
+        
+
+        
+      
+     
+    </script> 
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <script>
+
+
+
+
+ 
+
+// parameters to ensure the model is georeferenced correctly on the map
+		const modelOrigin1 = [37.181901053587905, 55.972527514284046, 0];
+        
+        
+        
+        
+        
+
+		function createCustomLayer1(layerName1, origin1) {
+			let model1;
+            
+			//create the layer
+			let customLayer3D1 = {
+				id: layerName1,
+				type: 'custom',
+				renderingMode: '3d',
+				onAdd: function (map1, gl1) {
+
+					// instantiate threebox
+					window.tb = new Threebox(
+						map1,
+						gl1,
+
+                        
+                   { defaultLights: false, enableSelectingObjects: false, enableDraggingObjects: true, enableRotatingObjects: true, enableTooltips: true }     
+						
+					);
+  
+                    
+                    let options1 = { type: 'gltf', obj: 'https://dl.dropboxusercontent.com/s/0f8uu0y24l38rhq/1938%D0%A1.glb', units: 'meters', scale: 900, anchor: 'center', rotation: { x: 90, y: 0, z: 0 } }        
+                    type: 'gltf',           
+                    
+				tb.loadObj(options1, function (model1) {
+						model1.setCoords(origin1);
+						model1.addTooltip("Moscow 193888", true);
+						tb.add(model1);
+                        model1.setRotation({ x: 0, y: 0, z: 165.7 });
+                         
+                         
+     
+
+
+                  // create two three.js lights to illuminate the model
+                    var directionalLight = new THREE.DirectionalLight(0xffffff);
+                    directionalLight.position.set(90, -90, 90).normalize();
+                    tb1.scene.add(directionalLight);
+                     
+                    var directionalLight2 = new THREE.DirectionalLight(0xffffff);
+                    directionalLight2.position.set(-90, 90, 90).normalize();
+                    tb1.scene.add(directionalLight2);
+                 
+					});
+                    
+
+				},
+				render: function (gl1, matrix1) {
+					tb.update();
+                    
+       
+				}
+                
+                
+  
+                
+                
+			};
+			return customLayer3D1;
+
+		};
+        
+        
+        
+     map.on('style.load', function () {
+			map.addLayer(createCustomLayer1('3d-model1', modelOrigin1), '');
+               
+        		
+   
+		});
+        
+
+        
+     
+    </script> 
+  
+  
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+   <script>
+
+
+
+
+ 
+
+// parameters to ensure the model is georeferenced correctly on the map
+		const modelOrigin2 = [37.185186667198934, 55.971237678905304, 0];
+        
+        
+        
+        
+        
+
+		function createCustomLayer2(layerName2, origin2) {
+			let model2;
+            
+			//create the layer
+			let customLayer3D2 = {
+				id: layerName2,
+				type: 'custom',
+				renderingMode: '3d',
+				onAdd: function (map2, gl2) {
+
+					// instantiate threebox
+					window.tb = new Threebox(
+						map2,
+						gl2,
+
+                        
+                   { defaultLights: false, enableSelectingObjects: false, enableDraggingObjects: true, enableRotatingObjects: true, enableTooltips: true }     
+						
+					);
+  
+                    
+                    let options2 = { type: 'gltf', obj: 'https://dl.dropboxusercontent.com/s/ebdgebh8k4ypmw5/1938D.glb', units: 'meters', scale: 600, anchor: 'center', rotation: { x: 90, y: 0, z: 0 } }        
+                    type: 'gltf',           
+                    
+				tb.loadObj(options2, function (model2) {
+						model2.setCoords(origin2);
+						model2.addTooltip("Moscow 193888", true);
+						tb.add(model2);
+                        model2.setRotation({ x: 0, y: 0, z: 143.7 });
+                         
+                         
+     
+
+
+                  // create two three.js lights to illuminate the model
+                    var directionalLight = new THREE.DirectionalLight(0xffffff);
+                    directionalLight.position.set(90, -90, 90).normalize();
+                    tb1.scene.add(directionalLight);
+                     
+                    var directionalLight2 = new THREE.DirectionalLight(0xffffff);
+                    directionalLight2.position.set(-90, 90, 90).normalize();
+                    tb1.scene.add(directionalLight2);
+                 
+					});
+                    
+
+				},
+				render: function (gl2, matrix2) {
+					tb.update();
+                    
+       
+				}
+                
+                
+  
+                
+                
+			};
+			return customLayer3D2;
+
+		};
+        
+        
+        
+     map.on('style.load', function () {
+			map.addLayer(createCustomLayer2('3d-model2', modelOrigin2), '');
+               
+        		
+   
+		});
+        
+
+        
+     
+    </script> 
+ 
+ 
+ 
+ 
+  
+  
+  
+  
+  
+     <script>
+
+
+
+
+ 
+
+// parameters to ensure the model is georeferenced correctly on the map
+		const modelOrigin3 = [-6.342609597993402, 53.32453738418195, 0];
+        
+        
+        
+        
+        
+
+		function createCustomLayer3(layerName3, origin3) {
+			let model3;
+            
+			//create the layer
+			let customLayer3D3 = {
+				id: layerName3,
+				type: 'custom',
+				renderingMode: '3d',
+				onAdd: function (map3, gl3) {
+
+					// instantiate threebox
+					window.tb = new Threebox(
+						map3,
+						gl3,
+
+                        
+                   { defaultLights: false, enableSelectingObjects: false, enableDraggingObjects: true, enableRotatingObjects: true, enableTooltips: true }     
+						
+					);
+  
+                    
+                    let options3 = { type: 'gltf', obj: 'https://dl.dropboxusercontent.com/s/ebdgebh8k4ypmw5/1938D.glb', units: 'meters', scale: 600, anchor: 'center', rotation: { x: 90, y: 0, z: 0 } }        
+                    type: 'gltf',           
+                    
+				tb.loadObj(options3, function (model3) {
+						model3.setCoords(origin3);
+						model3.addTooltip("Moscow 193888", true);
+						tb.add(model3);
+                        model3.setRotation({ x: 0, y: 0, z: 182.7 });
+                         
+                         
+     
+
+
+                  // create two three.js lights to illuminate the model
+                    var directionalLight = new THREE.DirectionalLight(0xffffff);
+                    directionalLight.position.set(90, -90, 90).normalize();
+                    tb1.scene.add(directionalLight);
+                     
+                    var directionalLight2 = new THREE.DirectionalLight(0xffffff);
+                    directionalLight2.position.set(-90, 90, 90).normalize();
+                    tb1.scene.add(directionalLight2);
+                 
+					});
+                    
+
+				},
+				render: function (gl3, matrix3) {
+					tb.update();
+                    
+       
+				}
+                
+                
+  
+                
+                
+			};
+			return customLayer3D3;
+
+		};
+        
+        
+        
+     map.on('style.load', function () {
+			map.addLayer(createCustomLayer3('3d-model3', modelOrigin3), '');
+               
+        		
+   
+		});
+        
+
+        
+     
+    </script> 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+       <script>
+
+
+
+
+ 
+
+// parameters to ensure the model is georeferenced correctly on the map
+		const modelOrigin4 = [-6.340575759880181, 53.32495710876955, 0];
+        
+        
+        
+        
+        
+
+		function createCustomLayer4(layerName4, origin4) {
+			let model4;
+            
+			//create the layer
+			let customLayer3D4 = {
+				id: layerName4,
+				type: 'custom',
+				renderingMode: '3d',
+				onAdd: function (map4, gl4) {
+
+					// instantiate threebox
+					window.tb = new Threebox(
+						map4,
+						gl4,
+
+                        
+                   { defaultLights: false, enableSelectingObjects: false, enableDraggingObjects: true, enableRotatingObjects: true, enableTooltips: true }     
+						
+					);
+  
+                    
+                    let options4 = { type: 'gltf', obj: 'https://dl.dropboxusercontent.com/s/qy9vmdai69eycjq/ireland.glb', units: 'meters', scale: 600, anchor: 'center', rotation: { x: 90, y: 0, z: 0 } }        
+                    type: 'gltf',           
+                    
+				tb.loadObj(options4, function (model4) {
+						model4.setCoords(origin4);
+						model4.addTooltip("Moscow 193888", true);
+						tb.add(model4);
+                        model4.setRotation({ x: 0, y: 0, z: 182.7 });
+                         
+                         
+     
+
+
+                  // create two three.js lights to illuminate the model
+                    var directionalLight = new THREE.DirectionalLight(0xffffff);
+                    directionalLight.position.set(90, -90, 90).normalize();
+                    tb1.scene.add(directionalLight);
+                     
+                    var directionalLight2 = new THREE.DirectionalLight(0xffffff);
+                    directionalLight2.position.set(-90, 90, 90).normalize();
+                    tb1.scene.add(directionalLight2);
+                 
+					});
+                    
+
+				},
+				render: function (gl4, matrix4) {
+					tb.update();
+                    
+       
+				}
+                
+                
+  
+                
+                
+			};
+			return customLayer3D4;
+
+		};
+        
+        
+        
+     map.on('style.load', function () {
+			map.addLayer(createCustomLayer4('3d-model4', modelOrigin4), '');
+               
+        		
+   
+		});
+        
+
+        
+     
+    </script> 
+  
+  
+  
+  
+  
+ 
+ 
+ 
+ 
+ 
+        <script>
+
+
+
+
+ 
+
+// parameters to ensure the model is georeferenced correctly on the map
+		const modelOrigin5 = [37.18091904998829, 55.972141819190284, 0];
+        
+        
+        
+        
+        
+
+		function createCustomLayer5(layerName5, origin5) {
+			let model5;
+            
+			//create the layer
+			let customLayer3D5 = {
+				id: layerName5,
+				type: 'custom',
+				renderingMode: '3d',
+				onAdd: function (map5, gl5) {
+
+					// instantiate threebox
+					window.tb = new Threebox(
+						map5,
+						gl5,
+
+                        
+                   { defaultLights: false, enableSelectingObjects: false, enableDraggingObjects: true, enableRotatingObjects: true, enableTooltips: true }     
+						
+					);
+  
+                    
+                    let options5 = { type: 'gltf', obj: 'https://dl.dropboxusercontent.com/s/drftre3ux0kao3h/sport3.glb', units: 'meters', scale: 1, anchor: 'center', rotation: { x: 90, y: 0, z: 0 } }        
+                    type: 'gltf',           
+                    
+				tb.loadObj(options5, function (model5) {
+						model5.setCoords(origin5);
+						model5.addTooltip("Moscow 193888", true);
+						tb.add(model5);
+                        model5.setRotation({ x: 0, y: 0, z: 182.7 });
+                         
+                         
+     
+
+
+                  // create two three.js lights to illuminate the model
+                    var directionalLight = new THREE.DirectionalLight(0xffffff);
+                    directionalLight.position.set(90, -90, 90).normalize();
+                    tb1.scene.add(directionalLight);
+                     
+                    var directionalLight2 = new THREE.DirectionalLight(0xffffff);
+                    directionalLight2.position.set(-90, 90, 90).normalize();
+                    tb1.scene.add(directionalLight2);
+                 
+					});
+                    
+
+				},
+				render: function (gl5, matrix5) {
+					tb.update();
+                    
+       
+				}
+                
+                
+  
+                
+                
+			};
+			return customLayer3D5;
+
+		};
+        
+        
+        
+     map.on('style.load', function () {
+			map.addLayer(createCustomLayer5('3d-model5', modelOrigin5), '');
+               
+        		
+   
+		});
+        
+
+        
+     
+    </script> 
+ 
+ 
+ 
+  
+
+
+
+
+        <script>
+
+
+
+
+ 
+
+// parameters to ensure the model is georeferenced correctly on the map
+		const modelOrigin7 = [37.174866834944226, 55.977229487624356, 0];
+        
+        
+        
+        
+        
+
+		function createCustomLayer7(layerName7, origin7) {
+			let model7;
+            
+			//create the layer
+			let customLayer3D7 = {
+				id: layerName7,
+				type: 'custom',
+				renderingMode: '3d',
+				onAdd: function (map7, gl7) {
+
+					// instantiate threebox
+					window.tb = new Threebox(
+						map7,
+						gl7,
+
+                        
+                   { defaultLights: false, enableSelectingObjects: false, enableDraggingObjects: true, enableRotatingObjects: true, enableTooltips: true }     
+						
+					);
+  
+                    
+                    let options7 = { type: 'gltf', obj: 'https://dl.dropboxusercontent.com/s/drftre3ux0kao3h/sport3.glb', units: 'meters', scale: 0.78, anchor: 'center', rotation: { x: 90, y: 0, z: 0 } }        
+                    type: 'gltf',           
+                    
+				tb.loadObj(options7, function (model7) {
+						model7.setCoords(origin7);
+						model7.addTooltip("Moscow 193888", true);
+						tb.add(model7);
+                        model7.setRotation({ x: 0, y: 0, z: 59.7 });
+                         
+                         
+     
+
+
+                  // create two three.js lights to illuminate the model
+                    var directionalLight = new THREE.DirectionalLight(0xffffff);
+                    directionalLight.position.set(90, -90, 90).normalize();
+                    tb1.scene.add(directionalLight);
+                     
+                    var directionalLight2 = new THREE.DirectionalLight(0xffffff);
+                    directionalLight2.position.set(-90, 90, 90).normalize();
+                    tb1.scene.add(directionalLight2);
+                 
+					});
+                    
+
+				},
+				render: function (gl7, matrix7) {
+					tb.update();
+                    
+       
+				}
+                
+                
+  
+                
+                
+			};
+			return customLayer3D7;
+
+		};
+        
+        
+        
+     map.on('style.load', function () {
+			map.addLayer(createCustomLayer7('3d-model7', modelOrigin7), '');
+               
+        		
+   
+		});
+        
+
+        
+     
+    </script> 
+
+
+
+
+
+
+
+        <script>
+
+
+
+
+ 
+
+// parameters to ensure the model is georeferenced correctly on the map
+		const modelOrigin5 = [37.18091904998829, 55.972141819190284, 0];
+        
+        
+        
+        
+        
+
+		function createCustomLayer5(layerName5, origin5) {
+			let model5;
+            
+			//create the layer
+			let customLayer3D5 = {
+				id: layerName5,
+				type: 'custom',
+				renderingMode: '3d',
+				onAdd: function (map5, gl5) {
+
+					// instantiate threebox
+					window.tb = new Threebox(
+						map5,
+						gl5,
+
+                        
+                   { defaultLights: false, enableSelectingObjects: false, enableDraggingObjects: true, enableRotatingObjects: true, enableTooltips: true }     
+						
+					);
+  
+                    
+                    let options5 = { type: 'gltf', obj: 'https://dl.dropboxusercontent.com/s/drftre3ux0kao3h/sport3.glb', units: 'meters', scale: 1, anchor: 'center', rotation: { x: 90, y: 0, z: 0 } }        
+                    type: 'gltf',           
+                    
+				tb.loadObj(options5, function (model5) {
+						model5.setCoords(origin5);
+						model5.addTooltip("Moscow 193888", true);
+						tb.add(model5);
+                        model5.setRotation({ x: 0, y: 0, z: 182.7 });
+                         
+                         
+     
+
+
+                  // create two three.js lights to illuminate the model
+                    var directionalLight = new THREE.DirectionalLight(0xffffff);
+                    directionalLight.position.set(90, -90, 90).normalize();
+                    tb1.scene.add(directionalLight);
+                     
+                    var directionalLight2 = new THREE.DirectionalLight(0xffffff);
+                    directionalLight2.position.set(-90, 90, 90).normalize();
+                    tb1.scene.add(directionalLight2);
+                 
+					});
+                    
+
+				},
+				render: function (gl5, matrix5) {
+					tb.update();
+                    
+       
+				}
+                
+                
+  
+                
+                
+			};
+			return customLayer3D5;
+
+		};
+        
+        
+        
+     map.on('style.load', function () {
+			map.addLayer(createCustomLayer5('3d-model5', modelOrigin5), '');
+               
+        		
+   
+		});
+        
+
+        
+     
+    </script> 
+ 
+ 
+ 
+  
+
+
+
+
+        <script>
+
+
+
+
+ 
+
+// parameters to ensure the model is georeferenced correctly on the map
+		const modelOrigin8 = [37.175138315371925, 55.97745521910511, 0];
+        
+        
+        
+        
+        
+
+		function createCustomLayer8(layerName8, origin8) {
+			let model8;
+            
+			//create the layer
+			let customLayer3D8 = {
+				id: layerName8,
+				type: 'custom',
+				renderingMode: '3d',
+				onAdd: function (map8, gl8) {
+
+					// instantiate threebox
+					window.tb = new Threebox(
+						map8,
+						gl8,
+
+                        
+                   { defaultLights: false, enableSelectingObjects: false, enableDraggingObjects: true, enableRotatingObjects: true, enableTooltips: true }     
+						
+					);
+  
+                    
+                    let options8 = { type: 'gltf', obj: 'https://dl.dropboxusercontent.com/s/tzxwdxc5fbaytow/kid.glb', units: 'meters', scale: 0.78, anchor: 'center', rotation: { x: 90, y: 0, z: 0 } }        
+                    type: 'gltf',           
+                    
+				tb.loadObj(options8, function (model8) {
+						model8.setCoords(origin8);
+						model8.addTooltip("Moscow 193888", true);
+						tb.add(model8);
+                        model8.setRotation({ x: 0, y: 0, z: 59.7 });
+                         
+                         
+     
+
+
+                  // create two three.js lights to illuminate the model
+                    var directionalLight = new THREE.DirectionalLight(0xffffff);
+                    directionalLight.position.set(90, -90, 90).normalize();
+                    tb1.scene.add(directionalLight);
+                     
+                    var directionalLight2 = new THREE.DirectionalLight(0xffffff);
+                    directionalLight2.position.set(-90, 90, 90).normalize();
+                    tb1.scene.add(directionalLight2);
+                 
+					});
+                    
+
+				},
+				render: function (gl8, matrix8) {
+					tb.update();
+                    
+       
+				}
+                
+                
+  
+                
+                
+			};
+			return customLayer3D8;
+
+		};
+        
+        
+        
+     map.on('style.load', function () {
+			map.addLayer(createCustomLayer8('3d-model8', modelOrigin8), '');
+               
+        		
+   
+		});
+        
+
+        
+     
+    </script> 
+
+
+
+
+
+
+
+
+<script>
+
+
+
+
+ 
+
+// parameters to ensure the model is georeferenced correctly on the map
+		const modelOrigin9 = [37.18028062218909, 55.97215719171217, 0];
+        
+        
+        
+        
+        
+
+		function createCustomLayer9(layerName9, origin9) {
+			let model9;
+            
+			//create the layer
+			let customLayer3D9 = {
+				id: layerName9,
+				type: 'custom',
+				renderingMode: '3d',
+				onAdd: function (map9, gl9) {
+
+					// instantiate threebox
+					window.tb = new Threebox(
+						map9,
+						gl9,
+
+                        
+                   { defaultLights: false, enableSelectingObjects: false, enableDraggingObjects: true, enableRotatingObjects: true, enableTooltips: true }     
+						
+					);
+  
+                    
+                    let options9 = { type: 'gltf', obj: 'https://dl.dropboxusercontent.com/s/tzxwdxc5fbaytow/kid.glb', units: 'meters', scale: 0.78, anchor: 'center', rotation: { x: 90, y: 0, z: 0 } }        
+                    type: 'gltf',           
+                    
+				tb.loadObj(options9, function (model9) {
+						model9.setCoords(origin9);
+						model9.addTooltip("Moscow 193888", true);
+						tb.add(model9);
+                        model9.setRotation({ x: 0, y: 0, z: 59.7 });
+                         
+                         
+     
+
+
+                  // create two three.js lights to illuminate the model
+                    var directionalLight = new THREE.DirectionalLight(0xffffff);
+                    directionalLight.position.set(90, -90, 90).normalize();
+                    tb1.scene.add(directionalLight);
+                     
+                    var directionalLight2 = new THREE.DirectionalLight(0xffffff);
+                    directionalLight2.position.set(-90, 90, 90).normalize();
+                    tb1.scene.add(directionalLight2);
+                 
+					});
+                    
+
+				},
+				render: function (gl9, matrix9) {
+					tb.update();
+                    
+       
+				}
+                
+                
+  
+                
+                
+			};
+			return customLayer3D9;
+
+		};
+        
+        
+        
+     map.on('style.load', function () {
+			map.addLayer(createCustomLayer9('3d-model9', modelOrigin9), '');
+               
+        		
+   
+		});
+        
+
+        
+     
+    </script> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+
+
+ 
+
+// parameters to ensure the model is georeferenced correctly on the map
+		const modelOrigin10 = [37.18095939664826, 55.97294000131305, 0];
+        
+        
+        
+        
+        
+
+		function createCustomLayer10(layerName10, origin10) {
+			let model10;
+            
+			//create the layer
+			let customLayer3D10 = {
+				id: layerName10,
+				type: 'custom',
+				renderingMode: '3d',
+				onAdd: function (map10, gl10) {
+
+					// instantiate threebox
+					window.tb = new Threebox(
+						map10,
+						gl10,
+
+                        
+                   { defaultLights: false, enableSelectingObjects: false, enableDraggingObjects: true, enableRotatingObjects: true, enableTooltips: true }     
+						
+					);
+  
+                    
+                    let options10 = { type: 'gltf', obj: 'https://dl.dropboxusercontent.com/s/l832akw63j4evzg/dog.glb', units: 'meters', scale: 90, anchor: 'center', rotation: { x: 90, y: 0, z: 0 } }        
+                    type: 'gltf',           
+                    
+				tb.loadObj(options10, function (model10) {
+						model10.setCoords(origin10);
+						model10.addTooltip("Moscow 193888", true);
+						tb.add(model10);
+                        model10.setRotation({ x: 0, y: 0, z: 59.7 });
+                         
+                         
+     
+
+
+                  // create two three.js lights to illuminate the model
+                    var directionalLight = new THREE.DirectionalLight(0xffffff);
+                    directionalLight.position.set(90, -90, 90).normalize();
+                    tb1.scene.add(directionalLight);
+                     
+                    var directionalLight2 = new THREE.DirectionalLight(0xffffff);
+                    directionalLight2.position.set(-90, 90, 90).normalize();
+                    tb1.scene.add(directionalLight2);
+                 
+					});
+                    
+
+				},
+				render: function (gl10, matrix10) {
+					tb.update();
+                    
+       
+				}
+                
+                
+  
+                
+                
+			};
+			return customLayer3D10;
+
+		};
+        
+        
+        
+     map.on('style.load', function () {
+			map.addLayer(createCustomLayer10('3d-model10', modelOrigin10), '');
+               
+        		
+   
+		});
+        
+
+        
+     
+    </script> 
+
+
+
+
+
+</body>
+</html>
+
