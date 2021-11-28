@@ -148,6 +148,9 @@
 	<link href="/emiia.css" rel="stylesheet">
     
     
+    
+    
+    
  
 
 
@@ -304,7 +307,59 @@ a.ex5:hover, a.ex5:active {text-decoration: underline;}
   
   
  
- 
+ <style>  
+/* полоса прокрутки (скроллбар) */
+::-webkit-scrollbar {
+    width: 5px; /* ширина для вертикального скролла */
+
+    background-color: white;
+}
+
+/* ползунок скроллбара */
+::-webkit-scrollbar-thumb {
+    background-color: #e3e3e3;
+    border-radius: 3em;
+    
+    
+    /* Стрелки */
+
+::-webkit-scrollbar-button:vertical:start:decrement {
+    
+    background-color: white;
+}
+
+::-webkit-scrollbar-button:vertical:end:increment {
+    
+    background-color: white;
+}
+
+::-webkit-scrollbar-button:horizontal:start:decrement {
+
+    background-color: white;
+}
+
+::-webkit-scrollbar-button:horizontal:end:increment {
+
+    background-color: white;
+}
+    
+    
+    
+
+
+
+
+/* Стрелки */
+
+::-webkit-scrollbar-button:vertical:start:decrement {
+    background: linear-gradient(120deg, #02141a 40%, rgba(0, 0, 0, 0) 41%),
+    linear-gradient(240deg, #02141a 40%, rgba(0, 0, 0, 0) 41%),
+    linear-gradient(0deg, #02141a 30%, rgba(0, 0, 0, 0) 31%);
+    background-color: transparent;
+}
+
+
+</style>
  
  
  
@@ -369,7 +424,7 @@ a.ex5:hover, a.ex5:active {text-decoration: underline;}
 
 
 
-
+<div class="area" data-simplebar>
 
 
 
@@ -698,8 +753,6 @@ a.ex5:hover, a.ex5:active {text-decoration: underline;}
 
 <br/>
 <br/>
-<br/>
-<br/>
 
 
   
@@ -737,13 +790,6 @@ a.ex5:hover, a.ex5:active {text-decoration: underline;}
   </section>
   
       
-  </div>
-</div>
-</div>
-
-
-  </div>
-</div>
 
   
   </section>
