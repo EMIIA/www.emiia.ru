@@ -1040,7 +1040,7 @@ map.on('load', function() {
       map.on('click', 'trees-point', (event) => {
         new mapboxgl.Popup()
           .setLngLat(event.features[0].geometry.coordinates)
-          .setHTML(`<strong></strong> ${event.features[0].properties.dbh}`)
+          .setHTML(`<strong>Радиус действия WiFi mesh сети (WMN):</strong> ${event.features[0].properties.dbh}`)
           .addTo(map);
       });
       
