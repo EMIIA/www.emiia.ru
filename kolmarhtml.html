@@ -439,6 +439,26 @@ body {
 
 
 
+<style>
+
+
+.app-h1 {
+  text-align: left;
+}
+.app-chart__canvas {
+  position: relative;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+
+
+
+
+</style>
+
+
+
 
 
 
@@ -662,10 +682,45 @@ body {
       <input type="radio" name="tabgroup" id="tab-1" checked>
       <label for="tab-1">Аналитика</label>
      <div class="tab__content">
-       <h4>Tab heading 1</h4>
-         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt libero ipsum, veniam magni modi exercitationem debitis ducimus assumenda ratione corporis, illum eius, laborum tempore cumque amet id perspiciatis nostrum unde?</p>
-                  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt libero ipsum, veniam magni modi exercitationem debitis ducimus assumenda ratione corporis, illum eius, laborum tempore cumque amet id perspiciatis nostrum unde?</p>
-                           <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt libero ipsum, veniam magni modi exercitationem debitis ducimus assumenda ratione corporis, illum eius, laborum tempore cumque amet id perspiciatis nostrum unde?</p>
+     
+     
+     
+     
+     
+     <h4></h4>
+
+             <p></p>
+
+
+                           
+                           
+             <!-- partial:index.partial.html -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700&display=swap" rel="stylesheet">
+
+
+
+<div id="app">
+    <div class="container">
+      <div class="app__chart app-chart">
+    
+        <!-- нас интересует данная часть -->
+        <div class="app-chart__canvas">
+          <canvas class="chart"></canvas>
+        </div>
+
+      </div>
+    </div>
+  </div>
+          
+                           
+                           
+                           
+                           
+                           
+                           
+                           
       </div> 
    </div>
    <div class="tab">
@@ -673,7 +728,7 @@ body {
       <label for="tab-2">Параметры</label>
       <div class="tab__content">
          <h4>Tab heading 2</h4>
-         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur odio cum eveniet excepturi eum provident molestias ad ipsa unde dignissimos illo porro animi earum aliquam perspiciatis id omnis, adipisci incidunt. Qui, beatae. Beatae animi totam obcaecati at quae, iste facere fuga nemo pariatur esse nihil?
+         <p>
 </p>
       </div> 
    </div>
@@ -684,7 +739,7 @@ body {
 
 
   <br/>
-  <br/>
+
 
 
 
@@ -1069,12 +1124,49 @@ $(document).ready(function() {
   
   
   
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js'></script>
   
-  
-  
-  
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+  new Chart(
+    document.querySelector('.chart'),
+    {
+      type: 'line',
+      data: {
+        labels: ['Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь'],
+        datasets: [
+          {
+            label: 'Сбои',
+            data: [3, 6, 2, 7, 4],
+            borderColor: 'crimson',
+            borderWidth: 5,
+            backgroundColor: 'crimson',
+            cubicInterpolationMode: 'monotone',
+          },
+          {
+            label: 'Производительность',
+            data: [5, 2, 3, 1, 4],
+            borderColor: 'teal',
+            borderWidth: 5,
+            backgroundColor: 'teal',
+            cubicInterpolationMode: 'monotone'
+          }
+        ]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    }
+  );
+
+})
  
- 
+ </script>
 
 </body>
 
@@ -1164,4 +1256,3 @@ $(document).ready(function() {
 </div>
 </div>
 </div>
-
