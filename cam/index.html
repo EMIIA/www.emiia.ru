@@ -1,0 +1,36 @@
+<html>
+<head>
+</head>
+<body onload="onLoad()">
+  <h2>Slightly Tweaked HTML5 Depth Capture Demo</h2>
+  <h3>See <a href="https://software.intel.com/en-us/blogs/2017/02/10/depth-camera-capture-in-html5">https://software.intel.com/en-us/blogs/2017/02/10/depth-camera-capture-in-html5</a></h3>
+  <p>Allow camera use, and wiew over https to save your camera permissions preferences.</p>
+  
+  <div class="select">
+    <label for="selectVideoDevice">Video capture device used for depth stream: </label><select id="selectVideoDevice"></select>
+  </div>
+  <div style="float:left;margin-right:20px">
+    <label style="display:block;">WebGL canvas with depth video frame texture:</label>
+    <canvas id="canvasGL" width="640" height="480" style="border:1px solid #CCCCCC;"></canvas>
+  </div>
+  <div style="float:left;">
+    <label style="display:block;">Depth video frame, after gl.readPixels and processing on CPU:</label>
+    <canvas id="canvas2D" width="640" height="480" style="border:1px solid #CCCCCC;"></canvas>
+  </div>
+</body>
+
+<script type="text/javascript">
+//added this to ask for peristent camera permissions. Otherwise labels will all be blank and it won't find the device
+  navigator.mediaDevices.getUserMedia({ video: true});  
+ 
+  
+  navigator.mediaDevices.enumerateDevices()
+.then(function(devices) {
+  devices.forEach(function(device) {
+    console.log(device.kind + ": " + device.label +
+                " id = " + device.deviceId);
+  });
+})
+</script>
+
+</html>
