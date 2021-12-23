@@ -1,7 +1,7 @@
 <svg id="EMIIA.AI_MRV" data-name="EMIIA.AI MRV" xmlns="http://www.w3.org/2000/svg" width="147" height="538" viewBox="0 0 147 538">
   <title>emiia_ai_model_lib_001</title>
   <g id="Frame">
-    <rect id="rect3351" x="6.4" y="6.1" width="129.7" height="520.7" style="fill: none;stroke: red;stroke-linecap: round;stroke-linejoin: round;stroke-width: 0.25450000166893005px"/>
+    <rect id="frame" x="6.4" y="6.1" width="129.7" height="520.7" style="fill: none;stroke: red;stroke-linecap: round;stroke-linejoin: round;stroke-width: 0.25450000166893005px"/>
   </g>
   <circle id="Keypivotpoint_0" data-name="Keypivotpoint 0" cx="136.1" cy="526.8" r="9.4" style="fill: red"/>
   <circle id="Keypivotpoint_1" data-name="Keypivotpoint 1" cx="6.4" cy="526.8" r="4.5" style="fill: red"/>
