@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html >
 <head>
@@ -382,33 +380,21 @@ a.mapboxgl-ctrl-logo{
 
 
 
-
-
-
 .mapboxgl-popup-content {
 
- font-size: 0.8rem;
-font-weight: 100;
- 
-    border-radius: 7px;
-    padding: 0.1rem;
-    
-    
-    width: max-content;
-    
-    
-    
 
     
     
      font: 12px/20px Montserrat, montserrat;
-    font-weight: 100;
+
+   border-radius: 5px;
+    padding: 0.5rem;
     
-    @import url('https://www.emiia.ru/css.css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+    
+    width: max-content;
+    
 
-    @import url('/css.css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
 
-}
 
 
 
@@ -922,7 +908,7 @@ map.on('load', function() {
                 0,
                 'rgba(236,222,239,80)',
                 0.2,
-                'rgb(208,209,230,55)',
+                'rgb(103,169,207,55)',
                 0.3,
                 'rgb(166,189,219,55)',
                 0.4,
@@ -962,30 +948,27 @@ map.on('load', function() {
                 'property': 'dbh',
                 'type': 'exponential',
                 'stops': [
-                  [{ zoom: 1, value: 1}, 150],
+   [{ zoom: 1, value: 8 }, 60],
 
-                  [{ zoom: 1, value: 1 }, 250]
                 ]
               },
               'circle-color': {
                 'property': 'dbh',
                 'type': 'exponential',
                 'stops': [
-                  [0, 'rgba(61,133,198,80)'],
-                  [1, 'rgb(61,133,198)'],
-                  [5, 'rgb(61,133,198)'],
-                  [6, 'rgb(61,133,198)'],
-                  [8, 'rgb(61,133,198)'],
-                  [10, 'rgb(61,133,198)'],
-                  [60, 'rgb(61,133,198)']
+                  [0, 'rgba(61,133,198,0.2)']
+
+
                 ]
               },
-              'circle-stroke-color': 'white',
-              'circle-stroke-width': 1,
+              'circle-stroke-color': '#3d85c6',
+              'circle-stroke-width': 0.5,
+            
+           
               'circle-opacity': {
                 'stops': [
                   [3, 0],
-                  [6, 1]
+                  [3, 1]
                 ]
               }
             }
@@ -994,7 +977,7 @@ map.on('load', function() {
         );
         
         
-        map.setLayerZoomRange('trees-point', 3, 19);
+        map.setLayerZoomRange('trees-point', 5, 16);
         
       });
 
@@ -2445,7 +2428,6 @@ map.on('load', function () {
 
 </body>
 </html>
-
 
 
 
