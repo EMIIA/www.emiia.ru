@@ -1,0 +1,305 @@
+{
+  "svg": {
+    "-id": "78",
+    "-data-name": "EMIIA.AI MRV",
+    "-xmlns": "http://www.w3.org/2000/svg",
+    "-width": "147",
+    "-height": "538",
+    "-viewBox": "0 0 147 538",
+    "title": "emiia_ai_model_lib_001",
+    "g": {
+      "-id": "FrameV",
+      "rect": {
+        "-id": "rect3351",
+        "-x": "6.42",
+        "-y": "6.07",
+        "-width": "129.67",
+        "-height": "520.74",
+        "-style": "fill: none;stroke: #ff0808;stroke-linecap: round;stroke-linejoin: round;stroke-width: 0.254453986883163px",
+        "-self-closing": "true"
+      }
+    },
+    "circle": [
+      {
+        "-id": "KeypivotpointV_3",
+        "-data-name": "KeypivotpointV 3",
+        "-cx": "136.08",
+        "-cy": "6.07",
+        "-r": "4.5",
+        "-style": "fill: #ff0808",
+        "-self-closing": "true"
+      },
+      {
+        "-id": "KeypivotpointV_2",
+        "-data-name": "KeypivotpointV 2",
+        "-cx": "6.42",
+        "-cy": "6.07",
+        "-r": "4.5",
+        "-style": "fill: #ff0808",
+        "-self-closing": "true"
+      },
+      {
+        "-id": "KeypivotpointV_1",
+        "-data-name": "KeypivotpointV 1",
+        "-cx": "6.42",
+        "-cy": "526.81",
+        "-r": "4.5",
+        "-style": "fill: #ff0808",
+        "-self-closing": "true"
+      },
+      {
+        "-id": "KeypivotpointV_0",
+        "-data-name": "KeypivotpointV 0",
+        "-cx": "136.08",
+        "-cy": "526.81",
+        "-r": "9.38",
+        "-style": "fill: #ff0808;stroke: #ff0808;stroke-miterlimit: 10",
+        "-self-closing": "true"
+      },
+      {
+        "-id": "KeypivotpointL_14",
+        "-data-name": "KeypivotpointL 14",
+        "-cx": "52.39",
+        "-cy": "474.33",
+        "-r": "9.38",
+        "-style": "fill: #00fffc",
+        "-self-closing": "true"
+      },
+      {
+        "-id": "KeypivotpointL_13",
+        "-data-name": "KeypivotpointL 13",
+        "-cx": "31.3",
+        "-cy": "438.34",
+        "-r": "9.38",
+        "-style": "fill: #00fffc",
+        "-self-closing": "true"
+      },
+      {
+        "-id": "KeypivotpointL_12",
+        "-data-name": "KeypivotpointL 12",
+        "-cx": "104.51",
+        "-cy": "366.36",
+        "-r": "9.38",
+        "-style": "fill: #00fffc",
+        "-self-closing": "true"
+      },
+      {
+        "-id": "KeypivotpointL_11",
+        "-data-name": "KeypivotpointL 11",
+        "-cx": "79.07",
+        "-cy": "291.29",
+        "-r": "9.38",
+        "-style": "fill: #00fffc",
+        "-self-closing": "true"
+      },
+      {
+        "-id": "KeypivotpointL_10",
+        "-data-name": "KeypivotpointL 10",
+        "-cx": "99.55",
+        "-cy": "272.05",
+        "-r": "9.38",
+        "-style": "fill: #00fffc",
+        "-self-closing": "true"
+      },
+      {
+        "-id": "KeypivotpointL_9",
+        "-data-name": "KeypivotpointL 9",
+        "-cx": "71.63",
+        "-cy": "191.39",
+        "-r": "9.38",
+        "-style": "fill: #00fffc",
+        "-self-closing": "true"
+      },
+      {
+        "-id": "KeypivotpointL_8",
+        "-data-name": "KeypivotpointL 8",
+        "-cx": "102.65",
+        "-cy": "138.65",
+        "-r": "9.38",
+        "-style": "fill: #00fffc",
+        "-self-closing": "true"
+      },
+      {
+        "-id": "KeypivotpointL_7",
+        "-data-name": "KeypivotpointL 7",
+        "-cx": "60.46",
+        "-cy": "113.21",
+        "-r": "9.38",
+        "-style": "fill: #00fffc",
+        "-self-closing": "true"
+      },
+      {
+        "-id": "KeypivotpointL_6",
+        "-data-name": "KeypivotpointL 6",
+        "-cx": "113.2",
+        "-cy": "59.23",
+        "-r": "9.38",
+        "-style": "fill: #00fffc",
+        "-self-closing": "true"
+      },
+      {
+        "-id": "KeypivotpointL_5",
+        "-data-name": "KeypivotpointL 5",
+        "-cx": "77.9",
+        "-cy": "52.47",
+        "-r": "9.38",
+        "-style": "fill: #00fffc",
+        "-self-closing": "true"
+      },
+      {
+        "-id": "KeypivotpointL_4",
+        "-data-name": "KeypivotpointL 4",
+        "-cx": "98.93",
+        "-cy": "50.54",
+        "-r": "9.38",
+        "-style": "fill: #00fffc",
+        "-self-closing": "true"
+      },
+      {
+        "-id": "KeypivotpointR_30",
+        "-data-name": "KeypivotpointR 30",
+        "-cx": "16.24",
+        "-cy": "516.9",
+        "-r": "9.38",
+        "-style": "fill: #4a99d9",
+        "-self-closing": "true"
+      },
+      {
+        "-id": "KeypivotpointR_29",
+        "-data-name": "KeypivotpointR 29",
+        "-cx": "123.32",
+        "-cy": "515.84",
+        "-r": "9.38",
+        "-style": "fill: #4a99d9",
+        "-self-closing": "true"
+      },
+      {
+        "-id": "KeypivotpointR_28",
+        "-data-name": "KeypivotpointR 28",
+        "-cx": "110.9",
+        "-cy": "389.13",
+        "-r": "9.38",
+        "-style": "fill: #4a99d9",
+        "-self-closing": "true"
+      },
+      {
+        "-id": "KeypivotpointR_27",
+        "-data-name": "KeypivotpointR 27",
+        "-cx": "85.57",
+        "-cy": "385.46",
+        "-r": "9.38",
+        "-style": "fill: #4a99d9",
+        "-self-closing": "true"
+      },
+      {
+        "-id": "KeypivotpointR_26",
+        "-data-name": "KeypivotpointR 26",
+        "-cx": "55.81",
+        "-cy": "295.33",
+        "-r": "9.38",
+        "-style": "fill: #4a99d9",
+        "-self-closing": "true"
+      },
+      {
+        "-id": "KeypivotpointR_25",
+        "-data-name": "KeypivotpointR 25",
+        "-cx": "66.81",
+        "-cy": "293",
+        "-r": "9.38",
+        "-style": "fill: #4a99d9",
+        "-self-closing": "true"
+      },
+      {
+        "-id": "KeypivotpointR_24",
+        "-data-name": "KeypivotpointR 24",
+        "-cx": "68.52",
+        "-cy": "279.56",
+        "-r": "9.38",
+        "-style": "fill: #4a99d9",
+        "-self-closing": "true"
+      },
+      {
+        "-id": "KeypivotpointR_23",
+        "-data-name": "KeypivotpointR 23",
+        "-cx": "117.14",
+        "-cy": "269",
+        "-r": "9.38",
+        "-style": "fill: #4a99d9",
+        "-self-closing": "true"
+      },
+      {
+        "-id": "KeypivotpointR_22",
+        "-data-name": "KeypivotpointR 22",
+        "-cx": "35.62",
+        "-cy": "215.56",
+        "-r": "9.38",
+        "-style": "fill: #4a99d9",
+        "-self-closing": "true"
+      },
+      {
+        "-id": "KeypivotpointR_21",
+        "-data-name": "KeypivotpointR 21",
+        "-cx": "77.9",
+        "-cy": "201.21",
+        "-r": "9.38",
+        "-style": "fill: #4a99d9",
+        "-self-closing": "true"
+      },
+      {
+        "-id": "KeypivotpointR_20",
+        "-data-name": "KeypivotpointR 20",
+        "-cx": "38.23",
+        "-cy": "95.21",
+        "-r": "9.38",
+        "-style": "fill: #4a99d9",
+        "-self-closing": "true"
+      },
+      {
+        "-id": "KeypivotpointR_19",
+        "-data-name": "KeypivotpointR 19",
+        "-cx": "49.23",
+        "-cy": "93.46",
+        "-r": "9.38",
+        "-style": "fill: #4a99d9",
+        "-self-closing": "true"
+      },
+      {
+        "-id": "KeypivotpointR_18",
+        "-data-name": "KeypivotpointR 18",
+        "-cx": "92.3",
+        "-cy": "28.73",
+        "-r": "9.38",
+        "-style": "fill: #4a99d9",
+        "-self-closing": "true"
+      },
+      {
+        "-id": "KeypivotpointR_17",
+        "-data-name": "KeypivotpointR 17",
+        "-cx": "41.9",
+        "-cy": "20.54",
+        "-r": "9.38",
+        "-style": "fill: #4a99d9",
+        "-self-closing": "true"
+      },
+      {
+        "-id": "KeypivotpointR_16",
+        "-data-name": "KeypivotpointR 16",
+        "-cx": "80.63",
+        "-cy": "19.35",
+        "-r": "9.38",
+        "-style": "fill: #4a99d9",
+        "-self-closing": "true"
+      },
+      {
+        "-id": "KeypivotpointR_15",
+        "-data-name": "KeypivotpointR 15",
+        "-cx": "90.01",
+        "-cy": "17.02",
+        "-r": "9.38",
+        "-style": "fill: #4a99d9",
+        "-self-closing": "true"
+      }
+    ]
+  },
+  "#omit-xml-declaration": "yes"
+}
