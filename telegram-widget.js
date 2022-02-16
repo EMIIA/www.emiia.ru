@@ -136,7 +136,7 @@
       allowedAttrs = ['comment', 'userpic', 'single?', 'color', 'dark', 'dark_color'];
       defWidth = widgetEl.getAttribute('data-width') || '100%';
       defHeight = '';
-      styles.minWidth = '220px';
+      styles.minWidth = '320px';
     }
     else if (widgetId = widgetEl.getAttribute('data-telegram-discussion')) {
       widgetsOrigin = getWidgetsOrigin('https://t.me', 'https://post.tg.dev');
@@ -149,7 +149,7 @@
       allowedAttrs = ['comments_limit', 'color', 'colorful', 'dark', 'dark_color', 'width', 'height'];
       defWidth = widgetEl.getAttribute('data-width') || '100%';
       defHeight = widgetEl.getAttribute('data-height') || 0;
-      styles.minWidth = '220px';
+      styles.minWidth = '320px';
       if (defHeight > 0) {
         scrollable = true;
       }
