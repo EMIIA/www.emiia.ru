@@ -1081,13 +1081,13 @@ var geojson = {
 
 const rainbow = [ 
 '#3d85c6',
-'red',
-'red',
-'red',
+'transparent',
+'transparent',
+'transparent',
 '#3d85c6',
-'red',
-'red',
-'red' 
+'transparent',
+'transparent',
+'transparent' 
 ];
 
 function makeGradient(i) {
@@ -1121,8 +1121,8 @@ map.on('load', function () {
         id: 'line',
         paint: {
             'line-color': 'red',
-            'line-width': 3,
-            'line-gradient': makeGradient(0)
+            'line-width': 25,
+            'line-gradient': makeGradient(1)
         },
         layout: {
             'line-cap': 'round',
@@ -1133,7 +1133,7 @@ map.on('load', function () {
     setTimeout(() => {
       let i = 0;
       setInterval(() => {
-        i += 0.005;
+        i += 0.01;
         map.setPaintProperty('line', 'line-gradient', makeGradient(i));
       }, 1);
     }, 1000); 
@@ -1318,7 +1318,7 @@ map.on('load', function () {
         "source": "point_sample",
         "layout": {},
         "paint": {
-            'circle-color': "#FF0000",
+            'circle-color': "red",
             'circle-radius': 10
         }
     });
@@ -2455,6 +2455,8 @@ map.on('load', function () {
 
 </body>
 </html>
+
+
 
 
 
