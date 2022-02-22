@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -838,8 +839,40 @@ map.on('load', function() {
 
 
 
+<script>
+map.on('load', () => {
+map.addSource('floorplan', {
+'type': 'geojson',
+/*
+* Each feature in this GeoJSON file contains values for
+* `properties.height`, `properties.base_height`,
+* and `properties.color`.
+* In `addLayer` you will use expressions to set the new
+* layer's paint properties based on these values.
+*/
+'data': 'https://www.emiia.ru/ofisgeojson6.geojson'
+});
+map.addLayer({
+'id': 'room-extrusion',
+'type': 'fill-extrusion',
+'source': 'floorplan',
+'paint': {
 
+ // Get the `fill-extrusion-color` from the source `color` property.
+'fill-extrusion-color': ['get', 'color'],
 
+// Get `fill-extrusion-height` from the source `height` property.
+'fill-extrusion-height': ['get', 'height'],
+ 
+// Get `fill-extrusion-base` from the source `base_height` property.
+'fill-extrusion-base': ['get', 'base_height'],
+ 
+// Make extrusions slightly opaque to see through indoor walls.
+'fill-extrusion-opacity': 0.9
+}
+});
+});
+</script>
 
 
 
@@ -2422,6 +2455,8 @@ map.on('load', function () {
 
 </body>
 </html>
+
+
 
 
 
