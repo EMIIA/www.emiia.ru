@@ -1,6 +1,7 @@
 
 
 
+
 <html lang="ru" class=" FB_FW_ext BlitzScPluginAdapter"><head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1, shrink-to-fit=no">
@@ -524,7 +525,7 @@ body {
       <div class="row">
         <div class="col-lg-8 mx-auto">
         
-        <h4>ID: [<a style="color: #3d85c6;">34</a>]</h4>
+        <h4>ID: [<a style="color: #3d85c6;">14</a>]</h4>
         
         <div class="w3-content w3-section" alt="ЭМИИА ИИ — машинное радио зрение" title="ЭМИИА ИИ — машинное радиозрение (радиовидение)" style="max-width:560px">
   <img data-aos="zoom-in" data-aos-duration="2000" src="https://analytics.emiia.ai/svg/pin19.1.1.svg" style="width:100%" class="aos-init aos-animate">
@@ -533,10 +534,10 @@ body {
         
         
         
-        <p class="lead" style="text-align: left; max-width:650px; font-size:15px; color: "> Lon: [<a style="color: #3d85c6;">37.17400945723057</a>]<br>Lat: [<a style="color: #3d85c6;">55.977336389036346</a>]
+     <p class="lead" style="text-align: left; max-width:650px; font-size:15px; color: "> Lon: [<a style="color: #3d85c6;">37.174035</a><a class="lead" style="font-size:15px; color: #3d85c6;"  id="current_date_time_block3">26.12.2021 03:36:22:345</a>]<br>Lat: [<a style="color: #3d85c6;">55.977308</a><a class="lead" style="font-size:15px; color: #3d85c6;"  id="current_date_time_block4">26.12.2021 03:36:22:345</a>]
 </p>
 
-        <p class="lead" style="text-align: left; max-width:650px; font-size:15px;">km/h: [<a style="color: #3d85c6;">3.33</a>] <br>   
+        <p class="lead" style="text-align: left; max-width:650px; font-size:15px;">km/h: [<a style="color: #3d85c6;">3.</a><a class="lead" style="font-size:15px; color: #3d85c6;"  id="current_date_time_block5">26.12.2021 03:36:22:345</a>] <br>   
 
 
 </p>
@@ -2232,7 +2233,152 @@ $(document).ready(function() {
 
 
 
+<script type="text/javascript">
 
+
+    
+    /* функция добавления ведущих нулей */
+    /* (если число меньше десяти, перед числом добавляем ноль) */
+    function zero_first_format(value)
+    {
+        if (value < 10)
+        {
+            value='0'+value;
+        }
+        return value;
+    }
+
+    /* функция получения текущей даты и времени */
+    function date_time()
+    {
+
+ 
+                var current_datetime = new Date();
+        var day = zero_first_format(current_datetime.getDate());
+        var month = zero_first_format(current_datetime.getMonth()+1);
+        var year = current_datetime.getFullYear();
+        var hours = zero_first_format(current_datetime.getHours());
+        var minutes = zero_first_format(current_datetime.getMinutes());
+        var seconds = zero_first_format(current_datetime.getSeconds());
+        var milliseconds = zero_first_format(current_datetime.getMilliseconds());
+        
+        
+ 
+
+        return  ""+milliseconds;
+    }
+
+    
+    /* каждую секунду получаем текущую дату и время */
+    /* и вставляем значение в блок с id "current_date_time_block2" */
+    setInterval(function () {
+        document.getElementById('current_date_time_block3').innerHTML = date_time();
+    }, 500);
+
+</script>
+
+
+
+
+<script type="text/javascript">
+
+
+    
+    /* функция добавления ведущих нулей */
+    /* (если число меньше десяти, перед числом добавляем ноль) */
+    function zero_first_format(value)
+    {
+        if (value < 10)
+        {
+            value='0'+value;
+        }
+        return value;
+    }
+
+    /* функция получения текущей даты и времени */
+    function date_time()
+    {
+
+ 
+                var current_datetime = new Date();
+        var day = zero_first_format(current_datetime.getDate());
+        var month = zero_first_format(current_datetime.getMonth()+1);
+        var year = current_datetime.getFullYear();
+        var hours = zero_first_format(current_datetime.getHours());
+        var minutes = zero_first_format(current_datetime.getMinutes());
+        var seconds = zero_first_format(current_datetime.getSeconds());
+        var milliseconds = zero_first_format(current_datetime.getMilliseconds());
+        
+        
+ 
+
+        return  ""+milliseconds;
+    }
+
+    
+    /* каждую секунду получаем текущую дату и время */
+    /* и вставляем значение в блок с id "current_date_time_block2" */
+    setInterval(function () {
+        document.getElementById('current_date_time_block4').innerHTML = date_time();
+    }, 600);
+
+</script>
+    
+     
+     
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+
+    
+    /* функция добавления ведущих нулей */
+    /* (если число меньше десяти, перед числом добавляем ноль) */
+    function zero_first_format(value)
+    {
+        if (value < 3)
+        {
+            value='0'+value;
+        }
+        return value;
+    }
+
+    /* функция получения текущей даты и времени */
+    function date_time()
+    {
+
+ 
+                var current_datetime = new Date();
+        var day = zero_first_format(current_datetime.getDate());
+        var month = zero_first_format(current_datetime.getMonth()+1);
+        var year = current_datetime.getFullYear();
+        var hours = zero_first_format(current_datetime.getHours());
+        var minutes = zero_first_format(current_datetime.getMinutes());
+        var seconds = zero_first_format(current_datetime.getSeconds());
+        var milliseconds = zero_first_format(current_datetime.getMilliseconds());
+        
+        
+ 
+
+        return  ""+milliseconds;
+    }
+
+    
+    /* каждую секунду получаем текущую дату и время */
+    /* и вставляем значение в блок с id "current_date_time_block2" */
+    setInterval(function () {
+        document.getElementById('current_date_time_block5').innerHTML = date_time();
+    }, 1200);
+
+</script>
 
 
 
@@ -2321,6 +2467,8 @@ $(document).ready(function() {
 
 
 </a><div style="position: static; display: block;"></div></body><div class="troywell-caa"></div><div id="vimeo-record-extension"></div></html>
+
+
 
 
 
