@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html >
 <head>
@@ -12,7 +10,7 @@
         
         
         
-    <title>EMIIA.AI MRV (web app): SDK/API - em_70.7088_675_it_98342234...</title>    
+    <title>EMIIA.AI MRV: SDK/API - em_70.7088_675_it_98342234...</title>    
         
 
 	
@@ -1128,61 +1126,6 @@ map.on('style.load', function () {
 
 
 
-
-
-
-
-
-
-<script>
-
-map.on('load', function () {
-
-
-    // サークル設定
-    map.addSource('point_sample', {
-        type: 'geojson',
-        data: {
-            "type": "FeatureCollection",
-            "name": "sample",
-            "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-            "features": [
-                { "type": "Feature", "properties": { "field01": "一", "field02": "abcd", "field03": 5 }, "geometry": { "type": "Point", "coordinates": [ 139.766778945922852, 35.68198003744061 ] } },
-                { "type": "Feature", "properties": { "field01": "二", "field02": null, "field03": 7 }, "geometry": { "type": "Point", "coordinates": [ 139.762916564941406, 35.674310750817348 ] } },
-                { "type": "Feature", "properties": { "field01": "三", "field02": "kojsha", "field03": 9 }, "geometry": { "type": "Point", "coordinates": [ 139.763603210449219, 35.691391336319306 ] } }
-            ]
-        }
-    });
-
-    // スタイル設定
-    map.addLayer({
-        "id": "point_sample",
-        "type": "circle",
-        "source": "point_sample",
-        "layout": {},
-        "paint": {
-            'circle-color': "red",
-            'circle-radius': 10
-        }
-    });
-
-    // レイヤのズームレベル範囲設定
-    map.setLayerZoomRange('point_sample', 0, 12);
-});
-
-
-</script>
-
-
-
-
-
-
-
-
-
-
- 
 
 
 
