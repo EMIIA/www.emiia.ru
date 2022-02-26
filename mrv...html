@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -10,7 +12,7 @@
         
         
         
-    <title>EMIIA.AI MRV: SDK/API - em_70.7088_675_it_98342234...</title>    
+    <title>EMIIA.AI MRV (web app): SDK/API - em_70.7088_675_it_98342234...</title>    
         
 
 	
@@ -563,42 +565,6 @@ center: [37.17403560876846,55.977308625119825],
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // create the popup
 var popup = new mapboxgl.Popup({ offset: 25 })
    .setHTML("<iframe width=320 height=420 src=https://www.emiia.ru/mrvpinw.html?token=2.GtErfHCeAAcABc_H50WdWnkWZhJog9K6RBpaBlvUD9zSiDCX&amp;camera=0&amp;width=&amp;height=&amp;lang=ru frameborder=0 allow=accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture allowfullscreen></iframe>")
@@ -764,6 +730,38 @@ map.on('load', function() {
 
 
 
+<script>
+
+map.on('load', function () {
+
+
+    // サークル設定
+    map.addSource('point_sample', {
+        type: 'geojson',
+        data: {
+            "type": "FeatureCollection",
+            "name": "sample",
+            "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+            "features": [
+                { "type": "Feature", "properties": { "field01": "一", "field02": "abcd", "field03": 5 }, "geometry": { "type": "Point", "coordinates": [ 139.766778945922852, 35.68198003744061 ] } },
+                { "type": "Feature", "properties": { "field01": "二", "field02": null, "field03": 7 }, "geometry": { "type": "Point", "coordinates": [ 139.762916564941406, 35.674310750817348 ] } },
+                { "type": "Feature", "properties": { "field01": "三", "field02": "kojsha", "field03": 9 }, "geometry": { "type": "Point", "coordinates": [ 139.763603210449219, 35.691391336319306 ] } }
+            ]
+        }
+    });
+
+    
+
+    // レイヤのズームレベル範囲設定
+    map.setLayerZoomRange('point_sample', 0, 12);
+});
+
+
+</script>
+
+
+
+
 
 
 
@@ -777,9 +775,9 @@ map.addSource('floorplan', {
 'type': 'geojson',
 /*
 * Each feature in this GeoJSON file contains values for
-* `properties.height`, `properties.base_height`,
-* and `properties.color`.
-* In `addLayer` you will use expressions to set the new
+* properties.height, properties.base_height,
+* and properties.color.
+* In addLayer you will use expressions to set the new
 * layer's paint properties based on these values.
 */
 'data': 'https://www.emiia.ru/ofisgeojson6.geojson'
@@ -790,21 +788,65 @@ map.addLayer({
 'source': 'floorplan',
 'paint': {
 
- // Get the `fill-extrusion-color` from the source `color` property.
+ // Get the fill-extrusion-color from the source color property.
 'fill-extrusion-color': ['get', 'color'],
 
-// Get `fill-extrusion-height` from the source `height` property.
+// Get fill-extrusion-height from the source height property.
 'fill-extrusion-height': ['get', 'height'],
  
-// Get `fill-extrusion-base` from the source `base_height` property.
+// Get fill-extrusion-base from the source base_height property.
 'fill-extrusion-base': ['get', 'base_height'],
  
 // Make extrusions slightly opaque to see through indoor walls.
 'fill-extrusion-opacity': 0.9
 }
+
+
+
 });
+
+
+
+
+map.on('click', 'room-extrusion', (e) => {
+new mapboxgl.Popup()
+.setLngLat(e.lngLat)
+.setHTML(e.features[0].properties.name)
+.addTo(map);
+
 });
+ 
+// Change the cursor to a pointer when
+// the mouse is over the states layer.
+map.on('mouseenter', 'room-extrusion', () => {
+map.getCanvas().style.cursor = 'pointer';
+});
+ 
+// Change the cursor back to a pointer
+// when it leaves the states layer.
+map.on('mouseleave', 'room-extrusion', () => {
+map.getCanvas().style.cursor = 'pointer';
+});
+
+
+
+});
+
+
+
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <script>
@@ -940,7 +982,6 @@ map.addLayer({
 
 
  
-
 
 
 
@@ -1518,6 +1559,16 @@ map.on('style.load', function () {
 
 
         
+
+
+
+
+
+
+
+
+
+
 
 
 
