@@ -1,0 +1,93 @@
+<script>
+
+
+
+
+ 
+
+// parameters to ensure the model is georeferenced correctly on the map
+		const modelOrigin = [37.18141536974409, 55.971764963320595, 0];
+        
+        
+        
+        
+        
+
+		function createCustomLayer(layerName, origin) {
+			let model;
+			//create the layer
+			let customLayer3D = {
+				id: layerName,
+				type: 'custom',
+				renderingMode: '3d',
+				onAdd: function (map, gl) {
+
+					// instantiate threebox
+					window.tb = new Threebox(
+						map,
+						gl,
+
+                        
+                        
+						{ defaultLights: true, enableSelectingObjects: true, enableDraggingObjects: true, enableRotatingObjects: true, enableTooltips: true }
+					);
+  
+                    
+                    let options = { type: 'gltf', obj: 'https://dl.dropboxusercontent.com/s/1x60j6c32oh35rc/dom_new_v15_1.glb', units: 'meters', scale: 900, anchor: 'center', rotation: { x: 90, y: 0, z: 0 } }        
+                    type: 'gltf',           
+                    
+				tb.loadObj(options, function (model) {
+						model.setCoords(origin);
+						model.addTooltip("Moscow 1938 Renovation", true);
+						tb.add(model);
+                         model.setRotation({ x: 0, y: 0, z: 180.7 });
+                         
+                         
+     
+
+                    // create two three.js lights to illuminate the model
+                    var directionalLight = new THREE.DirectionalLight(0xffffff);
+                    directionalLight.position.set(90, -90, 90).normalize();
+                    tb.scene.add(directionalLight);
+                     
+                    var directionalLight5 = new THREE.DirectionalLight(0xffffff);
+                    directionalLight5.position.set(-90, 90, 90).normalize();
+                    tb.scene.add(directionalLight5);
+                 
+					});
+                    
+                    
+
+				},
+				render: function (gl, matrix) {
+					tb.update();
+                    
+       
+				}
+                
+                
+  
+                
+                
+			};
+			return customLayer3D;
+
+		};
+        
+        
+        
+     map.on('style.load', function () {
+			map.addLayer(createCustomLayer('3d-model', modelOrigin), '');
+               
+        		
+   
+		});
+        
+        
+        
+        
+
+        
+      
+     
+    </script>
