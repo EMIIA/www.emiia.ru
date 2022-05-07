@@ -1,47 +1,64 @@
-
 <!DOCTYPE html><html lang="ru"><head>
   <meta charset="utf-8">
-  <meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1">
-
-
-
-
-
-
+  <meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1, shrink-to-fit=no">
 <head>
-<script>console.log('pipeline version: 70dc7033995b3b368de09739e134e0f9d61a619b');</script>
-    <meta charset="utf-8"/>
-    <title>IfcOpenShell viewer</title>
+
+
+
+
+    
+    
+    
+    <title>EMIIA.AI</title>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
-    <link rel="stylesheet" href="/static/main.css"/>
+    <link rel="stylesheet" href="https://view.ifcopenshell.org/static/main.css"/>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    
 
     <script type="text/javascript">
         var isIE = !!window.MSInputMethodContext;
         if (isIE) {
             document.write('<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"><\/script>');
-            document.write('<script type="text/javascript" src="/static/lib/fetch.umd.js"><\/script>');
-            document.write('<script type="text/javascript" src="/static/lib/String.startsWith.js"><\/script>');
-            document.write('<script type="text/javascript" src="/static/lib/Array.from.js"><\/script>');
-            document.write('<script type="text/javascript" src="/static/lib/Object.entries.js"><\/script>');
-            document.write('<script type="text/javascript" src="/static/lib/Object.assign.js"><\/script>');
+            document.write('<script type="text/javascript" src="https://view.ifcopenshell.org/static/lib/fetch.umd.js"><\/script>');
+            document.write('<script type="text/javascript" src="https://view.ifcopenshell.org/static/lib/String.startsWith.js"><\/script>');
+            document.write('<script type="text/javascript" src="https://view.ifcopenshell.org/static/lib/Array.from.js"><\/script>');
+            document.write('<script type="text/javascript" src="https://view.ifcopenshell.org/static/lib/Object.entries.js"><\/script>');
+            document.write('<script type="text/javascript" src="https://view.ifcopenshell.org/static/lib/Object.assign.js"><\/script>');
         }
     </script>
-    
+  
+  
+  
     
     <script type="text/javascript" src="https://view.ifcopenshell.org/static/bimsurfer/lib/three.gltf.orbit.draco.min.js"></script>
     
     <script type="text/javascript" src="https://view.ifcopenshell.org/static/bimsurfer/lib/svg-pan-zoom.js"></script>
     
+  
+      
+
+  
+    
     <script type="text/javascript">
         window.MODEL_ID = "StoCFRlceKWOUmTsLVecdVbQFgAGwiLk";
         window.SPINNER_CLASS = 'spinner';
         window.NUM_FILES = 1;
-        window.LIVE_SHARE_ID = "mJxjPSlFuROgEJSFzlJsFdxSdRyUuEOL";
+        window.LIVE_SHARE_ID = "SumrjkxkyUSsfXNZOnPBDcxDCPPxHsgO";
     </script>
-    <script type="text/javascript" src="https://view.ifcopenshell.org/static/bimsurfer/lib/require.js" data-main="https://view.ifcopenshell.org/static/App.70dc7033995b3b368de09739e134e0f9d61a619b.js"></script>
+    
+ 
+ 
+    
+    
+    <script type="text/javascript" src="https://view.ifcopenshell.org/static/bimsurfer/lib/three.gltf.orbit.draco.min.js" data-main="https://view.ifcopenshell.org/static/bimsurfer/lib/svg-pan-zoom.js"></script>
+    
+         <script type="text/javascript" src="https://view.ifcopenshell.org/static/bimsurfer/lib/require.js" data-main="https://view.ifcopenshell.org/static/App.70dc7033995b3b368de09739e134e0f9d61a619b.js"></script>   
+    
+    
+    
     <style>
         html, body {
             margin: 0;
@@ -112,12 +129,13 @@
 </div>
 <div id='right'>
 </div>
+
 <div id='footer'>
-Powered by <a href='http://ifcopenshell.org/'>IfcOpenShell</a> and <a href='https://github.com/AECgeeks/bimsurfer2'>BIMSurfer2</a> <a href='/log/StoCFRlceKWOUmTsLVecdVbQFgAGwiLk.html' id='errors'>...</a>
+Powered by <a href='http://ifcopenshell.org/'></a> EMIIA.AI <a href='https://github.com/AECgeeks/bimsurfer2'>BIM CLOUD</a> <a href='https://view.ifcopenshell.org/log/StoCFRlceKWOUmTsLVecdVbQFgAGwiLk.html' id='errors'>...</a>
 </div>
 
 <script>
-fetch('/log/StoCFRlceKWOUmTsLVecdVbQFgAGwiLk.json').then(function(r) { return r.text(); }).then(function(log) {
+fetch('https://view.ifcopenshell.org/log/StoCFRlceKWOUmTsLVecdVbQFgAGwiLk.json').then(function(r) { return r.text(); }).then(function(log) {
     var msgs = log.split("\n").filter(function(s) {
         return s.length;
     }).map(JSON.parse);
@@ -134,8 +152,15 @@ fetch('/log/StoCFRlceKWOUmTsLVecdVbQFgAGwiLk.json').then(function(r) { return r.
 
 
 
+<script type="text/javascript">
+    window.onViewerLoaded = () => {
+        window.viewer.listen("https://view.ifcopenshell.org/live/SumrjkxkyUSsfXNZOnPBDcxDCPPxHsgO");
+    };
+</script>
+
+
+
 
 
 </body>
 </html>
-
