@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  
+  
+  
+
+
+  <link rel="stylesheet" media="screen" href="https://www.emiia.ru/video/main.css" /> 
+
+
+</head>
+
+
+
+<div class="wrapper py-6">
+
+<div class="archive-program-video">
+  <div class="video-wrap">
+    <div id="arctic-vault-video"></div>
+    <div class="video-controls" id="play-video">
+    
+      <img src="https://archiveprogram.github.com/assets/img/direction/video-bg.jpg" alt="arctic town" />
+      
+      
+      <svg width="104px" viewBox="0 0 106 106">
+        <polygon fill="#FFFFFF" points="58,53 48,59 48,47 "/>
+        <path fill="#FFFFFF" d="M53,106C23.8,106,0,82.2,0,53C0,23.8,23.8,0,53,0c29.2,0,53,23.8,53,53C106,82.2,82.2,106,53,106z M53,2
+        C24.9,2,2,24.9,2,53c0,28.1,22.9,51,51,51c28.1,0,51-22.9,51-51C104,24.9,81.1,2,53,2z"/>
+      </svg>
+    </div>
+
+      <script>
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        var player;
+        function onYouTubeIframeAPIReady() {
+          player = new YT.Player('arctic-vault-video', {
+            height: '390',
+            width: '640',
+            videoId: 'fzI9FNjXQ0o'
+          });
+        }
+
+        var playBtn = document.getElementById('play-video');
+        playBtn.onclick = function(e) {
+          e.preventDefault();
+          if( navigator.userAgent.toLowerCase().indexOf('firefox') > -1 ) {
+            document.getElementById('arctic-vault-video').requestFullscreen();
+          } else {
+            document.getElementById('arctic-vault-video').webkitRequestFullscreen();
+          }
+          setTimeout(function(){
+            player.playVideo();
+          }, 500);
+        }
+        document.addEventListener("fullscreenchange", function() {
+          if (!document.fullscreenElement) player.pauseVideo();
+        }, false);
+
+        document.addEventListener("msfullscreenchange", function() {
+          if (!document.msFullscreenElement) player.pauseVideo();
+        }, false);
+
+        document.addEventListener("mozfullscreenchange", function() {
+          if (!document.mozFullScreen) player.pauseVideo();
+        }, false);
+
+        document.addEventListener("webkitfullscreenchange", function() {
+          if (!document.webkitIsFullScreen) player.pauseVideo();
+        }, false);
+      </script>
+
+    </div>
+
+
+
+  
+
+
+
+
+ 
+ 
+
+        <script src="https://archiveprogram.github.com/assets/js/jquery.js"></script>
+      
+
+   
+      <script src="https://archiveprogram.github.com/assets/js/main.js"></script>
+      
+            
+    </div>
+  </div>
+
+
+</body> 
