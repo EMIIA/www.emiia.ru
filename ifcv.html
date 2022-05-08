@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>IFC viewer demo</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="css/metadata.css"/>
+    <link rel="stylesheet" href="css/tree.css"/>
+    <link rel="stylesheet" href="demo/css/demo.css"/>
+    <style>canvas { display: none; } .sk-fading-circle { display: none; }</style>
+
+    <script type="text/javascript" src="bimsurfer/lib/es6-promise-3.2.2.min.js"></script>
+    <script type="text/javascript" src="bimsurfer/lib/arraybuffer-slice.js"></script>
+    <script type="text/javascript">ES6Promise.polyfill()</script>
+    
+    <script type="text/javascript" src="bimsurfer/lib/require.js"></script>
+    <script type="text/javascript" src="bimsurfer/lib/xeogl.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>    
+    <script type="text/javascript">
+        function highlight(oid, selected) {
+            // Clicking an explorer node fits the view to its object and selects
+            if (selected.length) {
+                bimSurfer.viewFit({
+                    ids: selected,
+                    animate: true
+                });
+            }
+            bimSurfer.setSelection({
+                ids:selected,
+                clear:true,
+                selected:true
+            });
+        }
+    
+        require([
+            "bimsurfer/src/BimSurfer.js",
+            "bimsurfer/src/StaticTreeRenderer.js",
+            "bimsurfer/src/MetaDataRenderer.js",
+            "bimsurfer/src/Request.js",
+            "bimsurfer/src/Utils.js",
+            "bimsurfer/lib/domReady.js!",
+        ],
+        function (BimSurfer, StaticTreeRenderer, MetaDataRenderer, Request, Utils) {
+            var bimSurfer = new BimSurfer({
+                domNode: "viewerContainer"
+            });
+            
+            var modelName = window.location.hash;
+            if (modelName.length < 1) {
+                modelName = "Duplex_A_20110907_optimized";
+            } else {
+                modelName = modelName.substr(1);
+            }
+            modelName = "models/" + modelName;
+            
+            var tree = new StaticTreeRenderer({
+                domNode: "treeContainer"
+            });
+            tree.addModel({id: 1, src: modelName + ".xml"});
+            tree.build();
+            
+            tree.on("click", highlight);
+            
+            var data = new MetaDataRenderer({
+                domNode: "dataContainer"
+            });
+            data.addModel({id: 1, src: modelName + ".xml"}).then(function() {
+                // data.renderAll();
+            });
+            
+            bimSurfer.load({
+                src: modelName + ".gltf"
+            }).then(function (model) {
+                
+                // Really make sure everything is loaded.
+                Utils.Delay(100).then(function() {
+                
+                    var scene = bimSurfer.viewer.scene;
+                    
+                    var aabb = scene.worldBoundary.aabb;
+                    var diag = xeogl.math.subVec3(aabb.slice(3), aabb, xeogl.math.vec3());
+                    var modelExtent = xeogl.math.lenVec3(diag);
+                
+                    scene.camera.project.near = modelExtent / 1000.;
+                    scene.camera.project.far = modelExtent * 100.;
+                   
+                    scene.camera.view.eye = [-1,-1,5];
+                    scene.camera.view.up = [0,0,1];
+                    // scene.camera.up = [0,0,1];
+                    bimSurfer.viewFit({centerModel:true});
+                    
+                    bimSurfer.viewer.scene.canvas.canvas.style.display = 'block';
+                });
+                
+            });
+            
+            bimSurfer.on("selection-changed", function(selected) {
+                data.setSelected(selected.map(function(id) {
+                    // So, there are several options here, id can either be a glTF identifier, in which case the id is a rfc4122 guid, or an annotation in which case it is a compressed IFC guid.
+                    if (id.substr(0, 12) === "Annotations:") {
+                        return id.substr(12);
+                    } else {
+                        return Utils.CompressGuid(id.split("#")[1].substr(8, 36).replace(/-/g, ""));
+                    }                    
+                }));
+            });
+            
+            // Lets us play with the Surfer in the console
+            window.bimSurfer = bimSurfer;
+        });
+    </script>
+
+</head>
+<body>
+
+<h1>About this viewer...</h1>
+
+<div style='padding:10px 400px 40px 10px;line-height:160%'>This is a rudimentary IFC viewer example built on top of free open source components. <a href="http://ifcopenshell.org/ifcconvert.html">IfcConvert</a> is used to convert the parametric IFC geometry into a <a href="https://www.khronos.org/collada/">Collada</a> model, which is turned into a concise binary <a href="https://github.com/KhronosGroup/COLLADA2GLTF">glTF</a> stream. The viewer code is derived from the <a href="https://github.com/opensourceBIM/BIMsurfer/">BimSurfer</a>, which is built on top of <a href="http://xeogl.org/">xeogl</a>. The viewer has a stable API to be embedded into 3rd party platforms and provide <a href="javascript:highlight([],['2O2Fr$t4X7Zf8NOew3FLQD'])">rich interactions</a> (&lt; example).</div>
+
+<div id="maincontainer">
+
+    <div id="topsection"></div>
+
+    <!--
+    <div id="contentwrapper">
+        <div class="inner">
+            <div id="">
+
+            </div>
+        </div>
+    </div>
+
+    <div id="leftcolumn">
+        <div class="inner">
+            <div id=""></div>
+        </div>
+    </div>
+    -->
+    
+    <div id="contentwrapper">
+        <div id="colmid">
+            <div id="colright">
+                <div id="col1wrap">
+                    <div id="col1pad">
+                        <div id="viewerContainer">
+                        </div>
+                    </div>
+                </div>
+                <div id="treeContainer" class="bimsurfer-static-tree">
+                </div>
+                <div id="dataContainer" class="bimsurfer-metadata">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+</body>
+</html>
