@@ -1291,6 +1291,99 @@ map.on('style.load', function () {
 
 
 
+<script>
+
+
+
+
+ 
+
+// parameters to ensure the model is georeferenced correctly on the map
+		const modelOrigin10 = [37.174365520477295,
+          55.97696795273797, 0];
+        
+        
+        
+        
+        
+
+		function createCustomLayer10(layerName10, origin10) {
+			let model10;
+            
+			//create the layer
+			let customLayer10 = {
+				id: layerName10,
+				type: 'custom',
+				renderingMode: '3d',
+				onAdd: function (map10, gl10) {
+
+					// instantiate threebox
+					window.tb = new Threebox(
+						map10,
+						gl10,
+
+                        
+                   { defaultLights: false, enableSelectingObjects: false, enableDraggingObjects: true, enableRotatingObjects: true, enableTooltips: true }     
+						
+					);
+  
+                    
+                    let options10 = { type: 'gltf', obj: 'https://dl.dropboxusercontent.com/s/l832akw63j4evzg/dog.glb', units: 'meters', scale: 90, anchor: 'center', rotation: { x: 90, y: 0, z: 0 } }        
+                    type: 'gltf',           
+                    
+				tb.loadObj(options10, function (model10) {
+						model10.setCoords(origin10);
+						model10.addTooltip("DOGS OFIS", true);
+						tb.add(model10);
+                        model10.setRotation({ x: 0, y: 0, z: -9 });
+                         
+                         
+     
+
+
+                  // create two three.js lights to illuminate the model
+                    var directionalLight = new THREE.DirectionalLight(0xffffff);
+                    directionalLight.position.set(90, -90, 90).normalize();
+                    tb1.scene.add(directionalLight);
+                     
+                    var directionalLight2 = new THREE.DirectionalLight(0xffffff);
+                    directionalLight2.position.set(-90, 90, 90).normalize();
+                    tb1.scene.add(directionalLight2);
+                 
+					});
+                    
+
+				},
+				render: function (gl10, matrix10) {
+					tb.update();
+                    
+       
+				}
+                
+                
+  
+                
+                
+			};
+			return customLayer10;
+
+		};
+        
+        
+        
+     map.on('style.load', function () {
+			map.addLayer(createCustomLayer10('10', modelOrigin10), '');
+               
+        		
+   
+		});
+        
+
+        
+     
+    </script> 
+
+        
 
 
 
@@ -1451,99 +1544,6 @@ map.on('style.load', function () {
   
 
 
-<script>
-
-
-
-
- 
-
-// parameters to ensure the model is georeferenced correctly on the map
-		const modelOrigin10 = [37.174365520477295,
-          55.97696795273797, 0];
-        
-        
-        
-        
-        
-
-		function createCustomLayer10(layerName10, origin10) {
-			let model10;
-            
-			//create the layer
-			let customLayer10 = {
-				id: layerName10,
-				type: 'custom',
-				renderingMode: '3d',
-				onAdd: function (map10, gl10) {
-
-					// instantiate threebox
-					window.tb = new Threebox(
-						map10,
-						gl10,
-
-                        
-                   { defaultLights: false, enableSelectingObjects: false, enableDraggingObjects: true, enableRotatingObjects: true, enableTooltips: true }     
-						
-					);
-  
-                    
-                    let options10 = { type: 'gltf', obj: 'https://dl.dropboxusercontent.com/s/l832akw63j4evzg/dog.glb', units: 'meters', scale: 90, anchor: 'center', rotation: { x: 90, y: 0, z: 0 } }        
-                    type: 'gltf',           
-                    
-				tb.loadObj(options10, function (model10) {
-						model10.setCoords(origin10);
-						model10.addTooltip("DOGS OFIS", true);
-						tb.add(model10);
-                        model10.setRotation({ x: 0, y: 0, z: -9 });
-                         
-                         
-     
-
-
-                  // create two three.js lights to illuminate the model
-                    var directionalLight = new THREE.DirectionalLight(0xffffff);
-                    directionalLight.position.set(90, -90, 90).normalize();
-                    tb1.scene.add(directionalLight);
-                     
-                    var directionalLight2 = new THREE.DirectionalLight(0xffffff);
-                    directionalLight2.position.set(-90, 90, 90).normalize();
-                    tb1.scene.add(directionalLight2);
-                 
-					});
-                    
-
-				},
-				render: function (gl10, matrix10) {
-					tb.update();
-                    
-       
-				}
-                
-                
-  
-                
-                
-			};
-			return customLayer10;
-
-		};
-        
-        
-        
-     map.on('style.load', function () {
-			map.addLayer(createCustomLayer10('10', modelOrigin10), '');
-               
-        		
-   
-		});
-        
-
-        
-     
-    </script> 
-
-        
 
 
 
