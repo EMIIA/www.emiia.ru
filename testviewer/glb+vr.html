@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>3D Model (glb)</title>
+    <meta name="description" content="3D Model (glb) — A-Frame">
+    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@7f1d9cd96305e70495308f8f1585835c134c6448/dist/aframe-master.min.js"></script>
+    <script src="https://triroakenshield.github.io/TestRevitGLB/aframe-extras.min.js"></script>
+  </head>
+  <body>
+    <a-scene background="color: #ECECEC">
+      <a-assets>
+	  	<a-asset-item id="ar1" src="https://triroakenshield.github.io/TestRevitGLB/house5.glb"></a-asset-item>
+      </a-assets>
+
+      <a-gltf-model src="#ar1" rotation="0 0 0"></a-gltf-model>
+      <a-entity position="0 0 4" movement-controls="acceleration: 2000; fly: true" >
+      <a-camera></a-camera>
+      <a-entity vive-controls="hand: left"></a-entity>
+      <a-entity vive-controls="hand: right"></a-entity>
+    </a-entity>
+    </a-scene>
+  </body>
+</html>
+
+
