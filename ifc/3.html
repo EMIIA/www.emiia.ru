@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+
+  <style>   
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    overflow: hidden;
+}
+
+#three-canvas{
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+}
+
+#file-input{
+    z-index: 1;
+    position: absolute;
+}
+ </style>
+
+
+
+</head>
+<body>
+
+<canvas id="three-canvas"></canvas>
+<script src="https://www.emiia.ru/ifc/bundle.js"></script>
+
+
+
+
+
+
+<script>
+
+ifcLoader.load("https://www.emiia.ru/ifc/01.ifc", (ifcModel) => {
+    ifcModel.visible = false;
+
+    const modelCopy = new Mesh(
+        ifcModel.geometry,
+        new MeshLambertMaterial({
+                transparent: true,
+                opacity: 0.5,
+                color: 0xaaaaaa
+        }));
+
+    scene.add(ifcModel)
+    scene.add(modelCopy)
+  });
+
+  // ...
+
+window.onmousemove = (event) => highlight(
+                                    event,
+                                    undefined,
+                                    highlightModel);
+
+
+</script>
+
+
+
+</body>
+</html>
