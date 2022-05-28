@@ -12,5 +12,33 @@
 
 <canvas id="three-canvas"></canvas>
 <script src="bundle.js"></script>
+    
+    
+    <script>
+ifcLoader.load("ifc/01.ifc", (ifcModel) => {
+    ifcModel.visible = false;
+
+    const modelCopy = new Mesh(
+        ifcModel.geometry,
+        new MeshLambertMaterial({
+                transparent: true,
+                opacity: 0.1,
+                color: 0x77aaff
+        }));
+
+    scene.add(ifcModel)
+    scene.add(modelCopy)
+  });
+
+  // ...
+
+window.onmousemove = (event) => highlight(
+                                    event,
+                                    undefined,
+                                    highlightModel);
+                                    
+                                    </script>
+    
+    
 </body>
 </html>
