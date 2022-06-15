@@ -5,13 +5,13 @@
     <link rel="icon" href="favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="file:///D:/hello-world-main/examples/web-ifc-three/picking/styles.css">
+    <link rel="stylesheet" href="/styles.css">
     <title>IFC.js</title>
 </head>
 <body>
 
 <canvas id="three-canvas"></canvas>
-<script src="file:///D:/hello-world/examples/web-ifc-three/picking/bundle.js"></script>
+<script src="/bundle.js"></script>
 
 
 
@@ -24,7 +24,7 @@
 
 <script>
 
-ifcLoader.load("file:///D:/hello-world/01.ifc", (ifcModel) => {
+ifcLoader.load("/01.ifc", (ifcModel) => {
     ifcModel.visible = false;
 
     const modelCopy = new Mesh(
