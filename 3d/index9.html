@@ -1,0 +1,454 @@
+<!-- Copyright 2018 Google LLC.
+     SPDX-License-Identifier: Apache-2.0 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>model-viewer-example</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    
+
+
+
+
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1, shrink-to-fit=no" />
+    
+    
+    
+    
+    
+    <style>
+@import url('https://www.emiia.ru/css.css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+</style>
+
+  <style>  
+@import url('/css.css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+</style>
+
+<link rel="stylesheet" href="https://www.emiia.ru/cssfamily=Montserrat.css">
+<link rel="stylesheet" href="/cssfamily=Montserrat.css">
+
+
+
+
+<style>
+  /* This keeps child nodes hidden while the element loads */
+:not(:defined) > * {
+    display: none;
+    
+    
+  }
+
+  model-viewer {
+    background-color: #f8f9fa;
+    overflow-x: hidden;
+    --poster-color: #f8f9fa;
+    
+    display:block;top:0;left:0;position:absolute;width:100%;height:100%; 
+    
+    
+  }
+
+  #ar-button {
+    background-image: url(https://modelviewer.dev/assets/ic_view_in_ar_new_googblue_48dp.png);
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-position: 12px 30%;
+    background-color: #fff;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    bottom: 132px;
+    padding: 0px 16px 0px 40px;
+    font-family: Montserrat, montserrat;
+    font-size: 14px;
+    color:#3d85c6;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 18px;
+    border: 1px solid #DADCE0;
+  }
+
+  #ar-button:active {
+    background-color: #E8EAED;
+  }
+
+  #ar-button:focus {
+    outline: none;
+  }
+
+  #ar-button:focus-visible {
+    outline: 1px solid #4285f4;
+  }
+
+  @keyframes circle {
+    from { transform: translateX(-50%) rotate(0deg) translateX(50px) rotate(0deg); }
+    to   { transform: translateX(-50%) rotate(360deg) translateX(50px) rotate(-360deg); }
+  }
+
+  @keyframes elongate {
+    from { transform: translateX(100px); }
+    to   { transform: translateX(-100px); }
+  }
+
+  model-viewer > #ar-prompt {
+    position: absolute;
+    left: 50%;
+    bottom: 175px;
+    animation: elongate 2s infinite ease-in-out alternate;
+    display: none;
+  }
+
+  model-viewer[ar-status="session-started"] > #ar-prompt {
+    display: block;
+  }
+
+  model-viewer > #ar-prompt > img {
+    animation: circle 4s linear infinite;
+  }
+
+  model-viewer > #ar-failure {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 175px;
+    display: none;
+  }
+
+  model-viewer[ar-tracking="not-tracking"] > #ar-failure {
+    display: block;
+  }
+
+  .slider {
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+    position: absolute;
+    bottom: 16px;
+    margin-left:9px
+  }
+
+  .slides {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .slide {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #fff;
+    margin-right: 10px;
+    border-radius: 10px;
+    border: none;
+    display: flex;
+  }
+
+  .slide.selected {
+    border: 2px solid #3d85c6;
+  }
+
+  .slide:focus {
+    outline: none;
+  }
+
+  .slide:focus-visible {
+    outline: 1px solid #4285f4;
+  }
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+  </head>
+  <body>
+    <script
+      type="module"
+      src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"
+    ></script>
+
+
+
+
+
+
+    
+    
+    
+    <model-viewer id="pickMaterial" enable-pan auto-rotate shadow-intensity="1" camera-controls alt="A 3D model carousel" src="https://dl.dropboxusercontent.com/s/oh1tt5tbq48hc67/25glbbin.glb" ar ar-modes="webxr scene-viewer quick-look" scale="0.001 0.001 0.001" alt="EMIIA.AI">
+    
+    
+    
+
+    
+    
+
+    
+  
+  <button slot="ar-button" id="ar-button">
+    EMIIA.AI AR/VR
+  </button>
+
+  <div id="ar-prompt">
+    <img src="https://modelviewer.dev/assets/hand.png">
+  </div>
+
+  <button id="ar-failure">
+    AR is not tracking!
+  </button>
+
+  <div class="slider">
+    <div class="slides">
+      <button class="slide selected" onclick="switchSrc(this, 'Chair')" style="background-image: url('https://modelviewer.dev/assets/ShopifyModels/Chair.png');">
+
+      </button><button class="slide" onclick="switchSrc(this, 'Mixer')" style="background-image: url('https://modelviewer.dev/assets/ShopifyModels/Mixer.png');">
+
+      </button><button class="slide" onclick="switchSrc(this, 'GeoPlanter')" style="background-image: url('https://modelviewer.dev/assets/ShopifyModels/GeoPlanter.png');">
+      
+      </button><button class="slide" onclick="switchSrc(this, 'ToyTrain')" style="background-image: url('https://modelviewer.dev/assets/ShopifyModels/ToyTrain.png');">
+      
+      </button><button class="slide" onclick="switchSrc(this, 'Canoe')" style="background-image: url('https://modelviewer.dev/assets/ShopifyModels/Canoe.png');">    
+    </button></div>
+  </div>
+</model-viewer>
+
+<script type="module">
+  const modelViewer = document.querySelector("model-viewer");
+
+  window.switchSrc = (element, name) => {
+    const base = "https://modelviewer.dev/assets/ShopifyModels/" + name;
+    modelViewer.src = base + '.glb';
+    modelViewer.poster = base + '.png';
+    const slides = document.querySelectorAll(".slide");
+    slides.forEach((element) => {element.classList.remove("selected");});
+    element.classList.add("selected");
+  };
+
+  document.querySelector(".slider").addEventListener('beforexrselect', (ev) => {
+    // Keep slider interactions from affecting the XR scene.
+    ev.preventDefault();
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="module">
+const modelViewer = document.querySelector("model-viewer#pickMaterial");
+
+modelViewer.addEventListener("load", () => {
+  const changeColor = (event) => {
+    const material = modelViewer.materialFromPoint(event.clientX, event.clientY);
+    if (material != null) {
+      material.pbrMetallicRoughness.
+        setBaseColorFactor([Math.random(), Math.random(), Math.random()]);
+    }
+  };
+
+  modelViewer.addEventListener("click", changeColor);
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+/**
+ * This is not an actual script, but an API declaration made prettier with JS syntax highlighting.
+*/
+
+interface Model {
+  /**
+    * An ordered set of unique Materials found in this model. The Materials
+    * correspond to the listing of materials in the glTF, with the possible
+    * addition of a default material at the end.
+    */
+  readonly materials: Material[];
+
+  // Returns the first material to whose name matches 'name'.
+  getMaterialByName(name: string): Material|null;
+}
+
+interface Material {
+  name: string;
+
+  // Returns the glTF index of this material.
+  readonly index: number;
+  readonly normalTexture: TextureInfo|null;
+  readonly occlusionTexture: TextureInfo|null;
+  readonly emissiveTexture: TextureInfo|null;
+  readonly emissiveFactor: RGB;
+  readonly pbrMetallicRoughness: PBRMetallicRoughness;
+
+  setEmissiveFactor(rgb: RGB): void;
+  setAlphaCutoff(cutoff: number): void;
+  getAlphaCutoff(): number;
+  setDoubleSided(doubleSided: boolean): void;
+  getDoubleSided(): boolean;
+  setAlphaMode(alphaMode: AlphaMode): void;
+  getAlphaMode(): AlphaMode;
+}
+
+interface PBRMetallicRoughness {
+  readonly baseColorFactor: RGBA;
+  readonly metallicFactor: number;
+  readonly roughnessFactor: number;
+  readonly baseColorTexture: TextureInfo|null;
+  readonly metallicRoughnessTexture: TextureInfo|null;
+  
+  setBaseColorFactor(rgba: RGBA): void;
+  setMetallicFactor(value: number): void;
+  setRoughnessFactor(value: number): void;
+}
+
+interface TextureInfo {
+  readonly texture: Texture|null;
+
+  /**
+   * Sets the texture, or removes it if argument is null. Note you cannot build
+   * your own Texture object, but must either use one from another TextureInfo,
+   * or create one with the createTexture method.
+   */
+  setTexture(texture: Texture|null): void;
+}
+
+interface Texture {
+  readonly name: string;
+  readonly sampler: Sampler;
+  readonly source: Image;
+}
+
+interface Sampler {
+  readonly name: string;
+  readonly minFilter: MinFilter;
+  readonly magFilter: MagFilter;
+  readonly wrapS: WrapMode;
+  readonly wrapT: WrapMode;
+
+  setMinFilter(filter: MinFilter): void;
+  setMagFilter(filter: MagFilter): void;
+  setWrapS(mode: WrapMode): void;
+  setWrapT(mode: WrapMode): void;
+}
+
+interface Image {
+  readonly name: string;
+
+  /**
+    * The type is 'external' if the image has a configured URI. Otherwise, it is
+    * considered to be 'embedded'. Note: this distinction is only implied by the
+    * glTF spec, and is made explicit here for convenience.
+    */
+  readonly type: 'embedded'|'external';
+
+  // The URI of the image, if it is external.
+  readonly uri?: string;
+
+  // The bufferView of the image, if it is embedded.
+  readonly bufferView?: number
+
+  /**
+    * A method to create an object URL of this image at the desired
+    * resolution. Especially useful for KTX2 textures which are GPU compressed,
+    * and so are unreadable on the CPU without a method like this.
+    */
+  createThumbnail(width: number, height: number): Promise<string>;
+}
+
+type RGBA = [number, number, number, number];
+type RGB = [number, number, number];
+type AlphaMode = 'OPAQUE'|'MASK'|'BLEND';
+
+enum WrapMode {
+  ClampToEdge = 33071,
+  MirroredRepeat = 33648,
+  Repeat = 10497,
+}
+
+enum MinFilter {
+  Nearest = 9728,
+  Linear = 9729,
+  NearestMipmapNearest = 9984,
+  LinearMipmapNearest = 9985,
+  NearestMipmapLinear = 9986,
+  LinearMipmapLinear = 9987,
+}
+
+enum MaxFilter {
+  Nearest = 9728,
+  Linear = 9729,
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+  </body>
+</html>
+
+
