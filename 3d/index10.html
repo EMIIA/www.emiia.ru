@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -115,9 +116,9 @@
   }
 
   model-viewer {
-    background-color: #f8f9fa;
+    background-color: white;
     overflow-x: hidden;
-    --poster-color: #f8f9fa;
+    --poster-color: white;
     
     display:block;top:0;left:0;position:absolute;width:100%;height:100%; 
     
@@ -220,7 +221,7 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    background-color: #fff;
+    background-color: #f8f9fa;
     margin-right: 10px;
     border-radius: 10px;
     border: none;
@@ -273,7 +274,7 @@
     
     
     
-    <model-viewer id="pickMaterial" enable-pan auto-rotate shadow-intensity="1" camera-controls alt="A 3D model carousel" src="https://dl.dropboxusercontent.com/s/oh1tt5tbq48hc67/25glbbin.glb" ar ar-modes="webxr scene-viewer quick-look" scale="0.001 0.001 0.001" alt="EMIIA.AI">
+    <model-viewer id="transform" orientation="0deg 0 0" bounds="tight" id="pickMaterial" enable-pan auto-rotate shadow-intensity="1" camera-controls alt="A 3D model carousel" src="https://dl.dropboxusercontent.com/s/oh1tt5tbq48hc67/25glbbin.glb" ar ar-modes="webxr scene-viewer quick-look" scale="0.001 0.001 0.001" alt="EMIIA.AI">
     
     
     
@@ -513,7 +514,47 @@ enum MaxFilter {
 
 
 
+<script>
+const modelViewerTransform = document.querySelector("model-viewer#transform");
+const roll = document.querySelector('#roll');
+const pitch = document.querySelector('#pitch');
+const yaw = document.querySelector('#yaw');
+const x = document.querySelector('#x');
+const y = document.querySelector('#y');
+const z = document.querySelector('#z');
+const frame = document.querySelector('#frame');
 
+frame.addEventListener('click', () => {
+  modelViewerTransform.updateFraming();
+});
+
+const updateOrientation = () => {
+  modelViewerTransform.orientation = `${roll.value}deg ${pitch.value}deg ${yaw.value}deg`;
+};
+
+const updateScale = () => {
+  modelViewerTransform.scale = `${x.value} ${y.value} ${z.value}`;
+};
+
+roll.addEventListener('input', () => {
+  updateOrientation();
+});
+pitch.addEventListener('input', () => {
+  updateOrientation();
+});
+yaw.addEventListener('input', () => {
+  updateOrientation();
+});
+x.addEventListener('input', () => {
+  updateScale();
+});
+y.addEventListener('input', () => {
+  updateScale();
+});
+z.addEventListener('input', () => {
+  updateScale();
+});
+</script>
 
 
 
@@ -525,5 +566,7 @@ enum MaxFilter {
     
   </body>
 </html>
+
+
 
 
