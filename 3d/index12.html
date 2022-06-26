@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>EMIIA.AI</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    
+
+
+
+
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1, shrink-to-fit=no" />
+    
+    
+    
+    
+    
+    <style>
+@import url('https://www.emiia.ru/css.css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+</style>
+
+  <style>  
+@import url('/css.css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+</style>
+
+<link rel="stylesheet" href="https://www.emiia.ru/cssfamily=Montserrat.css">
+<link rel="stylesheet" href="/cssfamily=Montserrat.css">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>  
+/* полоса прокрутки (скроллбар) */
+::-webkit-scrollbar {
+    width: 4px; /* ширина для вертикального скролла */
+    height: 4px;
+    
+
+    background-color: transparent;
+}
+
+/* ползунок скроллбара */
+::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 3em;
+    
+    
+    /* Стрелки */
+
+::-webkit-scrollbar-button:vertical:start:decrement {
+    
+    background-color: white;
+}
+
+::-webkit-scrollbar-button:vertical:end:increment {
+    
+    background-color: white;
+}
+
+::-webkit-scrollbar-button:horizontal:start:decrement {
+
+    background-color: white;
+}
+
+::-webkit-scrollbar-button:horizontal:end:increment {
+
+    background-color: white;
+}
+    
+    
+    
+
+
+
+
+/* Стрелки */
+
+::-webkit-scrollbar-button:vertical:start:decrement {
+    background: linear-gradient(120deg, #02141a 40%, rgba(0, 0, 0, 0) 41%),
+    linear-gradient(240deg, #02141a 40%, rgba(0, 0, 0, 0) 41%),
+    linear-gradient(0deg, #02141a 30%, rgba(0, 0, 0, 0) 31%);
+    background-color: transparent;
+}
+
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<style>
+  /* This keeps child nodes hidden while the element loads */
+:not(:defined) > * {
+    display: none;
+    
+    
+  }
+
+  model-viewer {
+    background-color: white;
+    overflow-x: hidden;
+    --poster-color: white;
+    
+    display:block;top:0;left:0;position:absolute;width:100%;height:100%; 
+    
+    
+  }
+
+  #ar-button {
+    background-image: url(https://modelviewer.dev/assets/ic_view_in_ar_new_googblue_48dp.png);
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-position: 12px 50%;
+    background-color: #fff;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    bottom: 132px;
+    padding: 0px 16px 0px 40px;
+    font-family: Montserrat, montserrat;
+    font-size: 14px;
+    color:#3d85c6;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 18px;
+    border: 1px solid #DADCE0;
+  }
+
+  #ar-button:active {
+    background-color: #E8EAED;
+  }
+
+  #ar-button:focus {
+    outline: none;
+  }
+
+  #ar-button:focus-visible {
+    outline: 1px solid #4285f4;
+  }
+
+  @keyframes circle {
+    from { transform: translateX(-50%) rotate(0deg) translateX(50px) rotate(0deg); }
+    to   { transform: translateX(-50%) rotate(360deg) translateX(50px) rotate(-360deg); }
+  }
+
+  @keyframes elongate {
+    from { transform: translateX(100px); }
+    to   { transform: translateX(-100px); }
+  }
+
+  model-viewer > #ar-prompt {
+    position: absolute;
+    left: 50%;
+    bottom: 175px;
+    animation: elongate 2s infinite ease-in-out alternate;
+    display: none;
+  }
+
+  model-viewer[ar-status="session-started"] > #ar-prompt {
+    display: block;
+  }
+
+  model-viewer > #ar-prompt > img {
+    animation: circle 4s linear infinite;
+  }
+
+  model-viewer > #ar-failure {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 175px;
+    display: none;
+  }
+
+  model-viewer[ar-tracking="not-tracking"] > #ar-failure {
+    display: block;
+  }
+
+  .slider {
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+    position: absolute;
+    bottom: 16px;
+    margin-left:9px
+  }
+
+  .slides {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .slide {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    width: 100px;
+    height: 100px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #f8f9fa;
+    margin-right: 10px;
+    border-radius: 10px;
+    border: none;
+    display: flex;
+  }
+
+  .slide.selected {
+    border: 2px solid #3d85c6;
+  }
+
+  .slide:focus {
+    outline: none;
+  }
+
+  .slide:focus-visible {
+    outline: 1px solid #4285f4;
+  }
+
+</style>
+
+
+
+
+
+
+
+
+
+
+    
+  </head>
+  <body>
+    <script
+      type="module"
+      src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"
+    ></script>
+
+
+
+
+    
+
+    
+    
+    
+     <model-viewer  enable-pan auto-rotate shadow-intensity="1" camera-controls alt="A 3D model carousel" src="https://dl.dropboxusercontent.com/s/oh1tt5tbq48hc67/25glbbin.glb" ar ar-modes="webxr scene-viewer quick-look" alt="EMIIA.AI">
+    
+    
+    
+
+    
+    
+
+    
+  
+  <button slot="ar-button" id="ar-button">
+    EMIIA.AI AR/VR
+  </button>
+
+  <div id="ar-prompt">
+    <img src="https://modelviewer.dev/assets/hand.png">
+  </div>
+
+  <button id="ar-failure">
+    AR is not tracking!
+  </button>
+
+  <div class="slider">
+    <div class="slides">
+      <button class="slide selected" onclick="switchSrc(this, 'Chair')" style="background-image: url('https://modelviewer.dev/assets/ShopifyModels/Chair.png');">
+
+      </button><button class="slide" onclick="switchSrc(this, 'Mixer')" style="background-image: url('https://modelviewer.dev/assets/ShopifyModels/Mixer.png');">
+
+      </button><button class="slide" onclick="switchSrc(this, 'GeoPlanter')" style="background-image: url('https://modelviewer.dev/assets/ShopifyModels/GeoPlanter.png');">
+      
+      </button><button class="slide" onclick="switchSrc(this, 'ToyTrain')" style="background-image: url('https://modelviewer.dev/assets/ShopifyModels/ToyTrain.png');">
+      
+      </button><button class="slide" onclick="switchSrc(this, 'Canoe')" style="background-image: url('https://modelviewer.dev/assets/ShopifyModels/Canoe.png');">    
+    </button></div>
+  </div>
+</model-viewer>
+
+<script type="module">
+  const modelViewer = document.querySelector("model-viewer");
+
+  window.switchSrc = (element, name) => {
+    const base = "https://modelviewer.dev/assets/ShopifyModels/" + name;
+    modelViewer.src = base + '.glb';
+    modelViewer.poster = base + '.png';
+    const slides = document.querySelectorAll(".slide");
+    slides.forEach((element) => {element.classList.remove("selected");});
+    element.classList.add("selected");
+  };
+
+  document.querySelector(".slider").addEventListener('beforexrselect', (ev) => {
+    // Keep slider interactions from affecting the XR scene.
+    ev.preventDefault();
+  });
+</script>
+
+
+    
+    
+    
+  </body>
+</html>
+
+
+
+
