@@ -1,0 +1,436 @@
+  <!DOCTYPE html><html lang="ru"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1, shrink-to-fit=no">
+  
+  
+  
+  
+  
+  
+  
+  <style>  
+/* полоса прокрутки (скроллбар) */
+::-webkit-scrollbar {
+    width: 4px; /* ширина для вертикального скролла */
+    height: 4px;
+    
+
+    background-color: transparent;
+}
+
+/* ползунок скроллбара */
+::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 3em;
+    
+    
+    /* Стрелки */
+
+::-webkit-scrollbar-button:vertical:start:decrement {
+    
+    background-color: white;
+}
+
+::-webkit-scrollbar-button:vertical:end:increment {
+    
+    background-color: white;
+}
+
+::-webkit-scrollbar-button:horizontal:start:decrement {
+
+    background-color: white;
+}
+
+::-webkit-scrollbar-button:horizontal:end:increment {
+
+    background-color: white;
+}
+    
+    
+    
+
+
+
+
+/* Стрелки */
+
+::-webkit-scrollbar-button:vertical:start:decrement {
+    background: linear-gradient(120deg, #02141a 40%, rgba(0, 0, 0, 0) 41%),
+    linear-gradient(240deg, #02141a 40%, rgba(0, 0, 0, 0) 41%),
+    linear-gradient(0deg, #02141a 30%, rgba(0, 0, 0, 0) 31%);
+    background-color: transparent;
+}
+
+
+</style>
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+   <style> 
+  #container {
+
+  
+  
+  background-color: white;
+    overflow-x: hidden;
+    --poster-color: white;
+    
+  
+  
+}
+
+#drag-img {
+  width: 400px;
+  height: 400px;
+  object-fit: contain;
+  cursor: grab;
+}
+
+.hovering {
+  stroke: orange !important;
+  stroke-width: 5 !important;
+  fill: orange !important;
+}
+  
+ </style> 
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div id="container">
+  <div id="drag-img">
+  
+  
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="220" width="340" style="text-align: center">
+
+
+
+<defs>  
+     
+<path id="loop-normal" d="M29.64 141.583c.707-10.975-.038-34.092.58-55.61.042-1.486 4.19-9.012 12.354-9.37 18.472-.81 52.623-.173 71.818-.389 21.354-.24 14.96-10.195 15.091-14.487.348-11.399-3.21-26.814 6.74-26.847 41.397-.137 33.217.87 68.297.169-4.293 19.812 13.204 67.094-24.178 80.138-17.918 6.253-50.593 4.267-76.227 4.582-13.657.168-25.855.394-38.828 1.818-16.287 1.788 4.641 20.93-35.648 19.996 z"/>
+    
+    
+    
+<!-- radial gradient has same color at constnnt distance from center,
+         regardless of direction-->
+	  <radialGradient id="fade" cx="0" cy="0" fx="0" fy="0" r="20" gradientUnits="userSpaceOnUse">
+	    <stop stop-color="#383838" stop-opacity="1" offset="0" />
+
+	  </radialGradient> 
+      
+
+  </defs>
+  
+
+
+   
+  <use style="fill:none;stroke:#ccc;stroke-width:0;"
+       xlink:href="#loop-normal" />
+
+  <!-- outer group makes sure mask is applied after animateMotion -->
+  <g style="mask:url(#tail)">
+    <!-- circle with gradient radius -->
+    
+    
+    
+    
+              <circle cx="0" cy="0" fill="none" r="0" stroke="#f3000048" stroke-width="20">
+  
+    <animate attributeName="r" from="2.9" to="21" dur="1.9s" begin="0s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" from="1.9" to="0" dur="1.9s" begin="0s" repeatCount="indefinite"/>
+    
+        <animateMotion calcMode="linear"  id="a" dur="25s" keyTimes="0;0.1;1" keyPoints="0;0.0;1" repeatCount="indefinite"   
+      path="M29.64 141.583c.707-10.975-.038-34.092.58-55.61.042-1.486 4.19-9.012 12.354-9.37 18.472-.81 52.623-.173 71.818-.389 21.354-.24 14.96-10.195 15.091-14.487.348-11.399-3.21-26.814 6.74-26.847 41.397-.137 33.217.87 68.297.169-4.293 19.812 13.204 67.094-24.178 80.138-17.918 6.253-50.593 4.267-76.227 4.582-13.657.168-25.855.394-38.828 1.818-16.287 1.788 4.641 20.93-35.648 19.996 z" />
+  
+  </circle>
+
+    
+   <circle style="fill:url(#fade);" fill="#383838" stroke="white" stroke-width="2" stroke-miterlimit="1"  cx="0" cy="0" r="7.5">
+   
+
+    
+    
+      <animateMotion style="text-align: center" calcMode="linear"  id="a" dur="25s" repeatCount="indefinite" keyTimes="0;0.1;1" keyPoints="0;0.0;1">
+                     
+	      <mpath xlink:href="#loop-normal"/>
+      </animateMotion>
+    </circle>
+    
+    
+                  <circle cx="0" cy="0" fill="none" r="1" stroke="#383838" stroke-width="3">
+  
+    <animate attributeName="r" from="7" to="-3" dur="1s" begin="0s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" from="8" to="3" dur="2s" begin="0s" repeatCount="indefinite"/>
+    
+        <animateMotion calcMode="linear"  id="a" dur="25s" keyTimes="0;0.1;1" keyPoints="0;0.0;1" repeatCount="indefinite"   
+      path="M29.64 141.583c.707-10.975-.038-34.092.58-55.61.042-1.486 4.19-9.012 12.354-9.37 18.472-.81 52.623-.173 71.818-.389 21.354-.24 14.96-10.195 15.091-14.487.348-11.399-3.21-26.814 6.74-26.847 41.397-.137 33.217.87 68.297.169-4.293 19.812 13.204 67.094-24.178 80.138-17.918 6.253-50.593 4.267-76.227 4.582-13.657.168-25.855.394-38.828 1.818-16.287 1.788 4.641 20.93-35.648 19.996 z" />
+  
+  </circle>
+    
+
+ 
+  </g>
+  
+  
+    
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+<defs>  
+     
+<path id="loop-normalb" d="M240.967 22.482c11.487.563 35.673-.18 58.191.26 1.556.03 9.449 3.572 9.86 10.608.927 15.917.41 45.355.718 61.9.344 18.403 10.733 12.85 15.225 12.944 11.929.25 28.043-2.882 28.12 5.693.324 35.68-.766 28.634.121 58.867-20.749-3.615-70.147 11.67-83.959-20.493-6.62-15.417-4.685-43.588-5.126-65.681-.235-11.771-.524-22.283-2.071-33.459-1.942-14.03-21.88 4.091-21.079-30.639 z"/>
+    
+    
+    
+<!-- radial gradient has same color at constnnt distance from center,
+         regardless of direction-->
+	  <radialGradient id="fadeb" cx="0" cy="0" fx="0" fy="0" r="20" gradientUnits="userSpaceOnUse">
+	    <stop stop-color="#3d85c6" stop-opacity="1" offset="0" />
+
+	  </radialGradient> 
+      
+
+  </defs>
+  
+
+
+   
+  <use style="fill:none;stroke:#ccc;stroke-width:0;"
+       xlink:href="#loop-normalb" />
+
+  <!-- outer group makes sure mask is applied after animateMotion -->
+  <g style="mask:url(#tail)">
+    <!-- circle with gradient radius -->
+    
+    
+    
+    
+
+
+       <circle style="fill:url(#fadeb);" fill="#3d85c6" stroke="white" stroke-width="2" stroke-miterlimit="1"  cx="0" cy="0" r="7.5">
+   
+
+    
+    
+      <animateMotion style="text-align: center" calcMode="linear" dur="50s" repeatCount="indefinite" keyTimes="0;0.1;1" keyPoints="0;0.0;1">
+                     
+	      <mpath xlink:href="#loop-normalb"/>
+      </animateMotion>
+    </circle>
+
+    
+                <circle cx="0" cy="0" fill="none" r="10" stroke="#3d85c6" stroke-width="3">
+  
+    <animate attributeName="r" from="7" to="-3" dur="1.3s" begin="0s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" from="7" to="3" dur="2s" begin="0s" repeatCount="indefinite"/>
+    
+    
+        <animateMotion 
+        
+        
+        calcMode="linear" dur="50s" repeatCount="indefinite" keyTimes="0;0.1;1" keyPoints="0;0.0;1"
+        
+      path="M240.967 22.482c11.487.563 35.673-.18 58.191.26 1.556.03 9.449 3.572 9.86 10.608.927 15.917.41 45.355.718 61.9.344 18.403 10.733 12.85 15.225 12.944 11.929.25 28.043-2.882 28.12 5.693.324 35.68-.766 28.634.121 58.867-20.749-3.615-70.147 11.67-83.959-20.493-6.62-15.417-4.685-43.588-5.126-65.681-.235-11.771-.524-22.283-2.071-33.459-1.942-14.03-21.88 4.091-21.079-30.639 z" />
+  
+  </circle>
+ 
+  </g>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<defs>  
+     
+<path id="loop-normalc" d="M20,50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z"/>
+    
+    
+    
+<!-- radial gradient has same color at constnnt distance from center,
+         regardless of direction-->
+	  <radialGradient id="fadec" cx="0" cy="0" fx="0" fy="0" r="20" gradientUnits="userSpaceOnUse">
+	    <stop stop-color="#8c8c8c" stop-opacity="1" offset="0" />
+
+	  </radialGradient> 
+      
+
+  </defs>
+  
+
+
+   
+  <use style="fill:none;stroke:#ccc;stroke-width:0;"
+       xlink:href="#loop-normalc" />
+
+  <!-- outer group makes sure mask is applied after animateMotion -->
+  <g style="mask:url(#tail)">
+    <!-- circle with gradient radius -->
+    
+    
+    
+    
+
+
+       <circle style="fill:url(#fadec);" fill="#383838" stroke="white" stroke-width="2" stroke-miterlimit="1"  cx="0" cy="0" r="7.5">
+   
+
+    
+    
+
+      
+      
+      
+      <animateMotion style="text-align: center"  dur="21s" repeatCount="indefinite" >
+      
+ 
+                     
+	      <mpath xlink:href="#loop-normalc"/>
+      </animateMotion>
+    </circle>
+
+    <circle cx="0" cy="0" fill="none" r="10" stroke="#8c8c8c" stroke-width="3">
+  
+    <animate attributeName="r" from="7" to="-3" dur="1.5s" begin="0s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" from="7" to="3" dur="2s" begin="0s" repeatCount="indefinite"/>
+    
+    
+        <animateMotion calcMode="linear"  dur="21s"   repeatCount="indefinite"   
+      path="M20,50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z" />
+  
+  
+  </circle>
+
+ 
+  </g>
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+   
+
+
+
+  
+</svg>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+</div>
+<!-- partial -->
+  <script src='https://unpkg.com/panzoom@9.2.4/dist/panzoom.min.js'></script>
+  
+  
+  
+  
+  <script>var element = document.querySelector('#drag-img');
+panzoom(element, {
+  bounds: true,
+  boundsPadding: 0.5
+});
+
+var redElements = document.querySelectorAll('.red');
+redElements.forEach((el) => {
+  el.addEventListener('mouseenter', e => {
+    redElements.forEach((lmnt) => {
+      lmnt.classList.add('hovering');
+    });
+  });
+  
+  el.addEventListener('mouseleave', e => {
+    redElements.forEach((lmnt) => {
+      lmnt.classList.remove('hovering');
+    });
+  });
+});
+
+var greenElements = document.querySelectorAll('.green');
+greenElements.forEach((el) => {
+  el.addEventListener('mouseenter', e => {
+    greenElements.forEach((lmnt) => {
+      lmnt.classList.add('hovering');
+    });
+  });
+  
+  el.addEventListener('mouseleave', e => {
+    greenElements.forEach((lmnt) => {
+      lmnt.classList.remove('hovering');
+    });
+  });
+});
+
+var blueElements = document.querySelectorAll('.blue');
+blueElements.forEach((el) => {
+  el.addEventListener('mouseenter', e => {
+    blueElements.forEach((lmnt) => {
+      lmnt.classList.add('hovering');
+    });
+  });
+  
+  el.addEventListener('mouseleave', e => {
+    blueElements.forEach((lmnt) => {
+      lmnt.classList.remove('hovering');
+    });
+  });
+});
+
+var dots = document.querySelectorAll('.dot');
+dots.forEach((dot) => {
+  dot.addEventListener('click', () => {
+    alert('dot clicked');
+  });
+});
+</script>
+
+</body>
+</html>
