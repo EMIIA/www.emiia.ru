@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - SVG map - with data</title>
+  
+  
+  <style>
+  body {
+  font-family: sans-serif;
+  background: #008cc6;
+}
+
+small {
+  color: #ccc;
+}
+
+path {
+  cursor: pointer;
+}
+
+path:hover {
+  fill: rebeccapurple;
+}
+
+#popper {
+  visibility: hidden;
+  padding: 1em;
+  background: white;
+  border-radius: 2px;
+  box-shadow: 0 0 10px 3px rbga(0, 0, 0, .3);
+}
+  
+</style>
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div id="map"></div>
+
+<!-- partial -->
+  <script src='https://unpkg.com/@svgdotjs/svg.js@3.0.16/dist/svg.min.js'></script>
+<script src='https://unpkg.com/@svgdotjs/svg.panzoom.js@2.1.1/dist/svg.panzoom.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.4/umd/popper.min.js'></script>
+
+
+
+
+
+
+<script>
+const popperEl = document.getElementById('popper')
+let popperInstance
+
+const getHex = (value) => {
+  return value.toString(16).padStart(2, '0')
+}
+
+const getColor = (ratio) => {
+  const color1 = '228b22'
+  const color2 = 'ffffff'
+
+  if (!isFinite(ratio)) { return '#' + color1 }
+
+  const r = Math.ceil(parseInt(color1.substring(0, 2), 16) * ratio + parseInt(color2.substring(0, 2), 16) * (1 - ratio))
+  const g = Math.ceil(parseInt(color1.substring(2, 4), 16) * ratio + parseInt(color2.substring(2, 4), 16) * (1 - ratio))
+  const b = Math.ceil(parseInt(color1.substring(4, 6), 16) * ratio + parseInt(color2.substring(4, 6), 16) * (1 - ratio))
+
+  return '#' + getHex(r) + getHex(g) + getHex(b)
+}
+
+// 2019 Belgian population by province
+const data = {
+  BEL2: 1344241,
+  BEL3: 874048,
+  BEL3474: 1208542,
+  BEL3475: 1146175,
+  BEL3476: 494325,
+  BEL3477: 284638,
+  BEL3478: 1515064,
+  BEL3479: 1195796,
+  BEL3480: 1857986,
+  BEL3481: 1106992,
+  BEL3482: 403599
+}
+
+fetch('https://simplemaps.com/static/svg/be/be.svg')
+  .then(response => response.text())
+  .then((image) => {
+    let startOfSvg = image.indexOf('<svg')
+    startOfSvg = startOfSvg >= 0 ? startOfSvg : 0
+
+    const draw = SVG(image.slice(startOfSvg))
+      .addTo('#map')
+      .size('100%', 450)
+      .panZoom()
+    
+    // get maximum value among the supplied data
+    const max = Math.max(...Object.values(data))
+    
+    for (const region of draw.find('path')) {
+      const regionValue = data[region.id()]
+
+      if (isFinite(regionValue)) {
+        // color the region based on it's value with respect to the maximum
+        region.fill(getColor(regionValue / max))
+        
+        // show region value as a label
+        draw.text(regionValue.toString())
+          .font({
+            size: '1.25em'
+          })
+          .center(region.cx(), region.cy())
+      }
+      
+      // show region data when clicking on it
+      region.on('click', () => {
+        alert(`${region.attr('name')} (${region.id()}): ${regionValue}`)
+      })
+      
+      region.on('mouseover', () => {
+        popperEl.innerText = `${region.attr('name')} (${region.id()}): ${regionValue}`
+        popperEl.style.visibility = 'visible'
+        popperInstance = Popper.createPopper(region.node, popperEl, { placement: 'bottom' })
+      })
+      
+      region.on('mouseleave', () => {
+        popperEl.style.visibility = 'hidden'
+      })
+    }
+  })
+
+</script>
+
+</body>
+</html>
