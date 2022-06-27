@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - pan zoom svg hover test</title>
+  <link rel="stylesheet" href="./style.css">
+  
+   <style> 
+  #container {
+  width: max-content;
+  height: auto;
+  overflow: hidden;
+}
+
+#drag-img {
+  width: 400px;
+  height: 400px;
+  object-fit: contain;
+  cursor: grab;
+}
+
+.hovering {
+  stroke: orange !important;
+  stroke-width: 5 !important;
+  fill: orange !important;
+}
+  
+ </style> 
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div id="container">
+  <div id="drag-img">
+    <svg width="400" height="400">
+    <!-- this is the draggable root -->
+    <g id='scene'> 
+      <line class="red" x1="50" y1="50" x2="200" y2="200" style="stroke:red;stroke-width:2" />
+      <line class="red" x1="350" y1="50" x2="200" y2="200" style="stroke:red;stroke-width:2" />
+      <line class="blue" x1="50" y1="200" x2="200" y2="200" style="stroke:blue;stroke-width:2" />
+      <line class="blue" x1="200" y1="200" x2="300" y2="350" style="stroke:blue;stroke-width:2" />
+      <line class="green" x1="200" y1="50" x2="200" y2="350" style="stroke:green;stroke-width:2" />
+      <circle class="red dot" cx='200' cy='200' r='5' fill='red'></circle>
+      <circle class="red dot" cx='50' cy='50' r='5' fill='red'></circle>
+      <circle class="red dot" cx='350' cy='50' r='5' fill='red'></circle>
+      <circle class="green dot" cx='200' cy='50' r='5' fill='green'></circle>
+      <circle class="green dot" cx='200' cy='350' r='5' fill='green'></circle>
+      <circle class="blue dot" cx='50' cy='200' r='5' fill='blue'></circle>
+      <circle class="blue dot" cx='300' cy='350' r='5' fill='blue'></circle>
+    </g>
+  </svg>
+  </div>
+</div>
+<!-- partial -->
+  <script src='https://unpkg.com/panzoom@9.2.4/dist/panzoom.min.js'></script>
+  
+  
+  
+  
+  <script>var element = document.querySelector('#drag-img');
+panzoom(element, {
+  bounds: true,
+  boundsPadding: 0.5
+});
+
+var redElements = document.querySelectorAll('.red');
+redElements.forEach((el) => {
+  el.addEventListener('mouseenter', e => {
+    redElements.forEach((lmnt) => {
+      lmnt.classList.add('hovering');
+    });
+  });
+  
+  el.addEventListener('mouseleave', e => {
+    redElements.forEach((lmnt) => {
+      lmnt.classList.remove('hovering');
+    });
+  });
+});
+
+var greenElements = document.querySelectorAll('.green');
+greenElements.forEach((el) => {
+  el.addEventListener('mouseenter', e => {
+    greenElements.forEach((lmnt) => {
+      lmnt.classList.add('hovering');
+    });
+  });
+  
+  el.addEventListener('mouseleave', e => {
+    greenElements.forEach((lmnt) => {
+      lmnt.classList.remove('hovering');
+    });
+  });
+});
+
+var blueElements = document.querySelectorAll('.blue');
+blueElements.forEach((el) => {
+  el.addEventListener('mouseenter', e => {
+    blueElements.forEach((lmnt) => {
+      lmnt.classList.add('hovering');
+    });
+  });
+  
+  el.addEventListener('mouseleave', e => {
+    blueElements.forEach((lmnt) => {
+      lmnt.classList.remove('hovering');
+    });
+  });
+});
+
+var dots = document.querySelectorAll('.dot');
+dots.forEach((dot) => {
+  dot.addEventListener('click', () => {
+    alert('dot clicked');
+  });
+});
+</script>
+
+</body>
+</html>
