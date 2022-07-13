@@ -1,5 +1,6 @@
 
 
+
   <!DOCTYPE html><html lang="ru"><head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1, shrink-to-fit=no">
@@ -325,74 +326,6 @@
 
 
 
-<defs>  
-     
-<path id="loop-normalvl" d="M1427.5,469.7c0,.07.71,7.16,3.87,10.6a18.44,18.44,0,0,0,11.07,5.22c3.31.41,89.88,2.21,111.19-1.45,10.61-1.82,17.88-10.21,19.12-27.8,1.63-23,3.44-68.65-5.37-75.37-1.24-.95-4.37-2.6-3.72-3.93,1.28-2.58,6.35-5,10-4,1.61.44,4.25,2,3.85,7.05-.52,6.61-.79,28.13-1,47.11-.18,14.12-.35,27.45-.59,32.25-.47,9.33-6.41,24.4-20.28,27-8,1.49-25.76,2.93-47.52,2.93-27.91,0-57.26-1.16-62.8-1.49-4-.24-16.2-1-20.45-7.75-1.65-2.61-1.54-6.28-.12-9.81"/>
-    
- 
-<!-- radial gradient has same color at constnnt distance from center,
-         regardless of direction-->
-    <radialGradient id="fade" cx="0" cy="0" fx="0" fy="0" r="20" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#3D85C6" stop-opacity="1" offset="0" />
-
-    </radialGradient> 
-      
-
-  </defs>
-  
-
-
-   
-  <use style="fill:none;stroke:#ccc;stroke-width:0;"
-       xlink:href="#loop-normalvl" />
-
-  <!-- outer group makes sure mask is applied after animateMotion -->
-  <g style="mask:url(#tail)">
-    <!-- circle with gradient radius -->
-    
-    
-    
-    
-              <circle cx="0" cy="0" fill="none" r="0" stroke="#f3000000" stroke-width="20" id="vl">
-  
-    <animate attributeName="r" from="2.9" to="21" dur="1.9s" begin="0s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" from="1.9" to="0" dur="1.9s" begin="0s" repeatCount="indefinite"/>
-    
-        <animateMotion calcMode="linear"  id="g" dur="40s" keyTimes="0;0.1;1" keyPoints="0;0.0;1" repeatCount="indefinite"   
-      path="M1427.5,469.7c0,.07.71,7.16,3.87,10.6a18.44,18.44,0,0,0,11.07,5.22c3.31.41,89.88,2.21,111.19-1.45,10.61-1.82,17.88-10.21,19.12-27.8,1.63-23,3.44-68.65-5.37-75.37-1.24-.95-4.37-2.6-3.72-3.93,1.28-2.58,6.35-5,10-4,1.61.44,4.25,2,3.85,7.05-.52,6.61-.79,28.13-1,47.11-.18,14.12-.35,27.45-.59,32.25-.47,9.33-6.41,24.4-20.28,27-8,1.49-25.76,2.93-47.52,2.93-27.91,0-57.26-1.16-62.8-1.49-4-.24-16.2-1-20.45-7.75-1.65-2.61-1.54-6.28-.12-9.81" />
-  
-  </circle>
-
-    
-   <circle style="fill:url(#fade);" fill="#3D85C6" stroke="white" stroke-width="2" stroke-miterlimit="1"  cx="0" cy="0" r="7.5">
-   
-
-    
-    
-      <animateMotion style="text-align: center" calcMode="linear"  id="g" dur="40s" repeatCount="indefinite" keyTimes="0;0.1;1" keyPoints="0;0.0;1">
-                     
-        <mpath xlink:href="#loop-normalvl"/>
-      </animateMotion>
-    </circle>
-    
-    
-                  <circle cx="0" cy="0" fill="none" r="1" stroke="#3D85C6" stroke-width="3">
-  
-    <animate attributeName="r" from="7" to="-3" dur="1.1s" begin="0s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" from="8" to="3" dur="2s" begin="0s" repeatCount="indefinite"/>
-    
-        <animateMotion calcMode="linear"  id="vl" dur="40s" keyTimes="0;0.1;1" keyPoints="0;0.0;1" repeatCount="indefinite"   
-      path="M1427.5,469.7c0,.07.71,7.16,3.87,10.6a18.44,18.44,0,0,0,11.07,5.22c3.31.41,89.88,2.21,111.19-1.45,10.61-1.82,17.88-10.21,19.12-27.8,1.63-23,3.44-68.65-5.37-75.37-1.24-.95-4.37-2.6-3.72-3.93,1.28-2.58,6.35-5,10-4,1.61.44,4.25,2,3.85,7.05-.52,6.61-.79,28.13-1,47.11-.18,14.12-.35,27.45-.59,32.25-.47,9.33-6.41,24.4-20.28,27-8,1.49-25.76,2.93-47.52,2.93-27.91,0-57.26-1.16-62.8-1.49-4-.24-16.2-1-20.45-7.75-1.65-2.61-1.54-6.28-.12-9.81" />
-  
-  </circle>
-    
-
- 
-  </g>
-
-
-
-
 
 
 
@@ -409,7 +342,7 @@
 
 <defs>  
      
-<path id="loop-normalroom2" d="M1483.94,555.93h-4.15"/>
+<path id="loop-normalroom2" d="M1490.94,380.93h-4.15"/>
     
     
     
@@ -442,7 +375,7 @@
     <animate attributeName="opacity" from="1.9" to="0" dur="1.9s" begin="0s" repeatCount="indefinite"/>
     
         <animateMotion calcMode="linear"  id="b" dur="30s" keyTimes="0;0.1;1" keyPoints="0;0.0;1" repeatCount="indefinite"   
-      path="M1483.94,555.93h-4.15" />
+      path="M1490.94,380.93h-4.15" />
   
   </circle>
 
@@ -465,7 +398,7 @@
     <animate attributeName="opacity" from="8" to="3" dur="2s" begin="0s" repeatCount="indefinite"/>
     
         <animateMotion calcMode="linear"  id="b" dur="30s" keyTimes="0;0.1;1" keyPoints="0;0.0;1" repeatCount="indefinite"   
-      path="M1483.94,555.93h-4.15" />
+      path="M1490.94,380.93h-4.15" />
   
   </circle>
     
@@ -490,7 +423,7 @@
 
 <defs>  
      
-<path id="loop-normalroom21" d="M1521.94,555.93h-4.15"/>
+<path id="loop-normalroom21" d="M1477.35,480.90h-5.15"/>
     
     
     
@@ -523,7 +456,7 @@
     <animate attributeName="opacity" from="1.9" to="0" dur="1.9s" begin="0s" repeatCount="indefinite"/>
     
         <animateMotion calcMode="linear"  id="b" dur="30s" keyTimes="0;0.1;1" keyPoints="0;0.0;1" repeatCount="indefinite"   
-      path="M1521.94,555.93h-4.15" />
+      path="M1477.35,480.90h-5.15" />
   
   </circle>
 
@@ -546,14 +479,13 @@
     <animate attributeName="opacity" from="8" to="3" dur="2s" begin="0s" repeatCount="indefinite"/>
     
         <animateMotion calcMode="linear"  id="room21" dur="30s" keyTimes="0;0.1;1" keyPoints="0;0.0;1" repeatCount="indefinite"   
-      path="M1521.94,555.93h-4.15" />
+      path="M1477.35,480.90h-5.15" />
   
   </circle>
     
 
  
   </g>
-
 
 
 
@@ -649,6 +581,22 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
 
@@ -675,7 +623,7 @@
 
 <defs>  
      
-<path id="loop-normaldrone" d="M1484.94,325.93h-4.15"/>
+<path id="loop-normaldrone" d="M1483.94,410.93h-4.15"/>
     
     
     
@@ -708,7 +656,7 @@
     <animate attributeName="opacity" from="1.9" to="0" dur="1.9s" begin="0s" repeatCount="indefinite"/>
     
         <animateMotion calcMode="linear"  id="drone" dur="0s"  repeatCount="indefinite"   
-      path="M1484.94,325.93h-4.15" />
+      path="M1483.94,410.93h-4.15" />
   
   </circle>
 
@@ -733,7 +681,7 @@
     <animate attributeName="opacity" from="8" to="3" dur="2s" begin="0s" repeatCount="indefinite"/>
     
         <animateMotion calcMode="linear"  id="drone" dur="0s"  repeatCount="indefinite"   
-      path="M1484.94,325.93h-4.15" />
+      path="M1483.94,410.93h-4.15" />
       
      
   
@@ -742,6 +690,17 @@
 
  
   </g>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -763,14 +722,14 @@
 
 <defs>  
      
-<path id="loop-normalcrob" d="M1386,522.64c.22,2,1,3.37,4.94,5.19,3.67,1.71,24.39,1.76,31.38,1.25,3.55-.26,5.66-2.35,5.64-4.21,0-1.26-1.06-2.67-4-2.83-6.48-.35-31.46-.55-37.64-.29"/>
+<path id="loop-normalcrob" d="M1483.94,380.93h-4.15"/>
     
     
     
 <!-- radial gradient has same color at constnnt distance from center,
          regardless of direction-->
 	  <radialGradient id="fadec" cx="0" cy="0" fx="0" fy="0" r="20" gradientUnits="userSpaceOnUse">
-	    <stop stop-color="#383838" stop-opacity="1" offset="0" />
+	    <stop stop-color="#3D85C6" stop-opacity="1" offset="0" />
 
 	  </radialGradient> 
       
@@ -792,7 +751,7 @@
     
 
 
-       <circle style="fill:url(#fadec);" fill="#383838" stroke="white" stroke-width="2" stroke-miterlimit="1"  cx="0" cy="0" r="7.5">
+       <circle style="fill:url(#fadec);" fill="#3D85C6" stroke="white" stroke-width="2" stroke-miterlimit="1"  cx="0" cy="0" r="7.5">
    
 
     
@@ -809,20 +768,25 @@
       </animateMotion>
     </circle>
 
-    <circle cx="0" cy="0" fill="none" r="10" stroke="#383838" stroke-width="3">
+    <circle cx="0" cy="0" fill="none" r="10" stroke="#3D85C6" stroke-width="3">
   
     <animate attributeName="r" from="7" to="-3" dur="1.5s" begin="0s" repeatCount="indefinite"/>
     <animate attributeName="opacity" from="7" to="3" dur="2s" begin="0s" repeatCount="indefinite"/>
     
     
         <animateMotion calcMode="linear"  dur="31s"   repeatCount="indefinite"   
-      path="M1386,522.64c.22,2,1,3.37,4.94,5.19,3.67,1.71,24.39,1.76,31.38,1.25,3.55-.26,5.66-2.35,5.64-4.21,0-1.26-1.06-2.67-4-2.83-6.48-.35-31.46-.55-37.64-.29" />
+      path="M1483.94,380.93h-4.15" />
   
   
   </circle>
 
  
   </g>
+
+
+
+
+
 
 
 
@@ -834,6 +798,8 @@
 
 
 </svg>
+
+
 
 
 
@@ -928,6 +894,7 @@ dots.forEach((dot) => {
 
 </body>
 </html>
+
 
 
 
