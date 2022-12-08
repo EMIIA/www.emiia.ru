@@ -10158,7 +10158,28 @@ max-width: 200px;
 
 
 
+.mapboxgl-ctrl-scale {
+    background-color: hsla(0,0%,100%,.75);
+    border: 2px solid white;
+    border-top: #333;
+    border-radius: 7px;
+    padding: 0 6px;
+    color: #333;
+    box-sizing: border-box;
+    font: 10px/20px Montserrat, montserrat;
+    font-weight: 400;
+    max-width: 7em;
+    max-height: 1.9em;
+    box-shadow: 0 0 10px 2px rgb(0 0 0 / 10%);
+}
 
+
+
+
+.mapboxgl-ctrl-bottom-right .mapboxgl-ctrl {
+    margin: 10px 14px 43px 14px;
+    float: right;
+}
 
 
 
@@ -10436,7 +10457,7 @@ var scale = new mapboxgl.ScaleControl({
       
       
 
-
+map.addControl(scale, 'bottom-left');
 
 
 
@@ -10725,7 +10746,346 @@ map.on('style.load', function () {
     
     
     
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css'>
+
+
+  
+  
+  
+
+<style>
+  #demo {
+
+
+
+
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+
+
+
+@import url('https://www.emiia.ru/css.css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+
+
+  
+@import url('/css.css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+
+
+<link rel="stylesheet" href="https://www.emiia.ru/cssfamily=Montserrat.css">
+<link rel="stylesheet" href="/cssfamily=Montserrat.css">
+
+
+  color: #383838;
+
+  font-size: 10px;
+  cursor: pointer;
+font-weight:400;
+
+
+position: absolute;
+bottom: 1.2rem;
+left: 0rem;
+
+
+   
+  left: 5.6rem;
+  -webkit-transform: translateY(-0%);
+  -ms-transform: translateY(-0%);
+  transform: translateY(-0%);float:left}
+
+
+
+
+
+position: absolute;
+bottom: 1%;
+left: 0rem;
+
+
+
+ 
+
+  }
+</style>
+
+
+
+
+
+
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <section id="demo" >
+  
+  
+  
+  
+
+
+        
+        
+        <div style="overflow: hidden;">
+        
+        
+
+  
+
+  
+  
+  
+  
     
+            <div style="float: left; width: 25px; height: 17px; font-size: 14px;" class="wi ow-ico ow-ico-current pull-left"></div>
+            
+            
+                        <div style="float: left; width: 25.5px; height: 10px; " class="ow-temp-current pull-left"></div>
+                        
+                        
+                        
+  
+               
+
+            
+
+    
+                   <div style="float: left; width: 65px; height: 10px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-speedometer2" viewBox="0 0 16 16">
+  <path d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4zM3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.389.389 0 0 0-.029-.518z"/>
+  <path fill-rule="evenodd" d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z"/>
+</svg> <span class="ow-pressure"></span></div>  
+
+
+
+
+
+                <div style="float: left; width: 42px; height: 10px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-droplet" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M7.21.8C7.69.295 8 0 8 0c.109.363.234.708.371 1.038.812 1.946 2.073 3.35 3.197 4.6C12.878 7.096 14 8.345 14 10a6 6 0 0 1-12 0C2 6.668 5.58 2.517 7.21.8zm.413 1.021A31.25 31.25 0 0 0 5.794 3.99c-.726.95-1.436 2.008-1.96 3.07C3.304 8.133 3 9.138 3 10a5 5 0 0 0 10 0c0-1.201-.796-2.157-2.181-3.7l-.03-.032C9.75 5.11 8.5 3.72 7.623 1.82z"/>
+  <path fill-rule="evenodd" d="M4.553 7.776c.82-1.641 1.717-2.753 2.093-3.13l.708.708c-.29.29-1.128 1.311-1.907 2.87l-.894-.448z"/>
+</svg> <span class="ow-humidity"></span></div>
+
+
+
+
+
+<div style="float: left; width: 80px; height: 5px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-wind" viewBox="0 0 16 16">
+  <path d="M12.5 2A2.5 2.5 0 0 0 10 4.5a.5.5 0 0 1-1 0A3.5 3.5 0 1 1 12.5 8H.5a.5.5 0 0 1 0-1h12a2.5 2.5 0 0 0 0-5zm-7 1a1 1 0 0 0-1 1 .5.5 0 0 1-1 0 2 2 0 1 1 2 2h-5a.5.5 0 0 1 0-1h5a1 1 0 0 0 0-2zM0 9.5A.5.5 0 0 1 .5 9h10.042a3 3 0 1 1-3 3 .5.5 0 0 1 1 0 2 2 0 1 0 2-2H.5a.5.5 0 0 1-.5-.5z"/>
+</svg> 
+
+
+
+
+
+
+<span class="ow-wind"></span></div>
+            </div>
+            
+            
+            
+            
+
+       
+                
+
+</section>
+
+  
+
+  
+  
+  <script>
+
+'use strict';
+
+let weatherWidget = {
+    settings: {
+        api_key: '6bd5b850178e2134497c4b965fbaf54e',
+        weather_url: 'https://api.openweathermap.org/data/2.5/weather',
+        forecast_url: 'https://api.openweathermap.org/data/2.5/forecast',
+        search_type: 'city_name',
+        city_name: '',
+        units: 'metric',
+        icon_mapping: {
+            '01d': 'wi-day-sunny',
+            '01n': 'wi-day-sunny',
+            '02d': 'wi-day-cloudy',
+            '02n': 'wi-day-cloudy',
+            '03d': 'wi-cloud',
+            '03n': 'wi-cloud',
+            '04d': 'wi-cloudy',
+            '04n': 'wi-cloudy',
+            '09d': 'wi-rain',
+            '09n': 'wi-rain',
+            '10d': 'wi-day-rain',
+            '10n': 'wi-day-rain',
+            '11d': 'wi-thunderstorm',
+            '11n': 'wi-thunderstorm',
+            '13d': 'wi-snow',
+            '13n': 'wi-snow',
+            '50d': 'wi-fog',
+            '50n': 'wi-fog'
+        }
+    },
+    constant: {
+        dow: ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
+    }
+};
+
+weatherWidget.init = function (settings) {
+    this.settings = Object.assign(this.settings, settings);
+    Promise.all([this.getWeather(), this.getForecast()]).then((resolve) => {
+        let weather = resolve[0];
+        let forecast = resolve[1].list;
+
+        //@TODO lokalizacja bez zwrotki, blad
+
+
+        document.getElementsByClassName('ow-temp-current')[0].innerHTML = Math.round(weather.main.temp) + '&deg';
+        document.getElementsByClassName('ow-pressure')[0].innerHTML = weather.main.pressure + ' hPa';
+        document.getElementsByClassName('ow-humidity')[0].innerHTML = weather.main.humidity + '%';
+        document.getElementsByClassName('ow-wind')[0].innerHTML = weather.wind.speed + ' km/h  <i class="bi bi-arrow-up-right"></i>';
+        if (!!this.settings.icon_mapping[weather.weather[0].icon]) {
+            let icon = this.settings.icon_mapping[weather.weather[0].icon];
+            let ico_current =  document.getElementsByClassName('ow-ico-current')[0];
+            if (ico_current.classList) {
+                ico_current.classList.add(icon);
+            } else {
+                ico_current.className += ' ' + icon;
+            }
+
+        }
+
+        // split forecast data by day
+        // get max and min temperature for a day
+        //@TODO get average forecast by day
+
+        // remove todays weather from forecast
+        forecast = forecast.filter((x) => {
+            return x.dt_txt.substr(0, 10) !== new Date().toJSON().slice(0, 10);
+        });
+
+        // array to hold forecast items
+        let fs = [];for (let f of forecast) {
+            let date = f.dt_txt.substr(0, 10);
+            if (!!fs[date]) {
+                fs[date].temp_max = f.main.temp_max > fs[date].temp_max ? f.main.temp_max : fs[date].temp_max;
+                fs[date].temp_min = f.main.temp_min < fs[date].temp_min ? f.main.temp_min : fs[date].temp_min;
+                fs[date].icons.push(f.weather[0].icon);
+            } else {
+                fs[date] = {
+                    dow: this.constant.dow[new Date(date).getDay()],
+                    temp_max: f.main.temp_max,
+                    temp_min: f.main.temp_min,
+                    icons: [f.weather[0].icon]
+                }
+            }
+        }
+
+        let forecast_items = document.getElementsByClassName('ow-forecast-item');
+
+        // for each daily forecast, get weather icon with highest occurence
+        // show the foreacast
+        let counter = 0;
+        for (let day in fs) {
+            let icon = this.settings.icon_mapping[this.getIconWithHighestOccurence(fs[day].icons)];
+            let fi = forecast_items[counter];
+            fi.getElementsByClassName('max')[0].innerHTML = Math.round(fs[day].temp_max) + '&deg';
+            fi.getElementsByClassName('min')[0].innerHTML = Math.round(fs[day].temp_min) + '&deg';
+            fi.getElementsByClassName('ow-day')[0].innerHTML = fs[day].dow;
+            let ico_current =  fi.getElementsByClassName('ow-ico-forecast')[0];
+            if (ico_current.classList) {
+                ico_current.classList.add(icon);
+            } else {
+                ico_current.className += ' ' + icon;
+            }
+            counter++;
+        }
+
+    });
+};
+
+weatherWidget.getForecast = function () {
+    let params = {
+        'q': this.settings.city_name,
+        'APPID': this.settings.api_key,
+        'units': this.settings.units
+    };
+
+    let p = '?' + Object.keys(params)
+            .map((key) => {
+                return key + '=' + params[key]
+            })
+            .join('&');
+    return this.makeRequest(this.settings.forecast_url, p);
+};
+
+weatherWidget.getWeather = function () {
+    let params = {
+        'q': this.settings.city_name,
+        'APPID': this.settings.api_key,
+        'units': this.settings.units
+    };
+
+    let p = '?' + Object.keys(params)
+            .map((key) => {
+                return key + '=' + params[key]
+            })
+            .join('&');
+    return this.makeRequest(this.settings.weather_url, p);
+};
+
+weatherWidget.makeRequest = function (url, params) {
+    return new Promise(function (resolve, reject) {
+        let req = new XMLHttpRequest();
+        req.open('GET', url + params, true);
+        req.responseType = 'json';
+
+        req.onload = function () {
+            if (req.status >= 200 && req.status < 400) {
+                resolve(req.response);
+            } else {
+                reject(Error(req.status));
+            }
+        };
+
+        req.onerror = () => reject('Error occured while connecting to Weather API');
+        req.send(params);
+    });
+};
+
+weatherWidget.getIconWithHighestOccurence = function (a) {
+    let elems = Array.prototype.slice.call(a);
+    return elems.sort((a, b) =>
+        elems.filter(v => v === a).length - elems.filter(v => v === b).length
+    ).pop();
+}
+
+// run the widget
+let widget = Object.create(weatherWidget);
+widget.init({
+  city_name: 'Moscow'
+});
+  </script>
+
     
     
     
