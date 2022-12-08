@@ -3669,7 +3669,15 @@ map.addControl(scale, 'bottom-left');
   
 
 
+/* Ruler */
+  map.addControl(new RulerControl(), 'top-right');
+  map.on('ruler.on', () => console.log('%cruler.on', 'color: #3d85c6'));
+  map.on('ruler.off', () => console.log('%cruler.off', 'color: #3d85c6'));
+  map.on('ruler.change', (params) => {
+    console.log('%cruler.change', 'color: #3d85c6');
+    console.table(params.coordinates);
 
+  });
 
     
   
