@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -214,7 +213,7 @@ var app = new Vue({
         let vm = this
         axios
             .get(
-                'https://sheets.googleapis.com/v4/spreadsheets/10c9-lyJ19UE4p3I-MIuDGWhvegjVQejnnl2tBljtKLM/values/Specials!A2:C20?key=AIzaSyBf6aW3AZ_ZSNLj2F2UTQjojxlPJtQShpI'
+                'https://sheets.googleapis.com/v4/spreadsheets/14L7oLrj5L_9ipch54WIT3cP5gxdge2gBonuCGdINcBk/values/Specials!A2:C20?key=AIzaSyBf6aW3AZ_ZSNLj2F2UTQjojxlPJtQShpI'
             )
             .then(function (response) {
                 let specials = response.data.values
@@ -253,56 +252,7 @@ var app = new Vue({
     }
 });
 
-/*
-для парсирования второго варианта
-(function () {
-   var app = "https://script.google.com/macros/s/AKfycbzngb-5a3tDdHJ445o5LxqeN63V_ihhF_Nxlkz3gxLyMeG3MA/exec",
-      output = '',
-      xhr = new XMLHttpRequest();
-   xhr.open('GET', app);
-   xhr.onreadystatechange = function() {
-     if (xhr.readyState !== 4) return;
-     if (xhr.status == 200) {
-        try {
-            var r = JSON.parse(xhr.responseText),
-               result = r["result"];
-            for (var i = 0; i < result.length; i++){
-                  var obj = r["result"][i];
-                  output += obj.join("<br/>") + "<br/><hr/>";
-            }
-        } catch(e) {}
-     } 
-     
-   document.getElementById('info').innerHTML = output;
-   }
-   xhr.send()
-})()
 
-
-get =responce = data.feed.entry
-
-
-entry":[
-{
-"gsx$название":{
-"$t":"Пивна дощечка"
-},
-"gsx$описание":{
-"$t":""
-},
-"gsx$ссылканаизображение":{
-"$t":""
-},
-"gsx$цена":{
-"$t":"65"
-},
-"gsx$особаяотметка":{
-"$t":""
-}
-},
-
-
-*/
 
 
 
@@ -312,4 +262,3 @@ entry":[
 
 </body>
 </html>
-
