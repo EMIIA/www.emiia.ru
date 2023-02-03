@@ -330,7 +330,7 @@ var app = new Vue({
         let vm = this
         axios
             .get(
-                'https%3A%2F%2Fsheets.googleapis.com%2Fv4%2Fspreadsheets%2F14L7oLrj5L_9ipch54WIT3cP5gxdge2gBonuCGdINcBk%2Fvalues%2FSpecials%21A2%3AC100%3Fkey%3DAIzaSyBf6aW3AZ_ZSNLj2F2UTQjojxlPJtQShpI'
+                'https://sheets.googleapis.com/v4/spreadsheets/14L7oLrj5L_9ipch54WIT3cP5gxdge2gBonuCGdINcBk/values/Specials!A2:C100?key=AIzaSyBf6aW3AZ_ZSNLj2F2UTQjojxlPJtQShpI'
             )
             .then(function (response) {
                 let specials = response.data.values
