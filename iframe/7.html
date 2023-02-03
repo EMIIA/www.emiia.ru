@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Menu Google sheets</title>
+
+  
+  
+  
+  
+  
+  
+   <style>
+  
+  
+  body,
+html {
+    margin: 0;
+    padding: 0;
+    background-color: #ffe6d1;
+   font-family:Arial;
+}
+
+a{
+  text-decoration: none;
+}
+
+.editlink {
+    background-color: cyan;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    position: fixed;
+    right: 20px;
+    top: 15px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-family: Quicksand,
+        sans-serif;
+    font-weight: 600;
+    transform: rotate(12deg);
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+}
+
+.specials-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: Quicksand, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.specials-container table {
+    width: 90%;
+    margin: 0px auto;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+#special_component {
+    width: 100%;
+    background-color: #fff;
+    margin: 0 auto;
+}
+
+.specials-table-container {
+    max-width: 1500px;
+    margin: 40px auto;
+}
+
+h1 {
+    font-family: "Damion", cursive;
+    font-size: 50px;
+    font-weight: 100;
+    line-height: 25px;
+}
+
+.nameandprice td {
+    padding: 1em 0 0 0;
+    vertical-align: bottom;
+    background-image: radial-gradient(black 1px, transparent 0px);
+    background-size: 8px 8px;
+    background-repeat: repeat-x;
+    background-position: left bottom;
+}
+
+.nameandprice span {
+    background-color: #fff;
+}
+
+.nameandprice td:first-child {
+    text-align: left;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.nameandprice td:first-child span {
+    padding-right: 0.25em;
+}
+
+.nameandprice td:last-child {
+    text-align: right;
+    width: 3em;
+    font-size: 20px;
+}
+
+.description td {
+    text-align: left;
+    padding: 8px 0px 15px 15px;
+}
+
+td:last-child span {
+    padding-left: 0.25em;
+}
+
+@media (min-width: 992px) {
+    .specials-container table {
+        margin: 40px;
+      width: 45%;
+    }
+
+    .specials-table-container {
+        display: flex;
+        margin: 0px auto;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .editlink {
+        right: -20px;
+        top: -15px;
+    }
+}
+  
+  
+  </style>
+  
+  
+  
+  
+  
+
+</head>
+<body>
+
+
+<div id="app">
+        <section id="specialssection" class="specials-container" v-if="menuItems_L" :style="menuStyle">
+            <div id="special_component" :style="menuStyle">
+                <h1>Daily Specials</h1>
+                <div class="specials-table-container">
+                    <table>
+                        <tbody v-for="item in menuItems_L" :key="`specialmenu-${item.name}`">
+                            <tr class="nameandprice">
+                                <td :style="dotStyle">
+                                    <span :style="menuStyle">{{item.name}}</span>
+                                </td>
+                                <td :style="dotStyle">
+                                    <span :style="menuStyle">${{item.price}}</span>
+                                </td>
+                            </tr>
+                            <tr class="description">
+                                <td colspan="2">{{item.description}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <tbody v-for="item in menuItems_R" :key="`specialmenu-${item.name}`">
+                            <tr class="nameandprice">
+                                <td :style="dotStyle">
+                                    <span :style="menuStyle">{{item.name}}</span>
+                                </td>
+                                <td :style="dotStyle">
+                                    <span :style="menuStyle">${{item.price}}</span>
+                                </td>
+                            </tr>
+                            <tr class="description">
+                                <td colspan="2">{{item.description}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js'></script>
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+var app = new Vue({
+    el: '#app',
+    mounted() {
+        let vm = this
+        axios
+            .get(
+                'https://sheets.googleapis.com/v4/spreadsheets/10c9-lyJ19UE4p3I-MIuDGWhvegjVQejnnl2tBljtKLM/values/Specials!A2:C20?key=AIzaSyBf6aW3AZ_ZSNLj2F2UTQjojxlPJtQShpI'
+            )
+            .then(function (response) {
+                let specials = response.data.values
+                for (let index = 0; index < specials.length; index++) {
+                    const element = specials[index]
+                    let mitem = {
+                        name: element[0],
+                        description: element[1],
+                        price: element[2]
+                    }
+                    if (vm.isEven(index)) {
+                        vm.menuItems_L = vm.menuItems_L.concat(mitem)
+                    } else {
+                        vm.menuItems_R = vm.menuItems_R.concat(mitem)
+                    }
+                }
+                console.log(response)
+            })
+    },
+    data: {
+        menuItems_L: [],
+        menuItems_R: [],
+        menuStyle: {
+            background: '#ffe6d1',
+            color: '#000'
+        },
+        dotStyle: {
+            backgroundImage: 'radial-gradient(' + this.color + ' 1px, transparent 0px)'
+        }
+    },
+    computed: {},
+    methods: {
+        isEven: function (n) {
+            return n % 2 == 0
+        }
+    }
+});
+
+/*
+для парсирования второго варианта
+(function () {
+   var app = "https://script.google.com/macros/s/AKfycbzngb-5a3tDdHJ445o5LxqeN63V_ihhF_Nxlkz3gxLyMeG3MA/exec",
+      output = '',
+      xhr = new XMLHttpRequest();
+   xhr.open('GET', app);
+   xhr.onreadystatechange = function() {
+     if (xhr.readyState !== 4) return;
+     if (xhr.status == 200) {
+        try {
+            var r = JSON.parse(xhr.responseText),
+               result = r["result"];
+            for (var i = 0; i < result.length; i++){
+                  var obj = r["result"][i];
+                  output += obj.join("<br/>") + "<br/><hr/>";
+            }
+        } catch(e) {}
+     } 
+     
+   document.getElementById('info').innerHTML = output;
+   }
+   xhr.send()
+})()
+
+
+get =responce = data.feed.entry
+
+
+entry":[
+{
+"gsx$название":{
+"$t":"Пивна дощечка"
+},
+"gsx$описание":{
+"$t":""
+},
+"gsx$ссылканаизображение":{
+"$t":""
+},
+"gsx$цена":{
+"$t":"65"
+},
+"gsx$особаяотметка":{
+"$t":""
+}
+},
+
+
+*/
+
+
+
+
+
+</script>
+
+</body>
+</html>
