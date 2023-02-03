@@ -144,6 +144,8 @@ a{
     font-weight: 600;
 }
 
+
+
 .specials-container table {
     width: 90%;
     margin: 0px auto;
@@ -153,9 +155,11 @@ a{
 
 #special_component {
     width: 100%;
-    background-color: red;
+    background-color: #F8F9FA;
     margin: 0 auto;
 }
+
+
 
 .specials-table-container {
     max-width: 1500px;
@@ -179,7 +183,7 @@ h1 {
 }
 
 .nameandprice span {
-    background-color: red;
+    background-color: #F8F9FA;
 }
 
 .nameandprice td:first-child {
@@ -242,8 +246,20 @@ td:last-child span {
         <section id="specialssection" class="specials-container" v-if="menuItems_L" :style="menuStyle">
             <div id="special_component" :style="menuStyle">
                 <h1>Daily Specials</h1>
+                
+                
+                
+                
+                
+                
+                
                 <div class="specials-table-container">
-                    <table>
+                
+                
+                
+                    
+                
+                <table>
                         <tbody v-for="item in menuItems_L" :key="`specialmenu-${item.name}`">
                             <tr class="nameandprice">
                                 <td :style="dotStyle">
@@ -258,7 +274,11 @@ td:last-child span {
                             </tr>
                         </tbody>
                     </table>
-                    <table>
+                    
+                    
+                    
+                    
+                <table>
                         <tbody v-for="item in menuItems_R" :key="`specialmenu-${item.name}`">
                             <tr class="nameandprice">
                                 <td :style="dotStyle">
@@ -272,7 +292,15 @@ td:last-child span {
                                 <td colspan="2">{{item.description}}</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table>    
+                    
+                    
+                
+                
+                
+                
+                    
+                    
                 </div>
             </div>
         </section>
