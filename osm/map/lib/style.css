@@ -1,0 +1,45 @@
+#mapid { 
+  height: 100vh;
+  width: 100%;
+  z-index: 0;
+  }
+
+#buttonDeleteAll:hover {
+  background-color: #FF0000;
+  color: black;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.placeName{
+	position: relative;
+  z-index: 2;
+  margin: 0;
+  float: left;
+  display: block;
+  height: 20px;
+  width: 200px;
+  padding: 6px 24px 6px 12px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #4C4C4C;
+  background-color: rgb(255, 255, 255);
+  opacity: 0.75;
+  border: 1px outset rgb(129, 129, 129);
+  -webkit-border-radius: 4px 4px 4px 4px;
+  border-radius: 4px 4px 4px 4px;
+  -webkit-transition: width .175s ease-in;
+  -moz-transition: width .175s ease-in;
+  -ms-transition: width .175s ease-in;
+  -o-transition: width .175s ease-in;
+  transition: width .175s ease-in;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}  
+
+.leaflet-bottom.leaflet-left div {
+  clear: none !important;
+}
+
+
+

@@ -1,0 +1,85 @@
+.leaflet-toast-message {
+    margin: 0 0 1rem 0;
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 3px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.leaflet-toast-message-info {
+    background: #B3E5FC;
+    border: solid #0891cf;
+    border-width: 0 0 0 6px;
+    color: #044868;
+}
+
+.leaflet-toast-message-success {
+  background: #C8E6C9;
+  border: solid #439446;
+  border-width: 0 0 0 6px;
+  color: #224a23;
+}
+
+.leaflet-toast-message-warn {
+  background: #FFECB3;
+  border: solid #d9a300;
+  border-width: 0 0 0 6px;
+  color: #6d5100;
+}
+
+.leaflet-toast-message-error {
+  background: #FFCDD2;
+  border: solid #e60017;
+  border-width: 0 0 0 6px;
+  color: #73000c;
+}
+
+.leaflet-toast-message-content {
+    padding: 1rem;
+    border-width: 0 0 0 6px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: start;
+    align-items: flex-start;
+}
+
+.leaflet-toast-message-content .message-text {
+  margin: 0 0 0 1rem;
+  flex: 1 1 auto;
+}
+.leaflet-toast-message-content .message-text .message-summary {
+  font-weight: 700;
+}
+
+.leaflet-toast-message-content .message-text .message-detail {
+  margin: 0.5rem 0 0 0;
+}
+
+
+.leaflet-toast-message-content .remove-button {
+  width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: transparent;
+    transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+
+    text-align: left;
+    background-color: rgba(0,0,0,0);
+    margin: 0;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
