@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mapbox</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1" />
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.js"></script>
+    <link
+      href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body style="margin: 0px; padding: 0px;">
+    <select id="pubTypeFilter" name="pubTypeFilter" style="z-index: 999; position: absolute; top: 0;">
+      <option value="">Select Pub Type</option>
+    </select>
+    <div id="map" style="position: absolute; top: 0px; bottom: 0px; width: 100%;"></div>
+    <script>
+      mapboxgl.accessToken =
+        "pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA";
+      const map = new mapboxgl.Map({
+        container: "map",
+        style: "mapbox://styles/mapbox/dark-v10",
+        zoom: 11,
+        center: [-0.14222681522369385, 51.53918203198429]
+      });
+
+      window.map = map;
+
+      const geojson = {
+        id: "places",
+        type: "FeatureCollection",
+        features: [
+          {
+            type: "Feature",
+            properties: {
+              name: "The World's End",
+              PubType: "Independent",
+              times:
+                "Monday-Thursday: 11.00-0.00" +
+                "<br>" +
+                "Friday-Saturday: 11.00-1.00" +
+                "<br>" +
+                "Sunday: 12.00-23.00"
+            },
+            geometry: {
+              type: "Point",
+              coordinates: [-0.14222681522369385, 51.53918203198429]
+            }
+          },
+          {
+            type: "Feature",
+            properties: {
+              name: "The Black Heart",
+              PubType: "Independent",
+              times:
+                "Monday-Tuesday: 15.00-23.00" +
+                "<br>" +
+                "Wednesday-Thursday: 15.00-1.00" +
+                "<br>" +
+                "Friday-Saturday: 12.00-2.00" +
+                "<br>" +
+                "Sunday: 12.00-23.00"
+            },
+            geometry: {
+              type: "Point",
+              coordinates: [-0.141786, 51.539003]
+            }
+          },
+          {
+            type: "Feature",
+            properties: {
+              name: "The Devonshire Arms",
+              PubType: "Independent",
+              times:
+                "Monday-Wednesday: 14.00-0.00" +
+                "<br>" +
+                "Thursday: 14.00-1.00" +
+                "<br>" +
+                "Friday-Saturday: 14.00-2.00" +
+                "<br>" +
+                "Sunday: 14.00-0.00"
+            },
+            geometry: {
+              type: "Point",
+              coordinates: [-0.14223217964172363, 51.54096705495758]
+            }
+          },
+          {
+            type: "Feature",
+            properties: {
+              name: "The Unicorn",
+              PubType: "Independent",
+              times:
+                "Monday-Thursday: 12.00-23.00" +
+                "<br>" +
+                "Friday-Saturday: 12.00-0.00" +
+                "<br>" +
+                "Sunday: 12.00-23.00"
+            },
+            geometry: {
+              type: "Point",
+              coordinates: [-0.12938976287841797, 51.54885034693916]
+            }
+          },
+          {
+            type: "Feature",
+            properties: {
+              name: "Garlic and Shots",
+              PubType: "Independent",
+              times:
+                "Monday-Thursday: 17.00-0.00" +
+                "<br>" +
+                "Friday-Saturday: 16.00-1.00" +
+                "<br>" +
+                "Sunday: 17.00-23.30"
+            },
+            geometry: {
+              type: "Point",
+              coordinates: [-0.13152748346328735, 51.51379710359405]
+            }
+          },
+          {
+            type: "Feature",
+            properties: {
+              name: "Crobar",
+              PubType: "Independent",
+              times: "Monday-Saturday: 16.00-3.00" + "<br>" + "Sunday: Closed"
+            },
+            geometry: {
+              type: "Point",
+              coordinates: [-0.1302802562713623, 51.51482699380818]
+            }
+          },
+          {
+            type: "Feature",
+            properties: {
+              name: "Slim Jim's Liquor Store",
+              PubType: "Independent",
+              times:
+                "Monday-Wednesday: 17.00-2.00" +
+                "<br>" +
+                "Thursday: 14.00-1.00" +
+                "<br>" +
+                "Friday-Saturday: 14.00-2.00" +
+                "<br>" +
+                "Sunday: 14.00-0.00"
+            },
+            geometry: {
+              type: "Point",
+              coordinates: [-0.10267496109008789, 51.53812099449894]
+            }
+          },
+          {
+            type: "Feature",
+            properties: {
+              name: "Aces and Eights Saloon Bar",
+              PubType: "Independent",
+              times:
+                "Monday-Thursday: 16.00-1.00" +
+                "<br>" +
+                "Friday-Saturday: 16.00-2.30" +
+                "<br>" +
+                "Sunday: 16.00-1.00"
+            },
+            geometry: {
+              type: "Point",
+              coordinates: [-0.1383929, 51.556696]
+            }
+          },
+          {
+            type: "Feature",
+            properties: {
+              name: "Ace Cafe",
+              PubType: "Independent",
+              times:
+                "Monday-Thursday: 7.00-22.30" +
+                "<br>" +
+                "Friday-Saturday: 7.00-11.00" +
+                "<br>" +
+                "Sunday: 7.00-10.30"
+            },
+            geometry: {
+              type: "Point",
+              coordinates: [-0.277751, 51.541419]
+            }
+          },
+          {
+            type: "Feature",
+            properties: {
+              name: "Brewdog",
+              PubType: "Pub Chain",
+              times:
+                "Monday-Thursday: 12.00-23.30" +
+                "<br>" +
+                "Friday-Saturday: 12.00-0.00" +
+                "<br>" +
+                "Sunday: 12.00-10.30"
+            },
+            geometry: {
+              type: "Point",
+              coordinates: [-0.140905, 51.538394]
+            }
+          },
+          {
+            type: "Feature",
+            properties: {
+              name: "The Draft House",
+              PubType: "Pub Chain",
+              times:
+                "Monday-Wednesday: 12.00-23.00" +
+                "<br>" +
+                "Thursday: 12.00-0.00" +
+                "<br>" +
+                "Friday-Saturday: 12.00-1.00" +
+                "<br>" +
+                "Sunday: 12.00-10.30"
+            },
+            geometry: {
+              type: "Point",
+              coordinates: [-0.138385, 51.54154]
+            }
+          },
+          {
+            type: "Feature",
+            properties: {
+              name: "The Draft House",
+              PubType: "Pub Chain",
+              times:
+                "Monday-Thursday: 12.00-23.00" +
+                "<br>" +
+                "Friday-Saturday: 12.00-0.00" +
+                "<br>" +
+                "Sunday: Closed"
+            },
+            geometry: {
+              type: "Point",
+              coordinates: [-0.135732, 51.519278]
+            }
+          }
+        ]
+      };
+
+      map.on("load", function() {
+        map.addLayer({
+          id: "places",
+          type: "symbol",
+          source: {
+            type: "geojson",
+            data: geojson
+          },
+          layout: {
+            "icon-image": "bar-15",
+            "icon-size": 1.25,
+            "icon-allow-overlap": true,
+          }
+        });
+
+        const pubTypes = geojson.features.map(feature => feature.properties.PubType);
+        const uniquePubTypes = Array.from(new Set(pubTypes));
+        const filterElem = document.getElementById('pubTypeFilter');
+        uniquePubTypes.forEach(pubType => {
+          const opt = document.createElement('option');
+          opt.value = pubType;
+          opt.innerText = pubType; 
+          filterElem.appendChild(opt);
+        });
+        
+        filterElem.onchange = () => {
+          const pubType = filterElem.value;
+          const newGeoJSON = {...geojson };
+          if (pubType) {
+            newGeoJSON.features = geojson.features.filter(feature => feature.properties.PubType === pubType);
+          } else {
+            newGeoJSON.features = [...geojson.features];
+          }
+          map.getSource('places').setData(newGeoJSON);
+        };
+
+        const popup = new mapboxgl.Popup();
+        map.on("click", e => {
+          const features = map.queryRenderedFeatures(e.point, { layers: ['places'] });
+          if (features && features.length > 0) {
+            popup
+              .setLngLat(e.lngLat)
+              .setHTML(
+                "<h3>" +
+                  features[0].properties.name +
+                  "</h3>" +
+                  "<h4>Opening Times</h4>" +
+                  "<p>" +
+                  features[0].properties.times +
+                  "</p>"
+              )
+              .addTo(map);
+          } else {
+            popup.remove();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
