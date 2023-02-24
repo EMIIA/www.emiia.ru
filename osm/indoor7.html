@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+
+<div id='map'></div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiZW1paWFhaSIsImEiOiJja21icnU4bHkyNGRwMnFrbjVvNXdtdGJ0In0.TcfxV21Ov7zOgvWvgPxzlA';
+var map = new mapboxgl.Map({
+    container: 'map', // container id
+    style: 'mapbox://styles/mapbox/dark-v11', //stylesheet location
+    center: [28.834527783897784, 45.340983787852906], // starting position
+    zoom: 9 // starting zoom
+});
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+	
+
+
+
+  
+     var size = 100;
+
+    // This implements `StyleImageInterface`
+    // to draw a pulsing dot icon on the map.
+    var pulsingDot88 = {
+width: size,
+        height: size,
+        data: new Uint8Array(size * size * 4),
+
+        // When the layer is added to the map,
+        // get the rendering context for the map canvas.
+        onAdd: function () {
+            var canvas = document.createElement('canvas');
+            canvas.width = this.width;
+            canvas.height = this.height;
+            this.context = canvas.getContext('2d');
+        },
+
+        // Call once before every frame where the icon will be used.
+        render: function () {
+            var duration = 1000;
+            var t = (performance.now() % duration) / duration;
+
+            var radius = (size / 2) * 0.3;
+            var outerRadius = (size / 2) * 0.7 * t + radius;
+            var context = this.context;
+
+            // Draw the outer circle.
+            context.clearRect(0, 0, this.width, this.height);
+            context.beginPath();
+            context.arc(
+                this.width / 2,
+                this.height / 2,
+                outerRadius,
+                0,
+                Math.PI * 2
+            );
+            context.fillStyle = 'rgba(255, 200, 200,' + (1.1 - t) + ')';
+            context.fill();
+
+            // Draw the inner circle.
+            context.beginPath();
+            context.arc(
+                this.width / 2,
+                this.height / 2,
+                radius,
+                0,
+                Math.PI * 2
+            );
+            context.fillStyle = '#3d85c6';
+            context.strokeStyle = 'white';
+            context.lineWidth = 2 + 4 * (1 - t);
+            context.fill();
+            context.stroke();
+
+            // Update this image's data with data from the canvas.
+            this.data = context.getImageData(
+                0,
+                0,
+                this.width,
+                this.height
+            ).data;
+
+            // Continuously repaint the map, resulting
+            // in the smooth animation of the dot.
+            map.triggerRepaint();
+
+            // Return `true` to let the map know that the image was updated.
+            return true;
+        }
+    };
+    
+    
+    
+    
+ 
+    
+    
+    
+    
+
+    map.on('load', function () {
+        map.addImage('pulsing-dot88', pulsingDot88, { pixelRatio: 2 });
+
+        map.addSource('dot-point88', {
+            'type': 'geojson',
+            'data': { "id": "layer-with-pulsing-dot88",
+                'type': 'FeatureCollection',
+                'features': [
+                    {
+                        'type': 'Feature88',
+                        'geometry': {
+                            'type': 'Point',
+                           
+
+                            'coordinates': [28.834527, 45.340983]
+                        },
+                        'properties': {
+                          id: 'home-1'
+                        }
+                    },
+                    {
+                        'type': 'Feature',
+                        'geometry': {
+                            'type': 'Point',
+                            'coordinates': [28.838527, 45.340983]
+                        },
+                        'properties': {
+                          id: 'home-2'
+                        }
+                    }
+                ]
+            }
+        });
+        
+    
+ 
+        
+        
+        map.addLayer({
+            'id': 'layer-with-pulsing-dot88',
+            'type': 'symbol',
+            'source': 'dot-point88',
+            'layout': {
+                'icon-image': 'pulsing-dot88'
+            }
+        });
+
+
+
+});
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+	
+
+
+
+  
+     var size = 100;
+
+    // This implements `StyleImageInterface`
+    // to draw a pulsing dot icon on the map.
+    var pulsingDot89 = {
+width: size,
+        height: size,
+        data: new Uint8Array(size * size * 4),
+
+        // When the layer is added to the map,
+        // get the rendering context for the map canvas.
+        onAdd: function () {
+            var canvas = document.createElement('canvas');
+            canvas.width = this.width;
+            canvas.height = this.height;
+            this.context = canvas.getContext('2d');
+        },
+
+        // Call once before every frame where the icon will be used.
+        render: function () {
+            var duration = 1000;
+            var t = (performance.now() % duration) / duration;
+
+            var radius = (size / 2) * 0.3;
+            var outerRadius = (size / 2) * 0.7 * t + radius;
+            var context = this.context;
+
+            // Draw the outer circle.
+            context.clearRect(0, 0, this.width, this.height);
+            context.beginPath();
+            context.arc(
+                this.width / 2,
+                this.height / 2,
+                outerRadius,
+                0,
+                Math.PI * 2
+            );
+            context.fillStyle = 'rgba(255, 200, 200,' + (1.1 - t) + ')';
+            context.fill();
+
+            // Draw the inner circle.
+            context.beginPath();
+            context.arc(
+                this.width / 2,
+                this.height / 2,
+                radius,
+                0,
+                Math.PI * 2
+            );
+            context.fillStyle = 'red';
+            context.strokeStyle = 'white';
+            context.lineWidth = 2 + 4 * (1 - t);
+            context.fill();
+            context.stroke();
+
+            // Update this image's data with data from the canvas.
+            this.data = context.getImageData(
+                0,
+                0,
+                this.width,
+                this.height
+            ).data;
+
+            // Continuously repaint the map, resulting
+            // in the smooth animation of the dot.
+            map.triggerRepaint();
+
+            // Return `true` to let the map know that the image was updated.
+            return true;
+        }
+    };
+    
+    
+    
+    
+ 
+    
+    
+    
+    
+
+    map.on('load', function () {
+        map.addImage('pulsing-dot89', pulsingDot89, { pixelRatio: 2 });
+
+        map.addSource('dot-point89', {
+            'type': 'geojson',
+            'data': { "id": "layer-with-pulsing-dot89",
+                'type': 'FeatureCollection',
+                'features': [
+                    {
+                        'type': 'Feature89',
+                        'geometry': {
+                            'type': 'Point',
+                           
+
+                            'coordinates': [28.8349, 46.340983]
+                        },
+                        'properties': {
+                          id: 'home-1'
+                        }
+                    },
+                    {
+                        'type': 'Feature',
+                        'geometry': {
+                            'type': 'Point',
+                            'coordinates': [28.8389, 46.340983]
+                        },
+                        'properties': {
+                          id: 'home-2'
+                        }
+                    }
+                ]
+            }
+        });
+        
+    
+ 
+        
+        
+        map.addLayer({
+            'id': 'layer-with-pulsing-dot89',
+            'type': 'symbol',
+            'source': 'dot-point89',
+            'layout': {
+                'icon-image': 'pulsing-dot89'
+            }
+        });
+
+
+
+});
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
