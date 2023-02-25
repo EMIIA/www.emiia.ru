@@ -10169,6 +10169,7 @@ max-width: 200px;
     <div id="map"></div>
     
     
+<button id="replay"></button>
 
 
 
@@ -10219,7 +10220,7 @@ max-width: 200px;
 
 
 
-
+<script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
 
 
 
@@ -10231,7 +10232,7 @@ max-width: 200px;
     
    
 
-    const monument = [  37.17403560876846,55.977308625119825];
+    const monument = [  37.17404207813226, 55.977374266578806];
     
 
     
@@ -10524,7 +10525,7 @@ map.addLayer(
 15.05,
 ['get', 'min_height']
 ],
-'fill-extrusion-opacity': 0.3
+'fill-extrusion-opacity': 0.2
 
 
 
@@ -10698,18 +10699,489 @@ map.on('style.load', function () {
       
       
     </script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script>
+
+
+
+
+
+ 
+// A simple line from origin to destination.
+const route = {
+'type': 'FeatureCollection',
+'id': '888',
+'features': [
+{
+'type': 'Feature',
+'id': '888',
+'geometry': {
+'type': 'LineString',
+'coordinates': [[37.17396598258472, 55.97715952834096], [37.17400397506739, 55.977439886655446], [37.17396598258472, 55.97715952834096], [37.17400397506739, 55.977439886655446], [37.17396598258472, 55.97715952834096], [37.17400397506739, 55.977439886655446]]
+}
+}
+]
+};
+
+
+
+
+// A single point that animates along the route.
+// Coordinates are initially set to origin.
+const point = {
+'type': 'FeatureCollection',
+'id': '888',
+'features': [
+{
+'type': 'Feature',
+'properties': {},
+'geometry': {
+'type': 'Point',
+'coordinates': origin
+}
+}
+]
+};
+ 
+// Calculate the distance in kilometers between route start/end point.
+const lineDistance = turf.length(route.features[0]);
+ 
+const arc = [];
+ 
+// Number of steps to use in the arc and animation, more steps means
+// a smoother arc and animation, but too many steps will result in a
+// low frame rate
+const steps = 390000;
+ 
+// Draw an arc between the `origin` & `destination` of the two points
+for (let i = 0; i < lineDistance; i += lineDistance / steps) {
+const segment = turf.along(route.features[0], i);
+arc.push(segment.geometry.coordinates);
+}
+ 
+// Update the route with calculated arc coordinates
+route.features[0].geometry.coordinates = arc;
+ 
+// Used to increment the value of the point measurement against the route.
+let counter = 0;
+ 
+map.on('load', () => {
+// Add a source and layer displaying a point which will be animated in a circle.
+map.addSource('route', {
+'type': 'geojson',
+'data': route
+});
+
+
+
+
+
+
+
+
+    
+
+
+
+ 
+map.addSource('point', {
+'type': 'geojson',
+'data': point
+});
+ 
+map.addLayer({
+'id': 'route',
+'source': 'route',
+'type': 'line',
+'paint': {
+'line-width': 0,
+'line-color': '#007cbf'
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+});
+ 
+map.addLayer({
+'id': 'point',
+'source': 'point',
+
+'minzoom': 14,
+'maxzoom': 23,
+
+
+
+'type': 'symbol',
+'layout': {
+// This icon is a part of the Mapbox Streets style.
+// To view all images available in a Mapbox style, open
+// the style in Mapbox Studio and click the "Images" tab.
+// To add a new image to the style at runtime see
+// https://docs.mapbox.com/mapbox-gl-js/example/add-image/
+'icon-image': 'pulsing-dot',
+'icon-size': 0.6,
+
+'icon-rotate': ['get', 'bearing'],
+'icon-rotation-alignment': 'map',
+'icon-allow-overlap': true,
+
+
+
+
+
+'icon-ignore-placement': true
+}
+});
+ 
+function animate() {
+const start =
+route.features[0].geometry.coordinates[
+counter >= steps ? counter - 0 : counter
+];
+const end =
+route.features[0].geometry.coordinates[
+counter >= steps ? counter : counter + 0
+];
+if (!start || !end) return;
+ 
+// Update point geometry to a new position based on counter denoting
+// the index to access the arc
+point.features[0].geometry.coordinates =
+route.features[0].geometry.coordinates[counter];
+ 
+// Calculate the bearing to ensure the icon is rotated to match the route arc
+// The bearing is calculated between the current point and the next point, except
+// at the end of the arc, which uses the previous point and the current point
+point.features[0].properties.bearing = turf.bearing(
+turf.point(start),
+turf.point(end)
+);
+ 
+// Update the source with this new data
+map.getSource('point').setData(point);
+ 
+// Request the next frame of animation as long as the end has not been reached
+if (counter < steps) {
+requestAnimationFrame(animate);
+}
+ 
+ 
+ 
+
+ 
+ 
+counter = counter + 30;
+}
+ 
+document.getElementById('replay').addEventListener('click', () => {
+// Set the coordinates of the original point back to origin
+point.features[0].geometry.coordinates = origin;
+ 
+// Update the source layer
+map.getSource('point').setData(point);
+ 
+// Reset the counter
+counter = 0;
+
+
+ 
+// Restart the animation
+animate(counter);
+});
+ 
+// Start the animation
+animate(counter);
+});
+
+
+
+
+
+ 
+const size = 180;
+ 
+// This implements `StyleImageInterface`
+// to draw a pulsing dot icon on the map.
+const pulsingDot = {
+width: size,
+height: size,
+data: new Uint8Array(size * size * 4),
+ 
+// When the layer is added to the map,
+// get the rendering context for the map canvas.
+onAdd: function () {
+const canvas = document.createElement('canvas');
+canvas.width = this.width;
+canvas.height = this.height;
+this.context = canvas.getContext('2d');
+},
+ 
+// Call once before every frame where the icon will be used.
+render: function () {
+const duration = 1000;
+const t = (performance.now() % duration) / duration;
+ 
+const radius = (size / 2) * 0.3;
+const outerRadius = (size / 2) * 0.7 * t + radius;
+const context = this.context;
+ 
+// Draw the outer circle.
+context.clearRect(0, 0, this.width, this.height);
+context.beginPath();
+context.arc(
+this.width / 2,
+this.height / 2,
+outerRadius,
+0,
+Math.PI * 2
+);
+context.fillStyle = `rgba(255, 200, 200, ${1 - t})`;
+context.fill();
+ 
+// Draw the inner circle.
+context.beginPath();
+context.arc(
+this.width / 2,
+this.height / 2,
+radius,
+0,
+Math.PI * 2
+);
+context.fillStyle = 'rgba(255, 100, 100, 1)';
+context.strokeStyle = 'white';
+context.lineWidth = 2 + 4 * (1 - t);
+context.fill();
+context.stroke();
+ 
+// Update this image's data with data from the canvas.
+this.data = context.getImageData(
+0,
+0,
+this.width,
+this.height
+).data;
+ 
+// Continuously repaint the map, resulting
+// in the smooth animation of the dot.
+map.triggerRepaint();
+ 
+// Return `true` to let the map know that the image was updated.
+return true;
+}
+};
+ 
+map.on('load', () => {
+map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
+ 
+map.addSource('dot-point', {
+'type': 'geojson',
+'data': {
+'type': 'FeatureCollection',
+'id': '888',
+'features': [
+{
+'type': 'Feature',
+'id': '888',
+'geometry': {
+'type': 'Point',
+'coordinates': [0, 0] // icon position [lng, lat]
+}
+}
+]
+}
+});
+
+
+
+
+
+});
+</script>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+         
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        
+        
+       
+        
+        
+        
+    <script>  
+    
+    
+    
+    
+    
+    
+     
+        map.on('load', async () => {
+// Get the initial location of the International Space Station (ISS).
+const geojson = await getLocation();
+// Add the ISS location as a source.
+map.addSource('iss', {
+type: 'geojson',
+data: geojson
+});
+    
+    
+    
+        
+       
+// Add the rocket symbol layer to the map.
+map.addLayer({
+'id': 'iss',
+'type': 'symbol',
+
+'minzoom': 14,
+'maxzoom': 23,
+
+
+'source': 'iss',
+'layout': {
+// This icon is a part of the Mapbox Streets style.
+// To view all images available in a Mapbox style, open
+// the style in Mapbox Studio and click the "Images" tab.
+// To add a new image to the style at runtime see
+// https://docs.mapbox.com/mapbox-gl-js/example/add-image/
+'icon-image': 'pulsing-dot',
+'icon-size': 0.6,
+'icon-rotate': ['get', 'bearing'],
+'icon-rotation-alignment': 'map',
+'icon-allow-overlap': true,
+'icon-ignore-placement': true
+}
+});
+ 
+// Update the source from the API every 2 seconds.
+const updateSource = setInterval(async () => {
+const geojson = await getLocation(updateSource);
+map.getSource('iss').setData(geojson);
+}, 10000000);
+ 
+async function getLocation(updateSource) {
+// Make a GET request to the API and return the location of the ISS.
+try {
+const response = await fetch(
+'https://www.emiia.ru/osm/25544.json',
+{ method: 'GET' }
+);
+
+
+const { latitude, longitude } = await response.json();
+
+
+// Fly the map to the location.
+map.flyTo({
+center: [longitude, latitude],
+speed: 0.0
+
+});
+
+
+
+
+// Return the location of the ISS as GeoJSON.
+return {
+'type': 'FeatureCollection',
+'features': [
+{
+'type': 'Feature',
+'geometry': {
+'type': 'Point',
+'coordinates': [longitude, latitude]
+}
+}
+]
+};
+
+
+
+
+
+
+
+} catch (err) {
+// If the updateSource interval is defined, clear the interval to stop updating the source.
+if (updateSource) clearInterval(updateSource);
+throw new Error(err);
+}
+}
+});
+
+
+
+
+
+</script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 
     
     
-    
-    
-    
-    
-    
-    
-    
-    
+
 
 </body>
 
