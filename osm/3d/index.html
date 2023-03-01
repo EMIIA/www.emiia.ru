@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>GTLF МОЖНО ПОДТЯННУТЬ И GLB загрузить версия 220 можно ратировать +3 d здания можно настроить. GLTF только на версии 1.0.1, короче нужно выяснить </title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+
+    	<link href="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css" rel="stylesheet">
+	<script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
+    
+    
+<script src="https://unpkg.com/threebox-plugin/dist/threebox.min.js" type="text/javascript"></script>
+
+
+
+
+ <style>
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+#map {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 100%;
+}
+
+.helpDiv {
+	width: auto;
+	left: 50%;
+	top: 0px;
+	z-index: 2;
+	position: absolute;
+}
+
+.help {
+	background: rgba(0, 0, 0, 0.5);
+	color: #fff;
+	position: relative;
+	text-align: center;
+	top: 10px;
+	left: -50%;
+	padding: 5px 10px;
+	margin: 0;
+	font-size: 11px;
+	line-height: 18px;
+	border-radius: 3px;
+	z-index: 1;
+	display: block;
+}
+
+/*these 3 clases will provide mapbox-like style for labels*/
+.toolTip {
+	border: 0.5px black solid;
+	display: inline-block;
+	background: white;
+	padding: 1px 6px;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 11px !important;
+}
+
+.marker {
+	max-width: 240px;
+	display: flex;
+	margin-bottom: 5em;
+	text-align: center;
+	color: black;
+}
+
+.mapboxgl-popup-tip {
+	margin-top: -1px;
+}
+
+.top-right-tools {
+	display: flex;
+	right: 40px;
+	z-index: 10;
+}
+
+.tools-i.mapboxgl-ctrl {
+	margin: 10px 20px 0 0;
+	display: inline-flex;
+}
+
+#toolsControl {
+	margin: 10px 20px 0 0;
+	display: inline-flex;
+}
+
+#toolsControl.mapboxgl-ctrl-group button + button, #toolsControl.mapboxgl-ctrl-group div + div {
+	border-left: 1px solid #ddd;
+	border-top: 0px;
+}
+
+
+
+ </style>
+
+
+    
+    <style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+
+		html, body, #map {
+			height: 100%;
+		}
+
+		#menu {
+			position: absolute;
+			background: #fff;
+			padding: 10px;
+			font-family: 'Open Sans', sans-serif;
+		}
+	</style>
+    
+    
+    
+</head>
+<body>
+    <div id='map' class='map'></div>
+    
+    
+    
+    
+    
+    
+    
+    <script>
+
+
+    
+    
+    
+    
+    
+    
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZW1paWFhaSIsImEiOiJja21icnU4bHkyNGRwMnFrbjVvNXdtdGJ0In0.TcfxV21Ov7zOgvWvgPxzlA'
+        const map = window.map = new mapboxgl.Map({
+            container: "map",
+            
+  attributionControl: false,
+   
+  
+maxPitch: 45,
+
+minZoom: 2,
+maxZoom: 20,
+zoom: 18,
+pitch: 20,
+            
+            
+  
+            center: [37.174014151096344,
+              55.97747745943937],
+
+             style: 'mapbox://styles/mapbox/light-v10',
+             attributionControl: false,
+          
+            hash: true
+            
+     
+            
+        });
+    
+
+    
+        
+        </script>
+        
+        
+        
+ 
+ 
+ 
+ 
+        
+        
+        
+        
+        
+        <script>
+        
+  
+		// parameters to ensure the model is georeferenced correctly on the map
+		var modelOrigin = [37.17402239557072, 55.97723794736996];
+
+		function createCustomLayer(layerName, origin) {
+			let model;
+			//create the layer
+			let customLayer3D = {
+				id: layerName,
+				type: 'custom',
+				renderingMode: '3d',
+				onAdd: function (map, gl) {
+
+					// instantiate threebox
+					window.tb = new Threebox(
+						map,
+						gl,
+						{ defaultLights: true, enableSelectingObjects: true, enableDraggingObjects: true, enableRotatingObjects: true, enableTooltips: true }
+					);
+
+		
+            
+                    
+                    let options = { type: 'gltf', obj: 'https://dl.dropboxusercontent.com/s/md9f3aqsk9dliwn/dom_new_v15.glb', units: 'meters', scale: 1000, anchor: 'center', rotation: { x: 90, y: 0, z: 0 } }        
+                    type: 'gltf',           
+                    
+                    
+					tb.loadObj(options, function (model) {
+						model.setCoords(origin);
+						model.addTooltip("Your diorama model is loaded", true);
+						tb.add(model);
+                         model.setRotation({ x: 0, y: 0, z: 80.7 });
+					});
+
+				},
+				render: function (gl, matrix) {
+					tb.update();
+				}
+			};
+			return customLayer3D;
+
+		};
+        
+        
+        
+
+</script>
+
+
+<script>
+
+     map.on('style.load', function() {
+    map.addLayer({
+        'id': '3d-buildings',
+        'source': 'composite',
+        'source-layer': 'building',
+        'filter': ['==', 'extrude', 'true'],
+        'type': 'fill-extrusion',
+        'minzoom': 15,
+        'paint': {
+            'fill-extrusion-color': '#ccc',
+            'fill-extrusion-height': ["get", "height"]
+        }
+    }, 'waterway-label');
+
+
+        
+    });    
+
+		map.on('style.load', function () {
+			map.addLayer(createCustomLayer('3d-model', modelOrigin), '');
+            
+   
+		});
+        
+        
+     
+
+    </script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+  
+
+    
+</body>
+</html>
