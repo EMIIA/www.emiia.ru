@@ -24,6 +24,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -11508,6 +11509,353 @@ throw new Error(err);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+map.on('load', () => {
+map.addSource('places', {
+'type': 'geojson',
+'data': {
+'type': 'FeatureCollection',
+'features': [
+
+
+
+
+
+
+{
+'type': 'Feature',
+'properties': {
+'description': 
+'<strong>A Little Night Music</strong><p>The Arlington Players\' production of Stephen Sondheim\'s  <a href="http://www.thearlingtonplayers.org/drupal-6.20/node/4661/show" target="_blank" title="Opens in a new window"><em>A Little Night Music</em></a> comes to the Kogod Cradle at The Mead Center for American Theater (1101 6th Street SW) this weekend and next. 8:00 p.m.</p>'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [37.17403708738425,55.9773359924618]
+}
+}
+]
+}
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Add a layer showing the places.
+map.addLayer({
+'id': 'places',
+'type': 'circle',
+
+
+'minzoom': 14,
+'maxzoom': 19,
+
+
+
+
+'source': 'places',
+'paint': {
+'circle-color': 'white',
+'circle-radius': 6,
+'circle-stroke-width': 2,
+'circle-stroke-color': '#3d85c6'
+}
+});
+
+
+
+
+
+
+
+
+
+
+
+ map.addLayer({
+            'id': 'places',
+            'type': 'circle',
+            'source': 'places',
+            'layout': {
+                'icon-image': ['get', 'circle'],
+                'icon-allow-overlap': true
+            }
+        });
+
+        // When a click event occurs on a feature in the places layer, open a popup at the
+        // location of the feature, with description HTML from its properties.
+        map.on('click', 'places', (e) => {
+            // Copy coordinates array.
+            const coordinates = e.features[0].geometry.coordinates.slice();
+            const description = e.features[0].properties.description;
+
+            // Ensure that if the map is zoomed out such that multiple
+            // copies of the feature are visible, the popup appears
+            // over the copy being pointed to.
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+
+            new mapboxgl.Popup()
+                .setLngLat(coordinates)
+                .setHTML(description)
+                .addTo(map);
+        });
+
+        // Change the cursor to a pointer when the mouse is over the places layer.
+        map.on('mouseenter', 'places', () => {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'places', () => {
+            map.getCanvas().style.cursor = '';
+        });
+    });
+    
+    
+    
+    
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+map.on('load', () => {
+map.addSource('places1', {
+'type': 'geojson',
+
+
+
+
+'data': {
+'type': 'FeatureCollection',
+'features': [
+{
+'type': 'Feature',
+'properties': {
+'description':
+'<strong>A Little Night Music</strong><p>The Arlington Players\' production of Stephen Sondheim\'s  <a href="http://www.thearlingtonplayers.org/drupal-6.20/node/4661/show" target="_blank" title="Opens in a new window"><em>A Little Night Music</em></a> comes to the Kogod Cradle at The Mead Center for American Theater (1101 6th Street SW) this weekend and next. 8:00 p.m.</p>'
+},
+'geometry': {
+'type': 'Point',
+
+'coordinates': [37.174147071844686,55.977428264695845]
+}
+},
+
+
+
+
+
+
+
+
+
+{
+'type': 'Feature',
+'properties': {
+'description':
+'<strong>A Little Night Music</strong><p>The Arlington Players\' production of Stephen Sondheim\'s  <a href="http://www.thearlingtonplayers.org/drupal-6.20/node/4661/show" target="_blank" title="Opens in a new window"><em>A Little Night Music</em></a> comes to the Kogod Cradle at The Mead Center for American Theater (1101 6th Street SW) this weekend and next. 8:00 p.m.</p>'
+},
+'geometry': {
+'type': 'Point',
+
+'coordinates': [37.17405191989792,55.97710447718691]
+}
+},
+
+
+
+
+
+
+
+
+
+
+
+
+{
+'type': 'Feature',
+'properties': {
+'description': 
+'<strong>A Little Night Music</strong><p>The Arlington Players\' production of Stephen Sondheim\'s  <a href="http://www.thearlingtonplayers.org/drupal-6.20/node/4661/show" target="_blank" title="Opens in a new window"><em>A Little Night Music</em></a> comes to the Kogod Cradle at The Mead Center for American Theater (1101 6th Street SW) this weekend and next. 8:00 p.m.</p>'
+},
+'geometry': {
+'type': 'Point',
+
+'coordinates': [37.174114950657895,55.977264080461964]
+}
+}
+]
+}
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Add a layer showing the places.
+map.addLayer({
+'id': 'places1',
+
+
+'minzoom': 14,
+'maxzoom': 19,
+
+
+
+
+'type': 'circle',
+'source': 'places1',
+'paint': {
+'circle-color': 'white',
+'circle-radius': 6,
+'circle-stroke-width': 2,
+'circle-stroke-color': '#be3455'
+}
+});
+
+
+
+
+
+
+
+
+ map.addLayer({
+            'id': 'places1',
+            'type': 'circle',
+            'source': 'places1',
+            'layout': {
+                'icon-image': ['get', 'circle'],
+                'icon-allow-overlap': true
+            }
+        });
+
+        // When a click event occurs on a feature in the places layer, open a popup at the
+        // location of the feature, with description HTML from its properties.
+        map.on('click', 'places1', (e) => {
+            // Copy coordinates array.
+            const coordinates = e.features[0].geometry.coordinates.slice();
+            const description = e.features[0].properties.description;
+
+            // Ensure that if the map is zoomed out such that multiple
+            // copies of the feature are visible, the popup appears
+            // over the copy being pointed to.
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+
+            new mapboxgl.Popup()
+                .setLngLat(coordinates)
+                .setHTML(description)
+                .addTo(map);
+        });
+
+        // Change the cursor to a pointer when the mouse is over the places layer.
+        map.on('mouseenter', 'places1', () => {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'places1', () => {
+            map.getCanvas().style.cursor = '';
+        });
+    });
+    
+    
+    
+    
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     
 
@@ -11515,6 +11863,8 @@ throw new Error(err);
 </body>
 
 </html>
+
+
 
 
 
