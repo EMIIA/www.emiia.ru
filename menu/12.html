@@ -1,0 +1,444 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - dropdown accordion-like</title>
+
+
+
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+
+
+<link rel='stylesheet' href='https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css'>
+
+
+
+
+
+
+
+
+<style>
+
+a , a:focus {
+    color: #383838;
+    text-decoration: none;
+}
+a{
+  dispaly:block;
+  width:100%;
+  height:25px;
+}
+a:hover {
+    color: #2A6496;
+    text-decoration: none;
+  background-color:#eee;
+}
+.accordion12{
+  position:relative;
+  hight:30px;
+  
+}
+
+.list{
+  padding-left:19px;
+  background-color:#eee;
+  list-style:none;
+}
+.list-item{
+  display:block;
+  padding-top: 3px;
+  
+}
+.hight{
+  padding-left:20px;
+  hight:30px;
+}
+
+i { position:absolute;
+  right: 10px;
+  top:4px;
+    -webkit-transition:all 300ms ease-in 0s;
+    -moz-transition: all 300ms ease-in 0s;
+    -o-transition: all 300ms ease-in 0s;
+  transition: all 300ms ease-in 0s;}
+
+
+.oppened i {
+    
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.dropdown-menu > li > a:hover {
+    background-color: #fff;
+    background-image: none;
+    color:#2A6496;
+}
+
+</style>
+
+
+
+
+
+
+
+
+
+
+<style>
+
+
+
+.btn {
+    
+ 
+    width: 44px;
+    height: 44px;
+    display: block;
+    padding: 0px;
+    outline: none;
+    border: 0;
+    box-sizing: border-box;
+    background-color: transparent;
+    cursor: pointer;
+    font: 13px/20px Montserrat, montserrat;
+    color: red;
+    
+    
+    
+    background-image: url(https://www.emiia.ai/icon/e.svg);
+    background-size: 28px 28px !important;
+    background-position: 8.7px 8.2px !important;
+    background-repeat: no-repeat !important;
+    
+    border-radius: 12px 12px 12px 12px;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+
+
+
+    
+    
+   .btn-primary.active, .btn-primary:active, .open>.dropdown-toggle.btn-primary {
+
+    
+    
+     color: white;
+
+    border-color: white;
+    
+         background-image: url(https://www.emiia.ai/icon/e.svg);
+    background-size: 28px 28px !important;
+    background-position: 8.7px 8.2px !important;
+    background-repeat: no-repeat !important;
+    
+} 
+
+
+
+.btn-primary.focus, .btn-primary:focus {
+    color: transparent;
+    background-color: transparent;
+    border-color: red;
+    
+    
+     background-image: url(https://www.emiia.ai/icon/e.svg);
+    background-size: 28px 28px !important;
+    background-position: 8.7px 8.2px !important;
+    background-repeat: no-repeat !important;
+    
+    
+    
+}
+
+
+.btn.focus, .btn:focus, .btn:hover {
+    color: none;
+    text-decoration: none;
+}
+
+
+
+.btn-primary {
+    color: white;
+
+    border-color: white;
+    
+    
+         background-image: url(https://www.emiia.ai/icon/e.svg);
+    background-size: 28px 28px !important;
+    background-position: 8.7px 8.2px !important;
+    background-repeat: no-repeat !important;
+}
+
+
+
+.btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary:active.focus, .btn-primary:active:focus, .btn-primary:active:hover, .open>.dropdown-toggle.btn-primary.focus, .open>.dropdown-toggle.btn-primary:focus, .open>.dropdown-toggle.btn-primary:hover {
+    color: transpaarent;
+
+    border-color: transparent;
+    
+    
+     background-image: url(https://www.emiia.ai/icon/e.svg);
+    background-size: 28px 28px !important;
+    background-position: 8.7px 8.2px !important;
+    background-repeat: no-repeat !important;
+    
+}
+
+
+
+
+</style>
+
+
+
+
+
+
+
+
+
+
+</head>
+<body>
+
+
+
+
+
+<div class="dropdown dropdown-accordion" data-accordion=".accordion12" id="parent" style="position: fixed; top: 0.95em; left: 0.7em; z-index: +20000;">
+  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"></span></button>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+										<div class="accordion12" id="accordion1">
+                      <a href="#collapseOne" data-toggle="collapse" data-parent="#parent">
+											<div class="hight">
+
+													HTML <i class="fa fa-angle-down"></i>
+
+											</div>
+                        </a>
+											<div class="panel-collapse collapse" id="collapseOne">
+
+												<ul class="list">
+													<li class="list-item"><a href="#sectionOne">Submenu link 1</a></li>
+													<li class="list-item"><a href="#sectionOneSubOne">Submenu link 2</a></li>
+													<li class="list-item"><a href="#sectionOneSubTwo">Submenu link 3</a></li>
+													
+												</ul>
+
+											</div>
+
+										</div>
+
+    </li>
+    <li><a href="#">CSS</a></li>
+    <li>
+										<div class="accordion12" id="accordion2">
+                      <a href="#collapseTwo" data-toggle="collapse" data-parent="#parent">
+											<div class="hight">
+
+													Javascript <i class="fa fa-angle-down"></i>
+
+											</div>
+                        </a>
+											<div class="panel-collapse collapse" id="collapseTwo">
+
+												<ul class="list">
+													<li class="list-item"><a href="#sectionTwo">Submenu link 1</a></li>
+													<li class="list-item"><a href="#sectionTwoSubOne">Submenu link 2</a></li>
+													<li class="list-item"><a href="#sectionTwoSubTwo">Submenu link 3</a></li>
+													
+												</ul>
+
+											</div>
+
+										</div>
+
+    </li>
+    <li><a href="#">jQuery</a></li>
+    <li>
+										<div class="accordion12" id="accordion3">
+                      <a href="#collapseThree" data-toggle="collapse" data-parent="#parent">
+											<div class="hight">
+
+													CSS <i class="fa fa-angle-down"></i>
+
+											</div>
+                        </a>
+											<div class="panel-collapse collapse" id="collapseThree">
+
+												<ul class="list">
+													<li class="list-item"><a href="#sectionThree">Submenu link 1</a></li>
+													<li class="list-item"><a href="#sectionThreeSubOne">Submenu link 2</a></li>
+													<li class="list-item"><a href="#sectionTreeSubTwo">Submenu link 3</a></li>
+													
+												</ul>
+
+											</div>
+
+										</div>
+                                        
+                                        
+                                        
+                                        
+                                  
+                                        
+                                        
+                                        
+
+    </li>
+    <li><a href="#"><div>Sass</div></a></li>
+    
+      <li><a href="#" class="small" tabIndex="-1" value="option1" checked><input type="checkbox" checked/>&nbsp;Option 1</a></li>
+      
+      
+            <li><a href="#" class="small" data-value="option2" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 2</a></li>
+            
+            
+                  <li><a href="#" class="small" data-value="option3" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 3</a></li>
+                  
+                  
+                        <li><a href="#" class="small" data-value="option4" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 4</a></li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+  <li role="presentation" class="divider"></li>                      
+                        
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>
+                        
+                        
+                        
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>
+          
+          
+          
+          
+          <li role="presentation" class="divider"></li>                      
+                        
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Выход</a></li>
+
+          
+          
+          
+          
+
+          
+          
+
+          
+          
+    
+    
+  </ul>
+  
+  
+  
+  
+  
+
+  
+
+
+
+
+
+
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+
+
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
+
+
+
+
+
+
+
+<script>
+   
+    $("[data-toggle='collapse']").on('click', function () {
+      $("[data-toggle='collapse']").removeClass('current');
+      $(this).addClass("current");
+  $(this).toggleClass("oppened"); 
+       $("[data-toggle='collapse']").not('.current').removeClass('oppened');
+});
+
+
+
+// Collapse accordion every time dropdown is shown
+$('.dropdown-accordion').on('show.bs.dropdown', function (event) {
+  var accordion1 = $(this).find($(this).data('accordion'));
+  accordion1.find('.panel-collapse.in').collapse('hide');
+  $("[data-toggle='collapse']").removeClass('oppened');
+});
+
+// Prevent dropdown to be closed when we click on an accordion link
+$('.dropdown-accordion').on('click', 'a[data-toggle="collapse"]', function (event) {
+  event.preventDefault();
+  event.stopPropagation();
+  $($(this).data('parent')).find('.panel-collapse.in').collapse('hide');
+  $($(this).attr('href')).collapse('show');
+  
+});
+
+
+
+// Close Nav When Link Is Selected
+$('.panel-body a[href^="#section"], a[href^="#section"]').on('click', function(){
+    $('.navbar-collapse').collapse('hide');
+	$('.dropdown-toggle').click();
+});
+
+
+//Smooth Scrolling For Internal Page Links
+$(function() {
+  $('.list-group a[href*=#]:not([href=#]), a[href="#toTop"]').click(function() {
+	if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+	  var target = $(this.hash);
+	  target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+	  if (target.length) {
+		$('html,body').animate({
+		  scrollTop: target.offset().top
+		}, 1000);
+		return false;
+	  }
+	}
+  });
+});
+
+</script>
+
+
+
+
+
+</body>
+
+
+
+
+</html>
+
+
+
+
+
+
+
+
+
+
