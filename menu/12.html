@@ -7,6 +7,8 @@
 
 
 
+
+
   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
 
 
@@ -17,9 +19,20 @@
 
 
 
-
-
 <style>
+
+
+
+
+body {
+    font-family: "Montserrat", montserrat;
+    font-size: 16px;
+    line-height: 1.42857143;
+    color: #333;
+    background-color: #fff;
+}
+
+
 
 a , a:focus {
     color: #383838;
@@ -43,7 +56,7 @@ a:hover {
 
 .list{
   padding-left:19px;
-  background-color:#f8f9fa;
+  background-color: #f8f9fa;
   list-style:none;
 }
 .list-item{
@@ -80,7 +93,17 @@ i { position:absolute;
     color: #2A6496;
 }
 
+
+.btn:focus,.btn:active:focus,.btn.active:focus,
+.btn.focus,.btn:active.focus,.btn.active.focus {
+    outline: none;
+}
+
 </style>
+
+
+
+
 
 
 
@@ -130,9 +153,9 @@ i { position:absolute;
 
     
     
-     color: white;
+     color: red;
 
-    border-color: white;
+    border-color: red;
     
          background-image: url(https://www.emiia.ai/icon/e.svg);
     background-size: 28px 28px !important;
@@ -144,8 +167,8 @@ i { position:absolute;
 
 
 .btn-primary.focus, .btn-primary:focus {
-    color: white;
-    background-color: white;
+    color: transparent;
+
     border-color: red;
     
     
@@ -159,17 +182,14 @@ i { position:absolute;
 }
 
 
-.btn.focus, .btn:focus, .btn:hover {
-    color: white;
-    text-decoration: none;
-}
+
 
 
 
 .btn-primary {
-    color: white;
+    color: red;
 
-    border-color: white;
+    border-color: red;
     
     
          background-image: url(https://www.emiia.ai/icon/e.svg);
@@ -183,7 +203,7 @@ i { position:absolute;
 .btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary:active.focus, .btn-primary:active:focus, .btn-primary:active:hover, .open>.dropdown-toggle.btn-primary.focus, .open>.dropdown-toggle.btn-primary:focus, .open>.dropdown-toggle.btn-primary:hover {
     color: white;
 
-    border-color: white;
+    border-color: red;
     
     
      background-image: url(https://www.emiia.ai/icon/e.svg);
@@ -202,7 +222,7 @@ i { position:absolute;
     
     
         
-     background-image: url(https://www.emiia.ai/icon/e.svg);
+    background-image: url(https://www.emiia.ai/icon/e.svg);
     background-size: 28px 28px !important;
     background-position: 8.7px 8.2px !important;
     background-repeat: no-repeat !important;
@@ -213,14 +233,7 @@ i { position:absolute;
 
 
 
-
-
 </style>
-
-
-
-
-
 
 
 
@@ -234,7 +247,7 @@ i { position:absolute;
 
 
 <div class="dropdown dropdown-accordion" data-accordion=".accordion12" id="parent" style="position: fixed; top: 0.95em; left: 0.7em; z-index: +20000;">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"></span></button>
+  <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown"></span></button>
   <ul class="dropdown-menu" role="menu">
     <li>
 										<div class="accordion12" id="accordion1">
@@ -317,7 +330,20 @@ i { position:absolute;
     </li>
     <li><a href="#"><div>Sass</div></a></li>
     
-      <li><a href="#" class="small" tabIndex="-1" value="option1" checked><input type="checkbox" checked/>&nbsp;Option 1</a></li>
+
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+  <li role="presentation" class="divider"></li>   
+  
+  
+  
+  
+        <li><a href="#" class="small" tabIndex="-1" value="option1" checked><input type="checkbox" checked/>&nbsp;Option 1</a></li>
       
       
             <li><a href="#" class="small" data-value="option2" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 2</a></li>
@@ -327,20 +353,16 @@ i { position:absolute;
                   
                   
                         <li><a href="#" class="small" data-value="option4" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 4</a></li>
+  
+  
+  
+  
+               <li role="presentation" class="divider"></li>                      
                         
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Тест</a></li> 
                         
-                        
-                        
-                        
-                        
-                        
-  <li role="presentation" class="divider"></li>                      
-                        
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>
-                        
-                        
-                        
-          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>
+                                                
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Тест</a></li> 
           
           
           
@@ -440,6 +462,9 @@ $(function() {
 });
 
 </script>
+
+
+
 
 
 
