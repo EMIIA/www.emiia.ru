@@ -30,6 +30,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -1181,6 +1182,10 @@ margin: 3.66px 0;
   
   
   
+
+  
+  
+  
   /* emiia навигация (кнопки A B) плюс центрация иконок внутри */
 
 .mapbox-form-label {
@@ -1306,7 +1311,15 @@ margin: 3.66px 0;
   
   
   
-  
+   .mapbox-directions-profile  input[type=radio]:checked + label:hover,
+  .mapbox-directions-profile input[type=radio]:checked + label {
+    background: #eee;
+    color:rgba(0,0,0,.75);
+     height: 44px;
+     width: 45px;
+
+   
+    } 
   
   
   
@@ -1318,12 +1331,12 @@ margin: 3.66px 0;
     vertical-align: top;
     display: block;
     border-radius: 12px;
-    padding: 8px 3px;
+    padding: 5.0px 3px;
     font-size: 12px;
     color: rgba(0,0,0,.5);
     line-height: 28px;
     text-align: center;
-    width: 14.5%;
+    width: 14.0%;
     float: left;
 }
   
@@ -1344,13 +1357,14 @@ margin: 3.66px 0;
       box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1) !important; 
       
       
-      
-     
-   
-   
-   
+ 
    
     }
+    
+    
+    
+    
+    
   
   
   
@@ -1365,7 +1379,7 @@ position: absolute;
 
  top:8.1ex;
    
-   left: 26.0ex; 
+   left: 25.0ex; 
     
      padding: 0;
     width: 17px;
@@ -1407,7 +1421,7 @@ position: absolute;
 
  top:7.8ex;
    
-   left: 31.6ex; 
+   left: 30.6ex; 
     
      padding: 0;
     width: 20px;
@@ -1448,7 +1462,7 @@ position: absolute;
 
  top:7.7ex;
    
-   left: 37.7ex; 
+   left: 36.4ex; 
     
      padding: 0;
     width: 22px;
@@ -1503,14 +1517,10 @@ position: absolute;
   .mapbox-directions-profile input[type=radio] {
     display:none;
     }
-  .mapbox-directions-profile input[type=radio]:checked + label:hover,
-  .mapbox-directions-profile input[type=radio]:checked + label {
-    background:#eee;
-    color:rgba(0,0,0,.75);
     
-   
     
-    }
+    
+
 
 /* Routes */
 .mapbox-directions-routes ul {
@@ -4715,6 +4725,8 @@ $(function() {
 </body>
 
 </html>
+
+
 
 
 
