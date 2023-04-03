@@ -34,6 +34,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -170,6 +171,8 @@ body {
 
 
 
+
+
 }
 
 
@@ -180,6 +183,9 @@ a , a:focus {
     
     
     line-height: 1.9em;     
+    
+    
+
 
 
     
@@ -189,7 +195,7 @@ a{
   width:100%;
   height:25px;
   
-  
+
 
 
 }
@@ -279,7 +285,7 @@ i { position:absolute;
     display: none;
     float: left;
     min-width: 307.5px;
-    padding: 20px 3px 10px 3px;
+    padding: 8px 3px 10px 3px;
     margin: 3.8px 0 0;
     font-size: 17px;
     text-align: left;
@@ -302,8 +308,6 @@ i { position:absolute;
     
     
 
-  
-    
     
     
 
@@ -3018,19 +3022,27 @@ a {
     dispaly: block;
     width: 100%;
     height: 25px;
+    
+
+    
+    
 }
 a, a:focus {
     color: #337ab7;
     text-decoration: none;
+    
+   
 }
 a {
     color: #337ab7;
     text-decoration: none;
+    
+
+    
+    
 }
 
  
-
-
 
 
 
@@ -3075,6 +3087,25 @@ max-width: 200px;
 
 
 
+.hight {
+    padding-left: 9px;
+    hight: 10px;
+
+   
+}
+
+
+
+
+
+.fa {
+    display: inline-block;
+    font: normal normal normal 20px/1 FontAwesome;
+    /* font-size: inherit; */
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 
 
 
@@ -3178,11 +3209,12 @@ max-width: 200px;
   
   
     <li>
-										<div class="accordion12" id="accordion1" style="font-size:15px;" >
-                      <a href="#collapseOne" data-toggle="collapse" data-parent="#parent">
-											<div class="hight"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-broadcast" viewBox="0 0 16 16">
+										<div class="accordion12" id="accordion1"  style="vertical-align: middle" style="vertical-align: baseline">
+                      <a href="#collapseOne" data-toggle="collapse" data-parent="#parent" >
+											<div class="hight"> <span 
+  style="vertical-align: -5.5px"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-broadcast" viewBox="0 0 16 16">
   <path d="M3.05 3.05a7 7 0 0 0 0 9.9.5.5 0 0 1-.707.707 8 8 0 0 1 0-11.314.5.5 0 0 1 .707.707zm2.122 2.122a4 4 0 0 0 0 5.656.5.5 0 1 1-.708.708 5 5 0 0 1 0-7.072.5.5 0 0 1 .708.708zm5.656-.708a.5.5 0 0 1 .708 0 5 5 0 0 1 0 7.072.5.5 0 1 1-.708-.708 4 4 0 0 0 0-5.656.5.5 0 0 1 0-.708zm2.122-2.12a.5.5 0 0 1 .707 0 8 8 0 0 1 0 11.313.5.5 0 0 1-.707-.707 7 7 0 0 0 0-9.9.5.5 0 0 1 0-.707zM10 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
-</svg> &nbsp;Радиоданные (MRV) <i class="fa fa-angle-down"></i>
+</svg></span> &nbsp;Радиоданные (MRV)<i class="fa fa-angle-down"></i>
 
 											</div>
                         </a>
@@ -3206,7 +3238,13 @@ max-width: 200px;
                                                                                                                <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;Животные</a></li>
                                                                                                                
                                                                                                                
-   <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;Устройства</a></li>                                                                                                            
+   <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;Устройства</a></li>  
+   
+   
+<p></p>
+   
+   
+   <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;Аналитика</a></li>   
                     
                                                     
                                                     
@@ -3230,20 +3268,42 @@ max-width: 200px;
 											<div class="hight">
 
    
-													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera-video" viewBox="0 0 16 16">
+													<span 
+  style="vertical-align: -5.5px"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-camera-video" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2V5zm11.5 5.175 3.5 1.556V4.269l-3.5 1.556v4.35zM2 4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h7.5a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H2z"/>
-</svg> &nbsp;Видеоданные <i class="fa fa-angle-down"></i>
+</svg></span> &nbsp;Видеоданные<i class="fa fa-angle-down"></i>
 
 											</div>
                         </a>
 											<div class="panel-collapse collapse" id="collapseTwo">
+                                            
+                                            
+                                            
+                                            
+                                            <ul class="list">
 
-												<ul class="list">
-													<li class="list-item"><a href="#sectionTwo">&nbsp; &nbsp;Submenu link 1</a></li>
-													<li class="list-item"><a href="#sectionTwoSubOne">&nbsp; &nbsp;Submenu link 2</a></li>
-													<li class="list-item"><a href="#sectionTwoSubTwo">&nbsp; &nbsp;Submenu link 3</a></li>
+												
+                                                
+                                                
+                  <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;Видеокамеры</a></li>
+                                                                                                              
+                                                                                                               <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;Лидарные камеры</a></li>
+                                                                                                               
+                                                                                                               
+   <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="123">&nbsp;Тепловые камеры</a></li>  
+   
+   
+<p></p>
+   
+   
+   <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;Аналитика</a></li>   
+                                                  
+                                                
+                                                
+                                    
 													
-												</ul>
+												</ul>                                   
+           
 
 											</div>
 
