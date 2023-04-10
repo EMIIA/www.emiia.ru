@@ -85,7 +85,7 @@ ifcLoader.load("https://www.emiia.ru/ifc/ofisRNPIFCRELISNOCONSTRUCTtest2.ifc", (
         ifcModel.geometry,
         new MeshLambertMaterial({
                 transparent: true,
-                opacity: 0.3,
+                opacity: 0.5,
                 color: 0xaaaaaa
         }));
 
@@ -94,6 +94,11 @@ ifcLoader.load("https://www.emiia.ru/ifc/ofisRNPIFCRELISNOCONSTRUCTtest2.ifc", (
   });
 
   // ...
+
+window.onmousemove = (event) => highlight(
+                                    event,
+                                    undefined,
+                                    highlightModel);
 
 
 
