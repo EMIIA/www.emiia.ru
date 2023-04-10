@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    
+    
+    
+    
+    
+    
+    <link rel="icon" href="favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://ifcjs.github.io/hello-world/examples/web-ifc-three/picking/styles.css">
+    <title>IFC.js</title>
+</head>
+<body>
+
+<canvas id="three-canvas"></canvas>
+<script src="https://ifcjs.github.io/hello-world/examples/web-ifc-three/picking/bundle.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+ifcLoader.load("https://www.emiia.ru/ifc/ofisRNPIFCRELISNOCONSTRUCT.ifc", (ifcModel) => {
+    ifcModel.visible = false;
+
+    const modelCopy = new Mesh(
+        ifcModel.geometry,
+        new MeshLambertMaterial({
+                transparent: true,
+                opacity: 0.5,
+                color: 0xaaaaaa
+        }));
+
+    scene.add(ifcModel)
+    scene.add(modelCopy)
+  });
+
+  // ...
+
+window.onmousemove = (event) => highlight(
+                                    event,
+                                    undefined,
+                                    highlightModel);
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+ifcLoader.load("https://www.emiia.ru/ifc/ofisRNPIFC.ifc", (ifcModel) => {
+    ifcModel.visible = false;
+
+    const modelCopy = new Mesh(
+        ifcModel.geometry,
+        new MeshLambertMaterial({
+                transparent: true,
+                opacity: 0.2,
+                color: 0xaaaaaa
+        }));
+
+    scene.add(ifcModel)
+    scene.add(modelCopy)
+  });
+
+  // ...
+
+window.onmousemove = (event) => highlight(
+                                    event,
+                                    undefined,
+                                    highlightModel);
+
+
+</script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
