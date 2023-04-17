@@ -40,6 +40,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -3329,12 +3330,9 @@ max-width: 200px;
     min-height: 110px;
     padding-bottom: 10px;
     
-    
-    
 
 
 }
-
 
 
 
@@ -3367,7 +3365,6 @@ max-width: 200px;
 
 
   
-
 
 <style>   
     
@@ -3407,6 +3404,15 @@ max-width: 200px;
 
 
 .mapboxgl-ctrl-markers {
+
+
+position: fixed;
+    top: -8.3em;
+    left: 0.0em;
+    z-index: +500000;
+ 
+
+
     background-image: url(https://www.emiia.ai/icon/h.svg);
     background-size: 28px 28px !important;
     background-position: 8.7px 8.2px !important;
@@ -3416,11 +3422,27 @@ max-width: 200px;
 
 
 .mapboxgl-ctrl-map {
+
+
+ position: fixed;
+    top: -8.3em;
+    left: 0.0em;
+    z-index: +500000;
+
     background-image: url(https://www.emiia.ai/icon/e.svg);
     background-size: 28px 28px !important;
     background-position: 8.7px 8.2px !important;
     background-repeat: no-repeat !important;
 }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4848,7 +4870,7 @@ pitch: 20,
         
         
         
-    
+         
  
  
 
@@ -4859,7 +4881,7 @@ map.addControl(new MapboxLanguage({
 
 
 
-            
+       
        
        
   // Add the specific control
@@ -4874,7 +4896,7 @@ map.addControl(new MapboxLanguage({
         // МЕСТО ГЕОКОДЕРА.
        
        
-       
+     
        
        
    
@@ -4896,7 +4918,7 @@ accessToken: mapboxgl.accessToken
        
        
 
-       map.addControl(new MapboxMarkers(exampleGeojson), "top-left");  
+       
   
 
 
@@ -4985,7 +5007,7 @@ var scale = new mapboxgl.ScaleControl({
       
     
 
-
+ map.addControl(new MapboxMarkers(exampleGeojson), "top-left"); 
 
 
 
@@ -6328,6 +6350,8 @@ $(function() {
 </body>
 
 </html>
+
+
 
 
 
