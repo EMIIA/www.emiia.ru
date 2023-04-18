@@ -1,0 +1,6183 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+ 
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+
+<meta name="format-detection" content="telephone=no">
+
+        
+        
+        
+    <title>EMIIA.AI MRV: SDK/API - em_70.3388_675_it_98342234...</title>    
+        
+
+	
+	<link rel="manifest" href="manifest.json">
+
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="application-name" content="EMIIA.AI MRV">
+<meta name="apple-mobile-web-app-title" content="EMIIA.AI MRV">
+	<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#fff">
+<meta name="msapplication-starturl" content="https://www.emiia.ru/osm/indoor9.html">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+	
+	
+	
+	<link rel="manifest" href="/manifest.json">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+
+<link rel='stylesheet' href='https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css'>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+
+
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+
+
+@import url('https://www.emiia.ru/css.css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+ 
+@import url('/css.css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+
+
+
+
+body {
+
+    
+ 
+   
+
+    line-height: 5.42857143;
+    color: #333;
+    background-color: #fff;
+    
+
+
+
+
+
+}
+
+
+
+a , a:focus {
+    color: #383838;
+    text-decoration: none;
+    
+    
+    line-height: 1.9em;     
+    
+    
+
+
+
+    
+}
+a{
+  dispaly:block;
+  width:100%;
+  height:25px;
+  
+
+
+
+}
+a:hover {
+    color: #2A6496;
+    text-decoration: none;
+  background-color:#eee;
+ 
+  
+}
+.accordion12{
+  position:relative;
+  hight:30px;
+  
+    line-height: 1.9em;  
+
+  
+}
+
+.list{
+  padding-left:19px;
+  background-color: #f8f9fa;
+  list-style:none;
+  
+
+  
+}
+.list-item{
+  display:block;
+  padding-top: 3px;
+  
+  
+ 
+  
+}
+.hight{
+  padding-left:20px;
+  hight:30px;
+
+  
+}
+
+i { position:absolute;
+  right: 10px;
+  
+ 
+  
+  top:4px;
+    -webkit-transition:all 300ms ease-in 0s;
+    -moz-transition: all 300ms ease-in 0s;
+    -o-transition: all 300ms ease-in 0s;
+  transition: all 300ms ease-in 0s;}
+
+
+.oppened i {
+    
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+    
+   
+}
+
+.dropdown-menu > li > a:hover {
+    background-color: #fff;
+    background-image: none;
+    color: #2A6496;
+
+    
+}
+
+
+
+
+
+
+
+
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 307.5px;
+    max-width: 307.5px;
+    padding: 0px 3px 0px 3px;
+    margin: 3.8px 0 0;
+    font-size: 17px;
+    text-align: left;
+    list-style: none;
+    background-color: white;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 0px solid #ccc;
+    border: 0px solid rgba(0,0,0,.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+       
+    
+    border-radius: 12px 12px 12px 12px;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1) !important;
+    
+    
+    cursor: pointer;
+    
+
+    font-family: 14px/19px Montserrat, montserrat !important;
+    font:16px/20px 'Montserrat', montserrat !important; 
+    
+    
+
+}
+    
+    
+    
+}
+
+
+
+
+
+
+
+
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+    <style>
+
+
+
+.btn {
+    
+ 
+    width: 44px;
+    height: 44px;
+    display: block;
+    padding: 0px;
+    outline: none;
+    border: 0;
+    box-sizing: border-box;
+    background-color: white;
+    cursor: pointer;
+    color: red;
+    
+    
+    font-family: 12px/20px Montserrat, montserrat;
+    font:12px/20px 'Montserrat', montserrat;
+    
+
+
+    
+    background-image: url(https://www.emiia.ai/icon/e.svg);
+    background-size: 28px 28px !important;
+    background-position: 8.7px 8.2px !important;
+    background-repeat: no-repeat !important;
+    
+    border-radius: 12px 12px 12px 12px;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1) !important;
+    
+
+    
+}
+
+
+
+
+
+
+
+
+
+.btn:focus,.btn:active:focus,.btn.active:focus,
+.btn.focus,.btn:active.focus,.btn.active.focus {
+    outline:  none;
+    
+  
+         background-color:#eee;  
+
+ } 
+ 
+ 
+ 
+ 
+
+
+
+.small:focus,.small:active:focus,.small.active:focus,
+.small.focus,.small:active.focus,.small.active.focus {
+ outline: none;
+ 
+  text-decoration: none;
+    
+background-color:#eee;
+ } 
+
+
+
+.mapboxgl-popup a {
+    color: #3D85C6;
+    text-decoration: none;
+    
+outline: none;
+
+}
+
+
+
+
+.mapboxgl-popup-content {
+    position: relative;
+    background: white;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgb(0 0 0/10%);
+    padding: 10px 10px 15px;
+    pointer-events: auto;
+    
+   max-width: 330px;
+   
+   
+    font-family: 12px/20px Montserrat, montserrat;
+  font:12px/20px 'Montserrat', montserrat;
+
+    
+}
+
+
+
+</style>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="https://telegram.org/js/telegram-web-app.js"></script> <!--Подключаем скрипт от телеграм-->
+    
+    
+    
+    
+    
+    
+    
+    
+	
+	<script src="https://js.sentry-cdn.com/9c5feb5b248b49f79a585804c259febc.min.js" crossorigin="anonymous"></script>
+	
+	
+	
+       <style>
+-webkit-transform: translateZ(0);
+-webkit-transform: translate3d(0, 0, 0);
+-webkit-overflow-scrolling: touch;
+</style> 
+    
+    
+    
+    
+    <script  src="https://www.emiia.ru/typing-effect.js"></script>
+  <script  src="/typing-effect.js"></script>
+  
+  
+  
+  
+   <script src='https://mapbox.github.io/mapbox-gl-language/index.js'></script>
+  
+  
+  
+  
+  <script>
+  
+  var $viewportMeta = $('meta[name="viewport"]');
+$('input, select, textarea').bind('focus blur', function(event) {
+$viewportMeta.attr('content', 'width=device-width,initial-scale=1,maximum-scale=' +        (event.type == 'blur' ? 10 : 1));
+});
+  
+  </script>
+    
+    
+    
+    <style>
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+</style>
+
+	<style>
+@import url('https://www.emiia.ru/css.css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+</style>
+
+  <style>  
+@import url('/css.css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+</style>
+
+<link rel="stylesheet" href="https://www.emiia.ru/cssfamily=Montserrat.css">
+<link rel="stylesheet" href="/cssfamily=Montserrat.css">
+
+    
+    
+  
+	
+	
+	
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+	
+
+    
+
+
+
+
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.css" rel="stylesheet">
+ 
+              
+              
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.js"></script>
+
+
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.js"></script>
+    
+    
+    
+    <script src="https://www.emiia.ai/geocoderemiia.js"></script>
+    
+    <script src="/geocoderemiia.js"></script>
+    
+    
+    
+ 
+
+    
+    
+
+        
+     <script src="https://dl.dropboxusercontent.com/s/p4pzuar2waqsn7m/map-gl-indoor.umd.js<"></script>   
+        
+        
+    
+        
+        
+        
+        <script src='https://mapbox.github.io/mapbox-gl-traffic/mapbox-gl-traffic.js'></script>
+        
+        
+        
+        
+        
+         <script src='https://www.emiia.ru/relise.js'></script>
+
+    
+    
+  <link href='https://mapbox.github.io/mapbox-gl-traffic/mapbox-gl-traffic.css' rel='stylesheet' />  
+    
+    
+    
+     
+
+     
+     
+ <link href='https://www.emiia.ai/geocoderemiia.css' rel='stylesheet' />
+     
+     <link href='/geocoderemiia.css' rel='stylesheet' />    
+     
+     
+
+     
+     
+     
+     
+     
+     
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+     
+     
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+     
+        
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            
+            background-color: white;
+            
+            
+             font-family: 12px/20px Montserrat, montserrat;
+  font:12px/20px 'Montserrat', montserrat;
+            
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+        }
+        
+        
+        
+        
+    
+        
+    </style>
+    
+    
+    
+    
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+    
+    
+    
+    
+    
+    
+        
+ 
+        
+   
+        
+
+    
+    
+    
+    
+    
+    
+    
+    
+    <style>
+    
+    
+    
+        .mapboxgl-ctrl button.mapboxgl-ctrl-geolocate.mapboxgl-ctrl-geolocate-active .mapboxgl-ctrl-icon {
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcKICAgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIgogICB4bWxuczpjYz0iaHR0cDovL2NyZWF0aXZlY29tbW9ucy5vcmcvbnMjIgogICB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiCiAgIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgeG1sbnM6c29kaXBvZGk9Imh0dHA6Ly9zb2RpcG9kaS5zb3VyY2Vmb3JnZS5uZXQvRFREL3NvZGlwb2RpLTAuZHRkIgogICB4bWxuczppbmtzY2FwZT0iaHR0cDovL3d3dy5pbmtzY2FwZS5vcmcvbmFtZXNwYWNlcy9pbmtzY2FwZSIKICAgaW5rc2NhcGU6dmVyc2lvbj0iMS4wICg0MDM1YTRmYjQ5LCAyMDIwLTA1LTAxKSIKICAgc29kaXBvZGk6ZG9jbmFtZT0ibG9jYXRpb25vcmlnaW5vcGVuMS5zdmciCiAgIGlkPSJzdmc2IgogICB2ZXJzaW9uPSIxLjEiCiAgIGZpbGw9IiMzZDg1YzYiCiAgIHZpZXdCb3g9IjAgMCAyMCAyMCIKICAgaGVpZ2h0PSIyOSIKICAgd2lkdGg9IjI5Ij4KICA8bWV0YWRhdGEKICAgICBpZD0ibWV0YWRhdGExMiI+CiAgICA8cmRmOlJERj4KICAgICAgPGNjOldvcmsKICAgICAgICAgcmRmOmFib3V0PSIiPgogICAgICAgIDxkYzpmb3JtYXQ+aW1hZ2Uvc3ZnK3htbDwvZGM6Zm9ybWF0PgogICAgICAgIDxkYzp0eXBlCiAgICAgICAgICAgcmRmOnJlc291cmNlPSJodHRwOi8vcHVybC5vcmcvZGMvZGNtaXR5cGUvU3RpbGxJbWFnZSIgLz4KICAgICAgICA8ZGM6dGl0bGU+PC9kYzp0aXRsZT4KICAgICAgPC9jYzpXb3JrPgogICAgPC9yZGY6UkRGPgogIDwvbWV0YWRhdGE+CiAgPGRlZnMKICAgICBpZD0iZGVmczEwIiAvPgogIDxzb2RpcG9kaTpuYW1lZHZpZXcKICAgICBpbmtzY2FwZTpjdXJyZW50LWxheWVyPSJzdmc2IgogICAgIGlua3NjYXBlOndpbmRvdy1tYXhpbWl6ZWQ9IjEiCiAgICAgaW5rc2NhcGU6d2luZG93LXk9Ii0xMSIKICAgICBpbmtzY2FwZTp3aW5kb3cteD0iLTExIgogICAgIGlua3NjYXBlOmN5PSIxNC41IgogICAgIGlua3NjYXBlOmN4PSIxNC41IgogICAgIGlua3NjYXBlOnpvb209IjMwLjI3NTg2MiIKICAgICBzaG93Z3JpZD0iZmFsc2UiCiAgICAgaWQ9Im5hbWVkdmlldzgiCiAgICAgaW5rc2NhcGU6d2luZG93LWhlaWdodD0iMTA0NiIKICAgICBpbmtzY2FwZTp3aW5kb3ctd2lkdGg9IjE5MjAiCiAgICAgaW5rc2NhcGU6cGFnZXNoYWRvdz0iMiIKICAgICBpbmtzY2FwZTpwYWdlb3BhY2l0eT0iMCIKICAgICBndWlkZXRvbGVyYW5jZT0iMTAiCiAgICAgZ3JpZHRvbGVyYW5jZT0iMTAiCiAgICAgb2JqZWN0dG9sZXJhbmNlPSIxMCIKICAgICBib3JkZXJvcGFjaXR5PSIxIgogICAgIGJvcmRlcmNvbG9yPSIjNjY2NjY2IgogICAgIHBhZ2Vjb2xvcj0iI2ZmZmZmZiIgLz4KICA8cGF0aAogICAgIGlkPSJwYXRoMiIKICAgICBkPSJNIDEwLDQgQyA5LDQgOSw1IDksNSBWIDUuMSBBIDUsNSAwIDAgMCA1LjEsOSBIIDUgYyAwLDAgLTEsMCAtMSwxIDAsMSAxLDEgMSwxIEggNS4xIEEgNSw1IDAgMCAwIDksMTQuOSBWIDE1IGMgMCwwIDAsMSAxLDEgMSwwIDEsLTEgMSwtMSBWIDE0LjkgQSA1LDUgMCAwIDAgMTQuOSwxMSBIIDE1IGMgMCwwIDEsMCAxLC0xIEMgMTYsOSAxNSw5IDE1LDkgSCAxNC45IEEgNSw1IDAgMCAwIDExLDUuMSBWIDUgYyAwLDAgMCwtMSAtMSwtMSB6IgogICAgIHN0eWxlPSJmaWxsOiMzZDg1YzY7ZmlsbC1vcGFjaXR5OjE7c3Ryb2tlOm5vbmU7c3Ryb2tlLW9wYWNpdHk6MTtzdHJva2Utd2lkdGg6Mi4wMzQ0ODI3NjtzdHJva2UtbWl0ZXJsaW1pdDo0O3N0cm9rZS1kYXNoYXJyYXk6bm9uZSIgLz4KICA8cGF0aAogICAgIGlkPSJwYXRoODM5IgogICAgIGQ9Im0gMTAsNi41IGEgMy41LDMuNSAwIDEgMSAwLDcgMy41LDMuNSAwIDEgMSAwLC03IHoiCiAgICAgc3R5bGU9ImZpbGw6IzNkODVjNjtmaWxsLW9wYWNpdHk6MTtzdHJva2U6bm9uZTtzdHJva2Utb3BhY2l0eToxO3N0cm9rZS13aWR0aDoxO3N0cm9rZS1taXRlcmxpbWl0OjQ7c3Ryb2tlLWRhc2hhcnJheTpub25lIiAvPgogIDxwYXRoCiAgICAgZGlzcGxheT0ibm9uZSIKICAgICBkPSJNMTQgNWwxIDEtOSA5LTEtMSA5LTl6IgogICAgIGlkPSJzdHJva2UiIC8+CiAgPGNpcmNsZQogICAgIGlkPSJkb3QtMyIKICAgICBjeD0iLTEwIgogICAgIGN5PSIxMC4wNjgzMzciCiAgICAgc3R5bGU9ImZpbGw6I2NmMTYxNjtmaWxsLW9wYWNpdHk6MTtzdHJva2U6I2ZmZmZmZjtzdHJva2Utd2lkdGg6Mi43NTg2MjA2OTtzdHJva2UtbWl0ZXJsaW1pdDo0O3N0cm9rZS1kYXNoYXJyYXk6bm9uZTtzdHJva2Utb3BhY2l0eToxIgogICAgIHRyYW5zZm9ybT0ic2NhbGUoLTEsMSkiCiAgICAgcj0iMiIgLz4KICA8Y2lyY2xlCiAgICAgcj0iMiIKICAgICB0cmFuc2Zvcm09InNjYWxlKC0xLDEpIgogICAgIHN0eWxlPSJmaWxsOiMzZDg1YzY7ZmlsbC1vcGFjaXR5OjE7c3Ryb2tlOiMzZDg1YzY7c3Ryb2tlLXdpZHRoOjA7c3Ryb2tlLW1pdGVybGltaXQ6NDtzdHJva2UtZGFzaGFycmF5Om5vbmU7c3Ryb2tlLW9wYWNpdHk6MSIKICAgICBjeT0iMTAuMDQ1NTU4IgogICAgIGN4PSItMTAiCiAgICAgaWQ9ImRvdCIgLz4KPC9zdmc+Cg==);
+    
+    
+    
+    
+  background-size: 27px 27px !important;
+
+  background-repeat: no-repeat !important;
+
+  background-position: 9px 9px !important;
+    
+
+
+    
+}
+
+
+.mapboxgl-ctrl button.mapboxgl-ctrl-geolocate .mapboxgl-ctrl-icon {
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcKICAgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIgogICB4bWxuczpjYz0iaHR0cDovL2NyZWF0aXZlY29tbW9ucy5vcmcvbnMjIgogICB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiCiAgIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgeG1sbnM6c29kaXBvZGk9Imh0dHA6Ly9zb2RpcG9kaS5zb3VyY2Vmb3JnZS5uZXQvRFREL3NvZGlwb2RpLTAuZHRkIgogICB4bWxuczppbmtzY2FwZT0iaHR0cDovL3d3dy5pbmtzY2FwZS5vcmcvbmFtZXNwYWNlcy9pbmtzY2FwZSIKICAgaW5rc2NhcGU6dmVyc2lvbj0iMS4wICg0MDM1YTRmYjQ5LCAyMDIwLTA1LTAxKSIKICAgc29kaXBvZGk6ZG9jbmFtZT0iZ2VvbG9jYXRlLnN2ZyIKICAgaWQ9InN2ZzYiCiAgIHZlcnNpb249IjEuMSIKICAgZmlsbD0iIzMzMyIKICAgdmlld0JveD0iMCAwIDIwIDIwIgogICBoZWlnaHQ9IjI5IgogICB3aWR0aD0iMjkiPgogIDxtZXRhZGF0YQogICAgIGlkPSJtZXRhZGF0YTEyIj4KICAgIDxyZGY6UkRGPgogICAgICA8Y2M6V29yawogICAgICAgICByZGY6YWJvdXQ9IiI+CiAgICAgICAgPGRjOmZvcm1hdD5pbWFnZS9zdmcreG1sPC9kYzpmb3JtYXQ+CiAgICAgICAgPGRjOnR5cGUKICAgICAgICAgICByZGY6cmVzb3VyY2U9Imh0dHA6Ly9wdXJsLm9yZy9kYy9kY21pdHlwZS9TdGlsbEltYWdlIiAvPgogICAgICA8L2NjOldvcms+CiAgICA8L3JkZjpSREY+CiAgPC9tZXRhZGF0YT4KICA8ZGVmcwogICAgIGlkPSJkZWZzMTAiIC8+CiAgPHNvZGlwb2RpOm5hbWVkdmlldwogICAgIGlua3NjYXBlOmN1cnJlbnQtbGF5ZXI9InN2ZzYiCiAgICAgaW5rc2NhcGU6d2luZG93LW1heGltaXplZD0iMSIKICAgICBpbmtzY2FwZTp3aW5kb3cteT0iLTExIgogICAgIGlua3NjYXBlOndpbmRvdy14PSItMTEiCiAgICAgaW5rc2NhcGU6Y3k9IjExLjQ4MDYiCiAgICAgaW5rc2NhcGU6Y3g9IjEwLjkxMzM2MSIKICAgICBpbmtzY2FwZTp6b29tPSIyMS40MDgyNjciCiAgICAgc2hvd2dyaWQ9ImZhbHNlIgogICAgIGlkPSJuYW1lZHZpZXc4IgogICAgIGlua3NjYXBlOndpbmRvdy1oZWlnaHQ9IjEwNDYiCiAgICAgaW5rc2NhcGU6d2luZG93LXdpZHRoPSIxOTIwIgogICAgIGlua3NjYXBlOnBhZ2VzaGFkb3c9IjIiCiAgICAgaW5rc2NhcGU6cGFnZW9wYWNpdHk9IjAiCiAgICAgZ3VpZGV0b2xlcmFuY2U9IjEwIgogICAgIGdyaWR0b2xlcmFuY2U9IjEwIgogICAgIG9iamVjdHRvbGVyYW5jZT0iMTAiCiAgICAgYm9yZGVyb3BhY2l0eT0iMSIKICAgICBib3JkZXJjb2xvcj0iIzY2NjY2NiIKICAgICBwYWdlY29sb3I9IiNmZmZmZmYiIC8+CiAgPHBhdGgKICAgICBzdHlsZT0iZmlsbDojNmI2YjY5O2ZpbGwtb3BhY2l0eToxIgogICAgIGlkPSJwYXRoMiIKICAgICBkPSJNMTAgNEM5IDQgOSA1IDkgNXYuMUE1IDUgMCAwIDAgNS4xIDlINXMtMSAwLTEgMSAxIDEgMSAxaC4xQTUgNSAwIDAgMCA5IDE0Ljl2LjFzMCAxIDEgMSAxLTEgMS0xdi0uMWE1IDUgMCAwIDAgMy45LTMuOWguMXMxIDAgMS0xLTEtMS0xLTFoLS4xQTUgNSAwIDAgMCAxMSA1LjFWNXMwLTEtMS0xem0wIDIuNWEzLjUgMy41IDAgMSAxIDAgNyAzLjUgMy41IDAgMSAxIDAtN3oiIC8+CiAgPGNpcmNsZQogICAgIHN0eWxlPSJmaWxsOiM2YjZiNjk7ZmlsbC1vcGFjaXR5OjEiCiAgICAgcj0iMiIKICAgICBjeT0iMTAiCiAgICAgY3g9IjEwIgogICAgIGlkPSJkb3QiIC8+CiAgPHBhdGgKICAgICBkaXNwbGF5PSJub25lIgogICAgIGQ9Ik0xNCA1bDEgMS05IDktMS0xIDktOXoiCiAgICAgaWQ9InN0cm9rZSIgLz4KPC9zdmc+Cg==);
+
+
+
+
+
+
+  background-size: 27px 27px !important;
+
+  background-repeat: no-repeat !important;
+
+  background-position: 9px 9px !important;
+        
+    
+    
+
+
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.mapboxgl-ctrl button.mapboxgl-ctrl-geolocate.mapboxgl-ctrl-geolocate-background .mapboxgl-ctrl-icon {
+    background-image: url(https://www.emiia.ai/icon/locationnew.svg);
+    
+    
+    
+    
+    
+    
+    
+    
+  background-size: 27px 27px !important;
+
+  background-repeat: no-repeat !important;
+
+  background-position: 9px 9px !important;
+    
+    
+    
+    
+    
+    
+}
+
+
+
+
+    
+ 
+
+
+ 
+ /* emiia */
+ /* Mapboxgl Geocoder */
+/* Basics */
+.mapboxgl-ctrl-geocoder,
+.mapboxgl-ctrl-geocoder *,
+.mapboxgl-ctrl-geocoder *:after,
+.mapboxgl-ctrl-geocoder *:before {
+  -webkit-box-sizing:border-box;
+     -moz-box-sizing:border-box;
+          box-sizing:border-box;
+          
+          
+  font-family: 12px/20px Montserrat, montserrat;
+  font:12px/20px 'Montserrat', montserrat;
+
+  
+  
+  
+  
+  @import url('https://www.emiia.ru/css.css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+
+
+  
+@import url('/css.css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+
+
+
+
+
+
+
+
+
+
+/* ОТСТУПЫ МЕЖДУ ПОЛЯМИ ОТКУДА И КУДА ГЕОКОДЕРА ЗАКРУГЛЕНИЕ УГЛОВ emiia bottom цвет и толщина*/
+          
+  }
+  
+  
+  
+  
+.mapboxgl-ctrl-geocoder {
+  position:relative;
+  
+margin: 3.66px 0;
+
+
+  
+  width:calc(100% - 360px);;
+  min-width:calc(100% - 40px);;
+  max-width:calc(100% - 40px);;
+  
+  
+  margin-left:48px;
+  border-radius:12px 12px 12px 12px;
+  
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1) !important;
+  
+  }
+  .mapbox-directions-origin .mapboxgl-ctrl-geocoder {
+    border-radius:12px 12px 12px 12px;
+    
+
+
+
+
+
+
+
+  /* emiia bottom размер шрифта в поле A B ПОЛЕ B ВЫСОТА ГЕОКОДЕРА отступ ОТКУДА КУДА*/
+    }
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+
+.mapboxgl-ctrl-geocoder input[type='text'] {
+
+
+  width:100%;
+  border:10px;
+  background-color:transparent;
+  height:44px;
+  margin:0px;
+  
+  padding:10px 40px 10px 20px;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  overflow:hidden;
+
+  
+  font-family: 16px/20px Montserrat, montserrat;
+  font:16px/20px 'Montserrat', montserrat;
+
+  }
+  
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  /* emiia bottom размер шрифта в поле A B ПОЛЕ A*/
+  
+  .mapbox-directions-origin input[type='text'] {
+    
+    position:relative;
+    z-index:1;
+    
+  font-family: 16px/20px Montserrat, montserrat;
+  font:16px/20px 'Montserrat', montserrat;
+
+    
+    }
+    
+  
+    
+    
+  .mapboxgl-ctrl-geocoder input:focus {
+    color:rgba(0,0,0,.75);
+    outline:0;
+    outline:thin dotted\8;
+    
+    
+
+    
+    }
+
+.mapboxgl-ctrl-geocoder .geocoder-icon-search {
+  position:absolute;
+  top:12px;
+  left:10px;
+  }
+.mapboxgl-ctrl-geocoder button {
+  padding:0px;
+  margin:0px;
+  background-color:#fff;
+  border:none;
+  cursor:pointer;
+  }
+  
+  
+  
+  
+  
+  /* позиционирование иконки КЛОСЕ в геокодере */
+.mapboxgl-ctrl-geocoder .geocoder-pin-right * {
+  background-color:#fff;
+  z-index:2;
+  position:absolute;
+  right:10px;
+  top:12px;
+  display:none;
+  }
+  .mapboxgl-ctrl-geocoder .geocoder-pin-right *.active { display:block; }
+
+.mapboxgl-ctrl-geocoder,
+.mapboxgl-ctrl-geocoder ul {
+  box-shadow:none;
+  }
+  
+  
+  
+  
+  
+
+/* Suggestions */
+.mapboxgl-ctrl-geocoder ul {
+  background-color:#fff;
+  border-radius: 0 0 12px 12px;
+  left:0;
+  list-style:none;
+  margin:0;
+  padding:0px;
+  position:absolute;
+  width:100%;
+  top:100%;
+  z-index:1000;
+  overflow:hidden;
+  font-size:14px;
+  }
+  
+  
+  
+  .mapboxgl-ctrl-bottom-left .mapboxgl-ctrl-geocoder ul,
+  .mapboxgl-ctrl-bottom-right .mapboxgl-ctrl-geocoder ul {
+    top:auto;
+    bottom:100%;
+    }
+  .mapboxgl-ctrl-geocoder ul > li > a {
+    clear:both;
+    cursor:default;
+    display:block;
+    padding:5px 10px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    border-bottom:1px solid rgba(0,0,0,0.1);
+    }
+    .mapboxgl-ctrl-geocoder ul > li:last-child > a { border-bottom:none; }
+    .mapboxgl-ctrl-geocoder ul > li.active > a,
+    .mapboxgl-ctrl-geocoder ul > li > a:hover {
+      background-color:#eee;
+      text-decoration:none;
+      cursor:pointer;
+      }
+
+@-webkit-keyframes rotate { from { -webkit-transform: rotate(0deg); } to { -webkit-transform: rotate(360deg); } }
+   @-moz-keyframes rotate { from { -moz-transform: rotate(0deg); } to { -moz-transform: rotate(360deg); } }
+    @-ms-keyframes rotate { from { -ms-transform: rotate(0deg); } to { -ms-transform: rotate(360deg); } }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* icons */
+.geocoder-icon {
+  display:inline-block;
+  width:20px;
+  height:20px;
+  vertical-align:middle;
+  speak:none;
+  background-repeat:no-repeat;
+  }
+  .geocoder-icon-search {
+    display:none;
+    }
+  .geocoder-icon-close {
+    background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAyMCIgdmVyc2lvbj0iMS4xIiBoZWlnaHQ9IjIwIiB3aWR0aD0iMjAiPg0KICA8cGF0aCBkPSJtNSA1IDAgMS41IDMuNSAzLjUtMy41IDMuNSAwIDEuNSAxLjUgMCAzLjUtMy41IDMuNSAzLjUgMS41IDAgMC0xLjUtMy41LTMuNSAzLjUtMy41IDAtMS41LTEuNSAwLTMuNSAzLjUtMy41LTMuNS0xLjUgMHoiIGZpbGw9IiMwMDAiLz4NCjwvc3ZnPg==);
+    }
+    
+    
+    
+    
+    
+    
+    
+  .geocoder-icon-loading {
+    background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiB2aWV3Qm94PSIwIDAgMjAgMjAiPjxwYXRoIGQ9Im0xMCAyIDAgMy4zYzIuNiAwIDQuNyAyLjEgNC43IDQuN2wzLjMgMGMwLTQuNC0zLjYtOC04LTh6IiBmaWxsPSIjMDAwIi8+PHBhdGggZD0iTTEwIDJDNi44IDIgMy43IDQuMSAyLjYgNy4xIDEuNCAxMCAyLjEgMTMuNiA0LjUgMTUuOGMyLjQgMi40IDYuNCAyLjkgOS40IDEuMiAyLjUtMS40IDQuMi00LjIgNC4yLTctMS4xIDAtMi4yIDAtMy4zIDAgMC4xIDIuMi0xLjcgNC4zLTMuOCA0LjZDOC43IDE1IDYuNCAxMy44IDUuNyAxMS43IDQuOCA5LjcgNS42IDcuMSA3LjYgNiA4LjMgNS42IDkuMSA1LjMgMTAgNS4zYzAtMS4xIDAtMi4yIDAtMy4zeiIgc3R5bGU9ImZpbGw6IzAwMDtvcGFjaXR5OjAuMiIvPjwvc3ZnPg==);
+    -webkit-animation: rotate 400ms linear infinite;
+       -moz-animation: rotate 400ms linear infinite;
+        -ms-animation: rotate 400ms linear infinite;
+            animation: rotate 400ms linear infinite;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+    
+    
+    
+
+/* Basics */
+.mapboxgl-ctrl-directions {
+
+
+
+  width: 33.33333%;
+  min-width: 300px;
+  max-width: 300px;
+
+}
+.mapbox-directions-component {
+  position: relative;
+}
+.mapbox-directions-component,
+.mapbox-directions-component *,
+.mapbox-directions-component *:after,
+.mapbox-directions-component *:before {
+  -webkit-box-sizing:border-box;
+     -moz-box-sizing:border-box;
+          box-sizing:border-box;
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+/* emiia */
+.directions-control {
+
+  
+  font-family: 14px/20px Montserrat, montserrat;
+  font:14px/20px 'Montserrat', montserrat;
+  
+  width: 33.33333%;
+  min-width: 300px;
+  max-width: 300px;
+
+   
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+/* EMIIA РАЗМЕР ШРИФТА В РАСКРЫВАЮЩЕМСЯ МЕНЮ ДЕТАЛИ МАРШРУТА Layout containers */
+.directions-control {
+  width:100%;
+  z-index:1;
+  
+  
+  font-family: 14px/20px Montserrat, montserrat;
+  font:14px/20px 'Montserrat', montserrat;
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+   /* Цвет раскрывающейся панели при детализации навигации при клике  ВАЖНО ОТСТУП ОТ ВЕХНЕЙ ПАНЕЛИ*/ 
+  }
+  .directions-control.directions-control-directions {
+    background:white;
+    margin: 20px 0 0;
+    color:#fff;
+    top:0;
+    right:0;
+    bottom:0;
+    overflow:auto;
+    overflow-x:hidden;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   /* ВАЖНО ВАЖНО Закругление нижней раскрывающейся панели при детализации навигации  ВАЖНО*/ 
+    border-radius:0px;
+    
+
+     font-family: 14px/20px Montserrat, montserrat;
+  font:14px/20px 'Montserrat', montserrat;
+ 
+    width: 33.33333%;
+ min-width: 309px;
+ max-width: 309px; 
+    
+    }
+    
+    
+    
+    
+    
+  .directions-control.directions-control-inputs {
+    top:10px;
+    left:10px;
+    }
+
+/* Inputs */
+.mapbox-directions-origin,
+.mapbox-directions-destination {
+  position:relative;
+  }
+  
+  
+  
+  
+
+  
+  
+  
+  /* emiia навигация (кнопки A B) плюс центрация иконок внутри */
+
+.mapbox-form-label {
+  position:absolute;
+  top:0px;left:0;
+  background: white;
+  color:#fff;
+  padding:0px;
+  width:44px;
+  height:44px;
+  text-align:center;
+  line-height:41px;
+  border-radius:12px 12px 12px 12px;
+  
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1) !important;
+  
+  }
+  
+  
+  
+  
+  
+  
+  
+  /* emiia размер лого A и B (кнопки сбоку) */
+  .mapbox-form-label .directions-icon {
+    background-position: center;
+    width: 40px;
+    height: 40px;
+  
+
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+ /* КНОПКА РЕВЕРСА А В  */
+.directions-reverse {
+  position:absolute;
+  z-index:10;
+  background-color:transparent;
+  left:51px;
+  top:35.6px;
+  cursor:pointer;
+  }
+  
+ 
+
+.mapbox-directions-inputs button {
+  padding:0px;
+  margin:0px;
+  background-color:transparent;
+  border:none;
+  cursor:pointer;
+  }
+  
+  
+.mapbox-directions-inputs .directions-pin-right * {
+  background-color:#fff;
+  z-index:2;
+  position:absolute;
+  right:10px;
+  top:10px;
+  display:none;
+  
+
+  
+  }
+  
+.mapbox-directions-inputs .directions-pin-right *.active { display:block; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* emiia навигация (кнопки Indoor внизу) */
+.mapbox-directions-profile {
+  background:#fff;
+  margin:4.3px 0 0;
+  padding:0px;
+  border-radius:12px;
+  vertical-align:middle;
+  
+  width: 35.33333%;
+  min-width: 308px;
+  max-width: 308px;
+ 
+
+  
+  }
+  
+  
+  
+  
+  
+  
+   .mapbox-directions-profile  input[type=radio]:checked + label:hover,
+  .mapbox-directions-profile input[type=radio]:checked + label {
+    background: #eee;
+    color:rgba(0,0,0,.75);
+     height: 44px;
+     width: 45px;
+
+   
+    } 
+  
+  
+  
+  
+ /* emiia навигация ИКОНКИ АВТО АВТОБУС ... */
+  
+    .mapbox-directions-profile label {
+    cursor: pointer;
+    vertical-align: top;
+    display: block;
+    border-radius: 12px;
+    padding: 5.0px 3px;
+    font-size: 12px;
+    color: rgba(0,0,0,.5);
+    line-height: 28px;
+    text-align: center;
+    width: 14.0%;
+    float: left;
+}
+  
+  
+  
+  
+  
+  
+  
+  
+   /* emiia обрамление блока авто беспилотник ... */
+  
+  .mapbox-directions-profile {
+  
+ 
+    height: 44px;
+
+      box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1) !important; 
+      
+      
+ 
+   
+    }
+    
+    
+    
+    
+    
+  
+  
+  
+    
+    
+    
+ 
+ 
+ label::before {
+
+position: absolute;
+
+ top:8.1ex;
+   
+   left: 25.0ex; 
+    
+     padding: 0;
+    width: 17px;
+    height: 18px;
+    
+   
+   
+    
+    
+    text-align: center;
+  
+   cursor: pointer;
+  
+    
+   
+
+
+    content:""; 
+    
+    
+    background-image: url('https://www.emiia.ai/icon/inv.svg');
+    
+        background-repeat: no-repeat;
+
+ 
+}   
+
+
+
+
+
+
+
+
+
+ label::after {
+
+position: absolute;
+
+ top:7.8ex;
+   
+   left: 30.2ex; 
+    
+     padding: 0;
+    width: 19px;
+    height: 19px;
+    
+   
+   
+    
+    
+    text-align: center;
+  
+   cursor: pointer;
+  
+    
+   
+
+
+    content:""; 
+    
+    
+    background-image: url('https://www.emiia.ai/icon/drone.svg');
+    
+    
+     background-repeat: no-repeat;
+ 
+} 
+
+
+
+
+
+
+
+
+    .mapbox-form-label .directions-icon::after {
+
+position: absolute;
+
+ top:7.7ex;
+   
+   left: 36.4ex; 
+    
+     padding: 0;
+    width: 22px;
+    height: 20px;
+    
+   
+   
+    
+    
+    text-align: center;
+  
+   cursor: pointer;
+  
+    
+   
+
+
+    content:""; 
+    
+    
+    background-image: url('https://www.emiia.ai/icon/robomobile.svg');
+    
+    
+     background-repeat: no-repeat;
+ 
+} 
+
+
+
+
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ .mapbox-directions-profile label:hover {
+      color:rgba(0,0,0,.75);
+      
+    
+      }
+    
+    
+  .mapbox-directions-profile input[type=radio] {
+    display:none;
+    }
+    
+    
+    
+
+
+/* Routes */
+.mapbox-directions-routes ul {
+  list-style:none;
+  margin:0;
+  padding:10px 10px 0 10px;
+  border-bottom:1px solid rgba(255,255,255,.25);
+  }
+
+.mapbox-directions-routes li {
+  font-size:12px;
+  padding:10px 10px 10px 80px;
+  display:block;
+  position:relative;
+  cursor:pointer;
+  color:rgba(255,255,255,.5);
+  min-height:60px;
+  }
+
+.mapbox-directions-routes li:hover,
+.mapbox-directions-routes .mapbox-directions-route-active {
+  color:white;
+  }
+
+.mapbox-directions-route-heading {
+  position:absolute;
+  left:10px;
+  top:10px;
+  
+    
+  
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+/* ВАЖНО ВАЖНО ВАЖНО emiia цвет панели инструкции к навигации, цвет текста...) Route Summary */
+.mapbox-directions-route-summary {
+  position: relative;
+  z-index:1;
+  max-width: 340px;
+  background-color: transparent;
+  color:#383838;
+  padding:5px 5px 5px 5px;
+  font-size:15px;
+  line-height:38px; 
+  border-radius:50px;
+  
+
+  
+ height: 95.5px;
+ 
+  
+ 
+   
+  
+
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+ /* полоса прокрутки (скроллбар) */
+::-webkit-scrollbar {
+    width: 5px; /* ширина для вертикального скролла */
+
+   background-color: white;
+   max-height: 0.0vh; 
+   
+}
+
+
+
+
+
+.mapbox-directions-component, .mapbox-directions-component, .mapbox-directions-component, .mapbox-directions-component{
+  
+  
+    }
+
+
+
+  
+  .mapbox-directions-route-summary + .mapbox-directions-instructions {
+  
+
+ 
+    }
+  
+  
+  
+  
+  
+  
+  
+  
+  .mapbox-directions-route-summary h1 {
+    font-weight:500;
+    margin:0;
+    display:inline;
+    font-size:inherit;
+    line-height:inherit;
+    
+  
+    
+    }
+    
+  .mapbox-directions-route-summary span {
+    color:#383838;
+    margin:0px 5px;
+    
+   
+    
+    
+    }
+    
+    
+ 
+ 
+ 
+ 
+    
+    
+.mapbox-directions-route-summary span::before {
+
+position: absolute;
+    top:6.2ex;
+    left: 6.0ex;
+    background: #4CCCAA;
+    
+    padding: 0;
+    width: 260px;
+    height: 44px;
+    text-align: center;
+
+    border-radius: 12px 12px 12px 12px;
+    box-shadow: 0 0 10px 0px rgb(0 0 0 / 10%);
+    
+    
+    text-align: center;
+    line-height: 42px;
+    
+    color: white;
+    
+    cursor: pointer;
+    
+    font-weight: 580;
+
+
+    content:"В путь..."; 
+    
+ 
+ 
+}   
+
+
+
+
+
+
+
+h1::before {
+
+position: absolute;
+    top:6.2ex;
+    left: 0.1ex;
+    background: #7394ef;
+    
+    padding: 0;
+    width: 44px;
+    height: 44px;
+    text-align: center;
+
+    border-radius: 12px 12px 12px 12px;
+    box-shadow: 0 0 10px 0px rgb(0 0 0 / 10%);
+    
+    
+    text-align: center;
+    line-height: 38px;
+    
+    color: white;
+    
+    z-index: -1;
+    
+    cursor: pointer;
+    
+    font-weight: 580;
+
+
+    content:""; 
+    
+ 
+ 
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+.mapbox-directions-route-summary::after {
+
+position: absolute;
+
+ top:1.5ex;
+   
+   left: 22ex; 
+    
+     padding: 0;
+    width: 24px;
+    height: 25px;
+    
+   
+   
+    
+    
+    text-align: center;
+  
+   cursor: pointer;
+  
+    
+   
+
+
+    content:""; 
+    
+    
+    background-image: url('https://www.emiia.ai/icon/link.svg');
+    
+    
+
+    
+    
+        background-repeat: no-repeat;
+    
+  
+    
+    
+    
+ 
+}   
+
+
+
+
+
+
+
+
+
+
+
+.mapbox-directions-route-summary::before{
+  position: absolute;
+
+top:8.0ex;
+   
+   left: 1.9ex; 
+    
+
+    
+    padding: 0;
+    width: 15px;
+    height: 15px;
+    
+    text-align: center;
+
+  
+  
+   cursor: pointer;
+  
+color: #383838;
+
+
+ background-image:  url('https://www.emiia.ai/icon/trek.svg'); 
+
+    content:"";
+    
+
+      background-repeat: no-repeat;
+  
+    
+    
+    
+ 
+}
+
+
+
+
+
+
+    
+    
+
+  /* Alt route selection */
+  .mapbox-directions-instructions {
+      overflow: scroll;
+
+
+    }
+    
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+    
+    /* Высота информационной панели при навигации внизу */
+    .mapbox-directions-instructions-wrapper {
+      max-height: 0.0vh;
+
+
+      }
+      
+      
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+      
+      
+      
+      
+  .mapbox-directions-routes {
+    margin-left: 5px;
+    font-size:12px;
+    float: right;
+    }
+  .mapbox-directions-routes input[type=radio] { display: none;}
+  .mapbox-directions-routes input[type=radio]:not(:checked) + .button:before { width: 0;}
+  .mapbox-directions-routes input[type=radio] + label {
+    background-color:rgba(255,255,255,0.10);
+    float:left;
+    padding:0 10px;
+    cursor:pointer;
+    }
+    .mapbox-directions-routes input[type=radio] + label:hover,
+    .mapbox-directions-routes input[type=radio]:checked + label {
+      background-color:rgba(255,255,255,0.25);
+      }
+
+/* Instructions */
+.mapbox-directions-instructions .directions-icon {
+  position:absolute;
+  left:12px;
+  top:20px;
+
+  margin:auto
+  
+    
+  }
+  .mapbox-directions-instructions .directions-icon:before {
+    vertical-align:top;
+    
+    }
+
+.mapbox-directions-error {
+  padding:20px;
+  font-size:20px;
+  line-height:25px;
+  }
+.mapbox-directions-step-distance {
+  color:rgba(255,255,255,.5);
+  position:absolute;
+  padding:5px 10px;
+  font-size:14px;
+  left:30px;
+  bottom:-10px;
+  
+
+  
+  
+  }
+.mapbox-directions-steps {
+  position:relative;
+  list-style:none;
+  margin:0;
+  padding:0;
+  }
+  
+  
+  
+  
+  .mapbox-directions-step {
+    position:relative;
+    color:rgba(255,255,255,.75);
+    cursor:pointer;
+    padding:20px 20px 20px 40px;
+    font-size:14px;
+    line-height:18px;
+    font-weight: 300;
+    letter-spacing:0.1em;
+    
+
+    
+    
+    }
+    .mapbox-directions-step * { pointer-events:none; }
+    .mapbox-directions-step:hover {
+      color:white;
+      }
+    .mapbox-directions-step:after {
+      content:'';
+      position:absolute;
+      top:45px;
+      bottom:-10px;
+      border-left:2px dotted rgba(255,255,255,.2);
+      left:20px;
+      }
+    .mapbox-directions-step:last-child:after,
+    .mapbox-directions-step:last-child .mapbox-directions-step-distance {
+      display:none;
+      }
+
+.mapbox-marker-drag-icon {
+  display:block;
+  background-color:#444;
+  border-radius:50%;
+  box-shadow:0 0 5px 0 rgba(0,0,0,0.5);
+  }
+  .mapbox-marker-drag-icon-step {
+    background-color:4CCCAA;
+    }
+
+.mapbox-directions-clearfix:after {
+  content:'';
+  display:block;
+  height:0;
+  clear:both;
+  visibility:hidden;
+  }
+  
+  
+  
+ 
+ 
+ 
+ 
+  
+  
+  
+  
+  
+/* emiia ширина нижней панели */
+/* Mobile */
+@media only screen and (max-width:300px) {
+
+
+
+
+
+
+
+
+
+
+
+/* Containers */
+.directions-control.directions-control { width:100%; max-width:100%; 
+
+
+}
+
+/* Input container */
+.directions-control.directions-control-inputs { top:0;left:0; }
+.mapbox-directions-profile { margin:10px;
+
+
+
+
+}
+
+/* Instructions container */
+.mapbox-directions-routes { float:right; margin-right:10px; }
+.directions-control.directions-control-directions { top:auto; max-height:40%; }
+.mapbox-directions-multiple { min-height:50px; }
+
+}
+
+@-webkit-keyframes rotate { from { -webkit-transform: rotate(0deg); } to { -webkit-transform: rotate(360deg); } }
+   @-moz-keyframes rotate { from { -moz-transform: rotate(0deg); } to { -moz-transform: rotate(360deg); } }
+    @-ms-keyframes rotate { from { -ms-transform: rotate(0deg); } to { -ms-transform: rotate(360deg); } }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* icons */
+.directions-icon {
+  display:inline-block;
+  width:20px;
+  height:20px;
+  vertical-align:middle;
+  speak:none;
+  background-repeat:no-repeat;
+  }
+  .directions-icon-arrive {
+    background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgaWQ9InN2ZzUzMjciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDIwIDIwIj48ZGVmcyBpZD0iZGVmczUzMjkiLz48bWV0YWRhdGEgaWQ9Im1ldGFkYXRhNTMzMiIvPjxnIGlkPSJsYXllcjEiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMjAwLC05OTIuMzYyMTgpIj48ZyBpZD0iZzU5MzYiIHRyYW5zZm9ybT0ibWF0cml4KDEsMCwwLC0xLDEsMjAwNC43MjQ0KSIgb3BhY2l0eT0iMC41Ii8+PGcgaWQ9Imc1OTMyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxLC0yKSIvPjxnIHRyYW5zZm9ybT0ibWF0cml4KDEsMCwwLC0xLDEsMjAyNC43MjQ0KSIgaWQ9Imc2MDM4IiBmaWxsPSIjZmZmIi8+PGcgaWQ9InRleHQ2NjA2IiBzdHlsZT0iLWlua3NjYXBlLWZvbnQtc3BlY2lmaWNhdGlvbjonT3BlbiBTYW5zIEJvbGQnO2Jsb2NrLXByb2dyZXNzaW9uOnRiO2NvbG9yOiNGRkY7ZGlyZWN0aW9uOmx0cjtkaXNwbGF5OmlubGluZTtlbmFibGUtYmFja2dyb3VuZDphY2N1bXVsYXRlO2ZpbGwtcnVsZTpub256ZXJvO2ZpbGw6I0ZGRjtmb250LWZhbWlseTonT3BlbiBTYW5zJztmb250LXNpemU6MTYuODE7Zm9udC13ZWlnaHQ6Ym9sZDtsZXR0ZXItc3BhY2luZzpub3JtYWw7bGluZS1oZWlnaHQ6MTI1O292ZXJmbG93OnZpc2libGU7dGV4dC1hbGlnbjpjZW50ZXI7dGV4dC1hbmNob3I6bWlkZGxlO3RleHQtZGVjb3JhdGlvbi1saW5lOm5vbmU7dGV4dC1kZWNvcmF0aW9uOm5vbmU7dGV4dC1pbmRlbnQ6MDt0ZXh0LXRyYW5zZm9ybTpub25lO3dvcmQtc3BhY2luZzpub3JtYWw7d3JpdGluZy1tb2RlOmxyLXRiIj48cGF0aCBkPSJtMzIwNiA5OTYuMzYgMy43MyAwcTIuNTUgMCAzLjcgMC43MyAxLjE2IDAuNzIgMS4xNiAyLjMxIDAgMS4wOC0wLjUxIDEuNzYtMC41IDAuNjktMS4zNCAwLjgzbDAgMC4wOHExLjE0IDAuMjUgMS42NCAwLjk1IDAuNTEgMC43IDAuNTEgMS44NiAwIDEuNjQtMS4xOSAyLjU2LTEuMTggMC45Mi0zLjIyIDAuOTJsLTQuNDkgMCAwLTEyem0yLjU0IDQuNzUgMS40OCAwcTEuMDMgMCAxLjQ5LTAuMzIgMC40Ny0wLjMyIDAuNDctMS4wNiAwLTAuNjktMC41MS0wLjk4LTAuNS0wLjMtMS41OS0wLjNsLTEuMzQgMCAwIDIuNjd6bTAgMi4wMiAwIDMuMTMgMS42NiAwcTEuMDUgMCAxLjU1LTAuNCAwLjUtMC40IDAuNS0xLjIzIDAtMS40OS0yLjEzLTEuNDlsLTEuNTggMHoiIGlkPSJwYXRoMjcyMTIiLz48L2c+PC9nPjwvc3ZnPg==);
+  }
+  .directions-icon-slight-left {
+    background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgMjAgMjAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMjAwLC05OTIuMzYyMTgpIj48cGF0aCBkPSJtMzIwNiA5OTYuNCAwIDcuNSAzLjEtMy4xIDIuOSAzIDAgNC42IDIgMCAwLTUuNC0zLjUtMy41IDMtM3oiIGZpbGw9IiNGRkYiLz48ZyB0cmFuc2Zvcm09Im1hdHJpeCgxLDAsMCwtMSwxLDIwMDQuNzI0NCkiIG9wYWNpdHk9IjAuNSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEsLTIpIi8+PGcgdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsMSwyMDI0LjcyNDQpIiBmaWxsPSIjZmZmIi8+PC9nPjwvc3ZnPg==);
+  }
+  .directions-icon-slight-right {
+    background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgMjAgMjAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMjAwLC05OTIuMzYyMTgpIj48cGF0aCBkPSJtMzIwNi41IDk5Ni40IDMgMy0zLjUgMy41IDAgNS40IDIgMCAwLTQuNiAyLjktMyAzLjEgMy4xIDAtNy41eiIgZmlsbD0iI0ZGRiIvPjxnIHRyYW5zZm9ybT0ibWF0cml4KDEsMCwwLC0xLDEsMjAwNC43MjQ0KSIgb3BhY2l0eT0iMC41Ii8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMSwtMikiLz48ZyB0cmFuc2Zvcm09Im1hdHJpeCgxLDAsMCwtMSwxLDIwMjQuNzI0NCkiIGZpbGw9IiNmZmYiLz48L2c+PC9zdmc+);
+    }
+  .directions-icon-straight {
+    background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgMjAgMjAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMjAwLC05OTIuMzYyMTgpIj48cGF0aCBkPSJtMzIxNS41IDEwMDEuNC01LjUtNS41LTUuNSA1LjUgNC41IDAgMCA3IDIgMCAwLTd6IiBmaWxsPSIjRkZGIi8+PGcgdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsMSwyMDA0LjcyNDQpIiBvcGFjaXR5PSIwLjUiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxLC0yKSIvPjxnIHRyYW5zZm9ybT0ibWF0cml4KDEsMCwwLC0xLDEsMjAyNC43MjQ0KSIgZmlsbD0iI2ZmZiIvPjxwYXRoIGQ9Im0zNDA3IDk0Ny40LTIgNiA3LjMgMC0yIDYgMiAwIDQtMTItMS4yIDB6IiBmaWxsPSIjZmZmIi8+PC9nPjwvc3ZnPg==);
+  }
+  .directions-icon-depart {
+    background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgaWQ9InN2ZzUzMjciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDIwIDIwIj48ZGVmcyBpZD0iZGVmczUzMjkiLz48bWV0YWRhdGEgaWQ9Im1ldGFkYXRhNTMzMiIvPjxnIGlkPSJsYXllcjEiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMjAwLC05OTIuMzYyMTgpIj48ZyBpZD0iZzU5MzYiIHRyYW5zZm9ybT0ibWF0cml4KDEsMCwwLC0xLDEsMjAwNC43MjQ0KSIgb3BhY2l0eT0iMC41Ii8+PGcgaWQ9Imc1OTMyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxLC0yKSIvPjxnIHRyYW5zZm9ybT0ibWF0cml4KDEsMCwwLC0xLDEsMjAyNC43MjQ0KSIgaWQ9Imc2MDM4IiBmaWxsPSIjZmZmIi8+PGcgaWQ9InRleHQ2NTkzIiBzdHlsZT0iLWlua3NjYXBlLWZvbnQtc3BlY2lmaWNhdGlvbjonT3BlbiBTYW5zIEJvbGQnO2Jsb2NrLXByb2dyZXNzaW9uOnRiO2NvbG9yOiNGRkY7ZGlyZWN0aW9uOmx0cjtkaXNwbGF5OmlubGluZTtlbmFibGUtYmFja2dyb3VuZDphY2N1bXVsYXRlO2ZpbGwtcnVsZTpub256ZXJvO2ZpbGw6I0ZGRjtmb250LWZhbWlseTonT3BlbiBTYW5zJztmb250LXNpemU6MTYuNzQ7Zm9udC13ZWlnaHQ6Ym9sZDtsZXR0ZXItc3BhY2luZzpub3JtYWw7bGluZS1oZWlnaHQ6MTI1O292ZXJmbG93OnZpc2libGU7dGV4dC1hbGlnbjpjZW50ZXI7dGV4dC1hbmNob3I6bWlkZGxlO3RleHQtZGVjb3JhdGlvbi1saW5lOm5vbmU7dGV4dC1kZWNvcmF0aW9uOm5vbmU7dGV4dC1pbmRlbnQ6MDt0ZXh0LXRyYW5zZm9ybTpub25lO3dvcmQtc3BhY2luZzpub3JtYWw7d3JpdGluZy1tb2RlOmxyLXRiIj48cGF0aCBkPSJtMzIxMy4wNCAxMDA4LjM2LTAuODctMi44NC00LjM2IDAtMC44NyAyLjg0LTIuNzMgMCA0LjIyLTEyIDMuMSAwIDQuMjMgMTItMi43MyAwem0tMS40Ny00Ljk3cS0xLjItMy44Ny0xLjM2LTQuMzctMC4xNS0wLjUxLTAuMjEtMC44LTAuMjcgMS4wNS0xLjU0IDUuMTdsMy4xMSAweiIgaWQ9InBhdGgyNzIwOSIvPjwvZz48L2c+PC9zdmc+);
+  }
+  .directions-icon-roundabout {
+    background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgMjAgMjAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMjAwLC05OTIuMzYyMTgpIj48cGF0aCBkPSJtMzIxMCA5OTUuNGMtMS41IDAtMy4xIDAuNi00LjIgMS43LTIuMyAyLjMtMi4zIDYuMiAwIDguNWwxLjQtMS40Yy0xLjYtMS42LTEuNi00LjEgMC01LjYgMS42LTEuNiA0LjEtMS42IDUuNiAwIDEuNiAxLjYgMS42IDQuMSAwIDUuNi0wLjggMC44LTEuOCAxLjItMi44IDEuMmwtMSAwIDAgNCAyIDAgMC0yLjFjMS4yLTAuMiAyLjQtMC44IDMuMy0xLjcgMi4zLTIuMyAyLjMtNi4yIDAtOC41LTEuMi0xLjItMi43LTEuNy00LjItMS43eiIgc3R5bGU9Ii1pbmtzY2FwZS1mb250LXNwZWNpZmljYXRpb246U2FucztiYXNlbGluZS1zaGlmdDpiYXNlbGluZTtibG9jay1wcm9ncmVzc2lvbjp0YjtkaXJlY3Rpb246bHRyO2ZpbGw6I0ZGRjtmb250LWZhbWlseTpTYW5zO2ZvbnQtc2l6ZTptZWRpdW07bGV0dGVyLXNwYWNpbmc6bm9ybWFsO2xpbmUtaGVpZ2h0Om5vcm1hbDt0ZXh0LWFsaWduOnN0YXJ0O3RleHQtYW5jaG9yOnN0YXJ0O3RleHQtZGVjb3JhdGlvbi1saW5lOm5vbmU7dGV4dC1kZWNvcmF0aW9uOm5vbmU7dGV4dC1pbmRlbnQ6MDt0ZXh0LXRyYW5zZm9ybTpub25lO3dvcmQtc3BhY2luZzpub3JtYWw7d3JpdGluZy1tb2RlOmxyLXRiIi8+PGcgdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsMSwyMDA0LjcyNDQpIiBvcGFjaXR5PSIwLjUiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxLC0yKSIvPjxnIHRyYW5zZm9ybT0ibWF0cml4KDEsMCwwLC0xLDEsMjAyNC43MjQ0KSIgZmlsbD0iI2ZmZiIvPjwvZz48L3N2Zz4=);
+  }
+  .directions-icon-error {
+    background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgMjAgMjAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMjAwLC05OTIuMzYyMTgpIj48ZyB0cmFuc2Zvcm09Im1hdHJpeCgxLDAsMCwtMSwxLDIwMDQuNzI0NCkiIG9wYWNpdHk9IjAuNSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEsLTIpIi8+PGcgdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsMSwyMDI0LjcyNDQpIiBmaWxsPSIjZmZmIi8+PHBhdGggZD0ibTMyMTAgOTk2LjRjLTAuNiAwLTEuMiAwLjMtMS41IDAuOGwtNC4zIDkuMmMtMC41IDAuOCAwIDIgMS4xIDJsNC43IDAgNC43IDBjMS4xIDAgMS42LTEuMiAxLjEtMmwtNC4zLTkuMmMtMC4zLTAuNS0wLjktMC44LTEuNS0wLjh6bTAgMyAxIDEgMCAzLTIgMCAwLTN6bS0xIDUgMiAwIDAgMi0yIDB6IiBmaWxsPSIjMDAwIi8+PC9nPjwvc3ZnPg==);
+  }
+  .directions-icon-reverse {
+    background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgMjAgMjAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMjAwLC05OTIuMzYyMTgpIj48ZyB0cmFuc2Zvcm09Im1hdHJpeCgxLDAsMCwtMSwxLDIwMDQuNzI0NCkiIG9wYWNpdHk9IjAuNSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEsLTIpIi8+PGcgdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsMSwyMDI0LjcyNDQpIiBmaWxsPSIjZmZmIi8+PHBhdGggZD0ibTMyMTAgOTk1LjktNC41IDQuNSAzLjUgMCAwIDQtMy41IDAgNC41IDQuNSA0LjUtNC41LTMuNSAwIDAtNCAzLjUgMC00LjUtNC41eiIgZmlsbD0iIzAwMCIvPjwvZz48L3N2Zz4=);
+  }
+  .directions-icon-sharp-left {
+    background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgMjAgMjAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMjAwLC05OTIuMzYyMTgpIj48cGF0aCBkPSJtMzIxMy42IDk5Ni40LTYuNSA2LjUtMy0zIDAgNy41IDcuNSAwLTMuMS0zLjEgNC42LTQuNSAwIDUuNiAyIDAgMC04LTEuNC0xeiIgZmlsbD0iI0ZGRiIvPjxnIHRyYW5zZm9ybT0ibWF0cml4KDEsMCwwLC0xLDEsMjAwNC43MjQ0KSIgb3BhY2l0eT0iMC41Ii8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMSwtMikiLz48ZyB0cmFuc2Zvcm09Im1hdHJpeCgxLDAsMCwtMSwxLDIwMjQuNzI0NCkiIGZpbGw9IiNmZmYiLz48L2c+PC9zdmc+);
+  }
+  .directions-icon-sharp-right {
+    background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgMjAgMjAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMjAwLC05OTIuMzYyMTgpIj48cGF0aCBkPSJtMzIwNi40IDk5Ni40LTEuNCAxIDAgOCAyIDAgMC01LjYgNC42IDQuNS0zLjEgMy4xIDcuNSAwIDAtNy41LTMgMy02LjUtNi41eiIgZmlsbD0iI0ZGRiIvPjxnIHRyYW5zZm9ybT0ibWF0cml4KDEsMCwwLC0xLDEsMjAwNC43MjQ0KSIgb3BhY2l0eT0iMC41Ii8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMSwtMikiLz48ZyB0cmFuc2Zvcm09Im1hdHJpeCgxLDAsMCwtMSwxLDIwMjQuNzI0NCkiIGZpbGw9IiNmZmYiLz48cGF0aCBkPSJtMzQwNyA5NDcuNC0yIDYgNy4zIDAtMiA2IDIgMCA0LTEyLTEuMiAweiIgZmlsbD0iI2ZmZiIvPjwvZz48L3N2Zz4=);
+  }
+  .directions-icon-left {
+    background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgMjAgMjAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMjAwLC05OTIuMzYyMTgpIj48cGF0aCBkPSJtMzIwOSA5OTUuOSAwIDQuNSA1IDAgMSAxIDAgNi0yIDAgMC01LTQgMCAwIDQuNS01LjUtNS41eiIgc3R5bGU9Ii1pbmtzY2FwZS1mb250LXNwZWNpZmljYXRpb246U2FucztiYXNlbGluZS1zaGlmdDpiYXNlbGluZTtibG9jay1wcm9ncmVzc2lvbjp0YjtkaXJlY3Rpb246bHRyO2ZpbGw6I0ZGRjtmb250LWZhbWlseTpTYW5zO2ZvbnQtc2l6ZTptZWRpdW07bGV0dGVyLXNwYWNpbmc6bm9ybWFsO2xpbmUtaGVpZ2h0Om5vcm1hbDt0ZXh0LWFsaWduOnN0YXJ0O3RleHQtYW5jaG9yOnN0YXJ0O3RleHQtZGVjb3JhdGlvbi1saW5lOm5vbmU7dGV4dC1kZWNvcmF0aW9uOm5vbmU7dGV4dC1pbmRlbnQ6MDt0ZXh0LXRyYW5zZm9ybTpub25lO3dvcmQtc3BhY2luZzpub3JtYWw7d3JpdGluZy1tb2RlOmxyLXRiIi8+PGcgdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsMSwyMDA0LjcyNDQpIiBvcGFjaXR5PSIwLjUiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxLC0yKSIvPjxnIHRyYW5zZm9ybT0ibWF0cml4KDEsMCwwLC0xLDEsMjAyNC43MjQ0KSIgZmlsbD0iI2ZmZiIvPjwvZz48L3N2Zz4=);
+  }
+  .directions-icon-right {
+    background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgMjAgMjAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMjAwLC05OTIuMzYyMTgpIj48cGF0aCBkPSJtMzIxMSA5OTUuOSAwIDQuNS01IDAtMSAxIDAgNiAyIDAgMC01IDQgMCAwIDQuNSA1LjUtNS41eiIgc3R5bGU9Ii1pbmtzY2FwZS1mb250LXNwZWNpZmljYXRpb246U2FucztiYXNlbGluZS1zaGlmdDpiYXNlbGluZTtibG9jay1wcm9ncmVzc2lvbjp0YjtkaXJlY3Rpb246bHRyO2ZpbGw6I0ZGRjtmb250LWZhbWlseTpTYW5zO2ZvbnQtc2l6ZTptZWRpdW07bGV0dGVyLXNwYWNpbmc6bm9ybWFsO2xpbmUtaGVpZ2h0Om5vcm1hbDt0ZXh0LWFsaWduOnN0YXJ0O3RleHQtYW5jaG9yOnN0YXJ0O3RleHQtZGVjb3JhdGlvbi1saW5lOm5vbmU7dGV4dC1kZWNvcmF0aW9uOm5vbmU7dGV4dC1pbmRlbnQ6MDt0ZXh0LXRyYW5zZm9ybTpub25lO3dvcmQtc3BhY2luZzpub3JtYWw7d3JpdGluZy1tb2RlOmxyLXRiIi8+PGcgdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsMSwyMDA0LjcyNDQpIiBvcGFjaXR5PSIwLjUiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxLC0yKSIvPjxnIHRyYW5zZm9ybT0ibWF0cml4KDEsMCwwLC0xLDEsMjAyNC43MjQ0KSIgZmlsbD0iI2ZmZiIvPjxwYXRoIGQ9Im0zNDA3IDk0Ny40LTIgNiA3LjMgMC0yIDYgMiAwIDQtMTItMS4yIDB6IiBmaWxsPSIjZmZmIi8+PC9nPjwvc3ZnPg==);
+  }
+  .directions-icon-u-turn {
+    background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgMjAgMjAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMjAwLC05OTIuMzYyMTgpIj48cGF0aCBkPSJtMzIwOSA5OTYuNGMtMS43IDAtMy4xIDAuNi0zLjkgMS42LTAuOCAxLTEuMSAyLjItMS4xIDMuNGwwIDYgMiAwIDAtNmMwLTAuOCAwLjItMS42IDAuNy0yLjEgMC40LTAuNSAxLjEtMC45IDIuMy0wLjkgMS4zIDAgMS45IDAuNCAyLjMgMC45IDAuNCAwLjUgMC43IDEuMyAwLjcgMi4xbDAgMi00LjUgMCA1LjUgNS41IDUuNS01LjUtNC41IDAgMC0yYzAtMS4yLTAuMy0yLjQtMS4xLTMuNC0wLjgtMS0yLjItMS42LTMuOS0xLjZ6IiBzdHlsZT0iLWlua3NjYXBlLWZvbnQtc3BlY2lmaWNhdGlvbjpTYW5zO2Jhc2VsaW5lLXNoaWZ0OmJhc2VsaW5lO2Jsb2NrLXByb2dyZXNzaW9uOnRiO2RpcmVjdGlvbjpsdHI7ZmlsbDojRkZGO2ZvbnQtZmFtaWx5OlNhbnM7Zm9udC1zaXplOm1lZGl1bTtsZXR0ZXItc3BhY2luZzpub3JtYWw7bGluZS1oZWlnaHQ6bm9ybWFsO3RleHQtYWxpZ246c3RhcnQ7dGV4dC1hbmNob3I6c3RhcnQ7dGV4dC1kZWNvcmF0aW9uLWxpbmU6bm9uZTt0ZXh0LWRlY29yYXRpb246bm9uZTt0ZXh0LWluZGVudDowO3RleHQtdHJhbnNmb3JtOm5vbmU7d29yZC1zcGFjaW5nOm5vcm1hbDt3cml0aW5nLW1vZGU6bHItdGIiLz48ZyB0cmFuc2Zvcm09Im1hdHJpeCgxLDAsMCwtMSwxLDIwMDQuNzI0NCkiIG9wYWNpdHk9IjAuNSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEsLTIpIi8+PGcgdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsMSwyMDI0LjcyNDQpIiBmaWxsPSIjZmZmIi8+PC9nPjwvc3ZnPg==);
+  }
+  .directions-icon-waypoint {
+    background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgMjAgMjAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMjAwLC05OTIuMzYyMTgpIj48ZyB0cmFuc2Zvcm09Im1hdHJpeCgxLDAsMCwtMSwxLDIwMDQuNzI0NCkiIG9wYWNpdHk9IjAuNSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEsLTIpIi8+PGcgdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsMSwyMDI0LjcyNDQpIiBmaWxsPSIjZmZmIi8+PHBhdGggZD0ibTMyMTUgMTAwMS40YzAgMi44LTUgOC01IDggMCAwLTUtNS4yLTUtOCAwLTIuOCAyLjItNSA1LTUgMi44IDAgNSAyLjIgNSA1eiIgZmlsbD0iI0ZGRiIvPjwvZz48L3N2Zz4=);
+  }
+ 
+ 
+ </style>
+ 
+    
+    
+    
+    
+    
+    
+    
+    
+        
+    <style>
+
+
+
+*{margin:0;padding:0}body{font-family:-apple-system,Montserrat, montserrat;font-size:14px;font-weight:280;line-height:1.5}.is-loading{position:fixed;right:0;bottom:0;height:100%;text-align:center;color:#536580;text-shadow:0 2px 2px hsla(0,0%,100%,.4);
+
+a { 
+    text-decoration: none; /* Отменяем подчеркивание у ссылки */
+   } 
+
+
+
+
+background:hsla(0,0%,100%,.6);font-size:1.5rem;z-index:99999}.app-info,.is-loading{top:0;left:0;width:100%}.app-info{display:block;position:absolute;margin:0;padding:.5rem .75rem;background-color:transparent;color:#2b3441;
+
+z-index:1!important;box-sizing:border-box}.app-info *{text-shadow:0 2px 3px hsla(0,0%,100%,.6),0 -2px 3px hsla(0,0%,100%,.6)}.app-info h1{font-size:1rem;margin:.2rem 0;font-weight:400}
+
+.app-info h1 .lang-en{display:block;font-size:.875rem}.app-info p{font-size:.75rem;color:#545d6a}.app-info a{color:#536580;text-decoration:none}.app-info a:focus,.app-info a:hover{color:#495971;text-decoration:underline}.language-toggle-button{position:absolute;right:.75rem;top:.5rem;-webkit-appearance:none;padding:.5rem .75rem;color:#536580;background:hsla(0,0%,100%,.8);border:0;border-radius:4px;text-shadow:none;font-size:.75rem}.language-toggle-button:focus,.language-toggle-button:hover{color:#495971;background-color:#fff}.wrapper[lang*=zh-] [lang=en],.wrapper[lang=en] [lang*=zh-]{display:none}.mapContainer{position:absolute;top:0;left:0;right:0;bottom:0;width:100vw;height:100vh}.marker{background-image:url(/images/pin.svg);background-size:auto 100%;width:32px;height:32px;cursor:pointer}
+
+
+.mapboxgl-popup-content:not(:empty){box-shadow:0 0 10px 2px rgba(0,0,0,.1)}
+
+
+
+
+
+.mapboxgl-popup-content{font-size:1rem;font-weight: 100;border-radius:7px;padding:1rem;width:321px}[lang=en]
+
+
+
+
+
+.mapboxgl-popup-content{min-width:380px}.mapboxgl-popup .tag{font-size:.875rem;color:#545d6a;line-height:1.2}
+.mapboxgl-popup .tag[lang=en]{font-size:.75rem}.mapboxgl-popup h3{color:#2b3441;margin:.5rem 0;text-transform:capitalize;line-height:1.2}.mapboxgl-popup h3[lang=en]{font-size:.875rem}.mapboxgl-popup p{font-size:.875rem;color:#545d6a;margin-bottom:.25rem}.mapboxgl-popup p[lang=en]{font-size:.875rem}.mapboxgl-popup .divider{color:#efefef}
+
+.mapboxgl-popup a{color:#3D85C6;text-decoration:none}.mapboxgl-popup a:focus,.mapboxgl-popup a:hover{color:#3D85C6;text-decoration:none}.mapboxgl-popup-close-button{font-size:.0rem;padding:.0rem}
+/*# sourceMappingURL=main.9498309c.chunk.css.map */
+
+
+
+
+
+a.mapboxgl-ctrl-logo{
+    width: 0;
+    height: 0;
+    margin: 0 0 -4px-4px;
+    display: block;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    overflow: hidden;
+    background-image: url(data:image/svg+xml;charset=utf-8,%3Csvg width='88' height='23' viewBox='0 0 88 23' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' fill-rule='evenodd'%3E %3Cdefs%3E %3Cpath id='logo' d='M11.5 2.25c5.105 0 9.25 4.145 9.25 9.25s-4.145 9.25-9.25 9.25-9.25-4.145-9.25-9.25 4.145-9.25 9.25-9.25zM6.997 15.983c-.051-.338-.828-5.802 2.233-8.873a4.395 4.395 0 013.13-1.28c1.27 0 2.49.51 3.39 1.42.91.9 1.42 2.12 1.42 3.39 0 1.18-.449 2.301-1.28 3.13C12.72 16.93 7 16 7 16l-.003-.017zM15.3 10.5l-2 .8-.8 2-.8-2-2-.8 2-.8.8-2 .8 2 2 .8z'/%3E %3Cpath id='text' d='M50.63 8c.13 0 .23.1.23.23V9c.7-.76 1.7-1.18 2.73-1.18 2.17 0 3.95 1.85 3.95 4.17s-1.77 4.19-3.94 4.19c-1.04 0-2.03-.43-2.74-1.18v3.77c0 .13-.1.23-.23.23h-1.4c-.13 0-.23-.1-.23-.23V8.23c0-.12.1-.23.23-.23h1.4zm-3.86.01c.01 0 .01 0 .01-.01.13 0 .22.1.22.22v7.55c0 .12-.1.23-.23.23h-1.4c-.13 0-.23-.1-.23-.23V15c-.7.76-1.69 1.19-2.73 1.19-2.17 0-3.94-1.87-3.94-4.19 0-2.32 1.77-4.19 3.94-4.19 1.03 0 2.02.43 2.73 1.18v-.75c0-.12.1-.23.23-.23h1.4zm26.375-.19a4.24 4.24 0 00-4.16 3.29c-.13.59-.13 1.19 0 1.77a4.233 4.233 0 004.17 3.3c2.35 0 4.26-1.87 4.26-4.19 0-2.32-1.9-4.17-4.27-4.17zM60.63 5c.13 0 .23.1.23.23v3.76c.7-.76 1.7-1.18 2.73-1.18 1.88 0 3.45 1.4 3.84 3.28.13.59.13 1.2 0 1.8-.39 1.88-1.96 3.29-3.84 3.29-1.03 0-2.02-.43-2.73-1.18v.77c0 .12-.1.23-.23.23h-1.4c-.13 0-.23-.1-.23-.23V5.23c0-.12.1-.23.23-.23h1.4zm-34 11h-1.4c-.13 0-.23-.11-.23-.23V8.22c.01-.13.1-.22.23-.22h1.4c.13 0 .22.11.23.22v.68c.5-.68 1.3-1.09 2.16-1.1h.03c1.09 0 2.09.6 2.6 1.55.45-.95 1.4-1.55 2.44-1.56 1.62 0 2.93 1.25 2.9 2.78l.03 5.2c0 .13-.1.23-.23.23h-1.41c-.13 0-.23-.11-.23-.23v-4.59c0-.98-.74-1.71-1.62-1.71-.8 0-1.46.7-1.59 1.62l.01 4.68c0 .13-.11.23-.23.23h-1.41c-.13 0-.23-.11-.23-.23v-4.59c0-.98-.74-1.71-1.62-1.71-.85 0-1.54.79-1.6 1.8v4.5c0 .13-.1.23-.23.23zm53.615 0h-1.61c-.04 0-.08-.01-.12-.03-.09-.06-.13-.19-.06-.28l2.43-3.71-2.39-3.65a.213.213 0 01-.03-.12c0-.12.09-.21.21-.21h1.61c.13 0 .24.06.3.17l1.41 2.37 1.4-2.37a.34.34 0 01.3-.17h1.6c.04 0 .08.01.12.03.09.06.13.19.06.28l-2.37 3.65 2.43 3.7c0 .05.01.09.01.13 0 .12-.09.21-.21.21h-1.61c-.13 0-.24-.06-.3-.17l-1.44-2.42-1.44 2.42a.34.34 0 01-.3.17zm-7.12-1.49c-1.33 0-2.42-1.12-2.42-2.51 0-1.39 1.08-2.52 2.42-2.52 1.33 0 2.42 1.12 2.42 2.51 0 1.39-1.08 2.51-2.42 2.52zm-19.865 0c-1.32 0-2.39-1.11-2.42-2.48v-.07c.02-1.38 1.09-2.49 2.4-2.49 1.32 0 2.41 1.12 2.41 2.51 0 1.39-1.07 2.52-2.39 2.53zm-8.11-2.48c-.01 1.37-1.09 2.47-2.41 2.47s-2.42-1.12-2.42-2.51c0-1.39 1.08-2.52 2.4-2.52 1.33 0 2.39 1.11 2.41 2.48l.02.08zm18.12 2.47c-1.32 0-2.39-1.11-2.41-2.48v-.06c.02-1.38 1.09-2.48 2.41-2.48s2.42 1.12 2.42 2.51c0 1.39-1.09 2.51-2.42 2.51z'/%3E %3C/defs%3E %3Cmask id='clip'%3E %3Crect x='0' y='0' width='100%25' height='100%25' fill='white'/%3E %3Cuse xlink:href='%23logo'/%3E %3Cuse xlink:href='%23text'/%3E %3C/mask%3E %3Cg id='outline' opacity='0.3' stroke='%23000' stroke-width='3'%3E %3Ccircle mask='url(%23clip)' cx='11.5' cy='11.5' r='9.25'/%3E %3Cuse xlink:href='%23text' mask='url(%23clip)'/%3E %3C/g%3E %3Cg id='fill' opacity='0.9' fill='%23fff'%3E %3Cuse xlink:href='%23logo'/%3E %3Cuse xlink:href='%23text'/%3E %3C/g%3E %3C/svg%3E);
+}
+
+  
+
+
+
+
+
+
+
+
+.mapboxgl-popup {
+    z-index: 1;
+
+}
+
+
+
+
+
+
+.marker svg {
+  width: 100%;
+  height: 100%;
+}
+.marker{
+  pointer-events:none;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Bottom emiia левый ряд включая кнопки INDOOR отступы*/
+
+.mapboxgl-ctrl-bottom-left .mapboxgl-ctrl {
+    margin: -1px -1px 10px 10px;
+    float: left;
+}
+
+
+/* Bottom emiia нижний правый ряд включая кнопки INDOOR отступы*/
+.mapboxgl-ctrl-bottom-right .mapboxgl-ctrl {
+    margin: 10px 10px 25px 14px;
+    float: right;
+}
+
+
+
+
+
+
+
+/* emiia размер боковых кнопок */
+.mapboxgl-ctrl-group button {
+    width: 44.0px;
+    height: 44.0px;
+    display: block;
+
+    padding: 0px;
+    outline: none;
+    border: 0;
+    box-sizing: border-box;
+    background-color: transparent;
+    cursor: pointer;
+    
+       font: 13px/20px Montserrat, montserrat;
+       
+       color:#383838
+    
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.mapboxgl-ctrl-scale {
+    background-color: hsla(0,0%,100%,.75);
+ 
+    border: 2px solid white;
+    border-top: #333;
+    border-radius: 4px;
+    padding: 0 6px;
+    color: #333;
+    box-sizing: border-box;
+  
+    font: 10px/20px Montserrat, montserrat;
+    font-weight: 400;
+    max-width: 7em;
+    max-height: 1.9em;
+
+    box-shadow: 0 0 10px 2px rgb(0 0 0 / 10%);
+}
+
+
+
+
+.mapboxgl-popup-content {
+
+
+    
+    
+     font: 12px/20px Montserrat, montserrat;
+
+   border-radius: 12px;
+    padding: 0.5rem;
+    
+    
+    width: max-content;
+    
+    
+    
+
+
+
+
+
+@import url('https://www.emiia.ru/css.css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+
+
+  
+@import url('/css.css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+
+}
+
+
+
+
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
+
+
+
+
+
+
+
+
+</style>
+ 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    
+    
+    
+    
+    
+
+    
+
+    
+    
+    
+    <style>
+    
+    
+    
+    
+    
+    
+        /* Mapbox GL */ /* Bottom emiia  верхний  правый бокой ряд включая кнопки отступы*/
+.mapboxgl-ctrl-top-right .mapboxgl-ctrl {
+  margin: 13.9px 10px -10.6px 0px !important;
+}
+.mapboxgl-ctrl-icon {
+  background-size: 18px 18px !important;
+  background-position: 6px 6px !important;
+  background-repeat: no-repeat !important;
+}
+
+
+.mapboxgl-ctrl-icon.mapboxgl-ctrl-compass > .mapboxgl-ctrl-compass-arrow {
+  height: 18px;
+  margin: 6px;
+  width: 18px;
+  background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8' standalone='yes'%3F%3E%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath fill='%231F3044'%0Ad='M5.5,14.2c-0.9,0.8-1.9,0-1.5-1l4-9c0.2-0.4,0.6-0.8,1-0.8s0.8,0.4,1,0.8l4,9c0.4,1-0.6,1.8-1.5,1l-3.5-3L5.5,14.2z'/%3E%3C/svg%3E");
+}
+
+.mapboxgl-ctrl-group {
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* only hide the logo if title=true is true */
+.has-title .mapboxgl-ctrl-logo {
+  display: none !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+
+
+
+.geocoder-icon-close {
+
+    border-radius:6px 6px 6px 6px;
+
+    text-decoration: none; /* Отменяем подчеркивание у ссылки */
+    border: none; /* Убираем рамку */
+
+
+}
+
+
+
+
+/* ИКОНКИ ПО ЦЕНТРУ ЦЕНТРАЦИЯ ИКОНОК ВНУТРИ КНОПОК*/
+
+.mapboxgl-ctrl-icon {
+   
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.directions-icon-arrive {
+    background-image: url(https://www.emiia.ai/icon/h.svg);
+    
+     background-size: 28px 28px !important;
+        
+    background-position: 5.5px 7.3px !important;
+    background-repeat: no-repeat !important;
+
+    
+    
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.mapboxgl-ctrl button.mapboxgl-ctrl-compass .mapboxgl-ctrl-icon {
+    background-image: url(https://www.emiia.ai/icon/compass.svg);
+    
+    
+    background-size: 16px 16px !important;
+    background-position: 13.5px 13.5px !important;
+    background-repeat: no-repeat !important;
+    
+}
+
+
+
+
+.directions-icon-reverse {
+    background-image: url(https://www.emiia.ai/icon/reverse.svg);
+    
+ 
+}
+
+
+
+
+.geocoder-icon-close {
+    background-image: url(https://www.emiia.ai/icon/close.svg);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.mapboxgl-popup-close-button {
+
+    padding: 0.4rem 0.7rem;
+    background-repeat: no-repeat;
+    color: #6B6B69;
+    font-size: 23px;
+    
+    z-index: 2;
+    position: absolute;
+    cursor: pointer;
+    border-radius: 12px 12px 12px 12px;
+    
+ background-color: white;
+ 
+outline: 0;
+    outline-offset: 0;
+
+}
+
+
+
+
+
+
+
+
+
+
+.mapboxgl-popup-close-button:hover ~ *{
+  color: #fff;
+  text-decoration: none; /* Отменяем подчеркивание у ссылки */
+
+  border: 1px dashed black;
+
+  
+}
+.mapboxgl-popup-close-button:hover:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ededed;
+  pointer-events: none;
+  z-index: -1;
+  border-radius: 12px 12px 12px 12px;
+  text-decoration: none; /* Отменяем подчеркивание у ссылки */
+  border: none; /* Убираем рамку */
+}
+
+
+
+
+
+
+
+
+.mapboxgl-user-location-dot, .mapboxgl-user-location-dot:before {
+    background-color: #3D85C6;
+    text-decoration: none; /* Отменяем подчеркивание у ссылки */
+   
+}
+
+
+
+.mapboxgl-user-location-show-heading .mapboxgl-user-location-heading:after, .mapboxgl-user-location-show-heading .mapboxgl-user-location-heading:before {
+    content: "";
+    border-bottom: 7.5px solid #3D85C6;
+    position: absolute;
+
+
+    text-decoration: none; /* Отменяем подчеркивание у ссылки */
+   } 
+   
+   
+   
+   
+   
+   
+   
+   
+   /* ВАЖНО ПАРАМЕТРЫ НИЖНЕГО ДОПОЛНИТЕЛЬНОГО БЛОКА */
+  .mapboxgl-ctrl-top-left,  .mapboxgl-ctrl-top-left{
+
+ background-color: white;
+
+   
+   
+border-radius: 0px 0px 12px 12px;
+width: 100%;
+
+box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1) !important;
+
+z-index: 2;
+
+
+
+
+ } 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ .mapboxgl-ctrl-top-left{
+
+border-bottom: 16.6px solid white;
+
+
+
+     
+
+
+  
+  } 
+  
+  
+  
+  
+  
+  
+  
+  
+  .mapboxgl-ctrl-top-left::after {
+
+
+  width: 50px;
+  height: 10px;
+    
+   
+   
+  text-align: center;
+  position: absolute;
+ bottom: -38px;
+
+
+  left: 51.5%;
+
+
+  transform: translate(-50%, -50%);
+  
+  transform: translateY(-50%, -50%);
+
+
+  
+    
+   
+
+
+  content:""; 
+    
+    
+  background-image: url('https://raw.githubusercontent.com/EMIIA/www.emiia.ai/master/icon/---.svGGGGGG');
+    
+    
+
+    
+    
+  background-repeat: no-repeat;
+    
+  
+    
+    
+    
+ 
+}   
+
+
+
+
+
+
+
+
+
+
+h1::after {
+
+position: absolute;
+    top:6.1ex;
+    left: 39.3ex;
+    background: white;
+    
+    
+    padding: 0;
+    width: 44px;
+    height: 44px;
+    text-align: center;
+
+    border-radius: 12px 12px 12px 12px;
+    box-shadow: 0 0 10px 0px rgb(0 0 0 / 10%);
+    
+    
+    text-align: center;
+    line-height: 0px;
+    
+    color: white;
+    
+    z-index: -1;
+    
+    cursor: pointer;
+    
+    font-weight: 0;
+    
+    
+    
+    content:""; 
+    
+    background-image: url('https://www.emiia.ai/icon/volume.svg');
+    
+    background-repeat: no-repeat;
+    
+    
+    background-size: 28px 28px !important;
+    background-position: 8.8px 8.2px !important;
+    background-repeat: no-repeat !important;
+ 
+} 
+
+
+
+
+
+
+
+
+.directions-control.directions-control-directions {
+    background: white;
+    margin: 20px 0 0;
+    color: #fff;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    overflow-x: hidden;
+    border-radius: 0px;
+    font-family: 14px/20px Montserrat, montserrat;
+    font: 14px/20px 'Montserrat', montserrat;
+    width: 33.33333%;
+    min-width: 400px;
+    max-width: 300px;
+}
+
+  
+  
+
+  
+  
+  
+  
+  
+ 
+ 
+ 
+ 
+ .mapboxgl-ctrl-group {
+    border-radius: 12px;
+    background: #fff;
+}
+
+ 
+
+ 
+ 
+ 
+ .mapboxgl-ctrl button:not(:disabled):hover {
+
+    
+        background-color: rgb(0 0 0/5%);
+    border-radius: 12px 12px 12px 12px;
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.mapboxgl-ctrl-traffic {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMiIgaGVpZ2h0PSIyMiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0iYmkgYmktZXhjbGFtYXRpb24iIHZpZXdCb3g9IjAgMCAxNiAxNiIgc3Ryb2tlPSIjNkI2QjY5Ij4KIDx0aXRsZT5odHRwczovL3d3dy5lbWlpYS5haS9pY29uL3JvYWQuc3ZnPC90aXRsZT4KIAogCiAgPHBhdGgKICAgICBpZD0icGF0aDE0IgogICAgIGQ9Im0gNy4wNDUzMzAzLDQuMDEwOTQ1MyBhIDAuOTA1LDAuOTA1IDAgMSAxIDEuOCwwIGwgLTAuMzUsMy41MDcgYSAwLjU1MywwLjU1MyAwIDAgMSAtMS4xLDAgeiIgc3R5bGU9ImZpbGw6ICM2QjZCNjkiLz4KICA8cGF0aAogICAgIGlkPSJwYXRoMiIKICAgICBkPSJtIDcuMDAyLDExIGEgMSwxIDAgMSAxIDIsMCAxLDEgMCAwIDEgLTIsMCB6IiBzdHlsZT0iZmlsbDogIzZCNkI2OSIgLz4KPC9zdmc+Cg==);
+    
+    
+    
+    background-size: 23px 23px !important;
+
+    background-repeat: no-repeat !important;
+
+background-position: 10px 12px !important;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.mapboxgl-ctrl-map {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMiIgaGVpZ2h0PSIyMiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0iYmkgYmktZXhjbGFtYXRpb24iIHZpZXdCb3g9IjAgMCAxNiAxNiIgc3Ryb2tlPSIjM2Q4NWM2Ij4KIDx0aXRsZT5odHRwczovL3d3dy5lbWlpYS5haS9pY29uL3JvYWQuc3ZnPC90aXRsZT4KIAogCiAgPHBhdGgKICAgICBpZD0icGF0aDE0IgogICAgIGQ9Im0gNy4wNDUzMzAzLDQuMDEwOTQ1MyBhIDAuOTA1LDAuOTA1IDAgMSAxIDEuOCwwIGwgLTAuMzUsMy41MDcgYSAwLjU1MywwLjU1MyAwIDAgMSAtMS4xLDAgeiIgc3R5bGU9ImZpbGw6ICMzZDg1YzYiLz4KICA8cGF0aAogICAgIGlkPSJwYXRoMiIKICAgICBkPSJtIDcuMDAyLDExIGEgMSwxIDAgMSAxIDIsMCAxLDEgMCAwIDEgLTIsMCB6IiBzdHlsZT0iZmlsbDogIzNkODVjNiIgLz4KPC9zdmc+Cg==);
+    
+    
+
+
+   background-size: 23px 23px !important;
+
+   background-repeat: no-repeat !important;
+
+   background-position: 10px 12px !important;
+
+}
+
+
+
+
+
+
+
+
+.mapboxgl-popup p {
+
+
+    font-size: 1.5rem;
+        
+    margin: 10px 0 0;
+   
+    top: 0;
+    margin-left: 10px;
+    bottom: 0;
+    margin-bottom: 10px;
+
+}
+
+
+
+b, strong {
+font-weight: 600;
+margin-left: 10px;
+margin-bottom: 100px;
+margin-top: 30px;
+
+
+}
+
+
+
+.mapboxgl-popup-content {
+    max-width: 340px;
+    min-width: 340px;
+   
+ 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+a {
+    dispaly: block;
+    width: 100%;
+    height: 25px;
+    
+
+    
+    
+}
+
+
+a, a:focus {
+    color: #337ab7;
+    text-decoration: none;
+    
+   
+}
+a {
+    color: #337ab7;
+    text-decoration: none;
+    
+    
+
+    
+    
+}
+
+
+
+.dropdown-menu {
+
+
+max-height: 560px;
+
+height: 560px;
+
+overflow-y: auto;
+
+background-color: white;
+
+
+
+
+}
+
+
+
+
+::-webkit-scrollbar {
+    width: 0.1px;
+    background-color: red;
+
+    
+
+    
+}
+
+
+
+
+
+
+
+
+
+
+.sticky {
+    position: sticky;
+    top: 0;
+    
+    z-index: 210000;
+    
+    
+
+    
+
+    
+
+     background-color: white;
+    
+    border-top:20px solid white;
+    
+    border-bottom:0px solid white;
+    
+     
+ 
+
+     
+  
+
+}
+
+
+
+
+
+
+
+
+
+.sticky::before {
+    position: absolute;
+    top: -2.9ex;
+    left: -1.0ex;
+
+    
+    
+
+   background-color: white;
+    cursor: pointer;
+    font-weight: 580;
+    content: "";
+    
+    z-index: -1;
+
+
+ 
+
+    
+    width: 60px;
+    height: 52px;
+    
+    
+border-radius: 0px 3px 3px 3px;
+
+
+
+
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+i {
+    position: absolute;
+    right: 14px;
+    top: 4px;
+    -webkit-transition: all 300ms ease-in 0s;
+    -moz-transition: all 300ms ease-in 0s;
+    -o-transition: all 300ms ease-in 0s;
+    transition: all 300ms ease-in 0s;
+}
+
+
+
+ 
+        
+
+
+
+
+
+
+
+hr {
+display: block;
+   
+
+    margin-top: 0.9em;
+    
+    
+     z-index: 230000;
+    
+    
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+    
+    
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1) !important;
+    
+    
+    
+    border-color: transparent;
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+        </style>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    <style>
+#marker {
+background-image: url('https://analytics.emiia.ai/svg/pinnewwhite.svg');
+background-size: cover;
+width: 110px;  height: 48px;
+border-radius: 0%;
+cursor: pointer;
+
+}
+ 
+.mapboxgl-popup {
+max-width: 200px;
+}
+
+
+
+
+
+
+.hight {
+    padding-left: 9px;
+    hight: 10px;
+
+   
+}
+
+
+
+
+.fa {
+    display: inline-block;
+    font: normal normal normal 20px/1 FontAwesome;
+    /* font-size: inherit; */
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+
+
+.mapboxgl-ctrl-geocoder .suggestions {
+    background-color: #fff;
+    border-radius: 10px;
+    left: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    width: 100%;
+    top: 110%;
+    top: calc(100% + 6px);
+    z-index: 200000;
+    overflow: hidden;
+    font-size: 15px;
+    padding-top: 48px;
+    min-height: 110px;
+    padding-bottom: 10px;
+    
+    
+    
+
+
+}
+
+
+
+
+
+
+
+
+
+.mapboxgl-ctrl-bottom-left {
+    
+    position: fixed;
+    
+    
+    
+    
+    
+    top: 10ex;
+    left: 0;
+    
+    z-index: 200000;
+}
+
+
+
+
+
+
+.mapboxgl-ctrl-markers {
+    
+    top: -8.3em;
+    left: 0em;
+    background-image: url(https://www.emiia.ai/icon/h.svg);
+    background-size: 28px 28px !important;
+    background-position: 7.7px 8.2px !important;
+    background-repeat: no-repeat !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.mapboxgl-ctrl-map {
+    background-image: url(https://www.emiia.ai/icon/h1.svg);
+    
+    
+ background-size: 28px 28px !important;
+    background-position: 7.7px 8.2px !important;
+    background-repeat: no-repeat !important;
+
+  
+
+}
+
+
+
+
+</style>
+    
+    
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <script>
+!function e(t,o,r){function i(s,a){if(!o[s]){if(!t[s]){var l="function"==typeof require&&require;if(!a&&l)return l(s,!0);if(n)return n(s,!0);var p=new Error("Cannot find module '"+s+"'");throw p.code="MODULE_NOT_FOUND",p}var c=o[s]={exports:{}};t[s][0].call(c.exports,function(e){var o=t[s][1][e];return i(o||e)},c,c.exports,e,t,o,r)}return o[s].exports}for(var n="function"==typeof require&&require,s=0;s<r.length;s++)i(r[s]);return i}({1:[function(e,t,o){function r(e,t){if(!(this instanceof r))throw new Error("MapboxMarkers needs to be called with the new keyword");this.URLSearchParams=new URLSearchParams(new URL(window.location).search),this._sourceName="markerspec",this._geojson=e,this._rendered=!1,this.options=Object.assign({enabled:this.URLSearchParams.get("enabled")||!0,showControl:this.URLSearchParams.get("show-control")||!0,marker:{image:"https://www.emiia.ai/icon/e.svg"},popup:{description:"<i>No description provided</i>"},style:{label:"{name}",labelSize:10,color:this.URLSearchParams.get("style-color")||"transporent",size:2,opacity:1,icon:"marker",layers:null}},t),this.toggle=this.toggle.bind(this),this.render=this.render.bind(this),this._toggleLayers=this._toggleLayers.bind(this),this._updateMap=this._updateMap.bind(this),this._toggle=new i({show:this.options.showControl,onToggle:this.toggle.bind(this)})}function i(e){var t,o;e=Object.assign({show:!0,onToggle:function(){}},e),this._btn=((t=document.createElement("button")).className="mapboxgl-ctrl-icon mapboxgl-ctrl-markers",t.type="button",t["aria-label"]="Inspect",t),this._btn.onclick=e.onToggle,this._input=((o=document.createElement("input")).id="marker-search",o.type="text",o.placeholder="Marker Search",o.style.display="none",o),this.elem=function(e,t,o){var r=document.createElement("div");return r.className="mapboxgl-ctrl mapboxgl-ctrl-group markerspec",r.appendChild(e),o||(r.style.display="none"),r}(this._btn,this._input,e.show)}r.prototype.onAdd=function(e){return this._map=e,e.on("load",this.render),e.on("moveend",this._updateMap),this._toggle.elem},r.prototype.onRemove=function(){this._map.off("load",this.render);var e=this._toggle.elem;e.parentNode.removeChild(e),this._map=void 0},r.prototype.toggle=function(){this.options.enabled=!this.options.enabled,this.render()},r.prototype.render=function(){if(!this._rendered){var e=this;if(this.URLSearchParams.get("data")){var t=new XMLHttpRequest;t.onreadystatechange=function(){t.readyState==XMLHttpRequest.DONE&&(e._geojson=JSON.parse(t.responseText),o())},t.open("GET",this.URLSearchParams.get("data"),!0),t.send(null)}else o();function o(){e._geojson.features.forEach(function(t){if("Point"==t.geometry.type){var o=document.createElement("div");o.className="markerspec marker",o.style=`background-image:url('${t.properties["marker-image"]||e.options.marker.image}')`,o.onclick=function(e){map.flyTo({center:t.geometry.coordinates})};var r=(void 0!==t.properties.title?`<h3>${t.properties.title}</h3>`:"")+(void 0!==t.properties.image?`<img src='${t.properties.image}' width=200 alt='${t.properties.title}'>`:"")+(void 0!==t.properties.description?`<p>${t.properties.description}</p>`:`<p>${e.options.popup.description}</p>`)+(void 0!==t.properties.website?`<a href='${t.properties.website}' target='_blank' class='button'>Website</a>`:`<a href='https://www.openstreetmap.org/?mlat=${t.geometry.coordinates[1]}&mlon=${t.geometry.coordinates[0]}' target='_blank' class='button'>Browse Location</a>`);new mapboxgl.Marker(o).setLngLat(t.geometry.coordinates).setPopup(new mapboxgl.Popup({offset:25}).setHTML(r)).addTo(map)}}),e._map.addSource("markerspec",{type:"geojson",data:e._geojson});var t,o,r=e._map.getStyle().layers.filter(function(e){return"road"===e["source-layer"]}),i=r[r.length-1].id;e.options.style.layers||(e.options.style.layers=(t=e._sourceName,o=e.options.style,[{id:`${t} fill`,type:"fill",source:`${t}`,paint:{"fill-color":o.color,"fill-opacity":o.opacity},filter:["==","$type","Polygon"]},{id:`${t} line`,type:"line",source:`${t}`,paint:{"line-color":o.color,"line-width":o.size,"line-opacity":o.opacity}},{id:`${t} circle`,type:"circle",source:`${t}`,paint:{"circle-color":o.color,"circle-radius":o.size,"circle-opacity":o.opacity}},{id:`${t} symbol`,type:"symbol",source:`${t}`,layout:{"text-field":o.label,"text-size":o.labelSize,"text-font":["Open Sans Semibold","Arial Unicode MS Bold"],"text-anchor":"top","icon-image":"{icon}-15","icon-allow-overlap":!0}}]));var n=function(e,t,o){for(var r=0;r<e.layers.length;r++){var i=e.layers[r];if(o===i.id){var n=e.layers.slice(0,r).concat(t).concat(e.layers.slice(r));return Object.assign({},e,{layers:n})}}return e}(e._map.getStyle(),e.options.style.layers,i);e._map.setStyle(n),e._toggle._input.onkeypress=(t=>{if("Enter"===t.key)return e.options.query=e._toggle._input.value,e._updateMap(),!0})}this._rendered=!0}this.options.enabled?(this._toggleLayers(),this._toggle.setMapIcon()):(this._toggleLayers(),this._toggle.setPluginIcon())},r.prototype._updateMap=function(){this.options.enabled&&this.options._geojson&&console.log("Nothing to update")},i.prototype.setPluginIcon=function(){this._btn.className="mapboxgl-ctrl-icon mapboxgl-ctrl-markers"},i.prototype.setMapIcon=function(){this._btn.className="mapboxgl-ctrl-icon mapboxgl-ctrl-map"},r.prototype._toggleLayers=function(){var e=this.options.enabled;Array.from(document.getElementsByClassName("markerspec marker")).forEach(function(t){t.style.display=e?"inline":"none"});var t=new RegExp(this._sourceName),o=this._map.getStyle();o.layers.forEach(function(o){t.test(o.source)&&(o.layout=o.layout||{},o.layout.visibility=e?"visible":"none")}),this._map.setStyle(o),this._toggle._input.style.display=e?"inline":"none"},void 0!==t&&void 0!==t.exports?window.MapboxMarkers=r:t.exports=r},{}]},{},[1]);
+
+</script>
+  
+  
+  
+  
+  
+  
+
+
+
+
+<script>
+
+var exampleGeojson = {
+  "type": "FeatureCollection",
+  "features": [
+
+   
+   
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "small",
+        "marker-symbol": "",
+        "title": "No Style",
+                
+                "maxzoom": 10,
+                "minzoom": 20
+                
+        
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+         37.173945684286,
+          55.97705374444533
+        ]
+      }
+    },
+    
+    
+    
+    
+    
+     {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/e.svg",
+        "title": "Rocket launching spot",
+                
+                "maxzoom": 10,
+                "minzoom": 20
+      },
+      
+      
+      
+ 
+      
+      
+      
+      
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.1740273834634,
+          55.97722105465553
+        ]
+        }
+
+        },
+        
+        
+
+      
+
+
+
+    
+
+    
+    
+    
+    
+    
+   
+  ]
+};
+
+
+</script>    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+    
+    
+    
+
+ 
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+    <div id="map"></div>
+    
+    
+<button id="replay"></button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span>
+<div class="dropdown dropdown-accordion" class="btn btn-outline-primary btn-lg btn-iconed btn-rounded" data-accordion=".accordion12" id="parent" style="position: fixed; top: 0.95em; left: 0.7em; z-index: +200000;" >
+  <button  class="btn btn-light dropdown-toggle" class="btn btn-primary"  type="button" data-toggle="dropdown" ></button>
+  
+  
+<ul class="dropdown-menu" role="menu"  >
+  
+  
+
+   
+  <li1 class="sticky" ><a href="https://www.emiia.ru/ifc/18.html">
+ 
+
+ <span> 
+  
+
+  <img src="https://www.emiia.ai/icon/menu/globe.svg" style="float:none; margin: -5px 0px 10px 6.4px;" title="GIS">
+  
+
+
+</span></a></li1>
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <li1 class="sticky" ><a href="https://www.emiia.ru/ifc/18.html" >
+ 
+ 
+ <span> 
+  
+
+
+  <img src="https://www.emiia.ai/icon/menu/build.svg" style="float:none; margin: -5px 0px 11px 14px;" title="BIM">
+  
+
+
+</span></a></li1>
+
+
+
+
+
+
+
+
+
+
+<li1 class="sticky" ><a href="https://www.emiia.ru/ifc/18.html" >
+ 
+ 
+ <span> 
+  
+
+
+  <img src="https://www.emiia.ai/icon/menu/edm.svg" style="float:none; margin: -5px 0px 11px 14px;" title="EDM">
+  
+
+
+</span></a></li1>
+
+
+
+
+
+
+
+ 
+
+
+
+
+<li1 class="sticky" ><a href="https://www.emiia.ru/ifc/18.html">
+ 
+ 
+ <span> 
+  
+
+
+  <img src="https://www.emiia.ai/icon/menu/calendar.svg" style="float:none; margin: -6px 0px 11px 14px;" title="Tracker">
+  
+
+
+</span></a></li1>
+
+
+
+
+
+
+
+
+
+
+
+<li1 class="sticky" ><a href="https://www.emiia.ru/ifc/18.html">
+ 
+ 
+ <span> 
+  
+
+
+  <img src="https://www.emiia.ai/icon/menu/litics.svg" style="float:none; margin: -6px 0px 11px 14px;" title="Tracker">
+  
+
+
+</span></a></li1>
+
+
+
+
+
+
+
+
+
+
+
+<li1 class="sticky" ><a href="https://www.emiia.ru/ifc/18.html" >
+ 
+ 
+ <span> 
+  
+
+
+  <img src="https://www.emiia.ai/icon/menu/cloud1.svg" style="float:none; margin: -5px 5px 11px 15px;" title="EMIIA.AI CLOUD ML PLATFORM">
+  
+
+
+</span></a></li1>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li1 class="sticky" ><a href="https://www.emiia.ru/ifc/18.html">
+ 
+ 
+ <span> 
+  
+
+
+  <img src="https://www.emiia.ai/icon/menu/bot.svg" style="float:none; margin: -5px 0px 11px 11px;" title="BOT">
+  
+
+
+</span></a></li1>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <li>
+										<div class="accordion12" id="accordion1"  style="vertical-align: middle" style="vertical-align: baseline">
+                      <a href="#collapseOne" data-toggle="collapse" data-parent="#parent" >
+											<div class="hight"> <span 
+  style="vertical-align: -4.5px"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-broadcast" viewBox="0 0 16 16">
+  <path d="M3.05 3.05a7 7 0 0 0 0 9.9.5.5 0 0 1-.707.707 8 8 0 0 1 0-11.314.5.5 0 0 1 .707.707zm2.122 2.122a4 4 0 0 0 0 5.656.5.5 0 1 1-.708.708 5 5 0 0 1 0-7.072.5.5 0 0 1 .708.708zm5.656-.708a.5.5 0 0 1 .708 0 5 5 0 0 1 0 7.072.5.5 0 1 1-.708-.708 4 4 0 0 0 0-5.656.5.5 0 0 1 0-.708zm2.122-2.12a.5.5 0 0 1 .707 0 8 8 0 0 1 0 11.313.5.5 0 0 1-.707-.707 7 7 0 0 0 0-9.9.5.5 0 0 1 0-.707zM10 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
+</svg></span> &nbsp;Радиоданные (MRV)<i class="fa fa-angle-down"></i>
+
+											</div>
+                        </a>
+											<div class="panel-collapse collapse" id="collapseOne">
+
+												<ul class="list">
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+
+                                                      
+
+                                                                                                            
+                                                       
+                                                                                                              <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;Люди</a></li>
+                                                                                                              
+                                                                                                               <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel"  value="" aria-label="123">&nbsp;Животные</a></li>
+                                                                                                               
+                                                                                                               
+   <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;Устройства</a></li>  
+   
+   
+<p></p>
+   
+   
+   <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;Аналитика</a></li>   
+   
+   
+   
+   <p></p> 
+
+<li><a href="#" > <div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+  <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+  <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/> 
+</svg>&nbsp;Настройки </div></a></li>
+                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+													
+												</ul>
+
+											</div>
+
+										</div>
+
+    </li>
+    
+    
+
+    <li>
+										<div class="accordion12" id="accordion2" >
+                      <a href="#collapseTwo" data-toggle="collapse" data-parent="#parent">
+											<div class="hight">
+
+   
+													<span 
+  style="vertical-align: -4.5px"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-camera-video" viewBox="-0 0 16 16">
+  <path fill-rule="evenodd" d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2V5zm11.5 5.175 3.5 1.556V4.269l-3.5 1.556v4.35zM2 4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h7.5a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H2z"/>
+</svg></span> &nbsp;Видеоданные (VCA)<i class="fa fa-angle-down"></i>
+
+											</div>
+                        </a>
+											<div class="panel-collapse collapse" id="collapseTwo">
+                                            
+                                            
+                                            
+                                            
+                                            <ul class="list">
+
+												
+                                                
+                                                
+                  <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;Видеокамеры</a></li>
+                                                                                                              
+                                                                                                               <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;Лидарные камеры</a></li>
+                                                                                                               
+                                                                                                               
+   <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="123">&nbsp;Тепловые камеры</a></li>  
+   
+   
+      <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="123">&nbsp;Аудиопотоки</a></li>  
+   
+   
+   
+   
+<p></p>
+   
+   
+   <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;Аналитика</a></li>   
+   
+   
+   
+   
+   <p></p> 
+
+<li><a href="#" > <div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+  <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+  <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/> 
+</svg>&nbsp;Настройки </div></a></li>
+                                                  
+                                                
+                                                
+                                    
+													
+												</ul>                                   
+           
+
+											</div>
+
+										</div>
+
+    </li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <li>
+										<div class="accordion12"  id="accordion3">
+                      <a href="#collapseThree" data-toggle="collapse" data-parent="#parent">
+											<div class="hight">
+
+													<span 
+  style="vertical-align: -4.5px"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-globe" viewBox="0 0 16 16">
+  <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/>
+</svg></span> &nbsp;Геоданные (GIS)<i class="fa fa-angle-down"></i>
+
+											</div>
+                        </a>
+											<div class="panel-collapse collapse" id="collapseThree">
+
+												<ul class="list">
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+        <li1><a href="#" style="color: #6B6B69; padding-left: 1.5em;" value="option1" checked><input    class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked/>&nbsp;Карта</a></li1>
+      
+      
+            <li1><a href="#" style="color: #6B6B69; padding-left: 2em;"  value="option2" ><input    class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>&nbsp;Спутник</a></li1>
+            
+            <br>
+            
+            
+        <li1><a href="#" style="color: #6B6B69; padding-left: 1.5em;" value="option1" disabled><input    class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" disabled/>&nbsp;Радар</a></li1>
+      
+      
+            <li1><a href="#" style="color: #6B6B69; padding-left: 1.75em;"  value="option2" checked><input    class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>&nbsp;Гибрид</a></li1>
+                                                
+                                                
+                                                
+                                                
+                                                
+  
+  
+   <p></p>
+   
+   
+   <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel"  value="" aria-label="123" checked>&nbsp;Панель поиска</a></li>
+   
+   
+   
+   <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel"  value="" aria-label="123" checked>&nbsp;Панель навигации</a></li>
+   
+   
+   
+      <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel"  value="" aria-label="123" checked>&nbsp;Панель Indoor (IPS)</a></li>
+   
+   
+   
+     <p></p>
+  
+  
+  
+
+												
+                                                
+                                                
+                  <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel"  value="" aria-label="123">&nbsp;Качество воздуха</a></li>
+                                                                                                              
+                                                                                                               <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel"  value="" aria-label="123">&nbsp;Паркоместа</a></li>
+                                                                                                               
+                                                                                                               
+                                                                                                                                                                                                                              <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel"  value="" aria-label="123">&nbsp;Спортплощадки</a></li>
+                                                                                                                                                                                                                              
+                                                                                                                                                                                                                              
+                                                                                                                                                                                                                               <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel"  value="" aria-label="123">&nbsp;Лесные пожары</a></li>
+                                                                                                                                                                                                                              
+                                                                                                                                                                                                                              
+                                                                                                                                    <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;ТИМ-модели (BIM)</a></li> 
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                            <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel"  value="" aria-label="123">&nbsp;ТИМ-инструменты (BIM)</a></li>
+                                                      
+                                                      
+                                                       <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;Indoor-инструменты (IPS)</a></li> 
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" disabled value="" aria-label="123">&nbsp;Радары (фото-tile)</a></li> 
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" disabled value="" aria-label="123">&nbsp;Радары (онлайн данные)</a></li>
+                                                                                                                                    
+                                                                                                                                                                                                                              <p></p>
+                                                                                                               
+                                                                                                               
+   <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;МЧС (объекты)</a></li>  
+   
+   
+                                           <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;МЧС (данные)</a></li>
+
+   
+   
+<p></p>
+   
+   
+   <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel"  value="" aria-label="123">&nbsp;Аналитика</a></li>   
+   
+   
+   
+   
+   <p></p> 
+
+<li><a href="#" > <div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+  <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+  <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/> 
+</svg>&nbsp;Настройки </div></a></li>
+                                                  
+                                                
+                                                
+                                    
+													
+												</ul>  
+                                                
+                                                
+                                                
+											</div>
+
+										</div>
+                                        
+                                        
+                       
+
+    </li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+ <li role="presentation" class="divider"></li>  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+        <li>
+										<div class="accordion12"  id="accordion60"  >
+                      <a href="#collapseFour" data-toggle="collapse" data-parent="#parent">
+											<div class="hight">
+
+													<span 
+  style="vertical-align: -4.5px"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-diagram-3" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H14a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 2 7h5.5V6A1.5 1.5 0 0 1 6 4.5v-1zM8.5 5a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1zM0 11.5A1.5 1.5 0 0 1 1.5 10h1A1.5 1.5 0 0 1 4 11.5v1A1.5 1.5 0 0 1 2.5 14h-1A1.5 1.5 0 0 1 0 12.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm4.5.5A1.5 1.5 0 0 1 7.5 10h1a1.5 1.5 0 0 1 1.5 1.5v1A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm4.5.5a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"/>
+</svg></span> &nbsp;Базы данных (API)<i class="fa fa-angle-down"></i>
+
+											</div>
+                        </a>
+											<div class="panel-collapse collapse" id="collapseFour">
+
+												<ul class="list">
+                                                
+                                                
+   <li><a href="#" > <div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-download" viewBox="0 0 16 16">
+  <path d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z"/>
+  <path d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z"/>
+</svg>&nbsp;Вход данных: </div></a></li>
+                                                                                                                                                   
+                                                      <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;EMIIA.AI CLOUD</a></li>
+                                                      
+                                                      
+                                                       <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;GitHub</a></li>
+                                                       
+                                                       
+                                                       <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;TelegramBot</a></li>
+                                                       
+                                                       
+                                                       <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;OpenStreetMap</a></li>
+                                                       
+                                                       
+                                                                                                              <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;ChatGPT</a></li>
+                                                       
+                                                       
+                                                   
+     <p></p> 
+     
+     
+     
+     
+    
+    
+    
+    
+    
+     <li><a href="#" > <div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-upload" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z"/>
+  <path fill-rule="evenodd" d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3z"/>
+</svg>&nbsp;Выход данных: </div></a></li>
+
+
+
+
+<li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;EMIIA.AI CLOUD</a></li>
+
+
+
+
+
+<li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;EMIIA.AI CLOUD ML</a></li>
+
+
+
+
+<p></p> 
+
+<li><a href="#" > <div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+  <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+  <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/> 
+</svg>&nbsp;Настройки </div></a></li>
+    
+    
+                                                    
+													
+												</ul>
+
+											</div>
+
+										</div>
+                                        
+                                        
+                       
+
+    </li>
+   
+   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+  
+
+  
+  
+    <li>
+										<div class="accordion12" id="accordion40" >
+                      <a href="#collapseOne40" data-toggle="collapse" data-parent="#parent">
+											<div class="hight">
+                                            
+                                            <span 
+  style="vertical-align: -4.5px"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
+  <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
+</svg></span> &nbsp;Генерация кода<i class="fa fa-angle-down"></i>
+
+											</div>
+                        </a>
+											<div class="panel-collapse collapse" id="collapseOne40">
+
+												<ul class="list">
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+
+                                                      
+
+                                                                                                            
+                                                       
+                                                                                                              <li><a href="#"  value="option6" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel"  value="" aria-label="123">&nbsp;Python</a></li>
+                                                                                                              
+                                                                                                              
+                                                                                                                 <li><a href="#"  value="option8" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="125" aria-label="123">&nbsp;Dart</a></li> 
+                                                                                                              
+                                                                                                         
+                                                                                                               <li><a href="#"  value="option7" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="124" aria-label="123">&nbsp;TypeScript</a></li>
+                                                                                                               
+                                                                         <p></p>                                                                                                                                                 
+                                                                         
+                                                                         <li><a href="#"  value="option7" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel"  value="124" aria-label="123">&nbsp;TopoJSON</a></li>
+                                                                         
+                                                                         <li><a href="#"  value="option7" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="124" aria-label="123">&nbsp;GeoJSON</a></li>
+                                                                         
+                                                                         
+                                                                         <li><a href="#"  value="option7" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="124" aria-label="123">&nbsp;JSON</a></li>
+                    
+                                                    
+                                                    
+   <p></p>      
+   
+   
+   <li><a href="#"  value="option7" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="124" aria-label="123">&nbsp;Cинхронизация</a></li>
+
+
+
+   
+   
+   
+<p></p>
+   
+   
+   
+   
+   
+
+   
+   
+   
+   
+   <li><a href="#" > <div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-zip" viewBox="0 0 16 16">
+  <path d="M5 7.5a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v.938l.4 1.599a1 1 0 0 1-.416 1.074l-.93.62a1 1 0 0 1-1.11 0l-.929-.62a1 1 0 0 1-.415-1.074L5 8.438V7.5zm2 0H6v.938a1 1 0 0 1-.03.243l-.4 1.598.93.62.929-.62-.4-1.598A1 1 0 0 1 7 8.438V7.5z"/>
+  <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1h-2v1h-1v1h1v1h-1v1h1v1H6V5H5V4h1V3H5V2h1V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
+</svg>&nbsp;Загрузить архив (ZIP) </div></a></li>
+
+
+
+
+<p></p> 
+
+<li><a href="#" > <div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+  <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+  <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/> 
+</svg>&nbsp;Настройки </div></a></li>
+
+   
+   
+
+                                                    
+                                                    
+													
+												</ul>
+
+											</div>
+
+										</div>
+
+    </li>
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+      
+    
+    
+    
+    
+    
+    
+    
+   
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+                      
+  
+
+
+
+
+                                        
+                                                       
+                                                       
+                                                       
+                                                       
+                                                       
+                                                       
+                                                       
+                                                       
+                                                       
+                                                       
+       <li role="presentation" class="divider"></li>   
+
+
+
+
+
+<li>
+										<div class="accordion12"  id="accordion62">
+                      <a href="#collapseFour62" data-toggle="collapse" data-parent="#parent">
+											<div class="hight">
+
+													<span 
+  style="vertical-align: -3.5px; padding-left: 1.0px;"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+</svg></span> &nbsp;Условные обозначения<i class="fa fa-angle-down"></i>
+
+											</div>
+                        </a>
+											<div class="panel-collapse collapse" id="collapseFour62">
+
+												<ul class="list">
+                                                
+                                                
+
+                                                                                                                                                   
+                                                      <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;Радиоданные (MRV)</a></li>
+                                                      
+                                                      
+                                                       <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;Видеоданные (CTV)</a></li>
+                                                       
+                                                       
+                                                                                                 
+                                                       
+                                                       
+                                    
+                                                    
+													
+												</ul>
+
+											</div>
+
+										</div>
+                                        
+                                        
+                       
+
+    </li>
+                                                   
+                                                       
+                                                       
+                                                       
+                                                       
+                                                       
+                                                       
+                                                       
+                                                       
+                                                       
+
+
+
+
+    
+     
+          <li role="presentation" class="divider"></li>                      
+                        
+                        <li role="presentation" style="padding: 0px 0px; color: #6B6B69;"><a role="menuitem" tabindex="-1" href="#" style="padding: 3px 8px;"> <span 
+  style="vertical-align: -4.5px; color: #6B6B69;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
+  <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+</svg></span> Справочник SDK</a></li>     
+
+
+
+                        <li role="presentation" style="padding: 0px 0px; color: #6B6B69;"><a role="menuitem" tabindex="-1" href="#" style="padding: 3px 8px;"> <span 
+  style="vertical-align: -4.5px; color: #6B6B69;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
+  <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+</svg></span> Справочник API</a></li>  
+                        
+  
+ 
+
+
+
+                        <li role="presentation" style="padding: 0px 0px; color: #6B6B69;"><a role="menuitem" tabindex="-1" href="#" style="padding: 3px 8px;"> <span 
+  style="vertical-align: -4.5px; color: #6B6B69;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
+  <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+</svg></span> Документация</a></li>  
+    
+
+
+    
+    
+    
+    
+
+
+
+
+
+ <li role="presentation" class="divider"></li>   
+
+
+
+
+
+<li>
+										<div class="accordion12"  id="accordion63">
+                      <a href="#collapseFour63" data-toggle="collapse" data-parent="#parent">
+											<div class="hight">
+
+													<span 
+  style="vertical-align: -3.5px;"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+  <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+  <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/> 
+</svg></span> &nbsp;Аккаунт<i class="fa fa-angle-down"></i>
+
+											</div>
+                        </a>
+											<div class="panel-collapse collapse" id="collapseFour63">
+
+												<ul class="list">
+                                                
+                                                
+
+                                                                                                                                                   
+                                                      <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;Радиоданные (MRV)</a></li>
+                                                      
+                                                      
+                                                       <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;Видеоданные (CTV)</a></li>
+                                                       
+                                                       
+
+                                                       
+                                    
+                                                    
+													
+												</ul>
+
+											</div>
+
+										</div>
+                                        
+                                        
+                       
+
+    </li>
+   
+
+
+
+
+          
+          
+          
+          
+          
+          <li role="presentation" class="divider"></li>                      
+                        
+                        <li role="presentation" style="padding: 0px 0px; color: #6B6B69;"><a role="menuitem" tabindex="-1" href="#" style="padding: 3px 12px;"> <span 
+  style="vertical-align: -4.5px; color: #6B6B69;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+  <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+</svg></span> Выход</a></li>
+
+
+
+
+                   
+                        
+
+                        
+                        
+<li role="presentation" class="divider"></li>   
+
+          
+          
+          
+          
+
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" style="color: #3d85c6; font-size:9px;">© EMIIA.AI MRV (SDK/API) Version (B2B): 00000000109.12.01</a></li>
+
+          
+
+         
+          
+    
+    
+  </ul>
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>   
+     
+ /**
+         * Indoor specific
+         */
+
+        // Where the indoor layers will be inserted.
+        // Here, 'housenum-label' comes from streets-v10
+
+ 
+    
+          var beforeLayerId = 'building-number-label';
+
+    // To avoid unwanted overlap from streets-v10 layers, some layers are hidden when an indoor map is shown
+        const layersToHide = ['poi-scalerank4-l15', 'poi-scalerank4-l1', 'poi-scalerank3', 'road-label-small'];
+
+
+
+
+         var customData;
+
+        // Retrieve the geojson from the path and add the map
+        fetch('https://www.emiia.ai/json/ofisgeojson24.geojson')
+            .then(res => res.json())
+            .then(geojson => {
+                map.indoor.addMap(mapgl_indoor.IndoorMap.fromGeojson(geojson, { beforeLayerId, layersToHide }));
+                customData = geojson;
+            });
+
+                
+
+
+
+ 
+ 
+  </script>   
+
+
+
+
+
+
+
+<script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+
+
+
+    
+    
+
+    <script>
+    
+   
+
+    const monument = [  37.17404207813226, 55.977374266578806];
+    
+
+    
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZW1paWFhaSIsImEiOiJja21icnU4bHkyNGRwMnFrbjVvNXdtdGJ0In0.TcfxV21Ov7zOgvWvgPxzlA'
+        const map = window.map = new mapboxgl.Map({
+            container: "map",
+            
+  attributionControl: false,
+  
+  
+  
+  
+maxPitch: 45,
+
+minZoom: 2,
+maxZoom: 20,
+zoom: 18,
+pitch: 20,
+            
+            
+  
+            center: [37.174014151096344,
+              55.97747745943937],
+
+             style: 'mapbox://styles/emiiaai/ckv9cvgm062s515nz08d6ceq0',
+             attributionControl: false,
+          
+            hash: true
+            
+     
+            
+        });
+        
+        
+        
+    
+ 
+ 
+
+  mapboxgl.setRTLTextPlugin('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js');
+map.addControl(new MapboxLanguage({
+  defaultLanguage: 'ru'
+}));
+
+
+
+            
+       
+       
+  // Add the specific control
+        map.addControl(map.indoor.control, 'bottom-right');
+ 
+  
+  
+     
+       
+       
+       
+        // МЕСТО ГЕОКОДЕРА.
+       
+       
+       
+       
+       
+   
+   
+   map.addControl(
+new MapboxDirections({
+accessToken: mapboxgl.accessToken
+}),
+'top-left'
+);
+   
+   
+   
+       
+       
+       
+
+      
+  
+
+
+        
+        
+(new mapboxgl.NavigationControl());
+
+(new mapboxgl.GeolocateControl({
+    positionOptions: {
+        enableHighAccuracy: true
+    },
+    trackUserLocation: true
+}));
+
+
+
+
+
+
+const geolocate = new mapboxgl.GeolocateControl({
+    positionOptions: {
+        enableHighAccuracy: true
+    },
+    trackUserLocation: true,
+    showUserHeading: true
+});
+
+
+
+
+
+
+
+
+
+
+
+map.addControl(geolocate, 'top-right');
+    
+map.addControl(new MapboxTraffic());
+
+
+
+
+
+
+
+
+
+
+
+var scale = new mapboxgl.ScaleControl({
+    positionOptions: {
+        enableHighAccuracy: true
+    },
+    trackUserLocation: true
+});
+
+
+
+
+
+
+      const directions = new MapboxDirections({
+        accessToken: mapboxgl.accessToken,
+        steps: false,
+        geometries: 'polyline',
+        unit: 'metric',
+        controls: { instructions: false }
+      });
+
+      
+      
+      
+      
+      
+      
+      
+             map.addControl(new mapboxgl.NavigationControl({
+  visualizePitch: true,
+  showZoom: false
+}));    
+      
+      
+      
+      
+      
+
+
+map.addControl(new MapboxMarkers(exampleGeojson), "bottom-left");
+
+
+
+
+    </script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+<script>  
+    
+    // create the popup
+const popup = new mapboxgl.Popup({ offset: 25 })
+   .setHTML("<iframe top:0;left:0;position:absolute;  allowfullscreen:true; width=335 height=500  frameborder='0'   src=https://www.emiia.ai/mrv.html?token=2.GtErfHCeAAcABc_H50WdWnkWZhJog9K6RBpaBlvUD9zSiDCX&amp;camera=0&amp;width=&amp;height=&amp;lang=ru frameborder=0 allow=accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture allowfullscreen></iframe>")
+   
+
+// create DOM element for the marker
+var el = document.createElement('div');
+el.id = 'marker';
+
+
+  
+  
+
+
+
+
+ 
+// create the marker
+new mapboxgl.Marker(el)
+.setLngLat(monument)
+.setPopup(popup) // sets a popup on this marker
+.addTo(map);
+
+
+
+    
+ </script>    
+ 
+ 
+ 
+
+ 
+ 
+ 
+ <script> 
+    
+ map.on('load', () => {
+// Insert the layer beneath any symbol layer.
+const layers = map.getStyle().layers;
+const labelLayerId = layers.find(
+(layer) => layer.type === 'symbol' && layer.layout['text-field']
+).id;
+ 
+// The 'building' layer in the Mapbox Streets
+// vector tileset contains building height data
+// from OpenStreetMap.
+map.addLayer(
+{
+'id': 'add-3d-buildings',
+'source': 'composite',
+'source-layer': 'building',
+'filter': ['==', 'extrude', 'true'],
+'type': 'fill-extrusion',
+
+
+'minzoom': 14,
+'maxzoom': 19,
+
+
+
+'paint': {
+'fill-extrusion-color': '#aaa',
+ 
+// Use an 'interpolate' expression to
+// add a smooth transition effect to
+// the buildings as the user zooms in.
+'fill-extrusion-height': [
+'interpolate',
+['linear'],
+['zoom'],
+15,
+0,
+15.05,
+['get', 'height']
+],
+'fill-extrusion-base': [
+'interpolate',
+['linear'],
+['zoom'],
+15,
+0,
+15.05,
+['get', 'min_height']
+],
+'fill-extrusion-opacity': 0.2
+
+
+
+
+
+}
+},
+labelLayerId
+);
+});
+
+
+map.on('style.load', function () {
+			map.addLayer(createCustomLayer('3d-model', modelOrigin), '');
+            
+   
+		});
+    
+    
+  </script> 
+ 
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+<script>
+
+
+      map.on('load', () => {
+        map.addSource('trees', {
+          'type': 'geojson',
+          'data': 'https://raw.githubusercontent.com/EMIIA/www.emiia.ai/master/json/circlegeojson.geojson'
+        });
+
+        map.addLayer(
+          {
+            'id': 'trees-heat',
+            'type': 'heatmap',
+            'source': 'trees',
+            
+            'minzoom': 14,
+'maxzoom': 23,
+            
+
+            'paint': {
+              // increase weight as diameter breast height increases
+              'heatmap-weight': {
+                'property': 'dbh',
+                'type': 'exponential',
+                'stops': [
+                  [3, 0],
+                  [3, 0]
+                ]
+              },
+              // increase intensity as zoom level increases
+              'heatmap-intensity': {
+                'stops': [
+                  [3, 0],
+                  [3, 0]
+                ]
+              },
+              // use sequential color palette to use exponentially as the weight increases
+              'heatmap-color': [
+                'interpolate',
+                ['linear'],
+                ['heatmap-density'],
+                40,
+                'rgba(293,209,234,80)',
+                0.1,
+                'rgb(103,169,207,80)',
+                0.2,
+                'rgb(166,189,219,80)',
+                0.3,
+                'rgb(103,169,207,80)',
+                0.4,
+                'rgb(28,144,153,80)'
+                
+            
+              ],
+              // increase radius as zoom increases
+              'heatmap-radius': {
+                'stops': [
+                  [3, 2],
+                  [3, 2]
+                ]
+              },
+              // decrease opacity to transition into the circle layer
+              'heatmap-opacity': {
+                'default': 1,
+                'stops': [
+                  [3, 1],
+                  [3, 0]
+                ]
+              }
+            }
+          },
+          'waterway-label'
+        );
+
+        map.addLayer(
+          {
+            'id': 'trees-point',
+            'type': 'circle',
+            'source': 'trees',
+            'maxzoom': 0,
+            'paint': {
+              // increase the radius of the circle as the zoom level and dbh value increases
+              'circle-radius': {
+                'property': 'dbh',
+                'type': 'exponential',
+                'stops': [
+ [{ zoom: 2, value: 20 }, 100],
+
+                ]
+              },
+              'circle-color': {
+                'property': 'dbh',
+                'type': 'exponential',
+                'stops': [
+                  [50, 'rgba(193,209,234,0.5)']
+
+
+                ]
+              },
+              'circle-stroke-color': '#C1D1EA',
+              'circle-stroke-width': 0.1,
+            
+           
+              'circle-opacity': {
+                'stops': [
+                  [0, 0],
+                  [3, 1]
+                ]
+              }
+            }
+          },
+          'waterway-label'
+        );
+        
+        
+        map.setLayerZoomRange('trees-point', 0, 15);
+        
+      });
+
+     
+      
+      
+    </script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script>
+
+
+
+
+
+ 
+// A simple line from origin to destination.
+const route = {
+'type': 'FeatureCollection',
+'id': '888',
+'features': [
+{
+'type': 'Feature',
+'id': '888',
+'geometry': {
+'type': 'LineString',
+'coordinates': [[37.17396598258472, 55.97715952834096], [37.17400397506739, 55.977439886655446], [37.17396598258472, 55.97715952834096], [37.17400397506739, 55.977439886655446], [37.17396598258472, 55.97715952834096], [37.17400397506739, 55.977439886655446]]
+}
+}
+]
+};
+
+
+
+
+// A single point that animates along the route.
+// Coordinates are initially set to origin.
+const point = {
+'type': 'FeatureCollection',
+'id': '888',
+'features': [
+{
+'type': 'Feature',
+'properties': {},
+'geometry': {
+'type': 'Point',
+'coordinates': origin
+}
+}
+]
+};
+ 
+// Calculate the distance in kilometers between route start/end point.
+const lineDistance = turf.length(route.features[0]);
+ 
+const arc = [];
+ 
+// Number of steps to use in the arc and animation, more steps means
+// a smoother arc and animation, but too many steps will result in a
+// low frame rate
+const steps = 390000;
+ 
+// Draw an arc between the `origin` & `destination` of the two points
+for (let i = 0; i < lineDistance; i += lineDistance / steps) {
+const segment = turf.along(route.features[0], i);
+arc.push(segment.geometry.coordinates);
+}
+ 
+// Update the route with calculated arc coordinates
+route.features[0].geometry.coordinates = arc;
+ 
+// Used to increment the value of the point measurement against the route.
+let counter = 0;
+ 
+map.on('load', () => {
+// Add a source and layer displaying a point which will be animated in a circle.
+map.addSource('route', {
+'type': 'geojson',
+'data': route
+});
+
+
+
+
+
+
+
+
+    
+
+
+
+ 
+map.addSource('point', {
+'type': 'geojson',
+'data': point
+});
+ 
+map.addLayer({
+'id': 'route',
+'source': 'route',
+'type': 'line',
+'paint': {
+'line-width': 0,
+'line-color': '#007cbf'
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+});
+ 
+map.addLayer({
+'id': 'point',
+'source': 'point',
+
+'minzoom': 14,
+'maxzoom': 23,
+
+
+
+'type': 'symbol',
+'layout': {
+// This icon is a part of the Mapbox Streets style.
+// To view all images available in a Mapbox style, open
+// the style in Mapbox Studio and click the "Images" tab.
+// To add a new image to the style at runtime see
+// https://docs.mapbox.com/mapbox-gl-js/example/add-image/
+'icon-image': 'pulsing-dot',
+'icon-size': 0.6,
+
+'icon-rotate': ['get', 'bearing'],
+
+'icon-allow-overlap': true,
+
+
+
+
+
+'icon-ignore-placement': true
+}
+});
+ 
+function animate() {
+const start =
+route.features[0].geometry.coordinates[
+counter >= steps ? counter - 0 : counter
+];
+const end =
+route.features[0].geometry.coordinates[
+counter >= steps ? counter : counter + 0
+];
+if (!start || !end) return;
+ 
+// Update point geometry to a new position based on counter denoting
+// the index to access the arc
+point.features[0].geometry.coordinates =
+route.features[0].geometry.coordinates[counter];
+ 
+// Calculate the bearing to ensure the icon is rotated to match the route arc
+// The bearing is calculated between the current point and the next point, except
+// at the end of the arc, which uses the previous point and the current point
+point.features[0].properties.bearing = turf.bearing(
+turf.point(start),
+turf.point(end)
+);
+ 
+// Update the source with this new data
+map.getSource('point').setData(point);
+ 
+// Request the next frame of animation as long as the end has not been reached
+if (counter < steps) {
+requestAnimationFrame(animate);
+}
+ 
+ 
+ 
+
+ 
+ 
+counter = counter + 30;
+}
+ 
+document.getElementById('replay').addEventListener('click', () => {
+// Set the coordinates of the original point back to origin
+point.features[0].geometry.coordinates = origin;
+ 
+// Update the source layer
+map.getSource('point').setData(point);
+ 
+// Reset the counter
+counter = 0;
+
+
+ 
+// Restart the animation
+animate(counter);
+});
+ 
+// Start the animation
+animate(counter);
+});
+
+
+
+
+
+ 
+const size = 180;
+ 
+// This implements `StyleImageInterface`
+// to draw a pulsing dot icon on the map.
+const pulsingDot = {
+width: size,
+height: size,
+data: new Uint8Array(size * size * 4),
+ 
+// When the layer is added to the map,
+// get the rendering context for the map canvas.
+onAdd: function () {
+const canvas = document.createElement('canvas');
+canvas.width = this.width;
+canvas.height = this.height;
+this.context = canvas.getContext('2d');
+},
+ 
+// Call once before every frame where the icon will be used.
+render: function () {
+const duration = 1000;
+const t = (performance.now() % duration) / duration;
+ 
+const radius = (size / 2) * 0.3;
+const outerRadius = (size / 2) * 0.7 * t + radius;
+const context = this.context;
+ 
+// Draw the outer circle.
+context.clearRect(0, 0, this.width, this.height);
+context.beginPath();
+context.arc(
+this.width / 2,
+this.height / 2,
+outerRadius,
+0,
+Math.PI * 0
+);
+context.fillStyle = `rgba(255, 200, 200, ${1 - t})`;
+context.fill();
+ 
+// Draw the inner circle.
+context.beginPath();
+context.arc(
+this.width / 2,
+this.height / 2,
+radius,
+0,
+Math.PI * 2
+);
+context.fillStyle = '#3d85c6';
+context.strokeStyle = 'white';
+context.lineWidth = 5 + 4 * (1 - t);
+context.fill();
+context.stroke();
+ 
+// Update this image's data with data from the canvas.
+this.data = context.getImageData(
+0,
+0,
+this.width,
+this.height
+).data;
+ 
+// Continuously repaint the map, resulting
+// in the smooth animation of the dot.
+map.triggerRepaint();
+ 
+// Return `true` to let the map know that the image was updated.
+return true;
+}
+};
+ 
+map.on('load', () => {
+map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
+ 
+map.addSource('dot-point', {
+'type': 'geojson',
+'data': {
+'type': 'FeatureCollection',
+'id': '888',
+'features': [
+{
+'type': 'Feature',
+'id': '888',
+'geometry': {
+'type': 'Point',
+'coordinates': [0, 0] // icon position [lng, lat]
+}
+}
+]
+}
+});
+
+
+
+
+
+});
+</script>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+         
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        
+        
+       
+        
+        
+        
+    <script>  
+    
+    
+    
+    
+    
+    
+     
+        map.on('load', async () => {
+// Get the initial location of the International Space Station (ISS).
+const geojson = await getLocation();
+// Add the ISS location as a source.
+map.addSource('iss', {
+type: 'geojson',
+data: geojson
+});
+    
+    
+    
+        
+       
+// Add the rocket symbol layer to the map.
+map.addLayer({
+'id': 'iss',
+'type': 'symbol',
+
+'minzoom': 14,
+'maxzoom': 23,
+
+
+'source': 'iss',
+'layout': {
+// This icon is a part of the Mapbox Streets style.
+// To view all images available in a Mapbox style, open
+// the style in Mapbox Studio and click the "Images" tab.
+// To add a new image to the style at runtime see
+// https://docs.mapbox.com/mapbox-gl-js/example/add-image/
+'icon-image': 'pulsing-dot',
+'icon-size': 0.6,
+'icon-rotate': ['get', 'bearing'],
+
+'icon-allow-overlap': true,
+'icon-ignore-placement': true
+}
+});
+ 
+// Update the source from the API every 2 seconds.
+const updateSource = setInterval(async () => {
+const geojson = await getLocation(updateSource);
+map.getSource('iss').setData(geojson);
+}, 10000000);
+ 
+async function getLocation(updateSource) {
+// Make a GET request to the API and return the location of the ISS.
+try {
+const response = await fetch(
+'https://www.emiia.ru/osm/25544.json',
+{ method: 'GET' }
+);
+
+
+const { latitude, longitude } = await response.json();
+
+
+// Fly the map to the location.
+map.flyTo({
+center: [longitude, latitude],
+speed: 0.0
+
+});
+
+
+
+
+// Return the location of the ISS as GeoJSON.
+return {
+'type': 'FeatureCollection',
+'features': [
+{
+'type': 'Feature',
+'geometry': {
+'type': 'Point',
+'coordinates': [longitude, latitude]
+}
+}
+]
+};
+
+
+
+
+
+
+
+} catch (err) {
+// If the updateSource interval is defined, clear the interval to stop updating the source.
+if (updateSource) clearInterval(updateSource);
+throw new Error(err);
+}
+}
+});
+
+
+
+
+
+</script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <script>  
+    
+    
+    
+    
+    
+    
+     
+        map.on('load', async () => {
+// Get the initial location of the International Space Station (ISS).
+const geojson = await getLocation();
+// Add the ISS location as a source.
+map.addSource('iss1', {
+type: 'geojson',
+data: geojson
+});
+    
+    
+    
+        
+       
+// Add the rocket symbol layer to the map.
+map.addLayer({
+'id': 'iss1',
+'type': 'symbol',
+
+'minzoom': 14,
+'maxzoom': 23,
+
+
+'source': 'iss1',
+'layout': {
+// This icon is a part of the Mapbox Streets style.
+// To view all images available in a Mapbox style, open
+// the style in Mapbox Studio and click the "Images" tab.
+// To add a new image to the style at runtime see
+// https://docs.mapbox.com/mapbox-gl-js/example/add-image/
+'icon-image': 'pulsing-dot',
+'icon-size': 0.6,
+'icon-rotate': ['get', 'bearing'],
+
+'icon-allow-overlap': true,
+'icon-ignore-placement': true
+}
+});
+ 
+// Update the source from the API every 2 seconds.
+const updateSource = setInterval(async () => {
+const geojson = await getLocation(updateSource);
+map.getSource('iss1').setData(geojson);
+}, 10000000);
+ 
+async function getLocation(updateSource) {
+// Make a GET request to the API and return the location of the ISS.
+try {
+const response = await fetch(
+'https://www.emiia.ru/osm/25545.json',
+{ method: 'GET' }
+);
+
+
+const { latitude, longitude } = await response.json();
+
+
+// Fly the map to the location.
+map.flyTo({
+center: [longitude, latitude],
+speed: 0.0
+
+});
+
+
+
+
+// Return the location of the ISS as GeoJSON.
+return {
+'type': 'FeatureCollection',
+'features': [
+{
+'type': 'Feature',
+'geometry': {
+'type': 'Point',
+'coordinates': [longitude, latitude]
+}
+}
+]
+};
+
+
+
+
+
+
+
+} catch (err) {
+// If the updateSource interval is defined, clear the interval to stop updating the source.
+if (updateSource) clearInterval(updateSource);
+throw new Error(err);
+}
+}
+});
+
+
+
+
+
+</script>
+    
+    
+    
+    
+    
+    <script>
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SXCK9F16F5');
+  
+  
+  
+  let tg = window.Telegram.WebApp; //получаем объект webapp телеграма target="_blank"  
+
+   tg.expand(); //расширяем на все окно  
+  
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+map.on('load', () => {
+map.addSource('places', {
+'type': 'geojson',
+'data': {
+'type': 'FeatureCollection',
+'features': [
+
+
+
+
+
+
+{
+'type': 'Feature',
+'properties': {
+'description': 
+'<strong>A Little Night Music</strong><p>The Arlington Players\' production of Stephen Sondheim\'s  <a href="http://www.thearlingtonplayers.org/drupal-6.20/node/4661/show" target="_blank" title="Opens in a new window"><em>A Little Night Music</em></a> comes to the Kogod Cradle at The Mead Center for American Theater (1101 6th Street SW) this weekend and next. 8:00 p.m.</p>'
+},
+'geometry': {
+'type': 'Point',
+'coordinates': [37.17403708738425,55.9773359924618]
+}
+}
+]
+}
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Add a layer showing the places.
+map.addLayer({
+'id': 'places',
+'type': 'circle',
+
+
+'minzoom': 14,
+'maxzoom': 19,
+
+
+
+
+'source': 'places',
+'paint': {
+'circle-color': 'white',
+'circle-radius': 6,
+'circle-stroke-width': 2,
+'circle-stroke-color': '#3d85c6'
+}
+});
+
+
+
+
+
+
+
+
+
+
+
+ map.addLayer({
+            'id': 'places',
+            'type': 'circle',
+            'source': 'places',
+            'layout': {
+                'icon-image': ['get', 'circle'],
+                'icon-allow-overlap': true
+            }
+        });
+
+        // When a click event occurs on a feature in the places layer, open a popup at the
+        // location of the feature, with description HTML from its properties.
+        map.on('click', 'places', (e) => {
+            // Copy coordinates array.
+            const coordinates = e.features[0].geometry.coordinates.slice();
+            const description = e.features[0].properties.description;
+
+            // Ensure that if the map is zoomed out such that multiple
+            // copies of the feature are visible, the popup appears
+            // over the copy being pointed to.
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+
+            new mapboxgl.Popup()
+                .setLngLat(coordinates)
+                .setHTML(description)
+                .addTo(map);
+        });
+
+        // Change the cursor to a pointer when the mouse is over the places layer.
+        map.on('mouseenter', 'places', () => {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'places', () => {
+            map.getCanvas().style.cursor = '';
+        });
+    });
+    
+    
+    
+    
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+map.on('load', () => {
+map.addSource('places1', {
+'type': 'geojson',
+
+
+
+
+'data': {
+'type': 'FeatureCollection',
+'features': [
+{
+'type': 'Feature',
+'properties': {
+'description':
+'<strong>A Little Night Music</strong><p>The Arlington Players\' production of Stephen Sondheim\'s  <a href="http://www.thearlingtonplayers.org/drupal-6.20/node/4661/show" target="_blank" title="Opens in a new window"><em>A Little Night Music</em></a> comes to the Kogod Cradle at The Mead Center for American Theater (1101 6th Street SW) this weekend and next. 8:00 p.m.</p>'
+},
+'geometry': {
+'type': 'Point',
+
+'coordinates': [37.174147071844686,55.977428264695845]
+}
+},
+
+
+
+
+
+
+
+
+
+{
+'type': 'Feature',
+'properties': {
+'description':
+'<strong>A Little Night Music</strong><p>The Arlington Players\' production of Stephen Sondheim\'s  <a href="http://www.thearlingtonplayers.org/drupal-6.20/node/4661/show" target="_blank" title="Opens in a new window"><em>A Little Night Music</em></a> comes to the Kogod Cradle at The Mead Center for American Theater (1101 6th Street SW) this weekend and next. 8:00 p.m.</p>'
+},
+'geometry': {
+'type': 'Point',
+
+'coordinates': [37.17405191989792,55.97710447718691]
+}
+},
+
+
+
+
+
+
+
+
+
+
+
+
+{
+'type': 'Feature',
+'properties': {
+'description': 
+'<strong>A Little Night Music</strong><p>The Arlington Players\' production of Stephen Sondheim\'s  <a href="http://www.thearlingtonplayers.org/drupal-6.20/node/4661/show" target="_blank" title="Opens in a new window"><em>A Little Night Music</em></a> comes to the Kogod Cradle at The Mead Center for American Theater (1101 6th Street SW) this weekend and next. 8:00 p.m.</p>'
+},
+'geometry': {
+'type': 'Point',
+
+'coordinates': [37.174114950657895,55.977264080461964]
+}
+}
+]
+}
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Add a layer showing the places.
+map.addLayer({
+'id': 'places1',
+
+
+'minzoom': 14,
+'maxzoom': 19,
+
+
+
+
+'type': 'circle',
+'source': 'places1',
+'paint': {
+'circle-color': 'white',
+'circle-radius': 6,
+'circle-stroke-width': 2,
+'circle-stroke-color': '#be3455'
+}
+});
+
+
+
+
+
+
+
+
+ map.addLayer({
+            'id': 'places1',
+            'type': 'circle',
+            'source': 'places1',
+            'layout': {
+                'icon-image': ['get', 'circle'],
+                'icon-allow-overlap': true
+            }
+        });
+
+        // When a click event occurs on a feature in the places layer, open a popup at the
+        // location of the feature, with description HTML from its properties.
+        map.on('click', 'places1', (e) => {
+            // Copy coordinates array.
+            const coordinates = e.features[0].geometry.coordinates.slice();
+            const description = e.features[0].properties.description;
+
+            // Ensure that if the map is zoomed out such that multiple
+            // copies of the feature are visible, the popup appears
+            // over the copy being pointed to.
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+
+            new mapboxgl.Popup()
+                .setLngLat(coordinates)
+                .setHTML(description)
+                .addTo(map);
+        });
+
+        // Change the cursor to a pointer when the mouse is over the places layer.
+        map.on('mouseenter', 'places1', () => {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'places1', () => {
+            map.getCanvas().style.cursor = '';
+        });
+    });
+    
+    
+    
+    
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+
+
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
+
+
+
+
+
+
+
+<script>
+   
+    $("[data-toggle='collapse']").on('click', function () {
+      $("[data-toggle='collapse']").removeClass('current');
+      $(this).addClass("current");
+  $(this).toggleClass("oppened"); 
+       $("[data-toggle='collapse']").not('.current').removeClass('oppened');
+});
+
+
+
+// Collapse accordion every time dropdown is shown
+$('.dropdown-accordion').on('show.bs.dropdown', function (event) {
+  var accordion1 = $(this).find($(this).data('accordion'));
+  accordion1.find('.panel-collapse.in').collapse('hide');
+  $("[data-toggle='collapse']").removeClass('oppened');
+});
+
+// Prevent dropdown to be closed when we click on an accordion link
+$('.dropdown-accordion').on('click', 'a[data-toggle="collapse"]', function (event) {
+  event.preventDefault();
+  event.stopPropagation();
+  $($(this).data('parent')).find('.panel-collapse.in').collapse('hide');
+  $($(this).attr('href')).collapse('show');
+  
+});
+
+
+
+// Close Nav When Link Is Selected
+$('.panel-body a[href^="#section"], a[href^="#section"]').on('click', function(){
+    $('.navbar-collapse').collapse('hide');
+	$('.dropdown-toggle').click();
+});
+
+
+//Smooth Scrolling For Internal Page Links
+$(function() {
+  $('.list-group a[href*=#]:not([href=#]), a[href="#toTop"]').click(function() {
+	if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+	  var target = $(this.hash);
+	  target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+	  if (target.length) {
+		$('html,body').animate({
+		  scrollTop: target.offset().top
+		}, 1000);
+		return false;
+	  }
+	}
+  });
+});
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
