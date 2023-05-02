@@ -2,8 +2,18 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Swipe between maps</title>
-<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+
+
+
+
+ <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+ 
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+
+
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
 <style>
@@ -50,13 +60,16 @@ zoom: 0
  
 const afterMap = new mapboxgl.Map({
 container: 'after',
-style: 'mapbox://styles/mapbox/dark-v11',
+style: 'mapbox://styles/emiiaai/cl98rxbyt003e16s1jg6unqr5',
 center: [0, 0],
 zoom: 0
 });
- 
-// A selector or reference to HTML element
+
+
+
+ // A selector or reference to HTML element
 const container = '#comparison-container';
+
  
 const map = new mapboxgl.Compare(beforeMap, afterMap, container, {
 // Set this to enable comparing two maps by mouse movement:
