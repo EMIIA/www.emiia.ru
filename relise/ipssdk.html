@@ -34,6 +34,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -392,7 +393,7 @@ a.mapboxgl-ctrl-logo{
          var customData;
 
         // Retrieve the geojson from the path and add the map
-        fetch('https://www.emiia.ai/json/ofisgeojson24.geojson')
+        fetch('https://www.emiia.ru/relise/geojson7.geojson')
             .then(res => res.json())
             .then(geojson => {
                 map.indoor.addMap(mapgl_indoor.IndoorMap.fromGeojson(geojson, { beforeLayerId, layersToHide }));
@@ -4059,6 +4060,8 @@ $(function() {
 </body>
 
 </html>
+
+
 
 
 
