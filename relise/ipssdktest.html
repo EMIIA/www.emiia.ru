@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Add a 3D model with threebox</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.129/build/three.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.129/examples/js/postprocessing/EffectComposer.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.129/examples/js/postprocessing/ShaderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.129/examples/js/postprocessing/RenderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.129/examples/js/shaders/HorizontalBlurShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.129/examples/js/shaders/VerticalBlurShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.129/examples/js/shaders/CopyShader.js"></script>
+
+
+
+
+
+
+
+
+
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/gh/jscastro76/threebox@v.2.2.2/dist/threebox.min.js" type="text/javascript"></script>
+<link href="https://cdn.jsdelivr.net/gh/jscastro76/threebox@v.2.2.2/dist/threebox.css" rel="stylesheet">
+<div id="map"></div>
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoiZW1paWFhaSIsImEiOiJja21icnU4bHkyNGRwMnFrbjVvNXdtdGJ0In0.TcfxV21Ov7zOgvWvgPxzlA';
+    const map = new mapboxgl.Map({
+        container: 'map',
+        // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+        style: 'mapbox://styles/mapbox/light-v11',
+        center: { lng: -73.97627, lat: 40.75155 },
+        zoom: 16.4,
+        pitch: 69.9,
+        bearing: 172.5,
+         antialias: true // create the gl context with MSAA antialiasing, so custom layers are antialiased 
+      
+    });
+
+    // eslint-disable-next-line no-undef
+    const tb = (window.tb = new Threebox(
+        map,
+        map.getCanvas().getContext('webgl'),
+        {
+            defaultLights: true,
+            
+            
+            
+            
+            
+        }
+    ));
+    
+    
+    
+
+
+    map.on('style.load', () => {
+        map.addLayer({
+            id: 'custom-threebox-model',
+            type: 'custom',
+            renderingMode: '3d',
+            onAdd: function () {
+
+                const scale = 3.2;
+                
+        
+     
+                
+                const options = {
+                    obj: 'https://www.emiia.ru/relise/modelGLB.glb',
+                    type: 'gltf',
+                    scale: { x: scale, y: scale, z: 2.7 },
+                    units: 'meters',
+                    
+                           wireframe: true,
+   
+
+                    
+                    
+    
+                    
+                    
+                    rotation: { x: 90, y: -90, z: 0 }
+                };
+                
+                
+                
+                
+
+                
+
+                tb.loadObj(options, (model) => {
+                    model.setCoords([-73.976799, 40.754145]);
+                    model.setRotation({ x: 0, y: 0, z: 241 });
+                    
+                    
+                    
+                    
+                    tb.add(model);
+                });
+                
+                
+                
+                
+                
+                
+                
+
+                
+                
+                
+                
+                
+            },
+
+            render: function () {
+                tb.update();
+            }
+        });
+        
+        
+        
+        
+  
+
+        
+        
+        
+        
+    });
+    
+    
+    
+
+
+    
+    
+   
+    
+</script>
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+
+
+// parameters to ensure the model is georeferenced correctly on the map
+const modelOrigin = [-73.976799, 40.754145]//[2.318, 48.850];
+const modelAltitude = 0;
+const modelRotate = [0, 0, 0];
+
+const modelAsMercatorCoordinate = mapboxgl.MercatorCoordinate.fromLngLat(
+  modelOrigin,
+  modelAltitude
+);
+
+// transformation parameters to position, rotate and scale the 3D model onto the map
+const modelTransform = {
+  translateX: modelAsMercatorCoordinate.x,
+  translateY: modelAsMercatorCoordinate.y,
+  translateZ: modelAsMercatorCoordinate.z,
+  rotateX: modelRotate[0],
+  rotateY: modelRotate[0],
+  rotateZ: modelRotate[0],
+  /* Since the 3D model is in real world meters, a scale transform needs to be
+   * applied since the CustomLayerInterface expects units in MercatorCoordinates.
+   */
+  scale: modelAsMercatorCoordinate.meterInMercatorCoordinateUnits()
+};
+
+const THREE = window.THREE;
+
+// configuration of the custom layer for a 3D model per the CustomLayerInterface
+const customLayer = {
+  id: "3d-model",
+  type: "custom",
+            wireframe: true,
+  renderingMode: "3d",
+  onAdd: function (map, gl) {
+    this.camera = new THREE.Camera();
+    this.scene = new THREE.Scene();
+    
+    
+    
+    
+     // create two three.js lights to illuminate the model
+    const directionalLight = new THREE.DirectionalLight(0x000000);
+    directionalLight.position.set(0, 0, 0).normalize();
+    this.scene.add(directionalLight);
+
+    const directionalLight2 = new THREE.DirectionalLight(0x000000);
+    directionalLight2.position.set(0, 0, 0).normalize();
+    this.scene.add(directionalLight2);
+
+    // use the three.js GLTF loader to add the 3D model to the three.js scene
+    const loader = new THREE.OBJLoader();
+    
+
+   
+    
+ 
+    
+     loader.load(
+    "https://www.emiia.ai/three/modelOBJ.obj" ,  
+      
+
+      
+    (mesh) => {
+        mesh.children[3].material = new THREE.MeshBasicMaterial({
+          wireframe: true,
+          color: 'red'
+        });
+        
+        
+        
+        
+                
+                               mesh.children[0].material = new THREE.MeshBasicMaterial({
+          wireframe: true,
+          color: 'red'
+        }); 
+        
+        
+        
+        mesh.children[14].material = new THREE.MeshBasicMaterial({
+          wireframe: true,
+          color: 'red'
+        });
+        
+        
+
+        
+        
+        
+        
+        
+                mesh.children[8].material = new THREE.MeshBasicMaterial({
+          wireframe: true,
+          color: 'red'
+        });
+        
+        
+                        mesh.children[9].material = new THREE.MeshBasicMaterial({
+          wireframe: true,
+          color: 'red'
+        });
+        
+        
+                
+                        mesh.children[7].material = new THREE.MeshBasicMaterial({
+          wireframe: true,
+          color: 'red'
+        });
+        
+        
+                               mesh.children[6].material = new THREE.MeshBasicMaterial({
+          wireframe: true,
+          color: 'red'
+        }); 
+        
+        
+        
+                
+                               mesh.children[5].material = new THREE.MeshBasicMaterial({
+          wireframe: true,
+          color: 'red'
+        }); 
+        
+        
+        
+                                mesh.children[4].material = new THREE.MeshBasicMaterial({
+          wireframe: true,
+          color: 'red'
+        });
+        
+        
+                                mesh.children[2].material = new THREE.MeshBasicMaterial({
+          wireframe: true,
+          color: 'red'
+        });
+        
+        
+                                        mesh.children[1].material = new THREE.MeshBasicMaterial({
+          wireframe: true,
+          color: 'red'
+        });
+        
+        
+        
+        
+        
+                
+                                        mesh.children[10].material = new THREE.MeshBasicMaterial({
+          wireframe: true,
+          color: 'red'
+        });
+        
+        
+        
+                                                mesh.children[11].material = new THREE.MeshBasicMaterial({
+          wireframe: true,
+          color: 'red'
+        });
+        
+        
+        
+                                                mesh.children[12].material = new THREE.MeshBasicMaterial({
+          wireframe: true,
+          color: 'red'
+        });
+        
+        
+        
+                                                mesh.children[13].material = new THREE.MeshBasicMaterial({
+          wireframe: true,
+          color: 'red'
+        });
+        
+        
+                                                mesh.children[15].material = new THREE.MeshBasicMaterial({
+          wireframe: true,
+          color: 'red'
+        });
+        
+        
+        
+                                                        mesh.children[16].material = new THREE.MeshBasicMaterial({
+          wireframe: true,
+          color: 'red'
+        });
+        
+        
+        
+                                                        mesh.children[17].material = new THREE.MeshBasicMaterial({
+          wireframe: true,
+          color: 'red'
+        });
+        
+        
+        
+                                                        mesh.children[18].material = new THREE.MeshBasicMaterial({
+          wireframe: true,
+          color: 'red'
+        });
+        
+        
+        
+                                                        mesh.children[19].material = new THREE.MeshBasicMaterial({
+          wireframe: true,
+          color: 'red'
+        });
+        
+        
+        
+                                                        mesh.children[20].material = new THREE.MeshBasicMaterial({
+          wireframe: true,
+          color: 'red'
+        });
+        
+        
+        
+                                                                mesh.children[21].material = new THREE.MeshBasicMaterial({
+          wireframe: true,
+          color: 'red'
+        });
+        
+        
+        
+                
+                                                                mesh.children[22].material = new THREE.MeshBasicMaterial({
+          wireframe: true,
+          color: 'red'
+        });
+        
+        
+        
+        this.scene.add(mesh);
+      }
+    );
+    
+    
+    
+   
+    this.map = map;
+
+    // use the Mapbox GL JS map canvas for three.js
+    this.renderer = new THREE.WebGLRenderer({
+      canvas: map.getCanvas(),
+      context: gl,
+                wireframe: true,
+      antialias: true
+    });
+       
+    
+    
+
+    
+
+    
+     this.renderer.autoClear = false;
+  },
+  render: function (gl, matrix) {
+    const rotationX = new THREE.Matrix4().makeRotationAxis(
+      new THREE.Vector3(0, 0, 0),
+      modelTransform.rotateX
+    );
+    const rotationY = new THREE.Matrix4().makeRotationAxis(
+      new THREE.Vector3(0, 0, 0),
+      modelTransform.rotateY
+    );
+    const rotationZ = new THREE.Matrix4().makeRotationAxis(
+      new THREE.Vector3(0, 0, 0),
+      modelTransform.rotateZ
+    );
+
+    const m = new THREE.Matrix4().fromArray(matrix);
+    const l = new THREE.Matrix4()
+      .makeTranslation(
+        modelTransform.translateX,
+        modelTransform.translateY,
+        modelTransform.translateZ
+      )
+      .scale(
+        new THREE.Vector3(
+          modelTransform.scale,
+          -modelTransform.scale,
+          modelTransform.scale
+        )
+      )
+      .multiply(rotationX)
+      .multiply(rotationY)
+      .multiply(rotationZ);
+
+    this.camera.projectionMatrix = m.multiply(l);
+    this.renderer.resetState();
+    this.renderer.render(this.scene, this.camera);
+    this.map.triggerRepaint();
+  }
+};
+
+    
+    
+   
+map.on("style.load", () => {
+  map.addLayer(customLayer, "waterway-label");
+});
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
