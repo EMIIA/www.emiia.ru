@@ -2537,6 +2537,33 @@ map.addControl(new MapboxLanguage({
    
    
    
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.meshline/1.4.0/THREE.MeshLine.js" integrity="sha512-CNumL3RLkfw0m0RcHHv67JdGVqchvvNOPZnX9WP2gNzkyk82/jKCgK1kVGJV8U3Cr+mEFOFAxY6L63mUGj3TIA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   
+   
+   
+   
+   
+   <script type="x-shader/x-vertex" id="vertexShader">
+
+			attribute vec3 center;
+			varying vec3 vCenter;
+
+			void main() {
+
+				vCenter = center;
+
+				gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+
+			}
+
+		</script>
+
+   
+   
+   
+   
+   
+   
    
    
 
@@ -2767,15 +2794,50 @@ var customLayer = {
                 
                                         mesh.children[10].material = new THREE.MeshBasicMaterial({
           wireframe: true,
+          
+  
           color: 'white'
         });
         
         
         
+        
+        
+      
+      
+      
+      
+      
+        
+        
+        
+        
                                                 mesh.children[11].material = new THREE.MeshBasicMaterial({
-          wireframe: true,
-          color: '#ff36ff'
+                                                
+                                                
+                                                
+                           						wireframe: false,
+                     
+                                                
+                                                color: 'white'
+                                                
+                                            
+                                                
+                                                
+                                             
+
         });
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
+      
         
         
         
@@ -2925,6 +2987,11 @@ var customLayer = {
       canvas: map.getCanvas(),
       context: gl,
                 wireframe: true,
+                
+               
+                
+                
+                
       antialias: true
     });
        
@@ -2942,7 +3009,7 @@ var customLayer = {
       modelTransform.rotateX
     );
     var rotationY = new THREE.Matrix4().makeRotationAxis(
-      new THREE.Vector3(0, 1, 0),
+      new THREE.Vector3(0, 0, 0),
       modelTransform.rotateY
     );
     var rotationZ = new THREE.Matrix4().makeRotationAxis(
@@ -3000,6 +3067,39 @@ map.on("style.load", () => {
      
 
 </script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 
 
@@ -3715,14 +3815,7 @@ throw new Error(err);
 </script>
     
     
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     
     
