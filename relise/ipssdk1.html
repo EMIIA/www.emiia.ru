@@ -2575,9 +2575,9 @@ map.addControl(new MapboxLanguage({
 
 
 // parameters to ensure the model is georeferenced correctly on the map
-var modelOrigin = [37.17409849995897,55.97737925266699]//[2.318, 48.850];
+var modelOrigin = [37.17409849995867,55.97737925266699]//[2.318, 48.850];
 var modelAltitude = -0;
-var modelRotate = [0.58, 0, -501.257];
+var modelRotate = [0.57, 0.16, -501.259];
 
 
 
@@ -2677,7 +2677,7 @@ var customLayer = {
 
     
      loader.load(
-    "https://www.emiia.ru/relise/modeOBJ-1.obj" , 
+    "https://www.emiia.ru/relise/modeOBJ-2.obj" , 
     
     
    
@@ -2717,7 +2717,9 @@ var customLayer = {
         
         
         
+    
         
+     
         
         
   
@@ -2776,7 +2778,7 @@ var customLayer = {
 
         
                                                    mesh.children[6].material = new THREE.MeshBasicMaterial({
-          wireframe: false,
+          wireframe: true,
           color: 'white'
         });   
         
@@ -2796,18 +2798,15 @@ var customLayer = {
         
         
         
+
+        
+        
+        
+        
+        
+        
+        
                                                               mesh.children[8].material = new THREE.MeshBasicMaterial({
-          wireframe: false,
-          color: '#F8F8F8'
-        });
-        
-        
-        
-        
-        
-        
-        
-                                                              mesh.children[9].material = new THREE.MeshBasicMaterial({
           wireframe: false,
           color: 'white'
         });
@@ -2815,30 +2814,16 @@ var customLayer = {
         
 
         
-        
-   mesh.children[10].material = new THREE.MeshBasicMaterial({
+                                                                      mesh.children[9].material = new THREE.MeshBasicMaterial({
           wireframe: true,
           color: 'white'
         });
-        
-              
-
-        
-        
-
-        
-        mesh.children[11].material = new THREE.MeshBasicMaterial({
-          wireframe: false,
-          color: '#F8F8F8'
-        });   
-        
 
         
         
         
         
-        
-        
+
 
       
       
