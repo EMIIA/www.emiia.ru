@@ -2677,7 +2677,7 @@ var customLayer = {
 
     
      loader.load(
-    "https://www.emiia.ru/relise/modelOBJ-1.obj" , 
+    "https://www.emiia.ru/relise/modeOBJ-1.obj" , 
     
     
    
@@ -2723,16 +2723,15 @@ var customLayer = {
   
   
   
-        
-        
-        
-        
-        
-         mesh.children[1].material = new THREE.MeshBasicMaterial({
+            mesh.children[1].material = new THREE.MeshBasicMaterial({
           wireframe: false,
           color: 'white'
         });
+           
         
+        
+        
+
         
         
         
@@ -2743,7 +2742,7 @@ var customLayer = {
                     
          mesh.children[2].material = new THREE.MeshBasicMaterial({
           wireframe: false,
-          color: '#FFA07A'
+          color: '#e5e8ec'
         });
         
         
@@ -2759,7 +2758,7 @@ var customLayer = {
         
                                               mesh.children[4].material = new THREE.MeshBasicMaterial({
           wireframe: false,
-          color: 'red'
+          color: '#F8F8F8'
         });
         
         
@@ -2799,7 +2798,7 @@ var customLayer = {
         
                                                               mesh.children[8].material = new THREE.MeshBasicMaterial({
           wireframe: false,
-          color: 'white'
+          color: '#F8F8F8'
         });
         
         
@@ -2817,7 +2816,10 @@ var customLayer = {
 
         
         
-
+   mesh.children[10].material = new THREE.MeshBasicMaterial({
+          wireframe: true,
+          color: 'white'
+        });
         
               
 
@@ -2825,7 +2827,10 @@ var customLayer = {
         
 
         
-        
+        mesh.children[11].material = new THREE.MeshBasicMaterial({
+          wireframe: false,
+          color: '#F8F8F8'
+        });   
         
 
         
