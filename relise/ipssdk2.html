@@ -2753,34 +2753,31 @@ var customLayer = {
         
         
    
+   
+   
+   
+   
         
         
         
                                       mesh.children[3].material = new THREE.MeshBasicMaterial({
-          wireframe: false,
-          color: 0xFFFFFF
+             wireframe: false,
+        color: 0xFFFFFF,
+          opacity: 0.8,
+          transparent: true,
+          fog: false
         });
         
         
-                                              mesh.children[4].material = new THREE.MeshBasicMaterial({
-          wireframe: false,
-          color: 0xF0F0F0
-        });
         
         
         
-        
-        
-        
-        
-        
-        
-        
+   
                         
                                               mesh.children[5].material = new THREE.MeshBasicMaterial({
          wireframe: false,
-          color: 0xE0E0E0,
-          opacity: 0.9,
+          color: 0xE8E8E8,
+          opacity: 0.81,
           transparent: true,
           fog: false
         });
@@ -2795,23 +2792,38 @@ var customLayer = {
     
     
     
+    
+    
+                                                  mesh.children[4].material = new THREE.MeshBasicMaterial({
+          wireframe: false,
+        color: 0xF5F5F5,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+    
+    
+    
+    
 
         
                                                    mesh.children[6].material = new THREE.MeshBasicMaterial({
           wireframe: true,
-          color: 0xFFFFFF
+        color: 0xFF0000,
+          opacity: 0.0,
+          transparent: true,
+          fog: false
         });   
         
         
-        
-        
-        
-        
-        
-        
+ 
                                                       mesh.children[7].material = new THREE.MeshBasicMaterial({
-          wireframe: false,
-          color: 0xFFFFFF
+wireframe: false,
+        color: 0xFFFFFF,
+          opacity: 0.8,
+          transparent: true,
+          fog: false
         });
         
         
@@ -2827,11 +2839,9 @@ var customLayer = {
         
         
                                                               mesh.children[8].material = new THREE.MeshBasicMaterial({
-          wireframe: false,
-          
-          
-          color: 0xFFFFFF,
-          opacity: 1,
+        wireframe: false,
+        color: 0xFFffff,
+          opacity: 0.9,
           transparent: true,
           fog: false
           
@@ -2847,16 +2857,30 @@ var customLayer = {
 
         
                                                                       mesh.children[9].material = new THREE.MeshBasicMaterial({
-          wireframe: true,
-          color: 0xFFFFFF
+ wireframe: false,
+        color: 0xFFffff,
+          opacity: 0.0,
+          transparent: true,
+          fog: false
         });
         
         
         
         
          mesh.children[10].material = new THREE.MeshBasicMaterial({
-          wireframe: true,
-          color: 0xFFFFFF
+
+          
+          
+          
+          wireframe: false,
+        color: 0xFFffff,
+          opacity: 0.0,
+          transparent: true,
+          fog: false
+          
+          
+          
+          
         });
         
         
