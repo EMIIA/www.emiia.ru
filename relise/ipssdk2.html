@@ -2702,7 +2702,7 @@ var customLayer = {
       
       
       
- // Верхние грани.     
+ // Лесничная площадка.     
                     
                                 mesh.children[0].material = new THREE.MeshBasicMaterial({
     wireframe: false,
@@ -2712,185 +2712,275 @@ var customLayer = {
           fog: false
         });
         
- 
- // Стены.  
- mesh.children[1].material = new THREE.MeshBasicMaterial({ 
- wireframe: false,
-          color: 0xE8E8E8,
+        
+        
+        
+        
+        
+        // Верхние грани.     
+                    
+                                mesh.children[1].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xffFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+             // Стены.     
+                    
+                                mesh.children[2].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xE8E8E8,
           opacity: 0.83,
           transparent: true,
           fog: false
         });
-           
         
         
         
-
-        
-        
-        
-
-      // Окна общие внутренние грани (сетка false/true).  
- mesh.children[2].material = new THREE.MeshBasicMaterial({ 
- wireframe: false,
-          color: 0xFF0000,
-          opacity: 0,
-          transparent: true,
-          fog: false
-        });   
-
-        
-        
-      
-      
-      
-      
-      
-            // Окна общие рамы.  
- mesh.children[3].material = new THREE.MeshBasicMaterial({ 
- wireframe: false,
-          color: 0xFFffff,
+   
+ 
+              // Внутренние грани наружных окон.     
+                    
+                                mesh.children[3].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xD3D3D3,
           opacity: 1,
           transparent: true,
           fog: false
-        }); 
-      
-      
-      
-      
-      
-
-                   // Стены вертикальные грани на стыках.  
- mesh.children[4].material = new THREE.MeshBasicMaterial({ 
- wireframe: false,
-          color: 0xE8E8E8,
+        });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+         
+              // Унитаз и умывальник.     
+                    
+                                mesh.children[4].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xFFFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+ 
+        
+        
+        
+        
+        
+                    // Рамы внешних окон.     
+                    
+                                mesh.children[5].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xFFFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+        
+                            // Вертикальные ребра стен (стыки).     
+                    
+                                mesh.children[6].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xE8E8E8,
           opacity: 0.8,
           transparent: true,
           fog: false
-        });  
-
-
- 
- 
- 
- 
- 
- 
- 
- 
-                   // Стекла окон на лесничной площадке.  
- mesh.children[5].material = new THREE.MeshBasicMaterial({ 
- wireframe: false,
-          color: 0xFF0000,
-          opacity: 0,
-          transparent: true,
-          fog: false
-        });  
-
- 
- 
- 
- 
- 
- 
-                    // Внутренние грани окон на лесничной площадке.  
- mesh.children[6].material = new THREE.MeshBasicMaterial({ 
- wireframe: false,
-          color: 0xD3D3D3,
+        });
+        
+        
+        
+        
+        
+        
+                                    //Смеситель.     
+                    
+                                mesh.children[7].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xFFffff,
           opacity: 1,
           transparent: true,
           fog: false
-        });  
-
- 
- 
- 
- 
- 
-                     // Внутренние грани общих окон.  
- mesh.children[7].material = new THREE.MeshBasicMaterial({ 
- wireframe: false,
-          color: 0xD3D3D3,
-          opacity: 1,
-          transparent: true,
-          fog: false
-        });  
+        });
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-                             // Стекла общих окон.  
- mesh.children[8].material = new THREE.MeshBasicMaterial({ 
- wireframe: false,
-          color: 0xFF0000,
+  
+  
+  
+  
+  
+                                      //Стекла окон на лестничных площадках.     
+                    
+                                mesh.children[8].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xFF0000,
           opacity: 0,
           transparent: true,
           fog: false
-        });  
+        });
         
         
         
-
- 
-                              // Внутренние двери полотно.  
- mesh.children[9].material = new THREE.MeshBasicMaterial({ 
- wireframe: false,
-          color: 0xFFffff,
+        
+        
+        
+        
+        
+        
+        
+         //Внутренние грани окон на лестничных площадках.
+        
+        
+                                       mesh.children[9].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xD3D3D3,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+                                             //Внутренние грани внешних окон.     
+                    
+                                mesh.children[10].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xD3D3D3,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+                                                     //Стекла внешних окон.     
+                    
+                                mesh.children[11].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xD3D3D3,
+          opacity: 0,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+  
+  
+  
+  
+  
+  
+  
+  
+    
+                                      //Полотно внутренних дверей.     
+                    
+                                mesh.children[12].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xFFFFFF,
           opacity: 0.83,
           transparent: true,
           fog: false
-        }); 
- 
- 
- 
- 
- 
- 
- 
- 
-                               // Внутренние двери, внутреняя сторона (наличники).  
- mesh.children[10].material = new THREE.MeshBasicMaterial({ 
- wireframe: false,
-          color: 0xD3D3D3,
-          opacity: 1,
-          transparent: true,
-          fog: false
-        }); 
- 
- 
- 
- 
- 
- 
- 
- 
-                                // Внутренние двери, внешняя сторона (грани).  
- mesh.children[11].material = new THREE.MeshBasicMaterial({ 
- wireframe: false,
-          color: 0xD3D3D3,
-          opacity: 1,
-          transparent: true,
-          fog: false
-        }); 
- 
- 
- 
- 
+        });
   
-                                // Внутренние двери, внешняя сторона (грани).  
- mesh.children[12].material = new THREE.MeshBasicMaterial({ 
- wireframe: false,
-          color: 0xD3D3D3,
+  
+  
+  
+  
+  
+  
+                                        //Внутренний наличник дверей внутри.     
+                    
+                                mesh.children[13].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xd3d3d3,
           opacity: 1,
           transparent: true,
           fog: false
-        }); 
+        });
+  
+  
+  
+  
+  
+  
+    
+                                        //Внутренние двери (внутренние грани1).     
+                    
+                                mesh.children[14].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xD3D3D3,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+  
+  
+  
+  
+  
+  
+  
+  
+  
+      
+                                        //Внутренние двери (внутренние грани2).     
+                    
+                                mesh.children[15].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xD3D3D3,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+  
+  
+  
+  
+                                          //Пожарный оповещатель.     
+                    
+                                mesh.children[16].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xFFFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+   
  
  
  
@@ -2898,6 +2988,8 @@ var customLayer = {
  
  
  
+
+   
  
  
  
