@@ -2672,6 +2672,69 @@ var customLayer = {
     // use the three.js GLTF loader to add the 3D model to the three.js scene
     var loader = new THREE.OBJLoader();
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+             loader.load(
+    "https://www.emiia.ru/relise/modeOBJ-3.obj" , 
+    
+    
+ 
+
+      
+    (mesh) => {
+        
+        
+      
+      
+ // Лесничная площадка.     
+                    
+                                mesh.children[0].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xFFFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+     
+        
+        this.scene.add(mesh);
+      }
+    );
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 
 
@@ -3004,6 +3067,57 @@ var customLayer = {
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
    
     this.map = map;
 
@@ -3116,7 +3230,7 @@ map.on("style.load", () => {
     
   
     
-    
+
     
     
     
