@@ -38,6 +38,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -3637,15 +3638,12 @@ map.addLayer({
 'icon-rotate': ['get', 'bearing'],
 
 'icon-allow-overlap': true,
-
-
-
-
-
 'icon-ignore-placement': true
 }
-});
- 
+}, 'road-label-navigation');
+
+
+
 function animate() {
 const start =
 route.features[0].geometry.coordinates[
@@ -3886,10 +3884,11 @@ map.addLayer({
 'icon-size': 0.6,
 'icon-rotate': ['get', 'bearing'],
 
+
 'icon-allow-overlap': true,
 'icon-ignore-placement': true
 }
-});
+}, 'road-label-navigation');
  
 // Update the source from the API every 2 seconds.
 const updateSource = setInterval(async () => {
@@ -4001,10 +4000,14 @@ map.addLayer({
 'icon-size': 0.6,
 'icon-rotate': ['get', 'bearing'],
 
+
 'icon-allow-overlap': true,
 'icon-ignore-placement': true
 }
-});
+}, 'road-label-navigation');
+
+
+
  
 // Update the source from the API every 2 seconds.
 const updateSource = setInterval(async () => {
@@ -4611,6 +4614,8 @@ $(function() {
 </body>
 
 </html>
+
+
 
 
 
