@@ -2685,7 +2685,7 @@ var customLayer = {
     
     
              loader.load(
-    "https://www.emiia.ru/relise/modeOBJ-3.obj" , 
+    "https://www.emiia.ru/relise/modeOBJ-4.obj" , 
     
     
  
@@ -2705,6 +2705,66 @@ var customLayer = {
           transparent: true,
           fog: false
         });
+        
+        
+        
+        // Контуры стен.
+                    
+                                mesh.children[1].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xFF0000,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+         // Стыки.     
+                    
+                                mesh.children[2].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xFF0000,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+                 // Окна на лесничной площадке.     
+                    
+                                mesh.children[3].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xFF0000,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+                         // Лесничная площадка.     
+                    
+                                mesh.children[4].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xFF0000,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+
         
         
      
@@ -2771,8 +2831,8 @@ var customLayer = {
                     
                                 mesh.children[0].material = new THREE.MeshBasicMaterial({
     wireframe: false,
-          color: 0x66cc99,
-          opacity: 0.8,
+          color: 0xFFFFFF,
+          opacity: 0.95,
           transparent: true,
           fog: false
         });
@@ -3040,7 +3100,7 @@ var customLayer = {
                     
                                 mesh.children[16].material = new THREE.MeshBasicMaterial({
     wireframe: false,
-         color: 0xFF0066,
+         color: 0xFFFFFF,
           opacity: 1,
           transparent: true,
           fog: false
