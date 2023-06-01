@@ -49,6 +49,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -2898,6 +2899,9 @@ position: absolute;
     background-repeat: no-repeat !important;
  
 } 
+
+
+
 
 
 
@@ -6046,7 +6050,7 @@ var exampleGeojson = {
   
 maxPitch: 45,
 
-minZoom: 2,
+minZoom: 1,
 maxZoom: 22,
 zoom: 18,
 pitch: 20,
@@ -6482,7 +6486,7 @@ var customLayer = {
                     
                                 mesh.children[3].material = new THREE.MeshBasicMaterial({
     wireframe: false,
-          color: 0xFF0000,
+          color: 0xFFFFFF,
           opacity: 1,
           transparent: true,
           fog: false
@@ -6496,7 +6500,7 @@ var customLayer = {
                     
                                 mesh.children[4].material = new THREE.MeshBasicMaterial({
     wireframe: false,
-          color: 0xFF0000,
+          color: 0xFFFFFF,
           opacity: 1,
           transparent: true,
           fog: false
@@ -6721,7 +6725,7 @@ var customLayer = {
                     
                                 mesh.children[8].material = new THREE.MeshBasicMaterial({
     wireframe: false,
-         color: 0xFF0000,
+         color: 0xFFFFFF,
           opacity: 0,
           transparent: true,
           fog: false
@@ -7192,7 +7196,7 @@ map.on('style.load', function () {
             'type': 'heatmap',
             'source': 'trees',
             
-            'minzoom': 14,
+            'minzoom': 10,
 'maxzoom': 23,
             
 
@@ -7292,7 +7296,7 @@ map.on('style.load', function () {
         );
         
         
-        map.setLayerZoomRange('trees-point', 0, 15);
+        map.setLayerZoomRange('trees-point', 0, 17);
         
       });
 
@@ -7483,6 +7487,8 @@ $(function() {
 </body>
 
 </html>
+
+
 
 
 
