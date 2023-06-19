@@ -45,6 +45,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -768,7 +769,13 @@
     		}
     	},
         
-        
+  
+  
+  
+  
+  
+  
+  
         
         
         
@@ -787,11 +794,11 @@
     				base: 1,
     				stops: [
     					[
-    						17,
+    						19,
     						0
     					],
     					[
-    						18,
+    						20,
     						1
     					]
     				]
@@ -836,11 +843,11 @@
     				base: 1,
     				stops: [
     					[
-    						17,
+    						19,
     						0
     					],
     					[
-    						18,
+    						20,
     						1
     					]
     				]
@@ -875,11 +882,11 @@
     				base: 1,
     				stops: [
     					[
-    						17,
+    						19,
     						0
     					],
     					[
-    						18,
+    						20,
     						1
     					]
     				]
@@ -887,11 +894,14 @@
     		}
     	},
         
-        
+   
+   
+   
+   
         
     	{
     		filter: [
-    			"any",
+    			"all",
     			[
     				"filter-==",
     				"indoor",
@@ -902,15 +912,15 @@
     			[
     				"filter-==",
     				"indoor",
-    				"area"
+    				"room"
     			]
     		],
     		id: "indoor-rooms-borders",
     		type: "line",
     		source: "indoor",
     		paint: {
-    			"line-color": "#FFFFFF",
-    			"line-width": 2,
+    			"line-color": "transparent",
+    			"line-width": 0,
     			"line-opacity": {
     				base: 1,
     				stops: [
@@ -926,7 +936,13 @@
     			}
     		}
     	},
-        
+       
+       
+       
+       
+       
+       
+       
         
     	{
     		filter: [
@@ -8507,7 +8523,7 @@ map.on('style.load', function () {
       map.on('load', () => {
         map.addSource('trees', {
           'type': 'geojson',
-          'data': 'https://raw.githubusercontent.com/EMIIA/www.emiia.ai/master/json/circlegeojson.geojson'
+          'data': 'https://raw.githubusercontent.com/EMIIA/www.emiia.ai/master/json/circlegeojson1.geojson'
         });
 
         map.addLayer(
@@ -8616,7 +8632,7 @@ map.on('style.load', function () {
         );
         
         
-        map.setLayerZoomRange('trees-point', 0, 17);
+        map.setLayerZoomRange('trees-point', 0, 19);
         
       });
 
@@ -9348,6 +9364,8 @@ $(function() {
 </body>
 
 </html>
+
+
 
 
 
