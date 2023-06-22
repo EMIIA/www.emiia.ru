@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Demo: Find elevations with the Tilequery API</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+    <link
+      href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+
+      .ele-info {
+        position: absolute;
+       
+        margin-top: 5px;
+        margin-left: 5px;
+        padding: 5px;
+        width: 140px;
+        border: 0px solid black;
+        font-size: 12px;
+        color: #222;
+        background-color: #fff;
+      }
+    </style>
+    
+    
+    
+    
+    
+    <style type="text/css">
+    #info {
+        display: table;
+        position: relative;
+        margin: 0px auto;
+        word-wrap: anywhere;
+        white-space: pre-wrap;
+        padding: 0px;
+        border: none;
+        border-radius: 0px;
+        font-size: 12px;
+        text-align: left;
+        color: #222;
+        background: #fff;
+    }
+</style>
+    
+    
+    
+    
+    
+    
+  </head>
+
+  <body>
+    <div id="map"></div>
+    <div class="ele-info">
+    
+    
+   
+      
+       
+      
+
+      
+      <div id="map"></div>
+<pre id="info"></pre>
+
+<div>ID: [$id EMIIA.AI CLOUD]&nbsp;<span id="ele"></span></div>
+      <div>Speed: 10 km&nbsp;<span id="1"></span></div>
+      
+      <div>Dist: 80 м&nbsp;<span id="ele"></span></div>
+
+      <div>Alt: 30 м&nbsp;<span id="ele"></span></div>
+      
+    </div>
+    <script>
+      mapboxgl.accessToken = 'pk.eyJ1IjoiZW1paWFhaSIsImEiOiJja21icnU4bHkyNGRwMnFrbjVvNXdtdGJ0In0.TcfxV21Ov7zOgvWvgPxzlA';
+      const map = new mapboxgl.Map({
+        container: 'map', // container id
+        style: 'mapbox://styles/emiiaai/cl98rxbyt003e16s1jg6unqr5', // stylesheet location
+        center: [-122.4387738485193, 37.75152511125579], // starting position [lng, lat]
+        zoom: 11.5 // starting zoom
+      });
+
+      let lng;
+      let lat;
+      const lngDisplay = document.getElementById('lng');
+      const latDisplay = document.getElementById('lat');
+      const eleDisplay = document.getElementById('ele');
+
+      const marker = new mapboxgl.Marker({
+        'color': 'transparent'
+      });
+
+      map.on('mousemove', (event) => {
+        // Use the returned LngLat object to set the marker location
+        // https://docs.mapbox.com/mapbox-gl-js/api/#lnglat
+        marker.setLngLat(event.lngLat).addTo(map);
+
+        lng = event.lngLat.lng;
+        lat = event.lngLat.lat;
+
+        getElevation();
+      });
+
+      async function getElevation() {
+        // Construct the API request
+        const query = await fetch(
+          `https://api.mapbox.com/v4/mapbox.mapbox-terrain-v2/tilequery/${lng},${lat}.json?layers=contour&limit=50&access_token=${mapboxgl.accessToken}`,
+          { method: 'GET' }
+        );
+        if (query.status !== 200) return;
+        const data = await query.json();
+        // Display the longitude and latitude values
+        lngDisplay.textContent = lng.toFixed(14);
+        latDisplay.textContent = lat.toFixed(14);
+        // Get all the returned features
+        const allFeatures = data.features;
+        // For each returned feature, add elevation data to the elevations array
+        const elevations = allFeatures.map((feature) => feature.properties.ele);
+        // In the elevations array, find the largest value
+        const highestElevation = Math.max(...elevations);
+        // Display the largest elevation value
+        eleDisplay.textContent = `${highestElevation} meters`;
+      }
+      
+      
+      
+      map.on('mousemove', (e) => {
+document.getElementById('info').innerHTML =
+// `e.point` is the x, y coordinates of the `mousemove` event
+// relative to the top-left corner of the map.
+JSON.stringify(e.point) +
+'<br />' +
+// `e.lngLat` is the longitude, latitude geographical position of the event.
+JSON.stringify(e.lngLat.wrap());
+});
+      
+      
+    </script>
+  </body>
+</html>
+
+
+
