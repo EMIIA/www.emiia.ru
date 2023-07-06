@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+<title>Display buildings in 3D</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.2.1/mapbox-gl.js"></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.2.1/mapbox-gl.css' rel='stylesheet' />
+<style>
+body { margin:0; padding:0; }
+#map { position:absolute; top:0; bottom:0; width:100%; }
+</style>
+</head>
+<body>
+ 
+<div id='map'></div>
+	<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoiYWxhbnRnZW8tcHJlc2FsZXMiLCJhIjoiY2pxcmZ1cW1mMG1tcDN4bDVvYzA4MWg5MyJ9.7QtVj_0ythHwEg1n_zaRTQ';
+	var map = new mapboxgl.Map({
+		style: 'mapbox://styles/mapbox/light-v10',
+		center: [ -74.005844, 40.715657],
+		zoom: 15.5,
+		pitch: 60,
+		bearing: 140,
+		container: 'map',
+		antialias: true
+	});
+	 
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+
+
+	map.on('load', function() {
+		
+ 
+		
+		extrusion_translucent = {
+			'id': 'extrusion-translucent',
+			'type': 'fill-extrusion',
+			'source': {
+				'type': 'geojson',
+				'data': {
+					"features": [
+						{
+						  "type": "Feature",
+						  "properties": {
+							"height": 300,
+							"base_height": 0,
+							"color": "blue"
+						  },
+						  "geometry": {
+							"coordinates": [
+							  [
+								[ -74.005844, 40.715657, ],
+								[ -74.006844, 40.715657, ],
+								[ -74.006844, 40.714657, ],
+								[ -74.005844, 40.714657, ],
+								[ -74.005844, 40.715657, ],
+							  ]
+							],
+							"type": "Polygon"
+						  }
+						}
+					],
+					"type": "FeatureCollection"
+				}
+			},
+			'paint': {
+				'fill-extrusion-color': ['get', 'color'],
+				'fill-extrusion-height': ['get', 'height'],
+				'fill-extrusion-base': ['get', 'base_height'],
+				'fill-extrusion-opacity': 0.5
+			}
+		};
+		
+	
+		map.addLayer(extrusion_translucent);
+		
+		console.log(mapboxgl);
+	});
+
+
+ 
+</script>
+
+
+
+
+
+
+<script>
+    map.on('load', function () {
+        var layers = map.getStyle().layers;
+
+        var labelLayerId;
+        for (var i = 0; i < layers.length; i++) {
+          if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
+            labelLayerId = layers[i].id;
+            break;
+          }
+        }
+        map.addLayer(
+          {
+            'id': '3dbuildings',
+            'source': 'composite',
+            'source-layer': 'building',
+            'filter': ['==', 'extrude', 'true'],
+            'type': 'fill-extrusion',
+            'minzoom': 15,
+            pitch: 60,
+            bearing: -60,
+            'paint': {
+              'fill-extrusion-color': 'green',
+
+              // use an 'interpolate' expression to add a smooth transition effect to the
+              // buildings as the user zooms in
+              'fill-extrusion-height': [
+                'interpolate',
+                ['linear'],
+                ['zoom'],
+                15,
+                0,
+                15.05,
+                ['get', 'height']
+              ],
+              'fill-extrusion-base': [
+                'interpolate',
+                ['linear'],
+                ['zoom'],
+                15,
+                0,
+                15.05,
+                ['get', 'min_height']
+              ],
+              'fill-extrusion-opacity': 0.5
+            }
+          },
+          labelLayerId
+        );
+        
+        
+        
+        
+        
+        
+        
+        
+
+ map.addSource('currentBuildings', {
+          type: 'geojson',
+          data: {
+            "type": "FeatureCollection",
+            "features": []
+          }
+        });
+
+   map.addLayer(
+          {
+            'id': 'highlight',
+            'source': 'currentBuildings',
+            'filter': ['==', 'extrude', 'true'],
+            'type': 'fill-extrusion',
+            'minzoom': 15,
+            pitch: 60,
+            bearing: -60,
+
+            'paint': {
+              'fill-extrusion-color': '#f00',
+              // use an 'interpolate' expression to add a smooth transition effect to the
+              // buildings as the user zooms in
+              'fill-extrusion-height': [
+                'interpolate',
+                ['linear'],
+                ['zoom'],
+                4,
+                0,
+                15.05,
+                ['get', 'height']
+              ],
+              'fill-extrusion-base': [
+                'interpolate',
+                ['linear'],
+                ['zoom'],
+                4,
+                0,
+                15.05,
+                ['get', 'min_height']
+              ],
+              'fill-extrusion-opacity': 0.6
+            }
+          },
+          labelLayerId
+        );
+
+
+        map.on('click', '3dbuildings', function (e) {
+          map.getSource('currentBuildings').setData({
+            "type": "FeatureCollection",
+            "features": e.features
+          });
+        });
+        map.on('mousemove', '3dbuildings', function (e) {
+          map.getSource('currentBuildings').setData({
+            "type": "FeatureCollection",
+            "features": e.features
+          });
+          
+          
+                  });
+              });
+        
+        
+        
+        
+        
+
+
+</script>
+
+
+
+
+ 
+</body>
+</html>
+
