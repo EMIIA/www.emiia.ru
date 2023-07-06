@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Animate 3D buildings based on ambient sounds</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoiZW1paWFhaSIsImEiOiJja21icnU4bHkyNGRwMnFrbjVvNXdtdGJ0In0.TcfxV21Ov7zOgvWvgPxzlA';
+    // Use a minimal variant of the Mapbox Dark style, with certain features removed.
+    const map = new mapboxgl.Map({
+        // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+        style: 'mapbox://styles/examples/cj68bstx01a3r2rndlud0pwpv',
+        center: {
+            lng: -74.0064,
+            lat: 40.7081
+        },
+        zoom: 15,
+        pitch: 55,
+        container: 'map',
+        antialias: true
+    });
+
+
+
+    map.on('load', function () {
+        var layers = map.getStyle().layers;
+
+        var labelLayerId;
+        for (var i = 0; i < layers.length; i++) {
+          if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
+            labelLayerId = layers[i].id;
+            break;
+          }
+        }
+        map.addLayer(
+          {
+            'id': '3dbuildings',
+            'source': 'composite',
+            'source-layer': 'building',
+            'filter': ['==', 'extrude', 'true'],
+            'type': 'fill-extrusion',
+            'minzoom': 15,
+            pitch: 60,
+            bearing: -60,
+            'paint': {
+              'fill-extrusion-color': '#aaa',
+
+              // use an 'interpolate' expression to add a smooth transition effect to the
+              // buildings as the user zooms in
+              'fill-extrusion-height': [
+                'interpolate',
+                ['linear'],
+                ['zoom'],
+                15,
+                0,
+                15.05,
+                ['get', 'height']
+              ],
+              'fill-extrusion-base': [
+                'interpolate',
+                ['linear'],
+                ['zoom'],
+                15,
+                0,
+                15.05,
+                ['get', 'min_height']
+              ],
+              'fill-extrusion-opacity': 0.6
+            }
+          },
+          labelLayerId
+        );
+
+        map.addSource('currentBuildings', {
+          type: 'geojson',
+          data: {
+            "type": "FeatureCollection",
+            "features": []
+          }
+        });
+
+        map.addLayer(
+          {
+            'id': 'highlight',
+            'source': 'currentBuildings',
+            'filter': ['==', 'extrude', 'true'],
+            'type': 'fill-extrusion',
+            'minzoom': 15,
+            pitch: 60,
+            bearing: -60,
+
+            'paint': {
+              'fill-extrusion-color': '#f00',
+              // use an 'interpolate' expression to add a smooth transition effect to the
+              // buildings as the user zooms in
+              'fill-extrusion-height': [
+                'interpolate',
+                ['linear'],
+                ['zoom'],
+                4,
+                0,
+                15.05,
+                ['get', 'height']
+              ],
+              'fill-extrusion-base': [
+                'interpolate',
+                ['linear'],
+                ['zoom'],
+                4,
+                0,
+                15.05,
+                ['get', 'min_height']
+              ],
+              'fill-extrusion-opacity': 0.6
+            }
+          },
+          labelLayerId
+        );
+
+
+        map.on('click', '3dbuildings', function (e) {
+          map.getSource('currentBuildings').setData({
+            "type": "FeatureCollection",
+            "features": e.features
+          });
+        });
+        map.on('mousemove', '3dbuildings', function (e) {
+          map.getSource('currentBuildings').setData({
+            "type": "FeatureCollection",
+            "features": e.features
+          });
+        });
+      });
+</script>
+
+</body>
+</html>
