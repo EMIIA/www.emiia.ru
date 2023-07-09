@@ -51,7 +51,7 @@ var f=i.createNS("http://www.w3.org/2000/svg","path");f.setAttributeNS(null,"d",
 
 
 
-var m=i.createNS("http://www.w3.org/2000/svg","g");m.setAttributeNS(null,"opacity","0.9"),m.setAttributeNS(null,"fill","white");var g=i.createNS("http://www.w3.org/2000/svg","path");g.setAttributeNS(null,"d","M27.68,12.7h-9v-9a3,3,0,0,0-6,0v9h-9a3,3,0,0,0,0,6h9v9a3,3,0,0,0,6,0v-9h9a3,3,0,0,0,0-6Zm0,4h-11v11a1,1,0,0,1-2,0v-11h-11a1,1,0,0,1,0-2h11v-11a1,1,0,0,1,2,0v11h11a1,1,0,0,1,0,2Z"),m.appendChild(g);
+var m=i.createNS("http://www.w3.org/2000/svg","g");m.setAttributeNS(null,"opacity","0.7"),m.setAttributeNS(null,"fill","white");var g=i.createNS("http://www.w3.org/2000/svg","path");g.setAttributeNS(null,"d","M27.68,12.7h-9v-9a3,3,0,0,0-6,0v9h-9a3,3,0,0,0,0,6h9v9a3,3,0,0,0,6,0v-9h9a3,3,0,0,0,0-6Zm0,4h-11v11a1,1,0,0,1-2,0v-11h-11a1,1,0,0,1,0-2h11v-11a1,1,0,0,1,2,0v11h11a1,1,0,0,1,0,2Z"),m.appendChild(g);
 
 
 
