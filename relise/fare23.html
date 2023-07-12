@@ -1,6 +1,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -5483,11 +5484,11 @@ var customLayer = {
         
         
         
-         // Окна ленты.     
+         // X.     
                     
                                 mesh.children[5].material = new THREE.MeshBasicMaterial({
     wireframe: false,
-          color: 0xFFFFFF,
+          color: 0x880808,
           opacity: 1,
           transparent: true,
           fog: false
@@ -5499,11 +5500,11 @@ var customLayer = {
         
 
         
-      // Окна ленты.     
+      // Y.     
                     
                                 mesh.children[6].material = new THREE.MeshBasicMaterial({
     wireframe: false,
-          color: 0xFFFFFF,
+          color: 0x454B1B,
           opacity: 1,
           transparent: true,
           fog: false
@@ -5512,7 +5513,31 @@ var customLayer = {
 
 
 
-        
+    
+     // Z.     
+                    
+                                mesh.children[7].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0x89CFF0,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });  
+    
+    
+    
+    
+    
+    // Основная решетка.     
+                    
+                                mesh.children[8].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xFFFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });  
+    
         
         
      
@@ -5530,9 +5555,7 @@ var customLayer = {
     
     
     
-    
-    
-    
+
     
     
     
@@ -7502,6 +7525,7 @@ $(function() {
 </body>
 
 </html>
+
 
 
 
