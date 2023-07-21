@@ -2939,7 +2939,7 @@ background-size: 26px 26px !important;
       
        
 
-<div>Alt:&nbsp;<span id="ele"></span> Hei:[&nbsp;&nbsp;&nbsp;m] Ml id: [#323456 @3d8356ff] &nbsp;</div>
+<div>Alt:&nbsp;<span id="ele"></span> Hei: [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m] Ml id: [#323456 @3d8356ff] &nbsp;</div>
 
 
 
@@ -4779,7 +4779,7 @@ JSON.stringify(e.lngLat.wrap());
 
     
    const draw = new MapboxDraw({
-displayControlsDefault: false,
+displayControlsDefault: true,
 // Select which mapbox-gl-draw control buttons to add to the map.
 controls: {
 line_string: true,
@@ -4794,6 +4794,7 @@ map.addControl(draw, 'top-left');
 map.on('draw.create', updateArea);
 map.on('draw.delete', updateArea);
 map.on('draw.update', updateArea);
+
  
 function updateArea(e) {
 const data = draw.getAll();
