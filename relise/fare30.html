@@ -4,6 +4,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -2513,8 +2514,9 @@ max-width: 200px;
 .ele-info {
           position: absolute;
    
-background: rgba(0, 0, 0, 0.5);
-color: #fff;
+background: transparent;
+color: #3d85c6;
+
 bottom: 67px;
 left: 11px;
 padding: 5px 10px;
@@ -2544,20 +2546,21 @@ cursor: crosshair;
 
 
 .calculation-box {
-height: 75px;
-width: 150px;
+height: 30px;
+width: 350px;
 position: absolute;
-bottom: 40px;
-left: 10px;
-background-color: red;
-padding: 15px;
-text-align: center;
+bottom: 57px;
+left: 0px;
+background-color: transparent;
+padding: 9.5px;
+
+font-family: 'Montserrat', montserrat !important; 
 }
  
 p {
-font-family: 'Open Sans';
-margin: 0;
-font-size: 13px;
+font-family: 'Montserrat';
+margin: 0px;
+font-size: 12px;
 }
 
 
@@ -2791,18 +2794,18 @@ background-position: 8px 9px !important;
 
     
 
-    
-    
-    
-        <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.0/mapbox-gl-draw.js"></script>
-<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.0/mapbox-gl-draw.css" type="text/css">
-    
-    
-    
-    
-    
-    
 
+
+
+
+
+
+    
+        
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.0/mapbox-gl-draw.css" type="text/css">
+
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.0/mapbox-gl-draw.js"></script>
+    
     
     
     
@@ -2928,7 +2931,10 @@ background-size: 26px 26px !important;
 
 <div class="calculation-box">
 <p>EMIIA.AI API: MRV (RADIO) </p>
-<div id="calculated-area"></div>
+
+<div id="calculated-area">
+
+</div>
 
 
 
@@ -4731,7 +4737,7 @@ MeasureControl.prototype._toggleEvents = function(toggle,event) {
         // In the elevations array, find the largest value
         const highestElevation = Math.max(...elevations);
         // Display the largest elevation value
-        eleDisplay.textContent = `${highestElevation} meters`;
+        eleDisplay.textContent = `${highestElevation} m`;
       }
       
       
@@ -4778,7 +4784,7 @@ if (data.features.length > 0) {
 const area = turf.area(data);
 // Restrict the area to 2 decimal points.
 const rounded_area = Math.round(area * 100) / 100;
-answer.innerHTML = `<p><strong>${rounded_area}</strong></p><p>square meters</p>`;
+answer.innerHTML = `<p><strong>${rounded_area} m²</strong ></p>`;
 } else {
 answer.innerHTML = '';
 if (e.type !== 'draw.delete')
@@ -7560,6 +7566,7 @@ $(function() {
 </body>
 
 </html>
+
 
 
 
