@@ -29,7 +29,7 @@ type:"fill",filter:["all",["==","active","true"],["==","$type","Polygon"]],paint
 {id:"gl-draw-polygon-midpoint",type:"circle",filter:["all",["==","$type","Point"],["==","meta","midpoint"]],paint:{"circle-radius":3,"circle-color":"#fbb03b"}},{id:"gl-draw-polygon-stroke-inactive",type:"line",filter:["all",["==","active","false"],["==","$type","Polygon"],["!=","mode","static"]],
 
 
-layout:{"line-cap":"round","line-join":"round"},paint:{"line-color":"red","line-width":3}},{id:"gl-draw-polygon-stroke-active",type:"line",filter:["all",["==","active","true"],["==","$type","Polygon"]],
+layout:{"line-cap":"round","line-join":"round"},paint:{"line-color":"red","line-width":2}},{id:"gl-draw-polygon-stroke-active",type:"line",filter:["all",["==","active","true"],["==","$type","Polygon"]],
 
 
 
