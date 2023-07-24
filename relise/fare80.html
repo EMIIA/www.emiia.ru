@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Add a video</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+<style>
+.map-overlay {
+font: bold 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+position: absolute;
+width: 25%;
+top: 0;
+left: 0;
+padding: 10px;
+}
+ 
+.map-overlay .map-overlay-inner {
+background-color: #fff;
+box-shadow: transparent;
+border-radius: 3px;
+padding: 10px;
+margin-bottom: 10px;
+}
+ 
+.map-overlay label {
+display: block;
+margin: 0 0 10px;
+}
+ 
+.map-overlay input {
+background-color: transparent;
+display: inline-block;
+width: 100%;
+position: relative;
+margin: 0;
+cursor: ew-resize;
+}
+</style>
+
+
+
+
+
+
+
+
+
+<div id="map"></div>
+
+
+
+<div class="map-overlay top">
+<div class="map-overlay-inner">
+
+<input id="slider" type="range" min="0" max="100" step="0" value="100">
+</div>
+</div>
+
+
+
+
+<script>
+
+
+
+const slider = document.getElementById('slider');
+const sliderValue = document.getElementById('slider-value');
+
+
+  mapboxgl.accessToken = 'pk.eyJ1IjoiYXBlcnNoaW5hIiwiYSI6ImNsand2N2dxcjIxeHEzbW1qcWF1bGE1ZzAifQ.3SHiRIyN5OQIhQJxXAblZA';
+const videoStyle = {
+'version': 8,
+'sources': {
+'satellite': {
+'type': 'raster',
+'url': 'mapbox://mapbox.satellite',
+'tileSize': 256
+},
+'video': {
+'type': 'video',
+'urls': [
+'https://static-assets.mapbox.com/mapbox-gl-js/drone.mp4',
+'https://static-assets.mapbox.com/mapbox-gl-js/drone.webm'
+],
+'coordinates': [
+[-122.51596391201019, 37.56238816766053],
+[-122.51467645168304, 37.56410183312965],
+[-122.51309394836426, 37.563391708549425],
+[-122.51423120498657, 37.56161849366671]
+]
+}
+},
+
+
+
+
+
+
+
+
+
+
+
+'layers': [
+{
+'id': 'background',
+'type': 'background',
+'paint': {
+'background-color': 'rgb(4,7,14)'
+}
+},
+{
+'id': 'satellite',
+'type': 'raster',
+'source': 'satellite'
+},
+{
+'id': 'video',
+'type': 'raster',
+'source': 'video'
+}
+]
+};
+
+
+
+
+
+
+
+slider.addEventListener('input', (e) => {
+// Adjust the layers opacity. layer here is arbitrary - this could
+// be another layer name found in your style or a custom layer
+// added on the fly using addSource.
+map.setPaintProperty(
+'video',
+'raster-opacity',
+
+parseInt(e.target.value, 10) / 100
+
+);
+
+
+
+// Value indicator
+sliderValue.textContent = e.target.value + '%';
+ 
+
+});
+
+
+
+
+ 
+const map = new mapboxgl.Map({
+container: 'map',
+minZoom: 14,
+zoom: 17,
+center: [-122.514426, 37.562984],
+bearing: -93,
+style: videoStyle
+});
+ 
+let playingVideo = true;
+ 
+map.on('click', () => {
+playingVideo = !playingVideo;
+ 
+if (playingVideo) {
+map.getSource('video').play();
+} else {
+map.getSource('video').pause();
+}
+});
+
+
+
+
+
+
+
+
+
+
+
+</script>
+ 
+</body>
+</html>
