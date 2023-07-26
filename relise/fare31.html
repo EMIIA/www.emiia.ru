@@ -5367,73 +5367,7 @@ map.on('style.load', function(){
    
    
    
-   <script>
-
-
-map.on('load', function () {
-    map.addSource("geojson", {
-        "type": "geojson",
-        "data": 'https://www.emiia.ru/relise/ofisgeojson.geojson'
-    });
-    
-
-    
-    map.addSource("hover", {"type": "geojson", "data": {"type": "FeatureCollection", "features": []}});
-    
-    
-
-
-    map.addLayer({
-        "id": "geojson-fills",
-        "type": "fill",
-        'minzoom': 19,
-        "source": "geojson",
-        "layout": {},
-        "paint": {
-            "fill-color": "#627BC1",
-            "fill-opacity": 0.25
-        }
-    }, 'road-label-navigation');
-    
-    
-
-
-    map.addLayer({
-        "id": "geojson-borders",
-        'minzoom': 19,
-        "type": "line",
-        "source": "geojson",
-        "layout": {},
-        "paint": {
-            "line-color": "#627BC1",
-            "line-width": 1
-        }
-    }, 'road-label-navigation');
-
-    map.addLayer({
-        "id": "geojson-hover",
-        'minzoom': 19,
-        "type": "fill",
-        "source": "hover",
-        "layout": {},
-        "paint": {
-            "fill-color": "#F00",
-            "fill-opacity": 0.5
-        }
-    }, 'road-label-navigation');
-
-    map.on("mousemove", function(e) {
-        var features = map.queryRenderedFeatures(e.point, { layers: ["geojson-fills"] });
-        map.getSource("hover").setData({"type": "FeatureCollection", "features": features.map(function(f) { return {"type": "Feature", "geometry": f.geometry}})});
-    });
-});
- 
-
-
-</script>
-
-
-   
+  
    
    
    
