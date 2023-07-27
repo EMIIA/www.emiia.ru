@@ -1,0 +1,64 @@
+
+   <!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Animate a series of images</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoiYXBlcnNoaW5hIiwiYSI6ImNsand2N2dxcjIxeHEzbW1qcWF1bGE1ZzAifQ.3SHiRIyN5OQIhQJxXAblZA';
+    const map = new mapboxgl.Map({
+        container: 'map',
+        // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+        style: 'mapbox://styles/mapbox/dark-v11',
+        maxZoom: 5.99,
+        minZoom: 4,
+        zoom: 5,
+        center: [-75, 44]
+    });
+
+    const frameCount = 5;
+    let currentImage = 0;
+
+    function getPath() {
+        return `https://docs.mapbox.com/mapbox-gl-js/assets/radar${currentImage}.gif`;
+    }
+
+    map.on('load', () => {
+        map.addSource('radar', {
+            type: 'image',
+            url: getPath(),
+            coordinates: [
+                [-80.425, 46.437],
+                [-71.516, 46.437],
+                [-71.516, 37.936],
+                [-80.425, 37.936]
+            ]
+        });
+        map.addLayer({
+            id: 'radar-layer',
+            'type': 'raster',
+            'source': 'radar',
+            'paint': {
+                'raster-fade-duration': 0
+            }
+        });
+
+        setInterval(() => {
+            currentImage = (currentImage + 1) % frameCount;
+            map.getSource('radar').updateImage({ url: getPath() });
+        }, 200);
+    });
+</script>
+
+</body>
+</html>
