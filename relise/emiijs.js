@@ -38,7 +38,7 @@ define(["./shared"],(function(t){"use strict";var e=t.createCommonjsModule((func
 
 
 
-else {this._defaultMarker=!0,this._element=i.create("div"),this._element.setAttribute("aria-label","Map marker");var n=i.createNS("http://www.w3.org/2000/svg","svg");n.setAttributeNS(null,"display","block"),n.setAttributeNS(null,"height","25px"),n.setAttributeNS(null,"width","30px"),n.setAttributeNS(null,"viewBox","0 0 31.5 25");
+else {this._defaultMarker=!0,this._element=i.create("div"),this._element.setAttribute("aria-label","Map marker");var n=i.createNS("http://www.w3.org/2000/svg","svg");n.setAttributeNS(null,"display",""),n.setAttributeNS(null,"height","150.49px"),n.setAttributeNS(null,"width","250.89px"),n.setAttributeNS(null,"viewBox","10 5 208.89 215.49");
 
 
 var s=i.createNS("http://www.w3.org/2000/svg","g");s.setAttributeNS(null,"stroke","none"),s.setAttributeNS(null,"stroke-width","1"),s.setAttributeNS(null,"fill","none"),s.setAttributeNS(null,"fill-rule","evenodd");var l=i.createNS("http://www.w3.org/2000/svg","g");l.setAttributeNS(null,"fill-rule","nonzero");var c=i.createNS("http://www.w3.org/2000/svg","g");c.setAttributeNS(null,"transform","translate(3.0, 29.0)"),c.setAttributeNS(null,"fill","transparent");for(var u=0,h=[{rx:"10.5",ry:"5.25002273"},{rx:"10.5",ry:"5.25002273"},{rx:"9.5",ry:"4.77275007"},{rx:"8.5",ry:"4.29549936"},{rx:"7.5",ry:"3.81822308"},{rx:"6.5",ry:"3.34094679"},{rx:"5.5",ry:"2.86367051"},{rx:"4.5",ry:"2.38636864"}];u<h.length;u+=1){var p=h[u],d=i.createNS("http://www.w3.org/2000/svg","ellipse");d.setAttributeNS(null,"opacity","0.04"),d.setAttributeNS(null,"cx","10.5"),d.setAttributeNS(null,"cy","5.80029008"),d.setAttributeNS(null,"rx",p.rx),d.setAttributeNS(null,"ry",p.ry),c.appendChild(d);
@@ -47,11 +47,47 @@ var s=i.createNS("http://www.w3.org/2000/svg","g");s.setAttributeNS(null,"stroke
 }var _=i.createNS("http://www.w3.org/2000/svg","g");_.setAttributeNS(null,"fill",this._color);
 
 
-var f=i.createNS("http://www.w3.org/2000/svg","path");f.setAttributeNS(null,"d","M28.68,15.7a1,1,0,0,1-1,1h-11v11a1,1,0,0,1-2,0v-11h-11a1,1,0,0,1,0-2h11v-11a1,1,0,0,1,2,0v11h11A1,1,0,0,1,28.68,15.7Z"),_.appendChild(f);
+var f=i.createNS("http://www.w3.org/2000/svg","path");f.setAttributeNS(null,"d","M110.44,1a1.5,1.5,0,0,1,1.5,1.5V62.38a1.5,1.5,0,1,1-3,0V2.5a1.5,1.5,0,0,1,1.5-1.5"),_.appendChild(f);
 
 
 
-var m=i.createNS("http://www.w3.org/2000/svg","g");m.setAttributeNS(null,"opacity","0.7"),m.setAttributeNS(null,"fill","white");var g=i.createNS("http://www.w3.org/2000/svg","path");g.setAttributeNS(null,"d","M27.68,12.7h-9v-9a3,3,0,0,0-6,0v9h-9a3,3,0,0,0,0,6h9v9a3,3,0,0,0,6,0v-9h9a3,3,0,0,0,0-6Zm0,4h-11v11a1,1,0,0,1-2,0v-11h-11a1,1,0,0,1,0-2h11v-11a1,1,0,0,1,2,0v11h11a1,1,0,0,1,0,2Z"),m.appendChild(g);
+
+var f=i.createNS("http://www.w3.org/2000/svg","path");f.setAttributeNS(null,"d","M110.44,155.61a1.5,1.5,0,0,1,1.5,1.5V216a1.5,1.5,0,0,1-3,0V157.11a1.5,1.5,0,0,1,1.5-1.5"),_.appendChild(f);
+
+
+
+
+var f=i.createNS("http://www.w3.org/2000/svg","path");f.setAttributeNS(null,"d","M62.88,108a1.5,1.5,0,0,1-1.5,1.5H2.5a1.5,1.5,0,0,1,0-3H61.38a1.5,1.5,0,0,1,1.5,1.5"),_.appendChild(f);
+
+
+
+var f=i.createNS("http://www.w3.org/2000/svg","path");f.setAttributeNS(null,"d","M219.89,108a1.5,1.5,0,0,1-1.5,1.5H159.51a1.5,1.5,0,0,1,0-3h58.88a1.5,1.5,0,0,1,1.5,1.5"),_.appendChild(f);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var m=i.createNS("http://www.w3.org/2000/svg","g");m.setAttributeNS(null,"opacity","1"),m.setAttributeNS(null,"fill","black");var g=i.createNS("http://www.w3.org/2000/svg","path");g.setAttributeNS(null,"d",""),m.appendChild(g);
+
+
+
+
+
+
+
+
 
 
 
@@ -66,7 +102,7 @@ var x=i.createNS("http://www.w3.org/2000/svg","circle");x.setAttributeNS(null,"f
 
 
 
-var b=i.createNS("http://www.w3.org/2000/svg","circle");b.setAttributeNS(null,"fill","transparent"),b.setAttributeNS(null,"cx","5.5"),b.setAttributeNS(null,"cy","5.5"),b.setAttributeNS(null,"r","5.4999962"),y.appendChild(x),y.appendChild(b),l.appendChild(c),l.appendChild(_),l.appendChild(m),l.appendChild(v),l.appendChild(y),n.appendChild(l),n.setAttributeNS(null,"height",41*this._scale+"px"),n.setAttributeNS(null,"width",27*this._scale+"px"),this._element.appendChild(n),this._offset=t.Point.convert(o&&o.offset||[0,-14]);
+var b=i.createNS("http://www.w3.org/2000/svg","circle");b.setAttributeNS(null,"fill","transparent"),b.setAttributeNS(null,"cx","5.5"),b.setAttributeNS(null,"cy","5.5"),b.setAttributeNS(null,"r","5.4999962"),y.appendChild(x),y.appendChild(b),l.appendChild(c),l.appendChild(_),l.appendChild(m),l.appendChild(v),l.appendChild(y),n.appendChild(l),n.setAttributeNS(null,"height",50*this._scale+"px"),n.setAttributeNS(null,"width",50*this._scale+"px"),this._element.appendChild(n),this._offset=t.Point.convert(o&&o.offset||[0,-14]);
 
 
 
