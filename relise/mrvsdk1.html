@@ -6529,16 +6529,16 @@ var customLayer = {
         
         
         
-         //Основная решетка.     
+        
+     //Основная решетка.     
                     
                                 mesh.children[9].material = new THREE.MeshBasicMaterial({
     wireframe: false,
-          color: 0xFFFFFF,
-          opacity: 1,
+          color: 0xffffff,
+          opacity: 0,
           transparent: true,
-          fog: false
+          fog: true
         });  
-    
         
         
      
@@ -7352,13 +7352,7 @@ map.on('style.load', function () {
     
     
     
-    
-    
-    
-    
-
-        
-        
+   
         
         
         
@@ -7413,6 +7407,9 @@ const point = {
 'properties': {},
 'geometry': {
 'type': 'Point',
+
+
+
 'coordinates': origin
 }
 }
@@ -7445,6 +7442,10 @@ map.on('load', () => {
 // Add a source and layer displaying a point which will be animated in a circle.
 map.addSource('route', {
 'type': 'geojson',
+
+
+
+
 'data': route
 });
 
@@ -7462,17 +7463,24 @@ map.addSource('route', {
  
 map.addSource('point', {
 'type': 'geojson',
+
 'data': point
 });
  
 map.addLayer({
 'id': 'route',
+
+'minzoom': 19,
+
 'source': 'route',
 'type': 'line',
 'paint': {
 'line-width': 0,
 
-'line-color': 'red'
+
+
+
+'line-color': '#4CCCAA'
 
 
 
@@ -7487,8 +7495,7 @@ map.addLayer({
 
 
 
-
-});
+},'road-label-navigation');
  
 map.addLayer({
 'id': 'point',
@@ -7755,6 +7762,40 @@ map.addSource('dot-point', {
 
 
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
