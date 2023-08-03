@@ -50,6 +50,11 @@
 
 
 
+
+
+
+
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -323,14 +328,84 @@ i { position:absolute;
     cursor: pointer;
     
 
-    font-family: 14px/19px Montserrat, montserrat !important;
-    font:16px/20px 'Montserrat', montserrat !important; 
-    
-    
+
+
+font:14px/20px/500 'Montserrat', montserrat !important; 
+   
+font-weight: 500;
 
 }
     
     
+
+
+   
+   
+    
+
+
+
+
+
+
+.dropdown-menu {
+
+
+max-height: 560px;
+
+height: 560px;
+
+overflow-y: auto;
+
+background-color: white;
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+a {
+    dispaly: block;
+    width: 100%;
+    height: 25px;
+    
+
+    
+    
+}
+
+
+a, a:focus {
+    color: #337ab7;
+    text-decoration: none;
+    
+   
+}
+a {
+    color: #337ab7;
+    text-decoration: none;
+    
+    
+
+    
     
 }
 
@@ -340,6 +415,158 @@ i { position:absolute;
 
 
 
+::-webkit-scrollbar {
+    width: 0.1px;
+    background-color: white;
+
+    
+
+    
+}
+
+
+
+
+
+
+
+
+
+
+.sticky {
+    position: sticky;
+    top: 0;
+    
+    z-index: 210000;
+    
+    
+
+    
+
+    
+
+     background-color: white;
+    
+    border-top:20px solid white;
+    
+    border-bottom:0px solid white;
+    
+     
+ 
+
+     
+  
+
+}
+
+
+
+
+
+
+
+
+
+.sticky::before {
+    position: absolute;
+    top: -2.6ex;
+    left: -1.0ex;
+
+    
+    
+
+   background-color: white;
+    cursor: pointer;
+    font-weight: 380;
+    content: "";
+    
+    z-index: -1;
+
+
+ 
+
+    
+    width: 60px;
+    height: 55px;
+    
+    
+border-radius: 0px 3px 3px 3px;
+
+
+
+
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+i {
+    position: absolute;
+    right: 14px;
+    top: 4px;
+    -webkit-transition: all 300ms ease-in 0s;
+    -moz-transition: all 300ms ease-in 0s;
+    -o-transition: all 300ms ease-in 0s;
+    transition: all 300ms ease-in 0s;
+}
+
+
+
+ 
+        
+
+
+
+
+
+
+
+hr {
+display: block;
+   
+
+    margin-top: 1.1em;
+    
+    
+     z-index: 230000;
+    
+    
+    margin-bottom: 0.9em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: -1px;
+    
+    
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1) !important;
+    
+    
+    
+    border-color: transparent;
+    
+}
+
+
+
+
+
+
+
+
+
+}
 
 
 </style>
@@ -811,12 +1038,11 @@ $viewportMeta.attr('content', 'width=device-width,initial-scale=1,maximum-scale=
     
     
     
-    
-  background-size: 27px 27px !important;
+background-size: 28px 28px !important;
 
   background-repeat: no-repeat !important;
 
-  background-position: 9px 9px !important;
+  background-position: 8px 10px !important;
     
 
 
@@ -825,19 +1051,17 @@ $viewportMeta.attr('content', 'width=device-width,initial-scale=1,maximum-scale=
 
 
 .mapboxgl-ctrl button.mapboxgl-ctrl-geolocate .mapboxgl-ctrl-icon {
-    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcKICAgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIgogICB4bWxuczpjYz0iaHR0cDovL2NyZWF0aXZlY29tbW9ucy5vcmcvbnMjIgogICB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiCiAgIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgeG1sbnM6c29kaXBvZGk9Imh0dHA6Ly9zb2RpcG9kaS5zb3VyY2Vmb3JnZS5uZXQvRFREL3NvZGlwb2RpLTAuZHRkIgogICB4bWxuczppbmtzY2FwZT0iaHR0cDovL3d3dy5pbmtzY2FwZS5vcmcvbmFtZXNwYWNlcy9pbmtzY2FwZSIKICAgaW5rc2NhcGU6dmVyc2lvbj0iMS4wICg0MDM1YTRmYjQ5LCAyMDIwLTA1LTAxKSIKICAgc29kaXBvZGk6ZG9jbmFtZT0iZ2VvbG9jYXRlLnN2ZyIKICAgaWQ9InN2ZzYiCiAgIHZlcnNpb249IjEuMSIKICAgZmlsbD0iIzMzMyIKICAgdmlld0JveD0iMCAwIDIwIDIwIgogICBoZWlnaHQ9IjI5IgogICB3aWR0aD0iMjkiPgogIDxtZXRhZGF0YQogICAgIGlkPSJtZXRhZGF0YTEyIj4KICAgIDxyZGY6UkRGPgogICAgICA8Y2M6V29yawogICAgICAgICByZGY6YWJvdXQ9IiI+CiAgICAgICAgPGRjOmZvcm1hdD5pbWFnZS9zdmcreG1sPC9kYzpmb3JtYXQ+CiAgICAgICAgPGRjOnR5cGUKICAgICAgICAgICByZGY6cmVzb3VyY2U9Imh0dHA6Ly9wdXJsLm9yZy9kYy9kY21pdHlwZS9TdGlsbEltYWdlIiAvPgogICAgICA8L2NjOldvcms+CiAgICA8L3JkZjpSREY+CiAgPC9tZXRhZGF0YT4KICA8ZGVmcwogICAgIGlkPSJkZWZzMTAiIC8+CiAgPHNvZGlwb2RpOm5hbWVkdmlldwogICAgIGlua3NjYXBlOmN1cnJlbnQtbGF5ZXI9InN2ZzYiCiAgICAgaW5rc2NhcGU6d2luZG93LW1heGltaXplZD0iMSIKICAgICBpbmtzY2FwZTp3aW5kb3cteT0iLTExIgogICAgIGlua3NjYXBlOndpbmRvdy14PSItMTEiCiAgICAgaW5rc2NhcGU6Y3k9IjExLjQ4MDYiCiAgICAgaW5rc2NhcGU6Y3g9IjEwLjkxMzM2MSIKICAgICBpbmtzY2FwZTp6b29tPSIyMS40MDgyNjciCiAgICAgc2hvd2dyaWQ9ImZhbHNlIgogICAgIGlkPSJuYW1lZHZpZXc4IgogICAgIGlua3NjYXBlOndpbmRvdy1oZWlnaHQ9IjEwNDYiCiAgICAgaW5rc2NhcGU6d2luZG93LXdpZHRoPSIxOTIwIgogICAgIGlua3NjYXBlOnBhZ2VzaGFkb3c9IjIiCiAgICAgaW5rc2NhcGU6cGFnZW9wYWNpdHk9IjAiCiAgICAgZ3VpZGV0b2xlcmFuY2U9IjEwIgogICAgIGdyaWR0b2xlcmFuY2U9IjEwIgogICAgIG9iamVjdHRvbGVyYW5jZT0iMTAiCiAgICAgYm9yZGVyb3BhY2l0eT0iMSIKICAgICBib3JkZXJjb2xvcj0iIzY2NjY2NiIKICAgICBwYWdlY29sb3I9IiNmZmZmZmYiIC8+CiAgPHBhdGgKICAgICBzdHlsZT0iZmlsbDojNmI2YjY5O2ZpbGwtb3BhY2l0eToxIgogICAgIGlkPSJwYXRoMiIKICAgICBkPSJNMTAgNEM5IDQgOSA1IDkgNXYuMUE1IDUgMCAwIDAgNS4xIDlINXMtMSAwLTEgMSAxIDEgMSAxaC4xQTUgNSAwIDAgMCA5IDE0Ljl2LjFzMCAxIDEgMSAxLTEgMS0xdi0uMWE1IDUgMCAwIDAgMy45LTMuOWguMXMxIDAgMS0xLTEtMS0xLTFoLS4xQTUgNSAwIDAgMCAxMSA1LjFWNXMwLTEtMS0xem0wIDIuNWEzLjUgMy41IDAgMSAxIDAgNyAzLjUgMy41IDAgMSAxIDAtN3oiIC8+CiAgPGNpcmNsZQogICAgIHN0eWxlPSJmaWxsOiM2YjZiNjk7ZmlsbC1vcGFjaXR5OjEiCiAgICAgcj0iMiIKICAgICBjeT0iMTAiCiAgICAgY3g9IjEwIgogICAgIGlkPSJkb3QiIC8+CiAgPHBhdGgKICAgICBkaXNwbGF5PSJub25lIgogICAgIGQ9Ik0xNCA1bDEgMS05IDktMS0xIDktOXoiCiAgICAgaWQ9InN0cm9rZSIgLz4KPC9zdmc+Cg==);
+    background-image: url(data:image/svg+xml;base64,PHN2ZyBpZD0i0YDQtdC30LXRgNCyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyOSIgaGVpZ2h0PSIyOSIgdmlld0JveD0iMCAwIDI5IDI5Ij4KICA8dGl0bGU+0LzQtdGB0YLQvtC/0L7Qu9C+0LbQtdC90LjQtTwvdGl0bGU+CiAgPGNpcmNsZSBjeD0iMTQuNzEiIGN5PSIxNC41MiIgcj0iMi43NyIgc3R5bGU9ImZpbGw6ICMzMzMiLz4KICA8Y2lyY2xlIGN4PSIxNC43MSIgY3k9IjE0LjUyIiByPSIyLjc3IiBzdHlsZT0iZmlsbDogIzNEODVDNiIvPgogIDxwYXRoIGQ9Ik0yMS41OCwxMy42NEgxOS42NWEuMy4zLDAsMCwxLS4yOS0uMjMsNC44LDQuOCwwLDAsMC0zLjU1LTMuNTQuMy4zLDAsMCwxLS4yMy0uMjlWNy42NmEuMzEuMzEsMCwwLDEsLjMyLS4zaDBhNy4yNiw3LjI2LDAsMCwxLDYsNS45NC4zMS4zMSwwLDAsMS0uMjguMzRaIiBzdHlsZT0iZmlsbDogIzNEODVDNiIvPgogIDxwYXRoIGQ9Ik0yNS4yOCwxMy42NGgtMS45YS4yOS4yOSwwLDAsMS0uMjktLjI2LDguNDYsOC40NiwwLDAsMC03LjI1LTcuMjQuMjkuMjksMCwwLDEtLjI2LS4yOVY0YS4zMS4zMSwwLDAsMSwuMzItLjNoMGExMSwxMSwwLDAsMSw5LjY3LDkuNjYuMzEuMzEsMCwwLDEtLjI5LjMzWiIgc3R5bGU9ImZpbGw6ICMzRDg1QzYiLz4KICA8cGF0aCBkPSJNMjEuOTQsMTUuNjdhNy4zLDcuMywwLDAsMS02LDYuMDUuMzEuMzEsMCwwLDEtLjM1LS4zVjE5LjQ4YS4yOS4yOSwwLDAsMSwuMjMtLjI5LDQuODEsNC44MSwwLDAsMCwzLjU2LTMuNjMuMy4zLDAsMCwxLC4yOS0uMjRoMS45M0EuMzEuMzEsMCwwLDEsMjEuOTQsMTUuNjdaIiBzdHlsZT0iZmlsbDogIzNEODVDNiIvPgogIDxwYXRoIGQ9Ik0xMy45NCwxOS41MXYxLjk0YS4zMS4zMSwwLDAsMS0uMzUuMyw3LjMsNy4zLDAsMCwxLTYuMTEtNi4wOC4zMS4zMSwwLDAsMSwuMy0uMzVIOS43MmEuMjkuMjksMCwwLDEsLjI5LjI0LDQuODEsNC44MSwwLDAsMCwzLjY5LDMuNjZBLjI5LjI5LDAsMCwxLDEzLjk0LDE5LjUxWiIgc3R5bGU9ImZpbGw6ICMzRDg1QzYiLz4KICA8cGF0aCBkPSJNMTMuOTQsNy41OVY5LjUzYS4zLjMsMCwwLDEtLjI0LjI5QTQuOCw0LjgsMCwwLDAsMTAsMTMuNDFhLjI5LjI5LDAsMCwxLS4yOS4yM0g3LjhhLjMxLjMxLDAsMCwxLS4zLS4zNSw3LjMxLDcuMzEsMCwwLDEsNi4wOS02QS4zMS4zMSwwLDAsMSwxMy45NCw3LjU5WiIgc3R5bGU9ImZpbGw6ICMzRDg1QzYiLz4KPC9zdmc+Cg==);
 
 
 
 
 
-
-  background-size: 27px 27px !important;
+background-size: 28px 28px !important;
 
   background-repeat: no-repeat !important;
 
-  background-position: 9px 9px !important;
-        
+  background-position: 8px 10px !important;
     
     
 
@@ -1821,34 +2045,32 @@ position: absolute;
  
  
     
- /* В путь размер поля и текст */   
+    
 .mapbox-directions-route-summary span::before {
 
 position: absolute;
-    top:5.2ex;
-    left: -5.5ex;
-    background: transparent;
+    top:6.2ex;
+    left: 6.0ex;
+    background: #4CCCAA;
     
     padding: 0;
-    width: 290px;
-    height: 80px;
+    width: 260px;
+    height: 44px;
     text-align: center;
 
     border-radius: 12px 12px 12px 12px;
-   
+    box-shadow: 0 0 10px 0px rgb(0 0 0 / 10%);
     
     
     text-align: center;
-    line-height: 10px;
+    line-height: 42px;
     
     color: white;
     
     cursor: pointer;
     
-    
-    
-    font: 20px 'Montserrat', montserrat;
-font-weight: 450;
+    font-weight: 580;
+
 
     content:"В путь..."; 
     
@@ -1865,13 +2087,13 @@ font-weight: 450;
 h1::before {
 
 position: absolute;
-    top:4.3ex;
-    left: 0.0ex;
+    top:6.2ex;
+    left: 0.1ex;
     background: #7394ef;
     
     padding: 0;
-    width: 305px;
-    height: 61px;
+    width: 44px;
+    height: 44px;
     text-align: center;
 
     border-radius: 12px 12px 12px 12px;
@@ -1908,47 +2130,7 @@ position: absolute;
 
 
 
-.mapbox-directions-route-summary::after {
 
-position: absolute;
-
- top:1.5ex;
-   
-   left: 22ex; 
-    
-     padding: 0;
-    width: 24px;
-    height: 25px;
-    
-   
-   
-    
-    
-    text-align: center;
-  
-   cursor: pointer;
-  
-    
-   
-
-
-    content:""; 
-    
-    
-    background-image: url('https://www.emiia.ai/icon/link.svg');
-    
-    
-
-    
-    
-        background-repeat: no-repeat;
-    
-  
-    
-    
-    
- 
-}   
 
 
 
@@ -1963,15 +2145,15 @@ position: absolute;
 .mapbox-directions-route-summary::before{
   position: absolute;
 
-top:6.7ex;
+top:8.0ex;
    
-   left: 1.5ex; 
+   left: 1.9ex; 
     
 
     
     padding: 0;
-    width: 25px;
-    height: 25px;
+    width: 15px;
+    height: 15px;
     
     text-align: center;
 
@@ -1983,10 +2165,6 @@ color: #383838;
 
 
  background-image:  url('https://www.emiia.ai/icon/trek.svg'); 
- 
- 
- background-size: 25px 25px;
-   background-position: center;
 
     content:"";
     
@@ -2866,8 +3044,8 @@ border-bottom: 16.6px solid white;
 h1::after {
 
 position: absolute;
-    top:6.1ex;
-    left: 39.3ex;
+    top:6.8ex;
+    left: 39.1ex;
     background: white;
     
     
@@ -2877,7 +3055,7 @@ position: absolute;
     text-align: center;
 
     border-radius: 12px 12px 12px 12px;
-    box-shadow: 0 0 10px 0px rgb(0 0 0 / 10%);
+    
     
     
     text-align: center;
@@ -2895,12 +3073,12 @@ position: absolute;
     
     content:""; 
     
-    background-image: url('https://www.emiia.ai/icon/volume.svg');
+    background-image: url('https://www.emiia.ai/icon/link.svg');
     
     background-repeat: no-repeat;
     
     
-    background-size: 28px 28px !important;
+    background-size: 23px 23px !important;
     background-position: 8.8px 8.2px !important;
     background-repeat: no-repeat !important;
  
@@ -2976,15 +3154,14 @@ position: absolute;
 
 
 .mapboxgl-ctrl-traffic {
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMiIgaGVpZ2h0PSIyMiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0iYmkgYmktZXhjbGFtYXRpb24iIHZpZXdCb3g9IjAgMCAxNiAxNiIgc3Ryb2tlPSIjNkI2QjY5Ij4KIDx0aXRsZT5odHRwczovL3d3dy5lbWlpYS5haS9pY29uL3JvYWQuc3ZnPC90aXRsZT4KIAogCiAgPHBhdGgKICAgICBpZD0icGF0aDE0IgogICAgIGQ9Im0gNy4wNDUzMzAzLDQuMDEwOTQ1MyBhIDAuOTA1LDAuOTA1IDAgMSAxIDEuOCwwIGwgLTAuMzUsMy41MDcgYSAwLjU1MywwLjU1MyAwIDAgMSAtMS4xLDAgeiIgc3R5bGU9ImZpbGw6ICM2QjZCNjkiLz4KICA8cGF0aAogICAgIGlkPSJwYXRoMiIKICAgICBkPSJtIDcuMDAyLDExIGEgMSwxIDAgMSAxIDIsMCAxLDEgMCAwIDEgLTIsMCB6IiBzdHlsZT0iZmlsbDogIzZCNkI2OSIgLz4KPC9zdmc+Cg==);
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNSIgaGVpZ2h0PSIyNSIgdmlld0JveD0iMCAwIDI1IDI1Ij4NCiAgPHRpdGxlPtCX0L3QsNGH0LrQuCDRgNCw0LTQsNGAINC4INGC0L88L3RpdGxlPg0KICA8ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIj4NCiAgICA8cGF0aCBkPSJNMTQuMTgsMTAuNXY5LjA5YS41MS41MSwwLDAsMS0uNS41aC0yYS41LjUsMCwwLDEtLjUtLjVWMTIuMzFoLS45MmEuNS41LDAsMCwxLS41LS41VjEwLjVhLjUuNSwwLDAsMSwuNS0uNWgzLjQ2QS41LjUsMCwwLDEsMTQuMTgsMTAuNVoiIHN0eWxlPSJmaWxsOiAjNmI2YjY5Ii8+DQogICAgPHBhdGggZD0iTTE0LjE4LDYuNTR2MmEuNS41LDAsMCwxLS41LjVoLTJhLjUuNSwwLDAsMS0uNS0uNXYtMmEuNS41LDAsMCwxLC41LS41aDJBLjUuNSwwLDAsMSwxNC4xOCw2LjU0WiIgc3R5bGU9ImZpbGw6ICM2YjZiNjkiLz4NCiAgPC9nPg0KPC9zdmc+DQo=);
     
     
-    
-    background-size: 23px 23px !important;
+background-size: 27px 27px !important;
 
     background-repeat: no-repeat !important;
 
-background-position: 10px 12px !important;
+background-position: 8px 9px !important;
 
 }
 
@@ -3059,202 +3236,6 @@ margin-top: 30px;
 
 
 
-
-
-
-
-
-
-a {
-    dispaly: block;
-    width: 100%;
-    height: 25px;
-    
-
-    
-    
-}
-
-
-a, a:focus {
-    color: #337ab7;
-    text-decoration: none;
-    
-   
-}
-a {
-    color: #337ab7;
-    text-decoration: none;
-    
-    
-
-    
-    
-}
-
-
-
-.dropdown-menu {
-
-
-max-height: 540px;
-
-height: 540px;
-
-overflow-y: auto;
-
-background-color: white;
-
-
-
-
-}
-
-
-
-
-::-webkit-scrollbar {
-    width: 0.1px;
-    background-color: red;
-
-    
-
-    
-}
-
-
-
-
-
-
-
-
-
-
-.sticky {
-    position: sticky;
-    top: 0;
-    
-    z-index: 210000;
-    
-    
-
-    
-
-    
-
-     background-color: white;
-    
-    border-top:20px solid white;
-    
-    border-bottom:0px solid white;
-    
-     
- 
-
-     
-  
-
-}
-
-
-
-
-
-
-
-
-
-.sticky::before {
-    position: absolute;
-    top: -2.9ex;
-    left: -1.0ex;
-
-    
-    
-
-   background-color: white;
-    cursor: pointer;
-    font-weight: 580;
-    content: "";
-    
-    z-index: -1;
-
-
- 
-
-    
-    width: 60px;
-    height: 52px;
-    
-    
-border-radius: 0px 3px 3px 3px;
-
-
-
-
-    
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-i {
-    position: absolute;
-    right: 14px;
-    top: 4px;
-    -webkit-transition: all 300ms ease-in 0s;
-    -moz-transition: all 300ms ease-in 0s;
-    -o-transition: all 300ms ease-in 0s;
-    transition: all 300ms ease-in 0s;
-}
-
-
-
- 
-        
-
-
-
-
-
-
-
-hr {
-display: block;
-   
-
-    margin-top: 0.9em;
-    
-    
-     z-index: 230000;
-    
-    
-    margin-bottom: 0.5em;
-    margin-left: auto;
-    margin-right: auto;
-    border-style: inset;
-    border-width: 1px;
-    
-    
-    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1) !important;
-    
-    
-    
-    border-color: transparent;
-    
-}
 
 
 
@@ -3419,48 +3400,6 @@ max-width: 200px;
 
 
 
-.mapboxgl-ctrl-bottom-right {
-    right: 0;
-    bottom: 3.775em;
-}
-
-
-
-
-
-
-#button778 {
-    width: 44px;
-    height: 44px;
-    display: block;
-    padding: 0px;
-    outline: none;
-    border: 0;
-    box-sizing: border-box;
-    background-color: white;
-    cursor: pointer;
-    font: 13px/20px Montserrat, montserrat;
-    color: #383838;
-    border-radius: 12px;
-    
-    
-
-   box-shadow: 0 0 10px 0.5px rgba(0, 0, 0, 0.08) !important;
-   
-    
-    background-image: url(https://www.emiia.ai/icon/menu/buidsetting.svg);
-    background-size: 24px 24px !important;
-    background-position: 9px 10px !important;
-    background-repeat: no-repeat !important;
-    
-    
-    
-   position: fixed; bottom: 1.775em; right: 0.79em; z-index: +20000;
-    
-
-    
-    
-}
 
 
 
@@ -3472,19 +3411,6 @@ max-width: 200px;
 
 
 
-.mapbox-directions-instructions-wrapper::after {
-    position: absolute;
-    top: 24.0ex;
-    left: 44ex;
-    padding: 0;
-    width: 24px;
-    height: 25px;
-    text-align: center;
-    cursor: pointer;
-    content: "";
-    background-image: url(https://www.emiia.ai/icon/close.svg);
-    background-repeat: no-repeat;
-}
 
 
 
@@ -6074,7 +6000,7 @@ var exampleGeojson = {
     
 
     
-        mapboxgl.accessToken = 'pk.eyJ1IjoiZW1paWFhaSIsImEiOiJja21icnU4bHkyNGRwMnFrbjVvNXdtdGJ0In0.TcfxV21Ov7zOgvWvgPxzlA'
+        mapboxgl.accessToken = 'pk.eyJ1IjoiYXBlcnNoaW5hIiwiYSI6ImNsand2N2dxcjIxeHEzbW1qcWF1bGE1ZzAifQ.3SHiRIyN5OQIhQJxXAblZA'
         const map = window.map = new mapboxgl.Map({
             container: "map",
             
@@ -6086,7 +6012,7 @@ var exampleGeojson = {
 maxPitch: 45,
 
 minZoom: 1,
-maxZoom: 27,
+maxZoom: 22,
 zoom: 18,
 pitch: 20,
             
@@ -6466,7 +6392,7 @@ var customLayer = {
     
     
              loader.load(
-    "https://www.emiia.ru/relise/modeOBJ-4.obj" , 
+    "https://www.emiia.ru/relise/modeOBJ-5.obj" , 
     
     
  
@@ -6477,7 +6403,7 @@ var customLayer = {
         
       
       
- // Лесничная площадка.     
+ // ?.     
                     
                                 mesh.children[0].material = new THREE.MeshBasicMaterial({
     wireframe: false,
@@ -6493,7 +6419,7 @@ var customLayer = {
                     
                                 mesh.children[1].material = new THREE.MeshBasicMaterial({
     wireframe: false,
-          color: 0xFFffff,
+          color: 0xFFFFFF,
           opacity: 1,
           transparent: true,
           fog: false
@@ -6544,11 +6470,11 @@ var customLayer = {
         
         
         
-         // Окна ленты.     
+         // ?.     
                     
                                 mesh.children[5].material = new THREE.MeshBasicMaterial({
     wireframe: false,
-          color: 0xFFFFFF,
+          color: 0xffFFFF,
           opacity: 1,
           transparent: true,
           fog: false
@@ -6560,12 +6486,59 @@ var customLayer = {
         
 
         
-        
+      // Y.     
+                    
+                                mesh.children[6].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0x66ff00,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });  
         
 
 
 
+    
+     // X.     
+                    
+                                mesh.children[7].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xff2400 ,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });  
+    
+    
+    
+    
+    
+    //Z.     
+                    
+                                mesh.children[8].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0x3D85C6,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });  
         
+        
+        
+        
+        
+        
+        
+     //Основная решетка.     
+                    
+                                mesh.children[9].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xffffff,
+          opacity: 0,
+          transparent: true,
+          fog: true
+        });  
         
         
      
@@ -6580,15 +6553,11 @@ var customLayer = {
     
     
     
+
     
     
-    
-    
-    
-    
-    
-    
-    
+   
+      
     
     
     
@@ -7086,6 +7055,38 @@ map.on("style.load", () => {
     
     
     
+
+    
+    
+    
+    
+  
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -7331,7 +7332,7 @@ map.on('style.load', function () {
         );
         
         
-        map.setLayerZoomRange('trees-point', 3, 17);
+        map.setLayerZoomRange('trees-point', 0, 18);
         
       });
 
@@ -7351,13 +7352,7 @@ map.on('style.load', function () {
     
     
     
-    
-    
-    
-    
-
-        
-        
+   
         
         
         
@@ -7378,12 +7373,429 @@ map.on('style.load', function () {
 
 
 
+<script>
+
+
+ 
+// A simple line from origin to destination.
+const route = {
+'type': 'FeatureCollection',
+'id': '888',
+'features': [
+{
+'type': 'Feature',
+'id': '888',
+'geometry': {
+'type': 'LineString',
+'coordinates': [[37.17417951425341,55.97743710357804], [37.17415334020461,55.977424607030116], [37.17408685623059,55.977430543896844], [37.17405923582942,55.97735488266653],[37.1740015268208,55.97736016541478], [37.17405923582942,55.97735488266653], [37.17408685623059,55.977430543896844], [37.17415334020461,55.977424607030116],[37.17417951425341,55.97743710357804],[37.17415334020461,55.977424607030116], [37.17408685623059,55.977430543896844], [37.17405923582942,55.97735488266653],[37.1740015268208,55.97736016541478], [37.17405923582942,55.97735488266653], [37.17408685623059,55.977430543896844], [37.17415334020461,55.977424607030116],[37.17417951425341,55.97743710357804]]
+}
+}
+]
+};
+
+
+
+
+// A single point that animates along the route.
+// Coordinates are initially set to origin.
+const point = {
+'type': 'FeatureCollection',
+'id': '888',
+'features': [
+{
+'type': 'Feature',
+'properties': {},
+'geometry': {
+'type': 'Point',
+
+
+
+'coordinates': origin
+}
+}
+]
+};
+ 
+// Calculate the distance in kilometers between route start/end point.
+const lineDistance = turf.length(route.features[0]);
+ 
+const arc = [];
+ 
+// Number of steps to use in the arc and animation, more steps means
+// a smoother arc and animation, but too many steps will result in a
+// low frame rate
+const steps = 300000;
+ 
+// Draw an arc between the `origin` & `destination` of the two points
+for (let i = 0; i < lineDistance; i += lineDistance / steps) {
+const segment = turf.along(route.features[0], i);
+arc.push(segment.geometry.coordinates);
+}
+ 
+// Update the route with calculated arc coordinates
+route.features[0].geometry.coordinates = arc;
+ 
+// Used to increment the value of the point measurement against the route.
+let counter = 0;
+ 
+map.on('load', () => {
+// Add a source and layer displaying a point which will be animated in a circle.
+map.addSource('route', {
+'type': 'geojson',
+
+
+
+
+'data': route
+});
 
 
 
 
 
 
+
+
+    
+
+
+
+ 
+map.addSource('point', {
+'type': 'geojson',
+
+'data': point
+});
+ 
+map.addLayer({
+'id': 'route',
+
+'minzoom': 19,
+
+'source': 'route',
+'type': 'line',
+'paint': {
+'line-width': 8,
+
+
+
+
+'line-color': '#4CCCAA'
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+},'road-label-navigation');
+ 
+map.addLayer({
+'id': 'point',
+'source': 'point',
+
+'minzoom': 19,
+
+
+
+
+
+
+'type': 'symbol',
+'layout': {
+// This icon is a part of the Mapbox Streets style.
+// To view all images available in a Mapbox style, open
+// the style in Mapbox Studio and click the "Images" tab.
+// To add a new image to the style at runtime see
+// https://docs.mapbox.com/mapbox-gl-js/example/add-image/
+'icon-image': 'pulsing-dot',
+'icon-size': 0.6,
+
+'icon-rotate': ['get', 'bearing'],
+
+'icon-allow-overlap': true,
+'icon-ignore-placement': true
+}
+}, 'road-label-navigation');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function animate() {
+const start =
+route.features[0].geometry.coordinates[
+counter >= steps ? counter - 0 : counter
+];
+const end =
+route.features[0].geometry.coordinates[
+counter >= steps ? counter : counter + 0
+];
+if (!start || !end) return;
+ 
+// Update point geometry to a new position based on counter denoting
+// the index to access the arc
+point.features[0].geometry.coordinates =
+route.features[0].geometry.coordinates[counter];
+ 
+// Calculate the bearing to ensure the icon is rotated to match the route arc
+// The bearing is calculated between the current point and the next point, except
+// at the end of the arc, which uses the previous point and the current point
+point.features[0].properties.bearing = turf.bearing(
+turf.point(start),
+turf.point(end)
+);
+ 
+// Update the source with this new data
+map.getSource('point').setData(point);
+ 
+// Request the next frame of animation as long as the end has not been reached
+if (counter < steps) {
+requestAnimationFrame(animate);
+}
+ 
+ 
+ 
+
+ 
+ 
+counter = counter + 30;
+}
+ 
+document.getElementById('replay').addEventListener('click', () => {
+// Set the coordinates of the original point back to origin
+point.features[0].geometry.coordinates = origin;
+ 
+// Update the source layer
+map.getSource('point').setData(point);
+ 
+// Reset the counter
+counter = 0;
+
+
+ 
+// Restart the animation
+animate(counter);
+});
+ 
+// Start the animation
+animate(counter);
+});
+
+
+
+
+
+ 
+const size = 180;
+ 
+// This implements `StyleImageInterface`
+// to draw a pulsing dot icon on the map.
+const pulsingDot = {
+width: size,
+height: size,
+data: new Uint8Array(size * size * 4),
+ 
+// When the layer is added to the map,
+// get the rendering context for the map canvas.
+onAdd: function () {
+const canvas = document.createElement('canvas');
+canvas.width = this.width;
+canvas.height = this.height;
+this.context = canvas.getContext('2d');
+},
+ 
+// Call once before every frame where the icon will be used.
+render: function () {
+const duration = 1000;
+const t = (performance.now() % duration) / duration;
+ 
+const radius = (size / 2) * 0.3;
+const outerRadius = (size / 2) * 0.7 * t + radius;
+const context = this.context;
+ 
+// Draw the outer circle.
+context.clearRect(0, 0, this.width, this.height);
+context.beginPath();
+context.arc(
+this.width / 2,
+this.height / 2,
+outerRadius,
+0,
+Math.PI * 2
+);
+context.fillStyle = `rgba(61, 133, 198, ${1 - t})`;
+context.fill();
+ 
+// Draw the inner circle.
+context.beginPath();
+context.arc(
+this.width / 2,
+this.height / 2,
+radius,
+0,
+Math.PI * 2
+);
+context.fillStyle = '#3d85c6';
+context.strokeStyle = 'white';
+context.lineWidth = 2 + 4 * (1 - t);
+context.fill();
+context.stroke();
+ 
+// Update this image's data with data from the canvas.
+this.data = context.getImageData(
+0,
+0,
+this.width,
+this.height
+).data;
+ 
+// Continuously repaint the map, resulting
+// in the smooth animation of the dot.
+map.triggerRepaint();
+ 
+// Return `true` to let the map know that the image was updated.
+return true;
+}
+};
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+ 
+
+
+
+
+
+
+
+
+
+ 
+map.on('load', () => {
+map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
+ 
+map.addSource('dot-point', {
+'type': 'geojson',
+'data': {
+'type': 'FeatureCollection',
+'id': '888',
+'features': [
+{
+'type': 'Feature',
+'id': '888',
+'geometry': {
+'type': 'Point',
+'coordinates': [0, 0] // icon position [lng, lat]
+}
+}
+]
+}
+});
+
+
+
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -7522,6 +7934,8 @@ $(function() {
 </body>
 
 </html>
+
+
 
 
 
