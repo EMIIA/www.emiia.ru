@@ -6396,7 +6396,7 @@ var customLayer = {
     
     
              loader.load(
-    "https://www.emiia.ru/relise/modeOBJ-4.obj" , 
+    "https://www.emiia.ru/relise/modeOBJ-5.obj" , 
     
     
  
@@ -6407,7 +6407,7 @@ var customLayer = {
         
       
       
- // Лесничная площадка.     
+ // ?.     
                     
                                 mesh.children[0].material = new THREE.MeshBasicMaterial({
     wireframe: false,
@@ -6423,7 +6423,7 @@ var customLayer = {
                     
                                 mesh.children[1].material = new THREE.MeshBasicMaterial({
     wireframe: false,
-          color: 0xFFffff,
+          color: 0xFFFFFF,
           opacity: 1,
           transparent: true,
           fog: false
@@ -6474,11 +6474,11 @@ var customLayer = {
         
         
         
-         // Окна ленты.     
+         // ?.     
                     
                                 mesh.children[5].material = new THREE.MeshBasicMaterial({
     wireframe: false,
-          color: 0xFFFFFF,
+          color: 0xffFFFF,
           opacity: 1,
           transparent: true,
           fog: false
@@ -6490,12 +6490,59 @@ var customLayer = {
         
 
         
-        
+      // Y.     
+                    
+                                mesh.children[6].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0x66ff00,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });  
         
 
 
 
+    
+     // X.     
+                    
+                                mesh.children[7].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xff2400 ,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });  
+    
+    
+    
+    
+    
+    //Z.     
+                    
+                                mesh.children[8].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0x3D85C6,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });  
         
+        
+        
+        
+        
+        
+         //Основная решетка.     
+                    
+                                mesh.children[9].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xFFFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });  
+    
         
         
      
@@ -6510,15 +6557,11 @@ var customLayer = {
     
     
     
+
     
     
-    
-    
-    
-    
-    
-    
-    
+   
+      
     
     
     
@@ -7003,6 +7046,38 @@ map.on("style.load", () => {
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+  
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
     
     
     
