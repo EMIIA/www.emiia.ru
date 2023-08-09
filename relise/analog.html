@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Display a map on a webpage</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+
+
+
+<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v2.0.0/turf.min.js' charset='utf-8'></script>
+<div class="col-md-12">
+    <div class="card text-white">
+      <h5 class="card-header bg-info">Featured</h5>
+      <div class="card-body">
+        <div class="col-md-12">
+            <div id='map'></div>
+            <div class='overlay'>
+                <button id='replay'>Replay</button>
+            </div>
+        </div>    
+      </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<script>
+
+
+
+mapboxgl.accessToken = 'pk.eyJ1IjoiYXBlcnNoaW5hIiwiYSI6ImNsand2N2dxcjIxeHEzbW1qcWF1bGE1ZzAifQ.3SHiRIyN5OQIhQJxXAblZA';
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v9',
+    center: [118.0148634, -2.548926],
+    zoom: 4.1
+});
+
+
+
+
+
+
+
+
+
+
+var route = {
+    "type": "FeatureCollection",
+    "features": [
+    
+    
+    
+    
+           {
+            "type": "Feature",
+            "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                   [117.66769409179686,3.2913401805277034],[117.75009155273438,3.2419820359767444],
+                   [117.81188964843751,3.2008484073844365],[117.93273925781249,3.1514858749293237],
+                   [118.048095703125,3.0637245031869744],[118.20190429687501,2.9649843693339677],
+                   [118.35571289062499,2.855262784366583],[118.443603515625,2.789424777005989],
+                   [118.597412109375,2.67419944615503],[118.817138671875,2.4656692707025543],
+                   [118.93798828125,2.191238104506552],[118.97644042968749,1.9442068658308456],
+                   [119.0643310546875,1.6477220517969353],[119.13574218749999,1.334718132769963],
+                   [119.15222167968751,1.0051974541602744],[119.05334472656249,0.5987439850125229],
+                   [118.9215087890625,0.29113644247137116],[118.8006591796875,-0.027465819260582135],
+                   [118.597412109375,-0.5163504323777461],[118.27880859375001,-0.8953492997435784],
+                   [118.16894531249999,-1.219390359762202],[117.83935546874999,-1.6641946615712557],
+                   [117.7349853515625,-1.8618548574369598],[117.65258789062499,-2.0485136203038063],
+                   [117.40539550781249,-2.67968661580376],[117.07580566406249,-3.2721456350750127],
+                   [116.7572021484375,-3.8806964824972487],[116.44958496093749,-4.209464815163466],
+                   [115.7574462890625,-4.335456463573485],[115.213623046875,-4.510714125698484],
+                   [114.6533203125,-4.647604837557583],[114.1864013671875,-4.70235372255946],
+                   [113.79089355468749,-4.7242520745232515],[113.4228515625,-4.8118385341739005],
+                   [112.9669189453125,-4.8282597468669755],[112.28576660156249,-4.844680562025358],
+                   [111.104736328125,-4.855627550617055],[110.7366943359375,-4.855627550617055],
+                   [110.19287109375,-4.855627550617055],[109.60510253906249,-4.926778627933801],
+                   [109.00634765625,-5.00339434502215],[108.4075927734375,-5.036226914872183],
+                   [108.116455078125,-5.189423479732417],[107.5177001953125,-5.369928743247035],
+                   [107.061767578125,-5.473831889192786],[106.76513671875,-5.544913134097361],
+                   [106.44653320312499,-5.626919311742117],[106.248779296875,-5.747174076651375],
+                   [106.1444091796875,-5.807291968003861],[106.02948188781738,-5.882003409958776]
+                ]
+            }
+        }, 
+    
+    
+    
+    
+
+        {
+          "type": "Feature",
+          "properties": {},
+          "geometry": {
+                "type": "LineString",
+                "coordinates": [
+                      [-252.99316406250003,-5.932972207945653],[-252.92724609374997,-5.774501181937723],
+                      [-252.872314453125,-5.697981985463135],[-252.8118896484375,-5.572249801113899],
+                      [-252.7789306640625,-5.484768018141262],[-252.7294921875,-5.353521355337321],
+                      [-252.66357421875,-5.244127581489528],[-252.57568359374997,-5.112829778499449],
+                      [-252.509765625,-5.00339434502215],[-252.42187499999997,-4.872047700241915],
+                      [-252.2900390625,-4.740675384778361],[-252.11425781249997,-4.653079918274038],
+                      [-252.00439453125,-4.54357027937176],[-251.78466796875,-4.434044005032582],
+                      [-251.65283203125003,-4.34641127533318],[-251.45507812499997,-4.171115454867424],
+                      [-251.16943359375,-4.083452772038619],[-251.03759765625,-3.9738609758391017],
+                      [-250.90576171875,-3.8204080831949407],[-250.70800781249997,-3.688855143147035],
+                      [-250.42236328125,-3.579212785860631],[-250.31250000000003,-3.513421045640032],
+                      [-250.13671875,-3.3818237353282767],[-249.87304687499997,-3.2940822283128046],
+                      [-249.697265625,-3.118576216781991],[-249.697265625,-2.943040910055132]
+                ]
+            }
+        }
+    ]
+};
+
+// A single point that animates along the route.
+// Coordinates are initially set to origin.
+var point = {
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {},
+            "geometry": {
+                "type": "Point",
+                "coordinates": [117.66769409179686,3.2913401805277034]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {},
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-252.99316406250003,-5.932972207945653]
+            }
+        }
+
+    ]
+};
+
+// Calculate the distance in kilometers between route start/end point.
+for(i=0;i<2;i++) {
+   var lineDistance = turf.lineDistance(route.features[0], 'kilometers');
+}
+   console.log(lineDistance) 
+
+var arc = [];
+
+// Number of steps to use in the arc and animation, more steps means
+// a smoother arc and animation, but too many steps will result in a
+// low frame rate
+var steps = 10000;
+
+
+
+
+
+// Draw an arc between the `origin` & `destination` of the two points
+for (var i = 0; i < lineDistance; i += lineDistance / steps) {
+    var segment = turf.along(route.features[0], i, 'kilometers');
+    arc.push(segment.geometry.coordinates);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// Update the route with calculated arc coordinates
+route.features[0].geometry.coordinates = arc;
+
+// Used to increment the value of the point measurement against the route.
+var counter = 0;
+
+
+
+
+
+
+
+
+
+
+
+map.on('load', function () {
+    // Add a source and layer displaying a point which will be animated in a circle.
+    map.addSource('route', {
+        "type": "geojson",
+        "data": route
+    });
+
+    map.addSource('point', {
+        "type": "geojson",
+        "data": point
+    });
+
+    map.addLayer({
+        "id": "route",
+        "source": "route",
+        "type": "line",
+        "paint": {
+            "line-width": 1,
+            "line-color": "#007cbf"
+        }
+    });
+
+    map.addLayer({
+        "id": "point",
+        "source": "point",
+        "type": "symbol",
+        "layout": {
+            "icon-image": "airport-15",
+            "icon-rotate": ["get", "bearing"],
+            "icon-rotation-alignment": "map",
+            "icon-allow-overlap": true,
+            "icon-ignore-placement": true
+        }
+    });
+
+    function animate(featureIdx, cntr) {
+        // Update point geometry to a new position based on counter denoting
+        // the index to access the arc.
+        if (cntr >= route.features[featureIdx].geometry.coordinates.length-1){
+          return;
+        }
+        point.features[featureIdx].geometry.coordinates = route.features[featureIdx].geometry.coordinates[cntr];
+
+
+        point.features[featureIdx].properties.bearing = turf.bearing(
+            turf.point(route.features[featureIdx].geometry.coordinates[cntr >= steps ? cntr - 1 : cntr]),
+            turf.point(route.features[featureIdx].geometry.coordinates[cntr >= steps ? cntr : cntr + 1])
+        );  
+        
+
+        // Update the source with this new data.
+        map.getSource('point').setData(point);
+
+        // Request the next frame of animation so long the end has not been reached.
+        if (cntr < steps) {
+            requestAnimationFrame(function(){animate(featureIdx, cntr+1);});
+        }
+
+    }
+
+    document.getElementById('replay').addEventListener('click', function() {
+        // Set the coordinates of the original point back to origin
+        point.features[0].geometry.coordinates = origin;
+
+        // Update the source layer
+        map.getSource('point').setData(point);
+
+        // Reset the counter
+        cntr = 0;
+
+        // Restart the animation.
+        animate(0,cntr);
+        animate(1,cntr)
+    });
+
+    // Start the animation.
+    animate(0, 0);
+    animate(1, 0);
+});
+
+
+
+
+
+
+</script>
+ 
+</body>
+</html>
