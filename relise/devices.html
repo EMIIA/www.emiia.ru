@@ -1481,7 +1481,7 @@ labelLayerId
     
     
     
-    <script>
+   <script>
 
 
  
@@ -1515,6 +1515,9 @@ const point = {
 'properties': {},
 'geometry': {
 'type': 'Point',
+
+
+
 'coordinates': origin
 }
 }
@@ -1547,6 +1550,10 @@ map.on('load', () => {
 // Add a source and layer displaying a point which will be animated in a circle.
 map.addSource('route', {
 'type': 'geojson',
+
+
+
+
 'data': route
 });
 
@@ -1564,17 +1571,23 @@ map.addSource('route', {
  
 map.addSource('point', {
 'type': 'geojson',
+
 'data': point
 });
  
 map.addLayer({
 'id': 'route',
+
+'minzoom': 19,
+
 'source': 'route',
+
 'type': 'line',
 'paint': {
-'line-width': 3,
+'line-width': 8,
 
-'line-color': 'red'
+
+'line-color': '#3d85c6',
 
 
 
@@ -1589,8 +1602,7 @@ map.addLayer({
 
 
 
-
-});
+},'road-label-navigation');
  
 map.addLayer({
 'id': 'point',
@@ -1610,6 +1622,10 @@ map.addLayer({
 // the style in Mapbox Studio and click the "Images" tab.
 // To add a new image to the style at runtime see
 // https://docs.mapbox.com/mapbox-gl-js/example/add-image/
+
+
+
+
 'icon-image': 'pulsing-dot',
 'icon-size': 0.6,
 
@@ -1619,6 +1635,7 @@ map.addLayer({
 'icon-ignore-placement': true
 }
 }, 'road-label-navigation');
+
 
 
 
@@ -1772,7 +1789,6 @@ return true;
 
 
 
-
  
 map.on('load', () => {
 map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
@@ -1804,13 +1820,8 @@ map.addSource('dot-point', {
 
 
 
-
-
-
 </script>
-    
-    
-    
+
     
     
     
@@ -2334,6 +2345,189 @@ map.on('load', function () {
       
       
     </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>    
+       
+       
+       map.on('load', function() {
+  map.addSource('clusters1', {
+    type: "geojson",
+    data: {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+           
+            "coordinates": [37.17417932268347,55.97743681787847]
+          },
+          "properties": {
+              "emiia": "A"
+            }
+        }]
+      }
+    }
+  );
+
+  map.addLayer({
+      "id": "clusters1",
+      "type": "circle",
+      "source": "clusters1",
+'minzoom': 19,
+      "paint": {
+          "circle-radius": 18,
+          "circle-color": "#3d85c6"
+      }
+  }, 'road-label-navigation');
+  
+  
+  
+
+  map.addLayer({
+    "id": "clusters-label1",
+    "type": "symbol",
+    "source": "clusters1",
+'minzoom': 19,
+    "layout": {
+      "text-field": "{emiia}",
+      
+  
+
+      "text-font": [
+ "DIN Offc Pro Medium",
+        "Arial Unicode MS Bold"
+      ],
+      
+     
+      
+      "text-size": 12
+    },
+    
+    
+    
+  paint: {
+    "text-color": "#ffffff"
+  }
+    
+    
+  }, 'road-label-navigation');
+});
+</script>
+       
+    
+    
+        
+        
+        
+        
+
+
+
+
+
+
+
+
+
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+ <script>    
+       
+       
+       map.on('load', function() {
+  map.addSource('clusters', {
+    type: "geojson",
+    data: {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+           
+            "coordinates": [37.17400113045119,55.977360042089686]
+          },
+          "properties": {
+          "color": "red",
+              "emiia": "B"
+            }
+        }]
+      }
+    }
+  );
+
+  map.addLayer({
+      "id": "clusters",
+      "type": "circle",
+      "source": "clusters",
+'minzoom': 19,
+      "paint": {
+          "circle-radius": 18,
+          "circle-color": "#3d85c6"
+      }
+  }, 'road-label-navigation');
+  
+  
+
+  map.addLayer({
+    "id": "clusters-label",
+    "type": "symbol",
+    "source": "clusters",
+'minzoom': 19,
+    "layout": {
+      "text-field": "{emiia}",
+      "text-font": [
+        "DIN Offc Pro Medium",
+        "Arial Unicode MS Bold"
+      ],
+      
+      
+     
+      
+      "text-size": 12,
+         
+    },
+    
+    
+    
+  paint: {
+    "text-color": "#ffffff"
+  }
+    
+    
+    
+    
+  }, 'road-label-navigation');
+});
+</script>
 
 
 
