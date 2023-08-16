@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -1494,7 +1495,7 @@ map.on('load', function () {
     map.addLayer({
         "id": "geojson-fills",
         "type": "fill",
-        'minzoom': 19,
+        'minzoom': 17,
         "source": "geojson",
         "layout": {},
         "paint": {
@@ -1508,13 +1509,13 @@ map.on('load', function () {
 
     map.addLayer({
         "id": "geojson-borders",
-        'minzoom': 19,
+        'minzoom': 17,
         "type": "line",
         "source": "geojson",
         "layout": {},
         "paint": {
             "line-color": "white",
-            "line-width": 0
+            "line-width": 4
         }
     }, 'road-label-navigation');
     
@@ -1523,7 +1524,7 @@ map.on('load', function () {
 
     map.addLayer({
         "id": "geojson-hover",
-        'minzoom': 19,
+        'minzoom': 17,
         "type": "fill",
         "source": "hover",
         "layout": {},
@@ -2935,6 +2936,8 @@ map.on('load', function () {
 </body>
 
 </html>
+
+
 
 
 
