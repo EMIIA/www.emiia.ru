@@ -3,6 +3,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -398,17 +399,25 @@ a.mapboxgl-ctrl-logo{
 
 @keyframes fade {
   0%   { opacity: 0; }
-  11.11%   { opacity: 1; }
+  33.11%   { opacity: 1; }
   33.33%  { opacity: 1; }
-  44.44%  { opacity: 0; }
+  33.44%  { opacity: 0; }
   100% { opacity: 0; }
 }
 
-.fadein { position:relative; width:30%;}
-.fadein img { position:absolute; width:100%; left:0px; top:70px; right:20; opacity:0; z-index: 28009; animation-name: fade; animation-duration: 9s; animation-iteration-count: infinite; }
+.fadein 
+{ position:relative; min-width:30%;
+}
+.fadein img 
+{ position:absolute; max-width:100%; left:0px; top:70px; right:10px; opacity:0; z-index: 28009; animation-name: fade;  animation-duration: 19s; animation-iteration-count: infinite; 
+}
 .fadein img:nth-child(1) { animation-delay: 0s;  }
-.fadein img:nth-child(2) { animation-delay: 3s;  }
-.fadein img:nth-child(3) { animation-delay: 6s;  }
+.fadein img:nth-child(2) { animation-delay: 4s;  }
+.fadein img:nth-child(3) { animation-delay: 8s;  }
+.fadein img:nth-child(4) { animation-delay: 12s;  }
+.fadein img:nth-child(5) { animation-delay: 14s;  }
+
+.fadein img:nth-child(6) { animation-delay: 16s;  }
 
 
 
@@ -436,8 +445,11 @@ a.mapboxgl-ctrl-logo{
 
 
 <div class="fadein">
+  <img src="https://www.emiia.ai/icon/navileft3m.svg">
+  <img src="https://www.emiia.ai/icon/navileft5m.svg">
   <img src="https://www.emiia.ai/icon/naviright.svg">
-  <img src="https://www.emiia.ai/icon/navileft.svg">
+  <img src="https://www.emiia.ai/icon/naviright.svg">
+  <img src="https://www.emiia.ai/icon/naviright.svg">
   <img src="https://www.emiia.ai/icon/naviright.svg">
 </div>
 
@@ -2926,6 +2938,8 @@ $(function() {
 </body>
 
 </html>
+
+
 
 
 
