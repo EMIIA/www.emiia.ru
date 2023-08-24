@@ -505,10 +505,53 @@ body {
 <button id="replay" ></button>
 
 
+<br>
+<button id="fit">Fit to Kenya</button>
+
+
+<style>
+#fit {
+
+
+bottom: 18px;
+
+left: 0.%;
+position: relative;
 
 
 
+position:absolute;   bottom: 70px;
 
+
+margin: 20px auto;
+width: 200px;
+height: 40px;
+padding: 10px;
+border: none;
+border-radius: 12px;
+font-size: 12px;
+text-align: center;
+color: red;
+background: #ee8a65;
+
+ z-index: 200000;
+ 
+ 
+ 
+  font: 600 1.8em/1 "Montserrat", montserrat;
+  font-family: 600 1.8em/1 "Montserrat", montserrat; 
+  font: 600 1.8em/1 "Montserrat", montserrat !important;  
+  font-family: 600 0.8em/1 "Montserrat", montserrat !important;
+ 
+ 
+@import url('https://www.emiia.ru/css.css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+
+@import url('/css.css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+
+ 
+ 
+}
+</style>
 
 
 
@@ -773,7 +816,9 @@ body {
 .mapboxgl-ctrl-bottom-left::before {
 
 
- 
+  width: 500px;
+  height: 10px;
+    
    
    
   text-align: center;
@@ -789,17 +834,9 @@ body {
   transform: translateY(-50%, -50%);
 
 
-  
-    font: 10px/20px Montserrat, montserrat;
-    font-weight: 400;
-    max-width: 7em;
-    max-height: 1.9em;
-   
 
 
   content:"ул. 1 Мая, дом 3, вход 2, оф. 14-6..."; 
-    
-    
     
 
     
@@ -3239,6 +3276,8 @@ $(function() {
 </body>
 
 </html>
+
+
 
 
 
