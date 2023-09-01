@@ -12,6 +12,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -141,7 +142,7 @@
 
 <style>
   body { margin: 0; padding: 0; }
-	#map { position: absolute; top: 0; bottom: 0;  width: 100%; background-color: #1fa600cc; }
+	#map { position: absolute; top: 0; bottom: 0;  width: 100%; background-color: #e7f4e6; }
     
     </style>
     
@@ -699,7 +700,7 @@ body {
     
     
     
-    style: 'mapbox://styles/dmytrii1988/cllz5451f00o601pf7jvt3qmh',
+    style: 'mapbox://styles/dmytrii1988/clm0orarl00qz01pf0p3uf3qt',
         
     
 
@@ -1177,8 +1178,8 @@ var customLayer = {
                     
                                 mesh.children[1].material = new THREE.MeshBasicMaterial({
     wireframe: false,
-          color: 0x65dc44,
-          opacity: 1,
+          color: 0x8fe37d,
+          opacity: 0.8,
           transparent: true,
           fog: false
         });
@@ -1195,8 +1196,8 @@ var customLayer = {
                     
                                 mesh.children[2].material = new THREE.MeshBasicMaterial({
     wireframe: false,
-         color: 0x65dc44,
-          opacity: 0.43,
+         color: 0xade9a0,
+          opacity: 0.8,
           transparent: true,
           fog: false
         });
@@ -2172,7 +2173,7 @@ map.addLayer({
 'line-width': 6,
 
 
-'line-color': '#3d85c6',
+'line-color': '#32ba00',
 
 
 
@@ -2334,7 +2335,7 @@ outerRadius,
 0,
 Math.PI * 2
 );
-context.fillStyle = `rgba(61, 133, 198, ${1 - t})`;
+context.fillStyle = `rgba(50, 186, 0, ${1 - t})`;
 context.fill();
  
 // Draw the inner circle.
@@ -2346,8 +2347,8 @@ radius,
 0,
 Math.PI * 2
 );
-context.fillStyle = '#3d85c6';
-context.strokeStyle = 'white';
+context.fillStyle = '#32ba00';
+context.strokeStyle = '#ade9a0';
 context.lineWidth = 2 + 4 * (1 - t);
 context.fill();
 context.stroke();
@@ -2473,7 +2474,7 @@ map.addLayer({
 'line-cap': 'round'
 },
 'paint': {
-'line-color': '#3d85c6',
+'line-color': '#32ba00',
 'line-width': 8
 }
 }, 'road-label-navigation');
@@ -2761,7 +2762,7 @@ $(function() {
 'minzoom': 19,
       "paint": {
           "circle-radius": 16,
-          "circle-color": "#D70040"
+          "circle-color": "#32ba00"
       }
   }, 'road-label-navigation');
   
@@ -2791,7 +2792,7 @@ $(function() {
     
     
   paint: {
-    "text-color": "#ffffff"
+    "text-color": "#caefc3"
   }
     
     
@@ -2860,7 +2861,7 @@ $(function() {
 'minzoom': 19,
       "paint": {
           "circle-radius": 16,
-          "circle-color": "#3d85c6"
+          "circle-color": "#32ba00"
       }
   }, 'road-label-navigation');
   
@@ -2888,7 +2889,7 @@ $(function() {
     
     
   paint: {
-    "text-color": "#ffffff"
+    "text-color": "#caefc3"
   }
     
     
@@ -2911,6 +2912,7 @@ $(function() {
 </body>
 
 </html>
+
 
 
 
