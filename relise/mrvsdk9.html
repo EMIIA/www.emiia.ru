@@ -6085,10 +6085,6 @@ var exampleGeojson = {
 
 
 
-  
-  
-
-
 
 
 
@@ -6145,7 +6141,15 @@ var exampleGeojson = {
 
  
  
-  </script>   
+  </script>  
+
+
+
+
+
+
+
+ 
 
 
 
@@ -6552,6 +6556,7 @@ new mapboxgl.Marker(el)
 
 
 
+
    
    
    
@@ -6886,7 +6891,7 @@ var customLayer = {
                                 mesh.children[0].material = new THREE.MeshBasicMaterial({
     wireframe: false,
           color: 0xFFFFFF,
-          opacity: 0.95,
+          opacity: 0,
           transparent: true,
           fog: false
         });
@@ -7746,8 +7751,7 @@ map.setPaintProperty('projects-pulse', 'circle-color', '#3D85C6')
 
 
 
-
-    <script>
+<script>
 
 
  
@@ -7761,7 +7765,66 @@ const route = {
 'id': '888',
 'geometry': {
 'type': 'LineString',
-'coordinates': [[37.17417951425341,55.97743710357804], [37.17415334020461,55.977424607030116], [37.17408685623059,55.977430543896844], [37.17405923582942,55.97735488266653],[37.1740015268208,55.97736016541478], [37.17405923582942,55.97735488266653], [37.17408685623059,55.977430543896844], [37.17415334020461,55.977424607030116],[37.17417951425341,55.97743710357804],[37.17415334020461,55.977424607030116], [37.17408685623059,55.977430543896844], [37.17405923582942,55.97735488266653],[37.1740015268208,55.97736016541478], [37.17405923582942,55.97735488266653], [37.17408685623059,55.977430543896844], [37.17415334020461,55.977424607030116],[37.17417951425341,55.97743710357804]]
+'coordinates': [          [
+            37.17417951425341,
+            55.97743710357804
+          ],
+          [
+            37.17415334020461,
+            55.977424607030116
+          ],
+          [
+            37.17408685623059,
+            55.977430543896844
+          ],
+          [
+            37.174066963591144,
+            55.97737097022389
+          ],
+          [
+            37.17403991489286,
+            55.97737348438817
+          ],
+          [
+            37.17400443201606,
+            55.977376355446914
+          ],
+          [
+            37.17400752398672,
+            55.977387304236544
+          ],
+          [
+            37.17400437507041,
+            55.97737650880508
+          ],
+          [
+            37.17406703938451,
+            55.977370788908104
+          ],
+          [
+            37.17408665164079,
+            55.977430628136716
+          ],
+          [
+            37.17415334020461,
+            55.977424607030116
+          ],
+          [
+            37.17417951425341,
+            55.97743710357804
+          ],
+          [
+            37.17415334020461,
+            55.977424607030116
+          ],
+          [
+            37.17415334020461,
+            55.977424607030116
+          ],
+          [
+            37.17417951425341,
+            55.97743710357804
+          ]]
 }
 }
 ]
@@ -7781,6 +7844,9 @@ const point = {
 'properties': {},
 'geometry': {
 'type': 'Point',
+
+
+
 'coordinates': origin
 }
 }
@@ -7795,7 +7861,7 @@ const arc = [];
 // Number of steps to use in the arc and animation, more steps means
 // a smoother arc and animation, but too many steps will result in a
 // low frame rate
-const steps = 300000;
+const steps = 155000;
  
 // Draw an arc between the `origin` & `destination` of the two points
 for (let i = 0; i < lineDistance; i += lineDistance / steps) {
@@ -7813,6 +7879,10 @@ map.on('load', () => {
 // Add a source and layer displaying a point which will be animated in a circle.
 map.addSource('route', {
 'type': 'geojson',
+
+
+
+
 'data': route
 });
 
@@ -7830,17 +7900,23 @@ map.addSource('route', {
  
 map.addSource('point', {
 'type': 'geojson',
+
 'data': point
 });
  
 map.addLayer({
 'id': 'route',
+
+'minzoom': 19,
+
 'source': 'route',
+
 'type': 'line',
 'paint': {
-'line-width': 0,
+'line-width': 6,
 
-'line-color': 'red'
+
+'line-color': '#3d85c6',
 
 
 
@@ -7855,8 +7931,7 @@ map.addLayer({
 
 
 
-
-});
+},'road-label-navigation');
  
 map.addLayer({
 'id': 'point',
@@ -7876,6 +7951,10 @@ map.addLayer({
 // the style in Mapbox Studio and click the "Images" tab.
 // To add a new image to the style at runtime see
 // https://docs.mapbox.com/mapbox-gl-js/example/add-image/
+
+
+
+
 'icon-image': 'pulsing-dot',
 'icon-size': 0.6,
 
@@ -7885,6 +7964,7 @@ map.addLayer({
 'icon-ignore-placement': true
 }
 }, 'road-label-navigation');
+
 
 
 
@@ -8038,7 +8118,6 @@ return true;
 
 
 
-
  
 map.on('load', () => {
 map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
@@ -8070,10 +8149,23 @@ map.addSource('dot-point', {
 
 
 
-
-
-
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
     
     
     
@@ -8380,6 +8472,321 @@ map.on('load', function () {
 
 
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script>  
+    
+    
+    map.on('load', () => {
+map.addSource('route33', {
+'type': 'geojson',
+'data': {
+'type': 'Feature',
+'properties': {},
+'geometry': {
+'type': 'LineString',
+'coordinates': [
+                  [
+            37.17400725594106,
+            55.977387345125834
+          ],
+          [
+            37.174189746036234,
+            55.977368574112916
+          ]
+]
+}
+}
+});
+map.addLayer({
+'id': 'route33',
+'minzoom': 19,
+
+'type': 'line',
+'source': 'route33',
+'layout': {
+'line-join': 'round',
+
+'line-cap': 'round'
+},
+'paint': {
+'line-color': '#3d85c6',
+'line-opacity': 0.3,
+
+'line-width': 8
+}
+}, 'road-label-navigation');
+});
+    
+    
+    
+    
+    
+  </script>  
+    
+
+
+
+
+
+
+  
+  
+
+
+
+
+<script>  
+    
+    
+    map.on('load', () => {
+map.addSource('route34', {
+'type': 'geojson',
+'data': {
+'type': 'Feature',
+'properties': {},
+'geometry': {
+'type': 'LineString',
+'coordinates': [
+                  [
+            37.174189906132284,
+            55.97736853921117
+          ],
+          [
+            37.17428894942938,
+            55.97735957157431
+          ]
+]
+}
+}
+});
+map.addLayer({
+'id': 'route34',
+'minzoom': 19,
+
+'type': 'line',
+'source': 'route34',
+'layout': {
+'line-join': 'round',
+
+'line-cap': 'round'
+},
+'paint': {
+'line-color': '#3d85c6',
+'line-width': 8
+}
+}, 'road-label-navigation');
+});
+    
+    
+    
+    
+    
+  </script> 
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+
+<script>    
+       
+       
+       map.on('load', function() {
+  map.addSource('clusters1', {
+    type: "geojson",
+    data: {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+           
+            "coordinates": [37.17417932268347,55.97743681787847]
+          },
+          "properties": {
+              "emiia": "●"
+            }
+        }]
+      }
+    }
+  );
+
+  map.addLayer({
+      "id": "clusters1",
+      "type": "circle",
+      "source": "clusters1",
+'minzoom': 19,
+      "paint": {
+          "circle-radius": 16,
+          "circle-color": "#D70040"
+      }
+  }, 'road-label-navigation');
+  
+  
+  
+
+  map.addLayer({
+    "id": "clusters-label1",
+    "type": "symbol",
+    "source": "clusters1",
+'minzoom': 19,
+    "layout": {
+      "text-field": "{emiia}",
+      
+  
+
+      "text-font": [
+ "DIN Offc Pro Medium",
+        "Arial Unicode MS Bold"
+      ],
+      
+     
+      
+      "text-size": 14
+    },
+    
+    
+    
+  paint: {
+    "text-color": "#ffffff"
+  }
+    
+    
+  }, 'road-label-navigation');
+});
+</script>
+       
+
+       
+       
+       
+       
+ <script>    
+       
+       
+       map.on('load', function() {
+  map.addSource('clusters', {
+    type: "geojson",
+    data: {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+           
+            "coordinates": [37.17428894942938,
+            55.97735957157431]
+          },
+          "properties": {
+          "color": "red",
+              "emiia": "●"
+            }
+        }]
+      }
+    }
+  );
+
+  map.addLayer({
+      "id": "clusters",
+      "type": "circle",
+      "source": "clusters",
+'minzoom': 19,
+      "paint": {
+          "circle-radius": 16,
+          "circle-color": "#3d85c6"
+      }
+  }, 'road-label-navigation');
+  
+  
+
+  map.addLayer({
+    "id": "clusters-label",
+    "type": "symbol",
+    "source": "clusters",
+'minzoom': 19,
+    "layout": {
+      "text-field": "{emiia}",
+      "text-font": [
+        "DIN Offc Pro Medium",
+        "Arial Unicode MS Bold"
+      ],
+      
+      
+     
+      
+      "text-size": 14,
+         
+    },
+    
+    
+    
+  paint: {
+    "text-color": "#ffffff"
+  }
+    
+    
+    
+    
+  }, 'road-label-navigation');
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  <script src="https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.js"></script>
 
     
@@ -8609,23 +9016,6 @@ map.on('style.load', function () {
       
       
     </script>
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
