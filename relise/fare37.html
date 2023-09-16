@@ -396,42 +396,6 @@ a.mapboxgl-ctrl-logo{
 
 
 
-<script>   
-     
- /**
-         * Indoor specific
-         */
-
-        // Where the indoor layers will be inserted.
-        // Here, 'housenum-label' comes from streets-v10
-
- 
-    
-          var beforeLayerId = 'building-number-label';
-
-    // To avoid unwanted overlap from streets-v10 layers, some layers are hidden when an indoor map is shown
-        const layersToHide = ['poi-scalerank4-l15', 'poi-scalerank4-l1', 'poi-scalerank3', 'road-label-small'];
-
-
-
-
-         var customData;
-
-        // Retrieve the geojson from the path and add the map
-        fetch('https://www.emiia.ai/json/ofisgeojson-3level.geojson')
-            .then(res => res.json())
-            .then(geojson => {
-                map.indoor.addMap(mapgl_indoor.IndoorMap.fromGeojson(geojson, { beforeLayerId, layersToHide }));
-                customData = geojson;
-            });
-
-                
-
-
-
- 
- 
-  </script> 
 
 
 
@@ -2900,9 +2864,6 @@ border: 0.1px solid #f8f9fa;
 
 
 
-
-
-
 <span>
 <div class="dropdown dropdown-accordion" class="btn btn-outline-primary btn-lg btn-iconed btn-rounded" data-accordion=".accordion12" id="parent" style="position: fixed; top: 0.95em; left: 1.15em; z-index: +200000;" >
   <button  class="btn btn-light dropdown-toggle" class="btn btn-primary"  type="button" data-toggle="dropdown" ></button>
@@ -3987,6 +3948,9 @@ border: 0.1px solid #f8f9fa;
 
 
 
+
+
+
   <script src='https://api.mapbox.com/mapbox.js/plugins/turf/v2.0.2/turf.min.js'></script> 
 
 <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
@@ -4563,6 +4527,42 @@ MeasureControl.prototype._toggleEvents = function(toggle,event) {
 
 
 
+<script>   
+     
+ /**
+         * Indoor specific
+         */
+
+        // Where the indoor layers will be inserted.
+        // Here, 'housenum-label' comes from streets-v10
+
+ 
+    
+          var beforeLayerId = 'building-number-label';
+
+    // To avoid unwanted overlap from streets-v10 layers, some layers are hidden when an indoor map is shown
+        const layersToHide = ['poi-scalerank4-l15', 'poi-scalerank4-l1', 'poi-scalerank3', 'road-label-small'];
+
+
+
+
+         var customData;
+
+        // Retrieve the geojson from the path and add the map
+        fetch('https://www.emiia.ai/json/ofisgeojson-3level.geojson')
+            .then(res => res.json())
+            .then(geojson => {
+                map.indoor.addMap(mapgl_indoor.IndoorMap.fromGeojson(geojson, { beforeLayerId, layersToHide }));
+                customData = geojson;
+            });
+
+                
+
+
+
+ 
+ 
+  </script> 
 
 
 
@@ -5049,13 +5049,20 @@ map.setPaintProperty('projects-pulse', 'circle-color', '#3D85C6')
    
    
    
+
+   
+
    
    
    
    
+
    
-   
-   
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/jscastro76/threebox@v.2.2.7/dist/threebox.min.js" type="text/javascript"></script>
+    
 
 
 
@@ -5064,12 +5071,6 @@ map.setPaintProperty('projects-pulse', 'circle-color', '#3D85C6')
 
 
 
-
-   <script src="https://cdn.jsdelivr.net/gh/jscastro76/threebox@v.2.2.2/dist/threebox.min.js" type="text/javascript"></script>
-   
-   
-   
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.meshline/1.4.0/THREE.MeshLine.js" integrity="sha512-CNumL3RLkfw0m0RcHHv67JdGVqchvvNOPZnX9WP2gNzkyk82/jKCgK1kVGJV8U3Cr+mEFOFAxY6L63mUGj3TIA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
    
    
    
@@ -6454,21 +6455,7 @@ map.addSource('dot-point', {
     
     
     
-    <script>
-
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-SXCK9F16F5');
-  
-  
-  
-  let tg = window.Telegram.WebApp; //получаем объект webapp телеграма target="_blank"  
-
-   tg.expand(); //расширяем на все окно  
-  
-</script>
+   
 
 
 
@@ -6476,15 +6463,6 @@ map.addSource('dot-point', {
 
 
 
-
-
-
-
-
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
-
-
-<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
 
 
 
