@@ -23,6 +23,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -218,7 +219,6 @@
 
 
 
-<script src="https://unpkg.com/@turf/turf@6.5.0/turf.min.js"></script>
 <script crossorigin src="https://unpkg.com/react@17.0.0/umd/react.production.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/jscastro76/threebox@v.2.2.7/dist/threebox.min.js" type="text/javascript"></script>
@@ -226,11 +226,8 @@
 
 <script src='https://api.mapbox.com/mapbox.js/plugins/turf/v2.0.2/turf.min.js'></script>
 
- 
 
-
-    
-    
+<script src="https://unpkg.com/@turf/turf@6.5.0/turf.min.js"></script>   
     
     
     
@@ -2510,7 +2507,7 @@ background-position: 8px 9px !important;
     <script src='https://mapbox.github.io/mapbox-gl-traffic/mapbox-gl-traffic.js'></script>
         
 
-  <script src='https://www.emiia.ru/relise.js'></script>
+
 
 
     
@@ -2525,14 +2522,14 @@ background-position: 8px 9px !important;
         
 <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.0/mapbox-gl-draw.css" type="text/css">
 
-
-
-
-
-
-
-
 <script src='https://www.emiia.ru/relise/draw.js'></script>
+
+
+
+
+
+
+
 
 
 
@@ -3938,10 +3935,9 @@ border: 0.1px solid #f8f9fa;
 
 
 
-  <script src='https://api.mapbox.com/mapbox.js/plugins/turf/v2.0.2/turf.min.js'></script> 
 
-<script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
 
+ 
 
 
 <script>
@@ -7174,6 +7170,70 @@ map.on('load', function () {
 
 
 
+ <script>
+
+
+map.on('load', function () {
+    map.addSource("geojson", {
+        "type": "geojson",
+        "data": 'https://www.emiia.ru/relise/ofisgeojson.geojson'
+    });
+    
+
+    
+    map.addSource("hover", {"type": "geojson", "data": {"type": "FeatureCollection", "features": []}});
+    
+    
+
+
+    map.addLayer({
+        "id": "geojson-fills",
+        "type": "fill",
+        'minzoom': 19,
+        "source": "geojson",
+        "layout": {},
+        "paint": {
+            "fill-color": "#627BC1",
+            "fill-opacity": 0.25
+        }
+    }, 'road-label-navigation');
+    
+    
+
+
+    map.addLayer({
+        "id": "geojson-borders",
+        'minzoom': 19,
+        "type": "line",
+        "source": "geojson",
+        "layout": {},
+        "paint": {
+            "line-color": "#627BC1",
+            "line-width": 1
+        }
+    }, 'road-label-navigation');
+
+    map.addLayer({
+        "id": "geojson-hover",
+        'minzoom': 19,
+        "type": "fill",
+        "source": "hover",
+        "layout": {},
+        "paint": {
+            "fill-color": "#F00",
+            "fill-opacity": 0.5
+        }
+    }, 'road-label-navigation');
+
+    map.on("mousemove", function(e) {
+        var features = map.queryRenderedFeatures(e.point, { layers: ["geojson-fills"] });
+        map.getSource("hover").setData({"type": "FeatureCollection", "features": features.map(function(f) { return {"type": "Feature", "geometry": f.geometry}})});
+    });
+});
+ 
+
+
+</script>
 
 
 
@@ -7191,6 +7251,8 @@ map.on('load', function () {
 
 
 </html>
+
+
 
 
 
