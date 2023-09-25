@@ -6995,6 +6995,152 @@ map.on('load', function () {
 
 
 
+<script>
+
+
+      map.on('load', () => {
+        map.addSource('trees2', {
+          'type': 'geojson',
+          'data': 'https://www.emiia.ai/wifiwave2.geojson'
+        });
+
+        map.addLayer(
+          {
+            'id': 'trees-heat2',
+            'type': 'heatmap',
+            'source': 'trees2',
+            
+            'minzoom': 19,
+
+            
+
+            'paint': {
+              // increase weight as diameter breast height increases
+              'heatmap-weight': {
+                'property': 'dbh',
+                'type': 'exponential',
+                'stops': [
+                  [3, 0],
+                  [3, 0]
+                ]
+              },
+              // increase intensity as zoom level increases
+              'heatmap-intensity': {
+                'stops': [
+                  [3, 0],
+                  [3, 0]
+                ]
+              },
+              // use sequential color palette to use exponentially as the weight increases
+              'heatmap-color': [
+                'interpolate',
+                ['linear'],
+                ['heatmap-density'],
+                40,
+                'rgba(293,209,234,80)',
+                0.1,
+                'rgb(103,169,207,80)',
+                0.2,
+                'rgb(166,189,219,80)',
+                0.3,
+                'rgb(103,169,207,80)',
+                0.4,
+                'rgb(28,144,153,80)'
+                
+            
+              ],
+              // increase radius as zoom increases
+              'heatmap-radius': {
+                'stops': [
+                  [3, 2],
+                  [3, 2]
+                ]
+              },
+              // decrease opacity to transition into the circle layer
+              'heatmap-opacity': {
+                'default': 1,
+                'stops': [
+                  [3, 1],
+                  [3, 0]
+                ]
+              }
+            }
+          },
+          'waterway-label'
+        );
+
+        map.addLayer(
+          {
+            'id': 'trees-point2',
+            'type': 'circle',
+            'source': 'trees2',
+            'maxzoom': 0,
+            'paint': {
+              // increase the radius of the circle as the zoom level and dbh value increases
+              'circle-radius': {
+                'property': 'dbh',
+                'type': 'exponential',
+                'stops': [
+ [{ zoom: 2, value: 20 }, 100],
+
+                ]
+              },
+              
+              
+              
+              
+              'circle-color': {
+                'property': 'dbh',
+                'type': 'exponential',
+                'stops': [
+                  [50, 'rgba(169,169,169,0.2)']
+
+
+                ]
+              },
+              
+              
+              
+              
+              
+              'circle-stroke-color': '#C1D1EA',
+              'circle-stroke-width': 0.0,
+            
+           
+              'circle-opacity': {
+                'stops': [
+                  [0, 0],
+                  [3, 1]
+                ]
+              }
+            }
+          },
+          'waterway-label'
+        );
+        
+        
+        map.setLayerZoomRange('trees-point2', 19, 21);
+        
+      });
+
+     
+      
+      
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <script>
