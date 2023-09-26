@@ -1,3 +1,30 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -5227,6 +5254,112 @@ var customLayer = {
     
     
     
+    
+     
+     loader.load(
+    "https://www.emiia.ru/relise/kuka8.1.obj", 
+    
+    
+ 
+
+      
+    (mesh) => {
+    
+    
+    
+    
+    
+    
+    
+    
+     // ?.     
+                    
+                                mesh.children[0].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0x008000,
+          opacity: 0.6,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+       
+        
+      
+
+        
+        
+    
+    
+    
+      this.scene.add(mesh);
+      }
+    );
+    
+    
+    
+   
+        
+      
+    
+     loader.load(
+    "https://www.emiia.ru/relise/kuka8.2.obj", 
+    
+    
+ 
+
+      
+    (mesh) => {
+    
+    
+    
+    
+    
+    
+    
+    
+     // ?.     
+                    
+                                mesh.children[0].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xFF0000,
+          opacity: 0.6,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+       
+        
+      
+
+        
+        
+    
+    
+    
+      this.scene.add(mesh);
+      }
+    );
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
              loader.load(
     "https://www.emiia.ru/relise/modeOBJ-5.obj" , 
     
@@ -7116,6 +7249,10 @@ map.on('load', function () {
 
 
 
+
+
+
+
 <script>
 
 
@@ -7123,6 +7260,9 @@ map.on('load', function () {
     map.addSource("geojson", {
         "type": "geojson",
         "data": 'https://www.emiia.ru/relise/ofisgeojson1.geojson'
+        
+        
+        
     });
     
 
@@ -7183,6 +7323,128 @@ map.on('load', function () {
 
 
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+map.on('load', function () {
+    map.addSource("geojson2", {
+        "type": "geojson",
+        "data": 'https://www.emiia.ru/relise/kuka.8.1.geojson'
+        
+        
+        
+    });
+    
+
+    
+    map.addSource("hover2", {"type": "geojson", "data": {"type": "FeatureCollection", "features": []}});
+    
+    
+
+
+    map.addLayer({
+        "id": "geojson-fills2",
+        "type": "fill",
+        'minzoom': 21,
+        'maxzoom': 24,
+        "source": "geojson2",
+        "layout": {},
+        "paint": {
+            "fill-color": "red",
+            "fill-opacity": 0.3
+        }
+    }, 'road-label-navigation');
+    
+    
+
+
+    map.addLayer({
+        "id": "geojson-borders2",
+       'minzoom': 21,
+        'maxzoom': 24,
+        "type": "line",
+        "source": "geojson2",
+        "layout": {},
+        "paint": {
+            "line-color": "red",
+            "line-width": 2,
+            "fill-opacity": 0.5
+        }
+    }, 'road-label-navigation');
+
+    map.addLayer({
+        "id": "geojson-hover2",
+       'minzoom': 21,
+        'maxzoom': 24,
+        "type": "fill",
+        "source": "hover2",
+        "layout": {},
+        "paint": {
+            "fill-color": "red",
+            "fill-opacity": 0.5
+        }
+    }, 'road-label-navigation');
+
+    map.on("mousemove", function(e) {
+        var features = map.queryRenderedFeatures(e.point, { layers: ["geojson-fills2"] });
+        map.getSource("hover2").setData({"type": "FeatureCollection", "features": features.map(function(f) { return {"type": "Feature", "geometry": f.geometry}})});
+    });
+});
+ 
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -7413,6 +7675,14 @@ animateDashArray(0);
 
 
 
+
+
+
+
+
+
+
+
 </body>
 
 
@@ -7422,6 +7692,17 @@ animateDashArray(0);
 
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
