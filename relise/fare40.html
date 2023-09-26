@@ -7220,6 +7220,234 @@ map.on('load', function () {
 
 
 
+
+
+
+
+
+
+
+<script>
+
+
+const geojson = {
+'type': 'FeatureCollection',
+'features': [
+{
+'type': 'Feature',
+'properties': {},
+'geometry': {
+'coordinates': 
+
+
+
+
+[
+          [
+            37.17413736426289,
+            55.97742532049273
+          ],
+          [
+            37.17404372851843,
+            55.977433878418
+          ],
+          [
+            37.1740872308327,
+            55.97742995215768
+          ],
+          [
+            37.174088704160454,
+            55.977435435028696
+          ],
+          [
+            37.17408721001481,
+            55.977430064457586
+          ],
+          [
+            37.174079291010784,
+            55.97740990170075
+          ],
+          [
+            37.17406638685894,
+            55.977410938925274
+          ],
+          [
+            37.17407914480931,
+            55.97740982604573
+          ],
+          [
+            37.17407583334086,
+            55.97739813746056
+          ],
+          [
+            37.17408879213767,
+            55.977396833212396
+          ],
+          [
+            37.17407571617602,
+            55.97739806527943
+          ],
+          [
+            37.17406795910019,
+            55.97737642482293
+          ],
+          [
+            37.174064714770694,
+            55.97736938524615
+          ],
+          [
+            37.17407889846557,
+            55.97736822680085
+          ],
+          [
+            37.17405046034497,
+            55.97737086111782
+          ],
+          [
+            37.174064394502906,
+            55.97736908473136
+          ],
+          [
+            37.17406209858834,
+            55.9773598596461
+          ],
+          [
+            37.17406053202899,
+            55.97735476699926
+          ],
+          [
+            37.174025307203266,
+            55.97735702562467
+          ],
+          [
+            37.174043203058986,
+            55.977355721243356
+          ],
+          [
+            37.174060951975484,
+            55.977354393399224
+          ],
+          [
+            37.17405640386579,
+            55.97734288169895
+          ],
+          [
+            37.174069792187,
+            55.97734140260968
+          ]
+        ],
+        
+        
+        
+'type': 'LineString'
+}
+}
+]
+};
+ 
+map.on('load', () => {
+map.addSource('line', {
+type: 'geojson',
+data: geojson
+});
+ 
+// add a line layer without line-dasharray defined to fill the gaps in the dashed line
+map.addLayer({
+
+ 'minzoom': 19,
+        'maxzoom': 21,
+
+
+type: 'line',
+source: 'line',
+id: 'line-background',
+paint: {
+'line-color': '#3D85C6',
+'line-width': 6,
+'line-opacity': 0.4
+}
+}, 'road-label-navigation');
+ 
+// add a line layer with line-dasharray set to the first value in dashArraySequence
+map.addLayer({
+
+
+ 'minzoom': 19,
+        'maxzoom': 21,
+
+
+
+type: 'line',
+source: 'line',
+id: 'line-dashed',
+paint: {
+'line-color': 'white',
+'line-width': 6,
+'line-dasharray': [0, 2, 3]
+}
+}, 'road-label-navigation');
+ 
+// technique based on https://jsfiddle.net/2mws8y3q/
+// an array of valid line-dasharray values, specifying the lengths of the alternating dashes and gaps that form the dash pattern
+const dashArraySequence = [
+[0, 4, 3],
+[0.5, 4, 2.5],
+[1, 4, 2],
+[1.5, 4, 1.5],
+[2, 4, 1],
+[2.5, 4, 0.5],
+[3, 4, 0],
+[0, 0.5, 3, 3.5],
+[0, 1, 3, 3],
+[0, 1.5, 3, 2.5],
+[0, 2, 3, 2],
+[0, 2.5, 3, 1.5],
+[0, 3, 3, 1],
+[0, 3.5, 3, 0.5]
+];
+ 
+let step = 0;
+ 
+function animateDashArray(timestamp) {
+// Update line-dasharray using the next value in dashArraySequence. The
+// divisor in the expression `timestamp / 50` controls the animation speed.
+const newStep = parseInt(
+(timestamp / 50) % dashArraySequence.length
+);
+ 
+if (newStep !== step) {
+map.setPaintProperty(
+'line-dashed',
+'line-dasharray',
+dashArraySequence[step]
+);
+step = newStep;
+}
+ 
+// Request the next frame of the animation.
+requestAnimationFrame(animateDashArray);
+}
+ 
+// start the animation
+animateDashArray(0);
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 
 
@@ -7229,5 +7457,17 @@ map.on('load', function () {
 
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
