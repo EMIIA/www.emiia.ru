@@ -25,6 +25,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -5276,8 +5277,8 @@ var customLayer = {
                     
                                 mesh.children[0].material = new THREE.MeshBasicMaterial({
     wireframe: false,
-          color: 0x008000,
-          opacity: 0.6,
+          color: 0xE8E8E8,
+          opacity: 0.8,
           transparent: true,
           fog: false
         });
@@ -5296,6 +5297,69 @@ var customLayer = {
       this.scene.add(mesh);
       }
     );
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+         loader.load(
+    "https://www.emiia.ru/relise/kuka8.1.obj", 
+    
+    
+ 
+
+      
+    (mesh) => {
+    
+    
+    
+    
+    
+    
+    
+    
+     // ?.     
+                    
+                                mesh.children[0].material = new THREE.MeshBasicMaterial({
+    wireframe: true,
+          color: 0xffffff,
+          opacity: 0.8,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+       
+        
+      
+
+        
+        
+    
+    
+    
+      this.scene.add(mesh);
+      }
+    );
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -5324,7 +5388,7 @@ var customLayer = {
                                 mesh.children[0].material = new THREE.MeshBasicMaterial({
     wireframe: false,
           color: 0xFF0000,
-          opacity: 0.6,
+          opacity: 0.7,
           transparent: true,
           fog: false
         });
@@ -5343,6 +5407,67 @@ var customLayer = {
       this.scene.add(mesh);
       }
     );
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     loader.load(
+    "https://www.emiia.ru/relise/kuka8.2.obj", 
+    
+    
+ 
+
+      
+    (mesh) => {
+    
+    
+    
+    
+    
+    
+    
+    
+     // ?.     
+                    
+                                mesh.children[0].material = new THREE.MeshBasicMaterial({
+    wireframe: true,
+          color: 0xFFFFFF,
+          opacity: 0.3,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+       
+        
+      
+
+        
+        
+    
+    
+    
+      this.scene.add(mesh);
+      }
+    );
+    
+    
+    
+    
+    
+    
     
     
     
@@ -7358,7 +7483,7 @@ map.on('load', function () {
 map.on('load', function () {
     map.addSource("geojson2", {
         "type": "geojson",
-        "data": 'https://www.emiia.ru/relise/kuka.8.1.geojson'
+        "data": 'https://www.emiia.ru/relise/kuka.8.2.geojson'
         
         
         
@@ -7692,6 +7817,8 @@ animateDashArray(0);
 
 
 </html>
+
+
 
 
 
