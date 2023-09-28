@@ -29,6 +29,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -2745,18 +2746,20 @@ border: 0.1px solid #f8f9fa;
 
 
 .mapboxgl-ctrl-top-left .mapboxgl-ctrl {
-    margin: 58.5px 14px -57px 13px !important;
- 
+    margin: 58.5px 14px 0px 13px !important;
 }
 
 
 .mapboxgl-ctrl-bottom-left  .mapboxgl-ctrl {
-    margin:80.0px 14px 0px 13px !important;
-
+    margin: 38.0px 14px 0px 13px !important;
 }
 
 
 
+.mapboxgl-ctrl-icon-left .mapboxgl-ctrl-measure-off{
+    margin:8.0px 14px 0px 13px !important;
+
+}
 
 
 
@@ -4744,7 +4747,6 @@ MeasureControl.prototype._toggleEvents = function(toggle,event) {
     
 
 
-    
 
     
     
@@ -4755,8 +4757,7 @@ MeasureControl.prototype._toggleEvents = function(toggle,event) {
     
     
  
-  var MeasureControl = new MeasureControl();
-    map.addControl(MeasureControl,'top-left');  
+
     
    
    
@@ -4846,6 +4847,15 @@ trash: true
 },
 
 });
+
+
+
+
+    
+
+
+
+
 map.addControl(draw, 'bottom-left');
  
 map.on('draw.create', updateArea);
@@ -4873,7 +4883,8 @@ alert('');
    
        
     
-    
+    var MeasureControl = new MeasureControl();
+    map.addControl(MeasureControl,'bottom-left');  
     
     
     
