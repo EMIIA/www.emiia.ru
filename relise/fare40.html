@@ -1,6 +1,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -323,6 +324,10 @@ a.mapboxgl-ctrl-logo{
 
 
 
+
+
+
+
 .mapboxgl-ctrl-bottom-right .mapboxgl-ctrl {
     margin: 10px 14px 25px 14px;
     float: right;
@@ -334,13 +339,6 @@ a.mapboxgl-ctrl-logo{
 
 
 
-
-
-
-.mapboxgl-ctrl-bottom-left .mapboxgl-ctrl {
-    margin: -10px -10px 10px 10px;
-    float: left;
-}
 
 
     
@@ -2712,16 +2710,14 @@ border: 0.1px solid #f8f9fa;
 
 
 
-
-.mapboxgl-ctrl-top-left  {
-    margin: 0.15px 14px -0px 0.2px !important;
-    position: fixed;
+.mapboxgl-ctrl-top-left .mapboxgl-ctrl {
+    margin: 59px 14px 0px 13px !important;
 }
 
 
-
-
-
+.mapboxgl-ctrl-bottom-left  .mapboxgl-ctrl {
+    margin: 37.5px 14px -33px 13px !important;
+}
 
 
 
@@ -4664,8 +4660,7 @@ MeasureControl.prototype._toggleEvents = function(toggle,event) {
     
     
  
-  var MeasureControl = new MeasureControl();
-    map.addControl(MeasureControl,'top-left');  
+ 
     
    
    
@@ -4786,7 +4781,8 @@ alert('');
     
     
     
-    
+     var MeasureControl = new MeasureControl();
+    map.addControl(MeasureControl,'bottom-left');  
     
     
     
