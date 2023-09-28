@@ -29,6 +29,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -2736,6 +2737,18 @@ border: 0.1px solid #f8f9fa;
 
 
 
+
+.mapboxgl-ctrl-top-left .mapboxgl-ctrl {
+    margin: 59px 14px -6.5px 13px !important;
+}
+
+
+.mapboxgl-ctrl-bottom-left  .mapboxgl-ctrl {
+    margin: 37.5px 14px -33px 13px !important;
+}
+
+
+
 </style>
 
 
@@ -4674,8 +4687,7 @@ MeasureControl.prototype._toggleEvents = function(toggle,event) {
     
     
  
-  var MeasureControl = new MeasureControl();
-    map.addControl(MeasureControl,'top-left');  
+ 
     
    
    
@@ -4797,7 +4809,9 @@ alert('');
     
     
     
-    
+        
+     var MeasureControl = new MeasureControl();
+    map.addControl(MeasureControl,'bottom-left');  
     
     
     
@@ -7702,6 +7716,7 @@ animateDashArray(0);
 
 
 </html>
+
 
 
 
