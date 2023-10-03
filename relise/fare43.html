@@ -31,6 +31,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -2517,7 +2518,7 @@ background: transparent;
 color: #3d85c6;
 
 bottom: 23px;
-left: 11px;
+left: 180px;
 padding: 5px 10px;
 margin: 0;
 font-size: 11px;
@@ -3071,6 +3072,20 @@ border: 0.1px solid #f8f9fa;
 
 
 
+
+
+
+
+
+
+
+
+.mapboxgl-ctrl-top-left {
+    left: 12.87em;
+    top: 0;
+}
+
+
 </style>
 
 
@@ -3147,12 +3162,6 @@ border: 0.1px solid #f8f9fa;
 
 
 
-<div class="calculation-box">
-<p>SDK/API: <strong>EMIIA.AI MRV (EDM, BIM, RADIO DATA) </strong></p>
-
-<div id="calculated-area">
-
-</div>
 
 
 
@@ -3198,7 +3207,7 @@ border: 0.1px solid #f8f9fa;
 
 <span>
 
-<div class="dropdown dropdown-accordion" class="btn btn-outline-primary btn-lg btn-iconed btn-rounded" data-accordion=".accordion12" id="parent" style="position: fixed; top: 0.95em; left: 1.22em; z-index: +200000;" >
+<div class="dropdown dropdown-accordion" class="btn btn-outline-primary btn-lg btn-iconed btn-rounded" data-accordion=".accordion12" id="parent" style="position: fixed; top: 0.95em; left: 15.22em; z-index: +200000;" >
   <button  class="btn btn-light dropdown-toggle" class="btn btn-primary"  type="button" data-toggle="dropdown" ></button>
   
   
@@ -3593,8 +3602,8 @@ border: 0.1px solid #f8f9fa;
         if (query.status !== 200) return;
         const data = await query.json();
         // Display the longitude and latitude values
-        lngDisplay.textContent = lng.toFixed(14);
-        latDisplay.textContent = lat.toFixed(14);
+        lngDisplay.textContent = lng.toFixed(11);
+        latDisplay.textContent = lat.toFixed(11);
         // Get all the returned features
         const allFeatures = data.features;
         // For each returned feature, add elevation data to the elevations array
@@ -6588,6 +6597,7 @@ map.on('load', function () {
 
 
 </html>
+
 
 
 
