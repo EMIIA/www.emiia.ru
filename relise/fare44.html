@@ -7815,21 +7815,6 @@ map.on('load', function () {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <script>
 
 
@@ -7917,6 +7902,46 @@ map.on('load', function () {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script>
 
 
@@ -7950,38 +7975,48 @@ map.on('load', function () {
     }, 'road-label-navigation');
     
     
-
-
-    map.addLayer({
-        "id": "geojson-borders3",
-       'minzoom': 21,
+    
+    
+    
+    
+     map.addLayer({
+        "id": "geojson-border3",
+       'minzoom': 15,
         'maxzoom': 24,
         "type": "line",
         "source": "geojson3",
         "layout": {},
         "paint": {
             "line-color": "red",
-            "line-width": 2,
-            "fill-opacity": 0.5
+            "line-width": 5,
+            "fill-opacity": 0
         }
     }, 'road-label-navigation');
+    
+    
+    
+
+
+   
+    
+    
 
     map.addLayer({
         "id": "geojson-hover3",
-       'minzoom': 21,
+       'minzoom': 15,
         'maxzoom': 24,
         "type": "fill",
         "source": "hover3",
         "layout": {},
         "paint": {
-            "fill-color": "red",
-            "fill-opacity": 0.5
+            "fill-color": "#008000",
+            "fill-opacity": 0.4
         }
     }, 'road-label-navigation');
 
     map.on("mousemove", function(e) {
         var features = map.queryRenderedFeatures(e.point, { layers: ["geojson-fills3"] });
-        map.getSource("hover2").setData({"type": "FeatureCollection", "features": features.map(function(f) { return {"type": "Feature", "geometry": f.geometry}})});
+        map.getSource("hover3").setData({"type": "FeatureCollection", "features": features.map(function(f) { return {"type": "Feature", "geometry": f.geometry}})});
     });
 });
  
@@ -7992,6 +8027,199 @@ map.on('load', function () {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+map.on('load', function () {
+    map.addSource("geojson4", {
+        "type": "geojson",
+        "data": 'https://www.emiia.ru/relise/parking_sport2.geojson'
+        
+        
+        
+    });
+    
+
+    
+    map.addSource("hover4", {"type": "geojson", "data": {"type": "FeatureCollection", "features": []}});
+    
+    
+
+
+    map.addLayer({
+        "id": "geojson-fills4",
+        "type": "fill",
+        'minzoom': 15,
+        'maxzoom': 24,
+        "source": "geojson4",
+        "layout": {},
+        "paint": {
+            "fill-color": "#c1d1ea",
+            "fill-opacity": 1
+        }
+    }, 'road-label-navigation');
+    
+    
+    
+    
+    
+    
+     map.addLayer({
+        "id": "geojson-border4",
+       'minzoom': 15,
+        'maxzoom': 24,
+        "type": "line",
+        "source": "geojson4",
+        "layout": {},
+        "paint": {
+            "line-color": "red",
+            "line-width": 5,
+            "fill-opacity": 0
+        }
+    }, 'road-label-navigation');
+    
+    
+    
+
+
+   
+    
+    
+
+    map.addLayer({
+        "id": "geojson-hover4",
+       'minzoom': 15,
+        'maxzoom': 24,
+        "type": "fill",
+        "source": "hover4",
+        "layout": {},
+        "paint": {
+            "fill-color": "red",
+            "fill-opacity": 0.4
+        }
+    }, 'road-label-navigation');
+
+    map.on("mousemove", function(e) {
+        var features = map.queryRenderedFeatures(e.point, { layers: ["geojson-fills4"] });
+        map.getSource("hover4").setData({"type": "FeatureCollection", "features": features.map(function(f) { return {"type": "Feature", "geometry": f.geometry}})});
+    });
+});
+ 
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+map.on('load', function () {
+    map.addSource("geojson4", {
+        "type": "geojson",
+        "data": 'https://www.emiia.ru/relise/parking_sport3.geojson'
+        
+        
+        
+    });
+    
+
+    
+    map.addSource("hover5", {"type": "geojson", "data": {"type": "FeatureCollection", "features": []}});
+    
+    
+
+
+    map.addLayer({
+        "id": "geojson-fills5",
+        "type": "fill",
+        'minzoom': 15,
+        'maxzoom': 24,
+        "source": "geojson5",
+        "layout": {},
+        "paint": {
+            "fill-color": "#c1d1ea",
+            "fill-opacity": 1
+        }
+    }, 'road-label-navigation');
+    
+    
+    
+    
+    
+    
+     map.addLayer({
+        "id": "geojson-border5",
+       'minzoom': 15,
+        'maxzoom': 24,
+        "type": "line",
+        "source": "geojson5",
+        "layout": {},
+        "paint": {
+            "line-color": "red",
+            "line-width": 5,
+            "fill-opacity": 0
+        }
+    }, 'road-label-navigation');
+    
+    
+    
+
+
+   
+    
+    
+
+    map.addLayer({
+        "id": "geojson-hover5",
+       'minzoom': 15,
+        'maxzoom': 24,
+        "type": "fill",
+        "source": "hover5",
+        "layout": {},
+        "paint": {
+            "fill-color": "red",
+            "fill-opacity": 0.4
+        }
+    }, 'road-label-navigation');
+
+    map.on("mousemove", function(e) {
+        var features = map.queryRenderedFeatures(e.point, { layers: ["geojson-fills5"] });
+        map.getSource("hover5").setData({"type": "FeatureCollection", "features": features.map(function(f) { return {"type": "Feature", "geometry": f.geometry}})});
+    });
+});
+ 
+
+
+</script>
 
 
 
