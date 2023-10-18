@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Basic+ (EPSG:3857) – MapTiler Cloud</title>
+    <script src="https://cdn.maptiler.com/maptiler-sdk-js/v1.0.12/maptiler-sdk.umd.min.js"></script>
+    <link href="https://cdn.maptiler.com/maptiler-sdk-js/v1.0.12/maptiler-sdk.css" rel="stylesheet" />
+  <style>
+    body { margin:0; padding:0; }
+    #map { position:absolute; top:0; bottom:0; width:100%; }
+    #ol-logo { position:absolute; bottom:6px; left:6px; z-index:999; }
+    #ol-logo img { width: 100px; }
+    .ol-zoom { right: .5em; left: unset; }
+    .chess {
+      background:
+        repeating-conic-gradient(
+          #fff 0deg 90deg,
+          #e6e6e6 0deg 180deg)
+        0 0/40px 40px round;
+    }
+  </style>
+</head>
+<body>
+  <div id="map" >
+  </div>
+  <script>
+    var q = (location.search || '').substr(1).split('&');
+    var useRetina = window.devicePixelRatio > 1;
+    var useVector = q.includes('vector') || !q.includes('raster');
+
+      var style = useVector ? 'https://api.maptiler.com/maps/5734df93-2e4f-455f-b0f5-bbcf51802a5a/style.json?key=QN6ALYSRnAohNK6Y8BiB' : {
+        version: 8,
+        sources: {
+          'raster-tiles': {
+            type: 'raster',
+            tiles: [
+              useRetina ? 'https://api.maptiler.com/maps/5734df93-2e4f-455f-b0f5-bbcf51802a5a/{z}/{x}/{y}@2x.png?key=QN6ALYSRnAohNK6Y8BiB' : 'https://api.maptiler.com/maps/5734df93-2e4f-455f-b0f5-bbcf51802a5a/{z}/{x}/{y}.png?key=QN6ALYSRnAohNK6Y8BiB'
+            ],
+            tileSize: 512,
+            attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+          }
+        },
+        layers: [{
+          id: 'raster-layer',
+          type: 'raster',
+          source: 'raster-tiles',
+          minzoom: 0,
+          maxzoom: 22,
+        }],
+        center: [0, 0],
+        zoom: 1
+      };
+      if (useVector) {
+        maptilersdk.setRTLTextPlugin('https://cdn.maptiler.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js');
+      }
+      var map = new maptilersdk.Map({
+        container: 'map',
+        style,
+        hash: true,
+        maptilerLogo: true,
+        language: maptilersdk.Language.STYLE_LOCK
+      });
+      
+  </script>
+</body>
+</html>
