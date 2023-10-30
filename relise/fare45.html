@@ -5,6 +5,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -5276,8 +5277,12 @@ MeasureControl.prototype._toggleEvents = function(toggle,event) {
         maxZoom: 30,
         
         
-		center: [37.16245075483897,55.98228609072842],
+		center: [37.14327514508162,56.00816433287014],
         
+        
+        
+        
+
         
          pitch: 30, // pitch in degrees
    
@@ -6197,11 +6202,11 @@ map.setPaintProperty('projects-pulse', 'circle-color', '#3D85C6')
 
 
 
-// parameters to ensure the model is georeferenced correctly on the map
-var modelOrigin = [37.17409849995867,55.97737925266699]//[2.318, 48.850];
+        // parameters to ensure the model is georeferenced correctly on the map
+var modelOrigin = [37.14327514508162,56.00816433287014]//[2.318, 48.850];
 var modelAltitude = -0;
-var modelRotate = [0.57, 0.16, -501.259];
-
+var modelRotate = [0.57, 0.1, 305.325];
+        
 
 
 
@@ -6349,8 +6354,6 @@ var customLayer = {
     
     
     
-    
-  
     
     
     
@@ -6655,7 +6658,7 @@ var customLayer = {
                                 mesh.children[3].material = new THREE.MeshBasicMaterial({
     wireframe: false,
           color: 0xE8E8E8,
-          opacity: 0.85,
+          opacity: 0.5,
           transparent: true,
           fog: false
         });    
@@ -7001,6 +7004,104 @@ var customLayer = {
         this.scene.add(mesh);
       }
     );
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    loader.load(
+    "https://www.emiia.ru/relise/FACTORY_RENGA_2D_OBJ.obj" , 
+    
+    
+ 
+
+      
+    (mesh) => {
+        
+        
+      
+      
+
+        
+      
+    
+        
+        
+     
+        
+      
+    
+    
+    
+    
+    
+    
+
+// .     
+                    
+                                mesh.children[0].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xE8E8E8,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+     
+         
+     // .     
+                    
+                                mesh.children[1].material = new THREE.MeshBasicMaterial({
+    wireframe: true,
+          color: 0xFF0000,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });    
+         
+         
+         
+         
+ 
+        
+      
+    
+ 
+
+        
+        
+        
+
+ 
+
+        
+        
+        this.scene.add(mesh);
+      }
+    );
+  
+    
+    
+    
     
     
     
@@ -9573,6 +9674,7 @@ animateDashArray(0);
 
 
 </html>
+
 
 
 
