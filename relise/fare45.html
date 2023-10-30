@@ -6363,6 +6363,50 @@ var customLayer = {
     
     
    
+             loader.load(
+    "https://www.emiia.ru/relise/FACTORY_RENGA_2D_5.05_OBJ.obj" , 
+    
+    
+ 
+
+      
+    (mesh) => {
+        
+        
+      
+      
+    
+
+// .     
+                    
+                                mesh.children[0].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xfFFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+
+
+        
+        
+        this.scene.add(mesh);
+      }
+    );
+    
+   
+   
+   
+   
+   
+   
+   
+   
+    
+    
     
     
     
