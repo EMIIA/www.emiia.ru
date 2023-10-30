@@ -6,6 +6,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -5527,11 +5528,7 @@ map.addControl(new MapboxLanguage({
 
  
     
-    
-
-
-
-
+  
 
 
 
@@ -6161,7 +6158,18 @@ map.setPaintProperty('projects-pulse', 'circle-color', '#3D85C6')
    
    
    
-   <script type="x-shader/x-vertex" id="vertexShader">
+ 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+<script type="x-shader/x-vertex" id="vertexShader">
 
 			attribute vec3 center;
 			varying vec3 vCenter;
@@ -6176,16 +6184,6 @@ map.setPaintProperty('projects-pulse', 'circle-color', '#3D85C6')
 
 		</script>
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
         
        
    
@@ -6299,7 +6297,6 @@ var customLayer = {
 
     // use the three.js GLTF loader to add the 3D model to the three.js scene
     var loader = new THREE.OBJLoader();
-    
     
     
     
@@ -6595,10 +6592,8 @@ var customLayer = {
       
     
         
-        
-     
-        
-      
+       
+
     
     
     
@@ -6660,7 +6655,7 @@ var customLayer = {
           color: 0xE8E8E8,
           opacity: 0.8,
           transparent: true,
-          fog: false
+          fog: true
         });    
         
         
@@ -7056,7 +7051,7 @@ var customLayer = {
                     
                                 mesh.children[0].material = new THREE.MeshBasicMaterial({
     wireframe: false,
-          color: 0xE8E8E8,
+          color: 0xffffff,
           opacity: 1,
           transparent: true,
           fog: false
@@ -8936,13 +8931,30 @@ map.on('load', function () {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script>
 
 
 map.on('load', function () {
     map.addSource("geojson", {
         "type": "geojson",
-        "data": 'https://www.emiia.ru/relise/ofisgeojson1.geojson'
+        "data": 'https://www.emiia.ru/relise/farma.geojson'
         
         
         
@@ -8958,13 +8970,13 @@ map.on('load', function () {
     map.addLayer({
         "id": "geojson-fills",
         "type": "fill",
-        'minzoom': 19,
-        'maxzoom': 21,
+        'minzoom': 8,
+        
         "source": "geojson",
         "layout": {},
         "paint": {
-            "fill-color": "#627BC1",
-            "fill-opacity": 0.0
+            "fill-color": "#c1d1ea",
+            "fill-opacity": 1
         }
     }, 'road-label-navigation');
     
@@ -8974,7 +8986,7 @@ map.on('load', function () {
     map.addLayer({
         "id": "geojson-borders",
         'minzoom': 19,
-        'maxzoom': 21,
+        'maxzoom': 19,
         "type": "line",
         "source": "geojson",
         "layout": {},
@@ -8986,14 +8998,14 @@ map.on('load', function () {
 
     map.addLayer({
         "id": "geojson-hover",
-        'minzoom': 19,
-        'maxzoom': 21,
+        'minzoom': 10,
+        'maxzoom': 10,
         "type": "fill",
         "source": "hover",
         "layout": {},
         "paint": {
-            "fill-color": "#3D85C6",
-            "fill-opacity": 0.2
+            "fill-color": "#627BC1",
+            "fill-opacity": 1
         }
     }, 'road-label-navigation');
 
@@ -9006,6 +9018,19 @@ map.on('load', function () {
 
 
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9461,97 +9486,25 @@ const geojson = {
 
 [
           [
-            37.17413736426289,
-            55.97742532049273
-          ],
-          [
-            37.17404372851843,
-            55.977433878418
-          ],
-          [
-            37.1740872308327,
-            55.97742995215768
-          ],
-          [
-            37.174088704160454,
-            55.977435435028696
-          ],
-          [
-            37.17408721001481,
-            55.977430064457586
-          ],
-          [
-            37.174079291010784,
-            55.97740990170075
-          ],
-          [
-            37.17406638685894,
-            55.977410938925274
-          ],
-          [
-            37.17407914480931,
-            55.97740982604573
-          ],
-          [
-            37.17407583334086,
-            55.97739813746056
-          ],
-          [
-            37.17408879213767,
-            55.977396833212396
-          ],
-          [
-            37.17407571617602,
-            55.97739806527943
-          ],
-          [
-            37.17406795910019,
-            55.97737642482293
-          ],
-          [
-            37.174064714770694,
-            55.97736938524615
-          ],
-          [
-            37.17407889846557,
-            55.97736822680085
-          ],
-          [
-            37.17405046034497,
-            55.97737086111782
-          ],
-          [
-            37.174064394502906,
-            55.97736908473136
-          ],
-          [
-            37.17406209858834,
-            55.9773598596461
-          ],
-          [
-            37.17406053202899,
-            55.97735476699926
-          ],
-          [
-            37.174025307203266,
-            55.97735702562467
-          ],
-          [
-            37.174043203058986,
-            55.977355721243356
-          ],
-          [
-            37.174060951975484,
-            55.977354393399224
-          ],
-          [
-            37.17405640386579,
-            55.97734288169895
-          ],
-          [
-            37.174069792187,
-            55.97734140260968
-          ]
+37.14283862743463,
+56.00826648298457
+],
+[
+37.14326366943405,
+56.00842568504527
+],
+[
+37.14356488294274,
+56.00817412430516
+],
+[
+37.14314115883832,
+56.00801426602854
+],
+[
+37.14283862743463,
+56.00826648298457
+]
         ],
         
         
@@ -9664,6 +9617,33 @@ animateDashArray(0);
 
 
 
+<script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
 
 </body>
 
@@ -9674,6 +9654,8 @@ animateDashArray(0);
 
 
 </html>
+
+
 
 
 
