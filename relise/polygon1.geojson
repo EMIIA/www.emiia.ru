@@ -5,10 +5,10 @@
       "type": "Feature",
       "properties": {
         "level": 1,
-        "color": "grey",
+        "color": "yellow",
         "name": "center_arch",
-        "base_height": 3,
-        "height": 4
+        "base_height": 10,
+        "height": 15
       },
       "geometry": {
         "coordinates": [
