@@ -6559,8 +6559,8 @@ var customLayer = {
                     
                                 mesh.children[0].material = new THREE.MeshBasicMaterial({
     wireframe: true,
-          color: 0x383838,
-          opacity: 0.08,
+          color: 0x4CBB17,
+          opacity: 0.2,
           transparent: true,
           fog: false
         });
@@ -6622,7 +6622,7 @@ var customLayer = {
     
     
     loader.load(
-    "https://www.emiia.ru/relise/FACTORY_RENGA_BUILDING_OBJ.obj" , 
+    "https://www.emiia.ru/relise/FACTORY_RENGA_BUILDING_NEW.obj" , 
     
     
  
@@ -6845,7 +6845,7 @@ var customLayer = {
                     
                                 mesh.children[12].material = new THREE.MeshBasicMaterial({
     wireframe: false,
-          color: 0xffffff,
+          color: 0xffFFFF,
           opacity: 0.85,
           transparent: true,
           fog: false
@@ -7027,9 +7027,16 @@ var customLayer = {
     wireframe: false,
           color: 0xd3d3d3,
           opacity: 1,
-          transparent: true,
+          transparent: false,
           fog: false
         });  
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -7125,8 +7132,7 @@ var customLayer = {
  
         
       
-    
- 
+   
 
         
         
@@ -9687,7 +9693,8 @@ animateDashArray(0);
         'maxzoom': 19,
             'source': 'floorplan',
             'paint': {
-                // Get the fill-extrusion-color from the source color property.
+            
+            // Get the fill-extrusion-color from the source color property.
                 'fill-extrusion-color': ['get', 'color'],
 
                 // Get fill-extrusion-height from the source height property.
@@ -9696,10 +9703,12 @@ animateDashArray(0);
                 // Get fill-extrusion-base from the source base_height property.
                 'fill-extrusion-base': ['get', 'base_height'],
 
+                
                 // Make extrusions slightly opaque to see through indoor walls.
-                'fill-extrusion-opacity': 0.2
+                'fill-extrusion-opacity': 0.3
             }
-        });
+
+        },'road-label-navigation');
     });
 
 
@@ -9708,17 +9717,6 @@ animateDashArray(0);
 
 
 </script>
-
-
-
-
-
-
-
-
-
-
-
 
 
 
