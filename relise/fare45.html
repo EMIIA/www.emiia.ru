@@ -8,6 +8,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -9661,17 +9662,45 @@ animateDashArray(0);
 
 
 
-
 <script>
 
 
 
 
 
+ map.on('load', () => {
+        map.addSource('floorplan', {
+            'type': 'geojson',
+            /*
+             * Each feature in this GeoJSON file contains values for
+             * properties.height, properties.base_height,
+             * and properties.color.
+             * In addLayer you will use expressions to set the new
+             * layer's paint properties based on these values.
+             */
+            'data': 'https://raw.githubusercontent.com/EMIIA/www.emiia.ru/master/relise/polygon7.geojson'
+        });
+        map.addLayer({
+            'id': 'room-extrusion',
+            'type': 'fill-extrusion',
+            'minzoom': 5,
+        'maxzoom': 18,
+            'source': 'floorplan',
+            'paint': {
+                // Get the fill-extrusion-color from the source color property.
+                'fill-extrusion-color': ['get', 'color'],
 
+                // Get fill-extrusion-height from the source height property.
+                'fill-extrusion-height': ['get', 'height'],
 
+                // Get fill-extrusion-base from the source base_height property.
+                'fill-extrusion-base': ['get', 'base_height'],
 
-
+                // Make extrusions slightly opaque to see through indoor walls.
+                'fill-extrusion-opacity': 0.5
+            }
+        });
+    });
 
 
 
@@ -9679,6 +9708,19 @@ animateDashArray(0);
 
 
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9699,6 +9741,8 @@ animateDashArray(0);
 
 
 </html>
+
+
 
 
 
