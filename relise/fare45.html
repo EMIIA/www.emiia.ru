@@ -9,6 +9,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -6583,27 +6584,115 @@ var customLayer = {
          
          
          
-         
- 
-        
-      
-    
-    
-    
-    
-
-        
-        
-        
-        
-
- 
 
         
         
         this.scene.add(mesh);
       }
     );
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     loader.load(
+    "https://www.emiia.ru/relise/FACTORY_RENGA_INDUSTRY_FILTER_OBJ.obj" , 
+    
+    
+ 
+
+      
+    (mesh) => {
+        
+        
+
+// .     
+                    
+                                mesh.children[0].material = new THREE.MeshBasicMaterial({
+    wireframe: true,
+          color: 0xFF0000,
+          opacity: 0.09,
+          transparent: true,
+          fog: false
+        });
+        
+        
+  
+        
+        this.scene.add(mesh);
+      }
+    );
+    
+    
+    
+    
+    
+    
+    
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+       loader.load(
+    "https://www.emiia.ru/relise/FACTORY_RENGA_INDUSTRY_FILTER_OBJ.obj" , 
+    
+    
+ 
+
+      
+    (mesh) => {
+        
+        
+
+// .     
+                    
+                                mesh.children[0].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xF8f9fa,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+  
+        
+        this.scene.add(mesh);
+      }
+    );
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -7134,7 +7223,16 @@ var customLayer = {
       
    
 
-        
+      // .     
+                    
+                                mesh.children[2].material = new THREE.MeshBasicMaterial({
+    wireframe: true,
+          color: 0xFFFFFF,
+          opacity: 0.09,
+          transparent: true,
+          fog: false
+        });    
+            
         
         
 
@@ -9739,6 +9837,8 @@ animateDashArray(0);
 
 
 </html>
+
+
 
 
 
