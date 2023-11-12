@@ -10,6 +10,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -6332,9 +6333,7 @@ var customLayer = {
       
     
     
-        
-        
-       
+   
         
       
 
@@ -6770,8 +6769,8 @@ var customLayer = {
                     
                                 mesh.children[1].material = new THREE.MeshBasicMaterial({
     wireframe: false,
-          color: 0xe8e8e8,
-          opacity: 0.5,
+          color: 0xf8f9fa,
+          opacity: 1,
           transparent: true,
           fog: false
         });    
@@ -6915,7 +6914,7 @@ var customLayer = {
                     
                                 mesh.children[10].material = new THREE.MeshBasicMaterial({
     wireframe: false,
-          color: 0xe8e8e8,
+          color: 0xf8f9fa,
           opacity: 1,
           transparent: true,
           fog: false
@@ -6928,7 +6927,7 @@ var customLayer = {
                     
                                 mesh.children[11].material = new THREE.MeshBasicMaterial({
     wireframe: false,
-          color: 0xe8e8e8,
+          color: 0xf8f9fa,
           opacity: 1,
           transparent: true,
           fog: false
@@ -7116,8 +7115,8 @@ var customLayer = {
                     
                                 mesh.children[22].material = new THREE.MeshBasicMaterial({
     wireframe: false,
-          color: 0xe8e8e8,
-          opacity: 0.5,
+          color: 0xf8f9fa,
+          opacity: 1,
           transparent: true,
           fog: false
         });  
@@ -7258,6 +7257,233 @@ var customLayer = {
       }
     );
   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   
+  
+    
+    
+    
+    
+    
+         
+      loader.load(
+    "https://www.emiia.ru/relise/FACTORY_RENGA_BUILDING_FARE.obj" , 
+    
+    
+ 
+
+      
+    (mesh) => {
+        
+        
+      
+
+    
+    
+
+// .     
+                    
+                                mesh.children[0].material = new THREE.MeshBasicMaterial({
+   wireframe: true,
+          color: 0x4CBB17,
+          opacity: 0.2,
+          transparent: true,
+          fog: false
+        });    
+        
+        
+        
+        
+        
+     
+         
+     // STENA.     
+                    
+                                mesh.children[1].material = new THREE.MeshBasicMaterial({
+    wireframe: true,
+          color: 0xE8E8E8,
+          opacity: 0.8,
+          transparent: true,
+          fog: false
+        });    
+         
+         
+         
+         
+ 
+        
+      
+   
+
+      // .     
+                    
+                                mesh.children[2].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xFFFFff,
+          opacity: 1,
+          transparent: false,
+          fog: false
+        });    
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            // lest.     
+                    
+                                mesh.children[3].material = new THREE.MeshBasicMaterial({
+    wireframe: true,
+          color: 0x4CBB17,
+          opacity: 0.2,
+          transparent: true,
+          fog: false
+        });    
+            
+        
+        
+// lest.     
+                    
+                                mesh.children[4].material = new THREE.MeshBasicMaterial({
+    wireframe: true,
+          color: 0x4CBB17,
+          opacity: 0.2,
+          transparent: true,
+          fog: false
+        });    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ // кнопка пожарная подкладка.     
+                    
+                                mesh.children[5].material = new THREE.MeshBasicMaterial({
+    wireframe: true,
+          color: 0xff0000,
+          opacity: 0.5,
+          transparent: true,
+          fog: true
+        });    
+        
+        
+        
+        
+        
+        
+       
+ // lestnica plochadka.     
+                    
+                                mesh.children[6].material = new THREE.MeshBasicMaterial({
+    wireframe: true,
+          color: 0x4CBB17,
+          opacity: 0.2,
+          transparent: true,
+          fog: false
+        });    
+ 
+ 
+ 
+
+        
+        
+        this.scene.add(mesh);
+      }
+    );   
+       
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        loader.load(
+    "https://www.emiia.ru/relise/FACTORY_RENGA_BUILDING_EL.obj" , 
+    
+    
+ 
+
+      
+    (mesh) => {
+        
+        
+      
+
+    
+    
+
+// .     
+                    
+                                mesh.children[0].material = new THREE.MeshBasicMaterial({
+   wireframe: true,
+          color: 0x4CBB17,
+          opacity: 0.2,
+          transparent: true,
+          fog: false
+        });    
+        
+        
+        
+        
+        
+     
+   
+
+        
+        
+        this.scene.add(mesh);
+      }
+    );   
+       
+    
+    
+    
     
     
     
@@ -9851,6 +10077,7 @@ animateDashArray(0);
 
 
 </html>
+
 
 
 
