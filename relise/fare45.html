@@ -13,6 +13,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -9255,7 +9256,7 @@ map.on('load', function () {
             "geometry": {
               "type": "Point",
               "coordinates": [
-                37.14313013063543,56.00806619537519
+               37.14289084424658,56.00826649534386
               ]
           }
         }
@@ -9284,7 +9285,7 @@ map.on('load', function () {
             "geometry": {
               "type": "Point",
               "coordinates": [
-              37.14313013063543,56.00806619537519
+             37.14289084424658,56.00826649534386
               ]
           }
         }
@@ -9339,7 +9340,7 @@ map.on('load', function () {
             "geometry": {
               "type": "Point",
               "coordinates": [
-                37.14309293083599,56.00825749047092
+                37.14311571985203,56.00826085462640
               ]
           }
         }
@@ -9368,7 +9369,7 @@ map.on('load', function () {
             "geometry": {
               "type": "Point",
               "coordinates": [
-                 37.14309293083599,56.00825749047092
+                 37.14311571985203,56.00826085462640
               ]
           }
         }
@@ -9434,7 +9435,7 @@ map.on('load', function () {
             "geometry": {
               "type": "Point",
               "coordinates": [
-               37.14318933481147,56.00805634860558
+               37.14333439844870,56.00820019546919
               ]
           }
         }
@@ -9444,7 +9445,7 @@ map.on('load', function () {
     'layout': {},
     'paint': {
       'circle-radius': 8,
-      'circle-color': '#FFD700'
+      'circle-color': '#3D85C6'
     }
   }, 'road-label-navigation');
 
@@ -9463,7 +9464,7 @@ map.on('load', function () {
             "geometry": {
               "type": "Point",
               "coordinates": [
-               37.14318933481147,56.00805634860558
+               37.14333439844870,56.00820019546919
               ]
           }
         }
@@ -9538,7 +9539,7 @@ map.on('load', function () {
             "geometry": {
               "type": "Point",
               "coordinates": [
-                37.14338312438346,56.00830062136023
+                37.14337283561608,56.00815248236577
               ]
           }
         }
@@ -9567,7 +9568,7 @@ map.on('load', function () {
             "geometry": {
               "type": "Point",
               "coordinates": [
-              37.14338312438346,56.00830062136023
+              37.14337283561608,56.00815248236577
               ]
           }
         }
@@ -9594,6 +9595,96 @@ map.on('load', function () {
 });
 
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+map.on('load', function () {
+
+  map.addLayer({
+    'id': 'circle-one4',
+    'type': 'circle',
+     'minzoom': 19,
+    'source': {
+      'type': 'geojson',
+      'data': {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "properties": {},
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                37.14309514170731,56.00825306425472
+              ]
+          }
+        }
+      ]
+    }
+    },
+    'layout': {},
+    'paint': {
+      'circle-radius': 8,
+      'circle-color': '#3D85C6'
+    }
+  }, 'road-label-navigation');
+
+  map.addLayer({
+    'id': 'circle-two4',
+    'type': 'circle',
+     'minzoom': 19,
+    'source': {
+      'type': 'geojson',
+      'data': {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "properties": {},
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+              37.14309514170731,56.00825306425472
+              ]
+          }
+        }
+      ]
+    }
+    },
+    'layout': {},
+    'paint': {
+      'circle-opacity': 0,
+      'circle-radius': 12,
+      'circle-stroke-width': 2,
+      'circle-stroke-color': 'white'
+    }
+  }, 'road-label-navigation');
+
+  setInterval(function(){
+      map.setPaintProperty('circle-one4', 'circle-radius', 0);
+      map.setPaintProperty('circle-two4', 'circle-radius', 5);
+      setTimeout(function(){
+        map.setPaintProperty('circle-one4', 'circle-radius', 9);
+        map.setPaintProperty('circle-two4', 'circle-radius', 8); }, 14);
+  }, 500);
+
+});
+
+</script>
+
+
+
 
 
 
@@ -11224,6 +11315,8 @@ animateDashArray(0);
 
 
 </html>
+
+
 
 
 
