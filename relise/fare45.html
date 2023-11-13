@@ -6390,6 +6390,7 @@ MeasureControl.prototype._toggleEvents = function(toggle,event) {
 
 
 
+
 <script>
 
 	// import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r115/build/three.module.js';
@@ -6667,18 +6668,221 @@ map.addControl(new MapboxLanguage({
 
 
 
- 
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <script>
+
+
+map.on('load', function () {
+    map.addSource("geojson", {
+        "type": "geojson",
+        "data": 'https://www.emiia.ru/relise/farma.geojson'
+        
+        
+        
+    });
     
-  
+
+    
+    map.addSource("hover", {"type": "geojson", "data": {"type": "FeatureCollection", "features": []}});
+    
+    
 
 
+    map.addLayer({
+        "id": "geojson-fills",
+        "type": "fill",
+        'minzoom': 8,
+        
+        "source": "geojson",
+        "layout": {},
+        "paint": {
+            "fill-color": "#c1d1ea",
+            "fill-opacity": 1
+        }
+    }, 'road-label-navigation');
+    
+    
 
+ map.addLayer({
+        "id": "geojson-borders",
+        'minzoom': 19,
+        'maxzoom': 19,
+        "type": "line",
+        "source": "geojson",
+        "layout": {},
+        "paint": {
+            "line-color": "red",
+            "line-width": 2
+        }
+    }, 'road-label-navigation');
 
+    map.addLayer({
+        "id": "geojson-hover",
+        'minzoom': 10,
+        'maxzoom': 10,
+        "type": "fill",
+        "source": "hover",
+        "layout": {},
+        "paint": {
+            "fill-color": "#627BC1",
+            "fill-opacity": 1
+        }
+    }, 'road-label-navigation');
+   
 
-
+    map.on("mousemove", function(e) {
+        var features = map.queryRenderedFeatures(e.point, { layers: ["geojson-fills"] });
+        map.getSource("hover").setData({"type": "FeatureCollection", "features": features.map(function(f) { return {"type": "Feature", "geometry": f.geometry}})});
+    });
+});
+ 
 
 
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+var elevated_points= {
+  "type": "FeatureCollection",
+  "features": [
+  
+
+
+{
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+    37.14313013063543,56.00806619537519
+        ]
+      }
+    }
+    
+    
+  ]
+}
+
+map.on('style.load', function(){
+  map.addSource('projects', {
+    'type': 'geojson',
+    'data': elevated_points
+  }, 'road-label-navigation');
+
+
+
+
+  function pulseMarker(timestamp){
+    setTimeout(function() {
+      requestAnimationFrame(pulseMarker)
+      multiplier += .1;
+      opacity -= ( 1.3 / framesPerSecond );
+      circleRadius += ( 1000 / framesPerSecond );
+
+
+
+  
+
+      map.setPaintProperty('projects-pulse', 'circle-opacity', opacity)
+      map.setPaintProperty('projects-pulse', 'circle-radius', circleRadius)
+
+      if (opacity <= 1) {
+        opacity = 1;
+        circleRadius = 2;
+      }
+
+    }, 1000 / framesPerSecond );
+  }
+
+  pulseMarker(0);
+
+}, 'road-label-navigation')
+
+
+  
+  
+</script>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -6711,72 +6915,55 @@ const route = {
 'geometry': {
 'type': 'LineString',
 'coordinates': [[
-            37.16663888439467,
-            55.98416071022001
+             37.14305333895334,56.00833208585840
           ],
           [
-            37.16601388968235,
-            55.984157675105905
+           37.14296085644844,56.00829769272448
           ],
           [
-            37.16566539683686,
-            55.98415916461289
+             37.14297683503182,56.00826973126169
           ],
           [
-            37.165119330807755,
-            55.98415916461289
+           37.14295590874164,56.00821503576628
           ],
           [
-            37.16459980298583,
-            55.98415486799513
+            37.14301634967845,56.0081644172446
           ],
           [
-            37.16351971026785,
-            55.98415474669039
+            37.143048964087334,56.00811671456782
           ],
           [
-            37.16244913625934,
-            55.98415158564282
+            37.14304872315648,56.00810148842930
           ],
           [
-            37.161992985864345,
-            55.984142073750746
+            37.14310787044647,56.00809325449507
           ],
           [
-            37.16199504172258,
-            55.98405434171917
+           37.14320278590051,56.00813196754473
           ],
           [
-            37.16235733995259,
-            55.98405434171917
+            37.14326973395777,56.00814557840769
           ],
           [
-            37.16341245203003,
-            55.98405124294217
+            37.14328842492264,56.00813181131443
           ],
           [
-            37.16450995057423,
-            55.984047891604575
+            37.14329739524663,56.00811982019772
           ],
           [
-            37.16612370372681,
-            55.98404790720443
+            37.14327026899983,56.00810501731721
           ],
           [
-            37.16651972400774,
-            55.984035628978006
+            37.14323563034708,56.00809921901640
           ],
           [
-            37.16688102186089,
-            55.98410986005317
+            37.14318831722107,56.00807904710808
           ],
           [
-            37.16684339301466,
-            55.98417592943679
+    37.14316475796309,56.00806588266039
           ],
           [
-            37.16663888439467,
-            55.98416071022001
+           37.14305333895334,56.00833208585840
           ]]
 }
 }
@@ -6878,7 +7065,7 @@ map.addLayer({
 'id': 'point',
 'source': 'point',
 
-'minzoom': 15,
+'minzoom': 19,
 
 
 
@@ -7061,6 +7248,8 @@ map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
  
 map.addSource('dot-point', {
 'type': 'geojson',
+
+
 'data': {
 'type': 'FeatureCollection',
 'id': '888',
@@ -8918,7 +9107,6 @@ labelLayerId
     
     
     
-    
  
     
     
@@ -9043,74 +9231,6 @@ $(function() {
 
 
 
-<script>
-
-var elevated_points= {
-  "type": "FeatureCollection",
-  "features": [
-  
-
-
-{
-      "type": "Feature",
-      "properties": {},
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-    37.14313013063543,56.00806619537519
-        ]
-      }
-    }
-    
-    
-  ]
-}
-
-map.on('style.load', function(){
-  map.addSource('projects', {
-    'type': 'geojson',
-    'data': elevated_points
-  });
-
-
-
-
-  function pulseMarker(timestamp){
-    setTimeout(function() {
-      requestAnimationFrame(pulseMarker)
-      multiplier += .1;
-      opacity -= ( 1.3 / framesPerSecond );
-      circleRadius += ( 1000 / framesPerSecond );
-
-
-
-  
-
-      map.setPaintProperty('projects-pulse', 'circle-opacity', opacity)
-      map.setPaintProperty('projects-pulse', 'circle-radius', circleRadius)
-
-      if (opacity <= 1) {
-        opacity = 1;
-        circleRadius = 2;
-      }
-
-    }, 1000 / framesPerSecond );
-  }
-
-  pulseMarker(0);
-
-})
-
-
-  
-  
-</script>
-
-    
-    
-
-
-
 
 
 
@@ -9169,8 +9289,7 @@ map.on('load', function () {
           }
         }
       ]
-    }
-    },
+    }},
     'layout': {},
     'paint': {
       'circle-opacity': 0,
@@ -9191,9 +9310,6 @@ map.on('load', function () {
 });
 
 </script>
-
-
-
 
 
 
@@ -11067,6 +11183,25 @@ animateDashArray(0);
 
 
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
