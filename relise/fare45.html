@@ -12,6 +12,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -9056,7 +9057,7 @@ var elevated_points= {
       "geometry": {
         "type": "Point",
         "coordinates": [
-    37.17402881370487,55.9774159971234
+    37.14313013063543,56.00806619537519
         ]
       }
     }
@@ -9134,7 +9135,7 @@ map.on('load', function () {
             "geometry": {
               "type": "Point",
               "coordinates": [
-                37.17402881370487,55.9774159971234
+                37.14313013063543,56.00806619537519
               ]
           }
         }
@@ -9163,7 +9164,7 @@ map.on('load', function () {
             "geometry": {
               "type": "Point",
               "coordinates": [
-                37.17402881370487,55.9774159971234
+              37.14313013063543,56.00806619537519
               ]
           }
         }
@@ -9222,7 +9223,7 @@ map.on('load', function () {
             "geometry": {
               "type": "Point",
               "coordinates": [
-                 37.17412479136888, 55.97737265901171
+                37.14309293083599,56.00825749047092
               ]
           }
         }
@@ -9251,7 +9252,7 @@ map.on('load', function () {
             "geometry": {
               "type": "Point",
               "coordinates": [
-                 37.17412479136888, 55.97737265901171
+                 37.14309293083599,56.00825749047092
               ]
           }
         }
@@ -9317,7 +9318,7 @@ map.on('load', function () {
             "geometry": {
               "type": "Point",
               "coordinates": [
-               37.17403966298906, 55.97740777308672
+               37.14318933481147,56.00805634860558
               ]
           }
         }
@@ -9346,7 +9347,7 @@ map.on('load', function () {
             "geometry": {
               "type": "Point",
               "coordinates": [
-               37.17403966298906, 55.97740777308672
+               37.14318933481147,56.00805634860558
               ]
           }
         }
@@ -9421,7 +9422,7 @@ map.on('load', function () {
             "geometry": {
               "type": "Point",
               "coordinates": [
-                37.17418420605804, 55.97743519229019
+                37.14338312438346,56.00830062136023
               ]
           }
         }
@@ -9450,7 +9451,7 @@ map.on('load', function () {
             "geometry": {
               "type": "Point",
               "coordinates": [
-              37.17418420605804, 55.97743519229019
+              37.14338312438346,56.00830062136023
               ]
           }
         }
@@ -10423,80 +10424,6 @@ map.on('load', function () {
 
 
 
-<script>
-
-
-map.on('load', function () {
-    map.addSource("geojson", {
-        "type": "geojson",
-        "data": 'https://www.emiia.ru/relise/farma.geojson'
-        
-        
-        
-    });
-    
-
-    
-    map.addSource("hover", {"type": "geojson", "data": {"type": "FeatureCollection", "features": []}});
-    
-    
-
-
-    map.addLayer({
-        "id": "geojson-fills",
-        "type": "fill",
-        'minzoom': 8,
-        
-        "source": "geojson",
-        "layout": {},
-        "paint": {
-            "fill-color": "#c1d1ea",
-            "fill-opacity": 1
-        }
-    }, 'road-label-navigation');
-    
-    
-
-
-    map.addLayer({
-        "id": "geojson-borders",
-        'minzoom': 19,
-        'maxzoom': 19,
-        "type": "line",
-        "source": "geojson",
-        "layout": {},
-        "paint": {
-            "line-color": "red",
-            "line-width": 2
-        }
-    }, 'road-label-navigation');
-
-    map.addLayer({
-        "id": "geojson-hover",
-        'minzoom': 10,
-        'maxzoom': 10,
-        "type": "fill",
-        "source": "hover",
-        "layout": {},
-        "paint": {
-            "fill-color": "#627BC1",
-            "fill-opacity": 1
-        }
-    }, 'road-label-navigation');
-
-    map.on("mousemove", function(e) {
-        var features = map.queryRenderedFeatures(e.point, { layers: ["geojson-fills"] });
-        map.getSource("hover").setData({"type": "FeatureCollection", "features": features.map(function(f) { return {"type": "Feature", "geometry": f.geometry}})});
-    });
-});
- 
-
-
-</script>
-
-
-
-
 
 
 
@@ -11162,6 +11089,8 @@ animateDashArray(0);
 
 
 </html>
+
+
 
 
 
