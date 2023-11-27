@@ -6400,7 +6400,7 @@ MeasureControl.prototype._toggleEvents = function(toggle,event) {
 	// import {GLTFLoader} from 'https://threejsfundamentals.org/threejs/resources/threejs/r115/examples/jsm/loaders/GLTFLoader.js';
     
     
-  const monument = [37.14329781892869, 56.00833834009185];
+  const monument = [38.14329781892869, 56.00833834009185];
 
 
 	mapboxgl.accessToken = 'pk.eyJ1Ijoidmxhc292IiwiYSI6ImNsb2ZrdjdnajB2aXYybHBsN3hjbTc4c2MifQ.bAszhUfl2tJDRCbrDy0x4w';
@@ -6695,77 +6695,6 @@ map.addControl(new MapboxLanguage({
 
 
 
- <script>
-
-
-map.on('load', function () {
-    map.addSource("geojson", {
-        "type": "geojson",
-        "data": 'https://www.emiia.ru/relise/farma.geojson'
-        
-        
-        
-    });
-    
-
-    
-    map.addSource("hover", {"type": "geojson", "data": {"type": "FeatureCollection", "features": []}});
-    
-    
-
-
-    map.addLayer({
-        "id": "geojson-fills",
-        "type": "fill",
-        'minzoom': 8,
-        
-        "source": "geojson",
-        "layout": {},
-        "paint": {
-            "fill-color": "#c1d1ea",
-            "fill-opacity": 1
-        }
-    }, 'road-label-navigation');
-    
-    
-
- map.addLayer({
-        "id": "geojson-borders",
-        'minzoom': 19,
-        'maxzoom': 19,
-        "type": "line",
-        "source": "geojson",
-        "layout": {},
-        "paint": {
-            "line-color": "red",
-            "line-width": 2
-        }
-    }, 'road-label-navigation');
-
-    map.addLayer({
-        "id": "geojson-hover",
-        'minzoom': 10,
-        'maxzoom': 10,
-        "type": "fill",
-        "source": "hover",
-        "layout": {},
-        "paint": {
-            "fill-color": "#627BC1",
-            "fill-opacity": 1
-        }
-    }, 'road-label-navigation');
-   
-
-    map.on("mousemove", function(e) {
-        var features = map.queryRenderedFeatures(e.point, { layers: ["geojson-fills"] });
-        map.getSource("hover").setData({"type": "FeatureCollection", "features": features.map(function(f) { return {"type": "Feature", "geometry": f.geometry}})});
-    });
-});
- 
-
-
-</script>
-
 
 
 
@@ -6800,7 +6729,7 @@ var elevated_points= {
       "geometry": {
         "type": "Point",
         "coordinates": [
-    37.14313013063543,56.00806619537519
+    38.14313013063543,56.00806619537519
         ]
       }
     }
@@ -6902,386 +6831,6 @@ map.on('style.load', function(){
 
 
 
-<script>
-
-
- 
-// A simple line from origin to destination.
-const route = {
-'type': 'FeatureCollection',
-'id': '888',
-'features': [
-{
-'type': 'Feature',
-'id': '888',
-'geometry': {
-'type': 'LineString',
-'coordinates': [[
-             37.14305333895334,56.00833208585840
-          ],
-          [
-           37.14296085644844,56.00829769272448
-          ],
-          [
-             37.14297683503182,56.00826973126169
-          ],
-          [
-           37.14295590874164,56.00821503576628
-          ],
-          [
-            37.14301634967845,56.0081644172446
-          ],
-          [
-            37.143048964087334,56.00811671456782
-          ],
-          [
-            37.14304872315648,56.00810148842930
-          ],
-          [
-            37.14310787044647,56.00809325449507
-          ],
-          [
-           37.14320278590051,56.00813196754473
-          ],
-          [
-            37.14326973395777,56.00814557840769
-          ],
-          [
-            37.14328842492264,56.00813181131443
-          ],
-          [
-            37.14329739524663,56.00811982019772
-          ],
-          [
-            37.14327026899983,56.00810501731721
-          ],
-          [
-            37.14323563034708,56.00809921901640
-          ],
-          [
-            37.14318831722107,56.00807904710808
-          ],
-          [
-    37.14316475796309,56.00806588266039
-          ],
-          [
-           37.14305333895334,56.00833208585840
-          ]]
-}
-}
-]
-};
-
-
-
-
-// A single point that animates along the route.
-// Coordinates are initially set to origin.
-const point = {
-'type': 'FeatureCollection',
-'id': '888',
-'features': [
-{
-'type': 'Feature',
-'properties': {},
-'geometry': {
-'type': 'Point',
-'coordinates': origin
-}
-}
-]
-};
- 
-// Calculate the distance in kilometers between route start/end point.
-const lineDistance = turf.length(route.features[0]);
- 
-const arc = [];
- 
-// Number of steps to use in the arc and animation, more steps means
-// a smoother arc and animation, but too many steps will result in a
-// low frame rate
-const steps = 300000;
- 
-// Draw an arc between the `origin` & `destination` of the two points
-for (let i = 0; i < lineDistance; i += lineDistance / steps) {
-const segment = turf.along(route.features[0], i);
-arc.push(segment.geometry.coordinates);
-}
- 
-// Update the route with calculated arc coordinates
-route.features[0].geometry.coordinates = arc;
- 
-// Used to increment the value of the point measurement against the route.
-let counter = 0;
- 
-map.on('load', () => {
-// Add a source and layer displaying a point which will be animated in a circle.
-map.addSource('route', {
-'type': 'geojson',
-'data': route
-});
-
-
-
-
-
-
-
-
-    
-
-
-
- 
-map.addSource('point', {
-'type': 'geojson',
-'data': point
-});
- 
-map.addLayer({
-'id': 'route',
-'source': 'route',
-'type': 'line',
-'paint': {
-'line-width': 0,
-
-'line-color': 'red'
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-});
- 
-map.addLayer({
-'id': 'point',
-'source': 'point',
-
-'minzoom': 19,
-
-
-
-
-
-
-'type': 'symbol',
-'layout': {
-// This icon is a part of the Mapbox Streets style.
-// To view all images available in a Mapbox style, open
-// the style in Mapbox Studio and click the "Images" tab.
-// To add a new image to the style at runtime see
-// https://docs.mapbox.com/mapbox-gl-js/example/add-image/
-'icon-image': 'pulsing-dot',
-'icon-size': 0.6,
-
-'icon-rotate': ['get', 'bearing'],
-
-'icon-allow-overlap': true,
-'icon-ignore-placement': true
-}
-}, 'road-label-navigation');
-
-
-
-
-
-
-
-
-
-
-
-function animate() {
-const start =
-route.features[0].geometry.coordinates[
-counter >= steps ? counter - 0 : counter
-];
-const end =
-route.features[0].geometry.coordinates[
-counter >= steps ? counter : counter + 0
-];
-if (!start || !end) return;
- 
-// Update point geometry to a new position based on counter denoting
-// the index to access the arc
-point.features[0].geometry.coordinates =
-route.features[0].geometry.coordinates[counter];
- 
-// Calculate the bearing to ensure the icon is rotated to match the route arc
-// The bearing is calculated between the current point and the next point, except
-// at the end of the arc, which uses the previous point and the current point
-point.features[0].properties.bearing = turf.bearing(
-turf.point(start),
-turf.point(end)
-);
- 
-// Update the source with this new data
-map.getSource('point').setData(point);
- 
-// Request the next frame of animation as long as the end has not been reached
-if (counter < steps) {
-requestAnimationFrame(animate);
-}
- 
- 
- 
-
- 
- 
-counter = counter + 30;
-}
- 
-document.getElementById('replay').addEventListener('click', () => {
-// Set the coordinates of the original point back to origin
-point.features[0].geometry.coordinates = origin;
- 
-// Update the source layer
-map.getSource('point').setData(point);
- 
-// Reset the counter
-counter = 0;
-
-
- 
-// Restart the animation
-animate(counter);
-});
- 
-// Start the animation
-animate(counter);
-});
-
-
-
-
-
- 
-const size = 180;
- 
-// This implements `StyleImageInterface`
-// to draw a pulsing dot icon on the map.
-const pulsingDot = {
-width: size,
-height: size,
-data: new Uint8Array(size * size * 4),
- 
-// When the layer is added to the map,
-// get the rendering context for the map canvas.
-onAdd: function () {
-const canvas = document.createElement('canvas');
-canvas.width = this.width;
-canvas.height = this.height;
-this.context = canvas.getContext('2d');
-},
- 
-// Call once before every frame where the icon will be used.
-render: function () {
-const duration = 1000;
-const t = (performance.now() % duration) / duration;
- 
-const radius = (size / 2) * 0.3;
-const outerRadius = (size / 2) * 0.7 * t + radius;
-const context = this.context;
- 
-// Draw the outer circle.
-context.clearRect(0, 0, this.width, this.height);
-context.beginPath();
-context.arc(
-this.width / 2,
-this.height / 2,
-outerRadius,
-0,
-Math.PI * 2
-);
-context.fillStyle = `rgba(91, 133, 198, ${1 - t})`;
-context.fill();
- 
-// Draw the inner circle.
-context.beginPath();
-context.arc(
-this.width / 2,
-this.height / 2,
-radius,
-0,
-Math.PI * 2
-);
-context.fillStyle = '#3d85c6';
-context.strokeStyle = 'white';
-context.lineWidth = 2 + 4 * (1 - t);
-context.fill();
-context.stroke();
- 
-// Update this image's data with data from the canvas.
-this.data = context.getImageData(
-0,
-0,
-this.width,
-this.height
-).data;
- 
-// Continuously repaint the map, resulting
-// in the smooth animation of the dot.
-map.triggerRepaint();
- 
-// Return `true` to let the map know that the image was updated.
-return true;
-}
-};
-
-
-
-
-
-
-
- 
-map.on('load', () => {
-map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
- 
-map.addSource('dot-point', {
-'type': 'geojson',
-
-
-'data': {
-'type': 'FeatureCollection',
-'id': '888',
-'features': [
-{
-'type': 'Feature',
-'id': '888',
-'geometry': {
-'type': 'Point',
-'coordinates': [0, 0] // icon position [lng, lat]
-}
-}
-]
-}
-});
-
-
-
-
-
-});
-
-
-
-
-
-
-
-</script>
-    
 
 
 
@@ -7857,7 +7406,7 @@ var customLayer = {
                     
                                 mesh.children[1].material = new THREE.MeshBasicMaterial({
     wireframe: false,
-          color: 0xffffff,
+          color: 0xe8e8e8,
           opacity: 0.5,
           transparent: true,
           fog: false
@@ -7928,7 +7477,7 @@ var customLayer = {
                                 mesh.children[5].material = new THREE.MeshBasicMaterial({
     wireframe: false,
           color: 0xfFffff,
-          opacity: 0.1,
+          opacity: 1,
           transparent: true,
           fog: false
         });
@@ -8568,7 +8117,7 @@ map.on('load', function () {
             "geometry": {
               "type": "Point",
               "coordinates": [
-               37.14289084424658,56.00826649534386
+               38.14289084424658,56.00826649534386
               ]
           }
         }
@@ -8597,7 +8146,7 @@ map.on('load', function () {
             "geometry": {
               "type": "Point",
               "coordinates": [
-             37.14289084424658,56.00826649534386
+             38.14289084424658,56.00826649534386
               ]
           }
         }
@@ -8652,7 +8201,7 @@ map.on('load', function () {
             "geometry": {
               "type": "Point",
               "coordinates": [
-                37.14311571985203,56.00826085462640
+                38.14311571985203,56.00826085462640
               ]
           }
         }
@@ -8681,7 +8230,7 @@ map.on('load', function () {
             "geometry": {
               "type": "Point",
               "coordinates": [
-                 37.14311571985203,56.00826085462640
+                 38.14311571985203,56.00826085462640
               ]
           }
         }
@@ -8747,7 +8296,7 @@ map.on('load', function () {
             "geometry": {
               "type": "Point",
               "coordinates": [
-               37.14333439844870,56.00820019546919
+               38.14333439844870,56.00820019546919
               ]
           }
         }
@@ -8776,7 +8325,7 @@ map.on('load', function () {
             "geometry": {
               "type": "Point",
               "coordinates": [
-               37.14333439844870,56.00820019546919
+               38.14333439844870,56.00820019546919
               ]
           }
         }
@@ -8851,7 +8400,7 @@ map.on('load', function () {
             "geometry": {
               "type": "Point",
               "coordinates": [
-                37.14337283561608,56.00815248236577
+                38.14337283561608,56.00815248236577
               ]
           }
         }
@@ -8880,7 +8429,7 @@ map.on('load', function () {
             "geometry": {
               "type": "Point",
               "coordinates": [
-              37.14337283561608,56.00815248236577
+              38.14337283561608,56.00815248236577
               ]
           }
         }
@@ -8938,7 +8487,7 @@ map.on('load', function () {
             "geometry": {
               "type": "Point",
               "coordinates": [
-                37.14309514170731,56.00825306425472
+                38.14309514170731,56.00825306425472
               ]
           }
         }
@@ -8967,7 +8516,7 @@ map.on('load', function () {
             "geometry": {
               "type": "Point",
               "coordinates": [
-              37.14309514170731,56.00825306425472
+              38.14309514170731,56.00825306425472
               ]
           }
         }
@@ -10390,140 +9939,6 @@ map.on('load', function () {
 
 
 
-<script>
-
-
-const geojson = {
-'type': 'FeatureCollection',
-'features': [
-{
-'type': 'Feature',
-'properties': {},
-'geometry': {
-'coordinates': 
-
-
-
-
-[
-          [
-37.14283862743463,
-56.00826648298457
-],
-[
-37.14326366943405,
-56.00842568504527
-],
-[
-37.14356488294274,
-56.00817412430516
-],
-[
-37.14314115883832,
-56.00801426602854
-],
-[
-37.14283862743463,
-56.00826648298457
-]
-        ],
-        
-        
-        
-'type': 'LineString'
-}
-}
-]
-};
- 
-map.on('load', () => {
-map.addSource('line', {
-type: 'geojson',
-data: geojson
-});
- 
-// add a line layer without line-dasharray defined to fill the gaps in the dashed line
-map.addLayer({
-
- 'minzoom': 19,
-        'maxzoom': 21,
-
-
-type: 'line',
-source: 'line',
-id: 'line-background',
-paint: {
-'line-color': '#F8F9FA',
-'line-width': 6,
-'line-opacity': 1
-}
-}, 'road-label-navigation');
- 
-// add a line layer with line-dasharray set to the first value in dashArraySequence
-map.addLayer({
-
-
- 'minzoom': 19,
-        'maxzoom': 21,
-
-
-
-type: 'line',
-source: 'line',
-id: 'line-dashed',
-paint: {
-'line-color': 'white',
-'line-width': 6,
-'line-dasharray': [0, 2, 3]
-}
-}, 'road-label-navigation');
- 
-// technique based on https://jsfiddle.net/2mws8y3q/
-// an array of valid line-dasharray values, specifying the lengths of the alternating dashes and gaps that form the dash pattern
-const dashArraySequence = [
-[0, 4, 3],
-[0.5, 4, 2.5],
-[1, 4, 2],
-[1.5, 4, 1.5],
-[2, 4, 1],
-[2.5, 4, 0.5],
-[3, 4, 0],
-[0, 0.5, 3, 3.5],
-[0, 1, 3, 3],
-[0, 1.5, 3, 2.5],
-[0, 2, 3, 2],
-[0, 2.5, 3, 1.5],
-[0, 3, 3, 1],
-[0, 3.5, 3, 0.5]
-];
- 
-let step = 0;
- 
-function animateDashArray(timestamp) {
-// Update line-dasharray using the next value in dashArraySequence. The
-// divisor in the expression `timestamp / 50` controls the animation speed.
-const newStep = parseInt(
-(timestamp / 50) % dashArraySequence.length
-);
- 
-if (newStep !== step) {
-map.setPaintProperty(
-'line-dashed',
-'line-dasharray',
-dashArraySequence[step]
-);
-step = newStep;
-}
- 
-// Request the next frame of the animation.
-requestAnimationFrame(animateDashArray);
-}
- 
-// start the animation
-animateDashArray(0);
-});
-</script>
-
 
 
 
@@ -10602,6 +10017,77 @@ animateDashArray(0);
 
 
 
+
+ <script>
+
+
+map.on('load', function () {
+    map.addSource("geojson", {
+        "type": "geojson",
+        "data": 'https://www.emiia.ru/relise/farma_prezentation.geojson'
+        
+        
+        
+    });
+    
+
+    
+    map.addSource("hover", {"type": "geojson", "data": {"type": "FeatureCollection", "features": []}});
+    
+    
+
+
+    map.addLayer({
+        "id": "geojson-fills",
+        "type": "fill",
+        'minzoom': 8,
+        
+        "source": "geojson",
+        "layout": {},
+        "paint": {
+            "fill-color": "#e8e8e8",
+            "fill-opacity": 1
+        }
+    }, 'road-label-navigation');
+    
+    
+
+ map.addLayer({
+        "id": "geojson-borders",
+        'minzoom': 19,
+        'maxzoom': 19,
+        "type": "line",
+        "source": "geojson",
+        "layout": {},
+        "paint": {
+            "line-color": "red",
+            "line-width": 2
+        }
+    }, 'road-label-navigation');
+
+    map.addLayer({
+        "id": "geojson-hover",
+        'minzoom': 10,
+        'maxzoom': 10,
+        "type": "fill",
+        "source": "hover",
+        "layout": {},
+        "paint": {
+            "fill-color": "#f8f9fa",
+            "fill-opacity": 1
+        }
+    }, 'road-label-navigation');
+   
+
+    map.on("mousemove", function(e) {
+        var features = map.queryRenderedFeatures(e.point, { layers: ["geojson-fills"] });
+        map.getSource("hover").setData({"type": "FeatureCollection", "features": features.map(function(f) { return {"type": "Feature", "geometry": f.geometry}})});
+    });
+});
+ 
+
+
+</script>
 
 
 
