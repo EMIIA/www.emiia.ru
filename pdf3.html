@@ -1,0 +1,61 @@
+
+
+
+<html class=" FB_FW_ext BlitzScPluginAdapter"><head>   <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1, shrink-to-fit=no"></head><body><div style="text-align:center">
+<h4></h4>
+<iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSdzWg2uETxyCCQAIOcintsMrWrnBVnPi1c8SNaVCtuHtve0ix9qf0KZoBRJFgnf1nAMdmuPFTr5S_5/pub?view=pdf&amp;embedded=true" frameborder="0" height="100%" width="100%"></iframe>
+  </div>
+</body><div id="vimeo-record-extension"></div></html>
+
+
+
+  
+  
+  
+  
+  
+  
+  <script type="text/javascript" nonce="">
+  function posObj(sheet, id, row, col, x, y) {
+      var rtl = false;
+      var sheetElement = document.getElementById(sheet);
+      if (!sheetElement) {
+        sheetElement = document.getElementById(sheet + '-grid-container');
+      }
+      if (sheetElement) {
+        rtl = sheetElement.getAttribute('dir') == 'rtl';
+      }
+      var r = document.getElementById(sheet+'R'+row);
+      var c = document.getElementById(sheet+'C'+col);
+      if (r && c) {
+        var objElement = document.getElementById(id);
+        var s = objElement.style;
+        var t = y;
+        while (r && r != sheetElement) {
+          t += r.offsetTop;
+          r = r.offsetParent;
+      }
+      var offsetX = x;
+      while (c && c != sheetElement) {
+        offsetX += c.offsetLeft;
+        c = c.offsetParent;
+      }
+      if (rtl) {
+        offsetX -= objElement.offsetWidth;
+      }
+      s.left = offsetX + 'px';
+      s.top = t + 'px';
+      s.display = 'block';
+      s.border = '1px solid #000000';
+    }
+  }
+
+  function posObjs() {
+  posObj('469364790', 'embed_1692859122', 1, 7, 13, -9);posObj('1558990796', 'embed_586244250', 157, 1, 10, 8);posObj('1558990796', 'embed_1876970475', 30, 0, 0, 20);posObj('1558990796', 'embed_30220123', 79, 1, 0, 10);posObj('1558990796', 'embed_1671083842', 107, 0, 7, 7);posObj('1558990796', 'embed_1318526440', 133, 0, 0, 2);}posObjs();</script>
+  
+  
+  
+  
+</body>
+
