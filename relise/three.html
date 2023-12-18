@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script src="https://wolfwind521.github.io/Indoor3D/js/three.min.js"></script>
+<script src="https://wolfwind521.github.io/Indoor3D/js/Detector.js"></script>
+<script src="https://wolfwind521.github.io/Indoor3D/js/OrbitControls.js"></script>
+<script src="https://wolfwind521.github.io/Indoor3D/js/IndoorMap.js"></script>
+<script src="https://wolfwind521.github.io/Indoor3D/js/stats.min.js"></script>
+<script src="https://wolfwind521.github.io/Indoor3D/js/Projector.js"></script>
+<script src="https://wolfwind521.github.io/Indoor3D/js/IndoorMap2d.js"></script>
+<script src="https://wolfwind521.github.io/Indoor3D/js/IndoorMap3d.js"></script>
+<link href="https://wolfwind521.github.io/Indoor3D/css/indoor3D.css" rel="stylesheet">
+
+<script>
+
+
+    var params = {
+        //,dim:"2d"
+    }
+    var map = IndoorMap(params);
+    map.load('https://wolfwind521.github.io/Indoor3D/data/爱琴海购物中心.json', function(){
+        map.showFloor(1);
+        map.setSelectable(false);
+        map.showPubPoints(true);
+        map.setSelectable(true);
+
+        var ul = IndoorMap.getUI(map);
+        document.body.appendChild(ul);
+    });
+
+    var stats = new Stats();
+    stats.domElement.style.position = 'absolute';
+    stats.domElement.style.top = '0px';
+    document.body.appendChild(stats.domElement);
+    animate();
+
+    function animate(){
+        requestAnimationFrame(animate);
+        stats.update();
+    }
+</script>
+
+</body>
+</html>
+
