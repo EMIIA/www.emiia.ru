@@ -1,0 +1,7537 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+
+ 
+ 
+ <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+ 
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+
+<meta name="format-detection" content="telephone=no">
+
+        
+        
+        
+    <title>EMIIA.AI MRV: SDK/API - em_70.3388_675_it_98342234...</title>    
+        
+
+	
+	<link rel="manifest" href="manifest.json">
+
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="application-name" content="EMIIA.AI MRV">
+<meta name="apple-mobile-web-app-title" content="EMIIA.AI MRV">
+	<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#fff">
+<meta name="msapplication-starturl" content="https://www.emiia.ru/relise/fare33.html">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+	
+	
+	
+	<link rel="manifest" href="/manifest.json">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="https://telegram.org/js/telegram-web-app.js"></script> <!--Подключаем скрипт от телеграм-->
+    
+    
+    
+    
+    
+    
+    
+    
+	
+	
+
+
+
+
+
+
+
+        
+	
+
+    
+
+
+
+
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+<style>
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+</style>
+
+	<style>
+@import url('https://www.emiia.ru/css.css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+</style>
+
+  <style>  
+@import url('/css.css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+</style>
+
+<link rel="stylesheet" href="https://www.emiia.ru/cssfamily=Montserrat.css">
+<link rel="stylesheet" href="/cssfamily=Montserrat.css">
+    
+    
+   
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+<script src="https://www.emiia.ru/relise/emiijs.js" type="text/javascript"></script>
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+
+
+
+
+
+
+      
+    
+    <script src="https://unpkg.com/threebox-plugin/dist/threebox.min.js" type="text/javascript"></script>
+<link href="https://unpkg.com/threebox-plugin/dist/threebox.css" rel="stylesheet" />
+
+
+<script src="https://unpkg.com/three@0.106.2/build/three.min.js"></script>
+<script src="https://unpkg.com/three@0.106.2/examples/js/loaders/GLTFLoader.js"></script>
+
+
+
+<script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+
+
+
+<script src="https://cdn.skypack.dev/pin/react@v17.0.1-yH0aYV1FOvoIPeKBbHxg/mode=imports/optimized/react.js"></script> 
+
+
+
+
+
+
+
+
+
+    
+    
+    
+   <script src="https://dl.dropboxusercontent.com/s/p4pzuar2waqsn7m/map-gl-indoor.umd.js"></script>   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+    
+    
+ <style>   
+    
+    .marker {
+  background-image: url('https://www.mapbox.com/help/demos/custom-markers-gl-js/mapbox-icon.png');
+  background-size: cover;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+
+}
+
+
+  
+
+
+.marker:hover,.marker.active{
+
+}
+
+.mapboxgl-popup {
+  max-width: 250px;
+}
+
+.mapboxgl-popup-content {
+  text-align: center;
+  font-family: 'Montserrat', montserrat;
+}
+
+
+
+.mapboxgl-ctrl-map {
+    background-image: url(https://www.emiia.ai/icon/e.svg);
+    background-size: 28px 28px !important;
+    background-position: 8.7px 8.2px !important;
+    background-repeat: no-repeat !important;
+}
+
+
+
+.mapboxgl-ctrl-markers {
+    background-image: url(https://www.emiia.ai/icon/e.svg);
+    background-size: 28px 28px !important;
+    background-position: 8.7px 8.2px !important;
+    background-repeat: no-repeat !important;
+}
+
+
+
+
+
+
+
+
+.mapboxgl-ctrl.markers input{
+  padding: 5px;
+}
+
+
+
+
+::-webkit-scrollbar {
+    width: 5px;
+    background-color: white;
+    max-height: 0vh;
+}
+
+
+
+
+
+.mapboxgl-ctrl-group button {
+    width: 44px;
+    height: 44px;
+    display: block;
+    padding: 0px;
+    outline: none;
+    border: 0;
+    box-sizing: border-box;
+    background-color: transparent;
+    cursor: pointer;
+    font: 13px/20px Montserrat, montserrat;
+    color: #383838;
+}
+
+
+.mapboxgl-ctrl-group {
+    border-radius: 12px;
+    background: #fff;
+}
+
+
+.mapboxgl-ctrl-group {
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+
+
+
+a.mapboxgl-ctrl-logo{
+    width: 0;
+    height: 0;
+    margin: 0 0 -4px-4px;
+    display: block;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    overflow: hidden;
+    background-image: url(data:image/svg+xml;charset=utf-8,%3Csvg width='88' height='23' viewBox='0 0 88 23' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' fill-rule='evenodd'%3E %3Cdefs%3E %3Cpath id='logo' d='M11.5 2.25c5.105 0 9.25 4.145 9.25 9.25s-4.145 9.25-9.25 9.25-9.25-4.145-9.25-9.25 4.145-9.25 9.25-9.25zM6.997 15.983c-.051-.338-.828-5.802 2.233-8.873a4.395 4.395 0 013.13-1.28c1.27 0 2.49.51 3.39 1.42.91.9 1.42 2.12 1.42 3.39 0 1.18-.449 2.301-1.28 3.13C12.72 16.93 7 16 7 16l-.003-.017zM15.3 10.5l-2 .8-.8 2-.8-2-2-.8 2-.8.8-2 .8 2 2 .8z'/%3E %3Cpath id='text' d='M50.63 8c.13 0 .23.1.23.23V9c.7-.76 1.7-1.18 2.73-1.18 2.17 0 3.95 1.85 3.95 4.17s-1.77 4.19-3.94 4.19c-1.04 0-2.03-.43-2.74-1.18v3.77c0 .13-.1.23-.23.23h-1.4c-.13 0-.23-.1-.23-.23V8.23c0-.12.1-.23.23-.23h1.4zm-3.86.01c.01 0 .01 0 .01-.01.13 0 .22.1.22.22v7.55c0 .12-.1.23-.23.23h-1.4c-.13 0-.23-.1-.23-.23V15c-.7.76-1.69 1.19-2.73 1.19-2.17 0-3.94-1.87-3.94-4.19 0-2.32 1.77-4.19 3.94-4.19 1.03 0 2.02.43 2.73 1.18v-.75c0-.12.1-.23.23-.23h1.4zm26.375-.19a4.24 4.24 0 00-4.16 3.29c-.13.59-.13 1.19 0 1.77a4.233 4.233 0 004.17 3.3c2.35 0 4.26-1.87 4.26-4.19 0-2.32-1.9-4.17-4.27-4.17zM60.63 5c.13 0 .23.1.23.23v3.76c.7-.76 1.7-1.18 2.73-1.18 1.88 0 3.45 1.4 3.84 3.28.13.59.13 1.2 0 1.8-.39 1.88-1.96 3.29-3.84 3.29-1.03 0-2.02-.43-2.73-1.18v.77c0 .12-.1.23-.23.23h-1.4c-.13 0-.23-.1-.23-.23V5.23c0-.12.1-.23.23-.23h1.4zm-34 11h-1.4c-.13 0-.23-.11-.23-.23V8.22c.01-.13.1-.22.23-.22h1.4c.13 0 .22.11.23.22v.68c.5-.68 1.3-1.09 2.16-1.1h.03c1.09 0 2.09.6 2.6 1.55.45-.95 1.4-1.55 2.44-1.56 1.62 0 2.93 1.25 2.9 2.78l.03 5.2c0 .13-.1.23-.23.23h-1.41c-.13 0-.23-.11-.23-.23v-4.59c0-.98-.74-1.71-1.62-1.71-.8 0-1.46.7-1.59 1.62l.01 4.68c0 .13-.11.23-.23.23h-1.41c-.13 0-.23-.11-.23-.23v-4.59c0-.98-.74-1.71-1.62-1.71-.85 0-1.54.79-1.6 1.8v4.5c0 .13-.1.23-.23.23zm53.615 0h-1.61c-.04 0-.08-.01-.12-.03-.09-.06-.13-.19-.06-.28l2.43-3.71-2.39-3.65a.213.213 0 01-.03-.12c0-.12.09-.21.21-.21h1.61c.13 0 .24.06.3.17l1.41 2.37 1.4-2.37a.34.34 0 01.3-.17h1.6c.04 0 .08.01.12.03.09.06.13.19.06.28l-2.37 3.65 2.43 3.7c0 .05.01.09.01.13 0 .12-.09.21-.21.21h-1.61c-.13 0-.24-.06-.3-.17l-1.44-2.42-1.44 2.42a.34.34 0 01-.3.17zm-7.12-1.49c-1.33 0-2.42-1.12-2.42-2.51 0-1.39 1.08-2.52 2.42-2.52 1.33 0 2.42 1.12 2.42 2.51 0 1.39-1.08 2.51-2.42 2.52zm-19.865 0c-1.32 0-2.39-1.11-2.42-2.48v-.07c.02-1.38 1.09-2.49 2.4-2.49 1.32 0 2.41 1.12 2.41 2.51 0 1.39-1.07 2.52-2.39 2.53zm-8.11-2.48c-.01 1.37-1.09 2.47-2.41 2.47s-2.42-1.12-2.42-2.51c0-1.39 1.08-2.52 2.4-2.52 1.33 0 2.39 1.11 2.41 2.48l.02.08zm18.12 2.47c-1.32 0-2.39-1.11-2.41-2.48v-.06c.02-1.38 1.09-2.48 2.41-2.48s2.42 1.12 2.42 2.51c0 1.39-1.09 2.51-2.42 2.51z'/%3E %3C/defs%3E %3Cmask id='clip'%3E %3Crect x='0' y='0' width='100%25' height='100%25' fill='white'/%3E %3Cuse xlink:href='%23logo'/%3E %3Cuse xlink:href='%23text'/%3E %3C/mask%3E %3Cg id='outline' opacity='0.3' stroke='%23000' stroke-width='3'%3E %3Ccircle mask='url(%23clip)' cx='11.5' cy='11.5' r='9.25'/%3E %3Cuse xlink:href='%23text' mask='url(%23clip)'/%3E %3C/g%3E %3Cg id='fill' opacity='0.9' fill='%23fff'%3E %3Cuse xlink:href='%23logo'/%3E %3Cuse xlink:href='%23text'/%3E %3C/g%3E %3C/svg%3E);
+}
+
+
+
+
+.mapboxgl-ctrl-bottom-right .mapboxgl-ctrl {
+    margin: 10px 14px 25px 14px;
+    float: right;
+}
+
+
+
+
+
+
+
+
+
+
+.mapboxgl-ctrl-bottom-left .mapboxgl-ctrl {
+    margin: -10px -10px 10px 10px;
+    float: left;
+}
+
+
+    
+ </style>    
+    
+    
+
+
+
+
+
+    
+
+
+
+
+
+<script>   
+     
+ /**
+         * Indoor specific
+         */
+
+        // Where the indoor layers will be inserted.
+        // Here, 'housenum-label' comes from streets-v10
+
+ 
+    
+          var beforeLayerId = 'building-number-label';
+
+    // To avoid unwanted overlap from streets-v10 layers, some layers are hidden when an indoor map is shown
+        const layersToHide = ['poi-scalerank4-l15', 'poi-scalerank4-l1', 'poi-scalerank3', 'road-label-small'];
+
+
+
+
+         var customData;
+
+        // Retrieve the geojson from the path and add the map
+        fetch('https://www.emiia.ai/json/ofisgeojson-3level.geojson')
+            .then(res => res.json())
+            .then(geojson => {
+                map.indoor.addMap(mapgl_indoor.IndoorMap.fromGeojson(geojson, { beforeLayerId, layersToHide }));
+                customData = geojson;
+            });
+
+                
+
+
+
+ 
+ 
+  </script> 
+
+
+
+
+
+
+ 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+
+
+
+
+
+    
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+
+<link rel='stylesheet' href='https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css'>
+
+
+
+
+
+
+
+<style>
+
+
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+
+
+@import url('https://www.emiia.ru/css.css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+ 
+@import url('/css.css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+
+
+
+
+body {
+
+    
+ 
+   
+
+    line-height: 5.42857143;
+    color: #333;
+    background-color: #fff;
+    
+
+
+
+
+
+}
+
+
+
+a , a:focus {
+    color: #383838;
+    text-decoration: none;
+    
+    
+    line-height: 1.9em;     
+    
+    
+
+
+
+    
+}
+a{
+  dispaly:block;
+  width:100%;
+  height:25px;
+  
+
+
+
+}
+a:hover {
+    color: #2A6496;
+    text-decoration: none;
+  background-color:#eee;
+ 
+  
+}
+.accordion12{
+  position:relative;
+  hight:30px;
+  
+    line-height: 1.9em;  
+
+  
+}
+
+.list{
+  padding-left:19px;
+  background-color: #f8f9fa;
+  list-style:none;
+  
+
+  
+}
+.list-item{
+  display:block;
+  padding-top: 3px;
+  
+  
+ 
+  
+}
+.hight{
+  padding-left:20px;
+  hight:30px;
+
+  
+}
+
+i { position:absolute;
+  right: 10px;
+  
+ 
+  
+  top:4px;
+    -webkit-transition:all 300ms ease-in 0s;
+    -moz-transition: all 300ms ease-in 0s;
+    -o-transition: all 300ms ease-in 0s;
+  transition: all 300ms ease-in 0s;}
+
+
+.oppened i {
+    
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+    
+   
+}
+
+.dropdown-menu > li > a:hover {
+    background-color: #fff;
+    background-image: none;
+    color: #2A6496;
+
+    
+}
+
+
+
+
+
+
+
+
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 307.5px;
+    max-width: 307.5px;
+    padding: 0px 3px 0px 3px;
+    margin: 3.8px 0 0;
+    font-size: 17px;
+    text-align: left;
+    list-style: none;
+    background-color: white;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 0px solid #ccc;
+    border: 0px solid rgba(0,0,0,.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+       
+    
+    border-radius: 12px 12px 12px 12px;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1) !important;
+    
+    
+    cursor: pointer;
+    
+
+    font-family: 14px/19px Montserrat, montserrat !important;
+    font:16px/20px 'Montserrat', montserrat !important; 
+    
+    
+
+}
+    
+    
+    
+
+
+
+
+
+
+
+
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+
+
+
+.btn {
+    
+ 
+    width: 44px;
+    height: 44px;
+    display: block;
+    padding: 0px;
+    outline: none;
+    border: 0;
+    box-sizing: border-box;
+    background-color: white;
+    cursor: pointer;
+    color: red;
+    
+    
+    font-family: 12px/20px Montserrat, montserrat;
+    font:12px/20px 'Montserrat', montserrat;
+    
+
+
+    
+    background-image: url(https://www.emiia.ai/icon/e.svg);
+    background-size: 28px 28px !important;
+    background-position: 8.7px 8.2px !important;
+    background-repeat: no-repeat !important;
+    
+    border-radius: 12px 12px 12px 12px;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1) !important;
+    
+
+    
+}
+
+
+
+
+
+
+
+
+
+.btn:focus,.btn:active:focus,.btn.active:focus,
+.btn.focus,.btn:active.focus,.btn.active.focus {
+    outline:  none;
+    
+  
+         background-color:#eee;  
+
+ } 
+ 
+ 
+ 
+ 
+
+
+
+.small:focus,.small:active:focus,.small.active:focus,
+.small.focus,.small:active.focus,.small.active.focus {
+ outline: none;
+ 
+  text-decoration: none;
+    
+background-color:#eee;
+ } 
+
+
+
+.mapboxgl-popup a {
+    color: #3D85C6;
+    text-decoration: none;
+    
+outline: none;
+
+}
+
+
+
+
+.mapboxgl-popup-content {
+    position: relative;
+    background: white;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgb(0 0 0/10%);
+    padding: 10px 10px 15px;
+    pointer-events: auto;
+    
+   max-width: 330px;
+   
+   
+    font-family: 12px/20px Montserrat, montserrat;
+  font:12px/20px 'Montserrat', montserrat;
+
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+a {
+    dispaly: block;
+    width: 100%;
+    height: 25px;
+    
+
+    
+    
+}
+
+
+a, a:focus {
+    color: #337ab7;
+    text-decoration: none;
+    
+   
+}
+a {
+    color: #337ab7;
+    text-decoration: none;
+    
+    
+
+    
+    
+}
+
+
+
+.dropdown-menu {
+
+
+max-height: 540px;
+
+height: 540px;
+
+overflow-y: auto;
+
+background-color: white;
+
+
+min-width: 304.0px;
+max-width: 304.0px;
+
+
+
+
+}
+
+
+
+
+::-webkit-scrollbar {
+    width: 0.1px;
+    background-color: red;
+
+    
+
+    
+}
+
+
+
+
+
+
+
+
+
+
+.sticky {
+    position: sticky;
+    top: 0;
+    
+    z-index: 210000;
+    
+    
+
+    
+
+    
+
+     background-color: white;
+    
+    border-top:20px solid white;
+    
+    border-bottom:0px solid white;
+    
+     
+ 
+
+     
+  
+
+}
+
+
+
+
+
+
+
+
+
+.sticky::before {
+    position: absolute;
+    top: -2.9ex;
+    left: -1.0ex;
+
+    
+    
+
+   background-color: white;
+    cursor: pointer;
+    font-weight: 580;
+    content: "";
+    
+    z-index: -1;
+
+
+ 
+
+    
+    width: 60px;
+    height: 52px;
+    
+    
+border-radius: 0px 3px 3px 3px;
+
+
+
+
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+i {
+    position: absolute;
+    right: 14px;
+    top: 4px;
+    -webkit-transition: all 300ms ease-in 0s;
+    -moz-transition: all 300ms ease-in 0s;
+    -o-transition: all 300ms ease-in 0s;
+    transition: all 300ms ease-in 0s;
+}
+
+
+
+ 
+        
+
+
+
+
+
+
+
+hr {
+display: block;
+   
+
+    margin-top: 0.9em;
+    
+    
+     z-index: 230000;
+    
+    
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+    
+    
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1) !important;
+    
+    
+    
+    border-color: transparent;
+    
+}
+
+
+
+
+
+
+
+
+ button#replay {
+    margin: -15px;
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.mapboxgl-ctrl button.mapboxgl-ctrl-geolocate .mapboxgl-ctrl-icon {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyBpZD0i0YDQtdC30LXRgNCyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyOSIgaGVpZ2h0PSIyOSIgdmlld0JveD0iMCAwIDI5IDI5Ij4NCiAgPHRpdGxlPjEzPC90aXRsZT4NCiAgPGNpcmNsZSBjeD0iMTQuNzEiIGN5PSIxNC41MiIgcj0iMi43NyIgc3R5bGU9ImZpbGw6ICMzMzMiLz4NCiAgPGNpcmNsZSBjeD0iMTQuNzEiIGN5PSIxNC41MiIgcj0iMi43NyIgc3R5bGU9ImZpbGw6ICM2YjZiNjkiLz4NCiAgPHBhdGggZD0iTTIxLjU4LDEzLjY0SDE5LjY1YS4zLjMsMCwwLDEtLjI5LS4yMyw0LjgsNC44LDAsMCwwLTMuNTUtMy41NC4zLjMsMCwwLDEtLjIzLS4yOVY3LjY2YS4zMS4zMSwwLDAsMSwuMzItLjNoMGE3LjI2LDcuMjYsMCwwLDEsNiw1Ljk0LjMxLjMxLDAsMCwxLS4yOC4zNFoiIHN0eWxlPSJmaWxsOiAjNmI2YjY5Ii8+DQogIDxwYXRoIGQ9Ik0yNS4yOCwxMy42NGgtMS45YS4yOS4yOSwwLDAsMS0uMjktLjI2LDguNDYsOC40NiwwLDAsMC03LjI1LTcuMjQuMjkuMjksMCwwLDEtLjI2LS4yOVY0YS4zMS4zMSwwLDAsMSwuMzItLjNoMGExMSwxMSwwLDAsMSw5LjY3LDkuNjYuMzEuMzEsMCwwLDEtLjI5LjMzWiIgc3R5bGU9ImZpbGw6ICM2YjZiNjkiLz4NCiAgPHBhdGggZD0iTTIxLjg4LDE1Ljd2MGE3LjI5LDcuMjksMCwwLDEtNS42Nyw1Ljkxdi4xM2ExLjM3LDEuMzcsMCwwLDEtLjIxLjc1LDEuNSwxLjUsMCwwLDEtMi43OS0uNzV2LS4xNkE3LjI0LDcuMjQsMCwwLDEsNy42NCwxNmgtLjJhMS40NCwxLjQ0LDAsMCwxLS44Mi0uMjUsMS40OSwxLjQ5LDAsMCwxLDAtMi40OEExLjQ2LDEuNDYsMCwwLDEsNy40NCwxM0g3LjZhNy4yNCw3LjI0LDAsMCwxLDUuODktNS42Ni4zMS4zMSwwLDAsMSwuMzUuMjZ2MmEuMy4zLDAsMCwxLS4yMy4yOEE0LjczLDQuNzMsMCwwLDAsMTAuMTgsMTNhMS44MywxLjgzLDAsMCwwLS4wOC4yNSw0LjcsNC43LDAsMCwwLS4xNywxLjI0LDQuNTEsNC41MSwwLDAsMCwuMTgsMS4yNiwyLjQxLDIuNDEsMCwwLDAsLjA4LjI1QTQuODEsNC44MSwwLDAsMCwxNiwxOS4wOWwuMjEtLjA3YTQuNzYsNC43NiwwLDAsMCwzLjE1LTMuNDEuMjguMjgsMCwwLDEsLjI4LS4yM2gxLjk0QS4zLjMsMCwwLDEsMjEuODgsMTUuN1oiIHN0eWxlPSJmaWxsOiAjNmI2YjY5Ii8+DQo8L3N2Zz4NCg==);
+    background-size: 27px 27px !important;
+    background-repeat: no-repeat !important;
+    background-position: 8px 9.5px !important;
+}
+.mapboxgl-ctrl button.mapboxgl-ctrl-geolocate .mapboxgl-ctrl-icon {
+    background-image: url(data:image/svg+xml;charset=utf-8,%3Csvg width='29' height='29' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg' fill='%23333'%3E%3Cpath d='M10 4C9 4 9 5 9 5v.1A5 5 0 005.1 9H5s-1 0-1 1 1 1 1 1h.1A5 5 0 009 14.9v.1s0 1 1 1 1-1 1-1v-.1a5 5 0 003.9-3.9h.1s1 0 1-1-1-1-1-1h-.1A5 5 0 0011 5.1V5s0-1-1-1zm0 2.5a3.5 3.5 0 110 7 3.5 3.5 0 110-7z'/%3E%3Ccircle cx='10' cy='10' r='2'/%3E%3C/svg%3E);
+}
+
+
+
+
+
+
+.mapboxgl-ctrl-top-right .mapboxgl-ctrl {
+    margin: 9.8px 12px -4.5px 0px !important;
+}
+
+
+.mapboxgl-ctrl-top-left .mapboxgl-ctrl {
+    margin: 58.5px 14px -54px 13px !important;
+}
+
+
+
+
+
+
+
+.mapboxgl-ctrl-map {
+    background-image: url(https://www.emiia.ai/icon/h1.svg);
+    background-size: 28px 28px !important;
+    background-position: 7.7px 8.2px !important;
+    background-repeat: no-repeat !important;
+}
+
+
+
+
+.mapboxgl-ctrl-markers {
+    background-image: url(https://www.emiia.ai/icon/h.svg);
+    background-size: 28px 28px !important;
+    background-position: 7.7px 8.2px !important;
+    background-repeat: no-repeat !important;
+}
+
+
+
+
+.mapboxgl-ctrl-bottom-left {
+    /* position: fixed; */
+    top: 11.25ex;
+    left: 0;
+    z-index: 200000;
+}
+
+
+
+.marker {
+    background-image: url(https://www.mapbox.com/help/demos/custom-markers-gl-js/mapbox-icon.png);
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+    border-radius: 0%;
+    cursor: pointer;
+}
+
+
+
+</style>
+
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+      <style>
+  body { margin: 0; padding: 0; }
+	#map { position: absolute; top: 0; bottom: 0;  width: 100%; }
+    
+    </style>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+          
+ 
+  
+  
+  <script>
+!function e(t,o,r){function i(s,a){if(!o[s]){if(!t[s])
+
+
+{var l="function"==typeof require&&require;if(!a&&l)return l(s,!0);if(n)return n(s,!0);var p=new Error("Cannot find module '"+s+"'");
+
+
+
+throw p.code="MODULE_NOT_FOUND",p}var c=o[s]={exports:{}};t[s][0].call(c.exports,function(e){var o=t[s][1][e];return i(o||e)},c,c.exports,e,t,o,r)}return o[s].exports}for(var n="function"==typeof require&&require,s=0;s<r.length;s++)i(r[s]);return i}({1:[function(e,t,o){function r(e,t){if(!(this instanceof r))
+
+
+throw new Error("MapboxMarkers needs to be called with the new keyword");this.URLSearchParams=new URLSearchParams(new URL(window.location).search),this._sourceName="markerspec",this._geojson=e,this._rendered=!1,this.options=Object.assign(
+
+
+
+
+{disabled:this.URLSearchParams.get("disabled")||!0,showControl:this.URLSearchParams.get("show-control")||!0,marker:{image:""},
+
+
+
+popup:{description:"<i></i>"},style:{label:"{name}",labelSize:10,color:this.URLSearchParams.get("style-color")||"transporent",size:2,opacity:1,icon:"marker",layers:null}},t),this.toggle=this.toggle.bind(this),this.render=this.render.bind(this),this._toggleLayers=this._toggleLayers.bind(this),this._updateMap=this._updateMap.bind(this),this._toggle=new i({show:this.options.showControl,onToggle:this.toggle.bind(this)})}function i(e){var t,o;e=Object.assign({show:!0,onToggle:function(){}},e),this._btn=((t=document.createElement("button")).className="mapboxgl-ctrl-icon mapboxgl-ctrl-markers",t.type="button",t["aria-label"]="Inspect",t),this._btn.onclick=e.onToggle,this._input=((o=document.createElement("input")).id="marker-search",o.type="text",o.placeholder="Marker Search",o.style.display="none",o),this.elem=function(e,t,o){var r=document.createElement("div");return r.className="mapboxgl-ctrl mapboxgl-ctrl-group markerspec",r.appendChild(e),o||(r.style.display="none"),r}(this._btn,this._input,e.show)}r.prototype.onAdd=function(e){return this._map=e,e.on("load",this.render),e.on("moveend",this._updateMap),this._toggle.elem},r.prototype.onRemove=function(){this._map.off("load",this.render);var e=this._toggle.elem;e.parentNode.removeChild(e),this._map=void 0},r.prototype.toggle=function(){this.options.enabled=!this.options.enabled,this.render()},r.prototype.render=function(){if(!this._rendered){var e=this;if(this.URLSearchParams.get("data")){var t=new XMLHttpRequest;t.onreadystatechange=function(){t.readyState==XMLHttpRequest.DONE&&(e._geojson=JSON.parse(t.responseText),o())},t.open("GET",this.URLSearchParams.get("data"),!0),t.send(null)}else o();function o(){e._geojson.features.forEach(function(t){if("Point"==t.geometry.type){var o=document.createElement("div");
+
+
+o.className="markerspec marker",o.style=`background-image:url('${t.properties["marker-image"]||e.options.marker.image}')`,o.onclick=function(e){map.flyTo({center:t.geometry.coordinates})};var r=(void 0!==t.properties.title?`<h3>${t.properties.title}</h3>`:"")+(void 0!==t.properties.image?`<img src='${t.properties.image}' width=200 alt='${t.properties.title}'>`:"")+(void 0!==t.properties.description?`<p>${t.properties.description}</p>`:`<p>${e.options.popup.description}</p>`)+(void 0!==t.properties.website?`<a href='${t.properties.website}' target='_blank' class='button'>Website</a>`:`<a href='https://www.openstreetmap.org/?mlat=${t.geometry.coordinates[1]}&mlon=${t.geometry.coordinates[0]}' target='_blank' class='button'></a>`);
+
+
+new mapboxgl.Marker(o).setLngLat(t.geometry.coordinates).setPopup(new mapboxgl.Popup({offset:25}).setHTML(r)).addTo(map)}}),e._map.addSource("markerspec",{type:"geojson",data:e._geojson});var t,o,r=e._map.getStyle().layers.filter(function(e){return"building"===e["source-layer"]}),i=r[r.length-1].id;e.options.style.layers||(e.options.style.layers=(t=e._sourceName,o=e.options.style,[{id:`${t} fill`,type:"fill",source:`${t}`,paint:{"fill-color":o.color,"fill-opacity":o.opacity},filter:["==","$type","Polygon"]},{id:`${t} line`,type:"line",source:`${t}`,paint:{"line-color":o.color,"line-width":o.size,"line-opacity":o.opacity}},{id:`${t} circle`,type:"circle",source:`${t}`,paint:{"circle-color":o.color,"circle-radius":o.size,"circle-opacity":o.opacity}},{id:`${t} symbol`,type:"symbol",source:`${t}`,
+
+
+
+
+
+layout:{"text-field":o.label,"text-size":o.labelSize,"text-font":["Open Sans Semibold","Arial Unicode MS Bold"],"text-anchor":"top","icon-image":"{icon}-25","road-label-navigation":!0}}]));var n=function(e,t,o){for(var r=0;r<e.layers.length;r++)
+
+
+
+
+
+
+{var i=e.layers[r];if(o===i.id){var n=e.layers.slice(0,r).concat(t).concat(e.layers.slice(r));return Object.assign({},e,{layers:n})}}return e}(e._map.getStyle(),e.options.style.layers,i);e._map.setStyle(n),e._toggle._input.onkeypress=(t=>{if("Enter"===t.key)return e.options.query=e._toggle._input.value,e._updateMap(),!0})}this._rendered=!0}this.options.enabled?(this._toggleLayers(),this._toggle.setMapIcon()):(this._toggleLayers(),this._toggle.setPluginIcon())},r.prototype._updateMap=function(){this.options.enabled&&this.options._geojson&&console.log("Nothing to update")},i.prototype.setPluginIcon=function(){this._btn.className="mapboxgl-ctrl-icon mapboxgl-ctrl-markers"},i.prototype.setMapIcon=function(){this._btn.className="mapboxgl-ctrl-icon mapboxgl-ctrl-map"},r.prototype._toggleLayers=function(){var e=this.options.enabled;Array.from(document.getElementsByClassName("markerspec marker")).forEach(function(t){t.style.display=e?"inline":"none"});var t=new RegExp(this._sourceName),o=this._map.getStyle();o.layers.forEach(function(o){t.test(o.source)&&(o.layout=o.layout||{},o.layout.visibility=e?"visible":"none")}),this._map.setStyle(o),this._toggle._input.style.display=e?"inline":"none"},void 0!==t&&void 0!==t.exports?window.MapboxMarkers=r:t.exports=r},{}]},{},[1]); 
+
+
+
+
+</script>
+  
+  
+
+
+
+
+<script>
+
+var exampleGeojson = {
+  "type": "FeatureCollection",
+  "features": [
+
+   
+   
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "small",
+        "marker-symbol": "",
+        "title": "No Style",
+                
+                "maxzoom": 10,
+                "minzoom": 20
+                
+        
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+         37.173945684286,
+          55.97705374444533
+        ]
+      }
+      
+       
+      
+    },
+    
+    
+    
+    
+    
+     {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/menu/14-1.svg",
+        "title": "Rocket launching spot",
+                
+           
+      },
+     
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+37.17402267754301,55.97734208685483
+        ]
+        }
+
+        },
+        
+        
+        
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/menu/14-2.svg",
+        "title": "Rocket launching spot",
+                
+           
+      },
+     
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+37.174031569343356,55.97740876134685
+        ]
+        }
+
+        },
+        
+        
+        
+        
+        
+      
+      
+      
+              {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/menu/14-3.svg",
+        "title": "Rocket launching spot",
+                
+           
+      },
+     
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+37.17404794726758,55.977454565337325
+        ]
+        }
+
+        },
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        
+        "elev": "200",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/menu/14-5.svg",
+        "title": "Rocket launching spot",
+                
+           
+      },
+     
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+37.17411452031047,55.97744897092298
+        ]
+        }
+
+        },
+      
+      
+      
+      
+        
+    
+    
+    
+    
+    
+    
+    
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/menu/14-6.svg",
+        "title": "Rocket launching spot",
+                
+           
+      },
+     
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+37.174177753615595,55.97743693054554
+        ]
+        }
+
+        },
+        
+        
+        
+        
+        
+        
+        
+        {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/menu/k-3.svg",
+        "title": "Rocket launching spot",
+                
+           
+      },
+     
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+37.17402875158575,55.97710596809998
+        ]
+        }
+
+        },
+        
+        
+        
+        
+    
+    
+    
+    
+    
+    
+    
+    
+        {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/menu/k-4.svg",
+        "title": "Rocket launching spot",
+                
+           
+      },
+     
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+37.17402127300704,55.97738253515081
+        ]
+        }
+
+        },
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/menu/14-17.svg",
+        "title": "Rocket launching spot",
+                
+           
+      },
+     
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+37.17399981915969,55.97727658620613
+        ]
+        }
+
+        },
+        
+        
+        
+        
+        
+        
+                {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/menu/14-7.svg",
+        "title": "Rocket launching spot",
+                
+           
+      },
+     
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+37.174151814772245,55.977405256853444
+        ]
+        }
+
+        },
+    
+    
+    
+    
+    
+    
+    
+     
+     
+     
+     
+     
+                     {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/menu/14-8.svg",
+        "title": "Rocket launching spot",
+                
+           
+      },
+     
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+37.17414278443073,55.97737218650559
+        ]
+        }
+
+        },
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                        {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/menu/14-9.svg",
+        "title": "Rocket launching spot",
+                
+           
+      },
+     
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+37.17413172686224,55.977330833110955
+        ]
+        }
+
+        },
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                            {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/menu/14-10.svg",
+        "title": "Rocket launching spot",
+                
+           
+      },
+     
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+37.17411937320139,55.97728516961206
+        ]
+        }
+
+        },
+    
+    
+    
+    
+    
+     {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/menu/14-11.svg",
+        "title": "Rocket launching spot",
+                
+           
+      },
+     
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+37.17409643805479,55.97722017333308
+        ]
+        }
+
+        },
+        
+        
+        
+        
+        
+        
+        
+         {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/menu/14-12.svg",
+        "title": "Rocket launching spot",
+                
+           
+      },
+     
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+37.17407892718086,55.97715622404155
+        ]
+        }
+
+        },
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+             {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/menu/14-13.svg",
+        "title": "Rocket launching spot",
+                
+           
+      },
+     
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+37.17404257530973,55.9770359496456
+        ]
+        }
+
+        },
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/menu/14-14.svg",
+        "title": "Rocket launching spot",
+                
+           
+      },
+     
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+37.17394447947481,55.977044959494606
+        ]
+        }
+
+        },
+    
+    
+    
+        
+        
+        
+        
+        
+        
+     {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/menu/14-15.svg",
+        "title": "Rocket launching spot",
+                
+           
+      },
+     
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+37.17395275886895,55.977144055712756
+        ]
+        }
+
+        },
+       
+        
+        
+        
+        
+        
+        
+        
+        
+        
+             {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/menu/14-16.svg",
+        "title": "Rocket launching spot",
+                
+           
+      },
+     
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+37.1739751767891,55.97720024823093
+        ]
+        }
+
+        },
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/menu/toilet.svg",
+        "title": "k3",
+                
+           
+      },
+     
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+37.1739214358588,55.97707402527169
+        ]
+        }
+
+        },
+        
+        
+        
+        
+        
+   
+   
+   
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/menu/toilet.svg",
+        "title": "k4",
+                
+           
+      },
+     
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+37.17400813814049,55.97735932135288
+        ]
+        }
+
+        },
+   
+   
+   
+   
+   
+   
+        
+
+      
+
+
+
+    
+    
+    
+    
+       
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/menu/4.svg",
+        "title": "Эвакуационный выход К 4",
+                
+                "maxzoom": 10,
+                "minzoom": 20
+      },
+
+      
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+37.17405447243860, 55.97736805499540
+        ]
+        }
+
+        },
+    
+
+    
+     
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+        
+         {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/menu/4.svg",
+        "title": "Эвакуационный выход К 3",
+                
+                "maxzoom": 10,
+                "minzoom": 20
+      },
+
+      
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+37.173957846693156,55.977086982526544
+        ]
+        }
+
+        },
+        
+        
+        
+        
+        
+        
+        
+        
+       
+        
+        
+        
+        
+        
+
+  
+  
+          {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/menu/wi-fi blue.svg",
+        
+        "title": "Информаци к3",
+
+      },
+
+      
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+37.17405870483179, 55.97740169378596
+        ]
+        }
+
+        },
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/menu/wi-fi grey.svg",
+        
+        "title": "wifi 14-6",
+
+      },
+
+      
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+37.17419957777403, 55.97744415032099
+        ]
+        }
+
+        },
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/menu/wi-fi grey.svg",
+        
+        "title": "wifi 14-7",
+
+      },
+
+      
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+37.17416710622393, 55.97739996650139
+        ]
+        }
+
+        },
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+         {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/menu/wi-fi grey.svg",
+        
+        "title": "wifi 14-9",
+
+      },
+
+      
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+37.17411507756677, 55.97734287858725
+        ]
+        }
+
+        },
+    
+    
+    
+    
+    
+    
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/menu/wi-fi grey.svg",
+        
+        "title": "wifi 14-11",
+
+      },
+
+      
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+37.17409267736207, 55.97720648530958
+        ]
+        }
+
+        },
+    
+   
+
+
+
+
+
+
+
+
+
+{
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/menu/wi-fi grey.svg",
+        
+        "title": "wifi 14-17",
+
+      },
+
+      
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+37.17400331385105, 55.97728011144378
+        ]
+        }
+
+        },
+    
+
+
+
+
+
+
+
+
+
+
+
+{
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/menu/wi-fi grey.svg",
+        
+        "title": "wifi 14-13",
+
+      },
+
+      
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+37.17402589504559, 55.9770466504176
+        ]
+        }
+
+        },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "marker-image": "https://www.emiia.ai/icon/menu/wi-fi grey.svg",
+        
+        "title": "wifi 14-15",
+
+      },
+
+      
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+37.17394659371922, 55.97716546986445
+        ]
+        }
+
+        },
+
+    
+    
+    
+    
+    
+   
+  ]
+};
+
+
+
+
+
+
+
+
+
+
+
+</script> 
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <style>
+#marker {
+background-image: url('https://analytics.emiia.ai/svg/pinnewwhite.svg');
+background-size: cover;
+width: 110px;  height: 48px;
+border-radius: 0%;
+cursor: pointer;
+
+}
+ 
+.mapboxgl-popup {
+max-width: 200px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.ele-info {
+          position: absolute;
+   
+background: transparent;
+color: #3d85c6;
+
+bottom: 23px;
+left: 11px;
+padding: 5px 10px;
+margin: 0;
+font-size: 11px;
+line-height: 18px;
+border-radius: 12px;
+
+
+ font-family: 'Montserrat', montserrat !important; 
+
+      }
+
+
+#map canvas {
+cursor: crosshair;
+}
+
+
+
+
+.mapboxgl-canvas-container {
+  cursor: url(https://www.emiia.ai/icon/cursor1.svg), auto !important;}
+
+
+
+
+
+.calculation-box {
+height: 30px;
+width: 350px;
+position: absolute;
+bottom: 57px;
+left: 0px;
+background-color: transparent;
+padding: 9.5px;
+
+font-family: 'Montserrat', montserrat !important; 
+}
+ 
+p {
+font-family: 'Montserrat';
+margin: 0px;
+font-size: 10px;
+}
+
+
+
+
+
+
+#button778 {
+    width: 41px;
+    height: 43px;
+    display: block;
+    padding: 0px;
+    outline: none;
+    border: 0;
+    box-sizing: border-box;
+    background-color: white;
+    cursor: pointer;
+    font: 13px/20px Montserrat, montserrat;
+    color: #383838;
+    border-radius: 12px;
+    
+    
+   border-bottom:0px 0px 1px 2px rgba(0, 0, 0, 0.1) !important;
+   box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.1) !important;
+   
+
+   
+              background-image: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNSIgaGVpZ2h0PSIyNSIgdmlld0JveD0iMCAwIDI1IDI1Ij4NCiAgPHRpdGxlPtCX0L3QsNGH0LrQuCDRgNCw0LTQsNGAINC4INGC0L88L3RpdGxlPg0KICA8cGF0aCBkPSJNMTkuMDcsNC4wOEExLjI0LDEuMjQsMCwwLDAsMTcuODYsNEwxMC4wNyw3Ljc2YTEuMjUsMS4yNSwwLDAsMC0uNzEsMS4xMlYxMS41TDQsMTMuNGExLjI0LDEuMjQsMCwwLDAtLjgzLDEuMTdWMjBhMS4yNSwxLjI1LDAsMCwwLDEuMjUsMS4yNUgxNC42NmwtLjEyLS4wOGExLjc0LDEuNzQsMCwwLDEtLjQ4LTIuMi40LjQsMCwwLDAsMC0uMjJIMTEuODZWOS42N2w1LjI5LTIuNTV2My4wNmExLjgyLDEuODIsMCwwLDEsLjkxLjcxLjQyLjQyLDAsMCwwLC4zNC4yLjQuNCwwLDAsMCwuMzMtLjE4LDEuNjYsMS42NiwwLDAsMSwuOTItLjczVjUuMTNBMS4yNSwxLjI1LDAsMCwwLDE5LjA3LDQuMDhaTTkuMzYsMTguNzhINS42OVYxNS40NWwzLjY3LTEuMzFaIiBzdHlsZT0iZmlsbDogIzZiNmI2OSIvPg0KICA8cGF0aCBkPSJNMjAuMjEsMTEuMjhhLjYuNiwwLDAsMSwuMjMsMCw1LjA4LDUuMDgsMCwwLDEsMS4wOS42NC41Ni41NiwwLDAsMSwuMTQuNzFBMS42LDEuNiwwLDAsMCwyMywxNWEuNTYuNTYsMCwwLDEsLjU0LjQ3LDUuMTEsNS4xMSwwLDAsMSwwLDEuMjkuNTUuNTUsMCwwLDEtLjU0LjQ2LDEuNjEsMS42MSwwLDAsMC0xLjM1LDIuMzIuNTQuNTQsMCwwLDEtLjE0LjcsNS4wOSw1LjA5LDAsMCwxLTEuMTEuNjUuNTEuNTEsMCwwLDEtLjIsMCwuNTcuNTcsMCwwLDEtLjQ4LS4yNywxLjYxLDEuNjEsMCwwLDAtMi42OSwwLC41OC41OCwwLDAsMS0uNDguMjguNTEuNTEsMCwwLDEtLjIsMCw1LjA5LDUuMDksMCwwLDEtMS4xMS0uNjUuNTQuNTQsMCwwLDEtLjE0LS43LDEuNjEsMS42MSwwLDAsMCwwLTEuNTIsMS41OCwxLjU4LDAsMCwwLTEuMzEtLjguNTUuNTUsMCwwLDEtLjU0LS40Niw2LDYsMCwwLDEsMC0xLjI5LjU2LjU2LDAsMCwxLC41NC0uNDcsMS41OSwxLjU5LDAsMCwwLDEuMzUtMi4zMi41NS41NSwwLDAsMSwuMTQtLjcxLDQuOTMsNC45MywwLDAsMSwxLjExLS42NC41My41MywwLDAsMSwuMiwwLC41Ny41NywwLDAsMSwuNDguMjcsMS42LDEuNiwwLDAsMCwyLjcyLDAsLjQ5LjQ5LDAsMCwxLC40NC0uMjNtLTEuODEsNi45YTIuMDcsMi4wNywwLDEsMC0yLjA3LTIuMDcsMi4wNywyLjA3LDAsMCwwLDIuMDcsMi4wNyIgc3R5bGU9ImZpbGw6ICM2YjZiNjkiLz4NCjwvc3ZnPg0K);
+       
+background-size: 23px 23px !important;
+    background-position: 8.5px 9px !important;
+    background-repeat: no-repeat !important;
+       
+   
+
+    
+    position: fixed; bottom: 1.9em; right: 1.15em; z-index: +200000;
+   
+   
+
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#button779 {
+    width: 59px;
+    height: 43px;
+    display: block;
+    padding: 0px;
+    outline: none;
+    border: 0;
+    
+    
+    background-repeat: no-repeat;
+   
+    background-color: transparent;
+    cursor: pointer;
+    font: 13px/20px Montserrat, montserrat;
+    color: #383838;
+    border-radius: 2px 12px 12px 2px;
+    
+    
+   border-bottom:0px 0px 1px 2px rgba(0, 0, 0, 0.1) !important;
+   box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.1) !important;
+   
+
+   
+       background-image: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNSIgaGVpZ2h0PSIyNSIgdmlld0JveD0iMCAwIDI1IDI1Ij4NCiAgPHRpdGxlPtCX0L3QsNGH0LrQuCDRgNCw0LTQsNGAINC4INGC0L88L3RpdGxlPg0KICA8cGF0aCBkPSJNMTQuOTIsMTkuNTdBMS4yNSwxLjI1LDAsMCwxLDE0LDE5LjJMOC4yMiwxMy4zOGExLjI1LDEuMjUsMCwwLDEsMC0xLjc3TDE0LDUuOEExLjI1LDEuMjUsMCwwLDEsMTUuOCw3LjU2TDEwLjg3LDEyLjVsNC45NCw0Ljk0YTEuMjUsMS4yNSwwLDAsMS0uODgsMi4xM1oiIHN0eWxlPSJmaWxsOiAjM2Q4NWM2Ii8+DQo8L3N2Zz4NCg==);
+       
+background-size: 25px 25px !important;
+    background-position: 23px 10px !important;
+    background-repeat: no-repeat !important;
+       
+   
+
+    
+    position: fixed; bottom: 8.8em; left: 0.0em; z-index: +200000;
+   
+   
+
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.measure-ctrl-group .mapboxgl-ctrl-icon {
+    background-size: 24px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-position: 8.5px 10px !important;
+}
+
+
+.measure-ctrl-group .mapboxgl-ctrl-measure-off{
+  
+  background-image: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNSIgaGVpZ2h0PSIyNSIgdmlld0JveD0iMCAwIDI1IDI1Ij4NCiAgPHRpdGxlPtCX0L3QsNGH0LrQuCDRgNCw0LTQsNGAINC4INGC0L88L3RpdGxlPg0KICA8cGF0aCBkPSJNMTIuNSwyMC40M2gwYTIuMTIsMi4xMiwwLDAsMS0xLjc2LS45M2wtMS0xLjM5SDguMzRBMy41MywzLjUzLDAsMCwxLDQuODEsMTQuNlY4LjM5QTMuNTMsMy41MywwLDAsMSw4LjM0LDQuODdoOC4zM2EzLjUyLDMuNTIsMCwwLDEsMy41MiwzLjUyVjE0LjZhMy41MiwzLjUyLDAsMCwxLTMuNTIsMy41MkgxNS4yM2wtMSwxLjRBMi4xMiwyLjEyLDAsMCwxLDEyLjUsMjAuNDNabS0uMy0yLjM0aDBabS42LDBoMFpNOC4zNCw3LjM3YTEsMSwwLDAsMC0xLDFWMTQuNmExLDEsMCwwLDAsMSwxaDIuMDhhMS4yNSwxLjI1LDAsMCwxLDEsLjUzbDEuMDUsMS41MSwxLjA1LTEuNTFhMS4yNSwxLjI1LDAsMCwxLDEtLjUzaDIuMDlhMSwxLDAsMCwwLDEtMVY4LjM5YTEsMSwwLDAsMC0xLTFaIiBzdHlsZT0iZmlsbDogIzZiNmI2OSIvPg0KICA8ZyBpZD0iZG90Ij4NCiAgICA8cGF0aCBkPSJNMTIuNTEsOC43MmEzLDMsMCwwLDEsMS44LjU5LDMsMywwLDEsMS0xLjgtLjU5IiBzdHlsZT0iZmlsbDogIzZiNmI2OSIvPg0KICA8L2c+DQo8L3N2Zz4NCg==);
+  
+  
+  
+  background-size: 26.5px 26.5px !important;
+  
+  
+}
+
+
+
+
+
+
+
+
+
+.measure-ctrl-group .mapboxgl-ctrl-measure-on {
+  background-image: url('https://www.emiia.ai/icon/menu/rule-c.svg');
+}
+
+
+
+
+
+
+
+
+.mapboxgl-ctrl-map {
+    background-image: url(https://www.emiia.ai/icon/h1.svg);
+    background-size: 28px 28px !important;
+    background-position: 7.7px 8.2px !important;
+    background-repeat: no-repeat !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.mapboxgl-ctrl-traffic {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNSIgaGVpZ2h0PSIyNSIgdmlld0JveD0iMCAwIDI1IDI1Ij4NCiAgPHRpdGxlPtCX0L3QsNGH0LrQuCDRgNCw0LTQsNGAINC4INGC0L88L3RpdGxlPg0KICA8ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIj4NCiAgICA8cGF0aCBkPSJNMTQuMTgsMTAuNXY5LjA5YS41MS41MSwwLDAsMS0uNS41aC0yYS41LjUsMCwwLDEtLjUtLjVWMTIuMzFoLS45MmEuNS41LDAsMCwxLS41LS41VjEwLjVhLjUuNSwwLDAsMSwuNS0uNWgzLjQ2QS41LjUsMCwwLDEsMTQuMTgsMTAuNVoiIHN0eWxlPSJmaWxsOiAjNmI2YjY5Ii8+DQogICAgPHBhdGggZD0iTTE0LjE4LDYuNTR2MmEuNS41LDAsMCwxLS41LjVoLTJhLjUuNSwwLDAsMS0uNS0uNXYtMmEuNS41LDAsMCwxLC41LS41aDJBLjUuNSwwLDAsMSwxNC4xOCw2LjU0WiIgc3R5bGU9ImZpbGw6ICM2YjZiNjkiLz4NCiAgPC9nPg0KPC9zdmc+DQo=);
+    
+    
+    
+    background-size: 27px 27px !important;
+
+    background-repeat: no-repeat !important;
+
+background-position: 8px 9px !important;
+
+}
+
+
+
+
+
+
+
+
+
+.mapboxgl-ctrl button.mapboxgl-ctrl-compass .mapboxgl-ctrl-icon {
+    background-image: url(https://www.emiia.ai/icon/compass.svg);
+    background-size: 16px 16px !important;
+    background-position: 13.5px 13.5px !important;
+    background-repeat: no-repeat !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.mapboxgl-ctrl button.mapboxgl-ctrl-geolocate .mapboxgl-ctrl-icon {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyBpZD0i0YDQtdC30LXRgNCyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyOSIgaGVpZ2h0PSIyOSIgdmlld0JveD0iMCAwIDI5IDI5Ij4NCiAgPHRpdGxlPtC80LXRgdGC0L7Qv9C+0LvQvtC20LXQvdC40LU8L3RpdGxlPg0KICA8Y2lyY2xlIGN4PSIxNC43MSIgY3k9IjE0LjUyIiByPSIyLjc3IiBzdHlsZT0iZmlsbDogIzMzMyIvPg0KICA8Y2lyY2xlIGN4PSIxNC43MSIgY3k9IjE0LjUyIiByPSIyLjc3IiBzdHlsZT0iZmlsbDogIzZiNmI2OSIvPg0KICA8cGF0aCBkPSJNMjEuNTgsMTMuNjRIMTkuNjVhLjMuMywwLDAsMS0uMjktLjIzLDQuOCw0LjgsMCwwLDAtMy41NS0zLjU0LjMuMywwLDAsMS0uMjMtLjI5VjcuNjZhLjMxLjMxLDAsMCwxLC4zMi0uM2gwYTcuMjYsNy4yNiwwLDAsMSw2LDUuOTQuMzEuMzEsMCwwLDEtLjI4LjM0WiIgc3R5bGU9ImZpbGw6ICM2YjZiNjkiLz4NCiAgPHBhdGggZD0iTTI1LjI4LDEzLjY0aC0xLjlhLjI5LjI5LDAsMCwxLS4yOS0uMjYsOC40Niw4LjQ2LDAsMCwwLTcuMjUtNy4yNC4yOS4yOSwwLDAsMS0uMjYtLjI5VjRhLjMxLjMxLDAsMCwxLC4zMi0uM2gwYTExLDExLDAsMCwxLDkuNjcsOS42Ni4zMS4zMSwwLDAsMS0uMjkuMzNaIiBzdHlsZT0iZmlsbDogIzZiNmI2OSIvPg0KICA8cGF0aCBkPSJNMjEuOTQsMTUuNjdhNy4zLDcuMywwLDAsMS02LDYuMDUuMzEuMzEsMCwwLDEtLjM1LS4zVjE5LjQ4YS4yOS4yOSwwLDAsMSwuMjMtLjI5LDQuODEsNC44MSwwLDAsMCwzLjU2LTMuNjMuMy4zLDAsMCwxLC4yOS0uMjRoMS45M0EuMzEuMzEsMCwwLDEsMjEuOTQsMTUuNjdaIiBzdHlsZT0iZmlsbDogIzZiNmI2OSIvPg0KICA8cGF0aCBkPSJNMTMuOTQsMTkuNTF2MS45NGEuMzEuMzEsMCwwLDEtLjM1LjMsNy4zLDcuMywwLDAsMS02LjExLTYuMDguMzEuMzEsMCwwLDEsLjMtLjM1SDkuNzJhLjI5LjI5LDAsMCwxLC4yOS4yNCw0LjgxLDQuODEsMCwwLDAsMy42OSwzLjY2QS4yOS4yOSwwLDAsMSwxMy45NCwxOS41MVoiIHN0eWxlPSJmaWxsOiAjNmI2YjY5Ii8+DQogIDxwYXRoIGQ9Ik0xMy45NCw3LjU5VjkuNTNhLjMuMywwLDAsMS0uMjQuMjlBNC44LDQuOCwwLDAsMCwxMCwxMy40MWEuMjkuMjksMCwwLDEtLjI5LjIzSDcuOGEuMzEuMzEsMCwwLDEtLjMtLjM1LDcuMzEsNy4zMSwwLDAsMSw2LjA5LTZBLjMxLjMxLDAsMCwxLDEzLjk0LDcuNTlaIiBzdHlsZT0iZmlsbDogIzZiNmI2OSIvPg0KPC9zdmc+DQo=);
+
+
+    
+background-size: 28px 28px !important;
+
+  background-repeat: no-repeat !important;
+
+  background-position: 8px 10px !important;
+
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</style>
+
+
+
+    
+    
+    
+    
+    
+    
+    
+      <style>
+  body { margin: 0; padding: 0; }
+	#map { position: absolute; top: 0; bottom: 0;  width: 100%; }
+    
+    </style>
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src='https://mapbox.github.io/mapbox-gl-traffic/mapbox-gl-traffic.js'></script>
+        
+
+  <script src='https://www.emiia.ru/relise.js'></script>
+
+
+    
+
+
+
+
+
+
+
+    
+        
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.0/mapbox-gl-draw.css" type="text/css">
+
+
+
+
+
+
+
+
+<script src='https://www.emiia.ru/relise/draw.js'></script>
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+ <style>   
+    
+    
+    
+    
+    
+    
+    .mapbox-gl-draw_combine {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNSIgaGVpZ2h0PSIyNSIgdmlld0JveD0iMCAwIDI1IDI1Ij4NCiAgPHRpdGxlPtCX0L3QsNGH0LrQuCDRgNCw0LTQsNGAINC4INGC0L88L3RpdGxlPg0KICA8cGF0aCBkPSJNMjEsMTguNTFhMi4xMywyLjEzLDAsMCwxLTIuMTMsMi4xNCwyLjEsMi4xLDAsMCwxLTEuNzMtLjg5SDguNTVhMi4xLDIuMSwwLDAsMS0xLjcyLjg5LDIuMTQsMi4xNCwwLDAsMS0xLjI4LTMuODVoMFY4LjJhMi4wOSwyLjA5LDAsMCwxLS44OC0xLjcyQTIuMTMsMi4xMywwLDAsMSw2LjgzLDQuMzRhMi4xMSwyLjExLDAsMCwxLDEuMjYuNDEsMi4xNiwyLjE2LDAsMCwxLC40OS41MUgxNS44bC0yLjUsMi41SDguNTJhMS44OCwxLjg4LDAsMCwxLS40NS40NHY4LjU4aDBhMi4wNSwyLjA1LDAsMCwxLC40Ni40N2g4LjU2YTIuMTMsMi4xMywwLDAsMSwuNDQtLjQ2aDB2LTQuN2wyLjUtMi41djcuMTloMEEyLjE1LDIuMTUsMCwwLDEsMjEsMTguNTFaIiBzdHlsZT0iZmlsbDogIzZiNmI2OSIvPg0KICA8Zz4NCiAgICA8cGF0aCBkPSJNMjEuODIsNi40NSwyMC43Niw3LjUxLDE3Ljg1LDQuNTlsMS4wNS0xLjA1YTEuMDcsMS4wNywwLDAsMSwxLjUxLDBsMS40LDEuNEExLjA3LDEuMDcsMCwwLDEsMjEuODIsNi40NVoiIHN0eWxlPSJmaWxsOiAjNmI2YjY5Ii8+DQogICAgPHBhdGggZD0iTTE3LjI5LDUuMTUsMjAuMiw4LjA3bC02LjM2LDYuMzZhMSwxLDAsMCwxLS41LjI3TDExLDE1LjI2YS43MS43MSwwLDAsMS0uODQtLjg0bC41NS0yLjRhMS4wOCwxLjA4LDAsMCwxLC4yNy0uNVoiIHN0eWxlPSJmaWxsOiAjNmI2YjY5Ii8+DQogIDwvZz4NCjwvc3ZnPg0K);
+    
+    background-size: 24px 24px !important;
+    background-position: 9.2px 10px !important;
+    
+}
+
+
+
+
+
+
+.mapbox-gl-draw_uncombine {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNSIgaGVpZ2h0PSIyNSIgdmlld0JveD0iMCAwIDI1IDI1Ij4NCiAgPHRpdGxlPtCX0L3QsNGH0LrQuCDRgNCw0LTQsNGAINC4INGC0L88L3RpdGxlPg0KICA8cGF0aCBkPSJNMTkuODgsOC40NSwxNyw1LjU2YTIuMjcsMi4yNywwLDAsMC0xLjU5LS42Nkg2Ljk0QTIuMjQsMi4yNCwwLDAsMCw0LjcsNy4xM1YxOC41MWEyLjI0LDIuMjQsMCwwLDAsMi4yNCwyLjI1SDE4LjNhMi4yNCwyLjI0LDAsMCwwLDIuMjQtMi4yNVYxMEEyLjE4LDIuMTgsMCwwLDAsMTkuODgsOC40NVpNMTAuMyw3LjM5aDEuODJ2MUgxMC4zWm00LjA4LDEwLjg2SDEwLjg2VjE1LjQxaDMuNTJabTMuNjYsMEgxNi44OHYtMy4yYTIuMTQsMi4xNCwwLDAsMC0yLjE1LTIuMTRIMTAuNWEyLjE0LDIuMTQsMCwwLDAtMi4xNCwyLjE0djMuMkg3LjJWNy4zOWguNlY4Ljc2YTIuMTIsMi4xMiwwLDAsMCwyLjExLDIuMTFIMTIuNWEyLjEyLDIuMTIsMCwwLDAsMi4xMi0yLjExVjcuMzloLjY3TDE4LDEwLjE0WiIgc3R5bGU9ImZpbGw6ICM2YjZiNjkiLz4NCjwvc3ZnPg0K);
+    
+    
+    
+    background-size: 26px 26px !important;
+background-position: 9.07px 9px !important;
+    
+}
+
+    
+    
+    
+    
+.mapbox-gl-draw_polygon {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNSIgaGVpZ2h0PSIyNSIgdmlld0JveD0iMCAwIDI1IDI1Ij4NCiAgPHRpdGxlPtCX0L3QsNGH0LrQuCDRgNCw0LTQsNGAINC4INGC0L88L3RpdGxlPg0KICA8ZyBpZD0iZG90Ij4NCiAgICA8cGF0aCBkPSJNMTIuODMsOS40N2EzLDMsMCwwLDEsMS44LjU5LDMsMywwLDEsMS0xLjgtLjU5WiIgc3R5bGU9ImZpbGw6ICM2YjZiNjkiLz4NCiAgPC9nPg0KICA8Zz4NCiAgICA8cGF0aCBkPSJNMTcuMTEsMTcuMjZIOC41NWEyLjExLDIuMTEsMCwwLDEsMCwyLjVIMTcuMWEyLjA4LDIuMDgsMCwwLDEtLjQxLTEuMjVBMiwyLDAsMCwxLDE3LjExLDE3LjI2WiIgc3R5bGU9ImZpbGw6ICM2YjZiNjkiLz4NCiAgICA8cGF0aCBkPSJNMjEsMTguNTFhMi4xMywyLjEzLDAsMCwxLTIuMTMsMi4xNCwyLjEsMi4xLDAsMCwxLTEuNzMtLjg5LDIuMDgsMi4wOCwwLDAsMS0uNDEtMS4yNSwyLDIsMCwwLDEsLjQyLTEuMjUsMi4xMywyLjEzLDAsMCwxLC40NC0uNDZsMCwwVjguMmEyLjA4LDIuMDgsMCwwLDEtLjQ1LS40NEg4LjUyYTEuODQsMS44NCwwLDAsMS0uNDQuNDR2OC41OGEwLDAsMCwwLDAsMCwwLDIuMDUsMi4wNSwwLDAsMSwuNDYuNDcsMi4xNCwyLjE0LDAsMCwxLTEuNzIsMy4zOSwyLjE0LDIuMTQsMCwwLDEtMS4yOC0zLjg1bDAsMFY4LjJhMi4xMiwyLjEyLDAsMCwxLS44OS0xLjczQTIuMTMsMi4xMywwLDAsMSw2LjgzLDQuMzRhMi4xMSwyLjExLDAsMCwxLDEuMjYuNDEsMi4xNiwyLjE2LDAsMCwxLC40OS41MWg4LjQ5YTIuMjgsMi4yOCwwLDAsMSwuNDgtLjUsMi4xNiwyLjE2LDAsMCwxLDEuMjgtLjQyLDIuMTEsMi4xMSwwLDAsMSwxLjI2LjQxLDIuMTQsMi4xNCwwLDAsMSwwLDMuNDV2OC41OGEwLDAsMCwwLDAsMCwwQTIuMTUsMi4xNSwwLDAsMSwyMSwxOC41MVoiIHN0eWxlPSJmaWxsOiAjNmI2YjY5Ii8+DQogIDwvZz4NCjwvc3ZnPg0K);
+    
+    
+background-size: 25px 25px !important;
+
+
+ background-position: 9.3px 10px !important;
+    
+
+}
+
+
+
+
+
+
+.mapbox-gl-draw_line {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNSIgaGVpZ2h0PSIyNSIgdmlld0JveD0iMCAwIDI1IDI1Ij4NCiAgPHRpdGxlPtCX0L3QsNGH0LrQuCDRgNCw0LTQsNGAINC4INGC0L88L3RpdGxlPg0KICA8cGF0aCBkPSJNMTkuOCwyMC4yOUg2LjcyQTEuMjUsMS4yNSwwLDAsMSw1LjQ3LDE5VjZBMS4yNSwxLjI1LDAsMCwxLDcuNiw1LjA4bDMuNjksMy42OWExLjI1LDEuMjUsMCwwLDEsLjM3Ljg4VjE0LjFoNC40NWExLjI1LDEuMjUsMCwwLDEsLjg4LjM3bDMuNjksMy42OWExLjI1LDEuMjUsMCwwLDEtLjg4LDIuMTNaTTgsMTcuNzloOC44MUwxNS41OSwxNi42SDEwLjQxYTEuMjUsMS4yNSwwLDAsMS0xLjI1LTEuMjVWMTAuMTdMOCw5WiIgc3R5bGU9ImZpbGw6ICM2YjZiNjkiLz4NCjwvc3ZnPg0K);
+    
+    
+    
+     background-size: 23px 23px !important;
+    background-position: 10px 12px !important;
+}
+
+
+
+
+
+
+
+.mapbox-gl-draw_point {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNSIgaGVpZ2h0PSIyNSIgdmlld0JveD0iMCAwIDI1IDI1Ij4KICA8dGl0bGU+0JfQvdCw0YfQutC4INGA0LDQtNCw0YAg0Lgg0YLQvzwvdGl0bGU+CiAgPGc+CiAgICA8cGF0aCBkPSJNMTguNTUsMTEuOWExLjQ1LDEuNDUsMCwwLDEtMS40NS0xLjQ1VjguMWEuMTkuMTksMCwwLDAtLjE5LS4xOUgxNC41NWExLjQ1LDEuNDUsMCwwLDEsMC0yLjloMi4zNkEzLjEsMy4xLDAsMCwxLDIwLDguMXYyLjM2QTEuNDUsMS40NSwwLDAsMSwxOC41NSwxMS45WiIgc3R5bGU9ImZpbGw6ICMzRDg1QzYiLz4KICAgIDxwYXRoIGQ9Ik02LjQ1LDExLjlBMS40NSwxLjQ1LDAsMCwxLDUsMTAuNDVWOC4xQTMuMSwzLjEsMCwwLDEsOC4wOSw1aDIuMzZhMS40NSwxLjQ1LDAsMCwxLDAsMi45SDguMDlhLjE5LjE5LDAsMCwwLS4xOS4xOXYyLjM2QTEuNDUsMS40NSwwLDAsMSw2LjQ1LDExLjlaIiBzdHlsZT0iZmlsbDogIzNEODVDNiIvPgogICAgPHBhdGggZD0iTTE2LjkxLDIwSDE0LjU1YTEuNDUsMS40NSwwLDEsMSwwLTIuOWgyLjM2YS4xOS4xOSwwLDAsMCwuMTktLjE5VjE0LjU1YTEuNDUsMS40NSwwLDAsMSwyLjksMFYxNi45QTMuMSwzLjEsMCwwLDEsMTYuOTEsMjBaIiBzdHlsZT0iZmlsbDogIzNEODVDNiIvPgogICAgPHBhdGggZD0iTTEwLjQ1LDIwSDguMDlBMy4xLDMuMSwwLDAsMSw1LDE2LjlWMTQuNTVhMS40NSwxLjQ1LDAsMCwxLDIuOSwwVjE2LjlhLjE5LjE5LDAsMCwwLC4xOS4xOWgyLjM2YTEuNDUsMS40NSwwLDAsMSwwLDIuOVoiIHN0eWxlPSJmaWxsOiAjM0Q4NUM2Ii8+CiAgPC9nPgogIDxnIGlkPSJkb3QiPgogICAgPHBhdGggZD0iTTEyLjUxLDkuNjRhMi44LDIuOCwwLDAsMSwxLjY4LjU2LDIuODQsMi44NCwwLDEsMS0xLjY4LS41NiIgc3R5bGU9ImZpbGw6ICMzRDg1QzYiLz4KICA8L2c+Cjwvc3ZnPgo=);
+    
+    
+    
+    background-size: 27px 27px !important;
+
+
+  background-position: 8.5px 10px !important;
+        
+}
+
+
+
+
+.mapbox-gl-draw_trash {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNSIgaGVpZ2h0PSIyNSIgdmlld0JveD0iMCAwIDI1IDI1Ij4NCiAgPHRpdGxlPtCX0L3QsNGH0LrQuCDRgNCw0LTQsNGAINC4INGC0L88L3RpdGxlPg0KICA8cGF0aCBkPSJNMjEuMDksMTMuODFhOC41OSw4LjU5LDAsMCwxLTE3LjE3LDAsOC41MSw4LjUxLDAsMCwxLDEuNjMtNSwxLjI1LDEuMjUsMCwwLDEsMiwxLjQ2LDYsNiwwLDAsMC0xLjE2LDMuNTZBNi4wOSw2LjA5LDAsMSwwLDE0LjI4LDh2Ljc2YTEsMSwwLDAsMS0uNTkuOTEsMSwxLDAsMCwxLS40MS4wOSwxLDEsMCwwLDEtLjY2LS4yNEwxMCw3LjIzYTEsMSwwLDAsMS0uMzUtLjc2QTEsMSwwLDAsMSwxMCw1LjcybDIuNjEtMi4yN2ExLDEsMCwwLDEsMS42Ni43NVY1LjRBOC42MSw4LjYxLDAsMCwxLDIxLjA5LDEzLjgxWiIgc3R5bGU9ImZpbGw6ICM2YjZiNjkiLz4NCiAgPHBhdGggZD0iTTE0LjkyLDE0LjQ1QTEuMjUsMS4yNSwwLDAsMSwxNCwxNi41OGExLjIxLDEuMjEsMCwwLDEtLjg4LS4zN2wtLjY0LS42NC0uNjUuNjRhMS4yMSwxLjIxLDAsMCwxLS44OC4zNywxLjI1LDEuMjUsMCwwLDEtLjg5LTIuMTNsLjY1LS42NS0uNjUtLjY0YTEuMjcsMS4yNywwLDAsMSwwLTEuNzcsMS4yNSwxLjI1LDAsMCwxLDEuNzcsMGwuNjUuNjUuNjQtLjY1YTEuMjUsMS4yNSwwLDEsMSwxLjc3LDEuNzdsLS42NS42NFoiIHN0eWxlPSJmaWxsOiAjNmI2YjY5Ii8+DQo8L3N2Zz4NCg==);
+    
+        
+    background-size: 24px 24px !important;
+    
+    background-position: 9.5px 10px !important;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.map-overlay {
+
+
+
+
+
+
+position: absolute;
+
+
+top: 14em; right: 0em; z-index: +100000;
+
+
+
+
+
+
+}
+
+
+ 
+
+
+
+
+
+
+.vranger {
+ 
+  margin-right: -4.3em;
+   transform: rotate(270deg);
+  -moz-transform: rotate(270deg); /*do same for other browsers if required*/
+  
+  
+      
+}
+
+
+
+#slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px !important;
+  width: 99%;
+  border-radius: 20em;
+  background-color: #6b6b6933;
+  outline: none;
+
+ 
+border: 0.1px solid #f8f9fa;
+
+   
+}
+
+
+#slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 17.0px;
+  height: 17.0px;
+  border-radius: 42%;
+  background: #3D85C6;
+  cursor: pointer;
+  border: 2.0px solid #f8f9fa;
+
+  
+
+  
+}
+
+
+
+
+</style>
+
+
+
+
+
+
+
+
+    
+    
+    
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+
+
+<div class="map-overlay ">
+
+
+
+<div class="map-overlay-inner">
+
+
+<input id="slider" type="range"  class="vranger" min="0" max="100" step="0" value="100">
+</div>
+</div>
+
+
+
+
+
+
+
+
+<div id="map"></div>
+       
+
+<button id="replay" ></button>
+
+
+<div class="ele-info">
+    
+<div>Lng:&nbsp;<span id="lng"></span> Lat:&nbsp;<span id="lat"></span></div>
+      
+       
+
+<div>Alt:&nbsp;<span id="ele"></span> &nbsp;Hei: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m &nbsp;Dis: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m &nbsp;Spe: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;km &nbsp;</div>
+
+
+
+
+
+
+
+<div class="calculation-box">
+<p>SDK/API: <strong>EMIIA.AI MRV (EDM, BIM, RADIO DATA) </strong></p>
+
+<div id="calculated-area">
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a href="https://www.emiia.ru/relise/vcasdk.html" title="ALL"><li id="button778" class="button778"></li></a>
+
+
+
+
+
+<a href="https://www.emiia.ru/relise/vcasdk.html" title="ALL"><li id="button779" class="button778"></li></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+<span>
+<div class="dropdown dropdown-accordion" class="btn btn-outline-primary btn-lg btn-iconed btn-rounded" data-accordion=".accordion12" id="parent" style="position: fixed; top: 0.95em; left: 1.15em; z-index: +200000;" >
+  <button  class="btn btn-light dropdown-toggle" class="btn btn-primary"  type="button" data-toggle="dropdown" ></button>
+  
+  
+<ul class="dropdown-menu" role="menu"  >
+  
+  
+
+   
+  <li1 class="sticky" ><a href="https://www.emiia.ru/relise/mrv.html">
+ 
+
+ <span> 
+  
+
+  <img src="https://www.emiia.ai/icon/menu/globe.svg" style="float:none; margin: -5px 0px 10px 6.4px;" title="GIS">
+  
+
+
+</span></a></li1>
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <li1 class="sticky" ><a href="https://www.emiia.ru/relise/bim.html" >
+ 
+ 
+ <span> 
+  
+
+
+  <img src="https://www.emiia.ai/icon/menu/build.svg" style="float:none; margin: -5px 0px 11px 14px;" title="BIM">
+  
+
+
+</span></a></li1>
+
+
+
+
+
+
+
+
+
+
+<li1 class="sticky" ><a href="https://www.emiia.ru/relise/edm.html" >
+ 
+ 
+ <span> 
+  
+
+
+  <img src="https://www.emiia.ai/icon/menu/edm.svg" style="float:none; margin: -5px 0px 11px 14px;" title="EDM">
+  
+
+
+</span></a></li1>
+
+
+
+
+
+
+
+ 
+
+
+
+
+<li1 class="sticky" ><a href="https://www.emiia.ru/ifc/18.html">
+ 
+ 
+ <span> 
+  
+
+
+  <img src="https://www.emiia.ai/icon/menu/calendar.svg" style="float:none; margin: -6px 0px 11px 14px;" title="Tracker">
+  
+
+
+</span></a></li1>
+
+
+
+
+
+
+
+
+
+
+
+<li1 class="sticky" ><a href="https://www.emiia.ru/relise/aai.html">
+ 
+ 
+ <span> 
+  
+
+
+  <img src="https://www.emiia.ai/icon/menu/litics.svg" style="float:none; margin: -6px 0px 11px 14px;" title="AAI">
+  
+
+
+</span></a></li1>
+
+
+
+
+
+
+
+
+
+
+
+<li1 class="sticky" ><a href="https://www.emiia.ru/ifc/18.html" >
+ 
+ 
+ <span> 
+  
+
+
+  <img src="https://www.emiia.ai/icon/menu/cloud1.svg" style="float:none; margin: -5px 5px 11px 15px;" title="EMIIA.AI CLOUD ML PLATFORM">
+  
+
+
+</span></a></li1>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li1 class="sticky" ><a href="https://t.me/EMIIAAIBOT">
+ 
+ 
+ <span> 
+  
+
+
+  <img src="https://www.emiia.ai/icon/menu/bot.svg" style="float:none; margin: -5px 0px 11px 11px;" title="BOT">
+  
+
+
+</span></a></li1>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <li>
+										<div class="accordion12" id="accordion1"  style="vertical-align: middle" style="vertical-align: baseline">
+                      <a href="#collapseOne" data-toggle="collapse" data-parent="#parent" >
+											<div class="hight"> <span 
+  style="vertical-align: -4.5px"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-broadcast" viewBox="0 0 16 16">
+  <path d="M3.05 3.05a7 7 0 0 0 0 9.9.5.5 0 0 1-.707.707 8 8 0 0 1 0-11.314.5.5 0 0 1 .707.707zm2.122 2.122a4 4 0 0 0 0 5.656.5.5 0 1 1-.708.708 5 5 0 0 1 0-7.072.5.5 0 0 1 .708.708zm5.656-.708a.5.5 0 0 1 .708 0 5 5 0 0 1 0 7.072.5.5 0 1 1-.708-.708 4 4 0 0 0 0-5.656.5.5 0 0 1 0-.708zm2.122-2.12a.5.5 0 0 1 .707 0 8 8 0 0 1 0 11.313.5.5 0 0 1-.707-.707 7 7 0 0 0 0-9.9.5.5 0 0 1 0-.707zM10 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
+</svg></span> &nbsp;Радиоданные (MRV)<i class="fa fa-angle-down"></i>
+
+											</div>
+                        </a>
+											<div class="panel-collapse collapse" id="collapseOne">
+
+												<ul class="list">
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+
+                                                      
+
+                                                                                                            
+                                                       
+                                                                                                              <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;Люди</a></li>
+                                                                                                              
+                                                                                                               <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel"  value="" aria-label="123">&nbsp;Животные</a></li>
+                                                                                                               
+                                                                                                               
+   <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;Устройства</a></li>  
+   
+   
+<p></p>
+   
+   
+   <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;Аналитика</a></li>   
+   
+   
+   
+   
+   
+   
+ <p></p>  
+   
+   
+   
+   
+                           <li role="presentation" style="padding: 0px 0px; color: #6B6B69;">&nbsp;&nbsp;<a role="menuitem" tabindex="-1" href="https://www.emiia.ru/relise/mrvsdk#18.37/55.977162/37.174262/141.7/38" style="padding: 5px 8px;"> <span 
+  style="vertical-align: -4.5px; color: #6B6B69;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
+  <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+</svg></span>SDK/API (Radio MRV)</a></li> 
+
+
+
+
+                          <li role="presentation" style="padding: 0px 0px; color: #6B6B69;">&nbsp;&nbsp;<a role="menuitem" tabindex="-1" href="https://www.emiia.ru/relise/rdrsdk#18.37/55.977162/37.174262/141.7/38" style="padding: 5px 8px;"> <span 
+  style="vertical-align: -4.5px; color: #6B6B69;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
+  <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+</svg></span>SDK/API (Radar RDR)</a></li> 
+
+
+
+
+ <li role="presentation" style="padding: 0px 0px; color: #6B6B69;">&nbsp;&nbsp;<a role="menuitem" tabindex="-1" href="https://www.emiia.ru/relise/ipssdk#18.37/55.977162/37.174262/141.7/38" style="padding: 5px 8px;"> <span 
+  style="vertical-align: -4.5px; color: #6B6B69;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
+  <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+</svg></span>SDK/API (Indoor IPS)</a></li> 
+   
+   
+   
+   
+   
+   
+   
+   
+   <p></p> 
+
+<li><a href="https://www.emiia.ru/relise/ips.html" > <div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+  <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+  <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/> 
+</svg>&nbsp;Настройки </div></a></li>
+                    
+                                                                                               
+                                                    
+                                                    
+                                                    
+													
+												</ul>
+
+											</div>
+
+										</div>
+
+    </li>
+    
+    
+
+    <li>
+										<div class="accordion12" id="accordion2" >
+                      <a href="#collapseTwo" data-toggle="collapse" data-parent="#parent">
+											<div class="hight">
+
+   
+													<span 
+  style="vertical-align: -4.5px"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-camera-video" viewBox="-0 0 16 16">
+  <path fill-rule="evenodd" d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2V5zm11.5 5.175 3.5 1.556V4.269l-3.5 1.556v4.35zM2 4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h7.5a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H2z"/>
+</svg></span> &nbsp;Видеоданные (VCA)<i class="fa fa-angle-down"></i>
+
+											</div>
+                        </a>
+											<div class="panel-collapse collapse" id="collapseTwo">
+                                            
+                                            
+                                            
+                                            
+                                            <ul class="list">
+
+												
+                                                
+                                                
+                  <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;Видеокамеры</a></li>
+                                                                                                              
+                                                                                                               <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;Лидарные камеры</a></li>
+                                                                                                               
+                                                                                                               
+   <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="123">&nbsp;Тепловые камеры</a></li>  
+   
+   
+      <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="123">&nbsp;Аудиопотоки</a></li>  
+   
+   
+   
+   
+<p></p>
+   
+   
+   <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;Аналитика</a></li>   
+   
+   
+   
+   
+   
+ <p></p>  
+   
+   
+   
+   <li role="presentation" style="padding: 0px 0px; color: #6B6B69;">&nbsp;&nbsp;<a role="menuitem" tabindex="-1" href="https://www.emiia.ru/relise/videosdk#18.37/55.977162/37.174262/141.7/38" style="padding: 5px 8px;"> <span 
+  style="vertical-align: -4.5px; color: #6B6B69;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
+  <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+</svg></span>SDK/API (Video VCA)</a></li> 
+   
+   
+   
+   
+   
+   
+   
+   
+   <p></p> 
+   
+
+<li><a href="#" > <div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+  <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+  <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/> 
+</svg>&nbsp;Настройки </div></a></li>
+                                                  
+                                                
+                                                
+                                    
+													
+												</ul>                                   
+           
+
+											</div>
+
+										</div>
+
+    </li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <li>
+										<div class="accordion12"  id="accordion3">
+                      <a href="#collapseThree" data-toggle="collapse" data-parent="#parent">
+											<div class="hight">
+
+													<span 
+  style="vertical-align: -4.5px"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-globe" viewBox="0 0 16 16">
+  <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/>
+</svg></span> &nbsp;Геоданные (GIS)<i class="fa fa-angle-down"></i>
+
+											</div>
+                        </a>
+											<div class="panel-collapse collapse" id="collapseThree">
+
+												<ul class="list">
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+        <li1><a href="#" style="color: #6B6B69; padding-left: 1.5em;" value="option1" checked><input    class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked/>&nbsp;Карта</a></li1>
+      
+      
+            <li1><a href="#" style="color: #6B6B69; padding-left: 2em;"  value="option2" ><input    class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>&nbsp;Спутник</a></li1>
+            
+            <br>
+            
+            
+        <li1><a href="#" style="color: #6B6B69; padding-left: 1.5em;" value="option1" disabled><input    class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" disabled/>&nbsp;Радар</a></li1>
+      
+      
+            <li1><a href="#" style="color: #6B6B69; padding-left: 1.75em;"  value="option2" checked><input    class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>&nbsp;Гибрид</a></li1>
+                                                
+                                                
+                                                
+                                                
+                                                
+  
+  
+   <p></p>
+   
+   
+   <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel"  value="" aria-label="123" checked>&nbsp;Панель поиска</a></li>
+   
+   
+   
+   <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel"  value="" aria-label="123" checked>&nbsp;Панель навигации</a></li>
+   
+   
+   
+      <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel"  value="" aria-label="123" checked>&nbsp;Панель Indoor (IPS)</a></li>
+   
+   
+   
+     <p></p>
+  
+  
+  
+
+												
+                                                
+                                                
+                  <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel"  value="" aria-label="123">&nbsp;Качество воздуха</a></li>
+                                                                                                              
+                                                                                                               <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel"  value="" aria-label="123">&nbsp;Паркоместа</a></li>
+                                                                                                               
+                                                                                                               
+                                                                                                                                                                                                                              <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel"  value="" aria-label="123">&nbsp;Спортплощадки</a></li>
+                                                                                                                                                                                                                              
+                                                                                                                                                                                                                              
+                                                                                                                                                                                                                               <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel"  value="" aria-label="123">&nbsp;Лесные пожары</a></li>
+                                                                                                                                                                                                                              
+                                                                                                                                                                                                                              
+                                                                                                                                    <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;ТИМ-модели (BIM)</a></li> 
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                            <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel"  value="" aria-label="123">&nbsp;ТИМ-инструменты (BIM)</a></li>
+                                                      
+                                                      
+                                                       <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;Indoor-инструменты (IPS)</a></li> 
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" disabled value="" aria-label="123">&nbsp;Радары (фото-tile)</a></li> 
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" disabled value="" aria-label="123">&nbsp;Радары (онлайн данные)</a></li>
+                                                                                                                                    
+                                                                                                                                                                                                                              <p></p>
+                                                                                                               
+                                                                                                               
+   <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;МЧС (объекты)</a></li>  
+   
+   
+                                           <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;МЧС (данные)</a></li>
+
+   
+   
+<p></p>
+
+
+
+
+
+
+<li role="presentation" style="padding: 0px 0px; color: #6B6B69;">&nbsp;&nbsp;<a role="menuitem" tabindex="-1" href="https://www.emiia.ru/relise/messdk#18.37/55.977162/37.174262/141.7/38" style="padding: 5px 8px;"> <span 
+  style="vertical-align: -4.5px; color: #6B6B69;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
+  <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+</svg></span>SDK/API (МЧС)</a></li> 
+
+
+
+ <p></p>  
+   
+   <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel"  value="" aria-label="123">&nbsp;Аналитика</a></li>   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   <p></p> 
+
+<li><a href="#" > <div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+  <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+  <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/> 
+</svg>&nbsp;Настройки </div></a></li>
+                                                  
+                                                
+                                                
+                                    
+													
+												</ul>  
+                                                
+                                                
+                                                
+											</div>
+
+										</div>
+                                        
+                                        
+                       
+
+    </li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+ <li role="presentation" class="divider"></li>  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+        <li>
+										<div class="accordion12"  id="accordion60"  >
+                      <a href="#collapseFour" data-toggle="collapse" data-parent="#parent">
+											<div class="hight">
+
+													<span 
+  style="vertical-align: -4.5px"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-diagram-3" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H14a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 2 7h5.5V6A1.5 1.5 0 0 1 6 4.5v-1zM8.5 5a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1zM0 11.5A1.5 1.5 0 0 1 1.5 10h1A1.5 1.5 0 0 1 4 11.5v1A1.5 1.5 0 0 1 2.5 14h-1A1.5 1.5 0 0 1 0 12.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm4.5.5A1.5 1.5 0 0 1 7.5 10h1a1.5 1.5 0 0 1 1.5 1.5v1A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm4.5.5a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"/>
+</svg></span> &nbsp;Базы данных (API)<i class="fa fa-angle-down"></i>
+
+											</div>
+                        </a>
+											<div class="panel-collapse collapse" id="collapseFour">
+
+												<ul class="list">
+                                                
+                                                
+   <li><a href="#" > <div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-download" viewBox="0 0 16 16">
+  <path d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z"/>
+  <path d="M7.646 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V5.5a.5.5 0 0 0-1 0v8.793l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z"/>
+</svg>&nbsp;Вход данных: </div></a></li>
+                                                                                                                                                   
+                                                      <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;EMIIA.AI CLOUD</a></li>
+                                                      
+                                                      
+                                                       <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;GitHub</a></li>
+                                                       
+                                                       
+                                                       <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;TelegramBot</a></li>
+                                                       
+                                                       
+                                                       <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;OpenStreetMap</a></li>
+                                                       
+                                                       
+                                                                                                              <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;ChatGPT</a></li>
+                                                       
+                                                       
+                                                   
+     <p></p> 
+     
+     
+     
+     
+    
+    
+    
+    
+    
+     <li><a href="#" > <div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-upload" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z"/>
+  <path fill-rule="evenodd" d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3z"/>
+</svg>&nbsp;Выход данных: </div></a></li>
+
+
+
+
+<li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;EMIIA.AI CLOUD</a></li>
+
+
+
+
+
+<li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;EMIIA.AI CLOUD ML</a></li>
+
+
+
+
+<p></p> 
+
+<li><a href="#" > <div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+  <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+  <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/> 
+</svg>&nbsp;Настройки </div></a></li>
+    
+    
+                                                    
+													
+												</ul>
+
+											</div>
+
+										</div>
+                                        
+                                        
+                       
+
+    </li>
+   
+   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+  
+
+  
+  
+    <li>
+										<div class="accordion12" id="accordion40" >
+                      <a href="#collapseOne40" data-toggle="collapse" data-parent="#parent">
+											<div class="hight">
+                                            
+                                            <span 
+  style="vertical-align: -4.5px"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
+  <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
+</svg></span> &nbsp;Генерация кода<i class="fa fa-angle-down"></i>
+
+											</div>
+                        </a>
+											<div class="panel-collapse collapse" id="collapseOne40">
+
+												<ul class="list">
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                
+
+                                                      
+
+                                                                                                            
+                                                       
+                                                                                                              <li><a href="#"  value="option6" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel"  value="" aria-label="123">&nbsp;Python</a></li>
+                                                                                                              
+                                                                                                              
+                                                                                                                 <li><a href="#"  value="option8" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="125" aria-label="123">&nbsp;Dart</a></li> 
+                                                                                                              
+                                                                                                         
+                                                                                                               <li><a href="#"  value="option7" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="124" aria-label="123">&nbsp;TypeScript</a></li>
+                                                                                                               
+                                                                         <p></p>                                                                                                                                                 
+                                                                         
+                                                                         <li><a href="#"  value="option7" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel"  value="124" aria-label="123">&nbsp;TopoJSON</a></li>
+                                                                         
+                                                                         <li><a href="#"  value="option7" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="124" aria-label="123">&nbsp;GeoJSON</a></li>
+                                                                         
+                                                                         
+                                                                         <li><a href="#"  value="option7" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="124" aria-label="123">&nbsp;JSON</a></li>
+                    
+                                                    
+                                                    
+   <p></p>      
+   
+   
+   <li><a href="#"  value="option7" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="124" aria-label="123">&nbsp;Cинхронизация</a></li>
+
+
+
+   
+   
+   
+<p></p>
+   
+   
+   
+   
+   
+
+   
+   
+   
+   
+   <li><a href="#" > <div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-zip" viewBox="0 0 16 16">
+  <path d="M5 7.5a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v.938l.4 1.599a1 1 0 0 1-.416 1.074l-.93.62a1 1 0 0 1-1.11 0l-.929-.62a1 1 0 0 1-.415-1.074L5 8.438V7.5zm2 0H6v.938a1 1 0 0 1-.03.243l-.4 1.598.93.62.929-.62-.4-1.598A1 1 0 0 1 7 8.438V7.5z"/>
+  <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1h-2v1h-1v1h1v1h-1v1h1v1H6V5H5V4h1V3H5V2h1V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
+</svg>&nbsp;Загрузить архив (ZIP) </div></a></li>
+
+
+
+
+<p></p> 
+
+<li><a href="#" > <div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+  <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+  <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/> 
+</svg>&nbsp;Настройки </div></a></li>
+
+   
+   
+
+                                                    
+                                                    
+													
+												</ul>
+
+											</div>
+
+										</div>
+
+    </li>
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+      
+    
+    
+    
+    
+    
+    
+    
+   
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+                      
+  
+
+
+
+
+                                        
+                                                       
+                                                       
+                                                       
+                                                       
+                                                       
+                                                       
+                                                       
+                                                       
+                                                       
+                                                       
+       <li role="presentation" class="divider"></li>   
+
+
+
+
+
+<li>
+										<div class="accordion12"  id="accordion62">
+                      <a href="#collapseFour62" data-toggle="collapse" data-parent="#parent">
+											<div class="hight">
+
+													<span 
+  style="vertical-align: -3.5px; padding-left: 1.0px;"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+</svg></span> &nbsp;Условные обозначения<i class="fa fa-angle-down"></i>
+
+											</div>
+                        </a>
+											<div class="panel-collapse collapse" id="collapseFour62">
+
+												<ul class="list">
+                                                
+                                                
+
+                                                                                                                                                   
+                                                      <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;Радиоданные (MRV)</a></li>
+                                                      
+                                                      
+                                                       <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;Видеоданные (CTV)</a></li>
+                                                       
+                                                       
+                                                                                                 
+                                                       
+                                                       
+                                    
+                                                    
+													
+												</ul>
+
+											</div>
+
+										</div>
+                                        
+                                        
+                       
+
+    </li>
+                                                   
+                                                       
+                                                       
+                                                       
+                                                       
+                                                       
+                                                       
+                                                       
+                                                       
+                                                       
+
+
+
+
+    
+     
+          <li role="presentation" class="divider"></li>                      
+                        
+                        <li role="presentation" style="padding: 0px 0px; color: #6B6B69;"><a role="menuitem" tabindex="-1" href="#" style="padding: 3px 8px;"> <span 
+  style="vertical-align: -4.5px; color: #6B6B69;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
+  <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+</svg></span> Справочник SDK</a></li>     
+
+
+
+                        <li role="presentation" style="padding: 0px 0px; color: #6B6B69;"><a role="menuitem" tabindex="-1" href="#" style="padding: 3px 8px;"> <span 
+  style="vertical-align: -4.5px; color: #6B6B69;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
+  <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+</svg></span> Справочник API</a></li>  
+                        
+  
+ 
+
+
+
+                        <li role="presentation" style="padding: 0px 0px; color: #6B6B69;"><a role="menuitem" tabindex="-1" href="#" style="padding: 3px 8px;"> <span 
+  style="vertical-align: -4.5px; color: #6B6B69;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dot" viewBox="0 0 16 16">
+  <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+</svg></span> Документация</a></li>  
+    
+
+
+    
+    
+    
+    
+
+
+
+
+
+ <li role="presentation" class="divider"></li>   
+
+
+
+
+
+<li>
+										<div class="accordion12"  id="accordion63">
+                      <a href="#collapseFour63" data-toggle="collapse" data-parent="#parent">
+											<div class="hight">
+
+													<span 
+  style="vertical-align: -3.5px;"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+  <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+  <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/> 
+</svg></span> &nbsp;Аккаунт<i class="fa fa-angle-down"></i>
+
+											</div>
+                        </a>
+											<div class="panel-collapse collapse" id="collapseFour63">
+
+												<ul class="list">
+                                                
+                                                
+
+                                                                                                                                                   
+                                                      <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;Радиоданные (MRV)</a></li>
+                                                      
+                                                      
+                                                       <li><a href="#"  value="option5" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="checkboxNoLabel" checked value="" aria-label="123">&nbsp;Видеоданные (CTV)</a></li>
+                                                       
+                                                       
+
+                                                       
+                                    
+                                                    
+													
+												</ul>
+
+											</div>
+
+										</div>
+                                        
+                                        
+                       
+
+    </li>
+   
+
+
+
+
+          
+          
+          
+          
+          
+          <li role="presentation" class="divider"></li>                      
+                        
+                        <li role="presentation" style="padding: 0px 0px; color: #6B6B69;"><a role="menuitem" tabindex="-1" href="#" style="padding: 3px 12px;"> <span 
+  style="vertical-align: -4.5px; color: #6B6B69;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+  <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+</svg></span> Выход</a></li>
+
+
+
+
+                   
+                        
+
+                        
+                        
+<li role="presentation" class="divider"></li>   
+
+          
+          
+          
+          
+
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" style="color: #3d85c6; font-size:9px;">© EMIIA.AI MRV (SDK/API) Version (B2B): 00000000109.12.01</a></li>
+
+          
+
+         
+          
+    
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src='https://api.mapbox.com/mapbox.js/plugins/turf/v2.0.2/turf.min.js'></script> 
+
+<script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+
+
+
+<script>
+
+
+/*
+ * 
+ * @Description: mapbox 测距插件
+ * @Author: charlotte.wangchao 
+ * @Date: 2017-02-16 13:42:45 
+ * @Last Modified by: charlotte.wangchao
+ * @Last Modified time: 2017-03-08 15:47:24
+ */
+
+
+function MeasureControl(options) {
+    this.options = Object.assign({},  MeasureControl.DEFAULTS, options);
+
+    //不能删除 不然会报错的
+    this._onClick = this._onClick.bind(this);
+    this._onDblClick = this._onDblClick.bind(this);
+    this._onMousemove = this._onMousemove.bind(this);
+    this._onAddSourceLayer = this._onAddSourceLayer.bind(this);
+    this._toggleState = this._toggleState.bind(this);
+    this._onAddMouseTips = this._onAddMouseTips.bind(this);
+    this._toggleCursor = this._toggleCursor.bind(this);
+    this._onMeasureStart = this._onMeasureStart.bind(this);
+    this._getPointsList = this._getPointsList.bind(this);
+    this._getLineDistance = this._getLineDistance.bind(this);
+    this._bindPointPopup = this._bindPointPopup.bind(this);
+    this._removeMeasure = this._removeMeasure.bind(this);
+    this._removeCurPopups = this._removeCurPopups.bind(this);
+    this._toggleEvents = this._toggleEvents.bind(this);
+}
+
+/**
+ * @description 加载Measure组件
+ * @param {any} map
+ * @returns 
+ */
+MeasureControl.prototype.onAdd = function(map) {
+    this._map = map;
+    this._container = document.createElement('div');
+    this._container.className = 'mapboxgl-ctrl mapboxgl-ctrl-group measure-ctrl-group';
+    this.state = 'off';
+
+    //所有测距geojson
+    this.geojsonList = {};
+
+    //储存可能冲突的事件
+    this.events = {};
+    
+    this._map.on('click', this._onClick);
+    this._map.on('dblclick', this._onDblClick);
+    this._map.on('mousemove', this._onMousemove);
+
+    this._measureOnButton = this._createNode('button','mapboxgl-ctrl-icon mapboxgl-ctrl-measure-off','',this._container, 'measure-off',this._onMeasureStart);
+    return this._container;
+};
+
+MeasureControl.DEFAULTS = {
+    linestring : {
+        "type": "Feature",
+        "geometry": {
+            "type": "LineString",
+            "coordinates": []
+        }
+    },
+    circleRadius: 3.5,
+    circleColor: '#fff',
+    lineColor: '#44bff0',
+    lineWidth: 3,
+    lineCap: 'round',
+    lineJoin: 'round', 
+};
+
+/**
+ * @description 卸载Measure组件
+ */
+MeasureControl.prototype.onRemove = function() {
+    this._container.parentNode.removeChild(this._container);
+    this._map.off('click', this._onClick);
+    this._map.off('dblclick', this._onDblClick);
+    this._map.off('mousemove', this._onMousemove);
+    this._map = undefined;
+};
+
+/**
+ * @description 获取控件的默认位置
+ * ['top-left','top-right','bottom-left','bottom-right']
+ * @returns 
+ */
+MeasureControl.prototype.getDefaultPosition = function(){
+    return 'top-left';
+}
+
+/**
+ * @description 创建button，绑定button到对应父级，并返回button的引用
+ * @param {string} className button的类名
+ * @param {node} container button绑定的父级node
+ * @param {string} ariaLabel button的aria-label属性值
+ * @param {func} fn click事件触发的方法
+ * @returns {node}
+ */
+MeasureControl.prototype._createNode = function(node,className,textContent,container, ariaLabel, fn){
+    var a = document.createElement(node);
+    a.className = className;
+    a.textContent = textContent;
+    a.setAttribute('aria-label',ariaLabel);
+    if(fn) a.addEventListener('click', fn);
+    container.appendChild(a);
+    
+    return a;
+}
+
+MeasureControl.prototype._removeNode = function(node, fn) {
+    node.remove();
+    if(fn) node.removeEventListener('click', fn);
+}
+
+
+/**
+ * @description map的click事件
+ * @param {any} e
+ */
+MeasureControl.prototype._onClick = function(e){
+    
+    if(this.state === 'off') return;
+
+    var map = this._map;
+    var features = map.queryRenderedFeatures(e.point, { layers: ['measure-points-' + this._name] });
+
+    //更新tips的文字
+    this.tips.textContent = '单击继续，双击结束测距';
+
+    //画点
+    var point = this.point = {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [e.lngLat.lng, e.lngLat.lat]
+        },
+        "properties": {
+            "id": String(new Date().getTime()),
+            "curDistance": 0.0,
+            "prevDistance": 0.0
+        }
+    };
+
+    this.curGeojson.features.push(point);
+        
+    //画线
+    var PointList = this._getPointsList();
+    if(PointList.length >=2) {
+        this.lineString.geometry.coordinates = PointList.map(function(point) {
+            return point.geometry.coordinates;
+        });
+
+        //计算距离
+        this.prevDis = this.curDis || 0.0;
+        this.curDis = this._getLineDistance(this.lineString, 'kilometers');
+
+        //将距离放到每个点的properties里
+        var last = this.curGeojson.features.length - 1;
+        this.curGeojson.features[last].properties.curDistance = this.curDis;
+        this.curGeojson.features[last].properties.prevDistance = this.prevDis;
+        
+        this.curGeojson.features.push(this.lineString);
+    }
+
+    //设置map的dataSource
+    map.getSource('measure-geojson-' + this._name).setData(this.curGeojson);
+
+    //每个point绑定popup
+    this._bindPointPopup(PointList);
+     
+}
+
+/**
+ * @description 计算线段的距离
+ * @param {geojson} geojson geometry的type为LineString
+ * @param {unit} 测量单位
+ * @return {Number} 距离
+ */
+MeasureControl.prototype._getLineDistance = function(lineString,unit) {
+    return turf.lineDistance(lineString, unit).toLocaleString();
+}
+
+/**
+ * @description 获取所有的Point geojson格式
+ * @return {Array} Point数组
+ */
+MeasureControl.prototype._getPointsList = function(){
+    return this.curGeojson.features.filter(function(item) {
+        return item.geometry.type === 'Point';
+    });
+}
+
+/**
+ * @description 删除当前测距实例的popups
+ * @param {string} name 当前测距实例的名字
+ */
+MeasureControl.prototype._removeCurPopups = function(name){
+    this.geojsonList[name].popups.map(function(popup){
+        popup.remove();
+    });
+}
+
+/**
+ * @description 给每个Point绑定popup
+ * @param {array} popup数组
+ */
+MeasureControl.prototype._bindPointPopup = function(list) {
+
+    var _this = this;
+    
+    //清除原先所有的popup
+    this._removeCurPopups(this._name);
+
+    //重新绑定popup
+    list.map(function(point) {
+
+        var popup = new mapboxgl.Popup({
+                closeButton: false,
+                closeOnClick: false, 
+                total:point.properties.curDistance, 
+                prev: point.properties.prevDistance
+            })
+            .setLngLat(point.geometry.coordinates)
+            .setHTML("总距离：" +point.properties.curDistance + "km")
+            .addTo(this.map);
+
+        popup._container.className += ' mapbox-measure-popup';
+        _this.geojsonList[_this._name].popups.push(popup);
+
+    });
+
+}
+
+/** 
+ * @description map的dblClick事件
+ * @param {any} e
+ */
+MeasureControl.prototype._onDblClick = function(e){
+
+    if(this.state === 'off') return;
+
+    this._toggleState('off');
+    this._toggleEvents('add','click');
+     this._measureOnButton.setAttribute('aria-label','measure-off');
+    this._measureOnButton.className = "mapboxgl-ctrl-icon mapboxgl-ctrl-measure-off";
+
+    //删除鼠标跟随tips
+    this._removeNode(this.tips);
+    //修改鼠标手势
+    this._toggleCursor('-webkit-grab');
+    // 重置记录的点击坐标
+    this.point = void 0;
+    
+    //创建删除当前测距的button
+    var length = this.geojsonList[this._name].popups.length;
+    var options = this.geojsonList[this._name].popups[length - 1].options;
+    this.geojsonList[this._name].popups[length - 1].setHTML("<div>总距离：" + options.total + "<button data-name='"+this._name+"' id='dele-btn-"+this._name+"'>X</button></div>");
+    document.getElementById('dele-btn-'+this._name).addEventListener('click', this._removeMeasure);
+    
+}
+
+/**
+ * @description 删除当前name的Measure实例
+ */
+MeasureControl.prototype._removeMeasure = function(e){
+    var name = e.target.getAttribute('data-name');
+    var map = this._map;
+    map.removeSource('measure-geojson-'+ name);
+    map.removeLayer('measure-points-' + name);
+    map.removeLayer('measure-lines-' + name);
+    // 删除mousemove layer
+    map.removeLayer('measure-lines-mousemove');
+    map.removeSource('measure-geojson-mousemove');
+
+    //删除当前name的所有的popup
+    this._removeCurPopups(name);
+
+    //删除当前name的geojson对象
+    delete this.geojsonList[name];
+   
+}
+
+/**
+ * @description map的点击测距按钮事件，进入测距模式，删除map的其他点击事件，禁用map的双击放大效果
+ * @param {any} e
+ */
+MeasureControl.prototype._onMeasureStart = function(e){
+    
+    if(this.state === 'on') return;
+
+    //进入测距模式
+    this._toggleState('on');
+    this._measureOnButton.setAttribute('aria-label','measure-on');
+    this._measureOnButton.className = "mapboxgl-ctrl-icon mapboxgl-ctrl-measure-on";
+
+    //禁用map的其他click事件
+    this._toggleEvents('remove','click');
+    //初始化总距离、之前的距离
+    this.prevDis = 0.0;
+    this.curDis = 0.0;
+
+    //设置鼠标手势
+    this._toggleCursor('crosshair');
+
+    //创建跟随鼠标提示框
+    this.mouseTips = this._onAddMouseTips(e);
+
+    //设置当前测距实例的唯一key
+    this._name = String(new Date().getTime());
+    
+    //创建当前测距的mapSource、mapLayer
+    this._onAddSourceLayer(e);
+
+}
+
+/**
+ * @description 创建鼠标跟随提示框
+ * @param {event} 鼠标点击事件
+ */
+MeasureControl.prototype._onAddMouseTips = function(e){
+    var tips = this.tips =  this._createNode('div','measure_mousemove_tips','单击确定起点',document.body,'mousemove_tips');
+    //设置tips的样式
+    tips.style.position = 'absolute';
+    this._setTipsPosition(e,tips);
+    
+    return tips;
+}
+
+/**
+ * @description 设置鼠标跟随tips的位置
+ * @param {event} 鼠标移动事件
+ * @param {tips} tips对应的dom元素
+ */
+MeasureControl.prototype._setTipsPosition = function(e,tips){
+    var x = e.pageX || e.clientX + (document.documentElement.scrollLeft || document.body.scrollLeft);
+    var y = e.pageY || e.clientY + (document.documentElement.scrollLeft || document.body.scrollLeft);
+    tips.style.left = x + 10 + 'px';
+    tips.style.top = y + 10 + 'px';
+    tips.style.padding = '10px';
+    tips.style.background = '#fff';
+    tips.style.fontSize = '10px';
+    tips.style.borderRadius = '3px';
+    tips.style.boxShadow = '0 1px 2px rgba(0,0,0,0.10)';
+}
+
+/**
+ * @description 创建MeasureControl的mapSource、mapLayer
+ */
+MeasureControl.prototype._onAddSourceLayer = function(){
+    //样式
+    var circleRadius = this.options.circleRadius;
+    var circleColor = this.options.circleColor;
+    var lineWidth = this.options.lineWidth;
+    var lineColor = this.options.lineColor;
+    var lineCap = this.options.lineCap;
+    var lineJoin = this.options.lineJoin;
+    this.curGeojson = {
+        "type": "FeatureCollection",
+        "features": []
+    };
+
+    this.lineString = {
+        "type": "Feature",
+        "geometry": {
+            "type": "LineString",
+            "coordinates": []
+        }
+    };
+    //dataSource
+    this._map.addSource('measure-geojson-' + this._name, {
+        "type": "geojson",
+        "data": this.curGeojson
+    });
+
+    //dataSource
+    this._map.addSource('measure-geojson-mousemove', {
+        "type": "geojson",
+        "data":  {
+            "type": "FeatureCollection",
+            "features": []
+        }
+    });
+    //线图层
+    this._map.addLayer({
+        id: 'measure-lines-' + this._name,
+        type: 'line',
+        source: 'measure-geojson-' + this._name,
+        layout: {
+            'line-cap': lineCap,
+            'line-join': lineJoin
+        },
+        paint: {
+            'line-color': lineColor,
+            'line-width': lineWidth
+        },
+        filter: ['in', '$type', 'LineString']
+    });
+
+    //点图层
+    this._map.addLayer({
+        id: 'measure-points-' + this._name,
+        type: 'circle',
+        source: 'measure-geojson-' + this._name,
+        paint: {
+            'circle-stroke-width': lineWidth,
+            'circle-stroke-color': lineColor,
+            'circle-radius': circleRadius,
+            'circle-color': circleColor,
+        },
+        filter: ['in', '$type', 'Point']
+    });
+
+    //mouseover线图层
+
+    this._map.addLayer({
+        id: 'measure-lines-mousemove',
+        type: 'line',
+        source: 'measure-geojson-mousemove',
+        layout: {
+            'line-cap': lineCap,
+            'line-join': lineJoin
+        },
+        paint: {
+            'line-color': lineColor,
+            'line-width': lineWidth
+        },
+    });
+
+     //保存所有的测绘feature、popup
+    this.geojsonList[this._name] = {geojson: this.curGeojson,popups: []};
+}
+
+
+/**
+ * @description map的点击测距按钮事件，结束测距模式
+ * @param {any} e
+ */
+MeasureControl.prototype._onMeasureEnd = function(e){
+    console.log('结束测距模式');
+    this._toggleState('off');
+
+}
+
+/**
+ * @description map的mousemove事件
+ * @param {any} e
+ */
+MeasureControl.prototype._onMousemove = function(e){
+
+    if(this.state === 'off') return;
+
+    //更新tips的位置
+    this._setTipsPosition(e.originalEvent,this.tips);
+    if(!this.point) return;
+
+    //鼠标当前位置点
+    var point = {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [e.lngLat.lng, e.lngLat.lat]
+        },
+        "properties": {}
+    };
+
+    //绘制最后一个点和鼠标当前位置的线段
+    var curcoord = this.point.geometry.coordinates;
+    var lineString = {
+        "type": "Feature",
+        "geometry": {
+            "type": "LineString",
+            "coordinates": [curcoord,[e.lngLat.lng, e.lngLat.lat]]
+        }
+    };
+
+    //测距鼠标位置和最后一个Point之间的距离
+    var distance = this._getLineDistance(lineString, 'kilometers');
+    //创建移动的线图层
+    if((distance - 0) === 0) return;
+
+    this._map.getSource('measure-geojson-mousemove').setData({
+        "type": "FeatureCollection",
+        "features": [lineString]
+    });
+
+    this.tips.innerText = '当前距离：'+ distance + 'km\n单击继续，双击结束测距';
+}
+
+/**
+ * @description Measure组件的状态切换
+ * @param {string} Oneof ['on','off']
+ * @return {bool} 是否处于测距状态
+ */
+MeasureControl.prototype._toggleState = function(state) {
+    this.state = state;
+    //禁用map双击放大效果
+    if(state === 'on') {
+        this._map.doubleClickZoom.disable();
+    }else {
+        this._map.doubleClickZoom.enable();
+    }
+}
+
+/**
+ * @description 鼠标手势的切换
+ * @param {string} 鼠标手势
+ */
+MeasureControl.prototype._toggleCursor = function(cursor) {
+    this._map.getCanvas().style.cursor = cursor;
+}
+
+/**
+ * @description 事件防冲突
+ * @param {string} 是否防冲突
+ * @param {string} 事件名称
+ */
+MeasureControl.prototype._toggleEvents = function(toggle,event) {
+    var _this = this;
+    
+    //假如没有储存对应event的事件
+    if(!this.events[event]) {
+        this.events[event] = [];
+        this._map._listeners[event].map(function(item, index) {
+            if(item.name !== 'bound ') {
+                _this.events[event].push(item);
+            }
+        });    
+    } 
+
+    if(this.events[event].length === 0) return;
+
+    //off其他不相关的event事件
+    if(toggle === 'remove') {
+        this.events[event].map(function(item, index){
+            _this._map.off(event, item);
+        });
+    }else if(toggle === 'add') {
+        //重新监听所有event事件
+        this.events[event].map(function(item, index){
+            _this._map.on(event, item);
+        });
+    }
+    
+}
+
+
+</script>
+
+
+
+<script>
+
+	// import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r115/build/three.module.js';
+	// import {OrbitControls} from 'https://threejsfundamentals.org/threejs/resources/threejs/r115/examples/jsm/controls/OrbitControls.js';
+	// import {GLTFLoader} from 'https://threejsfundamentals.org/threejs/resources/threejs/r115/examples/jsm/loaders/GLTFLoader.js';
+    
+    
+  const monument = [37.174052531268444,55.97741907825389];
+
+
+	
+    
+ 
+    
+    
+    mapboxgl.setRTLTextPlugin('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.1.0/mapbox-gl-rtl-text.js');
+      var map = new mapboxgl.Map({
+      
+      
+      
+       center: [37.174052531268444,55.97741907825389],
+      zoom: 15.5,
+      pitch: 45,
+      bearing: -17.6,
+      
+      
+        container: 'map',
+        style: 'https://api.maptiler.com/maps/5734df93-2e4f-455f-b0f5-bbcf51802a5a/style.json?key=QN6ALYSRnAohNK6Y8BiB',
+        
+        
+        
+        
+        
+        
+        attributionControl: false,
+        hash: true
+      });
+    
+
+
+    
+    
+    
+
+
+    
+
+    
+    
+    
+    
+  map.addControl(new MapboxMarkers(exampleGeojson), "top-left");
+    
+    
+    
+ 
+  var MeasureControl = new MeasureControl();
+    map.addControl(MeasureControl,'top-left');  
+    
+   
+   
+    
+   let lng;
+      let lat;
+      const lngDisplay = document.getElementById('lng');
+      const latDisplay = document.getElementById('lat');
+      const eleDisplay = document.getElementById('ele');
+
+      const marker = new mapboxgl.Marker({
+        'color': '#ff0000ff'
+      });
+      
+      
+      
+  
+
+      
+    map.on('mousemove', (event) => {
+    
+
+        // Use the returned LngLat object to set the marker location
+        // https://docs.mapbox.com/mapbox-gl-js/api/#lnglat
+        marker.setLngLat(event.lngLat).addTo(map);
+
+        lng = event.lngLat.lng;
+        lat = event.lngLat.lat;
+
+        getElevation();
+      });
+      
+      
+
+      
+      
+
+      async function getElevation() {
+        // Construct the API request
+        const query = await fetch(
+          `https://api.mapbox.com/v4/mapbox.mapbox-terrain-v2/tilequery/${lng},${lat}.json?layers=contour&limit=50&access_token=${mapboxgl.accessToken}`,
+          { method: 'GET' }
+        );
+        if (query.status !== 200) return;
+        const data = await query.json();
+        // Display the longitude and latitude values
+        lngDisplay.textContent = lng.toFixed(14);
+        latDisplay.textContent = lat.toFixed(14);
+        // Get all the returned features
+        const allFeatures = data.features;
+        // For each returned feature, add elevation data to the elevations array
+        const elevations = allFeatures.map((feature) => feature.properties.ele);
+        // In the elevations array, find the largest value
+        const highestElevation = Math.max(...elevations);
+        // Display the largest elevation value
+        eleDisplay.textContent = `${highestElevation} m`;
+      }
+      
+      
+    map.on('crosshair', (e) => {
+document.getElementById('info').innerHTML =
+// `e.point` is the x, y coordinates of the `mousemove` event
+// relative to the top-left corner of the map.
+JSON.stringify(e.point) +
+'<br />' +
+// `e.lngLat` is the longitude, latitude geographical position of the event.
+JSON.stringify(e.lngLat.wrap());  
+      
+});  
+   
+   
+
+   
+   
+   
+   
+
+    
+   const draw = new MapboxDraw({
+displayControlsDefault: true,
+// Select which mapbox-gl-draw control buttons to add to the map.
+controls: {
+line_string: true,
+point: true,
+polygon: true,
+trash: true
+},
+
+});
+map.addControl(draw, 'top-left');
+ 
+map.on('draw.create', updateArea);
+map.on('draw.delete', updateArea);
+map.on('draw.update', updateArea);
+
+ 
+function updateArea(e) {
+const data = draw.getAll();
+const answer = document.getElementById('calculated-area');
+if (data.features.length > 0) {
+const area = turf.area(data);
+// Restrict the area to 2 decimal points.
+const rounded_area = Math.round(area * 100) / 100;
+answer.innerHTML = `<p><strong>${rounded_area} m²</strong ></p>`;
+} else {
+answer.innerHTML = '';
+if (e.type !== 'draw.delete')
+alert('');
+}
+}  
+   
+
+
+   
+       
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   
+    
+    
+    
+    
+    // Add geolocate control to the map.
+map.addControl(
+new mapboxgl.GeolocateControl({
+positionOptions: {
+enableHighAccuracy: true
+},
+// When active the map will receive updates to the device's location as it changes.
+trackUserLocation: true,
+// Draw an arrow next to the location dot to indicate which direction the device is heading.
+showUserHeading: true
+})
+);
+    
+    
+    
+    
+    
+  
+
+
+    
+
+map.addControl(new MapboxTraffic());
+
+    
+    
+     map.addControl(new mapboxgl.NavigationControl({
+  visualizePitch: true,
+  showZoom: false
+}));  
+    
+    
+    
+    
+
+
+
+
+
+    
+
+
+
+// Add the specific control
+        map.addControl(map.indoor.control, 'bottom-right');
+ 
+
+
+
+
+
+
+
+
+
+
+  
+    
+     mapboxgl.setRTLTextPlugin('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js');
+map.addControl(new MapboxLanguage({
+  defaultLanguage: 'ru'
+}));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+    
+ 
+
+ 
+ 
+ 
+    
+    
+
+       <script>
+
+
+
+
+map.on('style.load', function(){
+  map.addSource('projects', {
+    'type': 'geojson',
+    
+  
+    
+    
+    'data': elevated_points
+  });
+
+  
+
+  map.addLayer({
+    'id': 'projects-pulse',
+    'type': 'circle',
+    'source': 'projects',
+    
+    'minzoom': 19,
+    
+    "paint": {
+            "circle-radius": 6,
+            "circle-color": "#FFD700"
+        }
+  }, 'road-label-navigation')
+
+  map.addLayer({
+    'id': 'projects',
+    'type': 'circle',
+    'source': 'projects',
+    
+    
+    'minzoom': 19,
+    
+    "paint": {
+            "circle-radius": 7,
+            "circle-color": "#FFD700"
+        }
+        
+
+  }, 'road-label-navigation');
+  
+  
+  
+  
+  
+  map.addLayer({
+    'id': 'projects',
+    'type': 'circle',
+    'source': 'projects',
+    
+    
+    'minzoom': 19,
+    
+    "paint": {
+            "circle-radius": 7,
+            "circle-color": "#FFD700"
+        }
+        
+
+  }, 'road-label-navigation');
+  
+  
+
+  map.setPaintProperty('projects-pulse', 'circle-color', 'white')
+  map.setPaintProperty('projects-pulse', 'circle-radius', 3)
+  
+  
+ 
+      
+  var framesPerSecond = 20;
+  var multiplier = 0.1;
+  var opacity = .01;
+  var circleRadius = 6;
+
+  function pulseMarker(timestamp){
+    setTimeout(function() {
+      requestAnimationFrame(pulseMarker)
+      multiplier += .1;
+      opacity -= ( .8 / framesPerSecond );
+      circleRadius += ( 14 / framesPerSecond );
+      
+      
+
+
+      map.setPaintProperty('projects-pulse', 'circle-opacity', opacity)
+      map.setPaintProperty('projects-pulse', 'circle-radius', circleRadius)
+
+  
+      
+      
+      
+      
+      if (opacity <= 0.9) {
+        opacity = 1;
+        circleRadius = 8;
+      }
+      
+      
+
+    }, 5000 / framesPerSecond );
+  }
+
+  pulseMarker(0);
+
+})
+
+
+
+
+
+</script> 
+
+
+   
+
+
+ 
+
+   
+   
+   
+   
+   
+   
+   
+   
+          <script>
+
+
+
+
+map.on('style.load', function(){
+  map.addSource('projects1', {
+    'type': 'geojson',
+    
+  
+    
+    
+    'data': elevated_points1
+  });
+
+  
+
+  map.addLayer({
+    'id': 'projects-pulse1',
+    'type': 'circle',
+    'source': 'projects1',
+    
+    'minzoom': 19,
+    
+    "paint": {
+            "circle-radius": 6,
+            "circle-color": "#9e9e9e"
+        }
+  }, 'road-label-navigation')
+
+  map.addLayer({
+    'id': 'projects1',
+    'type': 'circle',
+    'source': 'projects1',
+    
+    
+    'minzoom': 19,
+    
+    "paint": {
+            "circle-radius": 7,
+            "circle-color": "#9e9e9e"
+        }
+        
+
+  }, 'road-label-navigation');
+  
+  
+  
+  
+  
+  map.addLayer({
+    'id': 'projects1',
+    'type': 'circle',
+    'source': 'projects1',
+    
+    
+    'minzoom': 19,
+    
+    "paint": {
+            "circle-radius": 7,
+            "circle-color": "#FFD700"
+        }
+        
+
+  }, 'road-label-navigation');
+  
+  
+
+  map.setPaintProperty('projects-pulse1', 'circle-color', 'white')
+  map.setPaintProperty('projects-pulse1', 'circle-radius', 3)
+  
+  
+ 
+      
+  var framesPerSecond = 20;
+  var multiplier = 0.1;
+  var opacity = .01;
+  var circleRadius = 6;
+
+  function pulseMarker(timestamp){
+    setTimeout(function() {
+      requestAnimationFrame(pulseMarker)
+      multiplier += .1;
+      opacity -= ( .8 / framesPerSecond );
+      circleRadius += ( 14 / framesPerSecond );
+      
+      
+
+
+      map.setPaintProperty('projects-pulse1', 'circle-opacity', opacity)
+      map.setPaintProperty('projects-pulse1', 'circle-radius', circleRadius)
+
+  
+      
+      
+      
+      
+      if (opacity <= 0.9) {
+        opacity = 1;
+        circleRadius = 8;
+      }
+      
+      
+
+    }, 5000 / framesPerSecond );
+  }
+
+  pulseMarker(0);
+
+})
+
+
+
+
+
+</script>
+
+
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+
+
+   
+   
+      
+          <script>
+
+
+
+
+map.on('style.load', function(){
+  map.addSource('projects2', {
+    'type': 'geojson',
+    
+  
+    
+    
+    'data': elevated_points2
+  });
+
+  
+
+  map.addLayer({
+    'id': 'projects-pulse2',
+    'type': 'circle',
+    'source': 'projects2',
+    
+    'minzoom': 19,
+    
+    "paint": {
+            "circle-radius": 6,
+            "circle-color": "red"
+        }
+  }, 'road-label-navigation')
+
+  map.addLayer({
+    'id': 'projects2',
+    'type': 'circle',
+    'source': 'projects2',
+    
+    
+    'minzoom': 19,
+    
+    "paint": {
+            "circle-radius": 7,
+            "circle-color": "#3d85c6"
+        }
+        
+
+  }, 'road-label-navigation');
+  
+  
+  
+  
+  
+  map.addLayer({
+    'id': 'projects2',
+    'type': 'circle',
+    'source': 'projects2',
+    
+    
+    'minzoom': 19,
+    
+    "paint": {
+            "circle-radius": 7,
+            "circle-color": "#red"
+        }
+        
+
+  }, 'road-label-navigation');
+  
+  
+
+  map.setPaintProperty('projects-pulse2', 'circle-color', 'white')
+  map.setPaintProperty('projects-pulse2', 'circle-radius', 3)
+  
+  
+ 
+      
+  var framesPerSecond = 20;
+  var multiplier = 0.1;
+  var opacity = .01;
+  var circleRadius = 6;
+
+  function pulseMarker(timestamp){
+    setTimeout(function() {
+      requestAnimationFrame(pulseMarker)
+      multiplier += .1;
+      opacity -= ( .8 / framesPerSecond );
+      circleRadius += ( 14 / framesPerSecond );
+      
+      
+
+
+      map.setPaintProperty('projects-pulse2', 'circle-opacity', opacity)
+      map.setPaintProperty('projects-pulse2', 'circle-radius', circleRadius)
+
+  
+      
+      
+      
+      
+      if (opacity <= 0.9) {
+        opacity = 1;
+        circleRadius = 8;
+      }
+      
+      
+
+    }, 5000 / framesPerSecond );
+  }
+
+  pulseMarker(0);
+
+})
+
+
+
+
+
+</script>
+   
+   
+   
+   
+   
+   
+   
+   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+   <script>
+
+
+
+
+map.on('style.load', function(){
+  map.addSource('projects3', {
+    'type': 'geojson',
+    
+  
+    
+    
+    'data': elevated_points3
+  });
+
+  
+
+  map.addLayer({
+    'id': 'projects-pulse3',
+    'type': 'circle',
+    'source': 'projects3',
+    
+    'minzoom': 19,
+    
+    "paint": {
+            "circle-radius": 6,
+            "circle-color": "red"
+        }
+  }, 'road-label-navigation')
+
+  map.addLayer({
+    'id': 'projects3',
+    'type': 'circle',
+    'source': 'projects3',
+    
+    
+    'minzoom': 19,
+    
+    "paint": {
+            "circle-radius": 7,
+            "circle-color": "#3d85c6"
+        }
+        
+
+  }, 'road-label-navigation');
+  
+  
+  
+  
+  
+  map.addLayer({
+    'id': 'projects3',
+    'type': 'circle',
+    'source': 'projects3',
+    
+    
+    'minzoom': 19,
+    
+    "paint": {
+            "circle-radius": 7,
+            "circle-color": "#3d85c6"
+        }
+        
+
+  }, 'road-label-navigation');
+  
+  
+
+  map.setPaintProperty('projects-pulse3', 'circle-color', 'white')
+  map.setPaintProperty('projects-pulse3', 'circle-radius', 3)
+  
+  
+ 
+      
+  var framesPerSecond = 20;
+  var multiplier = 0.1;
+  var opacity = .01;
+  var circleRadius = 6;
+
+  function pulseMarker(timestamp){
+    setTimeout(function() {
+      requestAnimationFrame(pulseMarker)
+      multiplier += .1;
+      opacity -= ( .8 / framesPerSecond );
+      circleRadius += ( 14 / framesPerSecond );
+      
+      
+
+
+      map.setPaintProperty('projects-pulse3', 'circle-opacity', opacity)
+      map.setPaintProperty('projects-pulse3', 'circle-radius', circleRadius)
+
+  
+      
+      
+      
+      
+      if (opacity <= 0.9) {
+        opacity = 1;
+        circleRadius = 8;
+      }
+      
+      
+
+    }, 5000 / framesPerSecond );
+  }
+
+  pulseMarker(0);
+
+})
+
+
+
+
+
+</script>
+   
+   
+   
+   
+   
+  
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+
+
+
+
+
+
+
+
+
+   <script src="https://cdn.jsdelivr.net/gh/jscastro76/threebox@v.2.2.2/dist/threebox.min.js" type="text/javascript"></script>
+   
+   
+   
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.meshline/1.4.0/THREE.MeshLine.js" integrity="sha512-CNumL3RLkfw0m0RcHHv67JdGVqchvvNOPZnX9WP2gNzkyk82/jKCgK1kVGJV8U3Cr+mEFOFAxY6L63mUGj3TIA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   
+   
+   
+   
+   
+   <script type="x-shader/x-vertex" id="vertexShader">
+
+			attribute vec3 center;
+			varying vec3 vCenter;
+
+			void main() {
+
+				vCenter = center;
+
+				gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+
+			}
+
+		</script>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+       
+   
+   
+   
+   
+   
+   
+   
+
+
+<script>
+
+
+
+
+// parameters to ensure the model is georeferenced correctly on the map
+var modelOrigin = [37.17409849995867,55.97737925266699]//[2.318, 48.850];
+var modelAltitude = -0;
+var modelRotate = [0.57, 0.16, -501.259];
+
+
+
+
+
+
+
+
+
+
+   
+
+var modelAsMercatorCoordinate = mapboxgl.MercatorCoordinate.fromLngLat(
+  modelOrigin,
+  modelAltitude
+);
+
+
+
+
+
+// transformation parameters to position, rotate and scale the 3D model onto the map
+var modelTransform = {
+  translateX: modelAsMercatorCoordinate.x,
+  translateY: modelAsMercatorCoordinate.y,
+  translateZ: modelAsMercatorCoordinate.z,
+  rotateX: modelRotate[0],
+  rotateY: modelRotate[1],
+  rotateZ: modelRotate[2],
+  /* Since our 3D model is in real world meters, a scale transform needs to be
+   * applied since the CustomLayerInterface expects units in MercatorCoordinates.
+   */
+  scale: modelAsMercatorCoordinate.meterInMercatorCoordinateUnits()
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var THREE = window.THREE;
+
+// configuration of the custom layer for a 3D model per the CustomLayerInterface
+var customLayer = {
+  id: "3d-model",
+  type: "custom",
+            wireframe: true,
+  renderingMode: "3d",
+  onAdd: function (map, gl) {
+    this.camera = new THREE.Camera();
+    this.scene = new THREE.Scene();
+    
+    
+    
+    
+     // create two three.js lights to illuminate the model
+    var directionalLight = new THREE.DirectionalLight(0xffffff);
+    directionalLight.position.set(0, 0, 0).normalize();
+    this.scene.add(directionalLight);
+
+    var directionalLight2 = new THREE.DirectionalLight(0xffffff);
+    directionalLight2.position.set(0, 0, 0).normalize();
+    this.scene.add(directionalLight2);
+    
+    
+    
+    
+
+    
+    
+
+    // use the three.js GLTF loader to add the 3D model to the three.js scene
+    var loader = new THREE.OBJLoader();
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+             loader.load(
+    "https://www.emiia.ru/relise/modeOBJ-5.obj" , 
+    
+    
+ 
+
+      
+    (mesh) => {
+        
+        
+      
+      
+ // ?.     
+                    
+                                mesh.children[0].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xFFFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        // Контуры стен.
+                    
+                                mesh.children[1].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xFFFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+         // Стены.     
+                    
+                                mesh.children[2].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xFFFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+                 // ?.     
+                    
+                                mesh.children[3].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xFFFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+                         // ?.     
+                    
+                                mesh.children[4].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xFFFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+         // ?.     
+                    
+                                mesh.children[5].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xffFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+
+        
+      // Y.     
+                    
+                                mesh.children[6].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0x66ff00,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });  
+        
+
+
+
+    
+     // X.     
+                    
+                                mesh.children[7].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xff2400 ,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });  
+    
+    
+    
+    
+    
+    //Z.     
+                    
+                                mesh.children[8].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0x3D85C6,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });  
+        
+        
+        
+        
+        
+        
+         //Основная решетка.     
+                    
+                                mesh.children[9].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xFFFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });  
+    
+        
+        
+     
+        
+        this.scene.add(mesh);
+      }
+    );
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+   
+      
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+    
+     loader.load(
+    "https://www.emiia.ru/relise/modeOBJ-2.obj" , 
+    
+    
+   
+
+      
+
+      
+    (mesh) => {
+        
+        
+        
+        
+       
+        
+        
+        
+    
+        
+
+        
+      
+      
+      
+      
+ // Лесничная площадка.     
+                    
+                                mesh.children[0].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xFFFFFF,
+          opacity: 0.95,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+        // Верхние грани.     
+                    
+                                mesh.children[1].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xffFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+             // Стены.     
+                    
+                                mesh.children[2].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xE8E8E8,
+          opacity: 0.83,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+   
+ 
+              // Внутренние грани наружных окон.     
+                    
+                                mesh.children[3].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xD3D3D3,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+         
+              // Унитаз и умывальник.     
+                    
+                                mesh.children[4].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xFFFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+ 
+        
+        
+        
+        
+        
+                    // Рамы внешних окон.     
+                    
+                                mesh.children[5].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xFFFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+        
+                            // Вертикальные ребра стен (стыки).     
+                    
+                                mesh.children[6].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xE8E8E8,
+          opacity: 0.8,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+                                    //Смеситель.     
+                    
+                                mesh.children[7].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xFFffff,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+  
+  
+  
+  
+  
+                                      //Стекла окон на лестничных площадках.     
+                    
+                                mesh.children[8].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xFFFFFF,
+          opacity: 0,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+         //Внутренние грани окон на лестничных площадках.
+        
+        
+                                       mesh.children[9].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xD3D3D3,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+                                             //Внутренние грани внешних окон.     
+                    
+                                mesh.children[10].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xD3D3D3,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+                                                     //Стекла внешних окон.     
+                    
+                                mesh.children[11].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xD3D3D3,
+          opacity: 0,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+  
+  
+  
+  
+  
+  
+  
+  
+    
+                                      //Полотно внутренних дверей.     
+                    
+                                mesh.children[12].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xFFFFFF,
+          opacity: 0.9,
+          transparent: true,
+          fog: false
+        });
+  
+  
+  
+  
+  
+  
+  
+                                        //Внутренний наличник дверей внутри.     
+                    
+                                mesh.children[13].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xd3d3d3,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+  
+  
+  
+  
+  
+  
+    
+                                        //Внутренние двери (внутренние грани1).     
+                    
+                                mesh.children[14].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xD3D3D3,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+  
+  
+  
+  
+  
+  
+  
+  
+  
+      
+                                        //Внутренние двери (внутренние грани2).     
+                    
+                                mesh.children[15].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xD3D3D3,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+  
+  
+  
+  
+                                          //Пожарный оповещатель.     
+                    
+                                mesh.children[16].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xFFFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+   
+ 
+ 
+ 
+ 
+ 
+ 
+        
+        
+        this.scene.add(mesh);
+      }
+    );
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   
+    this.map = map;
+
+    // use the Mapbox GL JS map canvas for three.js
+    this.renderer = new THREE.WebGLRenderer({
+      canvas: map.getCanvas(),
+      context: gl,
+                wireframe: true,
+                
+               
+                
+                
+                
+      antialias: true
+    });
+       
+    
+    
+
+    
+
+    
+     this.renderer.autoClear = false;
+  },
+  render: function (gl, matrix) {
+    var rotationX = new THREE.Matrix4().makeRotationAxis(
+      new THREE.Vector3(0, 0, 0),
+      modelTransform.rotateX
+    );
+    var rotationY = new THREE.Matrix4().makeRotationAxis(
+      new THREE.Vector3(0, 0, 0),
+      modelTransform.rotateY
+    );
+    var rotationZ = new THREE.Matrix4().makeRotationAxis(
+      new THREE.Vector3(0, 0, 1),
+      modelTransform.rotateZ
+    );
+    
+    
+    
+
+
+    var m = new THREE.Matrix4().fromArray(matrix);
+    var l = new THREE.Matrix4()
+      .makeTranslation(
+        modelTransform.translateX,
+        modelTransform.translateY,
+        modelTransform.translateZ
+      )
+      .scale(
+        new THREE.Vector3(
+          modelTransform.scale,
+          -modelTransform.scale,
+          modelTransform.scale
+        )
+      )
+      .multiply(rotationX)
+      .multiply(rotationY)
+      .multiply(rotationZ);
+
+    this.camera.projectionMatrix = m.multiply(l);
+    this.renderer.resetState();
+    this.renderer.render(this.scene, this.camera);
+    this.map.triggerRepaint();
+  }
+};
+
+    
+
+   
+
+map.on("style.load", () => {
+  map.addLayer(customLayer, "waterway-label");
+});
+
+
+
+
+
+
+
+
+
+
+
+     
+
+</script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+  
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+<script>  
+    
+    // create the popup
+const popup = new mapboxgl.Popup({ offset: 25 })
+   .setHTML("<iframe top:0;left:0;position:absolute;  allowfullscreen:true; width=335 height=500  frameborder='0'   src=https://www.emiia.ru/relise/i.html></iframe>")
+   
+
+// create DOM element for the marker
+var el = document.createElement('div');
+el.id = 'marker';
+
+
+
+// create the marker
+new mapboxgl.Marker(el)
+.setLngLat(monument)
+.setPopup(popup) // sets a popup on this marker
+.addTo(map);
+
+
+
+    
+ </script>  
+
+
+
+    
+
+    
+    
+    
+
+    
+    
+    
+
+ 
+     
+ <script> 
+    
+ map.on('load', () => {
+// Insert the layer beneath any symbol layer.
+const layers = map.getStyle().layers;
+const labelLayerId = layers.find(
+(layer) => layer.type === 'symbol' && layer.layout['text-field']
+).id;
+ 
+// The 'building' layer in the Mapbox Streets
+// vector tileset contains building height data
+// from OpenStreetMap.
+map.addLayer(
+{
+'id': 'add-3d-buildings',
+'source': 'composite',
+'source-layer': 'building',
+'filter': ['==', 'extrude', 'true'],
+'type': 'fill-extrusion',
+
+
+'minzoom': 14,
+'maxzoom': 19,
+
+
+
+'paint': {
+'fill-extrusion-color': '#aaa',
+ 
+// Use an 'interpolate' expression to
+// add a smooth transition effect to
+// the buildings as the user zooms in.
+'fill-extrusion-height': [
+'interpolate',
+['linear'],
+['zoom'],
+15,
+0,
+15.05,
+['get', 'height']
+],
+'fill-extrusion-base': [
+'interpolate',
+['linear'],
+['zoom'],
+15,
+0,
+15.05,
+['get', 'min_height']
+],
+'fill-extrusion-opacity': 0.2
+
+
+
+
+
+}
+},
+labelLayerId
+);
+});
+
+
+
+    
+    
+  </script> 
+ 
+ 
+
+ 
+
+    
+    
+
+    
+    
+    
+   <script>
+
+
+      map.on('load', () => {
+        map.addSource('trees', {
+          'type': 'geojson',
+          'data': 'https://raw.githubusercontent.com/EMIIA/www.emiia.ai/master/json/circlegeojson.geojson'
+        });
+
+        map.addLayer(
+          {
+            'id': 'trees-heat',
+            'type': 'heatmap',
+            'source': 'trees',
+            
+            'minzoom': 19,
+
+            
+
+            'paint': {
+              // increase weight as diameter breast height increases
+              'heatmap-weight': {
+                'property': 'dbh',
+                'type': 'exponential',
+                'stops': [
+                  [3, 0],
+                  [3, 0]
+                ]
+              },
+              // increase intensity as zoom level increases
+              'heatmap-intensity': {
+                'stops': [
+                  [3, 0],
+                  [3, 0]
+                ]
+              },
+              // use sequential color palette to use exponentially as the weight increases
+              'heatmap-color': [
+                'interpolate',
+                ['linear'],
+                ['heatmap-density'],
+                40,
+                'rgba(293,209,234,80)',
+                0.1,
+                'rgb(103,169,207,80)',
+                0.2,
+                'rgb(166,189,219,80)',
+                0.3,
+                'rgb(103,169,207,80)',
+                0.4,
+                'rgb(28,144,153,80)'
+                
+            
+              ],
+              // increase radius as zoom increases
+              'heatmap-radius': {
+                'stops': [
+                  [3, 2],
+                  [3, 2]
+                ]
+              },
+              // decrease opacity to transition into the circle layer
+              'heatmap-opacity': {
+                'default': 1,
+                'stops': [
+                  [3, 1],
+                  [3, 0]
+                ]
+              }
+            }
+          },
+          'waterway-label'
+        );
+
+        map.addLayer(
+          {
+            'id': 'trees-point',
+            'type': 'circle',
+            'source': 'trees',
+            'maxzoom': 0,
+            'paint': {
+              // increase the radius of the circle as the zoom level and dbh value increases
+              'circle-radius': {
+                'property': 'dbh',
+                'type': 'exponential',
+                'stops': [
+ [{ zoom: 2, value: 20 }, 100],
+
+                ]
+              },
+              'circle-color': {
+                'property': 'dbh',
+                'type': 'exponential',
+                'stops': [
+                  [50, 'rgba(193,209,234,0.5)']
+
+
+                ]
+              },
+              'circle-stroke-color': '#C1D1EA',
+              'circle-stroke-width': 0.1,
+            
+           
+              'circle-opacity': {
+                'stops': [
+                  [0, 0],
+                  [3, 1]
+                ]
+              }
+            }
+          },
+          'waterway-label'
+        );
+        
+        
+        map.setLayerZoomRange('trees-point', 0, 17);
+        
+      });
+
+     
+      
+      
+    </script>
+
+
+
+
+
+    
+    
+    
+    
+    
+
+
+
+    
+    
+    
+    
+    
+
+
+
+   
+    
+    
+    
+      
+ 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script>
+
+
+ 
+// A simple line from origin to destination.
+const route = {
+'type': 'FeatureCollection',
+'id': '888',
+'features': [
+{
+'type': 'Feature',
+'id': '888',
+'geometry': {
+'type': 'LineString',
+'coordinates': [[37.17417951425341,55.97743710357804], [37.17415334020461,55.977424607030116], [37.17408685623059,55.977430543896844], [37.17405923582942,55.97735488266653],[37.1740015268208,55.97736016541478], [37.17405923582942,55.97735488266653], [37.17408685623059,55.977430543896844], [37.17415334020461,55.977424607030116],[37.17417951425341,55.97743710357804],[37.17415334020461,55.977424607030116], [37.17408685623059,55.977430543896844], [37.17405923582942,55.97735488266653],[37.1740015268208,55.97736016541478], [37.17405923582942,55.97735488266653], [37.17408685623059,55.977430543896844], [37.17415334020461,55.977424607030116],[37.17417951425341,55.97743710357804]]
+}
+}
+]
+};
+
+
+
+
+// A single point that animates along the route.
+// Coordinates are initially set to origin.
+const point = {
+'type': 'FeatureCollection',
+'id': '888',
+'features': [
+{
+'type': 'Feature',
+'properties': {},
+'geometry': {
+'type': 'Point',
+'coordinates': origin
+}
+}
+]
+};
+ 
+// Calculate the distance in kilometers between route start/end point.
+const lineDistance = turf.length(route.features[0]);
+ 
+const arc = [];
+ 
+// Number of steps to use in the arc and animation, more steps means
+// a smoother arc and animation, but too many steps will result in a
+// low frame rate
+const steps = 300000;
+ 
+// Draw an arc between the `origin` & `destination` of the two points
+for (let i = 0; i < lineDistance; i += lineDistance / steps) {
+const segment = turf.along(route.features[0], i);
+arc.push(segment.geometry.coordinates);
+}
+ 
+// Update the route with calculated arc coordinates
+route.features[0].geometry.coordinates = arc;
+ 
+// Used to increment the value of the point measurement against the route.
+let counter = 0;
+ 
+map.on('load', () => {
+// Add a source and layer displaying a point which will be animated in a circle.
+map.addSource('route', {
+'type': 'geojson',
+'data': route
+});
+
+
+
+
+
+
+
+
+    
+
+
+
+ 
+map.addSource('point', {
+'type': 'geojson',
+'data': point
+});
+ 
+map.addLayer({
+'id': 'route',
+'source': 'route',
+'type': 'line',
+'paint': {
+'line-width': 0,
+
+'line-color': 'red'
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+});
+ 
+map.addLayer({
+'id': 'point',
+'source': 'point',
+
+'minzoom': 19,
+
+
+
+
+
+
+'type': 'symbol',
+'layout': {
+// This icon is a part of the Mapbox Streets style.
+// To view all images available in a Mapbox style, open
+// the style in Mapbox Studio and click the "Images" tab.
+// To add a new image to the style at runtime see
+// https://docs.mapbox.com/mapbox-gl-js/example/add-image/
+'icon-image': 'pulsing-dot',
+'icon-size': 0.6,
+
+'icon-rotate': ['get', 'bearing'],
+
+'icon-allow-overlap': true,
+'icon-ignore-placement': true
+}
+}, 'road-label-navigation');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function animate() {
+const start =
+route.features[0].geometry.coordinates[
+counter >= steps ? counter - 0 : counter
+];
+const end =
+route.features[0].geometry.coordinates[
+counter >= steps ? counter : counter + 0
+];
+if (!start || !end) return;
+ 
+// Update point geometry to a new position based on counter denoting
+// the index to access the arc
+point.features[0].geometry.coordinates =
+route.features[0].geometry.coordinates[counter];
+ 
+// Calculate the bearing to ensure the icon is rotated to match the route arc
+// The bearing is calculated between the current point and the next point, except
+// at the end of the arc, which uses the previous point and the current point
+point.features[0].properties.bearing = turf.bearing(
+turf.point(start),
+turf.point(end)
+);
+ 
+// Update the source with this new data
+map.getSource('point').setData(point);
+ 
+// Request the next frame of animation as long as the end has not been reached
+if (counter < steps) {
+requestAnimationFrame(animate);
+}
+ 
+ 
+ 
+
+ 
+ 
+counter = counter + 30;
+}
+ 
+document.getElementById('replay').addEventListener('click', () => {
+// Set the coordinates of the original point back to origin
+point.features[0].geometry.coordinates = origin;
+ 
+// Update the source layer
+map.getSource('point').setData(point);
+ 
+// Reset the counter
+counter = 0;
+
+
+ 
+// Restart the animation
+animate(counter);
+});
+ 
+// Start the animation
+animate(counter);
+});
+
+
+
+
+
+ 
+const size = 180;
+ 
+// This implements `StyleImageInterface`
+// to draw a pulsing dot icon on the map.
+const pulsingDot = {
+width: size,
+height: size,
+data: new Uint8Array(size * size * 4),
+ 
+// When the layer is added to the map,
+// get the rendering context for the map canvas.
+onAdd: function () {
+const canvas = document.createElement('canvas');
+canvas.width = this.width;
+canvas.height = this.height;
+this.context = canvas.getContext('2d');
+},
+ 
+// Call once before every frame where the icon will be used.
+render: function () {
+const duration = 1000;
+const t = (performance.now() % duration) / duration;
+ 
+const radius = (size / 2) * 0.3;
+const outerRadius = (size / 2) * 0.7 * t + radius;
+const context = this.context;
+ 
+// Draw the outer circle.
+context.clearRect(0, 0, this.width, this.height);
+context.beginPath();
+context.arc(
+this.width / 2,
+this.height / 2,
+outerRadius,
+0,
+Math.PI * 0
+);
+context.fillStyle = `rgba(61, 133, 198, ${1 - t})`;
+context.fill();
+ 
+// Draw the inner circle.
+context.beginPath();
+context.arc(
+this.width / 2,
+this.height / 2,
+radius,
+0,
+Math.PI * 2
+);
+context.fillStyle = '#3d85c6';
+context.strokeStyle = 'white';
+context.lineWidth = 5 + 5 * (1 - t);
+context.fill();
+context.stroke();
+ 
+// Update this image's data with data from the canvas.
+this.data = context.getImageData(
+0,
+0,
+this.width,
+this.height
+).data;
+ 
+// Continuously repaint the map, resulting
+// in the smooth animation of the dot.
+map.triggerRepaint();
+ 
+// Return `true` to let the map know that the image was updated.
+return true;
+}
+};
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+ 
+
+
+
+
+
+
+
+
+
+ 
+map.on('load', () => {
+map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
+ 
+map.addSource('dot-point', {
+'type': 'geojson',
+'data': {
+'type': 'FeatureCollection',
+'id': '888',
+'features': [
+{
+'type': 'Feature',
+'id': '888',
+'geometry': {
+'type': 'Point',
+'coordinates': [0, 0] // icon position [lng, lat]
+}
+}
+]
+}
+});
+
+
+
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+        
+        
+        
+        
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+
+
+
+   
+   
+   
+   
+   
+   
+   
+   
+   
+        
+        
+        
+        
+        
+        
+
+
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+var elevated_points= {
+  "type": "FeatureCollection",
+  "features": [
+
+
+{
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+     37.17403983330939, 55.97740800874055
+        ]
+      }
+    },
+
+    
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+         37.16409849995867,55.97737925266699
+        ]
+      }
+    }
+  ]
+}
+
+map.on('style.load', function(){
+  map.addSource('projects', {
+    'type': 'geojson',
+    'data': elevated_points
+  });
+
+
+
+
+  function pulseMarker(timestamp){
+    setTimeout(function() {
+      requestAnimationFrame(pulseMarker)
+      multiplier += .1;
+      opacity -= ( 1.3 / framesPerSecond );
+      circleRadius += ( 1000 / framesPerSecond );
+
+
+
+  
+
+      map.setPaintProperty('projects-pulse', 'circle-opacity', opacity)
+      map.setPaintProperty('projects-pulse', 'circle-radius', circleRadius)
+
+      if (opacity <= 1) {
+        opacity = 1;
+        circleRadius = 2;
+      }
+
+    }, 1000 / framesPerSecond );
+  }
+
+  pulseMarker(0);
+
+})
+
+
+  
+  
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+var elevated_points1= {
+  "type": "FeatureCollection",
+  "features": [
+
+
+{
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+
+          37.17413527830573, 55.97739669143479
+          
+          
+        ]
+      }
+    },
+
+    
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+         37.16409849995867,55.97737925266699
+        ]
+      }
+    }
+  ]
+}
+
+map.on('style.load', function(){
+  map.addSource('projects1', {
+    'type': 'geojson',
+    'data': elevated_points1
+  });
+
+
+
+
+  function pulseMarker(timestamp){
+    setTimeout(function() {
+      requestAnimationFrame(pulseMarker)
+      multiplier += .1;
+      opacity -= ( 1.3 / framesPerSecond );
+      circleRadius += ( 1000 / framesPerSecond );
+
+
+
+  
+
+      map.setPaintProperty('projects-pulse1', 'circle-opacity', opacity)
+      map.setPaintProperty('projects-pulse1', 'circle-radius', circleRadius)
+
+      if (opacity <= 1) {
+        opacity = 1;
+        circleRadius = 2;
+      }
+
+    }, 1000 / framesPerSecond );
+  }
+
+  pulseMarker(0);
+
+})
+
+
+  
+  
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+var elevated_points2= {
+  "type": "FeatureCollection",
+  "features": [
+
+
+{
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+
+          37.17403799469756, 55.97741206218663
+          
+          
+        ]
+      }
+    },
+
+    
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+         37.16409849995867,55.97737925266699
+        ]
+      }
+    }
+  ]
+}
+
+map.on('style.load', function(){
+  map.addSource('projects2', {
+    'type': 'geojson',
+    'data': elevated_points2
+  });
+
+
+
+
+  function pulseMarker(timestamp){
+    setTimeout(function() {
+      requestAnimationFrame(pulseMarker)
+      multiplier += .1;
+      opacity -= ( 1.3 / framesPerSecond );
+      circleRadius += ( 1000 / framesPerSecond );
+
+
+
+  
+
+      map.setPaintProperty('projects-pulse2', 'circle-opacity', opacity)
+      map.setPaintProperty('projects-pulse2', 'circle-radius', circleRadius)
+
+      if (opacity <= 1) {
+        opacity = 1;
+        circleRadius = 2;
+      }
+
+    }, 1000 / framesPerSecond );
+  }
+
+  pulseMarker(0);
+
+})
+
+
+  
+  
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+var elevated_points3= {
+  "type": "FeatureCollection",
+  "features": [
+
+
+{
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+
+          37.17403005800458, 55.97741234166935
+          
+          
+        ]
+      }
+    },
+
+    
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+         37.16409849995867,55.97737925266699
+        ]
+      }
+    }
+  ]
+}
+
+map.on('style.load', function(){
+  map.addSource('projects3', {
+    'type': 'geojson',
+    'data': elevated_points3
+  });
+
+
+
+
+  function pulseMarker(timestamp){
+    setTimeout(function() {
+      requestAnimationFrame(pulseMarker)
+      multiplier += .1;
+      opacity -= ( 1.3 / framesPerSecond );
+      circleRadius += ( 1000 / framesPerSecond );
+
+
+
+  
+
+      map.setPaintProperty('projects-pulse2', 'circle-opacity', opacity)
+      map.setPaintProperty('projects-pulse2', 'circle-radius', circleRadius)
+
+      if (opacity <= 1) {
+        opacity = 1;
+        circleRadius = 2;
+      }
+
+    }, 1000 / framesPerSecond );
+  }
+
+  pulseMarker(0);
+
+})
+
+
+  
+  
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+    <script>
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SXCK9F16F5');
+  
+  
+  
+  let tg = window.Telegram.WebApp; //получаем объект webapp телеграма target="_blank"  
+
+   tg.expand(); //расширяем на все окно  
+  
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+
+
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
+
+
+
+
+
+
+
+<script>
+   
+    $("[data-toggle='collapse']").on('click', function () {
+      $("[data-toggle='collapse']").removeClass('current');
+      $(this).addClass("current");
+  $(this).toggleClass("oppened"); 
+       $("[data-toggle='collapse']").not('.current').removeClass('oppened');
+});
+
+
+
+// Collapse accordion every time dropdown is shown
+$('.dropdown-accordion').on('show.bs.dropdown', function (event) {
+  var accordion1 = $(this).find($(this).data('accordion'));
+  accordion1.find('.panel-collapse.in').collapse('hide');
+  $("[data-toggle='collapse']").removeClass('oppened');
+});
+
+// Prevent dropdown to be closed when we click on an accordion link
+$('.dropdown-accordion').on('click', 'a[data-toggle="collapse"]', function (event) {
+  event.preventDefault();
+  event.stopPropagation();
+  $($(this).data('parent')).find('.panel-collapse.in').collapse('hide');
+  $($(this).attr('href')).collapse('show');
+  
+});
+
+
+
+// Close Nav When Link Is Selected
+$('.panel-body a[href^="#section"], a[href^="#section"]').on('click', function(){
+    $('.navbar-collapse').collapse('hide');
+	$('.dropdown-toggle').click();
+});
+
+
+//Smooth Scrolling For Internal Page Links
+$(function() {
+  $('.list-group a[href*=#]:not([href=#]), a[href="#toTop"]').click(function() {
+	if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+	  var target = $(this.hash);
+	  target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+	  if (target.length) {
+		$('html,body').animate({
+		  scrollTop: target.offset().top
+		}, 1000);
+		return false;
+	  }
+	}
+  });
+});
+
+</script>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
