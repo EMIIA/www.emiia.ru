@@ -37,10 +37,7 @@ var map = new mapboxgl.Map({
     [38.3135420226066969, 56.1505434064830737] // Northeast coordinates
   ]
 });
-map.addControl(new mapboxgl.AttributionControl({
-    customAttribution:
-      "<a href=https://www.google.com/ target=`_blank`>© 2020 Google</a>"
-  }), "bottom-left");
+
 const themeColor = "#ff5575";
 const c0 = "#006ff7";
 const c1 = "#484848";
