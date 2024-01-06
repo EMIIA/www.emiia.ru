@@ -53,11 +53,13 @@
   <script src="https://www.unpkg.com/@watergis/maplibre-gl-legend@latest/dist/maplibre-gl-legend.umd.js"></script>
   
   
-  
-  <script src="https://cdn.maptiler.com/maplibre-gl-js/v2.4.0/maplibre-gl.js"></script>
-  <link href="https://cdn.maptiler.com/maplibre-gl-js/v2.4.0/maplibre-gl.css" rel="stylesheet" />
+
   
   
+  
+  
+  <link rel='stylesheet' href='https://unpkg.com/maplibre-gl@3.5.1/dist/maplibre-gl.css' />
+  <script src='https://unpkg.com/maplibre-gl@3.5.1/dist/maplibre-gl.js'></script>
   
   
   <style>
@@ -79,14 +81,7 @@
     
     
     
-    "fog": {
-    "range": [0.8, 8],
-    "color": "#dc9f9f",
-    "horizon-blend": 0.5,
-    "high-color": "#245bde",
-    "space-color": "#000000",
-    "star-intensity": 0.15
-}
+   
     
     
     
@@ -119,6 +114,8 @@
         bearing: 172,
     maxPitch: 85,
     attributionControl: false,
+    
+    antialias: true,
     
     hash: true,
         maxZoom: 24
@@ -205,8 +202,7 @@
       
        }); 
       
-      
-      
+
       
       
    // eslint-disable-next-line no-undef
