@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Display a 3D Map</title>
+  
+  
+  
+  <script src="https://cdn.maptiler.com/maplibre-gl-js/v2.4.0/maplibre-gl.js"></script>
+  <link href="https://cdn.maptiler.com/maplibre-gl-js/v2.4.0/maplibre-gl.css" rel="stylesheet" />
+  
+  
+  
+  
+  <style>
+    body { 
+      margin: 0; 
+      padding: 0;
+    }
+
+    #map { 
+      position: absolute; 
+      top: 0; 
+      bottom: 0; 
+      width: 100%; 
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const key = urlParams.get('key') || 'QN6ALYSRnAohNK6Y8BiB';      
+      const map = new maplibregl.Map({
+        container: 'map', // container id
+        style: `https://api.maptiler.com/maps/5734df93-2e4f-455f-b0f5-bbcf51802a5a/style.json?key=QN6ALYSRnAohNK6Y8BiB`, // style URL
+        center: [6.85684, 45.83595], // starting position [lng, lat]
+        zoom: 14, // starting zoom
+        pitch: 61,
+        bearing: 172,
+    maxPitch: 85,
+    attributionControl: false,
+        maxZoom: 24
+      });
+      
+     
+      
+  </script>
+</body>
+</html>
