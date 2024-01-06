@@ -33,8 +33,11 @@ mapboxgl.setRTLTextPlugin('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl
       
        center: [37.174052531268444,55.97741907825389],
       zoom: 15.5,
-      pitch: 45,
-      bearing: -17.6,
+
+
+
+        pitch: 60, // pitch in degrees
+bearing: -60, // bearing in degrees
       
       
         container: 'map',
