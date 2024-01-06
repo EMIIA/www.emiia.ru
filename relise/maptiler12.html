@@ -151,7 +151,7 @@ const urlParams = new URLSearchParams(window.location.search);
         });
         map.setTerrain({
           source: "terrain",
-          exaggeration: 0.3
+          exaggeration: 0.05
         });
       });
       map.on('error', function(err) {
@@ -161,12 +161,7 @@ const urlParams = new URLSearchParams(window.location.search);
   
   
 
-      
- 
-          
-    
   
-
 
   // The 'building' layer in the streets vector source contains building-height
   // data from OpenStreetMap.
@@ -199,7 +194,14 @@ const urlParams = new URLSearchParams(window.location.search);
               'source': 'openmaptiles',
               'source-layer': 'building',
               'type': 'fill-extrusion',
+
+              
+              
               'minzoom': 15,
+'maxzoom': 19,
+              
+              
+              
               'paint': {
                   'fill-extrusion-color': [
                       'interpolate',
