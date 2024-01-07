@@ -1,5 +1,6 @@
 
 
+
   
   
   <!DOCTYPE html>
@@ -133,11 +134,11 @@ const urlParams = new URLSearchParams(window.location.search);
         zoom: 17, // starting zoom
         pitch: 40,
         bearing: 20,
-    maxPitch: 85,
+    maxPitch: 50,
     attributionControl: false,
     
     
-    antialias: true,
+    antialias: false,
     
     hash: true,
     
@@ -271,7 +272,7 @@ rotation: { x: 90, y: -90, z: 0 }
 };
  
 tb.loadObj(options, (model) => {
-model.setCoords([-73.976799, 40.754145]);
+model.setCoords([37.184052531268444,55.97741907825389]);
 model.setRotation({ x: 0, y: 0, z: 241 });
 tb.add(model);
 });
@@ -292,6 +293,8 @@ tb.update();
 
 </body>
 </html>
+
+
 
 
 
