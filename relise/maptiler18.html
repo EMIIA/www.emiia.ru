@@ -1,6 +1,7 @@
 
 
 
+
   
   
   <!DOCTYPE html>
@@ -176,15 +177,19 @@ const urlParams = new URLSearchParams(window.location.search);
         const targets = {
           Residential: "Residential",
           Water: "Water",
-          POI: "POI",
           Building: "Building",
           Airport: "Airport",
           "Other POI": "Pois",
         };
+        
+        
+        
+        
+        
         const options = {
           showDefault: false,
           showCheckbox: true,
-          onlyRendered: true,
+          onlyRendered: false,
           reverseOrder: true
         };
         map.addControl(new MaplibreLegendControl.MaplibreLegendControl(targets, options), "bottom-left");
@@ -351,6 +356,8 @@ tb.update();
 
 </body>
 </html>
+
+
 
 
 
