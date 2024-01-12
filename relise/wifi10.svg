@@ -1,23 +1,6 @@
 <svg id="резерв" xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29">
   <title>местоположение</title>
-  <circle cx="14.71" cy="14.52" r="1.9" style="fill: #333">
   
-  
-  <animate
-       values="0.5;1;0.5"
-       restart="always"
-       id="one"
-       fill="remove"
-       dur="300ms"
-       calcMode="linear"
-       begin="0s;four.end+0.05s"
-       attributeName="fill-opacity"
-       additive="replace"
-       accumulate="none" />
-       
-             
-    
-  </circle>
   
   <circle cx="14.71" cy="14.52" r="1.9" style="fill: #6b6b69">
   
