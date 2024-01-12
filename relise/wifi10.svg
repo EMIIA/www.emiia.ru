@@ -1,0 +1,116 @@
+<svg id="резерв" xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29">
+  <title>местоположение</title>
+  <circle cx="14.71" cy="14.52" r="1.9" style="fill: #333">
+  
+  
+  <animate
+       values="0.5;1;0.5"
+       restart="always"
+       id="one"
+       fill="remove"
+       dur="300ms"
+       calcMode="linear"
+       begin="0s;four.end+0.05s"
+       attributeName="fill-opacity"
+       additive="replace"
+       accumulate="none" />
+       
+             
+    
+  </circle>
+  
+  <circle cx="14.71" cy="14.52" r="1.9" style="fill: #6b6b69">
+  
+  
+  <animate
+       values="0.5;1;0.5"
+       restart="always"
+       id="one"
+       fill="remove"
+       dur="500ms"
+       calcMode="linear"
+       begin="0s;four.end+0.05s"
+       attributeName="fill-opacity"
+       additive="replace"
+       accumulate="none" />
+       
+       
+              
+  </circle>
+  
+   
+<path d="M21.58,13.64H19.65a.3.3,0,0,1-.29-.23,4.8,4.8,0,0,0-3.55-3.54.3.3,0,0,1-.23-.29V7.66a.31.31,0,0,1,.32-.3h0a7.26,7.26,0,0,1,6,5.94.31.31,0,0,1-.28.34Z" style="fill: #6b6b69">
+
+
+    <animate
+       values="0.5;1;0.5"
+       restart="always"
+       id="one"
+       fill="remove"
+       dur="500ms"
+       calcMode="linear"
+       begin="0s;four.end+0.05s"
+       attributeName="fill-opacity"
+       additive="replace"
+       accumulate="none" /> 
+       
+    
+  </path>
+
+
+  <path d="M25.28,13.64h-1.9a.29.29,0,0,1-.29-.26,8.46,8.46,0,0,0-7.25-7.24.29.29,0,0,1-.26-.29V4a.31.31,0,0,1,.32-.3h0a11,11,0,0,1,9.67,9.66.31.31,0,0,1-.29.33Z" style="fill: #6b6b69">
+  
+  
+  
+  
+  <animate
+       values="0.5;1;0.5"
+       restart="always"
+       id="one"
+       fill="remove"
+       dur="500ms"
+       calcMode="linear"
+       begin="0s;four.end+0.05s"
+       attributeName="fill-opacity"
+       additive="replace"
+       accumulate="none" /> 
+       
+       
+</path>   
+    
+
+  
+  
+  
+  <path d="M21.94,15.67a7.3,7.3,0,0,1-6,6.05.31.31,0,0,1-.35-.3V19.48a.29.29,0,0,1,.23-.29,4.81,4.81,0,0,0,3.56-3.63.3.3,0,0,1,.29-.24h1.93A.31.31,0,0,1,21.94,15.67Z" style="fill: #6b6b69"  />   
+
+  
+  
+  
+  <path d="M13.94,19.51v1.94a.31.31,0,0,1-.35.3,7.3,7.3,0,0,1-6.11-6.08.31.31,0,0,1,.3-.35H9.72a.29.29,0,0,1,.29.24,4.81,4.81,0,0,0,3.69,3.66A.29.29,0,0,1,13.94,19.51Z" style="fill: #6b6b69" />   
+    
+
+  
+  
+  
+  <path d="M13.94,7.59V9.53a.3.3,0,0,1-.24.29A4.8,4.8,0,0,0,10,13.41a.29.29,0,0,1-.29.23H7.8a.31.31,0,0,1-.3-.35,7.31,7.31,0,0,1,6.09-6A.31.31,0,0,1,13.94,7.59Z" style="fill: #6b6b69" />   
+    
+
+  
+  
+   
+  
+  
+  <animateTransform
+       dur="5s"
+       begin="0s"
+    		from="0 0.01 0.01"
+    		to="360 0.01 0.01"
+       type="rotate"
+       repeatCount="indefinite"
+       attributeName="transform" />
+       
+
+       
+  
+</svg>
