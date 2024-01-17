@@ -1,0 +1,222 @@
+
+
+<svg id="svg10" xmlns="http://www.w3.org/2000/svg" width="38" height="63" viewBox="0 0 38 63">
+  <title>IPS</title>
+  
+  
+  
+
+   
+  
+  
+  <path id="path2" d="M35.5,17.79A16.43,16.43,0,0,1,22.15,35.05a2.33,2.33,0,0,0-.8.44l-1.87,2.22a.7.7,0,0,1-1,0L16.63,35.5a1.2,1.2,0,0,0-.8-.44A16.5,16.5,0,1,1,35.5,17.79Z" style="fill: #fff;stroke: #d2d2d255; stroke-width: 2.525520086288452px">
+  
+  
+  <animateMotion
+       repeatCount="indefinite"
+       dur="4s"
+       values="0,0;0,16;0,0"
+       type="translate"
+       attributeName="transform" />
+  
+  </path>
+  
+  
+  
+  
+  
+    
+    <circle cx="19.03" cy="18.9" r="5" style="fill: #3d85c6">
+    
+        <animate attributeName="r" from="1.1" to="19" dur="1.9s" begin="0s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" from="1" to="0" dur="1.9s" begin="0s" repeatCount="indefinite"/>
+    
+    
+    
+    <animateMotion
+       repeatCount="indefinite"
+       dur="4s"
+       values="0,0;0,16;0,0"
+       type="translate"
+       attributeName="transform" />
+
+   </circle>
+  
+  
+  
+  
+  
+  <path d="M26.21,21.06a7.5,7.5,0,0,1-5,5,.71.71,0,0,1-.91-.67v-1a.78.78,0,0,1,.49-.81,5,5,0,0,0,2.95-2.95.72.72,0,0,1,.67-.49h1.15A.71.71,0,0,1,26.21,21.06Z" style="fill: #d2d2d2">
+  
+  
+  
+  <animateMotion
+       repeatCount="indefinite"
+       dur="4s"
+       values="0,0;0,16;0,0"
+       type="translate"
+       attributeName="transform" />
+  
+  </path>
+  
+  <path d="M17.78,24.25v1a.73.73,0,0,1-.91.8,7.5,7.5,0,0,1-5-5,.71.71,0,0,1,.67-.91h1a.78.78,0,0,1,.81.49,5,5,0,0,0,2.94,2.94A.72.72,0,0,1,17.78,24.25Z" style="fill: #d2d2d2">
+  
+  
+  
+  <animateMotion
+       repeatCount="indefinite"
+       dur="4s"
+       values="0,0;0,16;0,0"
+       type="translate"
+       attributeName="transform" />
+  
+  </path>
+  
+  
+    <path d="M17.78,12.39v1a.78.78,0,0,1-.49.81,5,5,0,0,0-2.94,2.94.72.72,0,0,1-.67.49h-1a.73.73,0,0,1-.8-.91,7.49,7.49,0,0,1,5-5A.71.71,0,0,1,17.78,12.39Z" style="fill:#d2d2d2">
+    
+    
+    
+    <animateMotion
+       repeatCount="indefinite"
+       dur="4s"
+       values="0,0;0,16;0,0"
+       type="translate"
+       attributeName="transform" />
+ 
+ </path> 
+ 
+ 
+ 
+ <circle cx="19.03" cy="18.9" r="3.5" style="fill: #d2d2d2">
+    
+<animateMotion
+       repeatCount="indefinite"
+       dur="4s"
+       values="0,0;0,16;0,0"
+       type="translate"
+       attributeName="transform" />
+
+   </circle>
+ 
+ 
+  
+    <circle cx="19.03" cy="18.9" r="2.5" style="fill: #3d85c6">
+    
+<animateMotion
+       repeatCount="indefinite"
+       dur="4s"
+       values="0,0;0,16;0,0"
+       type="translate"
+       attributeName="transform" />
+
+   </circle>
+   
+   
+   
+   
+   
+   
+
+  
+ <path d="M25.53,17.65h-1a.78.78,0,0,1-.81-.49,5,5,0,0,0-2.94-2.94.72.72,0,0,1-.49-.67v-1a.73.73,0,0,1,.91-.8,7.49,7.49,0,0,1,5,5A.71.71,0,0,1,25.53,17.65Z" style="fill: #d2d2d2">
+  
+
+
+  <animateMotion
+       repeatCount="indefinite"
+       dur="4s"
+       values="0,0;0,16;0,0"
+       type="translate"
+       attributeName="transform" />
+       
+    
+  </path>
+   
+       
+
+  
+  
+ 
+   <path d="M30.67,17.65h-1a.75.75,0,0,1-.82-.59,10,10,0,0,0-8-8,.7.7,0,0,1-.59-.68v-1c0-.55.38-.89.8-.82A12.54,12.54,0,0,1,31.36,16.85.7.7,0,0,1,30.67,17.65Z" style="fill: #3d85c6">
+  
+  
+    
+  
+  
+
+   <animateTransform
+       dur="2s"
+       begin="0s"
+    	from="0 19.0 19.5"
+    		to="360 19 18"
+       type="rotate"
+       repeatCount="indefinite"
+       attributeName="transform" />
+       
+       
+      <animateMotion
+       repeatCount="indefinite"
+       dur="4s"
+       values="0,0;0,16;0,0"
+       type="translate"
+       attributeName="transform" />
+       
+    
+  </path>
+  
+
+    
+    
+    <path d="M25.53,17.65h-1a.78.78,0,0,1-.81-.49,5,5,0,0,0-2.94-2.94.72.72,0,0,1-.49-.67v-1a.73.73,0,0,1,.91-.8,7.49,7.49,0,0,1,5,5A.71.71,0,0,1,25.53,17.65Z" style="fill: #3d85c6">
+  
+
+     <animateTransform
+       dur="2s"
+       begin="0s"
+    		from="0 19.0 19.5"
+    		to="360 19 18"
+       type="rotate"
+       repeatCount="indefinite"
+       attributeName="transform" />
+       
+       
+      
+  <animateMotion
+       repeatCount="indefinite"
+       dur="4s"
+       values="0,0;0,16;0,0"
+       type="translate"
+       attributeName="transform" />
+       
+    
+  </path>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
+    
+  
+  
+</svg>
+
+
+
+
+
+
+
+
+
