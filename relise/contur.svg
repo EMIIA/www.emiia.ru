@@ -39,17 +39,17 @@
          inkscape:collect="always" />
     </filter>
     <filter
-       inkscape:collect="always"
+       height="1.0000255"
+       y="-1.2740554e-05"
+       width="1.000014"
+       x="-6.9851152e-06"
+       id="filter3011"
        style="color-interpolation-filters:sRGB"
-       id="filter2850-1"
-       x="-0.036955427"
-       width="1.073911"
-       y="-0.067405134"
-       height="1.1348103">
+       inkscape:collect="always">
       <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="7.6553131"
-         id="feGaussianBlur2852-3" />
+         id="feGaussianBlur3013"
+         stdDeviation="0.0014469659"
+         inkscape:collect="always" />
     </filter>
   </defs>
   <sodipodi:namedview
@@ -63,8 +63,8 @@
      inkscape:document-rotation="0"
      inkscape:current-layer="layer1"
      inkscape:document-units="mm"
-     inkscape:cy="947.76463"
-     inkscape:cx="786.98799"
+     inkscape:cy="950.2904"
+     inkscape:cx="789.95885"
      inkscape:zoom="0.35"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
@@ -89,7 +89,7 @@
      inkscape:groupmode="layer"
      inkscape:label="Слой 1">
     <rect
-       transform="matrix(0.95574846,0,0,0.91114354,7.5552315,14.343277)"
+       transform="matrix(0.93993298,0,0,0.91114354,15.510743,14.343277)"
        ry="13.183954"
        y="7.5457187"
        x="5.8606758"
@@ -98,13 +98,13 @@
        id="rect2734"
        style="opacity:1;fill:#e63838;fill-opacity:1;stroke:none;stroke-width:22.718;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke;filter:url(#filter2850)" />
     <rect
-       style="opacity:0.10382514;fill:none;fill-opacity:1;stroke:#4382c2;stroke-width:22.718;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke;filter:url(#filter2850-1)"
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#4382c2;stroke-width:47.8482;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke;filter:url(#filter3011)"
        id="rect2734-6"
        width="497.15976"
        height="272.57199"
        x="5.8606758"
        y="7.5457187"
-       ry="13.183954"
-       transform="matrix(0.95574845,0,0,0.91114353,11.259404,14.343277)" />
+       ry="37.033707"
+       transform="matrix(1.016569,0,0,1.0414911,-4.2158017,-5.5387288)" />
   </g>
 </svg>
