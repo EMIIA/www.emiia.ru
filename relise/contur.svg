@@ -43,8 +43,8 @@
      inkscape:window-maximized="0"
      inkscape:window-y="0"
      inkscape:window-x="0"
-     inkscape:window-height="1050"
-     inkscape:window-width="1920"
+     inkscape:window-height="1024"
+     inkscape:window-width="1898"
      units="px"
      showgrid="false"
      inkscape:document-rotation="0"
@@ -84,6 +84,6 @@
        height="276.13934"
        width="497.297"
        id="rect1402"
-       style="opacity:0.355191;fill:none;stroke:#6eb7ff;stroke-width:67.438;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke;filter:url(#filter2590)" />
+       style="opacity:0.355191;fill:#e32626;stroke:none;stroke-width:67.438;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke;filter:url(#filter2590);fill-opacity:1" />
   </g>
 </svg>
