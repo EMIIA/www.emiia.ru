@@ -26,16 +26,16 @@
          style="stop-color:#ff0006;stop-opacity:1;" />
     </linearGradient>
     <filter
-       height="1.1920889"
-       y="-0.096044463"
-       width="1.1066632"
-       x="-0.053331621"
-       id="filter2590"
+       height="1.1874155"
+       y="-0.09370775"
+       width="1.1040682"
+       x="-0.052034089"
+       id="filter2730"
        style="color-interpolation-filters:sRGB"
        inkscape:collect="always">
       <feGaussianBlur
-         id="feGaussianBlur2592"
-         stdDeviation="11.05069"
+         id="feGaussianBlur2732"
+         stdDeviation="10.781832"
          inkscape:collect="always" />
     </filter>
   </defs>
@@ -84,6 +84,6 @@
        height="276.13934"
        width="497.297"
        id="rect1402"
-       style="opacity:0.355191;fill:#e32626;stroke:none;stroke-width:67.438;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke;filter:url(#filter2590);fill-opacity:1" />
+       style="opacity:0.01912568;fill:#e32626;stroke:none;stroke-width:67.438;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke;fill-opacity:1;filter:url(#filter2730)" />
   </g>
 </svg>
