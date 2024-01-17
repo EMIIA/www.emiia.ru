@@ -25,32 +25,6 @@
          offset="0"
          style="stop-color:#ff0006;stop-opacity:1;" />
     </linearGradient>
-    <filter
-       height="1.1348103"
-       y="-0.067405134"
-       width="1.0739109"
-       x="-0.036955428"
-       id="filter2850"
-       style="color-interpolation-filters:sRGB"
-       inkscape:collect="always">
-      <feGaussianBlur
-         id="feGaussianBlur2852"
-         stdDeviation="7.6553131"
-         inkscape:collect="always" />
-    </filter>
-    <filter
-       height="1.0000255"
-       y="-1.2740554e-05"
-       width="1.000014"
-       x="-6.9851152e-06"
-       id="filter3011"
-       style="color-interpolation-filters:sRGB"
-       inkscape:collect="always">
-      <feGaussianBlur
-         id="feGaussianBlur3013"
-         stdDeviation="0.0014469659"
-         inkscape:collect="always" />
-    </filter>
   </defs>
   <sodipodi:namedview
      inkscape:window-maximized="0"
@@ -63,9 +37,9 @@
      inkscape:document-rotation="0"
      inkscape:current-layer="layer1"
      inkscape:document-units="mm"
-     inkscape:cy="950.2904"
-     inkscape:cx="789.95885"
-     inkscape:zoom="0.35"
+     inkscape:cy="824.97339"
+     inkscape:cx="986.30977"
+     inkscape:zoom="0.49497475"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      borderopacity="1.0"
@@ -89,22 +63,20 @@
      inkscape:groupmode="layer"
      inkscape:label="Слой 1">
     <rect
-       transform="matrix(0.93993298,0,0,0.91114354,15.510743,14.343277)"
-       ry="13.183954"
-       y="7.5457187"
-       x="5.8606758"
-       height="272.57199"
-       width="497.15976"
+       ry="11.986619"
+       y="19.080353"
+       x="16.808044"
+       height="247.81767"
+       width="469.90457"
        id="rect2734"
-       style="opacity:1;fill:#e63838;fill-opacity:1;stroke:none;stroke-width:22.718;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke;filter:url(#filter2850)" />
+       style="opacity:1;mix-blend-mode:normal;fill:#e63838;fill-opacity:1;stroke:none;stroke-width:21.0595;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke" />
     <rect
-       style="opacity:0.30054645;fill:none;fill-opacity:1;stroke:#4382c2;stroke-width:47.8482;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke;filter:url(#filter3011)"
+       style="opacity:0.10655738;fill:none;fill-opacity:1;stroke:#4382c2;stroke-width:36.2753;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke"
        id="rect2734-6"
-       width="497.15976"
-       height="272.57199"
-       x="5.8606758"
-       y="7.5457187"
-       ry="37.033707"
-       transform="matrix(1.016569,0,0,1.0414911,-4.2158017,-5.5387288)" />
+       width="504.50345"
+       height="282.99301"
+       x="1.1198069"
+       y="1.1606833"
+       ry="38.449589" />
   </g>
 </svg>
