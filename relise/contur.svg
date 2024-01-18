@@ -48,7 +48,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="0.49497475"
      inkscape:cx="905.54376"
-     inkscape:cy="385.36229"
+     inkscape:cy="629.00823"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -76,21 +76,21 @@
      inkscape:groupmode="layer"
      id="layer1">
     <rect
-       style="opacity:1;mix-blend-mode:normal;fill:#e63838;fill-opacity:1;stroke:none;stroke-width:16.1972;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke"
+       style="opacity:1;mix-blend-mode:normal;fill:#e63838;fill-opacity:1;stroke:none;stroke-width:16.0977;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke"
        id="rect2734"
-       width="381.70563"
-       height="180.46576"
-       x="64.382027"
-       y="51.687233"
-       ry="8.7288942" />
+       width="372.61847"
+       height="182.60391"
+       x="67.508682"
+       y="55.391399"
+       ry="8.8323135" />
     <rect
-       transform="matrix(0.9158802,0,0,0.85846553,21.354693,20.564872)"
+       transform="matrix(0.83898059,0,0,0.77727877,41.025553,33.450862)"
        ry="38.449589"
        y="1.1606833"
        x="1.1198069"
        height="282.99301"
        width="504.50345"
        id="rect2734-6"
-       style="opacity:0.0876713;fill:none;fill-opacity:1;stroke:#4382c2;stroke-width:36.2753;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke;filter:url(#filter1306)" />
+       style="opacity:0.00821916;fill:none;fill-opacity:1;stroke:#4382c2;stroke-width:36.2753;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers fill stroke;filter:url(#filter1306)" />
   </g>
 </svg>
