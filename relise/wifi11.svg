@@ -28,7 +28,7 @@
     
     <circle cx="19.03" cy="18.9" r="5" style="fill: #3d85c6">
     
-        <animate attributeName="r" from="1.1" to="19" dur="1.9s" begin="0s" repeatCount="indefinite"/>
+        <animate attributeName="r" from="1.1" to="5" dur="1.9s" begin="0s" repeatCount="indefinite"/>
     <animate attributeName="opacity" from="1" to="0" dur="1.9s" begin="0s" repeatCount="indefinite"/>
     
     
