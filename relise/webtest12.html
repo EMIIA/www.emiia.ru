@@ -1492,7 +1492,20 @@ background-image: url("https://www.emiia.ai/animate58.svg");
  <div class="video-wrapper1" data-aos="zoom-in" data-aos-duration="2000" style="text-align: center; max-width: 850px;" >
     <video  src="https://evi.nl.tab.digital/s/KQcKdFxdQ6YPKbJ/download/emiia_ai.mp4"
     
-    style="mask-image: linear-gradient(to top, transparent 0%, black 10%);"
+
+    style="-webkit-mask:
+    linear-gradient(to right ,rgba(0,0,0,0.5) ,white ,rgba(0,0,0,0.5)),
+    linear-gradient(to bottom,rgba(0,0,0,0.2) ,white ,rgba(0,0,0,0.2));
+  mask:
+    linear-gradient(to right ,rgba(0,0,0,0.5) ,white ,rgba(0,0,0,0.5)),
+    linear-gradient(to top, transparent 0%, black 10%);
+  -webkit-mask-composite: source-in; /* For Chrome */
+  mask-composite: intersect; /* For Firefox */
+"
+ 
+    
+    
+    
     
     poster="https://www.emiia.ru/relise/480p_full.gif" ></video>
 </div>
