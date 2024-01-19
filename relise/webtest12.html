@@ -760,16 +760,16 @@ $('.toggle-menu').click(function () {
     
     
      
-  -webkit-mask:
-    linear-gradient(to right ,rgba(0,0,0,0.2) ,white ,rgba(0,0,0,0.2)),
-    linear-gradient(to top,rgba(0,0,0,0.2) ,white ,rgba(0,0,0,0.2));
-  mask:
-    linear-gradient(to right ,rgba(0,0,0,0.2) ,white ,rgba(0,0,0,0.2)),
-    linear-gradient(to top,rgba(0,0,0,0.01) ,white ,rgba(0,0,0,0.01));
-  -webkit-mask-composite: source-in; /* For Chrome */
-  mask-composite: intersect; /* For Firefox */
 
-    
+  
+  
+  
+  
+ 
+            -webkit-mask-box-image:
+            -webkit-linear-gradient(
+            left,transparent, transparent 3%, white 20%, white 80%, transparent 95%);
+
 }
 
 .video-wrapper1 > video {
@@ -1503,7 +1503,7 @@ background-image: url("https://www.emiia.ai/animate58.svg");
 
 
     
-    
+    style="mask-image: linear-gradient(to top, transparent 0.00%, black 33%)"
  
     
     
