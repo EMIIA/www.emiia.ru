@@ -883,11 +883,22 @@ background-image: linear-gradient(transparent, #f8f9fa00),
 
 .video[poster] {
 
+object-fit: cover !important;
 
-object-fit: fill !important;
+-webkit-object-fit: cover !important;
+-moz-object-fit: cover !important;
 
--webkit-object-fit: fill !important;
--moz-object-fit: fill !important;
+
+
+
+	width: 100%;
+    min-width: 100%;
+	min-height: 100%;
+
+
+
+
+
 }
 
 
