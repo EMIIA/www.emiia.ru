@@ -58,14 +58,12 @@
        d="m0 0l960.0 0l0 720.0l-960.0 0l0 -720.0z" />
   </clipPath>
   <path
-     style="fill:#cd4646;fill-opacity:1;stroke:none;stroke-width:15.8366;stroke-opacity:1"
+     style="fill:#47b9e6;fill-opacity:1;stroke:none;stroke-width:15.8366;stroke-opacity:1"
      d="m 545.17439,365.56751 -101.5439,58.02223 c -8.6176,4.91902 -19.6768,-1.0372 -19.6768,-10.95383 V 296.59145 c 0,-9.90084 11.0432,-15.87279 19.6768,-10.93811 l 101.5439,58.02223 a 12.798711,12.603962 0 0 1 0,21.89194 z"
-     id="path1105" >
+     id="path1105" />
      
      
      
-      <animate fill="freeze" dur="0.1s" to="#3d85c6" from="#3d85c6" attributeName="fill" begin="mouseover"/>
-    <animate fill="freeze" dur="0.1s" to="#3d85c6" from="#3d85c6" attributeName="fill" begin="mouseout"/>
-      </path>
+    
      
 </svg>
