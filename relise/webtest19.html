@@ -1179,7 +1179,7 @@ const lines = [];
 let startTime = 0;
 
 function animate() {
-  const deltaTime = Math.floor(performance.now() - startTime) / 700;
+  const deltaTime = Math.floor(performance.now() - startTime) / 600;
   
   for(let i = 0; i<lines.length; i++) {
     lines[i].move(deltaTime * 24);
