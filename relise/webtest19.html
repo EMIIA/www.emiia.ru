@@ -1042,6 +1042,9 @@ body {
   perspective: 100px;
   
  
+  perspective: 800px;
+  
+ 
 }
 
 .string {
@@ -1050,7 +1053,7 @@ body {
   font-family: 'PT Mono', monospace;
   font-size: 30px;
   font-weight: 500;
-  color: #3d85c615;
+  color: white;
   white-space: pre;
   
 /*   filter: blur(4px); */
@@ -1071,7 +1074,7 @@ body {
   <script> 
  
  
- class Vector2 {
+class Vector2 {
   x = null;
   y = null;
   
@@ -1126,10 +1129,10 @@ class Line {
     el.style.top = `${position.y}px`;
     el.style.left = `${position.x}px`;
     
-    const hueRotate = Math.floor(Math.random() * 10);
+    const hueRotate = Math.floor(Math.random() * 30);
     
-    const distance = this.distance = Math.floor(Math.random() * 2);
-    el.style.fontSize = `${(20 - 2*distance)}px`;
+    const distance = this.distance = Math.floor(Math.random() * 5);
+    el.style.fontSize = `${(30 - 2*distance)}px`;
     el.style.filter = `blur(${distance}px) hue-rotate(${hueRotate}deg)`;
     el.style.zIndex = `-${distance}`;
     
@@ -1140,7 +1143,7 @@ class Line {
       this.direction = new Vector2(0, dir);
     }
     
-    el.style.opacity = (Math.floor(Math.random() * 80) + 80) + '';
+    el.style.opacity = (Math.floor(Math.random() * 20) + 80) + '';
     
     document.body.append(this.el);
   }
@@ -1179,7 +1182,7 @@ const lines = [];
 let startTime = 0;
 
 function animate() {
-  const deltaTime = Math.floor(performance.now() - startTime) / 600;
+  const deltaTime = Math.floor(performance.now() - startTime) / 800;
   
   for(let i = 0; i<lines.length; i++) {
     lines[i].move(deltaTime * 24);
