@@ -1128,7 +1128,7 @@ class Line {
     const hueRotate = Math.floor(Math.random() * 40);
     
     const distance = this.distance = Math.floor(Math.random() * 5);
-    el.style.fontSize = `${(28 - 2*distance)}px`;
+    el.style.fontSize = `${(20 - 2*distance)}px`;
     el.style.filter = `blur(${distance}px) hue-rotate(${hueRotate}deg)`;
     el.style.zIndex = `-${distance}`;
     
