@@ -19,9 +19,6 @@
 
 
 
-
-
-
 <!DOCTYPE html><html lang="ru"><head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1, shrink-to-fit=no">
@@ -37,7 +34,7 @@
 </style>
 
 
-
+<meta name="theme-color" content="#f8f9fa">
 <meta name="theme-color" content="lab(29.2345% 39.3825 20.0664)">
 
 
@@ -220,6 +217,14 @@
 
 
 
+<p><a ><img src="https://www.emiia.ai/animate6.svg" 
+  data-aos="zoom-out" data-aos-duration="2000" width="30" height="35" alt="ЭМИИА ИИ — машинное радио зрение" title="ЭМИИА ИИ — машинное радиозрение (радиовидение)"
+  z-index="3" ></a></p>
+
+      <div class="w3-center " href="https://www.emiia.ai">
+
+          </div>
+      </div>
 
   
       
@@ -949,7 +954,7 @@ video[poster] {
 body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat"; }
 .w3-row-padding img {margin-bottom: 12px}
 .w3-theme-l2 {
-color:#fff !important;background-color:red !important}
+color:#fff !important;background-color:#f8f9fa !important}
 
                 input,
                 textarea {
@@ -986,50 +991,6 @@ a.ex5:hover, a.ex5:active {text-decoration: underline;}
   
   
   
-    <style>
-body {
-  margin: 0;
-  font-family: Montserrat, "Montserrat";
-  
-  
-  min-height: calc(100vh - 0px);
-   
-  
-}
-
-.hero-image {
-
-
-
- 
-  height: 800px;
-  background-position: right;
-  
-    background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-
-}
-
-                input,
-                textarea {
-                    outline:none;
-                }
-
-  text-align: left;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-}
-
-
-</style>
-
-<body>
-
-<div class="hero-image">
 
 
 
@@ -1037,43 +998,39 @@ body {
 
 
 <style>
+
 body {
-  
-  perspective: 100px;
-  
- 
-  perspective: 800px;
-  
- 
+
+  z-index: -3;
 }
 
 .string {
   position: absolute;
   
   font-family: 'PT Mono', monospace;
-  font-size: 30px;
-  font-weight: 500;
-  color: white;
+  font-size: 28px;
+  font-weight: 800;
+  color: #34afaf;
   white-space: pre;
   
 /*   filter: blur(4px); */
   user-select: none;
   cursor: default;
 }
+
+</style>
+
+
+
+
+
+
+
+<script>
+ 
+ 
+
   
- </style> 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-  <script> 
- 
- 
 class Vector2 {
   x = null;
   y = null;
@@ -1129,12 +1086,12 @@ class Line {
     el.style.top = `${position.y}px`;
     el.style.left = `${position.x}px`;
     
-    const hueRotate = Math.floor(Math.random() * 30);
+    const hueRotate = Math.floor(Math.random() * 40);
     
     const distance = this.distance = Math.floor(Math.random() * 5);
-    el.style.fontSize = `${(30 - 2*distance)}px`;
+    el.style.fontSize = `${(28 - 2*distance)}px`;
     el.style.filter = `blur(${distance}px) hue-rotate(${hueRotate}deg)`;
-    el.style.zIndex = `-${distance}`;
+    el.style.zIndex = `-${distance+1}`;
     
     const dir = Math.round(Math.random()) == 1 ? -1 : 1;
     
@@ -1182,7 +1139,7 @@ const lines = [];
 let startTime = 0;
 
 function animate() {
-  const deltaTime = Math.floor(performance.now() - startTime) / 800;
+  const deltaTime = Math.floor(performance.now() - startTime) / 1000;
   
   for(let i = 0; i<lines.length; i++) {
     lines[i].move(deltaTime * 24);
@@ -1203,14 +1160,25 @@ for(let i=0; i<quantity; i++) {
   lines.push(new Line());
 }
 animate();
- 
- 
- 
-  </script> 
- 
- 
- 
- 
+  
+  </script>
+
+   
+
+
+
+
+
+
+
+
+
+
+<body>
+
+<div class="hero-image">
+  
+  
   
  
 
@@ -1284,7 +1252,6 @@ animate();
   <br/>
   <br/>
   <br/>
-   <br/>
 
 
   
@@ -1293,7 +1260,7 @@ animate();
     
 
      
-    <div class="wrapper" style=" font-size: 14px; text-align: right;">
+    <div class="wrapper" style=" font-size: 13px; text-align: right;">
      
 
  
@@ -1307,16 +1274,13 @@ animate();
 
  </div> 
 
-<br/>
 
-
-
-  <h2><a><p class="buttond"  
-   style="text-align: center"><a target="_self" style="cursor: pointer; font-size:15.4px;  text-decoration: none; padding:0px; color:#3d85c6; background-color:transparent; border-radius:0px; border: 0px solid #000000; margin-left: 0%;"><img src="https://raw.githubusercontent.com/EMIIA/www.emiia.ru/master/relise/logo_test.svg" width="260" height="60" alt="ЭМИИА ИИ — машинное радио зрение" title="ЭМИИА ИИ — машинное радиозрение" ></a></p></a></h2>
+  <h2><a><p class="buttond"  data-aos="fade-up"
+     data-aos-duration="3000"  style="text-align: center"><a target="_self" style="cursor: pointer; font-size:15.4px;  text-decoration: none; padding:0px; color:#3d85c6; background-color:transparent; border-radius:0px; border: 0px solid #000000; margin-left: 0%;"><img src="https://raw.githubusercontent.com/EMIIA/analytics/master/svg/logo_mrv_2.svg" width="200" height="32" alt="ЭМИИА ИИ — машинное радио зрение" title="ЭМИИА ИИ — машинное радиозрение" ></a></p></a></h2>
      
     
 
-  <a  style="text-align: left;  font-size:14px; color: #3d85c6;"alt="ЭМИИА ИИ — машинное радиозрение (радиовидение)"   title="Privacy">ПРОСТРАНСТВЕННЫЙ ИНТЕЛЛЕКТ </a>
+   <span><a  style="text-align: left;  font-size:10px; color: #3d85c6;"alt="ЭМИИА ИИ — машинное радиозрение (радиовидение)"   title="Privacy">ПРОСТРАНСТВЕННЫЙ ИНТЕЛЛЕКТ </a>
    
    
           <p class="lead"><br/><br/></p>
@@ -3118,39 +3082,5 @@ $(document).ready(function() {
 </div>
 </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
