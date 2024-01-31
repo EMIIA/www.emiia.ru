@@ -273,9 +273,15 @@ button::-moz-focus-inner {
   top: 19px;
   z-index: 20000;
   left: 1.4%;
+
 }
 
 #menu {
+
+
+ position: sticky;
+  top: 0;
+
   background: #f8f9fa;
   height: 100%;
   left: 0px;
@@ -291,10 +297,22 @@ button::-moz-focus-inner {
   z-index: 11000;
   
     
-  
-  
+    overflow-y: auto;
+
+      max-height: 540px;
+    height: 540px; 
+   
   
 }
+
+
+
+
+
+
+
+
+
 #menu.open {
   opacity: 1;
   visibility: visible;
@@ -586,9 +604,9 @@ button::-moz-focus-inner {
  <!-- MENU -->
 
 
-<div id="menu" class="">
+<div id="menu" class="" class="sticky">
 
-<nav class="footer-nav">
+<nav class="footer-nav" class="sticky">
 
 
 <br/>
