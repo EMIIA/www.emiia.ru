@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   inkscape:export-ydpi="96"
+   inkscape:export-xdpi="96"
+   inkscape:export-filename="C:\Users\vstar\Desktop\ramka_png.png"
+   sodipodi:docname="ramka2.svg"
+   id="svg838"
+   version="1.1"
+   viewBox="0 0 264.58333 158.75"
+   height="600"
+   width="1000">
+  <defs
+     id="defs832">
+    <filter
+       height="1.1534042"
+       y="-0.076702123"
+       width="1.0871285"
+       x="-0.043564256"
+       id="filter2606"
+       style="color-interpolation-filters:sRGB"
+       inkscape:collect="always">
+      <feGaussianBlur
+         id="feGaussianBlur2608"
+         stdDeviation="4.6997499"
+         inkscape:collect="always" />
+    </filter>
+    <filter
+       height="1.0412864"
+       y="-0.0206432"
+       width="1.0234493"
+       x="-0.011724651"
+       id="filter2778"
+       style="color-interpolation-filters:sRGB"
+       inkscape:collect="always">
+      <feGaussianBlur
+         id="feGaussianBlur2780"
+         stdDeviation="1.2648656"
+         inkscape:collect="always" />
+    </filter>
+    <filter
+       height="1.0913901"
+       y="-0.045695032"
+       width="1.0519065"
+       x="-0.025953259"
+       id="filter2843"
+       style="color-interpolation-filters:sRGB"
+       inkscape:collect="always">
+      <feGaussianBlur
+         id="feGaussianBlur2845"
+         stdDeviation="2.7998602"
+         inkscape:collect="always" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     inkscape:window-maximized="0"
+     inkscape:window-y="0"
+     inkscape:window-x="0"
+     inkscape:window-height="1024"
+     inkscape:window-width="1898"
+     units="px"
+     showgrid="false"
+     inkscape:document-rotation="0"
+     inkscape:current-layer="layer1"
+     inkscape:document-units="mm"
+     inkscape:cy="95.114058"
+     inkscape:cx="578.19138"
+     inkscape:zoom="0.49497475"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base" />
+  <metadata
+     id="metadata835">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Слой 1">
+    <rect
+       transform="matrix(0.95276054,0,0,0.94964279,8.0298146,3.5462912)"
+       ry="0"
+       rx="0"
+       y="7.0841355"
+       x="0.67999482"
+       height="147.0546"
+       width="258.91409"
+       id="rect1403"
+       style="opacity:1;fill:none;fill-opacity:0.141026;stroke:#f8fafa;stroke-width:5.997;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke;filter:url(#filter2606)" />
+    <rect
+       style="opacity:1;fill:none;fill-opacity:0.141026;stroke:#f8fafa;stroke-width:5.997;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke;filter:url(#filter2778)"
+       id="rect1403-3"
+       width="258.91409"
+       height="147.0546"
+       x="0.67999482"
+       y="7.0841355"
+       rx="0"
+       ry="0"
+       transform="matrix(1.0238741,0,0,1.0772302,-3.2782245,-7.9604912)" />
+    <rect
+       transform="matrix(0.99717937,0,0,1.0340498,1.1298674,-4.0619217)"
+       ry="0"
+       rx="0"
+       y="7.0841355"
+       x="0.67999482"
+       height="147.0546"
+       width="258.91409"
+       id="rect1403-3-2"
+       style="opacity:1;fill:none;fill-opacity:0.141026;stroke:#f8fafa;stroke-width:5.997;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke;filter:url(#filter2843)" />
+  </g>
+</svg>
