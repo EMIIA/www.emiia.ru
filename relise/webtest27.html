@@ -11,130 +11,31 @@
     
 
 
-
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css'>
 
 
 
  <style>
     
     
-.nav-tabs1 {
-        display: inline-flex;
-        width: 100%;
-        overflow-x: auto;
-        border-bottom: 2px solid #DDD;
-        -ms-overflow-style: none; // IE 10+
-        overflow: -moz-scrollbars-none; // Firefox}
-        .nav-tabs1>li.active>a,
-        .nav-tabs1>li.active>a:focus,
-        .nav-tabs1>li.active>a:hover {
-            border-width: 0;
-        }
-        .nav-tabs1>li>a {
-            border: none;
-            color: #666;
-        }
-        .nav-tabs1>li.active>a,
-        .nav-tabs1>li>a:hover {
-            border: none;
-            color: #4285F4 !important;
-            background: transparent;
-        }
-        .nav-tabs1>li>a::after {
-            content: "";
-            background: #4285F4;
-            height: 2px;
-            position: absolute;
-            width: 100%;
-            left: 0px;
-            bottom: 1px;
-            transition: all 250ms ease 0s;
-            transform: scale(0);
-        }
-        .nav-tabs1>li.active>a::after,
-        .nav-tabs1>li:hover>a::after {
-            transform: scale(1);  
-        }
-        .tab-nav1>li>a::after {
-            background: #21527d none repeat scroll 0% 0%;
-            color: #fff;
-        }
-        .tab-pane1 {
-            padding: 15px 0;
-        }
-        .tab-content1 {
-            padding: 20px
-        }
 
-        .nav-tabs1::-webkit-scrollbar {
-            display: none; // Safari and Chrome
-        }
-        .card1 {
-            background: #FFF none repeat scroll 0% 0%;
-            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
-            margin-bottom: 30px;
-        }
-        body {
-            background: #EDECEC;
-        }.nav-tabs1 {
-        display: inline-flex;
-        width: 100%;
-        overflow-x: auto;
-        border-bottom: 2px solid #DDD;
-        -ms-overflow-style: none; // IE 10+
-        overflow: -moz-scrollbars-none; // Firefox}
-        .nav-tabs1>li.active>a,
-        .nav-tabs1>li.active>a:focus,
-        .nav-tabs1>li.active>a:hover {
-            border-width: 0;
-        }
-        .nav-tabs1>li>a {
-            border: none;
-            color: #666;
-        }
-        .nav-tabs1>li.active>a,
-        .nav-tabs1>li>a:hover {
-            border: none;
-            color: #4285F4 !important;
-            background: transparent;
-        }
-        .nav-tabs1>li>a::after {
-            content: "";
-            background: #4285F4;
-            height: 2px;
-            position: absolute;
-            width: 100%;
-            left: 0px;
-            bottom: 1px;
-            transition: all 250ms ease 0s;
-            transform: scale(0);
-        }
-        .nav-tabs1>li.active>a::after,
-        .nav-tabs1>li:hover>a::after {
-            transform: scale(1);  
-        }
-        .tab-nav1>li>a::after {
-            background: #21527d none repeat scroll 0% 0%;
-            color: #fff;
-        }
-        .tab-pane1 {
-            padding: 15px 0;
-        }
-        .tab-content1 {
-            padding: 20px
-        }
 
-        .nav-tabs1::-webkit-scrollbar {
-            display: none; // Safari and Chrome
-        }
-        .card1 {
-            background: #FFF none repeat scroll 0% 0%;
-            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
-            margin-bottom: 30px;
-        }
-        body {
-            background: #EDECEC;
-        }
+.nav .nav-item button.active {
+  background-color: transparent;
+  color: var(--bs-danger) !important;
+}
+.nav .nav-item button.active::after {
+  content: "";
+  border-bottom: 4px solid var(--bs-danger);
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  border-radius: 5px 5px 0 0;
+}
+
+
+
 
 
 
@@ -146,7 +47,7 @@
 
 
 
-
+  
 
 
    
@@ -2295,64 +2196,54 @@ animate();
 
 
 
-                <!-- Nav tabs -->
-                <div class="card1">
-                
-                    <ul class="nav nav-tabs1" role="tablist1">
-                    
-                    
-                    
-                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab1" data-toggle="tab">Home</a></li>
-                        
-                        
-                        
-                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab1" data-toggle="tab">Profile</a></li>
-                        
-                        
-                        
-                        <li role="presentation"><a href="#messages" aria-controls="messages" role="tab1" data-toggle="tab">Messages</a></li>
-                        
-                        
-                        
-                        <li role="presentation"><a href="#settings" aria-controls="settings" role="tab1" data-toggle="tab">Settings</a></li>
-                        
-                        
-                        
-                        <li role="presentation"><a href="#about" aria-controls="about" role="tab1" data-toggle="tab">About</a></li>
-                        
-                        
-                        
-                        <li role="presentation"><a href="#contact" aria-controls="contact" role="tab1" data-toggle="tab">Contacts</a></li>
-                        
-                        
-                        
-                    </ul>
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="home">
-                            <legend>Responsive Tabs</legend>
-                            <p>If you are on desktop Try resizing the window to mobile view to see the scroll effect</p>
-                            <p>Horizontal scrollable tabs</p>
-                            <p>Best for mobile view</p>
-                            <p>Similar to gravity MODE_SCROLLABLE in Android</p>
-
-                          </div>
-                        <div role="tabpanel" class="tab-pane" id="profile">
-                            <legend>Profile</legend>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
-                        <div role="tabpanel" class="tab-pane" id="messages">
-                            <legend>Messages</legend>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
-                        <div role="tabpanel" class="tab-pane" id="settings">
-                            <legend>Settings</legend>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passage..</div>
-                        <div role="tabpanel" class="tab-pane" id="about">
-                            <legend>About</legend>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into 1960s with the release of Letraset sheets containing Lorem Ipsum passage..</div>
-                        <div role="tabpanel" class="tab-pane" id="contact">
-                            <legend>Contact Us</legend>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passage..</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <!-- partial:index.partial.html -->
+<div class="container p-5">
+  <ul class="nav nav-pills mb-3 border-bottom border-2" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link text-primary fw-semibold active position-relative" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Home</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link text-primary fw-semibold position-relative" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link text-primary fw-semibold position-relative" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</button>
+    </li>
+  </ul>
+  <div class="tab-content border rounded-3 border-primary p-3 text-danger" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+      <h2>Home</h2>
+      <p>Please check our more design @ <a target="_blank" href="https://codepen.io/Gaurav-Rana-the-reactor">Codepen</a></p>
     </div>
-<!-- partial -->
+    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+      <h2>Profile</h2>
+      <p>Please check our more design @ <a target="_blank" href="https://codepen.io/Gaurav-Rana-the-reactor">Codepen</a></p>
+    </div>
+    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+      <h2>Contact</h2>
+      <p>Please check our more design @ <a target="_blank" href="https://codepen.io/Gaurav-Rana-the-reactor">Codepen</a></p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+ </div>
+</div>
+</div>
+
+
+
+
+
+  </div>
+</div>
+
+  
+  </section>
+  
 
 
 
@@ -2361,6 +2252,30 @@ animate();
 
 
 
+
+
+
+  
+  
+
+  
+    
+    
+           
+           </div>
+      </div>
+    </div>  
+     
+
+
+
+    
+
+  </div>
+</div>
+
+  
+  </section>
 
 
 
@@ -2873,7 +2788,7 @@ animate();
 
 
 
-
+  <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js'></script>
 
 
 
