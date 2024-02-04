@@ -18,8 +18,6 @@
  <style>
     
     
-
-
 .nav .nav-item button.active {
   background-color: transparent;
   color: var(--bs-danger) !important;
@@ -37,6 +35,23 @@
 }
 
 
+
+
+.nav .nav-item button.active1 {
+  background-color: transparent;
+  color: var(--bs-danger) !important;
+}
+.nav .nav-item button.active1::after {
+  content: "";
+  border-bottom: 4px solid var(--bs-danger);
+  width: 100%;
+  height: 100%;
+
+  position: relative;
+  left: 0;
+  bottom: -1px;
+  border-radius: 5px 5px 0 0;
+}
 
 
 
@@ -1026,8 +1041,7 @@ $('.toggle-menu').click(function () {
          
             
             
-            -webkit-mask-box-image: -webkit-radial-gradient(white,transparent 100%);
-
+           
 }
 
 .video-wrapper1 > video {
@@ -1987,7 +2001,7 @@ animate();
 
 
     
-   style="mask-image: linear-gradient(to top, transparent 0%, black 10%;);"
+   
  
 
     
@@ -2016,16 +2030,16 @@ animate();
   
   
     <li class="nav-item" role="presentation">
-      <button class="nav-link text-primary fw-semibold active position-relative" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home1" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Home</button>
+      <button class="nav-link text-primary fw-semibold active position-relative" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home1" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Платформа</button>
     </li>
     
     
     
     <li class="nav-item" role="presentation">
-      <button class="nav-link text-primary fw-semibold position-relative" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile1" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</button>
+      <button class="nav-link text-primary fw-semibold position-relative" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile1" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Функции</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link text-primary fw-semibold position-relative" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact1" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</button>
+      <button class="nav-link text-primary fw-semibold position-relative" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact1" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Технология</button>
     </li>
   </ul>
   
