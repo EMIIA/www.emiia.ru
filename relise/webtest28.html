@@ -26,6 +26,10 @@
 .nav .nav-item button.active::after {
   content: "";
   border-bottom: 2px solid var(--bs-danger);
+  
+
+
+  
   width: 100%;
   position: absolute;
   left: 0;
@@ -2011,7 +2015,7 @@ animate();
 
 
 
-<p class="lead" style="text-align: left; padding-left: 0.3em; hyphens: auto; overflow-wrap: break-word;">
+<p class="lead" style="text-align: center; padding-left: 0.3em; hyphens: auto; overflow-wrap: break-word;">
 
 
 
@@ -2061,7 +2065,7 @@ animate();
 
 
 
-<p class="lead" style="text-align: left; padding-left: 1em; padding-right: 1em;  hyphens: auto; overflow-wrap: break-word; color: #3d85c6; font-size:15.4px;"> <a  href="https://new.fips.ru/registers-doc-view/fips_servlet?DB=EVM&DocNumber=2021680482&TypeFile=html&fbclid=IwAR3zYNmpOAqgodx67pCjd8kVp79OPibO7a0Sr7PYrQZ4svP4hA2BuzRnuXQ" alt="ЭМИИА ИИ — машинное радиозрение (радиовидение)"   title="P">
+<p class="lead" style="text-align: center; padding-left: 1em; padding-right: 1em;  hyphens: auto; overflow-wrap: break-word; color: #3d85c6; font-size:15.4px;"> <a  href="https://new.fips.ru/registers-doc-view/fips_servlet?DB=EVM&DocNumber=2021680482&TypeFile=html&fbclid=IwAR3zYNmpOAqgodx67pCjd8kVp79OPibO7a0Sr7PYrQZ4svP4hA2BuzRnuXQ" alt="ЭМИИА ИИ — машинное радиозрение (радиовидение)"   title="P">
 
 
 
@@ -2185,35 +2189,71 @@ animate();
 
 
 
-<!-- partial:index.partial.html -->
-<div class="container p-5">
-  <ul class="nav nav-pills mb-3 border-bottom border-2" id="pills-tab" role="tablist">
-    <li class="nav-item" role="presentation">
-      <button class="nav-link text-primary fw-semibold active position-relative" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Опции</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link text-primary fw-semibold position-relative" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Инструменты</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link text-primary fw-semibold position-relative" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Архитектура</button>
-    </li>
-  </ul>
-  <div class="tab-content border rounded-3 border-primary p-3 text-danger" id="pills-tabContent">
-    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-      <h2>Home</h2>
-      <p>Please check our more design @ <a target="_blank" href="https://codepen.io/Gaurav-Rana-the-reactor">Codepen</a></p>
-    </div>
-    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-      <h2>Profile</h2>
-      <p>Please check our more design @ <a target="_blank" href="https://codepen.io/Gaurav-Rana-the-reactor">Codepen</a></p>
-    </div>
-    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-      <h2>Contact</h2>
-      <p>Please check our more design @ <a target="_blank" href="https://codepen.io/Gaurav-Rana-the-reactor">Codepen</a></p>
-    </div>
+
+
+
+
+<ul class="nav nav-tabs nav-fill mb-3" id="ex1" role="tablist">
+  <li class="nav-item" role="presentation">
+    <a
+      class="nav-link active"
+      id="ex2-tab-1"
+      data-bs-toggle="tab"
+      href="#ex2-tabs-1"
+      role="tab"
+      aria-controls="ex2-tabs-1"
+      aria-selected="true"
+      >Опции</a
+    >
+  </li>
+  <li class="nav-item" role="presentation">
+    <a
+      class="nav-link"
+      id="ex2-tab-2"
+      data-bs-toggle="tab"
+      href="#ex2-tabs-2"
+      role="tab"
+      aria-controls="ex2-tabs-2"
+      aria-selected="false"
+      >Инструменты</a
+    >
+  </li>
+  <li class="nav-item" role="presentation">
+    <a
+      class="nav-link"
+      id="ex2-tab-3"
+      data-bs-toggle="tab"
+      href="#ex2-tabs-3"
+      role="tab"
+      aria-controls="ex2-tabs-3"
+      aria-selected="false"
+      >Архитектура</a
+    >
+  </li>
+</ul>
+<div class="tab-content" id="ex2-content">
+  <div
+    class="tab-pane fade show active"
+    id="ex2-tabs-1"
+    role="tabpanel"
+    aria-labelledby="ex2-tab-1"
+  >
+    Tab 1 content
+  </div>
+  <div class="tab-pane fade" id="ex2-tabs-2" role="tabpanel" aria-labelledby="ex2-tab-2">
+    Tab 2 content
+  </div>
+  <div class="tab-pane fade" id="ex2-tabs-3" role="tabpanel" aria-labelledby="ex2-tab-3">
+    Tab 3 content
   </div>
 </div>
-<!-- partial -->
+
+
+
+
+
+
+
 
 
   </div>
