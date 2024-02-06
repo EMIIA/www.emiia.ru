@@ -7,6 +7,7 @@
 
 
 
+
 <!DOCTYPE html><html lang="ru"><head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1, shrink-to-fit=no">
@@ -38,6 +39,19 @@
   left: 0;
   bottom: -1px;
   border-radius: 5px 5px 0 0;
+}
+
+
+
+
+
+.tabbable .nav-tabs {
+   overflow-x: auto;
+   overflow-y:hidden;
+   flex-wrap: nowrap;
+}
+.tabbable .nav-tabs .nav-link {
+  white-space: nowrap;
 }
 
         
@@ -2222,11 +2236,6 @@ animate();
 
 
 
-
-
-
-
-
  <div class="overflow-hidden">
   <div class="row p-0" >
 
@@ -2235,7 +2244,7 @@ animate();
     
     
     
-    
+   
 
 
 <br/>
@@ -2245,7 +2254,11 @@ animate();
 
 
 
-<ul class="nav nav-tabs nav-fill mb-3" id="ex1" role="tablist">
+ <nav class="tabbable">
+   
+
+
+<ul class="nav nav-tabs nav-fill mb-3" id="ex1" role="tablist" class="nav nav-tabs" id="nav-tab">
   <li class="nav-item" role="presentation">
     <a
       class="nav-link active"
@@ -2255,7 +2268,13 @@ animate();
       role="tab"
       aria-controls="ex2-tabs-1"
       aria-selected="true"
-      >Опции</a
+      
+      
+      class="nav-item nav-link"
+      
+      data-toggle="tab"
+      
+      > Опции</a
     >
   </li>
   <li class="nav-item" role="presentation">
@@ -2267,6 +2286,9 @@ animate();
       role="tab"
       aria-controls="ex2-tabs-2"
       aria-selected="false"
+      class="nav-item nav-link"
+      data-toggle="tab"
+      
       >Инструменты</a
     >
   </li>
@@ -2279,7 +2301,30 @@ animate();
       role="tab"
       aria-controls="ex2-tabs-3"
       aria-selected="false"
+      
+      class="nav-item nav-link"
+      
+      data-toggle="tab"
       >Архитектура</a
+    >
+  </li>
+  
+  
+  
+  <li class="nav-item" role="presentation">
+    <a
+      class="nav-link"
+      id="ex2-tab-4"
+      data-bs-toggle="tab"
+      href="#ex2-tabs-4"
+      role="tab"
+      aria-controls="ex2-tabs-4"
+      aria-selected="false"
+      
+      class="nav-item nav-link"
+      
+      data-toggle="tab"
+      >Тест</a
     >
   </li>
   
@@ -2297,10 +2342,12 @@ animate();
     class="tab-pane fade show active"
     id="ex2-tabs-1"
     role="tabpanel"
-    aria-labelledby="ex2-tab-1"
-  >
+    aria-labelledby="ex2-tab-1">
+    
     <img style="mask-image: radial-gradient(rgba(248,249,250,1), rgba(255,0,0,0) 100%);" src="https://www.emiia.ru/relise/plat_emiia_2.2_svg.svg" style="border-radius: 8px 8px 8px 8px; ">
   </div>
+  
+  
   <div class="tab-pane fade" id="ex2-tabs-2" role="tabpanel" aria-labelledby="ex2-tab-2">
     <img style="mask-image: radial-gradient(rgba(248,249,250,1), rgba(255,0,0,0) 100%);" src="https://www.emiia.ru/relise/plat_emiia_1.1_svg.svg" style="border-radius: 8px 8px 8px 8px; ">
   </div>
@@ -2309,6 +2356,17 @@ animate();
   <div class="tab-pane fade" id="ex2-tabs-3" role="tabpanel" aria-labelledby="ex2-tab-3">
      <img style="mask-image: radial-gradient(rgba(248,249,250,1), rgba(255,0,0,0) 100%);" src="https://www.emiia.ru/relise/plat_emiia_3.3_svg.svg" style="border-radius: 8px 8px 8px 8px; " width="650px" height="450">
   </div>
+  
+  
+  
+  
+  <div class="tab-pane fade" id="ex2-tabs-4" role="tabpanel" aria-labelledby="ex2-tab-4">
+     <img style="mask-image: radial-gradient(rgba(248,249,250,1), rgba(255,0,0,0) 100%);" src="https://www.emiia.ru/relise/plat_emiia_3.3_svg.svg" style="border-radius: 8px 8px 8px 8px; " width="650px" height="450">
+     
+     
+  </div>
+  
+  
 </div>
 
 
