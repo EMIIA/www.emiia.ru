@@ -7,17 +7,17 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   height="600"
-   width="1000"
-   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
-   sodipodi:docname="video3_4.svg"
-   id="svg274"
-   stroke-miterlimit="10"
-   stroke-linecap="square"
-   stroke="none"
-   fill="none"
+   version="1.1"
    viewBox="0 0 1000 600"
-   version="1.1">
+   fill="none"
+   stroke="none"
+   stroke-linecap="square"
+   stroke-miterlimit="10"
+   id="svg274"
+   sodipodi:docname="video3_4.svg"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   width="1000"
+   height="600">
   <metadata
      id="metadata280">
     <rdf:RDF>
@@ -26,42 +26,42 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <defs
      id="defs278" />
   <sodipodi:namedview
-     inkscape:current-layer="svg274"
-     inkscape:window-maximized="1"
-     inkscape:window-y="-11"
-     inkscape:window-x="-11"
-     inkscape:cy="304.30535"
-     inkscape:cx="910.72883"
-     inkscape:zoom="0.86227744"
-     showgrid="false"
-     id="namedview276"
-     inkscape:window-height="1046"
-     inkscape:window-width="1920"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0"
-     guidetolerance="10"
-     gridtolerance="10"
-     objecttolerance="10"
-     borderopacity="1"
-     bordercolor="#666666"
+     inkscape:document-rotation="0"
      pagecolor="#ffffff"
-     inkscape:document-rotation="0" />
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1046"
+     id="namedview276"
+     showgrid="false"
+     inkscape:zoom="0.86227744"
+     inkscape:cx="514.49132"
+     inkscape:cy="304.30535"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg274" />
   <clipPath
      id="g1ef8a2cc4ca_0_288.0">
     <path
-       id="path2"
+       d="M 0,0 H 960 V 720 H 0 Z"
        clip-rule="nonzero"
-       d="M 0,0 H 960 V 720 H 0 Z" />
+       id="path2" />
   </clipPath>
   <path
-     style="fill:#3d85c6;fill-opacity:1;stroke:none;stroke-width:8.46461;stroke-opacity:1"
-     d="m 531.3741,303.26293 -53.63201,31.38438 c -4.55151,2.66071 -10.3926,-0.56102 -10.3926,-5.92496 V 265.9536 c 0,-5.35539 5.83265,-8.58562 10.3926,-5.91644 l 53.63201,31.38438 a 6.7598399,6.8175153 0 0 1 0,11.84139 z"
-     id="path1105" />
+     id="path1105"
+     d="m 531.3741,321.26293 -53.63201,31.38438 c -4.55151,2.66071 -10.3926,-0.56102 -10.3926,-5.92496 V 283.9536 c 0,-5.35539 5.83265,-8.58562 10.3926,-5.91644 l 53.63201,31.38438 a 6.7598399,6.8175153 0 0 1 0,11.84139 z"
+     style="fill:#3d85c6;fill-opacity:1;stroke:none;stroke-width:8.46461;stroke-opacity:1" />
 </svg>
