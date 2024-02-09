@@ -19,6 +19,7 @@
 
 
 
+
 <!DOCTYPE html><html lang="ru"><head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1, shrink-to-fit=no">
@@ -1551,8 +1552,35 @@ animate();
     border-color: transparent;
 }
 
- </style>
 
+
+
+
+.uk-dotnav>*>* {
+    display: block;
+    box-sizing: border-box;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background:  white;
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    border: 1px solid rgba(102,102,102,.4);
+    transition: .2s ease-in-out;
+    transition-property: background-color,border-color;
+}
+
+
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    background-color:#f8f9fa;
+}
+
+
+ </style>
 
 
 
