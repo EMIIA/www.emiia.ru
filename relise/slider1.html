@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Ken Burns effect</title>
+  <link rel='stylesheet' href='https://owlcarousel2.github.io/OwlCarousel2/assets/css/docs.theme.min.css'>
+<link rel='stylesheet' href='https://owlcarousel2.github.io/OwlCarousel2/assets/owlcarousel/assets/owl.carousel.min.css'>
+<link rel='stylesheet' href='https://owlcarousel2.github.io/OwlCarousel2/assets/owlcarousel/assets/owl.theme.default.min.css'>
+
+
+
+
+
+<style>
+
+.owl-carousel .item{
+		padding:0 !important;
+		height:auto !important;;
+	}
+    
+    
+    .owl-carousel .owl-item div{
+           position: relative;
+           overflow: hidden;
+         }
+	
+      .owl-carousel .owl-item img{
+           display: block;
+           width: 100%;
+           height: auto;
+           -webkit-border-radius: 3px;
+           -moz-border-radius: 3px;
+           border-radius: 3px;
+           max-height: 1490px;
+           -webkit-transition: all 20s;
+           -moz-transition: all 20s;
+           -o-transition: all 20s;
+           transition: all 20s;
+           transition-timing-function:linear;
+         }
+         
+          
+
+</style>
+
+
+
+
+
+
+
+
+<style>
+
+.image {display:none;} /*should also prevent additional network request for the unused images*/
+
+.image__ct {background-size:cover;background-position:center center;background-repeat:no-repeat;}
+
+.image--6x3 .image__ct {padding-bottom:50%;}
+.image--6x4 .image__ct {padding-bottom:66.6666%;}
+.image--6x6 .image__ct {padding-bottom:100%;}
+
+/*show mobile images*/
+@media (min-width: 0) and (max-width: 767px) {
+	.image--mobile-6x3 .image--6x3,
+	.image--mobile-6x4 .image--6x4,
+	.image--mobile-6x6 .image--6x6 {display:block;}
+}
+
+/*show tablet images*/
+@media (min-width:768px) and (max-width: 1023px) {
+	.image--tablet-6x3 .image--6x3,
+	.image--tablet-6x4 .image--6x4,
+	.image--tablet-6x6 .image--6x6 {display:block;}
+}
+
+/*show desktop images*/
+@media (min-width: 1024px) {
+	.image--desktop-6x3 .image--6x3,
+	.image--desktop-6x4 .image--6x4,
+	.image--desktop-6x6 .image--6x6 {display:block;}
+}
+
+
+ </style>
+
+
+
+
+
+
+
+
+
+</head>
+<body>
+
+
+
+<h1>Resize between 767px - 1024px</h3>
+
+<!-- partial:index.partial.html -->
+
+<div class="owl-carousel owl-theme">
+
+
+
+
+ 
+     
+            
+            
+            
+                      
+   <div class="item">
+            
+            
+    <div class="image--mobile-6x6 image--tablet-6x3 image--desktop-6x4"> <!-- or any other combination of 6x3, 6x4 or 6x6 -->
+	<div class="image image--6x3"><div class="image__ct" style="background-image:url('https://www.emiia.ru/relise/plat_emiia_1.1_svg.svg')"></div></div>
+	<div class="image image--6x4"><div class="image__ct" style="background-image:url('https://www.emiia.ru/relise/plat_emiia_1.1_svg.svg')"></div></div>
+	<div class="image image--6x6"><div class="image__ct" style="background-image:url(' https://www.emiia.ru/relise/plat_emiia_2.2_svg.svg')"></div></div>
+</div>
+
+</div>
+  
+
+
+
+
+    
+            <div class="item">
+            
+     
+  <div class="image--mobile-6x6 image--tablet-6x3 image--desktop-6x4"> <!-- or any other combination of 6x3, 6x4 or 6x6 -->
+	<div class="image image--6x3"><div class="image__ct" style="background-image:url('https://www.emiia.ru/relise/plat_emiia_1.1_svg.svg')"></div></div>
+	<div class="image image--6x4"><div class="image__ct" style="background-image:url('https://www.emiia.ru/relise/plat_emiia_1.1_svg.svg')"></div></div>
+	<div class="image image--6x6"><div class="image__ct" style="background-image:url(' https://www.emiia.ru/relise/plat_emiia_2.2_svg.svg')"></div></div>
+</div>
+
+</div>
+            
+            
+<div class="item">
+
+			  <div class="image--mobile-6x6 image--tablet-6x3 image--desktop-6x4"> <!-- or any other combination of 6x3, 6x4 or 6x6 -->
+	<div class="image image--6x3"><div class="image__ct" style="background-image:url('https://www.emiia.ru/relise/plat_emiia_1.1_svg.svg')"></div></div>
+	<div class="image image--6x4"><div class="image__ct" style="background-image:url('https://www.emiia.ru/relise/plat_emiia_1.1_svg.svg')"></div></div>
+	<div class="image image--6x6"><div class="image__ct" style="background-image:url(' https://www.emiia.ru/relise/plat_emiia_2.2_svg.svg')"></div></div>
+</div>
+
+
+</div>
+</div>
+
+
+
+ 
+<!-- partial -->
+  <script src='https://owlcarousel2.github.io/OwlCarousel2/assets/vendors/jquery.min.js'></script>
+<script src='https://owlcarousel2.github.io/OwlCarousel2/assets/owlcarousel/owl.carousel.js'>
+
+
+</script>
+
+<script>
+
+$(document).ready(function() {
+              var owl = $('.owl-carousel');
+              owl.owlCarousel({
+			  animateOut: 'fadeOut',
+                items: 1,
+                loop: true,
+                margin: 10,
+                autoplay: true,
+                autoplayTimeout: 2000,
+                autoplayHoverPause: true
+              });
+            })
+                     
+            </script>
+
+</body>
+</html>
+
