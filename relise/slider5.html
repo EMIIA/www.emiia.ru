@@ -1576,6 +1576,8 @@ animate();
 
 
 
+
+
 ::-webkit-scrollbar {
   
       width: 3px;
@@ -1583,8 +1585,6 @@ animate();
     background-color:#f8f9fa;
     touch-action: pan-y;
 }
-
-
 
 
 
@@ -1681,17 +1681,12 @@ color: #383838;
 }
 
 
-body, html{
-    overflow-x: hidden;
-}
 
 
-{
-    overflow-x:hidden;
-}
-@media only screen and (max-width: 1024px)
-{
-    overflowing_content_div { overflow:hidden; }
+
+
+::-webkit-scrollbar {
+    display: none; 
 }
 
  </style>
