@@ -3,6 +3,7 @@
 
 
 
+
 <!DOCTYPE html><html lang="ru"><head>
 <meta content="yes" name="apple-mobile-web-app-capable" />
   <meta charset="utf-8">
@@ -3491,6 +3492,73 @@ color: #383838;
 
 
 
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+    
+    <script src='/jquery.min.js'></script>
+
+
+<script>
+
+
+/*------------------- ACTIVE LINK POSITION ------------------------*/
+$("#ProductNav .ProductNav_Link").click(function() {
+   
+   centerLI(this, '#ProductNav');
+
+ });
+
+$("#ProductNav2 .ProductNav_Link").click(function() {
+   
+   centerLI(this, '#ProductNav2');
+
+ });
+
+ //http://stackoverflow.com/a/33296765/350421
+ function centerLI(target, outer) {
+   var out = $(outer);
+   var tar = $(target);
+   var x = out.width() - 50;
+   var y = tar.outerWidth(true);
+   var z = tar.index();
+   var q = 0;
+   var m = out.find('.ProductNav_Link');
+   for (var i = 0; i < z; i++) {
+     q += $(m[i]).outerWidth(true);
+   }
+   
+ //out.scrollLeft(Math.max(0, q - (x - y)/2));
+ var xy = x - y;
+ if(q > xy){
+out.animate({
+  scrollLeft: Math.max(0, q - (x - y) + 100)
+}, 500);
+ } else {
+ out.animate({
+  scrollLeft: Math.max(0, q/2 - 50)
+}, 500);	  
+ }
+
+ }
+
+
+$(document).ready(function() {
+$('.mouse-scroll').mousewheel(function(e, delta) {
+this.scrollLeft -= (delta * 50);
+e.preventDefault();
+});
+});
+
+
+
+
+</script>
+
+
+
+
+
+
+
 
   <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js'></script>
 
@@ -3753,6 +3821,8 @@ $(document).ready(function() {
 </div>
 </div>
 </div>
+
+
 
 
 
