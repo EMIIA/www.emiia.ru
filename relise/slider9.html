@@ -10,6 +10,7 @@
 
 
 
+
 <html lang="ru"><head>
 <meta content="yes" name="apple-mobile-web-app-capable" />
   <meta charset="utf-8">
@@ -1752,7 +1753,7 @@ color: #383838;
 
 header.secondary-nav .scroll {
   white-space: nowrap;
-
+  overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
 }
@@ -1779,8 +1780,6 @@ header.secondary-nav .submenu.visible {
   border-top: 1px solid #e8e8e8;
 }
 
-
-
 header.secondary-nav .dropdown {position:inherit;}
 header.secondary-nav .dropdown-item {display: inline-block; font-size:0.8rem; font-weight:500; width:auto; clear:inherit; padding: 12px;}
 header.secondary-nav .dropdown-toggle.visible {background:#fbf7fc}
@@ -1791,13 +1790,8 @@ header.secondary-nav, header.secondary-nav nav {
   font-size: 0;
 }
 
-
-
-
-
-
 header.secondary-nav {
- 
+  background-color: transparent;
   // border-top: 1px solid #e2e2e3;
   // border-bottom: 1px solid #e2e2e3;
   position: relative;
@@ -1813,10 +1807,6 @@ header.secondary-nav {
   transition: transform .5s;
   transition: transform .5s, -webkit-transform .5s;
 }
-
-
-
-
 
 header.secondary-nav .vam {
   display: inline-block;
@@ -1834,16 +1824,27 @@ header.secondary-nav .nav-item {
 }
 
 header.secondary-nav .nav-link{
-  padding: 18px  16px;
+  padding: 18px 14px;
   font-size: 16px;
   font-weight: 400;
 }
 
+@media (max-width: 768px) {
+  header.secondary-nav::after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 35px;
+    background: linear-gradient(to left, #e3e3e3, rgba(37, 40, 61, 0));
+    pointer-events: none;
+    transition: opacity .2s;
+  }
+  
+  
 
-  header.secondary-nav .nav-link {padding: 14px 10px;}
-}
-
-header.secondary-nav .nav-link.active {color: #000; box-shadow: inset 0px -3px 0px 0px #fdac00;}
  
  
   </style>
