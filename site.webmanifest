@@ -1,5 +1,5 @@
 {
-  "background_color": "transparent",
+  "background_color": "#f8f9fa",
   "description": "EMIIA.AI",
   "display": "standalone",
   "icons": [
@@ -11,5 +11,5 @@
   ],
   "name": "EMIIA.AI",
   "short_name": "EMIIA.AI",
-  "start_url": "/denisovskiy1.html"
+  "start_url": "/index.html"
 }
