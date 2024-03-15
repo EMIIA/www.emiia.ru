@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+
+ 
+ 
+ <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+ 
+
+    
+    
+
+    
+    
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css" rel="stylesheet" />
+      
+    
+    
+	<script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
+
+
+
+
+
+
+
+
+
+    
+    
+    
+    
+      <style>
+  body { margin: 0; padding: 0; }
+	#map { position: absolute; top: 0; bottom: 0;  width: 100%; }
+    
+    </style>
+    
+    
+    
+    
+    
+    
+
+    
+    
+</head>
+
+
+
+
+<body>
+
+
+
+
+
+
+
+
+
+
+<div id="map"></div>
+       
+
+
+
+
+  
+
+
+
+<script>
+
+    
+    
+
+
+
+	mapboxgl.accessToken = 'pk.eyJ1IjoiZGFudmsiLCJhIjoiY2lrZzJvNDR0MDBhNXR4a2xqNnlsbWx3ciJ9.myJhweYd_hrXClbKk8XLgQ';
+	 var  map = (window.map = new mapboxgl.Map({
+		container: 'map',
+        
+        
+    
+    
+    
+    style: 'mapbox://styles/mapbox/light-v9',
+        
+    
+
+		
+
+ zoom: 18,
+
+        maxZoom: 30,
+        
+        
+		center: [37.173764, 55.977719],
+        
+        
+         pitch: 30, // pitch in degrees
+   
+        
+        
+
+
+        
+        
+        attributionControl: false,
+        
+		antialias: true // create the gl context with MSAA antialiasing, so custom layers are antialiased
+	}));
+    
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+  
+   
+ <script src="https://cdn.jsdelivr.net/gh/jscastro76/threebox@v.2.2.2/dist/threebox.min.js" type="text/javascript"></script> 
+
+   
+
+   
+    
+   
+
+
+<script>
+
+
+
+
+// parameters to ensure the model is georeferenced correctly on the map
+var modelOrigin = [37.17409849995867,55.97737925266699]//[2.318, 48.850];
+var modelAltitude = -0;
+var modelRotate = [0.57, 0.16, -501.259];
+
+
+   
+
+var modelAsMercatorCoordinate = mapboxgl.MercatorCoordinate.fromLngLat(
+  modelOrigin,
+  modelAltitude
+);
+
+
+
+
+
+// transformation parameters to position, rotate and scale the 3D model onto the map
+var modelTransform = {
+  translateX: modelAsMercatorCoordinate.x,
+  translateY: modelAsMercatorCoordinate.y,
+  translateZ: modelAsMercatorCoordinate.z,
+  rotateX: modelRotate[0],
+  rotateY: modelRotate[1],
+  rotateZ: modelRotate[2],
+  /* Since our 3D model is in real world meters, a scale transform needs to be
+   * applied since the CustomLayerInterface expects units in MercatorCoordinates.
+   */
+  scale: modelAsMercatorCoordinate.meterInMercatorCoordinateUnits()
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var THREE = window.THREE;
+
+// configuration of the custom layer for a 3D model per the CustomLayerInterface
+var customLayer = {
+  id: "3d-model",
+  type: "custom",
+            wireframe: true,
+  renderingMode: "3d",
+  onAdd: function (map, gl) {
+    this.camera = new THREE.Camera();
+    this.scene = new THREE.Scene();
+    
+    
+    
+    
+     // create two three.js lights to illuminate the model
+    var directionalLight = new THREE.DirectionalLight(0xffffff);
+    directionalLight.position.set(0, 0, 0).normalize();
+    this.scene.add(directionalLight);
+
+    var directionalLight2 = new THREE.DirectionalLight(0xffffff);
+    directionalLight2.position.set(0, 0, 0).normalize();
+    this.scene.add(directionalLight2);
+    
+    
+    
+    
+
+    
+    
+
+    // use the three.js GLTF loader to add the 3D model to the three.js scene
+    var loader = new THREE.OBJLoader();
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+             loader.load(
+    "https://www.emiia.ru/relise/modeOBJ-5.obj" , 
+    
+    
+ 
+
+      
+    (mesh) => {
+        
+        
+      
+      
+ // ?.     
+                    
+                                mesh.children[0].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xFFFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        // Контуры стен.
+                    
+                                mesh.children[1].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xFFFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+         // Стены.     
+                    
+                                mesh.children[2].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xFFFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+                 // ?.     
+                    
+                                mesh.children[3].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xFFFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+                         // ?.     
+                    
+                                mesh.children[4].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xFFFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+         // ?.     
+                    
+                                mesh.children[5].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xffFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+
+        
+      // Y.     
+                    
+                                mesh.children[6].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0x66ff00,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });  
+        
+
+
+
+    
+     // X.     
+                    
+                                mesh.children[7].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xff2400 ,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });  
+    
+    
+    
+    
+    
+    //Z.     
+                    
+                                mesh.children[8].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0x3D85C6,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });  
+        
+        
+        
+        
+        
+        
+         //Основная решетка.     
+                    
+                                mesh.children[9].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xFFFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });  
+    
+        
+        
+     
+        
+        this.scene.add(mesh);
+      }
+    );
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+   
+      
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+    
+     loader.load(
+    "https://www.emiia.ru/relise/modeOBJ-2.obj" , 
+    
+    
+   
+
+      
+
+      
+    (mesh) => {
+        
+        
+        
+        
+       
+        
+        
+        
+    
+        
+
+        
+      
+      
+      
+      
+ // Лесничная площадка.     
+                    
+                                mesh.children[0].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xFFFFFF,
+          opacity: 0.95,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+        // Верхние грани.     
+                    
+                                mesh.children[1].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xffFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+             // Стены.     
+                    
+                                mesh.children[2].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xE8E8E8,
+          opacity: 0.83,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+   
+ 
+              // Внутренние грани наружных окон.     
+                    
+                                mesh.children[3].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xD3D3D3,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+         
+              // Унитаз и умывальник.     
+                    
+                                mesh.children[4].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xFFFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+ 
+        
+        
+        
+        
+        
+                    // Рамы внешних окон.     
+                    
+                                mesh.children[5].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xFFFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+        
+                            // Вертикальные ребра стен (стыки).     
+                    
+                                mesh.children[6].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xE8E8E8,
+          opacity: 0.8,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+                                    //Смеситель.     
+                    
+                                mesh.children[7].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xFFffff,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+  
+  
+  
+  
+  
+                                      //Стекла окон на лестничных площадках.     
+                    
+                                mesh.children[8].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xFFFFFF,
+          opacity: 0,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+         //Внутренние грани окон на лестничных площадках.
+        
+        
+                                       mesh.children[9].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xD3D3D3,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+                                             //Внутренние грани внешних окон.     
+                    
+                                mesh.children[10].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xD3D3D3,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+                                                     //Стекла внешних окон.     
+                    
+                                mesh.children[11].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xD3D3D3,
+          opacity: 0,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+  
+  
+  
+  
+  
+  
+  
+  
+    
+                                      //Полотно внутренних дверей.     
+                    
+                                mesh.children[12].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xFFFFFF,
+          opacity: 0.9,
+          transparent: true,
+          fog: false
+        });
+  
+  
+  
+  
+  
+  
+  
+                                        //Внутренний наличник дверей внутри.     
+                    
+                                mesh.children[13].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xd3d3d3,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+  
+  
+  
+  
+  
+  
+    
+                                        //Внутренние двери (внутренние грани1).     
+                    
+                                mesh.children[14].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xD3D3D3,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+  
+  
+  
+  
+  
+  
+  
+  
+  
+      
+                                        //Внутренние двери (внутренние грани2).     
+                    
+                                mesh.children[15].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xD3D3D3,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+  
+  
+  
+  
+                                          //Пожарный оповещатель.     
+                    
+                                mesh.children[16].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xFFFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+   
+ 
+ 
+ 
+ 
+ 
+ 
+        
+        
+        this.scene.add(mesh);
+      }
+    );
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+   
+    this.map = map;
+
+    // use the Mapbox GL JS map canvas for three.js
+    this.renderer = new THREE.WebGLRenderer({
+      canvas: map.getCanvas(),
+      context: gl,
+                wireframe: true,
+                
+               
+                
+                
+                
+      antialias: true
+    });
+       
+    
+    
+
+    
+
+    
+     this.renderer.autoClear = false;
+  },
+  render: function (gl, matrix) {
+    var rotationX = new THREE.Matrix4().makeRotationAxis(
+      new THREE.Vector3(0, 0, 0),
+      modelTransform.rotateX
+    );
+    var rotationY = new THREE.Matrix4().makeRotationAxis(
+      new THREE.Vector3(0, 0, 0),
+      modelTransform.rotateY
+    );
+    var rotationZ = new THREE.Matrix4().makeRotationAxis(
+      new THREE.Vector3(0, 0, 1),
+      modelTransform.rotateZ
+    );
+    
+    
+    
+
+
+    var m = new THREE.Matrix4().fromArray(matrix);
+    var l = new THREE.Matrix4()
+      .makeTranslation(
+        modelTransform.translateX,
+        modelTransform.translateY,
+        modelTransform.translateZ
+      )
+      .scale(
+        new THREE.Vector3(
+          modelTransform.scale,
+          -modelTransform.scale,
+          modelTransform.scale
+        )
+      )
+      .multiply(rotationX)
+      .multiply(rotationY)
+      .multiply(rotationZ);
+
+    this.camera.projectionMatrix = m.multiply(l);
+    this.renderer.resetState();
+    this.renderer.render(this.scene, this.camera);
+    this.map.triggerRepaint();
+  }
+};
+
+    
+
+   
+
+map.on("style.load", () => {
+  map.addLayer(customLayer, "waterway-label");
+});
+
+
+
+
+
+
+
+
+
+
+
+     
+
+</script>
+    
+    
+    
+    
+    
+    
+    
+
+
+
+</body>
+
+</html>
