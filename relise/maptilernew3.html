@@ -123,9 +123,13 @@ body { margin: 0; padding: 0; }
     
     
     
-    
-    
 
+    
+    
+    
+    
+    
+   
     // parameters to ensure the model is georeferenced correctly on the map
 		var modelOrigin = [37.17402239557072, 55.97723794736996, 1];
 
@@ -142,8 +146,19 @@ body { margin: 0; padding: 0; }
 					window.tb = new Threebox(
 						map,
 						gl,
-						{ defaultLights: true, enableSelectingObjects: true, enableDraggingObjects: true, enableRotatingObjects: true, enableTooltips: true }
+						{ defaultLights: true,
+                        
+                        enableSelectingFeatures: false,
+                        realSunlight: false,
+                        enableSelectingObjects: false,
+                        enableDraggingObjects: false,
+                        enableRotatingObjects: false,
+                        enableTooltips: false }
 					);
+                    
+                    
+        
+                    
 
 		
             
@@ -167,13 +182,6 @@ body { margin: 0; padding: 0; }
 			return customLayer3D;
 
 		};
-        
-    
-    
-    
-    
-    
-    
     
     
     
