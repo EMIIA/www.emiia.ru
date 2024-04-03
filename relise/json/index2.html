@@ -61,10 +61,10 @@ html, body {
 
 
 <script type="module">
-import * as THREE from 'three.module.js';
-import {OrbitControls} from 'OrbitControls.js';
+import * as THREE from '../relise/json/three.module.js';
+import {OrbitControls} from '../relise/json/OrbitControls.js';
 
-import {OBJLoader2} from 'OBJLoader2.js';
+import {OBJLoader2} from '../relise/json/loaders/OBJLoader2.js';
 
 function main() {
   const canvas = document.querySelector('#c');
@@ -96,7 +96,7 @@ function main() {
 
   {
     const objLoader = new OBJLoader2();
-    objLoader.load('modelOBJ1.obj', (root) => {
+    objLoader.load('../relise/json/modelOBJ1.obj', (root) => {
       root.traverse(child => {
              if (child.isMesh) {
                 if (Array.isArray(child.material)) {
