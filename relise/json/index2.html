@@ -1,0 +1,162 @@
+
+
+
+<!DOCTYPE html>
+<html>
+
+
+
+<meta charset="UTF-8">
+  
+
+
+ 
+ <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+ 
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+
+
+
+
+
+<head>
+
+
+
+
+<style>
+html, body {
+  margin: 0;
+  height: 100%;
+
+}
+#c {
+  width: 100%;
+  height: 100%;
+  display: block;
+
+}
+
+</style>
+
+</head>
+<body>
+
+
+
+
+<canvas id="c"></canvas>
+
+</body>
+
+
+
+
+
+
+
+
+
+<script type="module">
+import * as THREE from './relise/json/three.module.js';
+import {OrbitControls} from './relise/json/OrbitControls.js';
+
+import {OBJLoader2} from './relise/json/loaders/OBJLoader2.js';
+
+function main() {
+  const canvas = document.querySelector('#c');
+  const renderer = new THREE.WebGLRenderer({canvas});
+
+  const fov = 60;
+  const aspect = 2;  // the canvas default
+  const near = 0.1;
+  const far = 1000;
+  const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+  camera.position.set(0, 0, 50);
+
+  const controls = new OrbitControls(camera, canvas);
+ 
+  controls.update();
+
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color('#3f69aa');
+
+  function makeWireframe(material) {
+    material.wireframe = true;
+    material.emissive.set('#E8E8E8');
+    material.map = undefined;
+    
+    
+
+    
+  }
+
+  {
+    const objLoader = new OBJLoader2();
+    objLoader.load('./relise/json/modelOBJ1.obj', (root) => {
+      root.traverse(child => {
+             if (child.isMesh) {
+                if (Array.isArray(child.material)) {
+                  child.material.forEach(makeWireframe);
+                } else {
+                  makeWireframe(child.material)
+                }
+             }
+      });
+      scene.add(root);
+    });
+  }
+
+  function resizeRendererToDisplaySize(renderer) {
+    const canvas = renderer.domElement;
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+    const needResize = canvas.width !== width || canvas.height !== height;
+    if (needResize) {
+      renderer.setSize(width, height, false);
+    }
+    return needResize;
+  }
+
+  function render() {
+
+    if (resizeRendererToDisplaySize(renderer)) {
+      const canvas = renderer.domElement;
+      camera.aspect = canvas.clientWidth / canvas.clientHeight;
+      camera.updateProjectionMatrix();
+    }
+
+    renderer.render(scene, camera);
+
+    requestAnimationFrame(render);
+  }
+
+  requestAnimationFrame(render);
+}
+
+main();
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
+
+
+
+
+
+
