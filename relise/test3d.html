@@ -1,0 +1,870 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Mapbox Standard Demo</title>
+  <meta charset='utf-8'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <link href='https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css' rel='stylesheet' />
+  
+  
+  
+  
+  
+  <style>
+    body {
+      margin: 0;
+      padding: 0
+    }
+
+    html,
+    body,
+    #map {
+      height: 100%;
+    }
+
+    .map-button:hover circle {
+      fill: #4264FB;
+    }
+
+    .map-button:hover path {
+      stroke: #fff;
+    }
+
+    .map-button:active circle {
+      fill: #4264FB;
+    }
+
+    .map-button:active path {
+      stroke: #fff;
+    }
+
+    .map-button.selected circle {
+      fill: #4264FB;
+    }
+
+    .map-button.selected path {
+      stroke: #fff;
+    }
+
+    .map-button {
+      display: flex;
+      border-radius: 8px;
+      justify-content: center;
+      transition: fill 2s ease, stroke 2s ease;
+    }
+
+    .map-controls {
+      grid-column-gap: 10px;
+      background-color: #fff;
+      border-radius: 32px;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 6px;
+      display: flex;
+      position: absolute;
+      z-index: 10;
+      top: 13px;
+      bottom: auto;
+      left: 13px;
+      right: auto;
+      box-shadow: 0 0 4px rgba(21, 45, 72, .25)
+    }
+  </style>
+</head>
+
+<body>
+
+
+
+<script src="https://cdn.jsdelivr.net/gh/jscastro76/threebox@v.2.2.2/dist/threebox.min.js" type="text/javascript"></script>
+<link href="https://cdn.jsdelivr.net/gh/jscastro76/threebox@v.2.2.2/dist/threebox.css" rel="stylesheet">
+
+  
+
+  <div id='map'>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js'></script>
+    
+    
+    <script>
+      
+
+      mapboxgl.accessToken = 'pk.eyJ1Ijoia211bm96IiwiYSI6ImNsY3A3NDloaDA2bnozcGxiN2U1Y2I2bWIifQ.WY4_mVStBm5c9CjvWsVy3w';
+
+      const map = window.map = new mapboxgl.Map({
+        container: 'map',
+        center: [37.17409849995867,55.97737925266699],
+        zoom: 16.2,
+        pitch: 62,
+        bearing: -20,
+        style: 'mapbox://styles/mapbox/light-v11',
+        hash: true
+      });
+      
+      
+      
+      
+      
+      
+      // eslint-disable-next-line no-undef
+    const tb = (window.tb = new Threebox(
+        map,
+        map.getCanvas().getContext('webgl'),
+        {
+            defaultLights: true
+        }
+    ));
+
+    map.on('style.load', () => {
+        map.addLayer({
+            id: 'custom-threebox-model',
+            type: 'custom',
+            renderingMode: '3d',
+            onAdd: function () {
+                // Creative Commons License attribution:  Metlife Building model by https://sketchfab.com/NanoRay
+                // https://sketchfab.com/3d-models/metlife-building-32d3a4a1810a4d64abb9547bb661f7f3
+                const scale = 500.2;
+                const options = {
+                    obj: 'https://www.emiia.ru/gltf/dom_new_down.gltf',
+                    type: 'gltf',
+                    scale: { x: scale, y: scale, z: 500.7 },
+                    units: 'meters',
+                    rotation: { x: 90, y: -90, z: 0 }
+                };
+
+                tb.loadObj(options, (model) => {
+                    model.setCoords([37.17402239557072, 55.97723794736996, 1]);
+                    model.setRotation({ x: 0, y: 0, z: 241 });
+                    tb.add(model);
+                });
+            },
+
+            render: function () {
+                tb.update();
+            }
+        });
+    });
+
+      
+      
+    
+    
+    
+   
+    
+      
+      
+      
+      
+
+     
+    </script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script type="x-shader/x-vertex" id="vertexShader">
+
+			attribute vec3 center;
+			varying vec3 vCenter;
+
+			void main() {
+
+				vCenter = center;
+
+				gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+
+			}
+
+		</script>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <script>
+
+
+
+
+        // parameters to ensure the model is georeferenced correctly on the map
+var modelOrigin = [37.17409849995867,55.97737925266699]//[2.318, 48.850];
+var modelAltitude = -0;
+var modelRotate = [0.57, 0.1, 305.325];
+        
+
+
+
+
+
+
+
+
+
+   
+
+var modelAsMercatorCoordinate = mapboxgl.MercatorCoordinate.fromLngLat(
+  modelOrigin,
+  modelAltitude
+);
+
+
+
+
+
+// transformation parameters to position, rotate and scale the 3D model onto the map
+var modelTransform = {
+  translateX: modelAsMercatorCoordinate.x,
+  translateY: modelAsMercatorCoordinate.y,
+  translateZ: modelAsMercatorCoordinate.z,
+  rotateX: modelRotate[0],
+  rotateY: modelRotate[1],
+  rotateZ: modelRotate[2],
+  /* Since our 3D model is in real world meters, a scale transform needs to be
+   * applied since the CustomLayerInterface expects units in MercatorCoordinates.
+   */
+  scale: modelAsMercatorCoordinate.meterInMercatorCoordinateUnits()
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var THREE = window.THREE;
+
+// configuration of the custom layer for a 3D model per the CustomLayerInterface
+var customLayer = {
+  id: "3d-model",
+  type: "custom",
+            wireframe: true,
+  renderingMode: "3d",
+  onAdd: function (map, gl) {
+    this.camera = new THREE.Camera();
+    this.scene = new THREE.Scene();
+    
+    
+    
+    
+     // create two three.js lights to illuminate the model
+    var directionalLight = new THREE.DirectionalLight(0xffffff);
+    directionalLight.position.set(0, 0, 0).normalize();
+    this.scene.add(directionalLight);
+
+    var directionalLight2 = new THREE.DirectionalLight(0xffffff);
+    directionalLight2.position.set(0, 0, 0).normalize();
+    this.scene.add(directionalLight2);
+    
+    
+    
+    
+
+    
+    
+
+    // use the three.js GLTF loader to add the 3D model to the three.js scene
+    var loader = new THREE.OBJLoader();
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     
+    
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   
+        
+      
+    
+    
+   
+        
+      
+
+        
+        
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                 loader.load(
+    "https://www.emiia.ru/relise/FACTORY_RENGA_PREZENTATION_4.obj" , 
+    
+    
+ 
+
+      
+    (mesh) => {
+        
+        
+      
+      
+    
+
+// .     
+                    
+                                mesh.children[0].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xDC143C,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+
+
+
+
+// .     
+                    
+                                mesh.children[1].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xfFffff,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        // .     
+                    
+                                mesh.children[2].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xDC143C,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+
+        
+        
+        
+        
+        
+        
+        
+         // .     
+                    
+                                mesh.children[3].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xfFffff,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+
+        
+      
+      
+      
+ 
+        
+        
+         // линии.     
+                    
+                                mesh.children[4].material = new THREE.MeshBasicMaterial({
+    wireframe: true,
+          color: 0xDC143C,
+          opacity: 0.1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+      
+        
+        
+        
+
+        
+        
+        this.scene.add(mesh);
+      }
+    );
+    
+    
+ 
+    
+    
+    
+    
+    
+   
+   
+   
+   
+   
+   
+   
+   
+    
+    
+    
+    
+   
+             loader.load(
+    "https://www.emiia.ru/relise/FACTORY_RENGA_PREZENTATION_3.obj" , 
+    
+    
+ 
+
+      
+    (mesh) => {
+        
+        
+      
+      
+    
+
+// .     
+                    
+                                mesh.children[0].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xfFFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+
+
+
+
+// stena.     
+                    
+                                mesh.children[1].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xe8e8e8,
+          opacity: 0.5,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        // .     
+                    
+                                mesh.children[2].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xDC143C,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+
+        
+        
+        
+        
+        
+        
+        
+         // .     
+                    
+                                mesh.children[3].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xfFffff,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+
+        
+      
+      
+      
+      
+      // oborudov.     
+                    
+                                mesh.children[4].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xffffff,
+          opacity: 0.5,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+        
+        
+          // .     
+                    
+                                mesh.children[5].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xfFffff,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+
+        
+        
+        this.scene.add(mesh);
+      }
+    );
+    
+    
+    
+    
+    
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   
+    
+          
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     
+ 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+ 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   
+  
+    
+    
+    
+    
+    
+ 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+       
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   
+    this.map = map;
+
+    // use the Mapbox GL JS map canvas for three.js
+    this.renderer = new THREE.WebGLRenderer({
+      canvas: map.getCanvas(),
+      context: gl,
+                wireframe: true,
+                
+               
+                
+                
+                
+      antialias: true
+    });
+       
+    
+    
+
+    
+
+    
+     this.renderer.autoClear = false;
+  },
+  render: function (gl, matrix) {
+    var rotationX = new THREE.Matrix4().makeRotationAxis(
+      new THREE.Vector3(0, 0, 0),
+      modelTransform.rotateX
+    );
+    var rotationY = new THREE.Matrix4().makeRotationAxis(
+      new THREE.Vector3(0, 0, 0),
+      modelTransform.rotateY
+    );
+    var rotationZ = new THREE.Matrix4().makeRotationAxis(
+      new THREE.Vector3(0, 0, 1),
+      modelTransform.rotateZ
+    );
+    
+    
+    
+
+
+    var m = new THREE.Matrix4().fromArray(matrix);
+    var l = new THREE.Matrix4()
+      .makeTranslation(
+        modelTransform.translateX,
+        modelTransform.translateY,
+        modelTransform.translateZ
+      )
+      .scale(
+        new THREE.Vector3(
+          modelTransform.scale,
+          -modelTransform.scale,
+          modelTransform.scale
+        )
+      )
+      .multiply(rotationX)
+      .multiply(rotationY)
+      .multiply(rotationZ);
+
+    this.camera.projectionMatrix = m.multiply(l);
+    this.renderer.resetState();
+    this.renderer.render(this.scene, this.camera);
+    this.map.triggerRepaint();
+  }
+};
+
+    
+
+   
+
+map.on("style.load", () => {
+  map.addLayer(customLayer, "waterway-label");
+});
+
+
+
+
+
+
+     
+
+</script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+        
+        
+    
+    
+    
+    
+    
+    
+</body>
+
+</html>
+
+
