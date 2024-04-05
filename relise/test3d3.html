@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Play map locations as a slideshow</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js"></script>
+<style>
+body { margin: 0; padding: 0;
+
+background-color: #3d85c6;
+
+}
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+</head>
+<body>
+<style>
+    .map-overlay-container {
+        position: absolute;
+        width: 25%;
+        top: 0;
+        left: 0;
+        padding: 10px;
+        z-index: 1;
+    }
+
+    .map-overlay {
+        font:
+            12px/20px 'Helvetica Neue',
+            Arial,
+            Helvetica,
+            sans-serif;
+        background-color: #fff;
+        border-radius: 3px;
+        padding: 10px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .map-overlay h2,
+    .map-overlay p {
+        margin: 0 0 10px;
+    }
+</style>
+
+<div id="map"></div>
+
+<div class="map-overlay-container">
+    <div class="map-overlay">
+        <h2 id="location-title"></h2>
+        <p id="location-description"></p>
+        <small>Text credit:
+            <a target="_blank" href="http://www.nycgo.com/neighborhoods">nycgo.com</a></small>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/gh/jscastro76/threebox@v.2.2.2/dist/threebox.min.js" type="text/javascript"></script>
+<link href="https://cdn.jsdelivr.net/gh/jscastro76/threebox@v.2.2.2/dist/threebox.css" rel="stylesheet">
+
+  
+
+  <div id='map'>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js'></script>
+
+
+
+
+<script>
+	// TO MAKE THE MAP APPEAR YOU MUST
+	// ADD YOUR ACCESS TOKEN FROM
+	// https://account.mapbox.com
+    mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';
+
+    const map = new mapboxgl.Map({
+        container: 'map', // container id
+        // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+        style: 'https://raw.githubusercontent.com/EMIIA/www.emiia.ru/master/style/emiia_style_test.json',
+        zoom: 18,
+
+ 
+        
+        center: [37.173764, 55.977719],
+        
+      
+         
+        hash: true,
+         
+        attributionControl: false,
+        
+	antialias: true // create the gl context with MSAA antialiasing, so custom layers are antialiased
+         
+    });
+    
+    const title = document.getElementById('location-title');
+    const description = document.getElementById('location-description');
+
+    const locations = [
+        {
+            'id': '2',
+            'title': 'The Bronx',
+            'description':
+                "This is where hip-hop was born, where the Yankees became a dynasty and where you can find New York City's leading zoo and botanical garden.",
+            'camera': {
+                center: [37.17403570349893, 55.977114192661986],
+                zoom: 19.21,
+                bearing: 360,
+                pitch: 30
+            }
+        },
+        
+
+
+        {
+            'title': 'Boroughs of new york',
+            'description':
+                'New York City is made up of five boroughs: the Bronx, Brooklyn, Manhattan, Queens and Staten Island. Each one has enough attractions—and enough personality—to be a city all its own.',
+            'camera': {
+                center: [37.17404738772552,55.97747075210435],
+                zoom: 21.68,
+                bearing: 180,
+                pitch: 0
+            }
+        }
+    ];
+
+    function highlightBorough(code) {
+        // Only show the polygon feature that corresponds to `borocode` in the data.
+        map.setFilter('highlight', ['==', 'borocode', code]);
+    }
+
+    function playback(index) {
+        title.textContent = locations[index].title;
+        description.textContent = locations[index].description;
+
+        highlightBorough(locations[index].id ? locations[index].id : '');
+
+        // Animate the map position based on camera properties.
+        map.flyTo(locations[index].camera);
+
+        map.once('moveend', () => {
+            // Duration the slide is on screen after interaction.
+            window.setTimeout(() => {
+                // Increment index, looping back to the first after the last location.
+                index = (index + 1) % locations.length;
+                playback(index);
+            }, 3000); // After callback, show the location for 3 seconds.
+        });
+    }
+
+    // Display the last title/description first.
+    title.textContent = locations[locations.length - 1].title;
+    description.textContent = locations[locations.length - 1].description;
+
+    map.on('load', () => {
+        map.addSource('boroughs', {
+            'type': 'vector',
+            'url': 'mapbox://mapbox.8ibmsn6u'
+        });
+        map.addLayer(
+            {
+                'id': 'highlight',
+                'type': 'fill',
+                'source': 'boroughs',
+                'source-layer': 'original',
+                'paint': {
+                    'fill-color': '#fd6b50',
+                    'fill-opacity': 0.25
+                },
+                'filter': ['==', 'borocode', '']
+            },
+            'road-label' // Place polygon under labels.
+        );
+
+        // Start the playback animation for each borough.
+        playback(0);
+    });
+</script>
+
+
+
+
+
+
+
+
+<script type="x-shader/x-vertex" id="vertexShader">
+
+			attribute vec3 center;
+			varying vec3 vCenter;
+
+			void main() {
+
+				vCenter = center;
+
+				gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+
+			}
+
+		</script>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script>
+
+
+
+
+// parameters to ensure the model is georeferenced correctly on the map
+var modelOrigin = [37.17409849995867,55.97737925266699]//[2.318, 48.850];
+var modelAltitude = 0.3;
+var modelRotate = [0.57, 0.16, -501.259];
+
+
+
+
+
+
+
+
+
+
+   
+
+var modelAsMercatorCoordinate = mapboxgl.MercatorCoordinate.fromLngLat(
+  modelOrigin,
+  modelAltitude
+);
+
+
+
+
+
+// transformation parameters to position, rotate and scale the 3D model onto the map
+var modelTransform = {
+  translateX: modelAsMercatorCoordinate.x,
+  translateY: modelAsMercatorCoordinate.y,
+  translateZ: modelAsMercatorCoordinate.z,
+  rotateX: modelRotate[0],
+  rotateY: modelRotate[1],
+  rotateZ: modelRotate[2],
+  /* Since our 3D model is in real world meters, a scale transform needs to be
+   * applied since the CustomLayerInterface expects units in MercatorCoordinates.
+   */
+  scale: modelAsMercatorCoordinate.meterInMercatorCoordinateUnits()
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var THREE = window.THREE;
+
+// configuration of the custom layer for a 3D model per the CustomLayerInterface
+var customLayer = {
+  id: "3d-model",
+  type: "custom",
+            wireframe: true,
+  renderingMode: "3d",
+  onAdd: function (map, gl) {
+    this.camera = new THREE.Camera();
+    this.scene = new THREE.Scene();
+    
+    
+    
+    
+     // create two three.js lights to illuminate the model
+    var directionalLight = new THREE.DirectionalLight(0xffffff);
+    directionalLight.position.set(0, 0, 0).normalize();
+    this.scene.add(directionalLight);
+
+    var directionalLight2 = new THREE.DirectionalLight(0xffffff);
+    directionalLight2.position.set(0, 0, 0).normalize();
+    this.scene.add(directionalLight2);
+    
+    
+    
+    
+
+    
+    
+
+    // use the three.js GLTF loader to add the 3D model to the three.js scene
+    var loader = new THREE.OBJLoader();
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+             loader.load(
+    "https://www.emiia.ru/relise/modeOBJ-5.obj" , 
+    
+    
+ 
+
+      
+    (mesh) => {
+        
+        
+      
+      
+ // ?.     
+                    
+                                mesh.children[0].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xDC143C,
+          opacity: 0,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        // Контуры стен.
+                    
+                                mesh.children[1].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xDC143C,
+          opacity: 0,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+         // Стены.     
+                    
+                                mesh.children[2].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xDC143C,
+          opacity: 0,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+                 // ?.     
+                    
+                                mesh.children[3].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xDC143C,
+          opacity: 0.3,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+                         // ?.     
+                    
+                                mesh.children[4].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xDC143C,
+          opacity: 0.9,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+         // ?.     
+                    
+                                mesh.children[5].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xDC143C,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+
+        
+      // Y.     
+                    
+                                mesh.children[6].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0x66ff00,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });  
+        
+
+
+
+    
+     // X.     
+                    
+                                mesh.children[7].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xff2400 ,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });  
+    
+    
+    
+    
+    
+    //Z.     
+                    
+                                mesh.children[8].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0x3D85C6,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });  
+        
+        
+        
+        
+        
+        
+         //Основная решетка.     
+                    
+                                mesh.children[9].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xFFFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });  
+    
+        
+        
+     
+        
+        this.scene.add(mesh);
+      }
+    );
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+   
+      
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+    
+     loader.load(
+    "https://www.emiia.ru/relise/modeOBJ-2.obj" , 
+    
+    
+
+
+      
+
+      
+    (mesh) => {
+        
+        
+        
+        
+       
+        
+        
+        
+    
+        
+
+        
+      
+      
+      
+      
+ // Лесничная площадка.     
+                    
+                                mesh.children[0].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xDC143C,
+          opacity: 0.95,
+        
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+        // Верхние грани.     
+                    
+                                mesh.children[1].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+          color: 0xDC143C,
+          opacity: 0.3,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+             // Стены.     
+                    
+                                mesh.children[2].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xDC143C,
+          opacity:0,
+          transparent: true,
+          fog: true
+        });
+        
+        
+        
+   
+ 
+              // Внутренние грани наружных окон.     
+                    
+                                mesh.children[3].material = new THREE.MeshBasicMaterial({
+    wireframe: true,
+         color: 0xDC143C,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+         
+              // Унитаз и умывальник.     
+                    
+                                mesh.children[4].material = new THREE.MeshBasicMaterial({
+    wireframe: true,
+         color: 0xDC143C,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+ 
+        
+        
+        
+        
+        
+                    // Рамы внешних окон.     
+                    
+                                mesh.children[5].material = new THREE.MeshBasicMaterial({
+    wireframe: true,
+         color: 0xDC143C,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+        
+                            // Вертикальные ребра стен (стыки).     
+                    
+                                mesh.children[6].material = new THREE.MeshBasicMaterial({
+    wireframe: true,
+         color: 0xDC143C,
+          opacity: 0.8,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+                                    //Смеситель.     
+                    
+                                mesh.children[7].material = new THREE.MeshBasicMaterial({
+    wireframe: true,
+         color: 0xDC143C,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+  
+  
+  
+  
+  
+                                      //Стекла окон на лестничных площадках.     
+                    
+                                mesh.children[8].material = new THREE.MeshBasicMaterial({
+    wireframe: true,
+         color: 0xDC143C,
+          opacity: 0,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+         //Внутренние грани окон на лестничных площадках.
+        
+        
+                                       mesh.children[9].material = new THREE.MeshBasicMaterial({
+    wireframe: true,
+         color: 0xDC143C,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+                                             //Внутренние грани внешних окон.     
+                    
+                                mesh.children[10].material = new THREE.MeshBasicMaterial({
+    wireframe: true,
+         color: 0xDC143C,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+                                                     //Стекла внешних окон.     
+                    
+                                mesh.children[11].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xD3D3D3,
+          opacity: 0,
+          transparent: true,
+          fog: false
+        });
+        
+        
+        
+        
+  
+  
+  
+  
+  
+  
+  
+  
+    
+                                      //Полотно внутренних дверей.     
+                    
+                                mesh.children[12].material = new THREE.MeshBasicMaterial({
+    wireframe: true,
+         color: 0xDC143C,
+          opacity: 0.9,
+          transparent: true,
+          fog: false
+        });
+  
+  
+  
+  
+  
+  
+  
+                                        //Внутренний наличник дверей внутри.     
+                    
+                                mesh.children[13].material = new THREE.MeshBasicMaterial({
+    wireframe: true,
+         color: 0xDC143C,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+  
+  
+  
+  
+  
+  
+    
+                                        //Внутренние двери (внутренние грани1).     
+                    
+                                mesh.children[14].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xD3D3D3,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+  
+  
+  
+  
+  
+  
+  
+  
+  
+      
+                                        //Внутренние двери (внутренние грани2).     
+                    
+                                mesh.children[15].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xD3D3D3,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+  
+  
+  
+  
+                                          //Пожарный оповещатель.     
+                    
+                                mesh.children[16].material = new THREE.MeshBasicMaterial({
+    wireframe: false,
+         color: 0xFFFFFF,
+          opacity: 1,
+          transparent: true,
+          fog: false
+        });
+   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+   
+ 
+ 
+ 
+ 
+ 
+ 
+        
+        
+        this.scene.add(mesh);
+      }
+    );
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   
+    this.map = map;
+
+    // use the Mapbox GL JS map canvas for three.js
+    this.renderer = new THREE.WebGLRenderer({
+      canvas: map.getCanvas(),
+      context: gl,
+                wireframe: true,
+                
+               
+                
+                
+                
+      antialias: true
+    });
+       
+    
+    
+
+    
+
+    
+     this.renderer.autoClear = false;
+  },
+  render: function (gl, matrix) {
+    var rotationX = new THREE.Matrix4().makeRotationAxis(
+      new THREE.Vector3(0, 0, 0),
+      modelTransform.rotateX
+    );
+    var rotationY = new THREE.Matrix4().makeRotationAxis(
+      new THREE.Vector3(0, 0, 0),
+      modelTransform.rotateY
+    );
+    var rotationZ = new THREE.Matrix4().makeRotationAxis(
+      new THREE.Vector3(0, 0, 1),
+      modelTransform.rotateZ
+    );
+    
+    
+    
+
+
+    var m = new THREE.Matrix4().fromArray(matrix);
+    var l = new THREE.Matrix4()
+      .makeTranslation(
+        modelTransform.translateX,
+        modelTransform.translateY,
+        modelTransform.translateZ
+      )
+      .scale(
+        new THREE.Vector3(
+          modelTransform.scale,
+          -modelTransform.scale,
+          modelTransform.scale
+        )
+      )
+      .multiply(rotationX)
+      .multiply(rotationY)
+      .multiply(rotationZ);
+
+    this.camera.projectionMatrix = m.multiply(l);
+    this.renderer.resetState();
+    this.renderer.render(this.scene, this.camera);
+    this.map.triggerRepaint();
+  }
+};
+
+    
+
+   
+
+map.on("style.load", () => {
+  map.addLayer(customLayer, "waterway-label");
+});
+
+
+
+
+
+
+
+
+
+
+
+     
+
+</script>
+    
+    
+
+
+
+
+
+
+
+</body>
+</html>
+
