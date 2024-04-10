@@ -50,23 +50,25 @@ background-color: #3d85c6;
 <style>
     .map-overlay-container {
         position: absolute;
-        width: 25%;
-        top: 0;
-        left: 0;
+ left: 0.5em;
+bottom: 0.5em;
+        max-width: 60%;   
         padding: 10px;
         z-index: 1;
     }
 
     .map-overlay {
         font:
-            12px/20px 'Helvetica Neue',
-            Arial,
-            Helvetica,
-            sans-serif;
-        background-color: #fff;
-        border-radius: 3px;
+            12px/18px 'Montserrat',
+            Montserrat,
+            Montserrat,
+            montserrat;
+        background-color: transparent;
+        color: white;
+        border-radius: 7px;
         padding: 10px;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+
+        box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.1) !important;
     }
 
     .map-overlay h2,
@@ -75,14 +77,35 @@ background-color: #3d85c6;
     }
 </style>
 
+
+
+
+<style>
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+</style>
+
+	<style>
+@import url('https://www.emiia.ru/css.css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+</style>
+
+  <style>  
+@import url('/css.css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic');
+</style>
+
+<link rel="stylesheet" href="https://www.emiia.ru/cssfamily=Montserrat.css">
+<link rel="stylesheet" href="/cssfamily=Montserrat.css">
+    
+
+
+
+
 <div id="map"></div>
 
 <div class="map-overlay-container">
     <div class="map-overlay">
         <h2 id="location-title"></h2>
         <p id="location-description"></p>
-        <small>Text credit:
-            <a target="_blank" href="http://www.nycgo.com/neighborhoods">nycgo.com</a></small>
+        
     </div>
 </div>
 
