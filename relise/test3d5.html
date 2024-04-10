@@ -55,7 +55,9 @@
 
 
 .mapboxgl-ctrl-top-right .mapboxgl-ctrl {
-    margin: 14.8em 12px -4.5px 0px !important;
+    margin: 18em 12px -4.5px 0px !important;
+    
+    margin-top: 50%;
 }
 
 .mapboxgl-ctrl-group {
@@ -119,14 +121,14 @@ background-color: #3d85c6;
         position: absolute;
  left: 0.5em;
 bottom: 0.9em;
-        width: 60%;   
+        max-width: 300px;   
         padding: 10px;
         z-index: 1;
     }
 
     .map-overlay {
         font:
-            12px/18px 'Montserrat',
+            10px/12px 'Montserrat',
             Montserrat,
             Montserrat,
             montserrat;
@@ -138,11 +140,11 @@ bottom: 0.9em;
 
         box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.1) !important;
     }
-
-    .map-overlay h2,
+.map-overlay h2,
     .map-overlay p {
-        margin: 0 0 10px;
+        margin: 5px 8px 0px 5px;
     }
+    
 </style>
 
 
@@ -238,9 +240,10 @@ bottom: 0.9em;
     const locations = [
         {
             'id': '2',
-            'title': 'The Bronx',
+            'title': 'ID [2]: #383838',
             'description':
-                "This is where hip-hop was born, where the Yankees became a dynasty and where you can find New York City's leading zoo and botanical garden.",
+            
+                "ID_1: #87695846 x:710 y:53 lng: 37.17403570349893 lat: 55.977114192661986 ID_2: #38376769",
             'camera': {
                 center: [37.17403570349893, 55.977114192661986],
                 zoom: 21,
@@ -252,9 +255,9 @@ bottom: 0.9em;
 
 
         {
-            'title': 'Boroughs of new york',
+            'title': 'ID [1]: #f8f9fa',
             'description':
-                'New York City is made up of five boroughs: the Bronx, Brooklyn, Manhattan, Queens and Staten Island. Each one has enough attractions—and enough personality—to be a city all its own.',
+                'ID_1: #89999980 x:310 y:530 lng: 37.17403570349893 lat: 55.977114192661986',
             'camera': {
                 center: [37.1740413877,55.9774107521],
                 zoom: 21,
