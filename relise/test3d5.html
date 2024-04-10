@@ -54,8 +54,8 @@
 }
 
 
-.mapboxgl-ctrl-top-right .mapboxgl-ctrl {
-    margin: 18em 12px -4.5px 0px !important;
+.mapboxgl-ctrl-top-left .mapboxgl-ctrl {
+    margin: 18em 12px 0px 15.5px !important;
     
     margin-top: 50%;
 }
@@ -136,13 +136,14 @@ bottom: 0.9em;
         color: white;
         border-radius: 12px;
         padding: 10px;
+        line-height: 1.3em;
        
 
         box-shadow: 0 0 10px 0.1px rgba(0, 0, 0, 0.1) !important;
     }
 .map-overlay h2,
     .map-overlay p {
-        margin: 10px 8px 0px 5px;
+        margin: 10px 8px 0px 8px;
     }
     
 </style>
@@ -211,7 +212,7 @@ bottom: 0.9em;
         container: 'map', // container id
         // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
         style: 'https://raw.githubusercontent.com/EMIIA/www.emiia.ru/master/style/emiia_style_test.json',
-        zoom: 18,
+        zoom: 19,
 
  
         
@@ -246,7 +247,7 @@ bottom: 0.9em;
                 "ID [1]: #39077383 lng: 37.1740   lat: 55.9771 x:310 y:530",
             'camera': {
                 center: [37.17403570349893, 55.977114192661986],
-                zoom: 21,
+                zoom: 19,
                 bearing: 360,
                 pitch: 30
             }
@@ -329,13 +330,13 @@ bottom: 0.9em;
 
 
     
-
+    
     
 
 map.addControl(new mapboxgl.NavigationControl({
   visualizePitch: true,
   showZoom: false
-}));    
+}), 'top-left');    
 
 
 
