@@ -251,11 +251,6 @@ bottom: 0.9em;
 
 
 
-
-
-
-
-
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('mapbox-gl')) :
     typeof define === 'function' && define.amd ? define(['exports', 'mapbox-gl'], factory) :
@@ -851,7 +846,7 @@ bottom: 0.9em;
     		source: "indoor",
     		paint: {
     			"line-color": "#FFFFFF",
-    			"line-width": 8,
+    			"line-width": 0,
     			"line-opacity": {
     				base: 1,
     				stops: [
@@ -877,7 +872,7 @@ bottom: 0.9em;
     		type: "fill",
     		source: "indoor",
     		paint: {
-    			"fill-color": "#c1d1ea",
+    			"fill-color": "transparent",
     			"fill-opacity": {
     				base: 1,
     				stops: [
@@ -3587,7 +3582,7 @@ bottom: 0.9em;
             map.levelsRange = levelsRange;
             map.layersToHide = options.layersToHide ? options.layersToHide : [];
             map.beforeLayerId = options.beforeLayerId;
-            map.defaultLevel = options.defaultLevel ? options.defaultLevel : 0;
+            map.defaultLevel = options.defaultLevel ? options.defaultLevel : 1;
             map.showFeaturesWithEmptyLevel = options.showFeaturesWithEmptyLevel ? options.showFeaturesWithEmptyLevel : false;
             return map;
         }
@@ -3687,10 +3682,6 @@ bottom: 0.9em;
     Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
-
-
-
-
 
 
 
