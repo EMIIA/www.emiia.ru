@@ -777,7 +777,7 @@ bottom: 0.9em;
         }
         _closestMap() {
             // TODO enhance this condition
-            if (this._map.getZoom() < 17) {
+            if (this._map.getZoom() < 19) {
                 return null;
             }
             const cameraBounds = this._map.getBounds();
@@ -3954,7 +3954,7 @@ bottom: 0.9em;
         style: 'https://raw.githubusercontent.com/EMIIA/www.emiia.ru/master/style/emiia_style_test.json',
         
 
-        zoom: 16,
+        zoom: 18,
         
         bearing: 360,
                 pitch: 30,
@@ -4268,9 +4268,9 @@ bottom: 0.9em;
                 "ID [1]: #39077383 lng: 37.1740   lat: 55.9771 x: 310 y: 530 EMIIA.AI MRV (SDK/API)",
             'camera': {
                 center: [37.17403570349893, 55.977114192661986],
-                zoom: 16,
+                zoom: 18,
                 bearing: 360,
-                pitch: 30
+                pitch: 90
             }
         },
         
@@ -4287,7 +4287,7 @@ bottom: 0.9em;
                 center: [37.17403570349893, 55.977114192661986],
                 zoom: 20,
                 bearing: 360,
-                pitch: 30
+                pitch: 60
             }
         },
         
@@ -4383,9 +4383,9 @@ map.on("load", function() {
       	{
       		"type": "Feature",
       		"properties": {
-        	"level": 1,
+        	"level": 10,
         	"name": "Bird Exhibit",
-        	"height": 10,
+        	"height": 50,
         	"base_height": 0,
         	"color": "#3d85c6"
       	},
@@ -4442,7 +4442,7 @@ map.on("load", function() {
                 'fill-extrusion-base': ['get', 'base_height'],
 
                 // Make extrusions slightly opaque for see through indoor walls.
-                'fill-extrusion-opacity': 0.1
+                'fill-extrusion-opacity': 0.2
     
  
     }
