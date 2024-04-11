@@ -3957,7 +3957,7 @@ bottom: 0.9em;
         zoom: 18,
         
         bearing: 360,
-                pitch: 30,
+                pitch: 31,
 
  
         
@@ -4269,8 +4269,8 @@ bottom: 0.9em;
             'camera': {
                 center: [37.17403570349893, 55.977114192661986],
                 zoom: 18,
-                bearing: 360,
-                pitch: 90
+                bearing: 300,
+                pitch: 110
             }
         },
         
@@ -4358,6 +4358,27 @@ bottom: 0.9em;
         // Start the playback animation for each borough.
         playback(0);
     });
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+    
 </script>
 
 
@@ -4366,6 +4387,39 @@ bottom: 0.9em;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 
 
 <script>
@@ -4377,17 +4431,21 @@ map.on("load", function() {
 	map.addLayer({
     id: "room-test",
     type: "fill-extrusion",
+    'minzoom': 18,
+  'maxzoom': 19,
+
     source: {
       type: "geojson",
       data: {"features": [
       	{
       		"type": "Feature",
       		"properties": {
-        	"level": 10,
-        	"name": "Bird Exhibit",
-        	"height": 50,
+        	"level": 1,
+        	"name": "Bird Exhibit1",
+        	"height": 10.0,
         	"base_height": 0,
-        	"color": "#3d85c6"
+
+        	"color": "#191970"
       	},
       	"geometry": {
         	"coordinates": [
@@ -4424,31 +4482,55 @@ map.on("load", function() {
     
     
     
+        
     
-    
-    
-    
-     paint: {
+
+
+
+
+
+
+ paint: {
                 // See the Style Specification for details on data expressions.
                 // https://docs.maptiler.com/gl-style-specification/expressions/
 
                 // Get the fill-extrusion-color from the source 'color' property.
-                'fill-extrusion-color': ['get', 'color'],
-
+                
+    
+    
+         
+                'fill-extrusion-color': '#191970',
+                
                 // Get fill-extrusion-height from the source 'height' property.
                 'fill-extrusion-height': ['get', 'height'],
 
                 // Get fill-extrusion-base from the source 'base_height' property.
                 'fill-extrusion-base': ['get', 'base_height'],
+                
+
 
                 // Make extrusions slightly opaque for see through indoor walls.
-                'fill-extrusion-opacity': 0.2
-    
+                'fill-extrusion-opacity': 0.1
+                
  
     }
     
     
-  });
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+      
+  }, 'road-label-navigation');
+    
+    
+
 
 });
 
@@ -4523,18 +4605,7 @@ map.addControl(new mapboxgl.NavigationControl({
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+     
     
     
     
