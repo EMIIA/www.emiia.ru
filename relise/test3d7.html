@@ -777,7 +777,7 @@ bottom: 0.9em;
         }
         _closestMap() {
             // TODO enhance this condition
-            if (this._map.getZoom() < 17) {
+            if (this._map.getZoom() < 19) {
                 return null;
             }
             const cameraBounds = this._map.getBounds();
@@ -3926,6 +3926,21 @@ bottom: 0.9em;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script>
 	// TO MAKE THE MAP APPEAR YOU MUST
 	// ADD YOUR ACCESS TOKEN FROM
@@ -3935,11 +3950,14 @@ bottom: 0.9em;
     const map = new mapboxgl.Map({
         container: 'map', // container id
         // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+        
         style: 'https://raw.githubusercontent.com/EMIIA/www.emiia.ru/master/style/emiia_style_test.json',
-        zoom: 16,
+        
+
+        zoom: 18,
         
         bearing: 360,
-                pitch: 30,
+                pitch: 31,
 
  
         
@@ -3954,6 +3972,1116 @@ bottom: 0.9em;
 	antialias: true // create the gl context with MSAA antialiasing, so custom layers are antialiased
          
     });
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+map.on("load", function() {
+
+	map.addLayer({
+    id: "room-test",
+    type: "fill-extrusion",
+    'minzoom': 18,
+  'maxzoom': 19,
+
+    source: {
+      type: "geojson",
+      data: {"features": [
+      	{
+      		"type": "Feature",
+      		"properties": {
+        	"level": 1,
+        	"name": "Bird Exhibit1",
+        	"height": 10.0,
+        	"base_height": 0,
+
+        	"color": "#191970"
+      	},
+      	"geometry": {
+        	"coordinates": [
+          	[
+            	[
+              37.174026475739936,
+              55.977845342109305
+            ],
+            [
+              37.17393469227386,
+              55.977550989634494
+            ],
+            [
+              37.17418517349802,
+              55.97753148372263
+            ],
+            [
+              37.174273345209514,
+              55.9778304120392
+            ],
+            [
+              37.174026475739936,
+              55.977845342109305
+            ]
+          	]
+        	],
+        	"type": "Polygon"
+      	},
+      	"id": "06e8fa0b3f851e3ae0e1da5fc17e111e"
+    	}],
+      	"type": "FeatureCollection"
+      }
+    },
+    
+    
+    
+        
+    
+
+
+
+
+
+
+ paint: {
+                // See the Style Specification for details on data expressions.
+                // https://docs.maptiler.com/gl-style-specification/expressions/
+
+                // Get the fill-extrusion-color from the source 'color' property.
+                
+    
+    
+         
+                'fill-extrusion-color': '#191970',
+                
+                // Get fill-extrusion-height from the source 'height' property.
+                'fill-extrusion-height': ['get', 'height'],
+
+                // Get fill-extrusion-base from the source 'base_height' property.
+                'fill-extrusion-base': ['get', 'base_height'],
+                
+
+
+                // Make extrusions slightly opaque for see through indoor walls.
+                'fill-extrusion-opacity': 0.1
+                
+ 
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+      
+  }, 'road-label-navigation');
+    
+    
+
+
+});
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    map.on("load", function() {
+
+	map.addLayer({
+    id: "room-test1",
+    type: "fill-extrusion",
+    'minzoom': 18,
+  'maxzoom': 19,
+
+    source: {
+      type: "geojson",
+      data: {"features": [
+      	{
+      		"type": "Feature",
+      		"properties": {
+        	"level": 1,
+        	"name": "Bird Exhibit1",
+        	"height": 10.0,
+        	"base_height": 0,
+
+        	"color": "#191970"
+      	},
+      	"geometry": {
+        	"coordinates": [
+          	[
+            	[
+              37.173817493104224,
+              55.9768694176293
+            ],
+            [
+              37.17380293403275,
+              55.976801633329615
+            ],
+            [
+              37.17377796627039,
+              55.9767070102682
+            ],
+            [
+              37.174546554986165,
+              55.9766485648354
+            ],
+            [
+              37.17462089362742,
+              55.97680134973451
+            ],
+            [
+              37.17442639929347,
+              55.976816373537304
+            ],
+            [
+              37.174409527886795,
+              55.976779802681605
+            ],
+            [
+              37.17399645908034,
+              55.97681885277626
+            ],
+            [
+              37.1740059059581,
+              55.97685474791379
+            ],
+            [
+              37.173817493104224,
+              55.9768694176293
+            ]
+          	]
+        	],
+        	"type": "Polygon"
+      	},
+      	"id": "06e"
+    	}],
+      	"type": "FeatureCollection"
+      }
+    },
+    
+    
+    
+        
+    
+
+
+
+
+
+
+ paint: {
+                // See the Style Specification for details on data expressions.
+                // https://docs.maptiler.com/gl-style-specification/expressions/
+
+                // Get the fill-extrusion-color from the source 'color' property.
+                
+    
+    
+         
+                'fill-extrusion-color': '#191970',
+                
+                // Get fill-extrusion-height from the source 'height' property.
+                'fill-extrusion-height': ['get', 'height'],
+
+                // Get fill-extrusion-base from the source 'base_height' property.
+                'fill-extrusion-base': ['get', 'base_height'],
+                
+
+
+                // Make extrusions slightly opaque for see through indoor walls.
+                'fill-extrusion-opacity': 0.1
+                
+ 
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+      
+  }, 'road-label-navigation');
+    
+    
+
+
+});
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     
+    map.on("load", function() {
+
+	map.addLayer({
+    id: "room-test2",
+    type: "fill-extrusion",
+    'minzoom': 18,
+  'maxzoom': 19,
+
+    source: {
+      type: "geojson",
+      data: {"features": [
+      	{
+      		"type": "Feature",
+      		"properties": {
+        	"level": 1,
+        	"name": "Bird Exhibit2",
+        	"height": 10.0,
+        	"base_height": 0,
+
+        	"color": "#191970"
+      	},
+      	"geometry": {
+        	"coordinates": [
+          	[
+            	[
+              37.17291200240183,
+              55.976865038314
+            ],
+            [
+              37.173098856416374,
+              55.97685818888013
+            ],
+            [
+              37.17345575392358,
+              55.97798441217418
+            ],
+            [
+              37.17359417878379,
+              55.97797507079818
+            ],
+            [
+              37.17365011990722,
+              55.978145098441445
+            ],
+            [
+              37.173334850369685,
+              55.978177735723534
+            ],
+            [
+              37.17291200240183,
+              55.976865038314
+            ]
+          	]
+        	],
+        	"type": "Polygon"
+      	},
+      	"id": "06e"
+    	}],
+      	"type": "FeatureCollection"
+      }
+    },
+    
+    
+    
+        
+    
+
+
+
+
+
+
+ paint: {
+                // See the Style Specification for details on data expressions.
+                // https://docs.maptiler.com/gl-style-specification/expressions/
+
+                // Get the fill-extrusion-color from the source 'color' property.
+                
+    
+    
+         
+                'fill-extrusion-color': '#191970',
+                
+                // Get fill-extrusion-height from the source 'height' property.
+                'fill-extrusion-height': ['get', 'height'],
+
+                // Get fill-extrusion-base from the source 'base_height' property.
+                'fill-extrusion-base': ['get', 'base_height'],
+                
+
+
+                // Make extrusions slightly opaque for see through indoor walls.
+                'fill-extrusion-opacity': 0.1
+                
+ 
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+      
+  }, 'road-label-navigation');
+    
+    
+
+
+});
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   
+   
+   
+   
+   
+   
+   
+       map.on("load", function() {
+
+	map.addLayer({
+    id: "room-test3",
+    type: "fill-extrusion",
+    'minzoom': 18,
+  'maxzoom': 19,
+
+    source: {
+      type: "geojson",
+      data: {"features": [
+      	{
+      		"type": "Feature",
+      		"properties": {
+        	"level": 1,
+        	"name": "Bird Exhibit3",
+        	"height": 10.0,
+        	"base_height": 0,
+
+        	"color": "#191970"
+      	},
+      	"geometry": {
+        	"coordinates": [
+          	[
+            	[
+              37.1743195974675,
+              55.977045740398495
+            ],
+            [
+              37.17449380236735,
+              55.97703336974374
+            ],
+            [
+              37.17456850990476,
+              55.977305567590975
+            ],
+            [
+              37.174397631525636,
+              55.97733005833311
+            ],
+            [
+              37.1743195974675,
+              55.977045740398495
+            ]
+          	]
+        	],
+        	"type": "Polygon"
+      	},
+      	"id": "06e"
+    	}],
+      	"type": "FeatureCollection"
+      }
+    },
+    
+    
+    
+        
+    
+
+
+
+
+
+
+ paint: {
+                // See the Style Specification for details on data expressions.
+                // https://docs.maptiler.com/gl-style-specification/expressions/
+
+                // Get the fill-extrusion-color from the source 'color' property.
+                
+    
+    
+         
+                'fill-extrusion-color': '#191970',
+                
+                // Get fill-extrusion-height from the source 'height' property.
+                'fill-extrusion-height': ['get', 'height'],
+
+                // Get fill-extrusion-base from the source 'base_height' property.
+                'fill-extrusion-base': ['get', 'base_height'],
+                
+
+
+                // Make extrusions slightly opaque for see through indoor walls.
+                'fill-extrusion-opacity': 0.1
+                
+ 
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+      
+  }, 'road-label-navigation');
+    
+    
+
+
+});
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     map.on("load", function() {
+
+	map.addLayer({
+    id: "ofice",
+    type: "fill-extrusion",
+    'minzoom': 18,
+  'maxzoom': 19,
+
+    source: {
+      type: "geojson",
+      data: {"features": [
+      	{
+      		"type": "Feature",
+      		"properties": {
+        	"level": 1,
+        	"name": "Ofise",
+        	"height": 10.0,
+        	"base_height": 0,
+
+        	"color": "#191970"
+      	},
+      	"geometry": {
+        	"coordinates": [
+          	[
+   [
+              37.17383408697464,
+              55.97697420514643
+            ],
+            [
+              37.17410262224104,
+              55.97694989390655
+            ],
+            [
+              37.17425780452953,
+              55.97746934653725
+            ],
+            [
+              37.17399142808651,
+              55.97749467580522
+            ],
+            [
+              37.17383408697464,
+              55.97697420514643
+            ]
+          	]
+        	],
+        	"type": "Polygon"
+      	},
+      	"id": "06e"
+    	}],
+      	"type": "FeatureCollection"
+      }
+    },
+    
+    
+    
+        
+    
+
+
+
+
+
+
+ paint: {
+                // See the Style Specification for details on data expressions.
+                // https://docs.maptiler.com/gl-style-specification/expressions/
+
+                // Get the fill-extrusion-color from the source 'color' property.
+                
+    
+    
+         
+                'fill-extrusion-color': '#191970',
+                
+                // Get fill-extrusion-height from the source 'height' property.
+                'fill-extrusion-height': ['get', 'height'],
+
+                // Get fill-extrusion-base from the source 'base_height' property.
+                'fill-extrusion-base': ['get', 'base_height'],
+                
+
+
+                // Make extrusions slightly opaque for see through indoor walls.
+                'fill-extrusion-opacity': 0.1
+                
+ 
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+      
+  }, 'road-label-navigation');
+    
+    
+
+
+});
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+// Add GeoJSON source and layer
+    function addAdditionalSourceAndLayer() {
+        map.addSource('routeSource', 
+        
+        
+        
+        
+        {
+            'type': 'geojson',
+            'data': {
+                'type': 'Feature',
+                'properties': {},
+                'geometry': {
+                    'type': 'LineString',
+                    'coordinates': [
+                       [
+            37.17184020535157,
+            55.97969479901715
+          ],
+          [
+            37.16812718855138,
+            55.977906136392875
+          ],
+          [
+            37.1680585719437,
+            55.977706841134136
+          ],
+          [
+            37.168125466076646,
+            55.97751687030629
+          ],
+          [
+            37.168269356045954,
+            55.977361261750275
+          ],
+          [
+            37.168549245948526,
+            55.97709544085916
+          ],
+          [
+            37.16884694348283,
+            55.97689006063311
+          ],
+          [
+            37.1693808293189,
+            55.97643151782009
+          ],
+          [
+            37.170620322385645,
+            55.975599417949894
+          ],
+          [
+            37.17149707859676,
+            55.975033787497665
+          ],
+          [
+            37.17334647286344,
+            55.973738336284015
+          ],
+          [
+            37.174731142038155,
+            55.972665391321414
+          ],
+          [
+            37.17490607168904,
+            55.972976757907304
+          ],
+          [
+            37.17576580095846,
+            55.97337485401272
+          ],
+          [
+            37.172742981887296,
+            55.975111827122845
+          ],
+          [
+            37.17303368874843,
+            55.97532260422162
+          ],
+          [
+            37.173227633884295,
+            55.975950418494534
+          ],
+          [
+            37.17354853796522,
+            55.97700542988321
+          ],
+          [
+            37.1739373648021,
+            55.97845537470877
+          ],
+          [
+            37.174088007129114,
+            55.978646710932026
+          ],
+          [
+            37.17185598440986,
+            55.979677013846754
+          ]
+          
+          
+          
+          
+          
+          
+                    ]
+                }
+            },
+            
+            
+            
+            
+            
+            
+         
+         
+         
+         
+       
+
+                
+         
+     
+            
+            
+            
+        });
+        map.addLayer({
+            'id': 'routeLayer',
+            'type': 'line',
+            'source': 'routeSource',
+            'layout': {
+                'line-join': 'round',
+                'line-cap': 'round'
+            },
+            'paint': {
+                'line-color': 'white',
+                 'line-opacity': 0.4,
+                'line-width': 25
+            }
+        });
+    }
+
+    // Add source and layer whenever base style is loaded
+    map.on('style.load', () => {
+        addAdditionalSourceAndLayer();
+    });
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // Add GeoJSON source and layer
+    function addAdditionalSourceAndLayer1() {
+        map.addSource('routeSource1', 
+        
+        
+        
+        
+        {
+            'type': 'geojson',
+            'data': {
+                'type': 'Feature',
+                'properties': {},
+                'geometry': {
+                    'type': 'LineString',
+                    'coordinates': [
+                        
+                        
+                        
+ [
+            37.17441957182052,
+            55.97838752023566
+          ],
+          [
+            37.17405133168856,
+            55.978081660285994
+          ],
+          [
+            37.173949922090145,
+            55.97806339436849
+          ],
+          [
+            37.17363128425839,
+            55.97693960153444
+          ],
+          [
+            37.173482259278245,
+            55.976528347156716
+          ],
+          [
+            37.17367988198711,
+            55.97649661636805
+          ],
+          [
+            37.1738811416985,
+            55.97644912653618
+          ],
+          [
+            37.17472235246473,
+            55.97636381132392
+          ],
+          [
+            37.175605088267105,
+            55.9760784141736
+          ],
+          [
+            37.175809724914245,
+            55.97646537994024
+          ],
+          [
+            37.175155157291044,
+            55.97706411074307
+          ],
+          [
+            37.174994159588095,
+            55.97686896507943
+          ],
+          [
+            37.17484735796688,
+            55.97685261723089
+          ],
+          [
+            37.17417517728272,
+            55.97691025029117
+          ],
+          [
+            37.1742187430787,
+            55.97708315327509
+          ],
+          [
+            37.17426334616424,
+            55.97728106880019
+          ],
+          [
+            37.17441851989439,
+            55.97777605128891
+          ],
+          [
+            37.17457042475489,
+            55.9778108557111
+          ],
+          [
+            37.17549048898818,
+            55.97750877489448
+          ],
+          [
+            37.175763852478525,
+            55.977770697245035
+          ]
+  
+          
+          
+
+          
+                    ]
+                }
+            },
+            
+            
+            
+
+            
+            
+            
+        });
+        map.addLayer({
+            'id': 'routeLayer1',
+            'type': 'line',
+            'source': 'routeSource1',
+            'layout': {
+                'line-join': 'round',
+                'line-cap': 'round'
+            },
+            'paint': {
+                'line-color': 'white',
+                 'line-opacity': 0.4,
+                'line-width': 10
+            }
+        });
+    }
+
+    // Add source and layer whenever base style is loaded
+    map.on('style.load', () => {
+        addAdditionalSourceAndLayer1();
+    });
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+       // Add GeoJSON source and layer
+    function addAdditionalSourceAndLayer2() {
+        map.addSource('routeSource2', 
+        
+        
+        
+        
+        {
+            'type': 'geojson',
+            'data': {
+                'type': 'Feature',
+                'properties': {},
+                'geometry': {
+                    'type': 'LineString',
+                    'coordinates': [
+                        
+                        
+                        
+[
+            37.173718083624124,
+            55.977543387658585
+          ],
+          [
+            37.1742878758632,
+            55.977488346219104
+          ],
+          
+          
+          
+          
+         [
+            37.17414073216071,
+            55.97692320787118
+          ],
+          [
+            37.17356850152001,
+            55.976973984543605
+          ]
+          
+          
+
+          
+                    ]
+                }
+            },
+            
+            
+            
+
+            
+            
+            
+        });
+        map.addLayer({
+            'id': 'routeLayer2',
+            'type': 'line',
+            'source': 'routeSource2',
+            'layout': {
+                'line-join': 'round',
+                'line-cap': 'round'
+            },
+            'paint': {
+                'line-color': 'white',
+                 'line-opacity': 0.4,
+                'line-width': 10
+            }
+        });
+    }
+
+    // Add source and layer whenever base style is loaded
+    map.on('style.load', () => {
+        addAdditionalSourceAndLayer2();
+    });
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
   
@@ -3975,9 +5103,9 @@ bottom: 0.9em;
                 "ID [1]: #39077383 lng: 37.1740   lat: 55.9771 x: 310 y: 530 EMIIA.AI MRV (SDK/API)",
             'camera': {
                 center: [37.17403570349893, 55.977114192661986],
-                zoom: 16,
-                bearing: 360,
-                pitch: 30
+                zoom: 18,
+                bearing: 300,
+                pitch: 110
             }
         },
         
@@ -3994,7 +5122,7 @@ bottom: 0.9em;
                 center: [37.17403570349893, 55.977114192661986],
                 zoom: 20,
                 bearing: 360,
-                pitch: 30
+                pitch: 60
             }
         },
         
@@ -4065,7 +5193,73 @@ bottom: 0.9em;
         // Start the playback animation for each borough.
         playback(0);
     });
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+    
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
 
 
 
@@ -4129,18 +5323,7 @@ map.addControl(new mapboxgl.NavigationControl({
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+     
     
     
     
@@ -4156,7 +5339,7 @@ map.addControl(new mapboxgl.NavigationControl({
 // parameters to ensure the model is georeferenced correctly on the map
 var modelOrigin1 = [37.17409849995867,55.97737925266699,10]//[2.318, 48.850];
 var modelAltitude = 0.3;
-var modelRotate = [0.8, 0.16, -501.259];
+var modelRotate = [0.4, 0.16, -501.230];
 
 
 
