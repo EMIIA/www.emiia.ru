@@ -1043,22 +1043,25 @@ bottom: 0.9em;
     		type: "fill",
     		source: "indoor",
     		paint: {
-    			"fill-color": "transparent",
+    			"fill-color": "#3b63a0",
     			"fill-opacity": {
-    				base: 1,
+		base: 1,
     				stops: [
     					[
     						17,
     						0
     					],
     					[
-    						18,
+    						20,
     						1
     					]
     				]
     			}
     		}
     	},
+        
+        
+        
     	{
     		filter: [
     			"all",
@@ -4074,7 +4077,7 @@ map.on("load", function() {
     
     
          
-                'fill-extrusion-color': '#191970',
+                'fill-extrusion-color': '#3b63a0',
                 
                 // Get fill-extrusion-height from the source 'height' property.
                 'fill-extrusion-height': ['get', 'height'],
@@ -4085,7 +4088,7 @@ map.on("load", function() {
 
 
                 // Make extrusions slightly opaque for see through indoor walls.
-                'fill-extrusion-opacity': 0.1
+                'fill-extrusion-opacity': 0.3
                 
  
     }
@@ -4228,7 +4231,7 @@ map.on("load", function() {
     
     
          
-                'fill-extrusion-color': '#191970',
+                'fill-extrusion-color': '#3b63a0',
                 
                 // Get fill-extrusion-height from the source 'height' property.
                 'fill-extrusion-height': ['get', 'height'],
@@ -4239,7 +4242,7 @@ map.on("load", function() {
 
 
                 // Make extrusions slightly opaque for see through indoor walls.
-                'fill-extrusion-opacity': 0.1
+                'fill-extrusion-opacity': 0.3
                 
  
     }
@@ -4370,7 +4373,7 @@ map.on("load", function() {
     
     
          
-                'fill-extrusion-color': '#191970',
+                'fill-extrusion-color': '#3b63a0',
                 
                 // Get fill-extrusion-height from the source 'height' property.
                 'fill-extrusion-height': ['get', 'height'],
@@ -4381,7 +4384,7 @@ map.on("load", function() {
 
 
                 // Make extrusions slightly opaque for see through indoor walls.
-                'fill-extrusion-opacity': 0.1
+                'fill-extrusion-opacity': 0.3
                 
  
     }
@@ -4495,7 +4498,7 @@ map.on("load", function() {
     
     
          
-                'fill-extrusion-color': '#191970',
+                'fill-extrusion-color': '#3b63a0',
                 
                 // Get fill-extrusion-height from the source 'height' property.
                 'fill-extrusion-height': ['get', 'height'],
@@ -4506,7 +4509,7 @@ map.on("load", function() {
 
 
                 // Make extrusions slightly opaque for see through indoor walls.
-                'fill-extrusion-opacity': 0.1
+                'fill-extrusion-opacity': 0.3
                 
  
     }
@@ -4566,7 +4569,7 @@ map.on("load", function() {
         	"height": 10.0,
         	"base_height": 0,
 
-        	"color": "#191970"
+        	"color": "red"
       	},
       	"geometry": {
         	"coordinates": [
@@ -4620,7 +4623,7 @@ map.on("load", function() {
     
     
          
-                'fill-extrusion-color': '#191970',
+                'fill-extrusion-color': '#3b63a0',
                 
                 // Get fill-extrusion-height from the source 'height' property.
                 'fill-extrusion-height': ['get', 'height'],
@@ -4631,7 +4634,7 @@ map.on("load", function() {
 
 
                 // Make extrusions slightly opaque for see through indoor walls.
-                'fill-extrusion-opacity': 0.1
+                'fill-extrusion-opacity': 0.3
                 
  
     }
@@ -5585,7 +5588,7 @@ map.addControl(new mapboxgl.NavigationControl({
 // parameters to ensure the model is georeferenced correctly on the map
 var modelOrigin1 = [37.17409849995867,55.97737925266699,10]//[2.318, 48.850];
 var modelAltitude = 0.3;
-var modelRotate = [0.4, 0.16, -501.230];
+var modelRotate = [0.45, 0.4, -501.250];
 
 
 
