@@ -4550,6 +4550,297 @@ map.on("load", function() {
     
     
     
+    
+    
+    
+    
+     map.on("load", function() {
+
+	map.addLayer({
+    id: "room-test4",
+    type: "fill-extrusion",
+    'minzoom': 18,
+  'maxzoom': 19,
+
+    source: {
+      type: "geojson",
+      data: {"features": [
+      	{
+      		"type": "Feature",
+      		"properties": {
+        	"level": 1,
+        	"name": "Bird Exhibit4",
+        	"height": 10.0,
+        	"base_height": 0,
+
+        	"color": "red"
+      	},
+      	"geometry": {
+        	"coordinates": [
+          	[
+   [
+              37.1747013856488,
+              55.97695938948203
+            ],
+            [
+              37.174825031856244,
+              55.976945897204985
+            ],
+            [
+              37.17487271150742,
+              55.97715324794447
+            ],
+            [
+              37.17500434529657,
+              55.97714546976377
+            ],
+            [
+              37.175023980717015,
+              55.97721091391742
+            ],
+            [
+              37.17488489112321,
+              55.9772547081819
+            ],
+            [
+              37.174776948269596,
+              55.97726319157698
+            ],
+            [
+              37.1747013856488,
+              55.97695938948203
+            ]
+          	]
+        	],
+        	"type": "Polygon"
+      	},
+      	"id": "06e"
+    	}],
+      	"type": "FeatureCollection"
+      }
+    },
+    
+    
+    
+        
+    
+
+
+
+
+
+
+ paint: {
+                // See the Style Specification for details on data expressions.
+                // https://docs.maptiler.com/gl-style-specification/expressions/
+
+                // Get the fill-extrusion-color from the source 'color' property.
+                
+    
+    
+         
+                'fill-extrusion-color': '#3b63a0',
+                
+                // Get fill-extrusion-height from the source 'height' property.
+                'fill-extrusion-height': ['get', 'height'],
+
+                // Get fill-extrusion-base from the source 'base_height' property.
+                'fill-extrusion-base': ['get', 'base_height'],
+                
+
+
+                // Make extrusions slightly opaque for see through indoor walls.
+                'fill-extrusion-opacity': 0.3
+                
+ 
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+      
+  }, 'road-label-navigation');
+    
+    
+
+
+});
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     map.on("load", function() {
+
+	map.addLayer({
+    id: "room-test5",
+    type: "fill-extrusion",
+    'minzoom': 18,
+  'maxzoom': 19,
+
+    source: {
+      type: "geojson",
+      data: {"features": [
+      	{
+      		"type": "Feature",
+      		"properties": {
+        	"level": 1,
+        	"name": "Bird Exhibit5",
+        	"height": 10.0,
+        	"base_height": 0,
+
+        	"color": "red"
+      	},
+      	"geometry": {
+        	"coordinates": [
+          	[
+   [
+              37.17162360309561,
+              55.97758786314455
+            ],
+            [
+              37.17192093992642,
+              55.977555331381495
+            ],
+            [
+              37.17198016119893,
+              55.97778230248217
+            ],
+            [
+              37.17185481203012,
+              55.97795234389085
+            ],
+            [
+              37.16987269379658,
+              55.978993467814966
+            ],
+            [
+              37.16937860062153,
+              55.97878528681652
+            ],
+            [
+              37.170837718792825,
+              55.97804965246986
+            ],
+            [
+              37.17107670202405,
+              55.9781892926629
+            ],
+            [
+              37.17122659935499,
+              55.978122087657056
+            ],
+            [
+              37.17168804884325,
+              55.97785878471911
+            ],
+            [
+              37.17162360309561,
+              55.97758786314455
+            ]
+          	]
+        	],
+        	"type": "Polygon"
+      	},
+      	"id": "06e"
+    	}],
+      	"type": "FeatureCollection"
+      }
+    },
+    
+    
+    
+        
+    
+
+
+
+
+
+
+ paint: {
+                // See the Style Specification for details on data expressions.
+                // https://docs.maptiler.com/gl-style-specification/expressions/
+
+                // Get the fill-extrusion-color from the source 'color' property.
+                
+    
+    
+         
+                'fill-extrusion-color': '#3b63a0',
+                
+                // Get fill-extrusion-height from the source 'height' property.
+                'fill-extrusion-height': ['get', 'height'],
+
+                // Get fill-extrusion-base from the source 'base_height' property.
+                'fill-extrusion-base': ['get', 'base_height'],
+                
+
+
+                // Make extrusions slightly opaque for see through indoor walls.
+                'fill-extrusion-opacity': 0.3
+                
+ 
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+      
+  }, 'road-label-navigation');
+    
+    
+
+
+});
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
      map.on("load", function() {
 
 	map.addLayer({
