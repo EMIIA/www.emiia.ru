@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - deck.gl OrbitView</title>
+  <style>
+  
+  
+  
+  body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+</style>
+
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+
+<!-- partial -->
+  <script src='https://unpkg.com/@loaders.gl/ply@^3.0.0/dist/dist.min.js'></script>
+<script src='https://unpkg.com/deck.gl@^8.9.0/dist.min.js'></script><script>
+
+
+
+
+
+/*
+* https://deck.gl/docs/api-reference/core/orbit-view
+*/
+const {DeckGL, OrbitView, SimpleMeshLayer} = deck;
+const {PLYLoader} = loaders;
+
+new DeckGL({
+  views: new OrbitView({
+    orbitAxis: 'Y',
+    // fovy: 50,
+    // near: 0.1,
+    // far: 1000,
+    // orthographic: false
+  }),
+  initialViewState: {
+    target: [0, 175, 0],
+    zoom: -0.5,
+    rotationOrbit: 145,
+    rotationX: 65,
+    minRotationX: -90,
+    maxRotationX: 90,
+    minZoom: -10,
+    maxZoom: 10
+  },
+  controller: true,
+  
+  layers: [
+    new SimpleMeshLayer({
+      data: [0],
+      mesh: 'https://raw.githubusercontent.com/visgl/deck.gl-data/master/examples/point-cloud-ply/lucy100k.ply',
+      getPosition: [0, 0, 0],
+      getColor: [200, 200, 200],
+      loaders: [PLYLoader]
+    })
+  ]
+});
+
+
+
+
+</script>
+
+</body>
+</html>
+
+
