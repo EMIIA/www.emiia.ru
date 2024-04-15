@@ -52,7 +52,7 @@
 
 
 {
-      "id": "road",
+      "id": "transportation",
       "fields": {
         "colour": "String",
         "hide_3d": "Boolean",
