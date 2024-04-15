@@ -41,7 +41,7 @@ bearing: -60, // bearing in degrees
       
       
         container: 'map',
-        style: 'https://api.maptiler.com/maps/5734df93-2e4f-455f-b0f5-bbcf51802a5a/style.json?key=QN6ALYSRnAohNK6Y8BiB',
+        style: 'https://api.maptiler.com/maps/9f2ce2e3-9c81-4fb8-a9e0-cc505d0aaac7/style.json?key=QN6ALYSRnAohNK6Y8BiB',
         
         
         
