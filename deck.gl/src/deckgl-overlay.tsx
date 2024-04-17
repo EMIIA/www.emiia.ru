@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import {DeckProps, GeoJsonLayer, PickingInfo, TripsLayer} from 'deck.gl/typed';
+import { useState, useEffect } from "https://esm.sh/react";
+import {DeckProps, GeoJsonLayer, PickingInfo, TripsLayer} from "https://esm.sh/deck.gl/typed";
 import {DeckglOverlayProps, Trip, Waypoint} from './data-interfaces';
-import { Color, Position } from '@deck.gl/core/typed';
-import {MapboxOverlay} from '@deck.gl/mapbox/typed';
-import { Feature, Point } from 'geojson';
-import { useControl } from 'react-map-gl';
+import { Color, Position } from "https://esm.sh/@deck.gl/core/typed";
+import {MapboxOverlay} from "https://esm.sh/@deck.gl/mapbox/typed";
+import { Feature, Point } from "https://esm.sh/geojson";
+import { useControl } from "https://esm.sh/react-map-gl";
 
 function DeckGLMapboxOverlay(props: DeckProps) {
   const deck = useControl<MapboxOverlay>(() => new MapboxOverlay(props));
