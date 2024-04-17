@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "https://esm.sh/react";
 import './loader.css';
 
 export default class Loader extends React.Component<any, any> {
