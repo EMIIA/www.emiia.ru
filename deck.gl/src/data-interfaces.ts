@@ -1,5 +1,5 @@
-import { FeatureCollection, Point } from 'geojson';
-import { ViewState } from 'react-map-gl';
+import { FeatureCollection, Point } from "https://esm.sh/geojson";
+import { ViewState } from "https://esm.sh/react-map-gl";
 
 export interface AppSettings {
     color: number[],
