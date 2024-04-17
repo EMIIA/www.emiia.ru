@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "https://esm.sh/react";
 import { DataSampleUrls, InfoBoxProps} from './data-interfaces';
-import Select from 'react-select';
+import Select from "https://esm.sh/react-select";
 import './info-box.css';
 import './select.css';
-import { SingleValue } from 'react-select'
+import { SingleValue } from "https://esm.sh/react-select"
 
 const InfoBox = (props: InfoBoxProps) => {
 
