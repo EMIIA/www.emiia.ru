@@ -1,0 +1,52 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: rgb(34, 34, 44);
+}
+
+#container {
+  position: relative;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 5px;
+}
+.full-width {
+  width: 100%;
+}
+
+.reverse-range {
+  direction: rtl;
+}
+
+.float-right {
+  float: right;
+}
+
+.block {
+  margin-left: 40px;
+}
+
+.block label {
+  display: inline-block;
+  font-size: 15px;
+}
+
+.btn-day {
+  padding: 1px 3px;
+  margin: 1px;
+}
+
+.popup-inner {
+  color: black;
+}
+
+.hide {
+  display: none;
+}
