@@ -69,7 +69,7 @@
       "source-layer": "transit_stop_label",
       "type": "circle",
       "paint": {
-        "circle-radius": 3,
+        "circle-radius": 0,
         "circle-color": "rgba(238,78,139, 0.4)",
         "circle-stroke-color": "rgba(238,78,139, 1)",
         "circle-stroke-width": 0
