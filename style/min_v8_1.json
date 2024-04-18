@@ -10,7 +10,7 @@
   "layers": [
     {
       "id": "admin",
-      "source": "composite",
+      "source": "mapbox-streets",
       "source-layer": "admin",
       "type": "line",
       "paint": {
@@ -19,7 +19,7 @@
     },
     {
       "id": "aeroway",
-      "source": "composite",
+      "source": "mapbox-streets",
       "source-layer": "aeroway",
       "type": "line",
       "paint": {
@@ -28,20 +28,21 @@
     },
     {
       "id": "airport_label",
-      "source": "composite",
+      "source": "mapbox-streets",
       "source-layer": "airport_label",
       "type": "circle",
       "paint": {
         "circle-radius": 3,
         "circle-color": "rgba(238,78,139, 0.4)",
         "circle-stroke-color": "rgba(238,78,139, 1)",
-        "circle-stroke-width": 1
+        "circle-stroke-width": 0
       }
     },
     {
       "id": "building",
-      "source": "composite",
+      "source": "mapbox-streets",
       "source-layer": "building",
+      "minzoom":15,
       "type": "fill",
       "paint": {
         "fill-color": "rgba(66,100,251, 0.3)",
@@ -50,19 +51,19 @@
     },
     {
       "id": "housenum_label",
-      "source": "composite",
+      "source": "mapbox-streets",
       "source-layer": "housenum_label",
       "type": "circle",
       "paint": {
         "circle-radius": 3,
         "circle-color": "rgba(238,78,139, 0.4)",
         "circle-stroke-color": "rgba(238,78,139, 1)",
-        "circle-stroke-width": 1
+        "circle-stroke-width": 0
       }
     },
     {
       "id": "landuse_overlay",
-      "source": "composite",
+      "source": "mapbox-streets",
       "source-layer": "landuse_overlay",
       "type": "fill",
       "paint": {
@@ -72,7 +73,7 @@
     },
     {
       "id": "landuse",
-      "source": "composite",
+      "source": "mapbox-streets",
       "source-layer": "landuse",
       "type": "fill",
       "paint": {
@@ -82,55 +83,55 @@
     },
     {
       "id": "motorway_junction",
-      "source": "composite",
+      "source": "mapbox-streets",
       "source-layer": "motorway_junction",
       "type": "circle",
       "paint": {
         "circle-radius": 3,
         "circle-color": "rgba(238,78,139, 0.4)",
         "circle-stroke-color": "rgba(238,78,139, 1)",
-        "circle-stroke-width": 1
+        "circle-stroke-width": 0
       }
     },
     {
       "id": "natural_label",
-      "source": "composite",
+      "source": "mapbox-streets",
       "source-layer": "natural_label",
       "type": "circle",
       "paint": {
         "circle-radius": 3,
         "circle-color": "rgba(238,78,139, 0.4)",
         "circle-stroke-color": "rgba(238,78,139, 1)",
-        "circle-stroke-width": 1
+        "circle-stroke-width": 0
       }
     },
     {
       "id": "place_label",
-      "source": "composite",
+      "source": "mapbox-streets",
       "source-layer": "place_label",
       "type": "circle",
       "paint": {
         "circle-radius": 3,
         "circle-color": "rgba(238,78,139, 0.4)",
         "circle-stroke-color": "rgba(238,78,139, 1)",
-        "circle-stroke-width": 1
+        "circle-stroke-width": 0
       }
     },
     {
       "id": "poi_label",
-      "source": "composite",
+      "source": "mapbox-streets",
       "source-layer": "poi_label",
       "type": "circle",
       "paint": {
         "circle-radius": 3,
         "circle-color": "rgba(238,78,139, 0.4)",
         "circle-stroke-color": "rgba(238,78,139, 1)",
-        "circle-stroke-width": 1
+        "circle-stroke-width": 0
       }
     },
     {
       "id": "road",
-      "source": "composite",
+      "source": "mapbox-streets",
       "source-layer": "road",
       "type": "line",
       "paint": {
@@ -139,7 +140,7 @@
     },
     {
       "id": "structure",
-      "source": "composite",
+      "source": "mapbox-streets",
       "source-layer": "structure",
       "type": "fill",
       "paint": {
@@ -149,19 +150,19 @@
     },
     {
       "id": "transit_stop_label",
-      "source": "composite",
+      "source": "mapbox-streets",
       "source-layer": "transit_stop_label",
       "type": "circle",
       "paint": {
         "circle-radius": 3,
         "circle-color": "rgba(238,78,139, 0.4)",
         "circle-stroke-color": "rgba(238,78,139, 1)",
-        "circle-stroke-width": 1
+        "circle-stroke-width": 0
       }
     },
     {
       "id": "water",
-      "source": "composite",
+      "source": "mapbox-streets",
       "source-layer": "water",
       "type": "fill",
       "paint": {
@@ -171,7 +172,7 @@
     },
     {
       "id": "waterway",
-      "source": "composite",
+      "source": "mapbox-streets",
       "source-layer": "waterway",
       "type": "line",
       "paint": {
