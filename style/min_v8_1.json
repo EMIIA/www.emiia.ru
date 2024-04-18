@@ -15,7 +15,6 @@
 {
       "id": "building",
       "source": "mapbox-streets",
-  "minzoom":15,
       "source-layer": "building",
       "type": "fill",
       "paint": {
