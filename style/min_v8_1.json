@@ -12,17 +12,16 @@
 
 
     
-"id": "building",
+{
+      "id": "building",
       "source": "mapbox-streets",
       "source-layer": "building",
       "type": "fill",
-    "minzoom":15,
       "paint": {
         "fill-color": "rgba(66,100,251, 0.3)",
         "fill-outline-color": "rgba(66,100,251, 1)"
-     }
+      }
     },
-
     
    
    
