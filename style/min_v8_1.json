@@ -10,13 +10,19 @@
   "layers": [
     
 
-    
-   
-    
-    
-
 
     
+"id": "building",
+      "source": "mapbox-streets",
+ "minzoom":15,
+      "source-layer": "building",
+      "type": "fill",
+      "paint": {
+        "fill-color": "rgba(66,100,251, 0.3)",
+        "fill-outline-color": "rgba(66,100,251, 1)"
+      }
+
+     },
    
 
     
@@ -29,7 +35,7 @@
       "source-layer": "natural_label",
       "type": "circle",
       "paint": {
-        "circle-radius": 3,
+        "circle-radius": 0,
         "circle-color": "rgba(238,78,139, 0.4)",
         "circle-stroke-color": "rgba(238,78,139, 1)",
         "circle-stroke-width": 0
@@ -48,6 +54,8 @@
         "line-color": "#ffffff"
       }
     },
+
+    
     {
       "id": "structure",
       "source": "mapbox-streets",
