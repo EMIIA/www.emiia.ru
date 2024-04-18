@@ -26,18 +26,7 @@
    
    
    
-    {
-      "id": "natural_label",
-      "source": "mapbox-streets",
-      "source-layer": "natural_label",
-      "type": "circle",
-      "paint": {
-        "circle-radius": 0,
-        "circle-color": "rgba(238,78,139, 0.4)",
-        "circle-stroke-color": "rgba(238,78,139, 1)",
-        "circle-stroke-width": 0
-      }
-    },
+   
 
     
     
@@ -63,18 +52,12 @@
         "fill-outline-color": "rgba(66,100,251, 1)"
       }
     },
-    {
-      "id": "transit_stop_label",
-      "source": "mapbox-streets",
-      "source-layer": "transit_stop_label",
-      "type": "circle",
-      "paint": {
-        "circle-radius": 0,
-        "circle-color": "rgba(238,78,139, 0.4)",
-        "circle-stroke-color": "rgba(238,78,139, 1)",
-        "circle-stroke-width": 0
-      }
-    },
+
+    
+   
+
+
+    
     {
       "id": "water",
       "source": "mapbox-streets",
@@ -85,6 +68,9 @@
         "fill-outline-color": "rgba(66,100,251, 1)"
       }
     },
+
+
+    
     {
       "id": "waterway",
       "source": "mapbox-streets",
