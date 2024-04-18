@@ -1,0 +1,182 @@
+{
+  "version": 8,
+  "name": "Mapbox Streets tileset v8",
+  "sources": {
+    "mapbox-streets": {
+      "type": "vector",
+      "url": "mapbox://mapbox.mapbox-streets-v8"
+    }
+  },
+  "layers": [
+    {
+      "id": "admin",
+      "source": "composite",
+      "source-layer": "admin",
+      "type": "line",
+      "paint": {
+        "line-color": "#ffffff"
+      }
+    },
+    {
+      "id": "aeroway",
+      "source": "composite",
+      "source-layer": "aeroway",
+      "type": "line",
+      "paint": {
+        "line-color": "#ffffff"
+      }
+    },
+    {
+      "id": "airport_label",
+      "source": "composite",
+      "source-layer": "airport_label",
+      "type": "circle",
+      "paint": {
+        "circle-radius": 3,
+        "circle-color": "rgba(238,78,139, 0.4)",
+        "circle-stroke-color": "rgba(238,78,139, 1)",
+        "circle-stroke-width": 1
+      }
+    },
+    {
+      "id": "building",
+      "source": "composite",
+      "source-layer": "building",
+      "type": "fill",
+      "paint": {
+        "fill-color": "rgba(66,100,251, 0.3)",
+        "fill-outline-color": "rgba(66,100,251, 1)"
+      }
+    },
+    {
+      "id": "housenum_label",
+      "source": "composite",
+      "source-layer": "housenum_label",
+      "type": "circle",
+      "paint": {
+        "circle-radius": 3,
+        "circle-color": "rgba(238,78,139, 0.4)",
+        "circle-stroke-color": "rgba(238,78,139, 1)",
+        "circle-stroke-width": 1
+      }
+    },
+    {
+      "id": "landuse_overlay",
+      "source": "composite",
+      "source-layer": "landuse_overlay",
+      "type": "fill",
+      "paint": {
+        "fill-color": "rgba(66,100,251, 0.3)",
+        "fill-outline-color": "rgba(66,100,251, 1)"
+      }
+    },
+    {
+      "id": "landuse",
+      "source": "composite",
+      "source-layer": "landuse",
+      "type": "fill",
+      "paint": {
+        "fill-color": "rgba(66,100,251, 0.3)",
+        "fill-outline-color": "rgba(66,100,251, 1)"
+      }
+    },
+    {
+      "id": "motorway_junction",
+      "source": "composite",
+      "source-layer": "motorway_junction",
+      "type": "circle",
+      "paint": {
+        "circle-radius": 3,
+        "circle-color": "rgba(238,78,139, 0.4)",
+        "circle-stroke-color": "rgba(238,78,139, 1)",
+        "circle-stroke-width": 1
+      }
+    },
+    {
+      "id": "natural_label",
+      "source": "composite",
+      "source-layer": "natural_label",
+      "type": "circle",
+      "paint": {
+        "circle-radius": 3,
+        "circle-color": "rgba(238,78,139, 0.4)",
+        "circle-stroke-color": "rgba(238,78,139, 1)",
+        "circle-stroke-width": 1
+      }
+    },
+    {
+      "id": "place_label",
+      "source": "composite",
+      "source-layer": "place_label",
+      "type": "circle",
+      "paint": {
+        "circle-radius": 3,
+        "circle-color": "rgba(238,78,139, 0.4)",
+        "circle-stroke-color": "rgba(238,78,139, 1)",
+        "circle-stroke-width": 1
+      }
+    },
+    {
+      "id": "poi_label",
+      "source": "composite",
+      "source-layer": "poi_label",
+      "type": "circle",
+      "paint": {
+        "circle-radius": 3,
+        "circle-color": "rgba(238,78,139, 0.4)",
+        "circle-stroke-color": "rgba(238,78,139, 1)",
+        "circle-stroke-width": 1
+      }
+    },
+    {
+      "id": "road",
+      "source": "composite",
+      "source-layer": "road",
+      "type": "line",
+      "paint": {
+        "line-color": "#ffffff"
+      }
+    },
+    {
+      "id": "structure",
+      "source": "composite",
+      "source-layer": "structure",
+      "type": "fill",
+      "paint": {
+        "fill-color": "rgba(66,100,251, 0.3)",
+        "fill-outline-color": "rgba(66,100,251, 1)"
+      }
+    },
+    {
+      "id": "transit_stop_label",
+      "source": "composite",
+      "source-layer": "transit_stop_label",
+      "type": "circle",
+      "paint": {
+        "circle-radius": 3,
+        "circle-color": "rgba(238,78,139, 0.4)",
+        "circle-stroke-color": "rgba(238,78,139, 1)",
+        "circle-stroke-width": 1
+      }
+    },
+    {
+      "id": "water",
+      "source": "composite",
+      "source-layer": "water",
+      "type": "fill",
+      "paint": {
+        "fill-color": "rgba(66,100,251, 0.3)",
+        "fill-outline-color": "rgba(66,100,251, 1)"
+      }
+    },
+    {
+      "id": "waterway",
+      "source": "composite",
+      "source-layer": "waterway",
+      "type": "line",
+      "paint": {
+        "line-color": "#ffffff"
+      }
+    }
+  ]
+}
