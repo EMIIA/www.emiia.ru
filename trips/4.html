@@ -1,0 +1,242 @@
+
+<html lang="ru"><head>
+<meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta charset="utf-8">
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1, shrink-to-fit=no">
+	
+  
+  
+  
+  
+  
+  <script src='https://unpkg.com/@loaders.gl/ply@^3.0.0/dist/dist.min.js'></script>
+<script src='https://unpkg.com/deck.gl@latest/dist.min.js'></script><script  src="./script.js"></script>
+  
+  
+  
+
+  
+  
+    <script src="https://unpkg.com/deck.gl@^8.6.5/dist.min.js"></script>
+    <script src="https://unpkg.com/@deck.gl/carto@^8.6.5/dist.min.js"></script>
+    <script src="https://libs.cartocdn.com/mapbox-gl/v1.13.0/mapbox-gl.js"></script>
+    
+    
+    
+    <link href="https://libs.cartocdn.com/mapbox-gl/v1.13.0/mapbox-gl.css" rel="stylesheet" />
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@5/turf.min.js"></script>
+    
+    
+    
+
+    
+    <style>
+      body { margin:0; padding:0; }
+      #map { position:absolute; top:0; bottom:0; width:100%; 
+      
+
+
+      
+      
+      }
+      
+      
+      
+      
+      #map1 { position:absolute; top:0; bottom:0; width:100%; 
+      
+      background-color: transparent;
+      
+      background-image: url('https://www.emiia.ru/relise/megasite.svg');
+      
+      background-repeat: no-repeat;
+
+      
+      background-size: cover;
+      
+      
+background-position-x: center, center, center;
+
+background-position-y: center, center, center;
+
+background-repeat: no-repeat, no-repeat, no-repeat;
+      
+      
+      
+      
+    </style>
+  </head>
+  <body>
+  
+  <div id='map'></div>
+  
+  <div id='map1'></div>
+  
+  
+  </body>
+  
+  
+  
+  
+  
+  
+  <script type="text/javascript">
+  
+  
+  
+    const ANIMATION_SPEED = 30;
+    const INITIAL_PAUSE = 1;
+    const colors = {0: [253, 128, 93], '1': [23, 184, 190], '2': [200, 180, 190]};
+
+    const getColor = i => {
+      
+      if (typeof i === 'undefined' || !(i in colors)) {i = '1'};
+
+     
+      
+      return colors[i];
+      
+      
+     
+
+      
+      
+    }
+
+    
+    drawTrips([{"vendor":0,"path":[[139.8007914,35.5144044],[139.9108676,35.4396142]],"timestamps":[10,600]},{"vendor":1,"path":[[139.9108139,35.439529],[139.8008987,35.5140027]],"timestamps":[120,500]},{"vendor":2,"path":[[139.9108139,35.439529],[139.8008987,35.5140027]],"timestamps":[100,400]}]);
+    
+    const setDropArea = (area) => {
+      area.ondragover = () => false;
+      area.ondrop = async event => {
+        event.preventDefault();
+        const promises = [];
+        for (const file of event.dataTransfer.files) {
+          if (file.name.split('.').pop() == 'json') {
+            promises.push(file.text());
+          }
+        }
+        const results = await Promise.all(promises);
+        drawTrips(results.map(JSON.parse).flat());
+        return false;
+      };
+    }
+    setDropArea(document.getElementById('map'));
+
+    function bbox(json) {
+      let points = [];
+      for (let e of json){
+        points = points.concat(e.path);
+      }
+      const b = turf.bbox(turf.multiPoint(points))
+      return [[b[0], b[3]], [b[2], b[1]]];
+    }
+
+    function interval_timestamps(json) {
+      let timestamps = [];
+      for (let e of json){
+        timestamps = timestamps.concat(e.timestamps);
+      }
+      return [Math.min(...timestamps), Math.max(...timestamps)]; 
+    }
+
+    function drawTrips(json) {
+      const interval = interval_timestamps(json);
+      interval[0] -= ANIMATION_SPEED * INITIAL_PAUSE;
+      const view = new deck.WebMercatorViewport({width: document.body.clientWidth, height: document.body.clientHeight});
+
+      deck.carto.setDefaultCredentials({
+        username: 'public',
+        apiKey: 'default_public',
+      });
+
+      const deckgl = new deck.DeckGL({
+        container: 'map',
+        
+        
+
+        
+        mapStyle: "https://api.maptiler.com/maps/5734df93-2e4f-455f-b0f5-bbcf51802a5a/style.json?key=QN6ALYSRnAohNK6Y8Bi",
+        initialViewState: view.fitBounds(bbox(json)),
+        
+        
+    initialViewState: {
+    longitude: 139.8007914,
+    latitude: 35.5144044,
+    
+    
+   
+    zoom: 14,
+    pitch: 10,
+    bearing: 30,
+    minZoom: 0,
+    maxZoom: 20,
+    minPitch: 0,
+    maxPitch: 60
+
+  },
+        
+        attributionControl: false,
+        controller: true
+      });
+
+     
+      let time = 0;
+      const RATE_ANIMATION_FRAME = 50;
+      function animate() {
+        time = (time + ANIMATION_SPEED/RATE_ANIMATION_FRAME) % (interval[1] - interval[0]);
+        window.requestAnimationFrame(animate);
+      }
+      
+      
+      
+      
+      setInterval(() => {
+        deckgl.setProps({
+          layers: [
+            new deck.TripsLayer({
+              id: 'trips-layer',
+              data: json,
+              getPath: d => d.path,
+              getTimestamps: d => d.timestamps,
+              getColor: d => getColor(d.vendor),
+              opacity: 0.8,
+              widthMinPixels: 3,
+ 
+              jointRounded: true,
+              capRounded: true,
+              trailLength: 180,
+              currentTime: time + interval[0],
+              shadowEnabled: false
+            })
+          ]
+        });
+      }, 50);
+
+      window.requestAnimationFrame(animate);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+  </script>
+  
+  
+
+  
+</html>
+
