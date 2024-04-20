@@ -1,6 +1,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -117,24 +118,27 @@ body { margin: 0; padding: 0; }
          
         attributionControl: false,
         
+        bearing: -60, // bearing in degrees
+        
 	antialias: true // create the gl context with MSAA antialiasing, so custom layers are antialiased
          
     });
     
     
     
+     
     
     
     
-     // disable map rotation using right click + drag
-    map.dragRotate.disable();
+
 
     // disable map rotation using touch rotation gesture
     map.touchZoomRotate.disableRotation();
 
 
     
-    
+         // disable map rotation using right click + drag
+    map.dragRotate.disable();
     
     
     
@@ -424,6 +428,8 @@ map.addControl(new MapboxLanguage({
 
 </body>
 </html>
+
+
 
 
 
