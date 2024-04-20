@@ -2,6 +2,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -128,7 +129,8 @@ body { margin: 0; padding: 0; }
     
      
     
-    
+             // disable map rotation using right click + drag
+    map.dragRotate.disable();
     
 
 
@@ -137,91 +139,13 @@ body { margin: 0; padding: 0; }
 
 
     
-         // disable map rotation using right click + drag
-    map.dragRotate.disable();
-    
-    
-    
-   
-    // parameters to ensure the model is georeferenced correctly on the map
-		var modelOrigin = [37.17402239557072, 55.97723794736996, 1];
 
-		function createCustomLayer(layerName, origin) {
-			let model;
-			//create the layer
-			let customLayer3D = {
-				id: layerName,
-				type: 'custom',
-				renderingMode: '3d',
-				onAdd: function (map, gl) {
+    // disable map zoom when using scroll
+    map.scrollZoom.disable();
 
-					// instantiate threebox
-					window.tb = new Threebox(
-						map,
-						gl,
-						{ defaultLights: true,
-                        
-                        enableSelectingFeatures: false,
-                        realSunlight: false,
-                        enableSelectingObjects: false,
-                        enableDraggingObjects: false,
-                        enableRotatingObjects: false,
-                        enableTooltips: false }
-					);
-                    
-                    
-        
-                    
-
-		
-            
-                    
-                    let options = { type: 'gltf', obj: 'https://www.emiia.ru/relise/dom_new_down.glb', units: 'meters', scale: 1000, anchor: 'center', rotation: { x: 90, y: 0, z: 0 } }        
-                    type: 'gltf',           
-                    
-                    
-					tb.loadObj(options, function (model) {
-						model.setCoords(origin);
-						model.addTooltip("Your diorama model is loaded", true);
-						tb.add(model);
-                         model.setRotation({ x: 0, y: 0, z: 80.7 });
-					});
-
-				},
-				render: function (gl, matrix) {
-					tb.update();
-				}
-			};
-			return customLayer3D;
-
-		};
-    
-    camera_RT_Holder = new THREE.Mesh(
-   new THREE.BoxGeometry(20, 20, 30),
-   new THREE.MeshNormalMaterial()
-);
-    
-    
     
 
-    map.on('mousemove', (e) => {
-        document.getElementById('info').innerHTML =
-            // `e.point` is the x, y coordinates of the `mousemove` event
-            // relative to the top-left corner of the map.
-            JSON.stringify(e.point) +
-            '<br />' +
-            // `e.lngLat` is the longitude, latitude geographical position of the event.
-            JSON.stringify(e.lngLat.wrap());
-    });
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
  map.on('load', function () {
   map.addSource('radar', {
@@ -247,21 +171,14 @@ body { margin: 0; padding: 0; }
 
        
     
+
     
-    
-    
-    
-    
- 
-    
- 
-    
-    
-    
-    
-    
-    
-    
+   mapboxgl.setRTLTextPlugin('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js');
+map.addControl(new MapboxLanguage({
+  defaultLanguage: 'ru'
+}));
+        
+
     
 </script>
 
@@ -274,109 +191,12 @@ body { margin: 0; padding: 0; }
     <script>
 
     
+
     
-    
-    
-    
-    
-    
-    
-    
-    
-    // The 'building' layer in the streets vector source contains building-height
-  // data from OpenStreetMap.
   map.on('load', () => {
-      // Insert the layer beneath any symbol layer.
-      const layers = map.getStyle().layers;
-
-      let labelLayerId;
-      for (let i = 0; i < layers.length; i++) {
-          if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
-              labelLayerId = layers[i].id;
-              break;
-          }
-      }
-      
-      
-
-
-      map.addSource('openmaptiles', {
-          url: `https://www.emiia.ru/style/tiles_maptiler.json`,
-          type: 'vector',
-      });
-
-      map.addLayer(
-          {
-              'id': '3d-buildings',
-              'source': 'openmaptiles',
-              'source-layer': 'building',
-              'type': 'fill-extrusion',
-
-              
-              
-              'minzoom': 15,
-'maxzoom': 19,
-              
-              
-              
-              'paint': {
-                  'fill-extrusion-color': [
-                      'interpolate',
-                      ['linear'],
-                      ['get', 'render_height'], 0, 'lightgray', 200, 'royalblue', 400, 'lightblue'
-                  ],
-                  'fill-extrusion-height': [
-                      'interpolate',
-                      ['linear'],
-                      ['zoom'],
-                      15,
-                      0,
-                      16,
-                      ['get', 'render_height']
-                  ],
-                  'fill-extrusion-base': ['case',
-                      ['>=', ['get', 'zoom'], 16],
-                      ['get', 'render_min_height'], 0
-                  ], 'fill-extrusion-opacity': 0.5
-              }
-          },
-          labelLayerId
-      );
-      
-      
-
-      
-  });
-    
-    
-    
-    
-    
-    
-    
-
-		map.on('style.load', function () {
-			map.addLayer(createCustomLayer('3d-model', modelOrigin), '');
-            
-   
-		});
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        map.on('load', () => {
         map.addSource("terrain", {
           "type": "raster-dem",
-          "url": `https://www.emiia.ru/style/tiles_maptiler_terrain.json?key=QN6ALYSRnAohNK6Y8BiB`
+          "url": `json`
         });
         map.setTerrain({
           source: "terrain",
@@ -399,24 +219,7 @@ body { margin: 0; padding: 0; }
     });
     
     
-    
-    
-    
-    
-  
-       
-    
-     mapboxgl.setRTLTextPlugin('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js');
-map.addControl(new MapboxLanguage({
-  defaultLanguage: 'ru'
-}));
-        
-        
-        
-        
-       
-        
-        
+ 
      
 
     </script>
@@ -428,6 +231,8 @@ map.addControl(new MapboxLanguage({
 
 </body>
 </html>
+
+
 
 
 
