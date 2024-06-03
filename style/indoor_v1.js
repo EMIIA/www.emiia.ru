@@ -3333,7 +3333,7 @@
             map.levelsRange = levelsRange;
             map.layersToHide = options.layersToHide ? options.layersToHide : [];
             map.beforeLayerId = options.beforeLayerId;
-            map.defaultLevel = options.defaultLevel ? options.defaultLevel : 1;
+            map.defaultLevel = options.defaultLevel ? options.defaultLevel : 2;
             map.showFeaturesWithEmptyLevel = options.showFeaturesWithEmptyLevel ? options.showFeaturesWithEmptyLevel : false;
             return map;
         }
