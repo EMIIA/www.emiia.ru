@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  
+  
+<meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta charset="utf-8">
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1, shrink-to-fit=no">
+	
+
+
+  <meta charset="UTF-8">
+  <title>CodePen - Play Video on Scroll!</title>
+  
+  
+  <style>
+  
+  
+   .items .item{
+    height:100%;
+    margin-left:25px;
+    margin-right:25px;
+    width:150px;
+    position:relative;
+    display:inline-block;
+}
+
+
+::-webkit-scrollbar {
+    display: none;
+}
+  
+  #set-height {
+  display: block;
+}
+#v0 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+p font-family helvetica {
+  font-size: 24px;
+}
+  
+  </style>
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div id="set-height"></div>
+<p id="time"></p>
+<video id="v0" tabindex="0" autobuffer="autobuffer" preload="preload">
+  <source type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" src="https://www.apple.com/media/us/mac-pro/2013/16C1b6b5-1d91-4fef-891e-ff2fc1c1bb58/videos/macpro_main_desktop.mp4">
+  </source>
+</video>
+  
+  
+  
+<!-- partial -->
+ 
+  <script>
+  
+  var frameNumber = 0, // start video at frame 0
+    // lower numbers = faster playback
+    playbackConst = 500, 
+    // get page height from video duration
+    setHeight = document.getElementById("set-height"), 
+    // select video element         
+    vid = document.getElementById('v0'); 
+
+// dynamically set the page height according to video length
+vid.addEventListener('loadedmetadata', function() {
+  setHeight.style.height = Math.floor(vid.duration) * playbackConst + "px";
+});
+
+// Use requestAnimationFrame for smooth playback
+function scrollPlay(){  
+  var frameNumber  = window.pageYOffset/playbackConst;
+  vid.currentTime  = frameNumber;
+  window.requestAnimationFrame(scrollPlay);
+}
+
+window.requestAnimationFrame(scrollPlay);
+  
+  </script>
+
+</body>
+</html>
+
