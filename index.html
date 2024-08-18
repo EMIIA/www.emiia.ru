@@ -44,6 +44,7 @@
 
 
 
+
 <html lang="ru"><head>
 <meta content="yes" name="apple-mobile-web-app-capable" />
   <meta charset="utf-8">
@@ -542,6 +543,42 @@ max-height: 100%;
   text-decoration: none;
   text-transform: uppercase;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+.toggle-menu.active::after {
+    content: "";
+
+
+  position: absolute;
+  z-index: 2; /* помещаем .green-box поверх .dashed-box */
+  background: #f8f9fa;
+  width: 200em;
+  
+  
+  
+  left: 362px;
+  top: -20px;
+  height: 200em;
+  opacity: 0.9;
+  
+  z-index: -30000;
+  
+
+}
+
+
+
+
 
 
 
