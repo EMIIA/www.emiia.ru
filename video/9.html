@@ -1,0 +1,237 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+
+<meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta charset="utf-8">
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1, shrink-to-fit=no">
+	
+  <meta charset="UTF-8">
+  <title>CodePen - animate video on scroll</title>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <style>
+  
+ * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background-color: #232730;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  font-family: sans-serif;
+}
+
+.canvas-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: grid;
+  width: 100%;
+  height: 100vh;
+  /*
+  margin: 0 auto;
+  max-width: 1024px;
+  overflow: hidden;
+  */
+}
+.canvas-wrapper video {
+  opacity: 0;
+  top: 0;
+  left: 0;
+  max-width: 100%;
+  max-height: 100%;
+  position: absolute;
+  pointer-events: none;
+}
+.canvas-wrapper canvas {
+  width: 100vw;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.vh-100 {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+.vh-100::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  border-bottom: 5px solid tomato;
+  z-index: 2;
+}
+.vh-100 > h1 {
+  font-size: clamp(4rem, 10vw, 6rem);
+  color: #ff906f;
+  font-weight: 700;
+}
+  
+  </style>
+
+  
+  
+  
+  
+  
+  
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<main>
+    <div class="canvas-wrapper">
+        <video muted playsinline preload="preload" autobuffer="autobuffer" autoplay="" loop="" muted="" playsinline="" data-object-fit="" allowfullscreen="">
+            
+       
+     
+  
+  
+  
+   <source 
+        src="https://www.emiia.ru/emiia_ai_ru.mov" 
+        type='video/mp4; codecs="hvc1"'>
+    <source 
+        src="https://www.emiia.ru/emiia_ai_ru.webm" 
+        type="video/webm">
+  
+  </video> 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+   
+  
+  
+  
+  
+        
+        <canvas></canvas>
+    </div>
+    <div class="vh-100">
+        <h1>Video onScroll</h1>
+    </div>
+    <section class="vh-100"></section>
+    <section class="vh-100"></section>
+    <section class="vh-100"></section>
+    <section class="vh-100"></section>
+    <section class="vh-100">
+        <h1>The End</h1>
+    </section>
+</main>
+<!-- partial -->
+  <script>
+  
+  
+  
+  
+  
+  
+  class ScrollVideo {
+    constructor(elem) {
+        this.elem = elem;
+        this.video = this.elem.querySelector("video");
+        this.videoDuration = 0.001;
+        this.canvas = this.elem.querySelector("canvas");
+        this.ctx = this.canvas.getContext("2d");
+        this.seeked = true;
+    }
+    setVideoDuration() {
+        console.log("ondurationchange");
+        this.videoDuration = this.video.duration;
+    }
+    init() {
+        // this.video.ondurationchange = this.setVideoDuration();
+        this.video.oncanplay = this.loop();
+        this.video.currentTime = 0.001;
+        this.initObserver();
+    }
+    loop() {
+        requestAnimationFrame(() => this.loop());
+
+        if (this.seeked) {
+            this.seeked = false;
+            const { scrollHeight, clientHeight, scrollTop } = document.body;
+            const maxScroll = scrollHeight - clientHeight;
+            const scrollProgress = scrollTop / Math.max(maxScroll, 1);
+
+            //canvas.width = document.body.clientWidth;
+            //canvas.height = document.body.clientHeight;
+            this.canvas.width = this.video.videoWidth;
+            this.canvas.height = this.video.videoHeight;
+
+            if (!isNaN(this.video.duration)) {
+                this.video.currentTime = this.video.duration * scrollProgress;
+            }
+
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            this.ctx.drawImage(
+                this.video,
+                0,
+                0,
+                this.canvas.width,
+                this.canvas.height
+            );
+        }
+    }
+    initObserver() {
+        this.video.addEventListener("seeked", () => {
+            this.seeked = true;
+        });
+    }
+}
+
+const Components = document.querySelectorAll(".canvas-wrapper");
+
+Components.forEach((item) => {
+    const component = new ScrollVideo(item);
+    component.init();
+});
+  
+  
+  
+  
+  
+  
+  </script>
+
+</body>
+</html>
+
+
+
