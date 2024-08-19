@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Play Video on Scroll!</title>
+
+   <style>
+#set-height {
+  display: block;
+}
+#v0 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+p font-family helvetica {
+  font-size: 24px;
+}
+
+
+ </style>
+ 
+ 
+ 
+ 
+
+</head>
+<body>
+
+
+<main>
+    <div class="canvas-wrapper">
+
+
+<!-- partial:index.partial.html -->
+<div id="set-height"></div>
+<p id="time"></p>
+
+
+<video id="v0" 
+
+tabindex="0" autobuffer="autobuffer" preload="preload"
+  
+        
+        autoplay="" muted="" playsinline="" data-object-fit="" allowfullscreen=""
+
+
+
+>
+
+
+        
+
+
+  <source type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;" src="https://www.apple.com/media/us/mac-pro/2013/16C1b6b5-1d91-4fef-891e-ff2fc1c1bb58/videos/macpro_main_desktop.mp4"></source>
+</video>
+
+
+
+<!-- partial -->
+  <script>
+  
+  
+  var frameNumber = 0, // start video at frame 0
+    // lower numbers = faster playback
+    playbackConst = 500, 
+    // get page height from video duration
+    setHeight = document.getElementById("set-height"), 
+    // select video element         
+    vid = document.getElementById('v0'); 
+
+// dynamically set the page height according to video length
+vid.addEventListener('loadedmetadata', function() {
+  setHeight.style.height = Math.floor(vid.duration) * playbackConst + "px";
+});
+
+// Use requestAnimationFrame for smooth playback
+function scrollPlay(){  
+  var frameNumber  = window.pageYOffset/playbackConst;
+  vid.currentTime  = frameNumber;
+  window.requestAnimationFrame(scrollPlay);
+}
+
+window.requestAnimationFrame(scrollPlay);
+  
+  
+  
+  
+  </script>
+  
+  
+  
+  
+  
+  
+  
+  
+  <script>
+  
+  
+  
+  
+  
+  
+  class ScrollVideo {
+    constructor(elem) {
+        this.elem = elem;
+        this.video = this.elem.querySelector("video");
+        this.videoDuration = 0.001;
+        this.canvas = this.elem.querySelector("canvas");
+        this.ctx = this.canvas.getContext("2d");
+        this.seeked = true;
+    }
+    setVideoDuration() {
+        console.log("ondurationchange");
+        this.videoDuration = this.video.duration;
+    }
+    init() {
+        // this.video.ondurationchange = this.setVideoDuration();
+        this.video.oncanplay = this.loop();
+        this.video.currentTime = 0.001;
+        this.initObserver();
+    }
+    loop() {
+        requestAnimationFrame(() => this.loop());
+
+        if (this.seeked) {
+            this.seeked = false;
+            const { scrollHeight, clientHeight, scrollTop } = document.body;
+            const maxScroll = scrollHeight - clientHeight;
+            const scrollProgress = scrollTop / Math.max(maxScroll, 1);
+
+            //canvas.width = document.body.clientWidth;
+            //canvas.height = document.body.clientHeight;
+            this.canvas.width = this.video.videoWidth;
+            this.canvas.height = this.video.videoHeight;
+
+            if (!isNaN(this.video.duration)) {
+                this.video.currentTime = this.video.duration * scrollProgress;
+            }
+
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            this.ctx.drawImage(
+                this.video,
+                0,
+                0,
+                this.canvas.width,
+                this.canvas.height
+            );
+        }
+    }
+    initObserver() {
+        this.video.addEventListener("seeked", () => {
+            this.seeked = true;
+        });
+    }
+}
+
+const Components = document.querySelectorAll(".canvas-wrapper");
+
+Components.forEach((item) => {
+    const component = new ScrollVideo(item);
+    component.init();
+});
+  
+  
+  
+  
+  
+  
+  </script>
+  
+  
+  
+  
+  
+
+</body>
+</html>
