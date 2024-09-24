@@ -1,0 +1,50 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" width="85.19mm" height="101.59mm" viewBox="0 0 241.49 287.99">
+  <title>панель прозрачная</title>
+  <g>
+    <path d="M224.85,74V222.15a30.63,30.63,0,0,1-27.62,30.48L73.41,264.84a32.62,32.62,0,0,1-11.89-1l-1.06-.31a32.77,32.77,0,0,1-23.11-31.37v-177a32.35,32.35,0,0,1,9-22.48,32.89,32.89,0,0,1,9.47-6.88l0,0,2.34-1,.16,0A32.19,32.19,0,0,1,74.69,23L196.53,41.17A33.22,33.22,0,0,1,224.85,74Z" style="fill: red;opacity: 0.6"/>
+    <path d="M60.46,263.54l-20.4-5.93-4.24-1.23a30.57,30.57,0,0,1-20-28.67V63A30.26,30.26,0,0,1,33.94,35.24l.49-.21,21.4-9.23a32.89,32.89,0,0,0-9.47,6.88,32.35,32.35,0,0,0-9,22.48v177a32.9,32.9,0,0,0,23.11,31.37Z" style="fill: red;stroke: #e30613;stroke-miterlimit: 10;stroke-width: 0.25px;opacity: 0.4"/>
+    <path d="M35.82,256.38l4.24,1.23A30.34,30.34,0,0,1,35.82,256.38Z" style="fill: none;stroke: red;stroke-miterlimit: 10;stroke-width: 0.25px"/>
+  </g>
+  
+  
+  
+  <g>
+    <path d="M224.85,74V222.15a30.63,30.63,0,0,1-27.62,30.48L73.41,264.84a32.62,32.62,0,0,1-11.89-1l-1.06-.31a32.77,32.77,0,0,1-23.11-31.37v-177a32.35,32.35,0,0,1,9-22.48,32.89,32.89,0,0,1,9.47-6.88l0,0,2.34-1,.16,0A32.19,32.19,0,0,1,74.69,23L196.53,41.17A33.22,33.22,0,0,1,224.85,74Z" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 0.75px"/>
+    <path d="M60.46,263.54l-20.4-5.93-4.24-1.23a30.57,30.57,0,0,1-20-28.67V63A30.26,30.26,0,0,1,33.94,35.24l.49-.21,21.4-9.23a32.89,32.89,0,0,0-9.47,6.88,32.35,32.35,0,0,0-9,22.48v177a32.9,32.9,0,0,0,23.11,31.37Z" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 0.75px"/>
+  </g>
+  <g>
+    <g>
+      <g>
+        <path d="M78.78,235.31,64.2,236V221.12h1.64v13.05l4.82-.23V223h1.66v10.83l4.82-.27V220.43h1.64Z" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 0.25px"/>
+        <path d="M78.78,197.63H64.2v-1.86H78.78Z" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 0.25px"/>
+        <path d="M78.78,192.79H64.2v-1.86H78.78Z" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 0.25px"/>
+        <path d="M66.63,188.25a2.2,2.2,0,0,1-1.23-.36,2.55,2.55,0,0,1-.88-1,2.93,2.93,0,0,1-.32-1.37V174.66a2.93,2.93,0,0,1,.32-1.37,2.55,2.55,0,0,1,.88-1,2.21,2.21,0,0,1,1.23-.36H78.78v1.84H73.45v12.64h5.33v1.83Zm5.19-14.48H66.63a.72.72,0,0,0-.56.26.91.91,0,0,0-.23.62v10.88a.9.9,0,0,0,.23.62.72.72,0,0,0,.56.26h5.19Z" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 0.25px"/>
+        <path d="M78.78,169.17H77.12v-1.86h1.66Z" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 0.25px"/>
+        <path d="M66.63,164.79a2.2,2.2,0,0,1-1.23-.36,2.54,2.54,0,0,1-.88-1,2.94,2.94,0,0,1-.32-1.37V151.19a2.93,2.93,0,0,1,.32-1.37,2.55,2.55,0,0,1,.88-1,2.2,2.2,0,0,1,1.23-.36H78.78v1.84H73.45V163h5.33v1.84Zm5.19-14.48H66.63a.73.73,0,0,0-.56.26.91.91,0,0,0-.23.62v10.88a.91.91,0,0,0,.23.62.72.72,0,0,0,.56.26h5.19Z" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 0.25px"/>
+        <path d="M78.78,145.67H64.2v-1.86H78.78Z" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 0.25px"/>
+      </g>
+      <path d="M78.78,218.11l-14.58.54v-2.51l7.21-6.78-7.21-6.77v-2.52H78.78v1.84H66.06L74,209.36l-7.92,7.46,12.72-.54Z" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 0.25px"/>
+    </g>
+    <line x1="78.39" y1="143.87" x2="78.39" y2="145.67" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 0.25px"/>
+    <line x1="78.37" y1="148.47" x2="78.37" y2="150.31" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 0.25px"/>
+    <polyline points="73.45 150.31 73.05 150.31 73.05 162.95 73.45 162.95" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 0.25px"/>
+    <polyline points="73.45 173.77 73.05 173.77 73.05 186.41 73.45 186.41" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 0.25px"/>
+    <line x1="78.4" y1="162.97" x2="78.4" y2="164.79" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 0.25px"/>
+    <path d="M66.63,150.31h-.4a.73.73,0,0,0-.56.26.91.91,0,0,0-.23.62v10.88a.91.91,0,0,0,.23.62.72.72,0,0,0,.56.26h.4" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 0.25px"/>
+    <path d="M66.63,173.77h-.4a.73.73,0,0,0-.56.26.91.91,0,0,0-.23.62v10.88a.91.91,0,0,0,.23.62.72.72,0,0,0,.56.26h.4" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 0.25px"/>
+    <line x1="78.45" y1="167.31" x2="78.45" y2="169.17" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 0.25px"/>
+    <line x1="78.45" y1="171.9" x2="78.45" y2="173.76" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 0.25px"/>
+    <line x1="78.45" y1="186.41" x2="78.45" y2="188.27" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 0.25px"/>
+    <line x1="78.45" y1="190.93" x2="78.45" y2="192.79" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 0.25px"/>
+    <line x1="78.45" y1="195.77" x2="78.45" y2="197.63" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 0.25px"/>
+    <line x1="78.45" y1="200.07" x2="78.45" y2="201.93" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 0.25px"/>
+    <line x1="78.45" y1="216.26" x2="78.45" y2="218.11" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 0.25px"/>
+    <path d="M66.06,201.9h-.47l7.92,7.45-7.92,7.46h.47" style="fill: none;stroke: #fff;stroke-linejoin: round;stroke-width: 0.25px"/>
+    <polyline points="65.47 221.12 65.47 234.21 65.72 234.17" style="fill: none;stroke: #fff;stroke-linejoin: round;stroke-width: 0.25px"/>
+    <polyline points="71.92 222.97 71.92 233.85 72.32 233.81" style="fill: none;stroke: #fff;stroke-linejoin: round;stroke-width: 0.25px"/>
+    <line x1="78.38" y1="220.43" x2="78.38" y2="235.33" style="fill: none;stroke: #fff;stroke-linejoin: round;stroke-width: 0.25px"/>
+  </g>
+</svg>
+
+
