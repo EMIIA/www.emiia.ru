@@ -1,0 +1,721 @@
+! $$$ Model: Keenetic Giga
+! $$$ Version: 2.06.1
+! $$$ Agent: http/rci
+! $$$ Md5 checksum: 5bd184dc00e49de28aa18f359151c925
+! $$$ Last change: Thu, 24 Oct 2024 09:27:48 GMT
+! $$$ Username: admin
+
+system
+    set net.ipv4.ip_forward 1
+    set net.ipv4.tcp_fin_timeout 30
+    set net.ipv4.tcp_keepalive_time 120
+    set net.ipv4.neigh.default.gc_thresh1 256
+    set net.ipv4.neigh.default.gc_thresh2 1024
+    set net.ipv4.neigh.default.gc_thresh3 2048
+    set net.ipv6.neigh.default.gc_thresh1 256
+    set net.ipv6.neigh.default.gc_thresh2 1024
+    set net.ipv6.neigh.default.gc_thresh3 2048
+    set net.netfilter.nf_conntrack_tcp_timeout_established 1200
+    set net.netfilter.nf_conntrack_max 32768
+    set vm.swappiness 60
+    set vm.overcommit_memory 0
+    set vm.vfs_cache_pressure 1000
+    set dev.usb.force_usb2 0
+    set net.ipv6.conf.all.forwarding 1
+    clock timezone Europe/Moscow
+    domainname WORKGROUP
+    hostname EMIIA
+    caption description
+    description "EMIIA.AI MRV"
+    zram
+    ndss dump-report no disable
+!
+ntp master
+schedule schedule0
+    description "\xd0\xa0\xd0\xb0\xd1\x81\xd0\xbf\xd0\xb8\xd1\x81\xd0\xb0\xd0\xbd\xd0\xb8\xd0\xb5 \xd0\xb0\xd0\xb2\xd1\x82\xd0\xbe\xd0\xbe\xd0\xb1\xd0\xbd\xd0\xbe\xd0\xb2\xd0\xbb\xd0\xb5\xd0\xbd\xd0\xb8\xd1\x8f"
+    action start 0 1 *
+    action stop 0 6 *
+!
+known host "EMIIA.AI Windows" 28:cd:c4:13:ee:a3
+known host "DESKTOP-CPPAE08 - Home network - 2024-10-22 14:02" 9c:d2:1e:fd:1c:77
+known host "iPhone (Vladimir)" a6:d8:cb:33:4a:ce
+known host Yandex b8:87:6e:a5:6c:02
+known host Alexandra ba:ed:84:e9:73:08
+known host Samsung bc:7e:8b:d2:ec:36
+known host emiia-ai-claster ec:2e:98:45:14:85
+isolate-private
+user admin
+    password md5 468ae2f2048152de19b0ff8cae0f0a8e
+    password nt df241048e6ba8af03bfe2d1cc9f88d66
+    home "NO NAME:/emiia"
+    tag cli
+    tag http
+    tag ftp
+    tag opt
+    tag afp
+    tag cifs
+    tag printers
+    tag webdav
+    tag sftp
+    tag torrent
+    tag sstp
+!
+user emiia.ai
+    password md5 76fe14041782d3e4c53fd5aa1e510a57
+    password nt d27328055c503d8f0931326300949bb7
+    home "NO NAME:/emiia"
+    tag webdav
+!
+dyndns profile _WEBADMIN
+!
+interface GigabitEthernet0
+    up
+!
+interface GigabitEthernet0/0
+    rename 1
+    switchport mode access
+    switchport access vlan 1
+    up
+!
+interface GigabitEthernet0/1
+    rename 2
+    switchport mode access
+    switchport access vlan 1
+    up
+!
+interface GigabitEthernet0/2
+    rename 3
+    switchport mode access
+    switchport access vlan 1
+    up
+!
+interface GigabitEthernet0/3
+    rename 4
+    switchport mode access
+    switchport access vlan 1
+    up
+!
+interface GigabitEthernet0/Vlan1
+    description "Home VLAN"
+    dyndns nobind
+    ip dhcp client dns-routes
+    ip name-servers
+    up
+!
+interface GigabitEthernet0/Vlan3
+    description "Guest VLAN"
+    dyndns nobind
+    ip dhcp client dns-routes
+    ip name-servers
+    up
+!
+interface GigabitEthernet1
+    rename ISP
+    description "\xd0\x9f\xd0\xbe\xd0\xb4\xd0\xba\xd0\xbb\xd1\x8e\xd1\x87\xd0\xb5\xd0\xbd\xd0\xb8\xd0\xb5 Ethernet"
+    dyndns nobind
+    mac address factory wan
+    security-level public
+    ip address dhcp
+    ip dhcp client dns-routes
+    ip global 700
+    ip name-servers
+    igmp upstream
+    ipv6 address auto
+    ipv6 prefix auto
+    ipv6 name-servers auto
+    up
+!
+interface GigabitEthernet1/0
+    rename 0
+    up
+!
+interface WifiMaster0
+    country-code RU
+    compatibility BGN+AX
+    tx-burst
+    rekey-interval 86400
+    beamforming explicit
+    vht
+    downlink-mumimo
+    uplink-mumimo
+    spatial-reuse
+    up
+!
+interface WifiMaster0/AccessPoint0
+    rename AccessPoint
+    description "Wi-Fi access point"
+    dyndns nobind
+    mac access-list type none
+    wps
+    authentication wpa-psk ns3 fmrIQCWWmahQmVD1WR3OFKGMjL4LS9fru87zqtlNbz/IgNo4
+    encryption enable
+    encryption wpa2
+    ip dhcp client dns-routes
+    ip name-servers
+    ssid "EMIIA.AI MRV"
+    wmm
+    rrm
+    ft mdid TL
+    ft enable
+    up
+!
+interface WifiMaster0/AccessPoint1
+    rename GuestWiFi
+    description "Guest access point"
+    dyndns nobind
+    mac access-list type none
+    encryption no enable
+    ip dhcp client dns-routes
+    ip name-servers
+    ssid Guest
+    wmm
+    rrm
+    ft mdid zL
+    ft enable
+    down
+!
+interface WifiMaster0/AccessPoint2
+    dyndns nobind
+    mac access-list type none
+    security-level private
+    encryption no enable
+    ip dhcp client dns-routes
+    ip name-servers
+    down
+!
+interface WifiMaster0/AccessPoint3
+    dyndns nobind
+    mac access-list type none
+    security-level private
+    encryption no enable
+    ip dhcp client dns-routes
+    ip name-servers
+    down
+!
+interface WifiMaster0/AccessPoint4
+    dyndns nobind
+    mac access-list type none
+    security-level private
+    encryption no enable
+    ip dhcp client dns-routes
+    down
+!
+interface WifiMaster0/AccessPoint5
+    dyndns nobind
+    mac access-list type none
+    security-level private
+    encryption no enable
+    ip dhcp client dns-routes
+    down
+!
+interface WifiMaster0/AccessPoint6
+    dyndns nobind
+    mac access-list type none
+    security-level private
+    encryption no enable
+    ip dhcp client dns-routes
+    down
+!
+interface WifiMaster0/WifiStation0
+    dyndns nobind
+    security-level public
+    encryption no enable
+    ip dhcp client dns-routes
+    ip name-servers
+    down
+!
+interface WifiMaster1
+    mac vht40 bc:7e:8b:d2:ec:36
+    country-code RU
+    compatibility AN+AC+AX
+    tx-burst
+    rekey-interval 86400
+    beamforming explicit
+    target-waketime
+    downlink-mumimo
+    uplink-mumimo
+    spatial-reuse
+    up
+!
+interface WifiMaster1/AccessPoint0
+    rename AccessPoint_5G
+    description "5GHz Wi-Fi access point"
+    dyndns nobind
+    mac access-list type none
+    wps
+    authentication wpa-psk ns3 fmrIQCWWmahQmVD1WR3OFKGMjL4LS9fru87zqtlNbz/IgNo4
+    encryption enable
+    encryption wpa2
+    ip dhcp client dns-routes
+    ip name-servers
+    ssid "EMIIA.AI MRV"
+    wmm
+    rrm
+    ft mdid TL
+    ft enable
+    follow AccessPoint
+    up
+!
+interface WifiMaster1/AccessPoint1
+    rename GuestWiFi_5G
+    description "5GHz Guest access point"
+    dyndns nobind
+    mac access-list type none
+    encryption no enable
+    ip dhcp client dns-routes
+    ip name-servers
+    ssid Guest
+    rrm
+    ft mdid zL
+    ft enable
+    follow GuestWiFi
+    down
+!
+interface WifiMaster1/AccessPoint2
+    dyndns nobind
+    mac access-list type none
+    security-level private
+    encryption no enable
+    ip dhcp client dns-routes
+    ip name-servers
+    down
+!
+interface WifiMaster1/AccessPoint3
+    dyndns nobind
+    mac access-list type none
+    security-level private
+    encryption no enable
+    ip dhcp client dns-routes
+    ip name-servers
+    down
+!
+interface WifiMaster1/AccessPoint4
+    dyndns nobind
+    mac access-list type none
+    security-level private
+    encryption no enable
+    ip dhcp client dns-routes
+    down
+!
+interface WifiMaster1/AccessPoint5
+    dyndns nobind
+    mac access-list type none
+    security-level private
+    encryption no enable
+    ip dhcp client dns-routes
+    down
+!
+interface WifiMaster1/AccessPoint6
+    dyndns nobind
+    mac access-list type none
+    security-level private
+    encryption no enable
+    ip dhcp client dns-routes
+    down
+!
+interface WifiMaster1/WifiStation0
+    dyndns nobind
+    security-level public
+    encryption no enable
+    ip dhcp client dns-routes
+    ip name-servers
+    down
+!
+interface UsbDsl0
+    description "Keenetic Plus DSL"
+    dyndns nobind
+    security-level public
+    ip address dhcp
+    ip dhcp client dns-routes
+    ip global 350
+    ip name-servers
+    operating-mode auto
+    vdsl profile 8a
+    vdsl profile 8b
+    vdsl profile 8c
+    vdsl profile 8d
+    vdsl profile 12a
+    vdsl profile 12b
+    vdsl profile 17a
+    vdsl profile 30a
+    vdsl carrier auto
+    vdsl psdmask A_R_POTS_D-32_EU-32
+    down
+!
+interface Bridge0
+    rename Home
+    description "Home network"
+    dyndns nobind
+    inherit GigabitEthernet0/Vlan1
+    include AccessPoint
+    include AccessPoint_5G
+    mac access-list type none
+    mac band ec:2e:98:45:14:85 1
+    security-level private
+    ip address 192.168.1.1 255.255.255.0
+    ip dhcp client dns-routes
+    ip name-servers
+    igmp downstream
+    iapp key ns3 CqfiREKhzhbKA6IUXU4KbXi39ydiwdZmfUGAxLXYN9apIMKj
+    up
+!
+interface Bridge1
+    rename Guest
+    description "Guest network"
+    traffic-shape rate 5120
+    dyndns nobind
+    inherit GigabitEthernet0/Vlan3
+    include GuestWiFi
+    include GuestWiFi_5G
+    mac access-list type none
+    mac band ec:2e:98:45:14:85 1
+    peer-isolation
+    security-level protected
+    ip address 10.1.30.1 255.255.255.0
+    ip dhcp client dns-routes
+    ip name-servers
+    iapp key ns3 UqR8q3nOkldFdSlFcbORY2806y7Vp81SrTUXy+c8CvhQv5Sk
+    down
+!
+ip dhcp pool _WEBADMIN
+    range 192.168.1.33 192.168.1.152
+    bind Home
+    enable
+!
+ip dhcp pool _WEBADMIN_GUEST_AP
+    range 10.1.30.33 10.1.30.152
+    bind Guest
+    enable
+!
+ip dhcp host ec:2e:98:45:14:85 192.168.1.94
+ip dhcp host bc:7e:8b:d2:ec:36 192.168.1.10
+ip http port 80
+ip http security-level public
+ip http lockout-policy 5 15 3
+ip http ssl enable
+ip http ssl redirect
+ip http ssl port 443
+ip http proxy cam
+    upstream https ec:2e:98:45:14:85 30
+    domain ndns
+    ssl redirect
+    security-level public
+!
+ip http proxy samsung
+    upstream https bc:7e:8b:d2:ec:36 50
+    domain ndns
+    ssl redirect
+    security-level public
+!
+ip http webdav
+    security-level public
+    enable
+    permissive
+    root "NO NAME:/emiia"
+!
+ip nat Home
+ip nat Guest
+ip nat vpn
+ip nat oc
+ip nat sstp
+ip telnet
+    port 23
+    security-level private
+    lockout-policy 5 15 3
+!
+ip ssh
+    port 22
+    security-level public
+    lockout-policy 5 15 3
+    sftp
+        enable
+        permissive
+        root "NO NAME:/emiia"
+    !
+!
+ip ftp
+    port 21
+    security-level public
+    lockout-policy 4 15 3
+    permissive
+    root "NO NAME:/emiia"
+!
+ip hotspot
+    host bc:7e:8b:d2:ec:36 permit
+    host bc:7e:8b:d2:ec:36 priority 1
+    host a6:d8:cb:33:4a:ce permit
+    host a6:d8:cb:33:4a:ce priority 2
+    host ba:ed:84:e9:73:08 permit
+    host ba:ed:84:e9:73:08 priority 1
+    host b8:87:6e:a5:6c:02 permit
+    host 28:cd:c4:13:ee:a3 permit
+    host ec:2e:98:45:14:85 permit
+    host ec:2e:98:45:14:85 priority 1
+    host 9c:d2:1e:fd:1c:77 permit
+    host 9c:d2:1e:fd:1c:77 conform
+!
+object-group ip _WEBADMIN_IPSEC_VirtualIPServerIKE2-local
+    include ip 0.0.0.0/0
+!
+object-group ip _WEBADMIN_IPSEC_VirtualIPServerIKE2-remote
+    include ip 0.0.0.0/0
+!
+object-group ip _WEBADMIN_IPSEC_VPNL2TPServer-local
+    include udp 0.0.0.0/0 1701
+!
+object-group ip _WEBADMIN_IPSEC_VPNL2TPServer-remote
+    include ip 0.0.0.0/0
+!
+object-group ip _WEBADMIN_IPSEC_VirtualIPServer-local
+    include ip 0.0.0.0/0
+!
+object-group ip _WEBADMIN_IPSEC_VirtualIPServer-remote
+    include ip 0.0.0.0/0
+!
+ipv6 subnet Default
+    bind Home
+    mode slaac
+    prefix length 64
+    number 0
+!
+ppe software
+ppe hardware
+upnp lan Home
+torrent
+    rpc-port 8090
+    peer-port 51413
+!
+crypto engine hardware
+crypto ike key VirtualIPServer ns3 TmzWRlo8vZLod/EmsS3n0Sae any
+crypto ike proposal VirtualIPServerIKE2
+    encryption aes-cbc-128
+    encryption aes-cbc-256
+    dh-group 2
+    dh-group 14
+    dh-group 20
+    dh-group 19
+    integrity sha256
+    integrity sha1
+!
+crypto ike proposal VPNL2TPServer
+    encryption 3des
+    encryption des
+    encryption aes-cbc-128
+    encryption aes-cbc-256
+    dh-group 2
+    dh-group 1
+    dh-group 20
+    dh-group 19
+    dh-group 14
+    integrity sha1
+    integrity sha256
+    integrity md5
+!
+crypto ike proposal VirtualIPServer
+    encryption aes-cbc-128
+    encryption aes-cbc-256
+    dh-group 2
+    dh-group 20
+    dh-group 19
+    dh-group 14
+    integrity sha1
+!
+crypto ike policy VirtualIPServerIKE2
+    proposal VirtualIPServerIKE2
+    lifetime 28800
+    mode ikev2
+!
+crypto ike policy VPNL2TPServer
+    proposal VPNL2TPServer
+    lifetime 28800
+    mode ikev1
+    negotiation-mode main
+!
+crypto ike policy VirtualIPServer
+    proposal VirtualIPServer
+    lifetime 28800
+    mode ikev1
+    negotiation-mode main
+!
+crypto ipsec transform-set VirtualIPServerIKE2
+    aead
+    lifetime 28800
+    cypher esp-chacha20-poly1305
+!
+crypto ipsec transform-set VPNL2TPServer
+    aead
+    lifetime 28800
+    cypher esp-chacha20-poly1305
+!
+crypto ipsec transform-set VirtualIPServer
+    lifetime 28800
+    cypher esp-aes-128
+    cypher esp-aes-256
+    hmac esp-sha1-hmac
+!
+crypto ipsec profile VirtualIPServerIKE2
+    dpd-interval 20 3
+    dpd-clear
+    identity-local fqdn ndns
+    match-identity-remote any
+    authentication-local pubkey
+    authentication-remote eap-mschapv2
+    mode tunnel
+    policy VirtualIPServerIKE2
+!
+crypto ipsec profile VPNL2TPServer
+    dpd-interval 20 4
+    dpd-clear
+    identity-local address 0.0.0.0
+    match-identity-remote any
+    authentication-local pre-share
+    authentication-remote pre-share
+    mode transport
+    policy VPNL2TPServer
+!
+crypto ipsec profile VirtualIPServer
+    dpd-interval 20 3
+    dpd-clear
+    identity-local fqdn mykeenetic.net
+    match-identity-remote any
+    authentication-local pre-share
+    authentication-remote pre-share
+    mode tunnel
+    policy VirtualIPServer
+    xauth server
+!
+crypto map VirtualIPServerIKE2
+    set-peer any
+    set-profile VirtualIPServerIKE2
+    set-transform VirtualIPServerIKE2
+    traffic-selectors _WEBADMIN_IPSEC_VirtualIPServerIKE2-local _WEBADMIN_IPSEC_VirtualIPServerIKE2-remote
+    set-tcpmss 1200
+    force-encaps
+    no nail-up
+    reauth-passive
+    virtual-ip range 172.20.8.1 172.20.9.0
+    virtual-ip dns-server 78.47.125.180
+    virtual-ip nat
+    virtual-ip multi-login
+    virtual-ip enable
+    l2tp-server lcp echo 30 3
+    l2tp-server no enable
+    enable
+!
+crypto map VPNL2TPServer
+    set-peer any
+    set-profile VPNL2TPServer
+    set-transform VPNL2TPServer
+    traffic-selectors _WEBADMIN_IPSEC_VPNL2TPServer-local _WEBADMIN_IPSEC_VPNL2TPServer-remote
+    nail-up
+    no reauth-passive
+    virtual-ip no enable
+    l2tp-server range 172.16.2.33 172.16.2.132
+    l2tp-server interface Bridge0
+    l2tp-server nat
+    l2tp-server multi-login
+    l2tp-server lcp echo 30 3
+    l2tp-server enable
+    enable
+!
+crypto map VirtualIPServer
+    set-peer any
+    set-profile VirtualIPServer
+    set-transform VirtualIPServer
+    traffic-selectors _WEBADMIN_IPSEC_VirtualIPServer-local _WEBADMIN_IPSEC_VirtualIPServer-remote
+    set-tcpmss 1200
+    force-encaps
+    no nail-up
+    reauth-passive
+    virtual-ip range 172.20.0.1 172.20.1.0
+    virtual-ip dns-server 78.47.125.180
+    virtual-ip nat
+    virtual-ip multi-login
+    virtual-ip enable
+    l2tp-server lcp echo 30 3
+    l2tp-server no enable
+    enable
+!
+nvox
+    fxs
+        port 1
+        !
+        port 2
+        !
+    !
+    sip-common
+        stun-server stun.l.google.com:19302
+    !
+    call-history length 500
+    phone
+        cadence 0 400 500 400 2000 0 0
+        cadence 1 1000 4000 0 0 0 0
+        cadence 2 400 500 0 0 0 0
+        cadence 3 400 2000 1200 1200 0 0
+        cadence 4 400 500 400 2000 2000 2000
+        cadence 5 4000 2000 0 0 0 0
+        intercom-cadence 0
+        paging-cadence 0
+    !
+!
+sstp-server
+    interface Home
+    pool-range 172.16.3.33 200
+    multi-login
+    lcp echo 30 3
+!
+vpn-server
+    interface Home
+    pool-range 172.16.1.33 200
+    multi-login
+    lcp echo 30 3
+    lockout-policy 3 30 5
+!
+oc-server
+    interface Home
+    pool-range 172.16.5.2 200
+    multi-login
+    camouflage
+!
+service dhcp
+service dns-proxy
+service igmp-proxy
+service http
+service ftp
+service cifs
+service dlna
+service telnet
+service ssh
+service ntp
+service upnp
+service vpn-server
+service nvox
+service sstp-server
+service oc-server
+cifs
+    share F3AA-4696 F3AA-4696:
+    share "NO NAME" 89D7-4B6B:
+    automount
+    permissive
+!
+dlna
+    port 8200
+    db-directory 76E8-CACF:/emiia
+    directory 76E8-CACF:/emiia
+    interface Bridge0
+    display-name "Keenetic Giga"
+!
+dns-proxy
+    rebind-protect auto
+!
+afp
+    share F3AA-4696 F3AA-4696: timemachine
+!
+easyconfig disable
+components
+    auto-update no disable
+    auto-update channel stable
+    auto-update schedule schedule0
+!
+cloud control2 security-level public
+!
