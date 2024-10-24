@@ -1,4 +1,4 @@
-! $$$ Model: Keenetic Giga
+! $$$ Model: EMIIA AI
 ! $$$ Version: 2.06.1
 ! $$$ Agent: http/rci
 ! $$$ Md5 checksum: 5bd184dc00e49de28aa18f359151c925
@@ -703,7 +703,7 @@ dlna
     db-directory 76E8-CACF:/emiia
     directory 76E8-CACF:/emiia
     interface Bridge0
-    display-name "Keenetic Giga"
+    display-name "EMIIA AI"
 !
 dns-proxy
     rebind-protect auto
