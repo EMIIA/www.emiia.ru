@@ -1339,11 +1339,20 @@ body {
 
  
 background-color:#f8f9fa!important;
+
+ 
  position: fixed;
+ 
+ position: absolute;
+ 
+
+top: 40px; 
+
+left: 40px;
   
   font-family: 'PT Mono', monospace;
   font-size: 28px;
-  font-weight: 600;
+  font-weight: 200;
   color: white;
   white-space: pre;
   
@@ -1356,7 +1365,7 @@ background-color:#f8f9fa!important;
 background-color:#f8f9fa!important;
 
 
-width: 500em;
+
 
   
 }
@@ -1477,7 +1486,7 @@ class Line {
 
 // Init:
 const windowSquare = window.innerWidth * window.innerHeight;
-const quantity = Math.floor(windowSquare / 90000);
+const quantity = Math.floor(windowSquare / 20000);
 const lines = [];
 let startTime = 0;
 
@@ -1959,11 +1968,11 @@ header.secondary-nav .nav-link{
 body {
   background-color: var(--bg-color);
   
-  background-color: gray-100;
+  background-color:  gray-100;
   
---bg-color: gray-100;
-    --header-color: gray-100;
-    --bottom-bar-color: gray-100;
+--bg-color:  gray-100;
+    --header-color:  gray-100;
+    --bottom-bar-color:  gray-100;
 
 }
 
