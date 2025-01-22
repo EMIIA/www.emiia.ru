@@ -5,6 +5,7 @@
 
 
 
+
 <html lang="ru"><head>
 <meta content="yes" name="apple-mobile-web-app-capable" />
   <meta charset="utf-8">
@@ -1380,7 +1381,8 @@ background-color:#f8f9fa!important;
 
 <script>
  
- 
+ const tg = Telegram.WebApp;
+tg.setHeaderColor("#f8f9fa");
 
   
 class Vector2 {
@@ -1535,6 +1537,9 @@ animate();
       position: relative;
       height: 100%;
       background: #f8f9fa;
+      
+ position: sticky;
+
         
     }
 
@@ -4458,7 +4463,12 @@ hyphens: auto;">
 
 
 
+<script>
 
+const tg = Telegram.WebApp;
+tg.setHeaderColor("#f8f9fa");
+
+</script>
         
           
 
@@ -4762,3 +4772,5 @@ let tg = window.Telegram.WebApp; //получаем объект webapp теле
 
 
 <div class="w3-row w3-border-no bg-light">
+
+
