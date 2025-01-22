@@ -1534,7 +1534,7 @@ animate();
   <!-- styles -->
   <style>
     html, body {
-      position: relative;
+    
 
 
       background: #f8f9fa;
@@ -1542,11 +1542,27 @@ animate();
 
  
  position: relative;
+ 
+ 
+ min-height: -webkit-fill-available;
 
-height: minmax(min-content, anchor-size(width));
+position: inherit;
+
+
+@media only screen and (max-width: 1200px) and (min-width: 768px) { 
+    min-height: -webkit-fill-available;
 
         
     }
+    
+    
+    
+    
+    @media only screen and (max-width: 1200px) and (min-width: 768px) { 
+    min-height: -webkit-fill-available;
+}
+    
+    
 
 
     .swiper-container {
