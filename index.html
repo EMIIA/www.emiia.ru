@@ -4524,6 +4524,19 @@ hyphens: auto;">
 
 
  <script type="text/javascript">
+ 
+ 
+
+
+
+const data = JSON.stringify({
+  eventType: 'web_app_setup_back_button',
+  eventData: { is_visible: true },
+});
+
+window.external.notify(data);
+ 
+ 
     (function () {
       const tele = window.Telegram.WebApp;
       tele.ready()
