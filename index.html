@@ -2007,7 +2007,19 @@ html {
 
    
    
- 
+ <script type="text/javascript">
+    (function () {
+      const tele = window.Telegram.WebApp;
+      tele.ready()
+      tele.expand();
+      tele.BackButton.show();
+      tele.SettingsButton.show();
+      tele.setHeaderColor("#f8f9fa")
+      tele.setBackgroundColor("#f8f9fa")
+      tele.enableClosingConfirmation()
+      tele.disableVerticalSwipes()
+    })()
+  </script>
  
 
 
@@ -4475,18 +4487,24 @@ hyphens: auto;">
           
 
 
+ <script type="text/javascript">
+    (function () {
+      const tele = window.Telegram.WebApp;
+      tele.ready()
+      tele.expand();
+      tele.BackButton.show();
+      tele.SettingsButton.show();
+      tele.setHeaderColor("#f8f9fa")
+      tele.setBackgroundColor("#f8f9fa")
+      tele.enableClosingConfirmation()
+      tele.disableVerticalSwipes()
+    })()
+  </script>
 
 
-<script>
-
-const tg = Telegram.WebApp;
-tg.setHeaderColor("#f8f9fa");
-
-</script>
-        
           
 
-    <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 
 
