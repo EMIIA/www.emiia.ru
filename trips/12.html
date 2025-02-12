@@ -172,11 +172,10 @@ body { margin: 0; padding: 0; }
     }
 
 
-146.8007914,38.5144044
+
 
     
-    drawTrips([{"vendor":0,"path":[[146.79023549212138,38.520812599182904],[146.79684078725086,38.511007770366746]],"timestamps":[100,400]},
-
+   drawTrips([{"vendor":0,"path":[[146.79023549212138,38.520812599182904],[146.79684078725086,38.511007770366746]],"timestamps":[80,300]},
 
 {"vendor":1,"path":[[139.9108139,35.439529],[139.8008987,35.5140027]],"timestamps":[120,500]},{"vendor":2,"path":[[139.9108139,35.439529],[139.8008987,35.5140027]],"timestamps":[200,500]}]);
 
@@ -267,7 +266,7 @@ body { margin: 0; padding: 0; }
       
 
       let time = 0;
-      const RATE_ANIMATION_FRAME = 50;
+      const RATE_ANIMATION_FRAME = 80;
       function animate() {
         time = (time + ANIMATION_SPEED/RATE_ANIMATION_FRAME) % (interval[1] - interval[0]);
         window.requestAnimationFrame(animate);
