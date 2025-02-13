@@ -132,9 +132,9 @@ body { margin: 0; padding: 0; }
   
   
   
-    const ANIMATION_SPEED = 50;
+    const ANIMATION_SPEED = 35;
 
-    const INITIAL_PAUSE = 1;
+    const INITIAL_PAUSE = 0;
     const colors = {0: [82, 126, 187], '1': [106, 168, 79], '2': [200, 180, 190]};
 
     const getColor = i => {
@@ -258,8 +258,8 @@ body { margin: 0; padding: 0; }
 
       
 
-      let time = 10;
-      const RATE_ANIMATION_FRAME = 10;
+      let time = 0;
+      const RATE_ANIMATION_FRAME = 12;
       function animate() {
         time = (time + ANIMATION_SPEED/RATE_ANIMATION_FRAME) % (interval[1] - interval[0]);
         window.requestAnimationFrame(animate);
