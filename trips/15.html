@@ -131,9 +131,9 @@ body { margin: 0; padding: 0; }
   
   
   
-    const ANIMATION_SPEED = 100;
+    const ANIMATION_SPEED = 10;
 
-    const INITIAL_PAUSE = 1;
+    const INITIAL_PAUSE = -10;
     const colors = {0: [82, 126, 187], '1': [23, 184, 190], '2': [200, 180, 190]};
 
     const getColor = i => {
@@ -235,8 +235,8 @@ body { margin: 0; padding: 0; }
         
         
     initialViewState: {
-    longitude: 146.783554066011,
-    latitude: 38.51136212631181,
+    longitude: 146.78757,
+    latitude: 38.51139,
     
 
    
@@ -257,7 +257,7 @@ body { margin: 0; padding: 0; }
       
 
       let time = 10;
-      const RATE_ANIMATION_FRAME = 40;
+      const RATE_ANIMATION_FRAME = 10;
       function animate() {
         time = (time + ANIMATION_SPEED/RATE_ANIMATION_FRAME) % (interval[1] - interval[0]);
         window.requestAnimationFrame(animate);
@@ -336,7 +336,7 @@ zoom: 15,
 
        
         
-        center: [146.783554066011,38.51136212631181],
+        center: [146.78757,38.51139],
 
 
         pitch: 0, // pitch in degrees
