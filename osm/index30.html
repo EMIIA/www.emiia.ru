@@ -293,7 +293,7 @@ title.onAdd = function (map) {
 
 
 // Export Button
-var showExport = '<a href="#" onclick="geojsonExport()" title="Export to GeoJSON File" type="button" class="btn btn-danger btn-sm text-light"><i class="fa fa-file-code-o" aria-hidden="true"></i> Export</a>';
+var showExport = '<a href="#" onclick="geojsonExport()" title="Export to GeoJSON File" type="button" class="btn btn-danger btn-sm text-light"><i class="fa fa-file-code-o" aria-hidden="true"></i> </a>';
 
 var showExportButton = new L.Control({position: "topright"});
 showExportButton.onAdd = function (map) {
@@ -337,40 +337,7 @@ map.zoomControl.setPosition(false);
 
 
 
- <script>
-
-map.on('load', function() {
-map.addSource('floorplan', {
-// GeoJSON Data source used in vector tiles, documented at
-// https://gist.github.com/ryanbaumann/a7d970386ce59d11c16278b90dde094d
-'type': 'geojson',
-'data': 'https://maplibre.org/maplibre-gl-js-docs/assets/indoor-3d-map.geojson'
-});
-map.addLayer({
-'id': 'room-extrusion',
-'type': 'fill-extrusion',
-'source': 'floorplan',
-'paint': {
-// See the MapLibre Style Specification for details on data expressions.
-// https://maplibre.org/maplibre-gl-js-docs/style-spec/expressions/
  
-// Get the fill-extrusion-color from the source 'color' property.
-'fill-extrusion-color': ['get', 'color'],
- 
-// Get fill-extrusion-height from the source 'height' property.
-'fill-extrusion-height': ['get', 'height'],
- 
-// Get fill-extrusion-base from the source 'base_height' property.
-'fill-extrusion-base': ['get', 'base_height'],
- 
-// Make extrusions slightly opaque for see through indoor walls.
-'fill-extrusion-opacity': 0.5
-}
-});
-});
-
- </script>
-
 </body>
 </html>
 
