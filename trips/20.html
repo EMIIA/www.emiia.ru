@@ -50,7 +50,7 @@
   
   <link rel="manifest" href="/trips.webmanifest">
   
-<link rel="manifest" href="https://luman.emiia.ai/trips.webmanifest">
+<link rel="manifest" href="https://luman.emiia.ru/trips.webmanifest">
 
 
 
@@ -161,7 +161,30 @@ body { margin: 0; padding: 0; }
 
 
 
-<div style="position: fixed; bottom: 0.3em; left: 2.3em; z-index: +20000;">
+<style>
+  .custom-element {
+    position: fixed;
+    z-index: 20000;
+    bottom: var(--mobile-bottom);
+    left: 2em;
+  }
+
+  @media (min-width: 768px) {
+    .custom-element {
+      bottom: var(--desktop-bottom);
+      left: 3em;
+    }
+  }
+</style>
+
+
+
+
+
+
+
+<div class="custom-element" style="--mobile-bottom: 0.3em; --desktop-bottom: 2em;">
+
 
   <a href="https://www.emiia.ai" title="EMIIA.AI">
 
