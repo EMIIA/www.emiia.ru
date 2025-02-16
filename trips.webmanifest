@@ -1,0 +1,15 @@
+{
+  "background_color": "#f8f9fa",
+  "description": "EMIIA.AI TRIPS",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "/192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+    }
+  ],
+  "name": "EMIIA.AI TRIPS",
+  "short_name": "EMIIA.AI TRIPS",
+  "start_url": "/trips/20.html"
+}
