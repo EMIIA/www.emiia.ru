@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Play TETRIS</title>
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#C2FFAE">
@@ -31,100 +31,129 @@
     <link rel="canonical" href="https://ytiurin.github.com/tetris" data-pjax-transient>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
+            padding: 0;
             background-color: #000;
             color: #C2FFAE;
             font-family: DejaVuSansMono, monospace;
             font-size: 12px;
             line-height: 1.2;
-            overflow: hidden;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
+            align-items: center;
         }
 
         #loading {
-            margin: 20px;
+            padding: 20px;
             text-align: center;
         }
 
         #container {
             display: none;
-            flex: 1;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 10px;
-            box-sizing: border-box;
             width: 100%;
-            max-width: 100vw;
-            overflow-y: auto;
+            max-width: 800px;
+            padding: 10px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         #game {
-            margin: 0 auto;
             width: 100%;
-            max-width: 320px; /* Ограничение ширины игрового поля */
+            max-width: 320px;
+            margin: 0 auto;
         }
 
         .controls {
+            width: 100%;
+            max-width: 320px;
+            margin: 10px auto;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            padding: 10px 0;
+            justify-content: space-between;
+            gap: 5px;
         }
 
         .controls button {
             flex: 1;
-            min-width: 70px;
-            padding: 15px;
-            font-size: 14px;
+            padding: 12px;
             background-color: #333;
             color: #C2FFAE;
-            border: 1px solid #C2FFAE;
-            border-radius: 5px;
+            border: none;
+            border-radius: 3px;
+            font-size: 12px;
             cursor: pointer;
-            touch-action: manipulation; /* Предотвращает масштабирование при касании */
+            transition: background-color 0.2s;
         }
 
+        .controls button:hover,
         .controls button:active {
             background-color: #555;
         }
 
-        #userboard, #leaderboard {
+        .controls.top {
+            justify-content: center;
+        }
+
+        #userboard,
+        #leaderboard {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.9);
-            padding: 20px;
-            border: 1px solid #C2FFAE;
+            background: rgba(0, 0, 0, 0.95);
+            padding: 15px;
             width: 90%;
             max-width: 300px;
-            box-sizing: border-box;
-            text-align: left;
+            border-radius: 5px;
+            z-index: 10;
         }
 
         #name-input {
             width: 100%;
             padding: 5px;
             margin: 5px 0;
-            box-sizing: border-box;
             background: #222;
             color: #C2FFAE;
-            border: 1px solid #C2FFAE;
+            border: none;
+            border-radius: 3px;
         }
 
-        /* Медиа-запросы для адаптации */
-        @media (max-width: 600px) {
-            body {
-                font-size: 10px;
+        #userboard div[style],
+        #leaderboard div[style] {
+            margin-top: 10px;
+        }
+
+        #userboard button,
+        #leaderboard button {
+            padding: 8px 12px;
+            background-color: #333;
+            color: #C2FFAE;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        #userboard button:hover,
+        #leaderboard button:hover {
+            background-color: #555;
+        }
+
+        @media (max-width: 400px) {
+            .controls {
+                flex-wrap: wrap;
             }
 
             .controls button {
                 padding: 10px;
-                font-size: 12px;
+                font-size: 10px;
             }
 
             #game {
@@ -132,33 +161,33 @@
             }
         }
 
-        @media (orientation: landscape) {
+        @media (orientation: landscape) and (max-height: 500px) {
             #container {
                 flex-direction: row;
+                justify-content: space-around;
                 align-items: center;
             }
 
             .controls {
                 flex-direction: column;
-                padding: 0 10px;
+                width: auto;
+                max-width: 100px;
             }
         }
     </style>
 </head>
 <body>
-    <div id="loading">LOADING..._</div>
+    <div id="loading">LOADING...</div>
     <div id="container">
         <div id="game"></div>
-        <div class="controls left">
+        <div class="controls">
             <button id="control-left" data-key="37">LEFT</button>
             <button id="control-rotate" data-key="38">ROTATE</button>
-        </div>
-        <div class="controls right">
-            <button id="control-pause" data-key="80">PAUSE</button>
             <button id="control-right" data-key="39">RIGHT</button>
             <button id="control-drop" data-key="32">DROP</button>
         </div>
         <div class="controls top">
+            <button id="control-pause" data-key="80">PAUSE</button>
             <button id="mute-sound">MUTE SOUND</button>
         </div>
         <div id="userboard">
@@ -166,8 +195,8 @@
             <div id="your-best-score"></div>
             <br><br>
             YOUR NAME: <input type="text" id="name-input">
-            <br><br><br>
-            <div style="text-align:right">
+            <br><br>
+            <div style="text-align: right;">
                 <button id="userboard-close">CANCEL</button>
                 <button id="userboard-send">SEND</button>
             </div>
@@ -175,21 +204,19 @@
         <div id="leaderboard">
             MONTH LEADERS:<br><br>
             <div id="score-leaders"></div>
-            <div style="text-align:center">
+            <div style="text-align: center;">
                 <button id="leaderboard-close">CLOSE</button>
             </div>
         </div>
         <div>
-            <a class="" href="" data-icon="" data-count-href="" data-count-api="" data-count-aria-label="" aria-label=""></a>
-            <br><br><br>
             <span id="leaderboard-link" class="link"></span>
             <a target="_blank" href="" rel="noopener"></a>
         </div>
     </div>
 
-    <script async defer="defer" type="text/javascript" src="./public/all.js"></script>
+    <script async defer type="text/javascript" src="./public/all.js"></script>
     <script>navigator.serviceWorker.register("./sw.js", {scope: "./"})</script>
-    <script async defer="defer" src="https://buttons.github.io/buttons.js"></script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script>
         window.twttr = (function(t,e,r){var n,i=t.getElementsByTagName(e)[0],w=window.twttr||{};return t.getElementById(r)?w:(n=t.createElement(e),n.id=r,n.src="https://platform.twitter.com/widgets.js",i.parentNode.insertBefore(n,i),w._e=[],w.ready=function(t){w._e.push(t)},w)}(document,"script","twitter-wjs"));
     </script>
