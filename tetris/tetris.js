@@ -27,7 +27,6 @@ let grid = Array(gridHeight).fill().map(() => Array(gridWidth).fill(0));
 let currentPiece, currentX, currentY;
 let score = 0;
 let gameOver = false;
-let paused = false; // Добавлено состояние паузы
 
 function newPiece() {
   const index = Math.floor(Math.random() * pieces.length);
@@ -103,29 +102,13 @@ function draw() {
     }
   }
 
-  // Добавляем прозрачный текст с инструкциями
+  // Добавлен только этот текст с прозрачностью
   ctx.font = '20px Arial';
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.5)'; // Прозрачность через rgba
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.5)'; // Прозрачный текст
   ctx.fillText('UP ARROW: ROTATE', 10, canvas.height - 100);
   ctx.fillText('DOWN ARROW: SOFT DROP', 10, canvas.height - 75);
   ctx.fillText('SPACEBAR: HARD DROP', 10, canvas.height - 50);
   ctx.fillText('ESC, P: PAUSE', 10, canvas.height - 25);
-
-  // Отображение счета
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-  ctx.fillText(`Score: ${score}`, 10, 20);
-
-  // Сообщение о паузе
-  if (paused) {
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-    ctx.fillText('PAUSED', canvas.width / 2 - 40, canvas.height / 2);
-  }
-
-  // Сообщение об окончании игры
-  if (gameOver) {
-    ctx.fillStyle = 'rgba(255, 0, 0, 0.8)';
-    ctx.fillText('GAME OVER', canvas.width / 2 - 50, canvas.height / 2);
-  }
 }
 
 function drop() {
@@ -148,8 +131,8 @@ function hardDrop() {
 }
 
 document.addEventListener('keydown', e => {
-  if (gameOver || paused) {
-    if (gameOver && e.key === 'Enter') {
+  if (gameOver) {
+    if (e.key === 'Enter') {
       grid = Array(gridHeight).fill().map(() => Array(gridWidth).fill(0));
       score = 0;
       gameOver = false;
@@ -174,18 +157,11 @@ document.addEventListener('keydown', e => {
     case ' ':
       hardDrop();
       break;
-    case 'Escape':
-    case 'p':
-    case 'P':
-      paused = !paused; // Переключение состояния паузы
-      break;
   }
 });
 
 function update() {
-  if (!gameOver && !paused) {
-    drop();
-  }
+  if (!gameOver) drop();
   draw();
   requestAnimationFrame(update);
 }
