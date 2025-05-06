@@ -2026,7 +2026,7 @@ html {
         .logo-container {
             display: block;
             text-align: left;
-            padding: 250px 0 0 0; /* Десктопный отступ */
+            padding: 350px 0 0 0; /* Десктопный отступ */
             margin: 0;
             position: relative;
         }
@@ -2381,7 +2381,20 @@ href="https://www.emiia.ru/preorder"
     
     
     
-    
+      <style>
+    @media (max-width: 767px) {
+      .responsive-img {
+        max-width: 180vw !important; /* Размер для мобильных */
+        max-height: 180vw !important;
+      }
+    }
+    @media (min-width: 768px) {
+      .responsive-img {
+        max-width: 120vh !important; /* Размер для десктопа */
+        max-height: 120vh !important;
+      }
+    }
+  </style>
     
 
   
@@ -2405,18 +2418,24 @@ href="https://www.emiia.ru/preorder"
 
 
 
-<a target="_self" style="cursor: pointer; text-decoration: none; padding:0px; color:#3d85c6;">
+
+
+
+
+
+
+
+
+<a target="_self" style="cursor: pointer; text-decoration: none; padding: 0px; color: #3d85c6;">
     <img src="https://emiia.ru/emiia_ai_iot_gateway_4.svg" 
          alt="ЭМИИА ИИ — машинное радио зрение" 
          title="ЭМИИА ИИ — машинное радиозрение" 
-         style="display: block; 
-                margin: 0 auto;
-                max-width: 100%;
-                max-height: 120vh;
-                width: auto;
-                height: auto;
-                object-fit: contain;">
-</a>
+         class="responsive-img" 
+         style="display: block; margin: 0 auto; object-fit: contain;">
+  </a>
+
+
+
 
 
 
