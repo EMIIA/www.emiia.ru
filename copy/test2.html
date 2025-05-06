@@ -2020,32 +2020,27 @@ html {
 
 
 <style>
+    @media (max-width: 768px) {
+      .logo-container {
+        padding-top: 300px !important; / Для низких экранов (меньшая высота) /
+        text-align: left;
+        width: 100%;
+      }
+      / Для высоких экранов (например, iPhone и подобных) /
+      @media (max-width: 768px) and (min-height: 800px) {
         .logo-container {
-            display: block;
-            text-align: left;
-            padding: 350px 0 0 0; /* Десктопный отступ */
-            margin: 0;
-            position: relative;
+          padding-top: 450px !important; / Для высоких экранов (большая высота) /
         }
-
-        .logo-link {
-            display: inline-block;
-            text-decoration: none;
-        }
-
-        @media (max-width: 768px) {
-            .logo-container {
-                padding-top: 350px !important; /* Мобильный отступ */
-                text-align: left;
-                width: 100%;
-            }
-            
-            .logo-link {
-                display: block;
-                margin: 0 auto;
-            }
-        }
-    </style>
+      }
+    }
+    @media (min-width: 769px) {
+      .logo-container {
+        padding-top: 450px !important; / Десктопный отступ (пример) /
+        text-align: center; / Пример для десктопа /
+        width: 100%;
+      }
+    }
+  </style>
 
 
 
