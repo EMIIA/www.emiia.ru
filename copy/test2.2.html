@@ -2386,6 +2386,170 @@ color="#3d85c6"
 
 
 
+<style>
+      /* Регулируемое расстояние между ссылками */
+.custom-link-spacing {
+    gap: 100px; /* Настройте расстояние */
+}
+
+/* Выравнивание заголовков */
+@media (max-width: 767.98px) {
+    .card-title {
+        text-align: left;
+    }
+}
+@media (min-width: 768px) {
+    .card-title {
+        text-align: center;
+    }
+}
+
+/* Регулируемые параметры */
+:root {
+    --link-color: #3d85c6; /* Цвет ссылок */
+    --link-hover-color: #2a5d8f; /* Цвет ссылок при наведении */
+    --text-color: #333333; /* Цвет текста карточки */
+    --title-font-size: 1.5rem; /* Размер шрифта заголовка */
+    --text-font-size: 1rem; /* Размер шрифта текста */
+    --title-font-weight: 700; /* Начертание заголовка (700 - жирное) */
+    --text-font-weight: 300; /* Начертание текста (400 - нормальное) */
+    --link-font-size: 1.1rem; /* Размер шрифта ссылок внизу */
+    --link-font-weight: 300; /* Начертание ссылок внизу (400 - нормальное) */
+    --inline-link-font-size: 1.1rem; /* Размер шрифта встроенных ссылок */
+    --inline-link-font-weight: 400; /* Начертание встроенных ссылок */
+}
+
+/* Стили для ссылок внизу карточек */
+.custom-link {
+    color: var(--link-color);
+    text-decoration: none;
+    font-size: var(--link-font-size);
+    font-weight: var(--link-font-weight);
+    font-size: 1.1rem;
+font-weight: 400;
+}
+.custom-link:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+}
+
+/* Стили для встроенных ссылок в тексте */
+.inline-link {
+    color: var(--link-color);
+    text-decoration: none;
+    font-size: var(--inline-link-font-size);
+    font-weight: var(--inline-link-font-weight);
+}
+.inline-link:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+}
+
+/* Стили для текста и заголовков */
+.card-text, .card-title {
+    color: var(--text-color);
+}
+.card-title {
+    font-size: var(--title-font-size);
+    font-weight: var(--title-font-weight);
+}
+.card-text {
+    font-size: var(--text-font-size);
+    font-weight: var(--text-font-weight);
+}
+
+/* Стили для SVG */
+.inline-svg {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+/* Прозрачный фон и без обводки */
+.card {
+    background-color: transparent;
+    border: none;
+}
+.card-footer {
+    background-color: transparent;
+    border: none;
+}
+
+    </style>
+
+
+<div class="container my-5">
+    <div class="row">
+        <!-- Левый блок -->
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Заголовок 1</h5>
+                    <p class="card-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                        <a href="#" class="inline-link">Подробнее здесь<svg class="inline-svg" xmlns="http://www.w3.org/2000/svg" width="10.283" height="15.283" viewBox="0 0 5.69 6">
+                            <path d="M2.282 5.26l2.250-2.231L2.292.902" 
+                                  fill="none" 
+                                  stroke="currentColor" 
+                                  color="var(--link-color)"
+                                  stroke-width=".9" 
+                                  stroke-linecap="round" 
+                                  stroke-linejoin="round"/>
+                        </svg></a>. 
+                        Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        <br/>
+<br/>
+                    </p>
+                </div>
+                <div class="card-footer text-center d-flex justify-content-center custom-link-spacing">
+                    <a href="#" class="custom-link">Ссылка <svg class="inline-svg" xmlns="http://www.w3.org/2000/svg" width="10.283" height="15.283" viewBox="0 0 5.69 6">
+                            <path d="M2.282 5.26l2.250-2.231L2.292.902" 
+                                  fill="none" 
+                                  stroke="currentColor" 
+                                  color="var(--link-color)"
+                                  stroke-width=".9" 
+                                  stroke-linecap="round" 
+                                  stroke-linejoin="round"/>
+                        </svg></a>
+                    <a href="#" class="custom-link">Ссылка <svg class="inline-svg" xmlns="http://www.w3.org/2000/svg" width="10.283" height="15.283" viewBox="0 0 5.69 6">
+                            <path d="M2.282 5.26l2.250-2.231L2.292.902" 
+                                  fill="none" 
+                                  stroke="currentColor" 
+                                  color="var(--link-color)"
+                                  stroke-width=".9" 
+                                  stroke-linecap="round" 
+                                  stroke-linejoin="round"/>
+                        </svg></a>
+                </div>
+            </div>
+        </div>
+        <!-- Правый блок -->
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Заголовок 2</h5>
+                    <img src="https://emiia.ru/emiia_ai_iot_gateway_4.svg" class="card-img-top" alt="Изображение">
+                </div>
+                <div class="card-footer text-center">
+                    <a href="#" class="custom-link">Ссылка <svg class="inline-svg" xmlns="http://www.w3.org/2000/svg" width="10.283" height="15.283" viewBox="0 0 5.69 6">
+                            <path d="M2.282 5.26l2.250-2.231L2.292.902" 
+                                  fill="none" 
+                                  stroke="currentColor" 
+                                  color="var(--link-color)"
+                                  stroke-width=".9" 
+                                  stroke-linecap="round" 
+                                  stroke-linejoin="round"/>
+                        </svg></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
 
 
 
