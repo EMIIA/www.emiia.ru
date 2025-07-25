@@ -3,21 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Инфографика: Гонка Инноваций в R&D</title>
+    <title>Инновационная гонка: R&D инвестиции</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #8b5cf6;
+            --accent: #06b6d4;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --glass: rgba(255, 255, 255, 0.15);
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #1a2a6c, #2c3e50);
-            color: #333;
-            padding: 20px;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #334155;
             min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+            overflow-x: hidden;
         }
         
         .container {
@@ -25,56 +40,89 @@
             margin: 0 auto;
         }
         
+        /* Header */
         .header {
             text-align: center;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 40px;
+            padding: 30px 20px;
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+            z-index: -1;
         }
         
         h1 {
-            color: #1a2a6c;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            color: var(--light);
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
         
         .subtitle {
-            color: #2c3e50;
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: #cbd5e1;
             max-width: 800px;
             margin: 0 auto;
-            line-height: 1.6;
         }
         
+        /* Infographic Sections */
         .infographic-container {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 25px;
+            gap: 30px;
             margin-bottom: 40px;
         }
         
         .infographic-section {
-            background: rgba(255, 255, 255, 0.92);
-            border-radius: 15px;
+            background: var(--card-bg);
+            border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
         .infographic-section:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
         
         .section-title {
-            font-size: 1.8rem;
-            color: #1a2a6c;
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1.4rem, 3vw, 1.8rem);
+            color: var(--dark);
             margin-bottom: 25px;
             text-align: center;
+            position: relative;
             padding-bottom: 15px;
-            border-bottom: 3px solid #3498db;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            border-radius: 2px;
         }
         
         /* Block 1: Giants Visualization */
@@ -93,14 +141,20 @@
             flex-direction: column;
             align-items: center;
             position: relative;
+            transition: transform 0.3s ease;
+        }
+        
+        .giant-bar:hover {
+            transform: translateY(-10px);
         }
         
         .bar {
             width: 100%;
-            border-radius: 8px 8px 0 0;
+            border-radius: 12px 12px 0 0;
             position: relative;
             transition: height 1s ease-out;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            box-shadow: var(--shadow);
+            background: linear-gradient(to top, var(--primary), var(--accent));
         }
         
         .bar-value {
@@ -108,31 +162,38 @@
             top: -40px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
+            background: var(--dark);
             color: white;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 1.1rem;
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         
         .company-logo {
-            height: 50px;
-            width: 50px;
-            border-radius: 50%;
+            height: 60px;
+            width: 60px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: 10px;
-            font-size: 1.5rem;
+            margin-top: 20px;
+            font-size: 1.8rem;
             color: white;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .company-logo:hover {
+            transform: scale(1.1);
         }
         
         .company-name {
             margin-top: 15px;
-            font-weight: bold;
-            font-size: 1.2rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-align: center;
         }
         
         .average-box {
@@ -140,20 +201,24 @@
             top: 50%;
             right: 0;
             transform: translateY(-50%);
-            background: #f8f9fa;
-            border: 2px dashed #3498db;
-            border-radius: 10px;
-            padding: 15px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
             width: 250px;
             text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
         
         .average-value {
             font-size: 1.8rem;
-            font-weight: bold;
-            color: #3498db;
+            font-weight: 800;
+            color: var(--primary);
             margin-top: 5px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         /* Block 2: Threshold Visualization */
@@ -167,61 +232,84 @@
         .shield {
             width: 280px;
             height: 320px;
-            background: linear-gradient(135deg, #1a2a6c, #2c3e50);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             border-radius: 50%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border: 8px solid #3498db;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border: 12px solid var(--accent);
             color: white;
             margin-bottom: 30px;
         }
         
         .shield-title {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             text-align: center;
             margin-bottom: 30px;
-            font-weight: bold;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            padding: 0 20px;
         }
         
         .shield-item {
             display: flex;
             align-items: center;
-            margin: 15px 0;
-            font-size: 1.3rem;
+            margin: 18px 0;
+            font-size: 1.2rem;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 12px 20px;
+            border-radius: 50px;
+            width: 90%;
+            backdrop-filter: blur(5px);
         }
         
         .shield-icon {
-            font-size: 2rem;
+            font-size: 1.8rem;
             margin-right: 15px;
-            color: #3498db;
+            color: var(--accent);
         }
         
         .investment-cycle {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 20px;
+            margin-top: 25px;
             font-size: 1.2rem;
-            font-weight: bold;
+            font-weight: 600;
+            flex-wrap: wrap;
+            gap: 10px;
         }
         
         .cycle-step {
-            background: #3498db;
+            background: linear-gradient(to right, var(--primary), var(--accent));
             color: white;
             padding: 12px 25px;
-            border-radius: 30px;
-            margin: 0 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border-radius: 50px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .cycle-step:hover {
+            transform: scale(1.05);
         }
         
         .cycle-arrow {
             font-size: 2rem;
-            color: #3498db;
+            color: var(--primary);
+        }
+        
+        .threshold-text {
+            text-align: center;
+            max-width: 600px;
+            margin-top: 25px;
+            font-size: 1.1rem;
+            background: rgba(37, 99, 235, 0.05);
+            padding: 20px;
+            border-radius: 16px;
+            border-left: 4px solid var(--primary);
         }
         
         /* Block 3: OpenAI vs Meta */
@@ -230,15 +318,61 @@
             justify-content: space-between;
             gap: 30px;
             margin-top: 20px;
+            position: relative;
+        }
+        
+        .barrier {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 80%;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary), var(--accent), var(--primary));
+            border-radius: 2px;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+        }
+        
+        .barrier::after {
+            content: "Информационный/Экономический Барьер";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(90deg);
+            white-space: nowrap;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark);
+            background: var(--light);
+            padding: 5px 15px;
+            border-radius: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         
         .company-card {
             flex: 1;
-            padding: 25px;
-            border-radius: 15px;
+            padding: 30px;
+            border-radius: 20px;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .company-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.01));
+            backdrop-filter: blur(5px);
+            z-index: -1;
+            border-radius: 20px;
         }
         
         .openai-card {
@@ -260,16 +394,25 @@
         .company-icon {
             font-size: 2.5rem;
             margin-right: 15px;
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         
         .company-title {
             font-size: 1.8rem;
-            font-weight: bold;
+            font-weight: 700;
         }
         
         .company-subtitle {
-            font-size: 1.1rem;
+            font-size: 1rem;
             opacity: 0.9;
+            margin-top: 5px;
         }
         
         .stats-container {
@@ -280,13 +423,14 @@
             display: flex;
             justify-content: space-between;
             padding: 15px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             font-size: 1.1rem;
         }
         
         .stat-value {
-            font-weight: bold;
-            font-size: 1.3rem;
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-align: right;
         }
         
         .negative {
@@ -297,123 +441,140 @@
             color: #a9ffa9;
         }
         
-        .barrier {
-            position: relative;
-            height: 5px;
-            background: repeating-linear-gradient(45deg, #fff, #fff 10px, #3498db 10px, #3498db 20px);
-            margin: 30px 0;
-            text-align: center;
-            font-weight: bold;
-            color: white;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-            padding: 8px 0;
-        }
-        
-        .barrier::after {
-            content: "Информационный/Экономический Барьер";
-            position: absolute;
-            top: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            white-space: nowrap;
-            font-size: 1.1rem;
-        }
-        
         .flow-arrow {
             position: absolute;
-            font-size: 1.5rem;
+            font-size: 2rem;
             color: #ff6b6b;
-        }
-        
-        .flow-arrow.right {
-            top: 50%;
-            right: -30px;
-            transform: translateY(-50%);
-        }
-        
-        .flow-arrow.left {
-            top: 50%;
-            left: -30px;
-            transform: translateY(-50%) rotate(180deg);
+            z-index: 10;
         }
         
         .flow-label {
             position: absolute;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0, 0, 0, 0.7);
             color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
+            padding: 8px 15px;
+            border-radius: 30px;
             font-size: 0.9rem;
             text-align: center;
             max-width: 150px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .conclusion {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            padding: 25px;
-            margin-top: 30px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            border-left: 5px solid #3498db;
-        }
-        
-        .conclusion h2 {
-            color: #1a2a6c;
-            margin-bottom: 15px;
-        }
-        
-        .conclusion p {
-            line-height: 1.8;
+        .goal-box {
+            margin-top: auto;
+            text-align: center;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
+            font-weight: 600;
             font-size: 1.1rem;
+            backdrop-filter: blur(5px);
+        }
+        
+        /* Key Takeaways */
+        .key-takeaways {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 35px;
+            margin-top: 30px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .key-takeaways h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--dark);
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .key-takeaways h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--secondary), var(--accent));
+            border-radius: 2px;
+        }
+        
+        .takeaway-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .takeaway-item {
+            background: rgba(37, 99, 235, 0.05);
+            padding: 25px;
+            border-radius: 16px;
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .takeaway-item:hover {
+            transform: translateY(-5px);
+            background: rgba(37, 99, 235, 0.08);
+        }
+        
+        .takeaway-item h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             margin-bottom: 15px;
+            color: var(--dark);
+            font-size: 1.2rem;
         }
         
-        .highlight {
-            background: linear-gradient(120deg, rgba(52, 152, 219, 0.2), rgba(26, 42, 108, 0.2));
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-weight: bold;
+        .takeaway-item p {
+            color: #475569;
+            font-size: 1rem;
         }
         
+        /* Mobile Optimizations */
         @media (max-width: 900px) {
-            .comparison-container {
-                flex-direction: column;
-            }
-            
             .giants-container {
-                height: 300px;
-            }
-            
-            .average-box {
-                position: static;
-                transform: none;
-                margin-top: 30px;
-                width: 100%;
-            }
-        }
-        
-        @media (max-width: 600px) {
-            .infographic-section {
-                padding: 20px 15px;
-            }
-            
-            .section-title {
-                font-size: 1.5rem;
-            }
-            
-            .giants-container {
-                flex-direction: column;
-                height: auto;
-                align-items: center;
+                height: 350px;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 30px;
+                align-items: flex-end;
             }
             
             .giant-bar {
-                width: 80%;
-                margin-bottom: 30px;
+                width: 40%;
+                max-width: 160px;
+                margin-bottom: 20px;
             }
             
-            .bar {
-                height: 150px !important;
+            .average-box {
+                position: relative;
+                transform: none;
+                margin: 30px auto 0;
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .shield {
+                width: 240px;
+                height: 270px;
+            }
+            
+            .shield-title {
+                font-size: 1.3rem;
+            }
+            
+            .shield-item {
+                font-size: 1rem;
+                padding: 10px 15px;
             }
             
             .investment-cycle {
@@ -422,61 +583,179 @@
             
             .cycle-arrow {
                 transform: rotate(90deg);
-                margin: 10px 0;
+                margin: 5px 0;
             }
+            
+            .comparison-container {
+                flex-direction: column;
+                gap: 50px;
+            }
+            
+            .barrier {
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) rotate(90deg);
+                height: 4px;
+                width: 90%;
+            }
+            
+            .barrier::after {
+                transform: translate(-50%, -50%);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .infographic-section {
+                padding: 25px 15px;
+            }
+            
+            .giants-container {
+                height: auto;
+                flex-direction: column;
+                align-items: center;
+                gap: 40px;
+            }
+            
+            .giant-bar {
+                width: 80%;
+                max-width: 250px;
+                flex-direction: row;
+                align-items: flex-end;
+                gap: 20px;
+            }
+            
+            .bar {
+                height: 150px !important;
+                width: 60px;
+            }
+            
+            .company-logo {
+                margin-top: 0;
+                margin-bottom: 15px;
+            }
+            
+            .bar-value {
+                top: auto;
+                bottom: calc(100% + 10px);
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .company-info {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 10px;
+            }
+            
+            .threshold-container {
+                padding: 10px;
+            }
+            
+            .shield {
+                width: 200px;
+                height: 230px;
+            }
+            
+            .shield-title {
+                font-size: 1.1rem;
+                margin-bottom: 15px;
+            }
+            
+            .shield-item {
+                font-size: 0.9rem;
+                margin: 12px 0;
+            }
+            
+            .company-card {
+                padding: 25px 20px;
+            }
+            
+            .company-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .company-icon {
+                margin-right: 0;
+            }
+            
+            .takeaway-list {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 4s ease-in-out infinite;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>Гонка Инноваций: Инвестиции в R&D и Барьеры Входа</h1>
-            <p class="subtitle">Анализ расходов на исследования и разработки ведущих технологических компаний и их стратегий в конкурентной борьбе</p>
+        <div class="header floating">
+            <h1>Гонка Инноваций: Инвестиции в R&D</h1>
+            <p class="subtitle">Анализ расходов на исследования и разработки технологических гигантов и динамики конкурентной борьбы на рынке</p>
         </div>
         
         <div class="infographic-container">
             <!-- Block 1: Giants -->
             <div class="infographic-section">
-                <h2 class="section-title">Гиганты Инвестируют (Современный Ландшафт R&D)</h2>
+                <h2 class="section-title">Инвестиции Технологических Гигантов</h2>
                 <div class="giants-container">
                     <div class="giant-bar">
                         <div class="bar" style="height: 340px; background: linear-gradient(to top, #FF9900, #ffad33);">
                             <div class="bar-value">$85.6 млрд</div>
                         </div>
-                        <div class="company-logo" style="background: linear-gradient(to right, #FF9900, #ffad33);">
-                            <i class="fab fa-amazon"></i>
+                        <div class="company-info">
+                            <div class="company-logo" style="background: linear-gradient(to right, #FF9900, #ffad33);">
+                                <i class="fab fa-amazon"></i>
+                            </div>
+                            <div class="company-name">Amazon</div>
                         </div>
-                        <div class="company-name">Amazon</div>
                     </div>
                     
                     <div class="giant-bar">
                         <div class="bar" style="height: 220px; background: linear-gradient(to top, #4285F4, #5a95f5);">
                             <div class="bar-value">$45.4 млрд</div>
                         </div>
-                        <div class="company-logo" style="background: linear-gradient(to right, #4285F4, #34A853, #FBBC05, #EA4335);">
-                            <i class="fab fa-google"></i>
+                        <div class="company-info">
+                            <div class="company-logo" style="background: linear-gradient(to right, #4285F4, #34A853, #FBBC05, #EA4335);">
+                                <i class="fab fa-google"></i>
+                            </div>
+                            <div class="company-name">Alphabet</div>
                         </div>
-                        <div class="company-name">Alphabet (Google)</div>
                     </div>
                     
                     <div class="giant-bar">
                         <div class="bar" style="height: 190px; background: linear-gradient(to top, #1877F2, #3d8df5);">
                             <div class="bar-value">$38.5 млрд</div>
                         </div>
-                        <div class="company-logo" style="background: linear-gradient(to right, #1877F2, #3d8df5);">
-                            <i class="fab fa-meta"></i>
+                        <div class="company-info">
+                            <div class="company-logo" style="background: linear-gradient(to right, #1877F2, #3d8df5);">
+                                <i class="fab fa-meta"></i>
+                            </div>
+                            <div class="company-name">Meta</div>
                         </div>
-                        <div class="company-name">Meta</div>
                     </div>
                     
                     <div class="giant-bar">
                         <div class="bar" style="height: 150px; background: linear-gradient(to top, #A2AAAD, #b8bec0);">
                             <div class="bar-value">$30 млрд</div>
                         </div>
-                        <div class="company-logo" style="background: linear-gradient(to right, #A2AAAD, #b8bec0);">
-                            <i class="fab fa-apple"></i>
+                        <div class="company-info">
+                            <div class="company-logo" style="background: linear-gradient(to right, #A2AAAD, #b8bec0);">
+                                <i class="fab fa-apple"></i>
+                            </div>
+                            <div class="company-name">Apple</div>
                         </div>
-                        <div class="company-name">Apple</div>
                     </div>
                     
                     <div class="average-box">
@@ -491,7 +770,7 @@
             <div class="infographic-section">
                 <h2 class="section-title">Минимальный Порог для Глобальной Игры</h2>
                 <div class="threshold-container">
-                    <div class="shield">
+                    <div class="shield floating">
                         <div class="shield-title">Минимальный Годовой Порог</div>
                         <div class="shield-item">
                             <div class="shield-icon"><i class="fas fa-dollar-sign"></i></div>
@@ -511,16 +790,16 @@
                         <div class="cycle-step">Инвестиции</div>
                     </div>
                     
-                    <div style="text-align: center; max-width: 600px; margin-top: 20px; font-size: 1.1rem;">
-        Чтобы войти в цикл <strong>Инвестиции → Инновации → Инвестиции</strong> на глобальном рынке, 
-        предприятию необходимо выделять минимум $1 млрд в год на R&D, что требует чистой прибыли не менее $3 млрд.
-    </div>
+                    <div class="threshold-text">
+                        Чтобы войти в цикл <strong>Инвестиции → Инновации → Инвестиции</strong> на глобальном рынке, 
+                        предприятию необходимо выделять минимум $1 млрд в год на R&D, что требует чистой прибыли не менее $3 млрд.
+                    </div>
                 </div>
             </div>
             
             <!-- Block 3: OpenAI vs Meta -->
             <div class="infographic-section">
-                <h2 class="section-title">OpenAI: Стартап в Зоне Риска vs Угроза для Meta</h2>
+                <h2 class="section-title">OpenAI vs Meta: Гонка за Инновациями</h2>
                 <div class="comparison-container">
                     <div class="company-card openai-card">
                         <div class="company-header">
@@ -552,16 +831,12 @@
                             </div>
                         </div>
                         
-                        <div style="margin-top: auto; text-align: center; padding: 15px; background: rgba(0,0,0,0.1); border-radius: 10px;">
+                        <div class="goal-box">
                             <i class="fas fa-bullseye"></i> Цель 2027: Достижение точки стабильности
                         </div>
                     </div>
                     
-                    <div class="barrier">
-                        <div class="flow-arrow right">➔</div>
-                        <div class="flow-label" style="top: -70px; left: 10px;">Утечка кадров и технологий</div>
-                        <div class="flow-label" style="top: -70px; right: 10px;">Угроза технологического размывания</div>
-                    </div>
+                    <div class="barrier"></div>
                     
                     <div class="company-card meta-card">
                         <div class="company-header">
@@ -577,7 +852,7 @@
                         <div class="stats-container">
                             <div class="stat-item">
                                 <div>Действия:</div>
-                                <div class="stat-value">Выкуп специалистов OpenAI</div>
+                                <div class="stat-value">Выкуп специалистов</div>
                             </div>
                             <div class="stat-item">
                                 <div>Стратегия:</div>
@@ -589,11 +864,11 @@
                             </div>
                             <div class="stat-item">
                                 <div>Риск:</div>
-                                <div class="stat-value">Проедание бюджета → Разрыв цикла</div>
+                                <div class="stat-value">Разрыв инновационного цикла</div>
                             </div>
                         </div>
                         
-                        <div style="margin-top: auto; text-align: center; padding: 15px; background: rgba(0,0,0,0.1); border-radius: 10px;">
+                        <div class="goal-box">
                             <i class="fas fa-shield-alt"></i> Сохранить цикл Инвестиции→Инновации→Инвестиции
                         </div>
                     </div>
@@ -601,12 +876,30 @@
             </div>
         </div>
         
-        <div class="conclusion">
-            <h2>Ключевые выводы</h2>
-            <p>🔹 Технологические гиганты инвестируют <span class="highlight">десятки миллиардов долларов</span> ежегодно в исследования и разработки, устанавливая высокий финансовый барьер для входа на рынок.</p>
-            <p>🔹 Для участия в глобальной инновационной гонке компаниям необходимо поддерживать цикл <span class="highlight">"Инвестиции → Инновации → Инвестиции"</span>, что требует чистой прибыли не менее $3 млрд.</p>
-            <p>🔹 <span class="highlight">OpenAI</span>, несмотря на убытки и потерю специалистов, представляет серьезную угрозу для <span class="highlight">Meta</span> благодаря стратегии развития за счет инвестиций.</p>
-            <p>🔹 Компании, которые не смогут поддерживать инновационный цикл, рискуют <span class="highlight">технологически размыться</span> и потерять конкурентные позиции на рынке.</p>
+        <!-- Key Takeaways -->
+        <div class="key-takeaways">
+            <h2>Ключевые Выводы</h2>
+            <div class="takeaway-list">
+                <div class="takeaway-item">
+                    <h3><i class="fas fa-chart-line"></i> Масштаб инвестиций</h3>
+                    <p>Технологические гиганты инвестируют десятки миллиардов долларов ежегодно в R&D, создавая высокий финансовый барьер для выхода на рынок.</p>
+                </div>
+                
+                <div class="takeaway-item">
+                    <h3><i class="fas fa-sync-alt"></i> Инновационный цикл</h3>
+                    <p>Для участия в глобальной гонке компаниям необходимо поддерживать цикл "Инвестиции → Инновации → Инвестиции" с чистой прибылью не менее $3 млрд.</p>
+                </div>
+                
+                <div class="takeaway-item">
+                    <h3><i class="fas fa-robot"></i> Угроза OpenAI</h3>
+                    <p>OpenAI, несмотря на убытки, представляет серьёзную угрозу для Meta благодаря стратегии развития за счёт инвестиций.</p>
+                </div>
+                
+                <div class="takeaway-item">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Риск размывания</h3>
+                    <p>Компании, не поддерживающие инновационный цикл, рискуют технологически размыться и потерять конкурентные позиции.</p>
+                </div>
+            </div>
         </div>
     </div>
     
@@ -620,7 +913,22 @@
                 
                 setTimeout(() => {
                     bar.style.height = originalHeight;
-                }, 300);
+                }, 500);
+            });
+            
+            // Анимация для элементов с задержкой
+            const animatedItems = document.querySelectorAll('.giant-bar, .shield-item, .cycle-step, .stat-item, .takeaway-item');
+            animatedItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(20px)';
+                    item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 150);
             });
         });
     </script>
