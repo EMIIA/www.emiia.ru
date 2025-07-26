@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Интерактивная диаграмма роста</title>
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
@@ -19,23 +19,18 @@
         }
         
         body {
-            background: linear-gradient(135deg, #f5f7fa, #e4edf5);
+            background: white;
             height: 100vh;
             width: 100vw;
             overflow: hidden;
             font-family: 'Montserrat', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
         
         #diagram-container {
             position: relative;
-            width: 95vw;
-            height: 90vh;
+            width: 100vw;
+            height: 100vh;
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
             overflow: hidden;
         }
         
@@ -68,7 +63,6 @@
         
         .node rect:hover, .node circle:hover, .node polygon:hover {
             filter: brightness(1.05);
-            transform: translateY(-2px);
         }
         
         /* Элементы управления */
@@ -83,8 +77,8 @@
         }
         
         .control-btn {
-            width: 56px;
-            height: 56px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             background: rgba(78, 115, 223, 0.95);
             color: white;
@@ -100,16 +94,17 @@
             border: 2px solid white;
         }
         
-        .control-btn:hover, .control-btn:active {
+        .control-btn:active {
             background: #2e59d9;
-            transform: scale(1.08);
+            transform: scale(0.95);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
         }
         
         .download-btn {
             background: rgba(54, 185, 204, 0.95);
         }
         
-        .download-btn:hover, .download-btn:active {
+        .download-btn:active {
             background: #2c9faf;
         }
         
@@ -117,7 +112,7 @@
             background: rgba(133, 135, 150, 0.95);
         }
         
-        .reset-btn:hover, .reset-btn:active {
+        .reset-btn:active {
             background: #6c6e7e;
         }
         
@@ -159,12 +154,13 @@
             font-size: 1rem;
         }
         
-        .download-option:hover, .download-option:active {
+        .download-option:active {
             background: #4e73df;
             color: white;
+            transform: scale(0.98);
         }
         
-        /* Индикаторы */
+        /* Индикатор масштаба */
         .scale-display {
             position: absolute;
             bottom: 20px;
@@ -180,23 +176,6 @@
             border: 2px solid #f0f2f5;
         }
         
-        .hint {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            color: #5a67d8;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-            z-index: 100;
-            border: 2px solid #f0f2f5;
-            font-weight: 500;
-            text-align: center;
-            max-width: 220px;
-        }
-        
         /* Анимации */
         @keyframes fadeIn {
             from { opacity: 0; transform: scale(0.95); }
@@ -205,15 +184,9 @@
         
         /* Адаптивность */
         @media (max-width: 768px) {
-            #diagram-container {
-                width: 100vw;
-                height: 100vh;
-                border-radius: 0;
-            }
-            
             .control-btn {
-                width: 50px;
-                height: 50px;
+                width: 46px;
+                height: 46px;
                 font-size: 1.1rem;
             }
             
@@ -227,42 +200,6 @@
                 padding: 12px 16px;
                 font-size: 0.95rem;
             }
-            
-            .hint {
-                font-size: 0.85rem;
-                max-width: 200px;
-                right: 10px;
-                left: 10px;
-                margin: 0 auto;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .control-btn {
-                width: 46px;
-                height: 46px;
-                font-size: 1rem;
-            }
-            
-            .download-menu {
-                top: 65px;
-                right: 10px;
-            }
-            
-            .scale-display, .hint {
-                font-size: 0.85rem;
-                padding: 8px 16px;
-            }
-        }
-        
-        /* Эффект прикосновения для мобильных */
-        .control-btn:active {
-            transform: scale(0.95);
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-        }
-        
-        .download-option:active {
-            transform: scale(0.98);
         }
     </style>
 </head>
@@ -329,7 +266,6 @@ graph TD
         </div>
         
         <div class="scale-display" id="scale-display">Масштаб: 100%</div>
-        <div class="hint" id="hint">Используйте два пальца для масштабирования<br>Перетаскивайте для перемещения</div>
     </div>
 
     <script>
@@ -354,14 +290,15 @@ graph TD
         const scaleDisplay = document.getElementById('scale-display');
         const downloadMenu = document.getElementById('download-menu');
         const downloadToggle = document.getElementById('download-toggle');
-        const hintElement = document.getElementById('hint');
         let scale = 1;
         let posX = 0;
         let posY = 0;
         let startX = 0;
         let startY = 0;
         let startDistance = 0;
+        let startScale = 1;
         let isDragging = false;
+        let isPinching = false;
         
         // Обновление позиции и масштаба
         function updateTransform() {
@@ -378,6 +315,7 @@ graph TD
         // Перемещение (панар)
         mc.get('pan').set({ direction: Hammer.DIRECTION_ALL });
         mc.on('panstart', (e) => {
+            if (isPinching) return;
             startX = posX;
             startY = posY;
             isDragging = true;
@@ -385,14 +323,14 @@ graph TD
         });
         
         mc.on('panmove', (e) => {
-            if (isDragging) {
+            if (isDragging && !isPinching) {
                 posX = startX + e.deltaX;
                 posY = startY + e.deltaY;
                 updateTransform();
             }
         });
         
-        mc.on('panend', () => {
+        mc.on('panend pancancel', () => {
             isDragging = false;
             diagram.style.cursor = 'grab';
         });
@@ -400,14 +338,20 @@ graph TD
         // Масштабирование (пинч)
         mc.get('pinch').set({ enable: true });
         mc.on('pinchstart', (e) => {
+            isPinching = true;
             startDistance = e.distance;
             startScale = scale;
         });
         
         mc.on('pinchmove', (e) => {
+            isPinching = true;
             const newScale = startScale * (e.distance / startDistance);
             scale = Math.max(0.3, Math.min(3, newScale));
             updateTransform();
+        });
+        
+        mc.on('pinchend pinchcancel', () => {
+            isPinching = false;
         });
         
         // Двойное касание для сброса
@@ -455,29 +399,26 @@ graph TD
             try {
                 downloadMenu.classList.remove('active');
                 
-                // Создаем временный элемент для рендеринга
-                const tempDiagram = diagram.cloneNode(true);
-                tempDiagram.style.transform = 'none';
-                tempDiagram.style.position = 'fixed';
-                tempDiagram.style.top = '0';
-                tempDiagram.style.left = '0';
-                tempDiagram.style.width = '100%';
-                tempDiagram.style.height = '100%';
-                tempDiagram.style.opacity = '0';
-                tempDiagram.style.pointerEvents = 'none';
-                document.body.appendChild(tempDiagram);
+                // Сохраняем текущее состояние
+                const originalTransform = diagram.style.transform;
+                const originalOpacity = diagram.style.opacity;
+                
+                // Временно сбрасываем трансформацию
+                diagram.style.transform = 'none';
+                diagram.style.opacity = '1';
                 
                 // Ждем обновления DOM
-                await new Promise(resolve => setTimeout(resolve, 100));
+                await new Promise(resolve => setTimeout(resolve, 50));
                 
-                const canvas = await html2canvas(tempDiagram, {
+                const canvas = await html2canvas(diagram, {
                     backgroundColor: '#ffffff',
                     scale: 3,
                     logging: false
                 });
                 
-                // Удаляем временный элемент
-                document.body.removeChild(tempDiagram);
+                // Восстанавливаем исходное состояние
+                diagram.style.transform = originalTransform;
+                diagram.style.opacity = originalOpacity;
                 
                 canvas.toBlob(blob => {
                     saveAs(blob, 'growth-plan.png');
@@ -496,14 +437,7 @@ graph TD
                     throw new Error('SVG элемент не найден');
                 }
                 
-                // Клонируем SVG, чтобы применить текущий масштаб
-                const clonedSvg = svgElement.cloneNode(true);
-                const gElements = clonedSvg.querySelectorAll('g');
-                gElements.forEach(g => {
-                    g.setAttribute('transform', `translate(${posX},${posY}) scale(${scale})`);
-                });
-                
-                const svgData = new XMLSerializer().serializeToString(clonedSvg);
+                const svgData = new XMLSerializer().serializeToString(svgElement);
                 const blob = new Blob([svgData], {type: 'image/svg+xml'});
                 saveAs(blob, 'growth-plan.svg');
             } catch (error) {
@@ -528,21 +462,6 @@ graph TD
             } catch (error) {
                 alert('Ошибка при скачивании кода: ' + error.message);
             }
-        });
-        
-        // Адаптация под разные устройства
-        if ('ontouchstart' in window) {
-            hintElement.innerHTML = 'Используйте два пальца для масштабирования<br>Перетаскивайте для перемещения';
-        } else {
-            hintElement.innerHTML = 'Используйте колесо мыши для масштабирования<br>Перетаскивайте для перемещения';
-        }
-        
-        // Обработка колеса мыши для масштабирования
-        diagram.addEventListener('wheel', (e) => {
-            e.preventDefault();
-            const delta = e.deltaY > 0 ? -0.1 : 0.1;
-            scale = Math.max(0.3, Math.min(3, scale + delta));
-            updateTransform();
         });
     </script>
 </body>
