@@ -1,0 +1,535 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интерактивная диаграмма роста</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            touch-action: manipulation;
+        }
+        
+        body {
+            background: white;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #diagram-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: white;
+            overflow: hidden;
+        }
+        
+        #diagram {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: max-content;
+            height: max-content;
+            transform-origin: 0 0;
+            padding: 40px;
+            cursor: grab;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #diagram:active {
+            cursor: grabbing;
+        }
+        
+        .mermaid {
+            font-family: 'Montserrat', sans-serif;
+            max-width: 100%;
+            max-height: 100%;
+        }
+        
+        .node rect, .node circle, .node polygon {
+            border-radius: 16px !important;
+            stroke-width: 2px !important;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        /* Элементы управления */
+        .controls-overlay {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 100;
+        }
+        
+        .control-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(78, 115, 223, 0.95);
+            color: white;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.3rem;
+            transition: all 0.2s;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid white;
+        }
+        
+        .control-btn:active {
+            background: #2e59d9;
+            transform: scale(0.95);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .download-btn {
+            background: rgba(54, 185, 204, 0.95);
+        }
+        
+        .download-btn:active {
+            background: #2c9faf;
+        }
+        
+        .reset-btn {
+            background: rgba(133, 135, 150, 0.95);
+        }
+        
+        .reset-btn:active {
+            background: #6c6e7e;
+        }
+        
+        /* Меню загрузки */
+        .download-menu {
+            position: absolute;
+            top: 80px;
+            right: 20px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+            padding: 15px;
+            display: none;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 200;
+            min-width: 180px;
+            transform-origin: top right;
+            animation: fadeIn 0.25s ease;
+            border: 1px solid #f0f2f5;
+        }
+        
+        .download-menu.active {
+            display: flex;
+        }
+        
+        .download-option {
+            background: #f8f9fa;
+            border: none;
+            padding: 14px 18px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s;
+            color: #2c3e50;
+            font-size: 1rem;
+        }
+        
+        .download-option:active {
+            background: #4e73df;
+            color: white;
+            transform: scale(0.98);
+        }
+        
+        /* Индикатор масштаба */
+        .scale-display {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #2c3e50;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            border: 2px solid #f0f2f5;
+        }
+        
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .control-btn {
+                width: 46px;
+                height: 46px;
+                font-size: 1.1rem;
+            }
+            
+            .download-menu {
+                top: 70px;
+                min-width: 170px;
+                padding: 12px;
+            }
+            
+            .download-option {
+                padding: 12px 16px;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="diagram-container">
+        <div id="diagram" class="mermaid">
+graph TD
+    A[Затраты] --> B[TCO: $1.5 млрд/год]
+    B --> B1[CapEx]
+    B --> B2[OpEx]
+    B --> B3[RSC: $700 млн/год]
+    B --> B4[CAC: $300 млн/год]
+    
+    C[Пользовательская экономика] --> D[ARPU: $36/год]
+    C --> E[ARPPU: $120/год]
+    C --> F[LTV: $840]
+    C --> G[CAC: $3]
+    C --> H[RSC: $7/год]
+    
+    I[Рынок] --> J[TARGET]
+    J --> J1[Объём: 1.67 млрд]
+    J --> J2[Емкость: $1.2 трлн]
+    
+    I --> K[ACTIVE]
+    K --> K1[Объём: 100 млн]
+    K --> K2[Потенциальная емкость: $12 млрд/год]
+    
+    I --> L[CORE]
+    L --> L1[Платящие: 30 млн]
+    L --> L2[Выручка: $3.6 млрд/год]
+    
+    %% Ключевые зависимости
+    K1 -->|Вход для| D
+    K1 -->|Расчёт| K2
+    K1 -->|Влияет| B3
+    
+    L1 -->|Определяет| E
+    L1 -->|Расчёт| L2
+    E -->|Определяет| F
+    
+    D -->|Сравнение| K2
+    E -->|Сравнение| K2
+    
+    B3 -->|Зависит от| K1
+    B4 -->|Зависит от| G
+    
+    L2 -->|Покрывает| B
+    L2 -->|Прибыль| M[Прибыль: $2.1 млрд]
+    
+    J -->|Контекст| K
+    K -->|Подмножество| L
+
+
+
+
+
+
+
+        </div>
+        
+        <!-- Элементы управления -->
+        <div class="controls-overlay">
+            <button class="control-btn download-btn" id="download-toggle">
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                </svg>
+            </button>
+            
+            <button class="control-btn" id="zoom-in">
+                <svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                </svg>
+            </button>
+            
+            <button class="control-btn" id="zoom-out">
+                <svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 13H5v-2h14v2z"/>
+                </svg>
+            </button>
+            
+            <button class="control-btn reset-btn" id="reset-zoom">
+                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Меню загрузки -->
+        <div class="download-menu" id="download-menu">
+            <button class="download-option" id="download-png">
+                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14h-2v-4h-4v4H7v-8h2v2h2v-2h2v8zm2-10h2v4h-2V7z"/>
+                </svg>
+                Скачать PNG
+            </button>
+            <button class="download-option" id="download-svg">
+                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                </svg>
+                Скачать SVG
+            </button>
+            <button class="download-option" id="download-code">
+                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
+                </svg>
+                Скачать код
+            </button>
+        </div>
+        
+        <div class="scale-display" id="scale-display">Масштаб: 100%</div>
+    </div>
+
+    <script>
+        // Инициализация Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis',
+                nodeSpacing: 60,
+                rankSpacing: 80
+            },
+            securityLevel: 'loose',
+            fontFamily: "'Montserrat', sans-serif"
+        });
+        
+        // Основные переменные
+        const diagram = document.getElementById('diagram');
+        const diagramContainer = document.getElementById('diagram-container');
+        const scaleDisplay = document.getElementById('scale-display');
+        const downloadMenu = document.getElementById('download-menu');
+        const downloadToggle = document.getElementById('download-toggle');
+        
+        let scale = 1;
+        let posX = 0;
+        let posY = 0;
+        let startX = 0;
+        let startY = 0;
+        let startScale = 1;
+        let isDragging = false;
+        let touchStartDistance = 0;
+        
+        // Обновление позиции и масштаба
+        function updateTransform() {
+            diagram.style.transform = `translate(${posX}px, ${posY}px) scale(${scale})`;
+            scaleDisplay.textContent = `Масштаб: ${Math.round(scale * 100)}%`;
+        }
+        
+        // Инициализация позиции
+        updateTransform();
+        
+        // Обработчики событий мыши
+        diagram.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.clientX - posX;
+            startY = e.clientY - posY;
+            diagram.style.cursor = 'grabbing';
+        });
+        
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            posX = e.clientX - startX;
+            posY = e.clientY - startY;
+            updateTransform();
+        });
+        
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            diagram.style.cursor = 'grab';
+        });
+        
+        // Обработчики событий касания
+        diagram.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 1) {
+                // Перемещение
+                isDragging = true;
+                startX = e.touches[0].clientX - posX;
+                startY = e.touches[0].clientY - posY;
+            } else if (e.touches.length === 2) {
+                // Масштабирование
+                const dx = e.touches[0].clientX - e.touches[1].clientX;
+                const dy = e.touches[0].clientY - e.touches[1].clientY;
+                touchStartDistance = Math.sqrt(dx * dx + dy * dy);
+                startScale = scale;
+            }
+            e.preventDefault();
+        });
+        
+        document.addEventListener('touchmove', (e) => {
+            if (isDragging && e.touches.length === 1) {
+                // Перемещение
+                posX = e.touches[0].clientX - startX;
+                posY = e.touches[0].clientY - startY;
+                updateTransform();
+            } else if (e.touches.length === 2) {
+                // Масштабирование
+                const dx = e.touches[0].clientX - e.touches[1].clientX;
+                const dy = e.touches[0].clientY - e.touches[1].clientY;
+                const touchDistance = Math.sqrt(dx * dx + dy * dy);
+                
+                const newScale = startScale * (touchDistance / touchStartDistance);
+                scale = Math.max(0.3, Math.min(3, newScale));
+                updateTransform();
+            }
+            e.preventDefault();
+        });
+        
+        document.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+        
+        // Масштабирование колесом мыши
+        diagram.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            const delta = e.deltaY > 0 ? -0.1 : 0.1;
+            scale = Math.max(0.3, Math.min(3, scale + delta));
+            updateTransform();
+        });
+        
+        // Обработчики событий для кнопок
+        document.getElementById('zoom-in').addEventListener('click', () => {
+            scale = Math.min(3, scale + 0.1);
+            updateTransform();
+        });
+        
+        document.getElementById('zoom-out').addEventListener('click', () => {
+            scale = Math.max(0.3, scale - 0.1);
+            updateTransform();
+        });
+        
+        document.getElementById('reset-zoom').addEventListener('click', () => {
+            scale = 1;
+            posX = 0;
+            posY = 0;
+            updateTransform();
+        });
+        
+        // Переключение меню загрузки
+        downloadToggle.addEventListener('click', (e) => {
+            downloadMenu.classList.toggle('active');
+            e.stopPropagation();
+        });
+        
+        // Закрытие меню при клике в другом месте
+        document.addEventListener('click', (e) => {
+            if (!downloadMenu.contains(e.target) && e.target !== downloadToggle) {
+                downloadMenu.classList.remove('active');
+            }
+        });
+        
+        // Функции скачивания
+        document.getElementById('download-png').addEventListener('click', async () => {
+            try {
+                downloadMenu.classList.remove('active');
+                
+                // Создаем временный элемент для рендеринга
+                const tempDiagram = diagram.cloneNode(true);
+                tempDiagram.style.transform = 'none';
+                tempDiagram.style.position = 'fixed';
+                tempDiagram.style.top = '0';
+                tempDiagram.style.left = '0';
+                tempDiagram.style.width = 'auto';
+                tempDiagram.style.height = 'auto';
+                tempDiagram.style.opacity = '0';
+                tempDiagram.style.pointerEvents = 'none';
+                document.body.appendChild(tempDiagram);
+                
+                // Ждем обновления DOM
+                await new Promise(resolve => setTimeout(resolve, 100));
+                
+                const canvas = await html2canvas(tempDiagram, {
+                    backgroundColor: '#ffffff',
+                    scale: 3,
+                    logging: false
+                });
+                
+                // Удаляем временный элемент
+                document.body.removeChild(tempDiagram);
+                
+                canvas.toBlob(blob => {
+                    saveAs(blob, 'growth-plan.png');
+                });
+            } catch (error) {
+                alert('Ошибка при создании PNG: ' + error.message);
+            }
+        });
+        
+        document.getElementById('download-svg').addEventListener('click', () => {
+            try {
+                downloadMenu.classList.remove('active');
+                const svgElement = diagram.querySelector('svg');
+                
+                if (!svgElement) {
+                    throw new Error('SVG элемент не найден');
+                }
+                
+                const svgData = new XMLSerializer().serializeToString(svgElement);
+                const blob = new Blob([svgData], {type: 'image/svg+xml'});
+                saveAs(blob, 'growth-plan.svg');
+            } catch (error) {
+                alert('Ошибка при создании SVG: ' + error.message);
+            }
+        });
+        
+        document.getElementById('download-code').addEventListener('click', () => {
+            try {
+                downloadMenu.classList.remove('active');
+                const code = `graph LR
+    A[Кол-во активных] --> B[Расчёт RSC]
+    A --> C[Расчёт емкости ACTIVE]
+    C --> D[Сравнение с ARPU]
+    E[Кол-во платящих] --> F[Расчёт ARPPU]
+    F --> G[Расчёт LTV]
+    F --> H[Расчёт выручки CORE]
+    H --> I[Покрытие TCO]
+    I --> J[Прибыль $2.1 млрд])`;
+                
+                const blob = new Blob([code], {type: 'text/plain'});
+                saveAs(blob, 'growth-plan.mmd');
+            } catch (error) {
+                alert('Ошибка при скачивании кода: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>
+
+
