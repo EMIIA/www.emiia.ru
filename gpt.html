@@ -2,10 +2,10 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Интерактивная диаграмма роста</title>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/panzoom@9.4.3/dist/panzoom.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -14,24 +14,29 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Montserrat', sans-serif;
+            touch-action: none;
+            user-select: none;
         }
         
         body {
-            background: white;
+            background: linear-gradient(135deg, #f5f7fa, #e4edf5);
             height: 100vh;
+            width: 100vw;
             overflow: hidden;
-            padding: 10px;
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
-        .diagram-wrapper {
+        #diagram-container {
             position: relative;
+            width: 95vw;
+            height: 90vh;
             background: white;
-            border-radius: 12px;
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
             overflow: hidden;
-            height: calc(100vh - 20px);
-            width: 100%;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
         
         #diagram {
@@ -41,37 +46,47 @@
             justify-content: center;
             align-items: center;
             transform-origin: center center;
-            transition: transform 0.2s ease;
             background: white;
+            padding: 30px;
+            cursor: grab;
+        }
+        
+        #diagram:active {
+            cursor: grabbing;
         }
         
         .mermaid {
             font-family: 'Montserrat', sans-serif;
-            padding: 40px;
         }
         
         .node rect, .node circle, .node polygon {
             border-radius: 16px !important;
             stroke-width: 2px !important;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
         }
         
-        /* Контролы на диаграмме */
+        .node rect:hover, .node circle:hover, .node polygon:hover {
+            filter: brightness(1.05);
+            transform: translateY(-2px);
+        }
+        
+        /* Элементы управления */
         .controls-overlay {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 20px;
+            right: 20px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 15px;
             z-index: 100;
         }
         
         .control-btn {
-            width: 44px;
-            height: 44px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
-            background: rgba(78, 115, 223, 0.92);
+            background: rgba(78, 115, 223, 0.95);
             color: white;
             border: none;
             display: flex;
@@ -79,53 +94,50 @@
             align-items: center;
             cursor: pointer;
             font-weight: 600;
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             transition: all 0.3s;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            border: 2px solid white;
         }
         
-        .control-btn:hover {
+        .control-btn:hover, .control-btn:active {
             background: #2e59d9;
             transform: scale(1.08);
         }
         
-        .control-btn:active {
-            transform: scale(0.96);
-        }
-        
         .download-btn {
-            background: rgba(54, 185, 204, 0.92);
+            background: rgba(54, 185, 204, 0.95);
         }
         
-        .download-btn:hover {
+        .download-btn:hover, .download-btn:active {
             background: #2c9faf;
         }
         
         .reset-btn {
-            background: rgba(133, 135, 150, 0.92);
+            background: rgba(133, 135, 150, 0.95);
         }
         
-        .reset-btn:hover {
+        .reset-btn:hover, .reset-btn:active {
             background: #6c6e7e;
         }
         
-        /* Выпадающее меню загрузки */
+        /* Меню загрузки */
         .download-menu {
             position: absolute;
-            top: 60px;
-            right: 15px;
+            top: 80px;
+            right: 20px;
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            padding: 12px;
+            border-radius: 16px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+            padding: 15px;
             display: none;
             flex-direction: column;
-            gap: 8px;
+            gap: 12px;
             z-index: 200;
-            min-width: 160px;
+            min-width: 180px;
             transform-origin: top right;
             animation: fadeIn 0.25s ease;
-            border: 1px solid #f0f0f0;
+            border: 1px solid #f0f2f5;
         }
         
         .download-menu.active {
@@ -135,51 +147,54 @@
         .download-option {
             background: #f8f9fa;
             border: none;
-            padding: 10px 14px;
-            border-radius: 8px;
+            padding: 14px 18px;
+            border-radius: 12px;
             cursor: pointer;
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             transition: all 0.2s;
             color: #2c3e50;
-            font-size: 0.9rem;
+            font-size: 1rem;
         }
         
-        .download-option:hover {
+        .download-option:hover, .download-option:active {
             background: #4e73df;
             color: white;
         }
         
+        /* Индикаторы */
         .scale-display {
             position: absolute;
-            bottom: 15px;
-            left: 15px;
-            background: rgba(255, 255, 255, 0.92);
-            padding: 6px 14px;
-            border-radius: 20px;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px 20px;
+            border-radius: 30px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: #2c3e50;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
             z-index: 100;
-            border: 1px solid #f0f0f0;
+            border: 2px solid #f0f2f5;
         }
         
         .hint {
             position: absolute;
-            bottom: 15px;
-            right: 15px;
-            background: rgba(255, 255, 255, 0.92);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.8rem;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
             color: #5a67d8;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
             z-index: 100;
-            border: 1px solid #f0f0f0;
+            border: 2px solid #f0f2f5;
             font-weight: 500;
+            text-align: center;
+            max-width: 220px;
         }
         
         /* Анимации */
@@ -190,55 +205,69 @@
         
         /* Адаптивность */
         @media (max-width: 768px) {
+            #diagram-container {
+                width: 100vw;
+                height: 100vh;
+                border-radius: 0;
+            }
+            
             .control-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
+                width: 50px;
+                height: 50px;
+                font-size: 1.1rem;
             }
             
             .download-menu {
-                top: 55px;
-                min-width: 150px;
-                padding: 10px;
+                top: 70px;
+                min-width: 170px;
+                padding: 12px;
             }
             
             .download-option {
-                padding: 8px 12px;
-                font-size: 0.85rem;
+                padding: 12px 16px;
+                font-size: 0.95rem;
             }
             
             .hint {
-                font-size: 0.75rem;
-                max-width: 140px;
-                text-align: right;
+                font-size: 0.85rem;
+                max-width: 200px;
+                right: 10px;
+                left: 10px;
+                margin: 0 auto;
             }
         }
         
         @media (max-width: 480px) {
-            .diagram-wrapper {
-                height: calc(100vh - 15px);
-            }
-            
             .control-btn {
-                width: 36px;
-                height: 36px;
-                font-size: 0.9rem;
+                width: 46px;
+                height: 46px;
+                font-size: 1rem;
             }
             
             .download-menu {
-                top: 50px;
+                top: 65px;
                 right: 10px;
             }
             
             .scale-display, .hint {
-                font-size: 0.75rem;
-                padding: 5px 10px;
+                font-size: 0.85rem;
+                padding: 8px 16px;
             }
+        }
+        
+        /* Эффект прикосновения для мобильных */
+        .control-btn:active {
+            transform: scale(0.95);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .download-option:active {
+            transform: scale(0.98);
         }
     </style>
 </head>
 <body>
-    <div class="diagram-wrapper">
+    <div id="diagram-container">
         <div id="diagram" class="mermaid">
 graph TD
     A(Текущее состояние • ARPU $36<br>• 30 млн платящих) --> B{Этап 1:<br>Горизонтальный рост}
@@ -250,60 +279,57 @@ graph TD
     G --> H(B2B-решения<br>• Комиссии<br>• Данные = $72 млрд)
         </div>
         
-        <!-- Элементы управления поверх диаграммы -->
+        <!-- Элементы управления -->
         <div class="controls-overlay">
             <button class="control-btn download-btn" id="download-toggle">
-                <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
                 </svg>
             </button>
             
             <button class="control-btn" id="zoom-in">
-                <svg width="22" height="22" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                <svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
                 </svg>
             </button>
             
             <button class="control-btn" id="zoom-out">
-                <svg width="22" height="22" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+                <svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 13H5v-2h14v2z"/>
                 </svg>
             </button>
             
             <button class="control-btn reset-btn" id="reset-zoom">
-                <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
-                    <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
                 </svg>
             </button>
         </div>
         
-        <!-- Выпадающее меню загрузки -->
+        <!-- Меню загрузки -->
         <div class="download-menu" id="download-menu">
             <button class="download-option" id="download-png">
-                <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
+                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14h-2v-4h-4v4H7v-8h2v2h2v-2h2v8zm2-10h2v4h-2V7z"/>
                 </svg>
-                PNG
+                Скачать PNG
             </button>
             <button class="download-option" id="download-svg">
-                <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M0 0h16v16H0V0z" fill="none"/>
-                    <path d="M8 13.5l-5-5 1-1 3 3 3-3 1 1-5 5zm0-12L3 7l1 1 3-3 3 3 1-1-5-5z"/>
+                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
                 </svg>
-                SVG
+                Скачать SVG
             </button>
             <button class="download-option" id="download-code">
-                <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M5.854 4.854a.5.5 0 1 0-.708-.708l-3.5 3.5a.5.5 0 0 0 0 .708l3.5 3.5a.5.5 0 0 0 .708-.708L2.707 8l3.147-3.146zm4.292 0a.5.5 0 0 1 .708-.708l3.5 3.5a.5.5 0 0 1 0 .708l-3.5 3.5a.5.5 0 0 1-.708-.708L13.293 8l-3.147-3.146z"/>
+                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
                 </svg>
-                Код
+                Скачать код
             </button>
         </div>
         
         <div class="scale-display" id="scale-display">Масштаб: 100%</div>
-        <div class="hint" id="hint">Используйте колесо мыши для масштабирования</div>
+        <div class="hint" id="hint">Используйте два пальца для масштабирования<br>Перетаскивайте для перемещения</div>
     </div>
 
     <script>
@@ -315,57 +341,100 @@ graph TD
                 useMaxWidth: true,
                 htmlLabels: true,
                 curve: 'basis',
-                nodeSpacing: 50,
-                rankSpacing: 70
+                nodeSpacing: 60,
+                rankSpacing: 80
             },
             securityLevel: 'loose',
             fontFamily: "'Montserrat', sans-serif"
         });
         
-        // Переменные
-        let scale = 1;
+        // Основные переменные
         const diagram = document.getElementById('diagram');
+        const diagramContainer = document.getElementById('diagram-container');
         const scaleDisplay = document.getElementById('scale-display');
         const downloadMenu = document.getElementById('download-menu');
         const downloadToggle = document.getElementById('download-toggle');
         const hintElement = document.getElementById('hint');
-        const zoomStep = 0.1;
-        const minScale = 0.3;
-        const maxScale = 3;
+        let scale = 1;
+        let posX = 0;
+        let posY = 0;
+        let startX = 0;
+        let startY = 0;
+        let startDistance = 0;
+        let isDragging = false;
         
-        // Инициализация Panzoom
-        const panzoomController = panzoom(diagram, {
-            bounds: true,
-            boundsPadding: 0.8,
-            minZoom: minScale,
-            maxZoom: maxScale,
-            smoothScroll: false,
-            beforeWheel: function(e) {
-                return true;
-            }
-        });
-        
-        // Обновление отображения масштаба
-        function updateScaleDisplay() {
-            scale = panzoomController.getTransform().scale;
+        // Обновление позиции и масштаба
+        function updateTransform() {
+            diagram.style.transform = `translate(${posX}px, ${posY}px) scale(${scale})`;
             scaleDisplay.textContent = `Масштаб: ${Math.round(scale * 100)}%`;
         }
         
+        // Инициализация позиции
+        updateTransform();
+        
+        // Обработка жестов пальцами
+        const mc = new Hammer(diagramContainer);
+        
+        // Перемещение (панар)
+        mc.get('pan').set({ direction: Hammer.DIRECTION_ALL });
+        mc.on('panstart', (e) => {
+            startX = posX;
+            startY = posY;
+            isDragging = true;
+            diagram.style.cursor = 'grabbing';
+        });
+        
+        mc.on('panmove', (e) => {
+            if (isDragging) {
+                posX = startX + e.deltaX;
+                posY = startY + e.deltaY;
+                updateTransform();
+            }
+        });
+        
+        mc.on('panend', () => {
+            isDragging = false;
+            diagram.style.cursor = 'grab';
+        });
+        
+        // Масштабирование (пинч)
+        mc.get('pinch').set({ enable: true });
+        mc.on('pinchstart', (e) => {
+            startDistance = e.distance;
+            startScale = scale;
+        });
+        
+        mc.on('pinchmove', (e) => {
+            const newScale = startScale * (e.distance / startDistance);
+            scale = Math.max(0.3, Math.min(3, newScale));
+            updateTransform();
+        });
+        
+        // Двойное касание для сброса
+        mc.get('tap').set({ event: 'doubletap', taps: 2 });
+        mc.on('doubletap', () => {
+            scale = 1;
+            posX = 0;
+            posY = 0;
+            updateTransform();
+        });
+        
         // Обработчики событий для кнопок
         document.getElementById('zoom-in').addEventListener('click', () => {
-            panzoomController.smoothZoom(diagram.clientWidth/2, diagram.clientHeight/2, 1 + zoomStep);
-            setTimeout(updateScaleDisplay, 100);
+            scale = Math.min(3, scale + 0.1);
+            updateTransform();
         });
         
         document.getElementById('zoom-out').addEventListener('click', () => {
-            panzoomController.smoothZoom(diagram.clientWidth/2, diagram.clientHeight/2, 1 - zoomStep);
-            setTimeout(updateScaleDisplay, 100);
+            scale = Math.max(0.3, scale - 0.1);
+            updateTransform();
         });
         
         document.getElementById('reset-zoom').addEventListener('click', () => {
-            panzoomController.moveTo(0, 0);
-            panzoomController.zoomAbs(0, 0, 1);
-            setTimeout(updateScaleDisplay, 100);
+            scale = 1;
+            posX = 0;
+            posY = 0;
+            updateTransform();
         });
         
         // Переключение меню загрузки
@@ -386,18 +455,29 @@ graph TD
             try {
                 downloadMenu.classList.remove('active');
                 
-                const originalTransform = diagram.style.transform;
-                diagram.style.transform = 'none';
+                // Создаем временный элемент для рендеринга
+                const tempDiagram = diagram.cloneNode(true);
+                tempDiagram.style.transform = 'none';
+                tempDiagram.style.position = 'fixed';
+                tempDiagram.style.top = '0';
+                tempDiagram.style.left = '0';
+                tempDiagram.style.width = '100%';
+                tempDiagram.style.height = '100%';
+                tempDiagram.style.opacity = '0';
+                tempDiagram.style.pointerEvents = 'none';
+                document.body.appendChild(tempDiagram);
                 
-                await new Promise(resolve => setTimeout(resolve, 50));
+                // Ждем обновления DOM
+                await new Promise(resolve => setTimeout(resolve, 100));
                 
-                const canvas = await html2canvas(diagram, {
+                const canvas = await html2canvas(tempDiagram, {
                     backgroundColor: '#ffffff',
                     scale: 3,
                     logging: false
                 });
                 
-                diagram.style.transform = originalTransform;
+                // Удаляем временный элемент
+                document.body.removeChild(tempDiagram);
                 
                 canvas.toBlob(blob => {
                     saveAs(blob, 'growth-plan.png');
@@ -416,7 +496,14 @@ graph TD
                     throw new Error('SVG элемент не найден');
                 }
                 
-                const svgData = new XMLSerializer().serializeToString(svgElement);
+                // Клонируем SVG, чтобы применить текущий масштаб
+                const clonedSvg = svgElement.cloneNode(true);
+                const gElements = clonedSvg.querySelectorAll('g');
+                gElements.forEach(g => {
+                    g.setAttribute('transform', `translate(${posX},${posY}) scale(${scale})`);
+                });
+                
+                const svgData = new XMLSerializer().serializeToString(clonedSvg);
                 const blob = new Blob([svgData], {type: 'image/svg+xml'});
                 saveAs(blob, 'growth-plan.svg');
             } catch (error) {
@@ -443,26 +530,20 @@ graph TD
             }
         });
         
-        // Обновление масштаба при изменениях
-        panzoomController.on('zoom', updateScaleDisplay);
-        panzoomController.on('pan', updateScaleDisplay);
-        
-        // Инициализация отображения масштаба
-        updateScaleDisplay();
-        
-        // Адаптация под мобильные устройства
-        window.addEventListener('resize', () => {
-            if (window.innerWidth < 768 && scale > 1.5) {
-                panzoomController.zoomAbs(0, 0, 1);
-                panzoomController.moveTo(0, 0);
-                updateScaleDisplay();
-            }
-        });
-        
-        // Подсказка для мобильных устройств
+        // Адаптация под разные устройства
         if ('ontouchstart' in window) {
             hintElement.innerHTML = 'Используйте два пальца для масштабирования<br>Перетаскивайте для перемещения';
+        } else {
+            hintElement.innerHTML = 'Используйте колесо мыши для масштабирования<br>Перетаскивайте для перемещения';
         }
+        
+        // Обработка колеса мыши для масштабирования
+        diagram.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            const delta = e.deltaY > 0 ? -0.1 : 0.1;
+            scale = Math.max(0.3, Math.min(3, scale + delta));
+            updateTransform();
+        });
     </script>
 </body>
 </html>
