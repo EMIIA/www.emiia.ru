@@ -3,817 +3,530 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Инвестиции в R&D: Гонка технологических гигантов</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <title>План роста компании - Интерактивная диаграмма</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/panzoom@9.4.3/dist/panzoom.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --secondary: #8b5cf6;
-            --accent: #06b6d4;
-            --success: #10b981;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-            --dark: #0f172a;
-            --light: #f8fafc;
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --glass: rgba(255, 255, 255, 0.15);
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
         }
         
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: #334155;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            display: flex;
+            justify-content: center;
+            align-items: center;
             min-height: 100vh;
-            padding: 15px;
-            line-height: 1.6;
-            overflow-x: hidden;
+            padding: 20px;
+            overflow: hidden;
         }
         
         .container {
-            max-width: 100%;
-            margin: 0 auto;
-            padding: 0 10px;
+            width: 100%;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
         }
         
-        /* Header */
-        .header {
+        header {
             text-align: center;
-            margin-bottom: 25px;
-            padding: 20px 15px;
-            background: var(--glass);
-            backdrop-filter: blur(8px);
-            border-radius: 18px;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 10;
         }
         
         h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: clamp(1.6rem, 5vw, 2.2rem);
-            color: var(--light);
-            margin-bottom: 12px;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            color: #2c3e50;
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
         .subtitle {
-            font-size: clamp(0.85rem, 2.5vw, 1rem);
-            color: #cbd5e1;
+            color: #5a67d8;
+            font-size: 1.2rem;
             max-width: 800px;
             margin: 0 auto;
+            font-weight: 500;
         }
         
-        /* Infographic Sections */
-        .infographic-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .infographic-section {
-            background: var(--card-bg);
-            border-radius: 18px;
-            padding: 20px;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-        }
-        
-        .section-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: clamp(1.25rem, 3vw, 1.5rem);
-            color: var(--dark);
-            margin-bottom: 20px;
-            text-align: center;
+        .diagram-wrapper {
             position: relative;
-            padding-bottom: 12px;
+            background: #f8f9fa;
+            border-radius: 16px;
+            overflow: hidden;
+            height: 70vh;
+            min-height: 500px;
+            border: 1px solid #e3e6f0;
+            box-shadow: inset 0 4px 15px rgba(0,0,0,0.08);
         }
         
-        .section-title::after {
-            content: '';
+        #diagram {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform-origin: center center;
+            transition: transform 0.2s ease;
+        }
+        
+        .mermaid {
+            font-family: 'Montserrat', sans-serif;
+            padding: 40px;
+        }
+        
+        .node rect, .node circle, .node polygon {
+            border-radius: 16px !important;
+            stroke-width: 2px !important;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        /* Контролы на диаграмме */
+        .controls-overlay {
             position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(to right, var(--primary), var(--accent));
-            border-radius: 2px;
-        }
-        
-        /* Block 1: Giants Visualization */
-        .giants-container {
+            top: 20px;
+            right: 20px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            margin-top: 15px;
+            gap: 12px;
+            z-index: 100;
         }
         
-        .giant-bar {
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.85);
-            border-radius: 14px;
-            padding: 12px;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-            overflow: hidden;
-        }
-        
-        .giant-bar:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
-        }
-        
-        .company-logo {
+        .control-btn {
             width: 50px;
             height: 50px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.6rem;
+            border-radius: 50%;
+            background: rgba(78, 115, 223, 0.9);
             color: white;
-            flex-shrink: 0;
-            margin-right: 12px;
-            box-shadow: var(--shadow);
-        }
-        
-        .company-info {
-            flex-grow: 1;
-            min-width: 0;
-        }
-        
-        .company-name {
-            font-weight: 600;
-            font-size: 1rem;
-            margin-bottom: 5px;
-            color: var(--dark);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
-        .bar-container {
+            border: none;
             display: flex;
+            justify-content: center;
             align-items: center;
-            gap: 8px;
-            margin-top: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
         
-        .bar {
-            flex-grow: 1;
-            height: 18px;
-            border-radius: 9px;
-            position: relative;
-            overflow: hidden;
+        .control-btn:hover {
+            background: #2e59d9;
+            transform: scale(1.1);
         }
         
-        .bar-value {
+        .control-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .download-btn {
+            background: rgba(54, 185, 204, 0.9);
+        }
+        
+        .download-btn:hover {
+            background: #2c9faf;
+        }
+        
+        .reset-btn {
+            background: rgba(133, 135, 150, 0.9);
+        }
+        
+        .reset-btn:hover {
+            background: #6c6e7e;
+        }
+        
+        /* Выпадающее меню загрузки */
+        .download-menu {
             position: absolute;
-            right: 8px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: white;
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-            z-index: 2;
-        }
-        
-        .average-box {
-            background: var(--card-bg);
-            border-radius: 14px;
-            padding: 18px;
-            margin-top: 15px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            border: 2px dashed var(--primary);
-        }
-        
-        .average-value {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin-top: 5px;
-            background: linear-gradient(to right, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        /* Block 2: Threshold Visualization */
-        .threshold-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 5px;
-        }
-        
-        .threshold-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            border-radius: 18px;
-            padding: 22px;
-            width: 100%;
-            max-width: 380px;
-            color: white;
-            box-shadow: var(--shadow);
-            margin-bottom: 20px;
-        }
-        
-        .threshold-title {
-            font-size: 1.3rem;
-            text-align: center;
-            margin-bottom: 18px;
-            font-weight: 700;
-        }
-        
-        .threshold-item {
-            display: flex;
-            align-items: center;
-            margin: 10px 0;
-            font-size: 1rem;
-            background: rgba(255, 255, 255, 0.15);
-            padding: 10px 18px;
-            border-radius: 40px;
-            width: 100%;
-        }
-        
-        .threshold-icon {
-            font-size: 1.4rem;
-            margin-right: 12px;
-            color: var(--accent);
-        }
-        
-        .investment-cycle {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            margin: 12px 0;
-        }
-        
-        .cycle-step {
-            background: linear-gradient(to right, var(--primary), var(--accent));
-            color: white;
-            padding: 8px 16px;
-            border-radius: 40px;
-            font-weight: 600;
-            box-shadow: var(--shadow);
-            font-size: 0.95rem;
-        }
-        
-        .cycle-arrow {
-            color: var(--primary);
-            font-size: 1.4rem;
-        }
-        
-        .threshold-text {
-            text-align: center;
-            font-size: 0.95rem;
-            background: rgba(37, 99, 235, 0.05);
-            padding: 16px;
-            border-radius: 14px;
-            border-left: 4px solid var(--primary);
-            margin-top: 15px;
-        }
-        
-        /* Block 3: OpenAI vs Meta */
-        .comparison-container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin-top: 15px;
-        }
-        
-        .company-card {
-            border-radius: 18px;
-            padding: 22px;
-            box-shadow: var(--shadow);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .openai-card {
-            background: linear-gradient(135deg, #10A37F, #0d8a6a);
-            color: white;
-        }
-        
-        .meta-card {
-            background: linear-gradient(135deg, #1877F2, #1159b5);
-            color: white;
-        }
-        
-        .company-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 18px;
-        }
-        
-        .company-icon {
-            font-size: 1.8rem;
-            margin-right: 14px;
-            width: 45px;
-            height: 45px;
+            top: 70px;
+            right: 20px;
+            background: white;
             border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            padding: 15px;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 200;
+            min-width: 180px;
+            transform-origin: top right;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .download-menu.active {
+            display: flex;
+        }
+        
+        .download-option {
+            background: #f8f9fa;
+            border: none;
+            padding: 12px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
             display: flex;
             align-items: center;
-            justify-content: center;
-            background: rgba(0, 0, 0, 0.2);
-            box-shadow: var(--shadow);
-            flex-shrink: 0;
+            gap: 10px;
+            transition: all 0.2s;
+            color: #2c3e50;
         }
         
-        .company-title {
-            font-size: 1.4rem;
-            font-weight: 700;
+        .download-option:hover {
+            background: #4e73df;
+            color: white;
+            transform: translateX(-5px);
         }
         
-        .company-subtitle {
-            font-size: 0.85rem;
-            opacity: 0.9;
-            margin-top: 3px;
-        }
-        
-        .stats-container {
-            margin: 12px 0;
-        }
-        
-        .stat-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            font-size: 0.95rem;
-        }
-        
-        .stat-value {
-            font-weight: 600;
-            font-size: 1rem;
-            text-align: right;
-            max-width: 60%;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
-        .negative {
-            color: #ff9e9e;
-        }
-        
-        .positive {
-            color: #a9ffa9;
-        }
-        
-        .goal-box {
-            margin-top: 12px;
-            text-align: center;
-            padding: 12px;
-            background: rgba(0, 0, 0, 0.15);
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-        
-        .barrier {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 15px 0;
-            position: relative;
-        }
-        
-        .barrier-line {
-            flex-grow: 1;
-            height: 2px;
-            background: linear-gradient(to right, var(--primary), var(--accent), var(--primary));
-            border-radius: 1px;
-        }
-        
-        .barrier-text {
-            background: var(--light);
-            color: var(--dark);
-            padding: 6px 12px;
-            border-radius: 25px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin: 0 8px;
-            box-shadow: var(--shadow);
-            white-space: nowrap;
-        }
-        
-        /* Key Takeaways */
-        .key-takeaways {
-            background: var(--card-bg);
-            border-radius: 18px;
-            padding: 22px;
-            margin-top: 20px;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .key-takeaways h2 {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--dark);
-            margin-bottom: 18px;
-            text-align: center;
-            font-size: 1.4rem;
-            position: relative;
-            padding-bottom: 12px;
-        }
-        
-        .key-takeaways h2::after {
-            content: '';
+        .scale-display {
             position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(to right, var(--secondary), var(--accent));
-            border-radius: 2px;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            z-index: 100;
         }
         
-        .takeaway-list {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
+        .hint {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #5a67d8;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            z-index: 100;
         }
         
-        .takeaway-item {
-            background: rgba(37, 99, 235, 0.05);
-            padding: 18px;
-            border-radius: 14px;
-            border-left: 4px solid var(--primary);
-            transition: all 0.3s ease;
-        }
-        
-        .takeaway-item:hover {
-            transform: translateY(-2px);
-            background: rgba(37, 99, 235, 0.08);
-        }
-        
-        .takeaway-item h3 {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 8px;
-            color: var(--dark);
-            font-size: 1.1rem;
-        }
-        
-        .takeaway-item p {
-            color: #475569;
-            font-size: 0.9rem;
-        }
-        
-        /* Animations */
+        /* Анимации */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
         
-        .fade-in {
-            animation: fadeIn 0.5s ease forwards;
-        }
-        
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
-        .delay-4 { animation-delay: 0.4s; }
-        
-        /* Tablet and Desktop Styles */
-        @media (min-width: 768px) {
-            body {
-                padding: 20px;
-            }
-            
+        /* Адаптивность */
+        @media (max-width: 768px) {
             .container {
-                max-width: 720px;
-                padding: 0;
+                padding: 15px;
             }
             
-            .header {
-                padding: 25px 20px;
+            h1 {
+                font-size: 1.8rem;
             }
             
-            .infographic-section {
-                padding: 25px;
+            .subtitle {
+                font-size: 1rem;
             }
             
-            .giants-container {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 18px;
+            .control-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1rem;
             }
             
-            .average-box {
-                grid-column: span 2;
+            .download-menu {
+                top: 65px;
+                min-width: 160px;
             }
             
-            .comparison-container {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 25px;
+            .download-option {
+                padding: 10px 12px;
+                font-size: 0.9rem;
             }
             
-            .barrier {
-                grid-column: span 2;
-            }
-            
-            .takeaway-list {
-                grid-template-columns: repeat(2, 1fr);
+            .hint {
+                font-size: 0.75rem;
+                max-width: 150px;
+                text-align: right;
             }
         }
         
-        @media (min-width: 992px) {
-            .container {
-                max-width: 960px;
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
             }
             
-            .giants-container {
-                grid-template-columns: repeat(4, 1fr);
+            .subtitle {
+                font-size: 0.9rem;
             }
             
-            .average-box {
-                grid-column: span 4;
+            .diagram-wrapper {
+                height: 60vh;
+                min-height: 400px;
             }
             
-            .threshold-container {
-                flex-direction: row;
-                justify-content: space-around;
-                align-items: center;
-                flex-wrap: wrap;
+            .control-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 0.9rem;
             }
             
-            .threshold-card {
-                margin-bottom: 0;
+            .download-menu {
+                top: 60px;
+                right: 10px;
             }
             
-            .investment-cycle {
-                margin: 0 15px;
-            }
-            
-            .takeaway-list {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-        
-        @media (min-width: 1200px) {
-            .container {
-                max-width: 1140px;
+            .scale-display, .hint {
+                font-size: 0.8rem;
+                padding: 6px 12px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header fade-in">
-            <h1>Инвестиции в R&D: Гонка Гигантов</h1>
-            <p class="subtitle">Анализ расходов на исследования и разработки ведущих технологических компаний</p>
-        </div>
+        <header>
+            <h1>Стратегия роста компании</h1>
+            <p class="subtitle">Интерактивная диаграмма с возможностью масштабирования, перемещения и экспорта</p>
+        </header>
         
-        <div class="infographic-container">
-            <!-- Block 1: Giants -->
-            <div class="infographic-section fade-in">
-                <h2 class="section-title">Инвестиции Технологических Гигантов</h2>
-                <div class="giants-container">
-                    <!-- Amazon -->
-                    <div class="giant-bar fade-in delay-1">
-                        <div class="company-logo" style="background: linear-gradient(to right, #FF9900, #ffad33);">
-                            <i class="fab fa-amazon"></i>
-                        </div>
-                        <div class="company-info">
-                            <div class="company-name">Amazon</div>
-                            <div class="bar-container">
-                                <div class="bar" style="background: linear-gradient(to right, #FF9900, #ffad33);">
-                                    <div class="bar-value">$85.6 млрд</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Alphabet -->
-                    <div class="giant-bar fade-in delay-2">
-                        <div class="company-logo" style="background: linear-gradient(to right, #4285F4, #34A853, #FBBC05, #EA4335);">
-                            <i class="fab fa-google"></i>
-                        </div>
-                        <div class="company-info">
-                            <div class="company-name">Alphabet (Google)</div>
-                            <div class="bar-container">
-                                <div class="bar" style="background: linear-gradient(to right, #4285F4, #5a95f5);">
-                                    <div class="bar-value">$45.4 млрд</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Meta -->
-                    <div class="giant-bar fade-in delay-3">
-                        <div class="company-logo" style="background: linear-gradient(to right, #1877F2, #3d8df5);">
-                            <i class="fab fa-meta"></i>
-                        </div>
-                        <div class="company-info">
-                            <div class="company-name">Meta</div>
-                            <div class="bar-container">
-                                <div class="bar" style="background: linear-gradient(to right, #1877F2, #3d8df5);">
-                                    <div class="bar-value">$38.5 млрд</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Apple -->
-                    <div class="giant-bar fade-in delay-4">
-                        <div class="company-logo" style="background: linear-gradient(to right, #A2AAAD, #b8bec0);">
-                            <i class="fab fa-apple"></i>
-                        </div>
-                        <div class="company-info">
-                            <div class="company-name">Apple</div>
-                            <div class="bar-container">
-                                <div class="bar" style="background: linear-gradient(to right, #A2AAAD, #b8bec0);">
-                                    <div class="bar-value">$30 млрд</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="average-box fade-in delay-1">
-                        <div><i class="fas fa-calculator"></i> Средний показатель</div>
-                        <div class="average-value">~$33 млрд</div>
-                        <div>на одну компанию (Топ-3 США)</div>
-                    </div>
-                </div>
+        <div class="diagram-wrapper">
+            <div id="diagram" class="mermaid">
+graph TD
+    A(Текущее состояние • ARPU $36<br>• 30 млн платящих) --> B{Этап 1:<br>Горизонтальный рост}
+    B --> C(Увеличение платящих до 80 млн<br>• ARPU $36 = $28.8 млрд)
+    A --> D{Этап 2:<br>Вертикальный рост}
+    D --> E(Запуск премиум-сегмента<br>• 20 млн пользователей<br>• ARPU $720 = $14.4 млрд)
+    C --> F(Суммарно:<br>$28.8 + $14.4 = $43.2 млрд)
+    F --> G{Этап 3:<br>Экосистема}
+    G --> H(B2B-решения<br>• Комиссии<br>• Данные = $72 млрд)
             </div>
             
-            <!-- Block 2: Threshold -->
-            <div class="infographic-section fade-in">
-                <h2 class="section-title">Минимальный Порог для Глобальной Игры</h2>
-                <div class="threshold-container">
-                    <div class="threshold-card fade-in delay-1">
-                        <div class="threshold-title">Минимальный Годовой Порог</div>
-                        <div class="threshold-item">
-                            <div class="threshold-icon"><i class="fas fa-dollar-sign"></i></div>
-                            <div><strong>$1 млрд</strong> на R&D</div>
-                        </div>
-                        <div class="threshold-item">
-                            <div class="threshold-icon"><i class="fas fa-chart-line"></i></div>
-                            <div><strong>$3 млрд</strong> чистая прибыль</div>
-                        </div>
-                    </div>
-                    
-                    <div class="investment-cycle fade-in delay-2">
-                        <div class="cycle-step">Инвестиции</div>
-                        <div class="cycle-arrow">➔</div>
-                        <div class="cycle-step">Инновации</div>
-                        <div class="cycle-arrow">➔</div>
-                        <div class="cycle-step">Инвестиции</div>
-                    </div>
-                    
-                    <div class="threshold-text fade-in delay-3">
-                        Чтобы войти в цикл <strong>Инвестиции → Инновации → Инвестиции</strong> на глобальном рынке, 
-                        предприятию необходимо выделять минимум $1 млрд в год на R&D, что требует чистой прибыли не менее $3 млрд.
-                    </div>
-                </div>
+            <!-- Элементы управления поверх диаграммы -->
+            <div class="controls-overlay">
+                <button class="control-btn download-btn" id="download-toggle">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                    </svg>
+                </button>
+                
+                <button class="control-btn" id="zoom-in">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg>
+                </button>
+                
+                <button class="control-btn" id="zoom-out">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+                    </svg>
+                </button>
+                
+                <button class="control-btn reset-btn" id="reset-zoom">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+                        <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+                    </svg>
+                </button>
             </div>
             
-            <!-- Block 3: OpenAI vs Meta -->
-            <div class="infographic-section fade-in">
-                <h2 class="section-title">OpenAI vs Meta: Гонка за Инновациями</h2>
-                <div class="comparison-container">
-                    <div class="company-card openai-card fade-in delay-1">
-                        <div class="company-header">
-                            <div class="company-icon">
-                                <i class="fas fa-robot"></i>
-                            </div>
-                            <div>
-                                <div class="company-title">OpenAI</div>
-                                <div class="company-subtitle">Зона риска: Работает с убытком</div>
-                            </div>
-                        </div>
-                        
-                        <div class="stats-container">
-                            <div class="stat-item">
-                                <div>R&D расходы:</div>
-                                <div class="stat-value">&lt; $1 млрд</div>
-                            </div>
-                            <div class="stat-item">
-                                <div>Выручка (2024):</div>
-                                <div class="stat-value positive">$10 млрд</div>
-                            </div>
-                            <div class="stat-item">
-                                <div>Чистый убыток (2024):</div>
-                                <div class="stat-value negative">-$5 млрд</div>
-                            </div>
-                            <div class="stat-item">
-                                <div>Ключ к выживанию:</div>
-                                <div class="stat-value">Развитие за счёт инвестиций</div>
-                            </div>
-                        </div>
-                        
-                        <div class="goal-box">
-                            <i class="fas fa-bullseye"></i> Цель 2027: Достижение стабильности
-                        </div>
-                    </div>
-                    
-                    <div class="barrier fade-in delay-2">
-                        <div class="barrier-line"></div>
-                        <div class="barrier-text">Информационный/Экономический Барьер</div>
-                        <div class="barrier-line"></div>
-                    </div>
-                    
-                    <div class="company-card meta-card fade-in delay-3">
-                        <div class="company-header">
-                            <div class="company-icon">
-                                <i class="fab fa-meta"></i>
-                            </div>
-                            <div>
-                                <div class="company-title">Meta</div>
-                                <div class="company-subtitle">Зона действия: Защита позиций</div>
-                            </div>
-                        </div>
-                        
-                        <div class="stats-container">
-                            <div class="stat-item">
-                                <div>Действия:</div>
-                                <div class="stat-value">Выкуп специалистов</div>
-                            </div>
-                            <div class="stat-item">
-                                <div>Стратегия:</div>
-                                <div class="stat-value">Скупка технологий</div>
-                            </div>
-                            <div class="stat-item">
-                                <div>Цель:</div>
-                                <div class="stat-value">Генерировать или скупать инновации</div>
-                            </div>
-                            <div class="stat-item">
-                                <div>Риск:</div>
-                                <div class="stat-value">Разрыв инновационного цикла</div>
-                            </div>
-                        </div>
-                        
-                        <div class="goal-box">
-                            <i class="fas fa-shield-alt"></i> Сохранить инновационный цикл
-                        </div>
-                    </div>
-                </div>
+            <!-- Выпадающее меню загрузки -->
+            <div class="download-menu" id="download-menu">
+                <button class="download-option" id="download-png">
+                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
+                    </svg>
+                    Скачать PNG
+                </button>
+                <button class="download-option" id="download-svg">
+                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M0 0h16v16H0V0z" fill="none"/>
+                        <path d="M8 13.5l-5-5 1-1 3 3 3-3 1 1-5 5zm0-12L3 7l1 1 3-3 3 3 1-1-5-5z"/>
+                    </svg>
+                    Скачать SVG
+                </button>
+                <button class="download-option" id="download-code">
+                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M5.854 4.854a.5.5 0 1 0-.708-.708l-3.5 3.5a.5.5 0 0 0 0 .708l3.5 3.5a.5.5 0 0 0 .708-.708L2.707 8l3.147-3.146zm4.292 0a.5.5 0 0 1 .708-.708l3.5 3.5a.5.5 0 0 1 0 .708l-3.5 3.5a.5.5 0 0 1-.708-.708L13.293 8l-3.147-3.146z"/>
+                    </svg>
+                    Скачать код
+                </button>
             </div>
-        </div>
-        
-        <!-- Key Takeaways -->
-        <div class="key-takeaways fade-in">
-            <h2>Ключевые Выводы</h2>
-            <div class="takeaway-list">
-                <div class="takeaway-item fade-in delay-1">
-                    <h3><i class="fas fa-chart-line"></i> Масштаб инвестиций</h3>
-                    <p>Технологические гиганты инвестируют десятки миллиардов долларов ежегодно в R&D, создавая высокий финансовый барьер.</p>
-                </div>
-                
-                <div class="takeaway-item fade-in delay-2">
-                    <h3><i class="fas fa-sync-alt"></i> Инновационный цикл</h3>
-                    <p>Для глобальной конкуренции необходимо поддерживать цикл "Инвестиции → Инновации → Инвестиции" с прибылью $3+ млрд.</p>
-                </div>
-                
-                <div class="takeaway-item fade-in delay-3">
-                    <h3><i class="fas fa-robot"></i> Угроза OpenAI</h3>
-                    <p>OpenAI представляет серьёзную угрозу для Meta благодаря стратегии развития за счёт инвестиций.</p>
-                </div>
-                
-                <div class="takeaway-item fade-in delay-4">
-                    <h3><i class="fas fa-exclamation-triangle"></i> Риск размывания</h3>
-                    <p>Компании, не поддерживающие инновационный цикл, рискуют технологически размыться.</p>
-                </div>
-            </div>
+            
+            <div class="scale-display" id="scale-display">Масштаб: 100%</div>
+            <div class="hint">Используйте колесо мыши для масштабирования<br>Перетаскивайте диаграмму для перемещения</div>
         </div>
     </div>
-    
+
     <script>
-        // Анимация при загрузке страницы
-        document.addEventListener('DOMContentLoaded', function() {
-            // Анимация для прогресс-баров
-            const bars = document.querySelectorAll('.bar');
-            bars.forEach(bar => {
-                bar.style.transform = 'scaleX(0)';
-                bar.style.transformOrigin = 'left center';
-                
-                setTimeout(() => {
-                    bar.style.transition = 'transform 1.5s ease-out';
-                    bar.style.transform = 'scaleX(1)';
-                }, 300);
-            });
+        // Инициализация Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis',
+                nodeSpacing: 50,
+                rankSpacing: 70
+            },
+            securityLevel: 'loose',
+            fontFamily: "'Montserrat', sans-serif"
         });
+        
+        // Переменные
+        let scale = 1;
+        const diagram = document.getElementById('diagram');
+        const scaleDisplay = document.getElementById('scale-display');
+        const downloadMenu = document.getElementById('download-menu');
+        const downloadToggle = document.getElementById('download-toggle');
+        const zoomStep = 0.1;
+        const minScale = 0.3;
+        const maxScale = 3;
+        
+        // Инициализация Panzoom
+        const panzoomController = panzoom(diagram, {
+            bounds: true,
+            boundsPadding: 0.8,
+            minZoom: minScale,
+            maxZoom: maxScale,
+            smoothScroll: false,
+            beforeWheel: function(e) {
+                // Запрещаем масштабирование колесиком мыши, если диаграмма не в фокусе
+                return true;
+            }
+        });
+        
+        // Обновление отображения масштаба
+        function updateScaleDisplay() {
+            scale = panzoomController.getTransform().scale;
+            scaleDisplay.textContent = `Масштаб: ${Math.round(scale * 100)}%`;
+        }
+        
+        // Обработчики событий для кнопок
+        document.getElementById('zoom-in').addEventListener('click', () => {
+            panzoomController.smoothZoom(diagram.clientWidth/2, diagram.clientHeight/2, 1 + zoomStep);
+            setTimeout(updateScaleDisplay, 100);
+        });
+        
+        document.getElementById('zoom-out').addEventListener('click', () => {
+            panzoomController.smoothZoom(diagram.clientWidth/2, diagram.clientHeight/2, 1 - zoomStep);
+            setTimeout(updateScaleDisplay, 100);
+        });
+        
+        document.getElementById('reset-zoom').addEventListener('click', () => {
+            panzoomController.moveTo(0, 0);
+            panzoomController.zoomAbs(0, 0, 1);
+            setTimeout(updateScaleDisplay, 100);
+        });
+        
+        // Переключение меню загрузки
+        downloadToggle.addEventListener('click', (e) => {
+            downloadMenu.classList.toggle('active');
+            e.stopPropagation();
+        });
+        
+        // Закрытие меню при клике в другом месте
+        document.addEventListener('click', (e) => {
+            if (!downloadMenu.contains(e.target) && e.target !== downloadToggle) {
+                downloadMenu.classList.remove('active');
+            }
+        });
+        
+        // Функции скачивания
+        document.getElementById('download-png').addEventListener('click', async () => {
+            try {
+                downloadMenu.classList.remove('active');
+                
+                // Сохраняем текущую трансформацию
+                const originalTransform = diagram.style.transform;
+                
+                // Сбрасываем трансформацию для корректного скриншота
+                diagram.style.transform = 'none';
+                
+                // Ждем обновления DOM
+                await new Promise(resolve => setTimeout(resolve, 50));
+                
+                const canvas = await html2canvas(diagram, {
+                    backgroundColor: '#f8f9fa',
+                    scale: 3,
+                    logging: false
+                });
+                
+                // Восстанавливаем трансформацию
+                diagram.style.transform = originalTransform;
+                
+                canvas.toBlob(blob => {
+                    saveAs(blob, 'growth-plan.png');
+                });
+            } catch (error) {
+                alert('Ошибка при создании PNG: ' + error.message);
+            }
+        });
+        
+        document.getElementById('download-svg').addEventListener('click', () => {
+            try {
+                downloadMenu.classList.remove('active');
+                const svgElement = diagram.querySelector('svg');
+                
+                if (!svgElement) {
+                    throw new Error('SVG элемент не найден');
+                }
+                
+                const svgData = new XMLSerializer().serializeToString(svgElement);
+                const blob = new Blob([svgData], {type: 'image/svg+xml'});
+                saveAs(blob, 'growth-plan.svg');
+            } catch (error) {
+                alert('Ошибка при создании SVG: ' + error.message);
+            }
+        });
+        
+        document.getElementById('download-code').addEventListener('click', () => {
+            try {
+                downloadMenu.classList.remove('active');
+                const code = `graph TD
+    A[Текущее состояние • ARPU $36<br>• 30 млн платящих] --> B{Этап 1: Горизонтальный рост}
+    B --> C(Увеличение платящих до 80 млн • ARPU $36 = $28.8 млрд)
+    A --> D{Этап 2: Вертикальный рост}
+    D --> E(Запуск премиум-сегмента • 20 млн пользователей • ARPU $720 = $14.4 млрд)
+    C --> F[Суммарно: $28.8 + $14.4 = $43.2 млрд]
+    F --> G{Этап 3: Экосистема}
+    G --> H(B2B-решения • Комиссии • Данные = $72 млрд)`;
+                
+                const blob = new Blob([code], {type: 'text/plain'});
+                saveAs(blob, 'growth-plan.mmd');
+            } catch (error) {
+                alert('Ошибка при скачивании кода: ' + error.message);
+            }
+        });
+        
+        // Обновление масштаба при изменениях
+        panzoomController.on('zoom', updateScaleDisplay);
+        panzoomController.on('pan', updateScaleDisplay);
+        
+        // Инициализация отображения масштаба
+        updateScaleDisplay();
+        
+        // Адаптация под мобильные устройства
+        window.addEventListener('resize', () => {
+            if (window.innerWidth < 768 && scale > 1.5) {
+                panzoomController.zoomAbs(0, 0, 1);
+                panzoomController.moveTo(0, 0);
+                updateScaleDisplay();
+            }
+        });
+        
+        // Подсказка для мобильных устройств
+        if ('ontouchstart' in window) {
+            document.querySelector('.hint').innerHTML = 'Используйте два пальца для масштабирования<br>Перетаскивайте диаграмму для перемещения';
+        }
     </script>
 </body>
 </html>
-
