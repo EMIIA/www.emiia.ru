@@ -1,11 +1,17 @@
+
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Финансовый анализ</title>
-  <script src="https://d3js.org/d3.v7.min.js"></script>
-  <script src="https://unpkg.com/dagre-d3@0.6.4/dist/dagre-d3.min.js"></script>
+  <script src="https://www.emiia.ru/d3.v7.min.js"></script>
+  <script src="https://www.emiia.ru/dagre-d3.min.js"></script>
+
+
+<script src="/d3.v7.min.js"></script>
+  <script src="/dagre-d3.min.js"></script>
+
   <style>
     body {
       margin: 0;
@@ -17,18 +23,18 @@
       height: 100vh;
     }
     .node rect {
-      fill: #4bc0c0;
-      stroke: #333;
-      stroke-width: 1.5px;
+      fill: #a4c2f4ff;
+      stroke: #f8f9fa;
+      stroke-width: 2.5px;
       rx: 5px; /* Закругление углов */
       ry: 5px; /* Закругление углов */
     }
     .node text {
-      fill: #333;
+      fill: #f8f9fa;
       font-size: 12px;
     }
     .edgePath path {
-      stroke: #333;
+      stroke: #3c78d8ff;
       stroke-width: 1.5px;
       fill: none;
     }
@@ -46,9 +52,9 @@
       width: 50px;
       height: 50px;
       border-radius: 50%;
-      background-color: #4bc0c0;
+      background-color: #6d9eebff;
       color: #fff;
-      font-size: 14px;
+      font-size: 10px;
       font-weight: bold;
       border: none;
       cursor: pointer;
@@ -59,12 +65,12 @@
       z-index: 1000;
     }
     #csv-button:hover {
-      background-color: #369999;
+      background-color: #3c78d8ff;
     }
   </style>
 </head>
 <body>
-  <button id="csv-button" onclick="downloadCSV()">CSV</button>
+  <button id="csv-button" onclick="downloadCSV()">CSV <br> Excel</button>
   <svg id="graph"></svg>
   <script>
     // Создаем граф
