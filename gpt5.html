@@ -236,7 +236,7 @@ function downloadCSV() {
   const link = document.createElement('a');
   const url = URL.createObjectURL(blob);
   link.setAttribute('href', url);
-  link.setAttribute('download', 'Финансовый_анализ.csv');
+  link.setAttribute('download', 'financial_analysis_EMIIA_AI_SIP.csv');
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
