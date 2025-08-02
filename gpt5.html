@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,6 +69,18 @@
     #csv-button:hover {
       background-color: #3c78d8ff;
     }
+
+
+
+
+
+
+
+
+
+
+
+
   </style>
 </head>
 <body>
@@ -148,6 +161,67 @@
     g.setEdge('PayingRevenue', 'ARPPU', { label: wrapText('Выручка = Платящие пользователи × ARPPU', 100).join('\n'), labeloffset: 20 });
     g.setEdge('ActiveCapacity', 'ActiveUsers', { label: wrapText('Емкость = Активные пользователи × ARPU', 100).join('\n'), labeloffset: 20 });
     g.setEdge('ActiveCapacity', 'ARPU', { label: wrapText('Емкость = Активные пользователи × ARPU', 100).join('\n'), labeloffset: 20 });
+
+
+
+
+
+
+
+
+
+
+// Затраты — оттенки красного
+g.setEdge('Zatraty', 'TCO', { label: '', 
+
+style: 'stroke: #FF6B6B; stroke-width: 2px;',
+  arrowheadStyle: 'fill: green; stroke: #58FFA5;' });
+
+
+
+g.setEdge('Zatraty', 'CAC', { label: '', style: 'stroke: #FF8E72; stroke-width: 2px;' });
+g.setEdge('Zatraty', 'RSC', { label: '', style: 'stroke: #FFB36B; stroke-width: 2px;' });
+g.setEdge('Zatraty', 'CapEx_OpEx', { label: '', style: 'stroke: #FFD36B; stroke-width: 2px;' });
+
+g.setEdge('TCO', 'CAC', { label: wrapText('TCO = CapEx + OpEx + RSC + CAC', 100).join('\n'), labeloffset: 20, style: 'stroke: #FF9F6B; stroke-dasharray: 5, 5;' });
+g.setEdge('TCO', 'RSC', { label: wrapText('TCO = CapEx + OpEx + RSC + CAC', 100).join('\n'), labeloffset: 20, style: 'stroke: #FF6B81; stroke-dasharray: 3, 3;' });
+g.setEdge('TCO', 'CapEx_OpEx', { label: wrapText('TCO = CapEx + OpEx + RSC + CAC', 100).join('\n'), labeloffset: 20, style: 'stroke: #FFA36B; stroke-dasharray: 1, 4;' });
+
+// Пользовательская экономика — оттенки синего и зеленого
+g.setEdge('PolzEkonomika', 'ARPU', { label: '', style: 'stroke: #5A9BFF; stroke-width: 2px;' });
+g.setEdge('PolzEkonomika', 'ARPPU', { label: '', style: 'stroke: #38D9A9; stroke-width: 2px;' });
+g.setEdge('PolzEkonomika', 'Lifetime', { label: '', style: 'stroke: #4DFFB0; stroke-width: 2px;' });
+g.setEdge('PolzEkonomika', 'LTV', { label: '', style: 'stroke: #58FFA5; stroke-width: 2px;' });
+
+g.setEdge('LTV', 'ARPPU', { label: wrapText('LTV = (ARPPU - RSC) × Срок жизни', 100).join('\n'), labeloffset: 20, style: 'stroke: #53FFD9; stroke-dasharray: 5, 5;' });
+g.setEdge('LTV', 'RSC', { label: wrapText('LTV = (ARPPU - RSC) × Срок жизни', 100).join('\n'), labeloffset: 20, style: 'stroke: #31DEFF; stroke-dasharray: 3, 3;' });
+g.setEdge('LTV', 'Lifetime', { label: wrapText('LTV = (ARPPU - RSC) × Срок жизни', 100).join('\n'), labeloffset: 20, style: 'stroke: #1EFFE3; stroke-dasharray: 1, 4;' });
+g.setEdge('ARPU', 'PayingRevenue', { label: wrapText('ARPU = Общий доход / Активные пользователи', 100).join('\n'), labeloffset: 20, style: 'stroke: #6BB5FF; stroke-dasharray: 2, 6;' });
+g.setEdge('ARPU', 'ActiveUsers', { label: wrapText('ARPU = Общий доход / Активные пользователи', 100).join('\n'), labeloffset: 20, style: 'stroke: #99C8FF; stroke-dasharray: 4, 2;' });
+
+// Рынок — оттенки фиолетового и розового
+g.setEdge('Rynok', 'ActiveUsers', { label: '', style: 'stroke: #A77CFF; stroke-width: 2px;' });
+g.setEdge('Rynok', 'PayingUsers', { label: '', style: 'stroke: #D06BFF; stroke-width: 2px;' });
+g.setEdge('Rynok', 'PayingRevenue', { label: '', style: 'stroke: #F36BFF; stroke-width: 2px;' });
+g.setEdge('Rynok', 'ActiveCapacity', { label: '', style: 'stroke: #FF6BF4; stroke-width: 2px;' });
+g.setEdge('Rynok', 'TargetMarket', { label: '', style: 'stroke: #FF6BA4; stroke-width: 2px;' });
+g.setEdge('Rynok', 'TargetCapacity', { label: '', style: 'stroke: #FD86C2; stroke-width: 2px;' });
+
+g.setEdge('PayingRevenue', 'PayingUsers', { label: wrapText('Выручка = Платящие пользователи × ARPPU', 100).join('\n'), labeloffset: 20, style: 'stroke: #DC6BFF; stroke-dasharray: 5, 2;' });
+g.setEdge('PayingRevenue', 'ARPPU', { label: wrapText('Выручка = Платящие пользователи × ARPPU', 100).join('\n'), labeloffset: 20, style: 'stroke: #FF6BDB; stroke-dasharray: 2, 5;' });
+g.setEdge('ActiveCapacity', 'ActiveUsers', { label: wrapText('Емкость = Активные пользователи × ARPU', 100).join('\n'), labeloffset: 20, style: 'stroke: #DE6BE6; stroke-dasharray: 4, 4;' });
+g.setEdge('ActiveCapacity', 'ARPU', { label: wrapText('Емкость = Активные пользователи × ARPU', 100).join('\n'), labeloffset: 20, style: 'stroke: #B16BFF; stroke-dasharray: 6, 2;' });
+
+
+
+
+
+
+
+
+
+
+
 
     // Рендеринг
     const svg = d3.select('#graph');
@@ -248,6 +322,19 @@ function downloadCSV() {
 
 
   </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>
 
