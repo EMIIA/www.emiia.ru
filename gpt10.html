@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Финансовый анализ</title>
+ <script src="https://www.emiia.ru/d3.v7.min.js"></script>
+  <script src="https://www.emiia.ru/dagre-d3.min.js"></script>
+
+
+<script src="/d3.v7.min.js"></script>
+  <script src="/dagre-d3.min.js"></script>
+
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+    #graph {
+      width: 100vw;
+      height: 100vh;
+    }
+    .node rect {
+      fill: #a4c2f4ff;
+      stroke: #f8f9fa;
+      stroke-width: 2.5px;
+      rx: 5px;
+      ry: 5px;
+    }
+    .node text {
+      fill: #f8f9fa;
+      font-size: 12px;
+    }
+    .edgePath path {
+      stroke: #3c78d8ff;
+      stroke-width: 1.5px;
+      fill: none;
+    }
+    .edgePath marker path {
+      fill: #3c78d8ff !important;
+      stroke: #3c78d8ff !important;
+    }
+    .edgeLabel {
+      font-size: 10px;
+      fill: transparent;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 4px 8px;
+      border-radius: 3px;
+    }
+    #csv-button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #6d9eebff;
+      color: #fff;
+      font-size: 10px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+    }
+    #csv-button:hover {
+      background-color: #3c78d8ff;
+    }
+    .tooltip {
+      position: absolute;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      pointer-events: none;
+      font-size: 13px;
+      max-width: 280px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+      backdrop-filter: blur(2px);
+      line-height: 1.4;
+    }
+    .tooltip-title {
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #3c78d8;
+      font-size: 14px;
+    }
+    .tooltip-formula {
+      font-family: 'Courier New', monospace;
+      background: #f5f5f5;
+      padding: 6px 8px;
+      border-radius: 4px;
+      margin: 8px 0;
+      white-space: pre-wrap;
+    }
+    
+    /* Увеличение стрелок на мобильных */
+    @media (max-width: 768px) {
+      .edgePath marker {
+        transform: scale(1.5);
+      }
+      .tooltip {
+        left: 50% !important;
+        top: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        max-width: 90vw;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button id="csv-button" onclick="downloadCSV()">CSV <br> Excel</button>
+  <svg id="graph"></svg>
+  <script>
+    // Создаем граф с настройками
+    const g = new dagreD3.graphlib.Graph()
+      .setGraph({
+        rankdir: 'TB',
+        ranksep: 50,
+        edgesep: 20,
+        nodesep: 30
+      })
+      .setDefaultEdgeLabel(function() { return {}; });
+
+    // Настройка стрелок по умолчанию
+    g.graph().edge = g.graph().edge || {};
+    g.graph().edge.arrowhead = 'normal';
+    g.graph().edge.arrowheadStyle = 'fill: #3c78d8; stroke: #3c78d8;';
+
+    // Функция для переноса текста
+    function wrapText(text, width) {
+      const words = text.split(/\s+/);
+      let lines = [];
+      let currentLine = '';
+      const padding = 20;
+      const maxWidth = width - padding;
+      words.forEach(word => {
+        const testLine = currentLine + (currentLine ? ' ' : '') + word;
+        const testWidth = testLine.length * 6;
+        if (testWidth > maxWidth && currentLine) {
+          lines.push(currentLine);
+          currentLine = word;
+        } else {
+          currentLine = testLine;
+        }
+      });
+      if (currentLine) lines.push(currentLine);
+      return lines;
+    }
+
+    // Узлы с описаниями формул
+    g.setNode('Zatraty', { 
+      label: 'Затраты', 
+      width: 120, 
+      height: 40,
+      description: 'Категория: Затраты\nВсе финансовые расходы компании'
+    });
+    
+    g.setNode('TCO', { 
+      label: 'TCO: $1,5 млрд/год', 
+      width: 160, 
+      height: 40,
+      description: 'Формула: CapEx + OpEx = $1,5 млрд/год\n\nКомпоненты:\n- CapEx: капитальные затраты\n- OpEx: операционные расходы\n- Включает RSC и CAC'
+    });
+    
+    g.setNode('CAC', { 
+      label: 'CAC: $3', 
+      width: 120, 
+      height: 40,
+      description: 'Customer Acquisition Cost\nСтоимость привлечения клиента\n\nЧасть OpEx: $3 на каждого нового пользователя'
+    });
+    
+    g.setNode('RSC', { 
+      label: 'RSC: $7/год', 
+      width: 120, 
+      height: 40,
+      description: 'Retention & Support Costs\nЗатраты на удержание и поддержку\n\n$7/год на каждого активного пользователя'
+    });
+    
+    g.setNode('CapEx_OpEx', { 
+      label: 'CapEx+OpEx', 
+      width: 120, 
+      height: 40,
+      description: 'Совокупные затраты:\n\nCapEx (капитальные) + OpEx (операционные)\n= $1,5 млрд/год (TCO)'
+    });
+
+    g.setNode('PolzEkonomika', { 
+      label: 'Пользовательская экономика', 
+      width: 180, 
+      height: 40,
+      description: 'Метрики монетизации пользователей'
+    });
+    
+    g.setNode('ARPU', { 
+      label: 'ARPU: $36/год', 
+      width: 120, 
+      height: 40,
+      description: 'Average Revenue Per User\nФормула:\nARPU = Общий доход / количество активных пользователей\n\n$3/мес × 12 = $36/год'
+    });
+    
+    g.setNode('ARPPU', { 
+      label: 'ARPPU: $120/год', 
+      width: 140, 
+      height: 40,
+      description: 'Average Revenue Per Paying User\nФормула:\nARPPU = Доход от платящих / их количество\n\n$10/мес × 12 = $120/год'
+    });
+    
+    g.setNode('Lifetime', { 
+      label: 'Срок жизни: 7 лет', 
+      width: 140, 
+      height: 40,
+      description: 'Средний срок жизни клиента\nИспользуется для расчета LTV'
+    });
+    
+    g.setNode('LTV', { 
+      label: 'LTV: $791', 
+      width: 120, 
+      height: 40,
+      description: 'Lifetime Value\nФормула:\nLTV = (ARPPU - RSC) × Срок жизни\n\nРасчет:\n($120 - $7) × 7 лет = $791'
+    });
+
+    g.setNode('Rynok', { 
+      label: 'Рынок', 
+      width: 120, 
+      height: 40,
+      description: 'Рыночные показатели и потенциал'
+    });
+    
+    g.setNode('ActiveUsers', { 
+      label: 'Активные пользователи: 100 млн', 
+      width: 180, 
+      height: 40,
+      description: 'Текущая активная пользовательская база\n\nИспользуется для расчета ARPU'
+    });
+    
+    g.setNode('PayingUsers', { 
+      label: 'Платящие пользователи: 30 млн', 
+      width: 180, 
+      height: 40,
+      description: 'Пользователи, приносящие доход\n\n30% от активных пользователей'
+    });
+    
+    g.setNode('PayingRevenue', { 
+      label: 'Выручка: $3,6 млрд/год', 
+      width: 180, 
+      height: 40,
+      description: 'Формула:\nВыручка = Платящие пользователи × ARPPU\n\n30 млн × $120 = $3,6 млрд/год'
+    });
+    
+    g.setNode('ActiveCapacity', { 
+      label: 'Потенциальная емкость: $8,4 млрд/год', 
+      width: 220, 
+      height: 40,
+      description: 'Формула:\nЕмкость = Активные пользователи × ARPU\n\n100 млн × $84 = $8,4 млрд/год\n(ARPPU с 30% скидкой)'
+    });
+    
+    g.setNode('TargetMarket', { 
+      label: 'Целевой рынок: 1,67 млрд', 
+      width: 180, 
+      height: 40,
+      description: 'Совокупный адресуемый рынок (TAM)\n\nОбъединяет облака, IoT и RTLS'
+    });
+    
+    g.setNode('TargetCapacity', { 
+      label: 'Емкость рынка: $1,2 трлн/год', 
+      width: 180, 
+      height: 40,
+      description: 'Максимальный потенциал рынка\n\n$1,2 трлн/год для всех сегментов:\nB2B, B2C, B2G, B2M, M2M, AI'
+    });
+
+    // Ребра с указанием смещения текста и стилями стрелок
+    g.setEdge('Zatraty', 'TCO', { 
+      label: '', 
+      style: 'stroke: #FF6B6B; stroke-width: 2px;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #FF6B6B; stroke: #FF6B6B;'
+    });
+    
+    g.setEdge('Zatraty', 'CAC', { 
+      label: '', 
+      style: 'stroke: #FF8E72; stroke-width: 2px;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #FF8E72; stroke: #FF8E72;'
+    });
+    
+    g.setEdge('Zatraty', 'RSC', { 
+      label: '', 
+      style: 'stroke: #FFB36B; stroke-width: 2px;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #FFB36B; stroke: #FFB36B;'
+    });
+    
+    g.setEdge('Zatraty', 'CapEx_OpEx', { 
+      label: '', 
+      style: 'stroke: #FFD36B; stroke-width: 2px;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #FFD36B; stroke: #FFD36B;'
+    });
+    
+    g.setEdge('TCO', 'CAC', { 
+      label: wrapText('TCO = CapEx + OpEx + RSC + CAC', 100).join('\n'), 
+      labeloffset: 20, 
+      style: 'stroke: #FF9F6B; stroke-dasharray: 5, 5;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #FF9F6B; stroke: #FF9F6B;'
+    });
+    
+    g.setEdge('TCO', 'RSC', { 
+      label: wrapText('TCO = CapEx + OpEx + RSC + CAC', 100).join('\n'), 
+      labeloffset: 20, 
+      style: 'stroke: #FF6B81; stroke-dasharray: 3, 3;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #FF6B81; stroke: #FF6B81;'
+    });
+    
+    g.setEdge('TCO', 'CapEx_OpEx', { 
+      label: wrapText('TCO = CapEx + OpEx + RSC + CAC', 100).join('\n'), 
+      labeloffset: 20, 
+      style: 'stroke: #FFA36B; stroke-dasharray: 1, 4;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #FFA36B; stroke: #FFA36B;'
+    });
+
+    g.setEdge('PolzEkonomika', 'ARPU', { 
+      label: '', 
+      style: 'stroke: #5A9BFF; stroke-width: 2px;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #5A9BFF; stroke: #5A9BFF;'
+    });
+    
+    g.setEdge('PolzEkonomika', 'ARPPU', { 
+      label: '', 
+      style: 'stroke: #38D9A9; stroke-width: 2px;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #38D9A9; stroke: #38D9A9;'
+    });
+    
+    g.setEdge('PolzEkonomika', 'Lifetime', { 
+      label: '', 
+      style: 'stroke: #4DFFB0; stroke-width: 2px;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #4DFFB0; stroke: #4DFFB0;'
+    });
+    
+    g.setEdge('PolzEkonomika', 'LTV', { 
+      label: '', 
+      style: 'stroke: #58FFA5; stroke-width: 2px;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #58FFA5; stroke: #58FFA5;'
+    });
+    
+    g.setEdge('LTV', 'ARPPU', { 
+      label: wrapText('LTV = (ARPPU - RSC) × Срок жизни', 100).join('\n'), 
+      labeloffset: 20, 
+      style: 'stroke: #53FFD9; stroke-dasharray: 5, 5;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #53FFD9; stroke: #53FFD9;'
+    });
+    
+    g.setEdge('LTV', 'RSC', { 
+      label: wrapText('LTV = (ARPPU - RSC) × Срок жизни', 100).join('\n'), 
+      labeloffset: 20, 
+      style: 'stroke: #31DEFF; stroke-dasharray: 3, 3;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #31DEFF; stroke: #31DEFF;'
+    });
+    
+    g.setEdge('LTV', 'Lifetime', { 
+      label: wrapText('LTV = (ARPPU - RSC) × Срок жизни', 100).join('\n'), 
+      labeloffset: 20, 
+      style: 'stroke: #1EFFE3; stroke-dasharray: 1, 4;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #1EFFE3; stroke: #1EFFE3;'
+    });
+    
+    g.setEdge('ARPU', 'PayingRevenue', { 
+      label: wrapText('ARPU = Общий доход / Активные пользователи', 100).join('\n'), 
+      labeloffset: 20, 
+      style: 'stroke: #6BB5FF; stroke-dasharray: 2, 6;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #6BB5FF; stroke: #6BB5FF;'
+    });
+    
+    g.setEdge('ARPU', 'ActiveUsers', { 
+      label: wrapText('ARPU = Общий доход / Активные пользователи', 100).join('\n'), 
+      labeloffset: 20, 
+      style: 'stroke: #99C8FF; stroke-dasharray: 4, 2;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #99C8FF; stroke: #99C8FF;'
+    });
+
+    g.setEdge('Rynok', 'ActiveUsers', { 
+      label: '', 
+      style: 'stroke: #A77CFF; stroke-width: 2px;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #A77CFF; stroke: #A77CFF;'
+    });
+    
+    g.setEdge('Rynok', 'PayingUsers', { 
+      label: '', 
+      style: 'stroke: #D06BFF; stroke-width: 2px;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #D06BFF; stroke: #D06BFF;'
+    });
+    
+    g.setEdge('Rynok', 'PayingRevenue', { 
+      label: '', 
+      style: 'stroke: #F36BFF; stroke-width: 2px;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #F36BFF; stroke: #F36BFF;'
+    });
+    
+    g.setEdge('Rynok', 'ActiveCapacity', { 
+      label: '', 
+      style: 'stroke: #FF6BF4; stroke-width: 2px;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #FF6BF4; stroke: #FF6BF4;'
+    });
+    
+    g.setEdge('Rynok', 'TargetMarket', { 
+      label: '', 
+      style: 'stroke: #FF6BA4; stroke-width: 2px;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #FF6BA4; stroke: #FF6BA4;'
+    });
+    
+    g.setEdge('Rynok', 'TargetCapacity', { 
+      label: '', 
+      style: 'stroke: #FD86C2; stroke-width: 2px;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #FD86C2; stroke: #FD86C2;'
+    });
+    
+    g.setEdge('PayingRevenue', 'PayingUsers', { 
+      label: wrapText('Выручка = Платящие пользователи × ARPPU', 100).join('\n'), 
+      labeloffset: 20, 
+      style: 'stroke: #DC6BFF; stroke-dasharray: 5, 2;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #DC6BFF; stroke: #DC6BFF;'
+    });
+    
+    g.setEdge('PayingRevenue', 'ARPPU', { 
+      label: wrapText('Выручка = Платящие пользователи × ARPPU', 100).join('\n'), 
+      labeloffset: 20, 
+      style: 'stroke: #FF6BDB; stroke-dasharray: 2, 5;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #FF6BDB; stroke: #FF6BDB;'
+    });
+    
+    g.setEdge('ActiveCapacity', 'ActiveUsers', { 
+      label: wrapText('Емкость = Активные пользователи × ARPU', 100).join('\n'), 
+      labeloffset: 20, 
+      style: 'stroke: #DE6BE6; stroke-dasharray: 4, 4;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #DE6BE6; stroke: #DE6BE6;'
+    });
+    
+    g.setEdge('ActiveCapacity', 'ARPU', { 
+      label: wrapText('Емкость = Активные пользователи × ARPU', 100).join('\n'), 
+      labeloffset: 20, 
+      style: 'stroke: #B16BFF; stroke-dasharray: 6, 2;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #B16BFF; stroke: #B16BFF;'
+    });
+
+    // Рендеринг
+    const svg = d3.select('#graph');
+    const inner = svg.append('g');
+    const render = new dagreD3.render();
+
+    // Создаем элемент для подсказки
+    const tooltip = d3.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
+
+    // Кастомизация узлов для переноса текста
+    const oldLabel = dagreD3.label;
+    dagreD3.label = function(node) {
+      const lines = wrapText(node.label, node.width - 20);
+      const tspan = lines.map((line, i) => `<tspan x="0" dy="${i ? 12 : -lines.length * 6}">${line}</tspan>`).join('');
+      return `<text text-anchor="middle" x="0" y="0">${tspan}</text>`;
+    };
+    
+    // Рендерим граф
+    render(inner, g);
+    
+    // Принудительно устанавливаем стили для стрелок
+    svg.selectAll('.edgePath marker path')
+      .attr('fill', function() {
+        return d3.select(this.parentNode).attr('fill') || '#3c78d8';
+      })
+      .attr('stroke', 'none');
+      
+    dagreD3.label = oldLabel;
+
+    // Обработчики событий для узлов
+    inner.selectAll("g.node")
+      .on("mouseover", function(event, nodeId) {
+        const node = g.node(nodeId);
+        const xOffset = 15;
+        const yOffset = -20;
+        const tooltipWidth = 280;
+        const windowWidth = window.innerWidth;
+
+        let left = event.pageX + xOffset;
+        if (left + tooltipWidth > windowWidth) {
+          left = event.pageX - tooltipWidth - xOffset;
+        }
+
+        tooltip.transition()
+          .duration(200)
+          .style("opacity", 0.95);
+        
+        tooltip.html(`
+          <div class="tooltip-title">${node.label}</div>
+          <div class="tooltip-formula">${node.description.replace(/\n/g, '<br>')}</div>
+        `);
+        
+        if (window.innerWidth <= 768) {
+          tooltip.style("left", "50%")
+                 .style("top", "50%")
+                 .style("transform", "translate(-50%, -50%)");
+        } else {
+          tooltip.style("left", left + "px")
+                 .style("top", (event.pageY + yOffset) + "px")
+                 .style("transform", "none");
+        }
+      })
+      .on("mouseout", function() {
+        tooltip.transition()
+          .duration(500)
+          .style("opacity", 0);
+      });
+
+    // Корректировка позиционирования текста на ребрах
+    inner.selectAll('g.edgeLabel text').each(function() {
+      const text = d3.select(this);
+      const bbox = text.node().getBBox();
+      text.attr('dy', -bbox.height / 2 + 5);
+      const rect = text.node().previousSibling;
+      if (rect && rect.tagName === 'rect') {
+        d3.select(rect)
+          .attr('x', bbox.x - 8)
+          .attr('y', bbox.y - 4)
+          .attr('width', bbox.width + 16)
+          .attr('height', bbox.height + 8)
+          .attr('rx', 3)
+          .attr('ry', 3);
+      }
+    });
+
+    // Масштабирование и перетаскивание
+    const zoom = d3.zoom()
+      .scaleExtent([0.5, 2])
+      .on('zoom', (event) => {
+        inner.attr('transform', event.transform);
+      });
+    svg.call(zoom);
+
+    // Центрирование графа
+    const graphWidth = g.graph().width;
+    const graphHeight = g.graph().height;
+    const svgWidth = window.innerWidth;
+    const svgHeight = window.innerHeight;
+    const xCenterOffset = (svgWidth - graphWidth) / 2;
+    const yCenterOffset = (svgHeight - graphHeight) / 2;
+    svg.call(zoom.transform, d3.zoomIdentity.translate(xCenterOffset, yCenterOffset));
+
+    // Функция для скачивания CSV
+    function downloadCSV() {
+      const data = [
+        ["Категория", "Метрика", "Значение", "Формула", "Текстовое объяснение формулы"],
+        ["Затраты", "TCO (Совокупная стоимость владения)", "1500000000", "=C3+C4", "TCO = CapEx + OpEx (RSC и CAC включены), $1.5 млрд/год"],
+        ["Затраты", "CapEx (Капитальные затраты)", "", "", "Разовые инвестиции в активы"],
+        ["Затраты", "OpEx (Операционные затраты)", "", "", "Текущие расходы включая CAC и RSC"],
+        ["Затраты", "CAC (Стоимость привлечения клиента)", "3", "", "Часть OpEx: стоимость привлечения клиента"],
+        ["Затраты", "RSC (Удержание и поддержка клиента)", "7", "", "Часть OpEx: поддержка и удержание клиента"],
+        ["Пользовательская экономика", "ARPU (средний доход на пользователя)", "36", "=C14/C13", "ARPU = Общий доход / активные пользователи ($3/мес, $36/год)"],
+        ["Пользовательская экономика", "ARPPU (средний доход с платящего пользователя)", "120", "=C16/C15", "ARPPU = Доход от платящих / их число ($10/мес, $120/год)"],
+        ["Пользовательская экономика", "Срок жизни клиента (годы)", "7", "", "Средний срок жизни клиента (лет)"],
+        ["Пользовательская экономика", "LTV (пожизненная ценность клиента)", "791", "=(C8-C6)*C9", "LTV = (ARPPU - RSC) × срок жизни ($791)"],
+        ["Рынок", "TARGET: объем", "1670000000", "", "Совокупный целевой рынок (1,67 млрд пользователей)"],
+        ["Рынок", "TARGET: емкость", "1200000000000", "", "Максимальная выручка на рынке ($1,2 трлн/год)"],
+        ["Рынок", "ACTIVE: объем", "100000000", "", "Активные пользователи (100 млн)"],
+        ["Рынок", "ACTIVE: потенциальная емкость", "8400000000", "=C13*84", "ACTIVE × ARPPU (100 млн × $84 = $8,4 млрд/год; -30% от ARPPU)"],
+        ["Рынок", "CORE/AR: объем", "30000000", "", "Платящих пользователей (30 млн)"],
+        ["Рынок", "CORE/AR: выручка", "3600000000", "=C15*120", "CORE/AR × ARPPU (30 млн × $120 = $3,6 млрд/год)"]
+      ];
+      
+      const csvContent = data.map(row =>
+        row.map(cell =>
+          (typeof cell === 'string' && cell.includes(',')) ? `"${cell}"` : cell
+        ).join(',')
+      ).join('\n');
+      
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      const url = URL.createObjectURL(blob);
+      link.setAttribute('href', url);
+      link.setAttribute('download', 'financial_analysis_EMIIA_AI_SIP.csv');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+</body>
+</html>
