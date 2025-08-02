@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,6 +31,9 @@
       width: 100vw;
       height: 100vh;
     }
+
+
+
     .node rect {
       fill: #a4c2f4ff;
       stroke: #f8f9fa;
@@ -37,6 +41,14 @@
       rx: 5px;
       ry: 5px;
     }
+
+.node rect:hover {
+  fill: #3c78d8ff;
+}
+
+
+
+
     .node text {
       fill: #f8f9fa;
       font-size: 12px;
@@ -81,9 +93,13 @@
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
       z-index: 1000;
     }
+
+
     #csv-button:hover {
       background-color: #3c78d8ff;
     }
+
+
     .tooltip {
       position: absolute;
       padding: 12px;
@@ -111,6 +127,29 @@
       margin: 8px 0;
       white-space: pre-wrap;
     }
+
+
+
+
+
+
+rect {
+  fill: #a4c2f4ff;
+  stroke: #f8f9fa;
+  stroke-width: 2.5px;
+  rx: 5px;
+  ry: 5px;
+}.node:hover rect {
+  fill: #3c78d8ff;
+}.node text {
+  fill: #f8f9fa;
+  font-size: 12px;
+}
+/* Важно для dagre-d3! */.node * {
+  pointer-events: visiblePainted;
+}
+
+
     
     
     }
@@ -625,3 +664,4 @@
   </script>
 </body>
 </html>
+
