@@ -1,4 +1,6 @@
 
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -164,6 +166,16 @@ rect {
   stroke: #00cc00ff; /* любой цвет на выбор */
 }
 </style>
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -698,6 +710,90 @@ stroke="black" stroke-width="1" fill="none"
       document.body.removeChild(link);
     }
   </script>
+
+
+
+
+
+
+
+
+
+
+<script>
+
+inner.selectAll("g.node")
+  .on("mouseover", function(event, nodeId) {
+    const node = g.node(nodeId);
+    const tooltipWidth = 280;
+    const margin = 15; // Отступ от края экрана
+    
+    tooltip.html(`
+      <div class="tooltip-title">${node.label}</div>
+      <div class="tooltip-formula">${node.description.replace(/\n/g, '<br>')}</div>
+    `);
+    
+    // Получаем размеры тултипа после вставки контента
+    const tooltipRect = tooltip.node().getBoundingClientRect();
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    const nodeRect = this.getBoundingClientRect();
+
+    if (window.innerWidth <= 768) {
+      // Мобильная версия - привязка к блоку
+      let topPos = nodeRect.bottom + 10;
+      
+      // Проверяем, помещается ли снизу
+      if (topPos + tooltipRect.height > viewportHeight) {
+        topPos = nodeRect.top - tooltipRect.height - 10;
+        // Если не помещается сверху, фиксируем у края
+        if (topPos < margin) topPos = margin;
+      }
+      
+      // Горизонтальное позиционирование
+      let leftPos = nodeRect.left + (nodeRect.width - tooltipRect.width) / 2;
+      // Корректировка, если выходит за границы
+      if (leftPos < margin) leftPos = margin;
+      if (leftPos + tooltipRect.width > viewportWidth - margin) {
+        leftPos = viewportWidth - tooltipRect.width - margin;
+      }
+      
+      tooltip.style("top", topPos + "px")
+             .style("left", leftPos + "px")
+             .style("right", "auto")
+             .style("transform", "none");
+    } else {
+      // Десктопная версия
+      let left = event.pageX + 15;
+      let top = event.pageY - 20;
+      
+      // Проверка правой границы
+      if (left + tooltipWidth > viewportWidth - margin) {
+        left = event.pageX - tooltipWidth - 15;
+      }
+      
+      // Проверка нижней границы
+      if (top + tooltipRect.height > viewportHeight - margin) {
+        top = event.pageY - tooltipRect.height - 10;
+      }
+      
+      // Проверка верхней границы
+      if (top < margin) top = margin;
+      
+      tooltip.style("left", left + "px")
+             .style("top", top + "px");
+    }
+    
+    tooltip.transition().duration(200).style("opacity", 0.95);
+  })
+
+
+</script>
+
+
+
+
+
 </body>
 </html>
 
