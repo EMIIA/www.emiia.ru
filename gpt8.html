@@ -1,22 +1,40 @@
+
+
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Финансовый анализ</title>
-  <script src="https://d3js.org/d3.v7.min.js"></script>
-  <script src="https://dagrejs.github.io/project/dagre-d3/latest/dagre-d3.min.js"></script>
+
+
+
+
+
+  <script src="https://www.emiia.ru/d3.v7.min.js"></script>
+  <script src="https://www.emiia.ru/dagre-d3.min.js"></script>
+
+
+<script src="/d3.v7.min.js"></script>
+  <script src="/dagre-d3.min.js"></script>
+
+
+
+
+
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       overflow: hidden;
-      touch-action: pan-x pan-y;
     }
     #graph {
       width: 100vw;
       height: 100vh;
     }
+
+
+
     .node rect {
       fill: #a4c2f4ff;
       stroke: #f8f9fa;
@@ -24,30 +42,47 @@
       rx: 5px;
       ry: 5px;
     }
+
+.node rect:hover {
+  fill: #3c78d8ff;
+}
+
+
+
+
     .node text {
       fill: #f8f9fa;
       font-size: 12px;
     }
-    .edgePath path {
+    
+
+
+
+.edgePath path {
       stroke: #3c78d8ff;
       stroke-width: 1.5px;
       fill: none;
     }
-    .edgeLabel {
+   
+
+
+
+ .edgeLabel {
       font-size: 10px;
       fill: transparent;
       background-color: rgba(255, 255, 255, 0.9);
       padding: 4px 8px;
       border-radius: 3px;
     }
+   
     #csv-button {
       position: fixed;
       top: 20px;
       right: 20px;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background-color: #6d9eebff;
+      width: 37px;
+      height: 37px;
+      border-radius: 30%;
+      background-color: transparent;
       color: #fff;
       font-size: 10px;
       font-weight: bold;
@@ -59,68 +94,132 @@
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
       z-index: 1000;
     }
+
+
     #csv-button:hover {
-      background-color: #3c78d8ff;
+      background-color: white;
     }
+
+
     .tooltip {
-      position: fixed;
+      position: absolute;
       padding: 12px;
-      background: rgba(255, 255, 255, 0.98);
+      background: rgba(255, 255, 255, 0.95);
       border: 1px solid #ddd;
-      border-radius: 8px;
+      border-radius: 6px;
       pointer-events: none;
-      font-size: 14px;
-      max-width: 80vw;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      backdrop-filter: blur(4px);
-      line-height: 1.5;
-      z-index: 1001;
-      transform: translate(-50%, -100%);
-      transition: opacity 0.2s, transform 0.2s;
+      font-size: 13px;
+      max-width: 280px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+      backdrop-filter: blur(2px);
+      line-height: 1.4;
     }
     .tooltip-title {
       font-weight: bold;
       margin-bottom: 8px;
       color: #3c78d8;
-      font-size: 15px;
+      font-size: 14px;
     }
     .tooltip-formula {
       font-family: 'Courier New', monospace;
       background: #f5f5f5;
-      padding: 8px;
+      padding: 6px 8px;
       border-radius: 4px;
       margin: 8px 0;
       white-space: pre-wrap;
-      overflow-wrap: break-word;
     }
-    .tooltip-desc {
-      color: #555;
-      font-size: 13px;
-    }
-    @media (max-width: 768px) {
-      .tooltip {
-        max-width: 90vw;
-        font-size: 13px;
-        padding: 10px;
-        transform: translate(-50%, -105%);
-      }
-      .tooltip-title {
-        font-size: 14px;
-      }
-      .tooltip-formula {
-        font-size: 12px;
-        padding: 6px;
-      }
+
+
+
+
+
+
+rect {
+  fill: #a4c2f4ff;
+  stroke: #f8f9fa;
+  stroke-width: 2.5px;
+  rx: 5px;
+  ry: 5px;
+}.node:hover rect {
+  fill: #3c78d8ff;
+}.node text {
+  fill: #f8f9fa;
+  font-size: 12px;
+}
+/* Важно для dagre-d3! */.node * {
+  pointer-events: visiblePainted;
+}
+
+
+    
+    
     }
   </style>
+
+
+
+<style>.download-icon path {
+  stroke:  #00ff00ff;
+  transition: stroke 0.2s;
+}.download-icon:hover path {
+  stroke: #00cc00ff; /* любой цвет на выбор */
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
 </head>
 <body>
-  <button id="csv-button" onclick="downloadCSV()">CSV <br> Excel</button>
+
+
+  <button id="csv-button" onclick="downloadCSV()">
+
+
+
+
+
+
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"  fill="currentColor" class="download-icon" viewBox="0 0 16 16">
+  <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"
+
+stroke="black" stroke-width="1" fill="none"
+/>
+  <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"
+stroke="black" stroke-width="1" fill="none"
+
+/>
+</svg>
+
+</button>
+
+
+
   <svg id="graph"></svg>
   <script>
-    // [Предыдущий код создания графа остается без изменений...]
-    // Создаем граф
-    const g = new dagreD3.graphlib.Graph().setGraph({ rankdir: 'TB' });
+    // Создаем граф с настройками
+    const g = new dagreD3.graphlib.Graph()
+      .setGraph({
+        rankdir: 'TB',
+        ranksep: 50,
+        edgesep: 20,
+        nodesep: 30
+      })
+      .setDefaultEdgeLabel(function() { return {}; });
+
+    // Настройка стрелок по умолчанию
+    g.graph().edge = g.graph().edge || {};
+    g.graph().edge.arrowhead = 'normal';
+    g.graph().edge.arrowheadStyle = 'fill: #3c78d8; stroke: #3c78d8;';
 
     // Функция для переноса текста
     function wrapText(text, width) {
@@ -149,6 +248,7 @@
       width: 120, 
       height: 40,
       description: 'Категория: Затраты\nВсе финансовые расходы компании'
+
     });
     
     g.setNode('TCO', { 
@@ -263,35 +363,211 @@
       description: 'Максимальный потенциал рынка\n\n$1,2 трлн/год для всех сегментов:\nB2B, B2C, B2G, B2M, M2M, AI'
     });
 
-    // Ребра с указанием смещения текста
-    g.setEdge('Zatraty', 'TCO', { label: '', style: 'stroke: #FF6B6B; stroke-width: 2px;' });
-    g.setEdge('Zatraty', 'CAC', { label: '', style: 'stroke: #FF8E72; stroke-width: 2px;' });
-    g.setEdge('Zatraty', 'RSC', { label: '', style: 'stroke: #FFB36B; stroke-width: 2px;' });
-    g.setEdge('Zatraty', 'CapEx_OpEx', { label: '', style: 'stroke: #FFD36B; stroke-width: 2px;' });
-    g.setEdge('TCO', 'CAC', { label: wrapText('TCO = CapEx + OpEx + RSC + CAC', 100).join('\n'), labeloffset: 20, style: 'stroke: #FF9F6B; stroke-dasharray: 5, 5;' });
-    g.setEdge('TCO', 'RSC', { label: wrapText('TCO = CapEx + OpEx + RSC + CAC', 100).join('\n'), labeloffset: 20, style: 'stroke: #FF6B81; stroke-dasharray: 3, 3;' });
-    g.setEdge('TCO', 'CapEx_OpEx', { label: wrapText('TCO = CapEx + OpEx + RSC + CAC', 100).join('\n'), labeloffset: 20, style: 'stroke: #FFA36B; stroke-dasharray: 1, 4;' });
 
-    g.setEdge('PolzEkonomika', 'ARPU', { label: '', style: 'stroke: #5A9BFF; stroke-width: 2px;' });
-    g.setEdge('PolzEkonomika', 'ARPPU', { label: '', style: 'stroke: #38D9A9; stroke-width: 2px;' });
-    g.setEdge('PolzEkonomika', 'Lifetime', { label: '', style: 'stroke: #4DFFB0; stroke-width: 2px;' });
-    g.setEdge('PolzEkonomika', 'LTV', { label: '', style: 'stroke: #58FFA5; stroke-width: 2px;' });
-    g.setEdge('LTV', 'ARPPU', { label: wrapText('LTV = (ARPPU - RSC) × Срок жизни', 100).join('\n'), labeloffset: 20, style: 'stroke: #53FFD9; stroke-dasharray: 5, 5;' });
-    g.setEdge('LTV', 'RSC', { label: wrapText('LTV = (ARPPU - RSC) × Срок жизни', 100).join('\n'), labeloffset: 20, style: 'stroke: #31DEFF; stroke-dasharray: 3, 3;' });
-    g.setEdge('LTV', 'Lifetime', { label: wrapText('LTV = (ARPPU - RSC) × Срок жизни', 100).join('\n'), labeloffset: 20, style: 'stroke: #1EFFE3; stroke-dasharray: 1, 4;' });
-    g.setEdge('ARPU', 'PayingRevenue', { label: wrapText('ARPU = Общий доход / Активные пользователи', 100).join('\n'), labeloffset: 20, style: 'stroke: #6BB5FF; stroke-dasharray: 2, 6;' });
-    g.setEdge('ARPU', 'ActiveUsers', { label: wrapText('ARPU = Общий доход / Активные пользователи', 100).join('\n'), labeloffset: 20, style: 'stroke: #99C8FF; stroke-dasharray: 4, 2;' });
 
-    g.setEdge('Rynok', 'ActiveUsers', { label: '', style: 'stroke: #A77CFF; stroke-width: 2px;' });
-    g.setEdge('Rynok', 'PayingUsers', { label: '', style: 'stroke: #D06BFF; stroke-width: 2px;' });
-    g.setEdge('Rynok', 'PayingRevenue', { label: '', style: 'stroke: #F36BFF; stroke-width: 2px;' });
-    g.setEdge('Rynok', 'ActiveCapacity', { label: '', style: 'stroke: #FF6BF4; stroke-width: 2px;' });
-    g.setEdge('Rynok', 'TargetMarket', { label: '', style: 'stroke: #FF6BA4; stroke-width: 2px;' });
-    g.setEdge('Rynok', 'TargetCapacity', { label: '', style: 'stroke: #FD86C2; stroke-width: 2px;' });
-    g.setEdge('PayingRevenue', 'PayingUsers', { label: wrapText('Выручка = Платящие пользователи × ARPPU', 100).join('\n'), labeloffset: 20, style: 'stroke: #DC6BFF; stroke-dasharray: 5, 2;' });
-    g.setEdge('PayingRevenue', 'ARPPU', { label: wrapText('Выручка = Платящие пользователи × ARPPU', 100).join('\n'), labeloffset: 20, style: 'stroke: #FF6BDB; stroke-dasharray: 2, 5;' });
-    g.setEdge('ActiveCapacity', 'ActiveUsers', { label: wrapText('Емкость = Активные пользователи × ARPU', 100).join('\n'), labeloffset: 20, style: 'stroke: #DE6BE6; stroke-dasharray: 4, 4;' });
-    g.setEdge('ActiveCapacity', 'ARPU', { label: wrapText('Емкость = Активные пользователи × ARPU', 100).join('\n'), labeloffset: 20, style: 'stroke: #B16BFF; stroke-dasharray: 6, 2;' });
+
+
+
+
+
+
+    // Ребра с указанием смещения текста и стилями стрелок
+    g.setEdge('Zatraty', 'TCO', { 
+      label: '', 
+
+
+ style: 'stroke: #FF6B6B; stroke-width: 2px;',
+  arrowheadStyle: 'fill: #B16BFF; stroke: red;'
+
+
+    });
+    
+    g.setEdge('Zatraty', 'CAC', { 
+      label: '', 
+      style: 'stroke: #FF8E72; stroke-width: 2px;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #FF8E72; stroke: #FF8E72;'
+    });
+    
+    g.setEdge('Zatraty', 'RSC', { 
+      label: '', 
+      style: 'stroke: #FFB36B; stroke-width: 2px;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #FFB36B; stroke: #FFB36B;'
+    });
+    
+    g.setEdge('Zatraty', 'CapEx_OpEx', { 
+      label: '', 
+      style: 'stroke: #FFD36B; stroke-width: 2px;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #FFD36B; stroke: #FFD36B;'
+    });
+    
+    g.setEdge('TCO', 'CAC', { 
+      label: wrapText('TCO = CapEx + OpEx + RSC + CAC', 100).join('\n'), 
+      labeloffset: 20, 
+      style: 'stroke: #FF9F6B; stroke-dasharray: 5, 5;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #FF9F6B; stroke: #FF9F6B;'
+    });
+    
+    g.setEdge('TCO', 'RSC', { 
+      label: wrapText('TCO = CapEx + OpEx + RSC + CAC', 100).join('\n'), 
+      labeloffset: 20, 
+      style: 'stroke: #FF6B81; stroke-dasharray: 3, 3;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #FF6B81; stroke: #FF6B81;'
+    });
+    
+    g.setEdge('TCO', 'CapEx_OpEx', { 
+      label: wrapText('TCO = CapEx + OpEx + RSC + CAC', 100).join('\n'), 
+      labeloffset: 20, 
+      style: 'stroke: #FFA36B; stroke-dasharray: 1, 4;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #FFA36B; stroke: #FFA36B;'
+    });
+
+    g.setEdge('PolzEkonomika', 'ARPU', { 
+      label: '', 
+      style: 'stroke: #5A9BFF; stroke-width: 2px;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #5A9BFF; stroke: #5A9BFF;'
+    });
+    
+    g.setEdge('PolzEkonomika', 'ARPPU', { 
+      label: '', 
+      style: 'stroke: #38D9A9; stroke-width: 2px;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #38D9A9; stroke: #38D9A9;'
+    });
+    
+    g.setEdge('PolzEkonomika', 'Lifetime', { 
+      label: '', 
+      style: 'stroke: #4DFFB0; stroke-width: 2px;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #4DFFB0; stroke: #4DFFB0;'
+    });
+    
+    g.setEdge('PolzEkonomika', 'LTV', { 
+      label: '', 
+      style: 'stroke: #58FFA5; stroke-width: 2px;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #58FFA5; stroke: #58FFA5;'
+    });
+    
+    g.setEdge('LTV', 'ARPPU', { 
+      label: wrapText('LTV = (ARPPU - RSC) × Срок жизни', 100).join('\n'), 
+      labeloffset: 20, 
+      style: 'stroke: #53FFD9; stroke-dasharray: 5, 5;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #53FFD9; stroke: #53FFD9;'
+    });
+    
+    g.setEdge('LTV', 'RSC', { 
+      label: wrapText('LTV = (ARPPU - RSC) × Срок жизни', 100).join('\n'), 
+      labeloffset: 20, 
+      style: 'stroke: #31DEFF; stroke-dasharray: 3, 3;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #31DEFF; stroke: #31DEFF;'
+    });
+    
+    g.setEdge('LTV', 'Lifetime', { 
+      label: wrapText('LTV = (ARPPU - RSC) × Срок жизни', 100).join('\n'), 
+      labeloffset: 20, 
+      style: 'stroke: #1EFFE3; stroke-dasharray: 1, 4;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #1EFFE3; stroke: #1EFFE3;'
+    });
+    
+    g.setEdge('ARPU', 'PayingRevenue', { 
+      label: wrapText('ARPU = Общий доход / Активные пользователи', 100).join('\n'), 
+      labeloffset: 20, 
+      style: 'stroke: #6BB5FF; stroke-dasharray: 2, 6;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #6BB5FF; stroke: #6BB5FF;'
+    });
+    
+    g.setEdge('ARPU', 'ActiveUsers', { 
+      label: wrapText('ARPU = Общий доход / Активные пользователи', 100).join('\n'), 
+      labeloffset: 20, 
+      style: 'stroke: #99C8FF; stroke-dasharray: 4, 2;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #99C8FF; stroke: #99C8FF;'
+    });
+
+    g.setEdge('Rynok', 'ActiveUsers', { 
+      label: '', 
+      style: 'stroke: #A77CFF; stroke-width: 2px;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #A77CFF; stroke: #A77CFF;'
+    });
+    
+    g.setEdge('Rynok', 'PayingUsers', { 
+      label: '', 
+      style: 'stroke: #D06BFF; stroke-width: 2px;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #D06BFF; stroke: #D06BFF;'
+    });
+    
+    g.setEdge('Rynok', 'PayingRevenue', { 
+      label: '', 
+      style: 'stroke: #F36BFF; stroke-width: 2px;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #F36BFF; stroke: #F36BFF;'
+    });
+    
+    g.setEdge('Rynok', 'ActiveCapacity', { 
+      label: '', 
+      style: 'stroke: #FF6BF4; stroke-width: 2px;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #FF6BF4; stroke: #FF6BF4;'
+    });
+    
+    g.setEdge('Rynok', 'TargetMarket', { 
+      label: '', 
+      style: 'stroke: #FF6BA4; stroke-width: 2px;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #FF6BA4; stroke: #FF6BA4;'
+    });
+    
+    g.setEdge('Rynok', 'TargetCapacity', { 
+      label: '', 
+      style: 'stroke: #FD86C2; stroke-width: 2px;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #FD86C2; stroke: #FD86C2;'
+    });
+    
+    g.setEdge('PayingRevenue', 'PayingUsers', { 
+      label: wrapText('Выручка = Платящие пользователи × ARPPU', 100).join('\n'), 
+      labeloffset: 20, 
+      style: 'stroke: #DC6BFF; stroke-dasharray: 5, 2;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #DC6BFF; stroke: #DC6BFF;'
+    });
+    
+    g.setEdge('PayingRevenue', 'ARPPU', { 
+      label: wrapText('Выручка = Платящие пользователи × ARPPU', 100).join('\n'), 
+      labeloffset: 20, 
+      style: 'stroke: #FF6BDB; stroke-dasharray: 2, 5;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #FF6BDB; stroke: #FF6BDB;'
+    });
+    
+    g.setEdge('ActiveCapacity', 'ActiveUsers', { 
+      label: wrapText('Емкость = Активные пользователи × ARPU', 100).join('\n'), 
+      labeloffset: 20, 
+      style: 'stroke: #DE6BE6; stroke-dasharray: 4, 4;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #DE6BE6; stroke: #DE6BE6;'
+    });
+    
+    g.setEdge('ActiveCapacity', 'ARPU', { 
+      label: wrapText('Емкость = Активные пользователи × ARPU', 100).join('\n'), 
+      labeloffset: 20, 
+      style: 'stroke: #B16BFF; stroke-dasharray: 6, 2;',
+      arrowhead: 'normal',
+      arrowheadStyle: 'fill: #B16BFF; stroke: #B16BFF;'
+    });
 
     // Рендеринг
     const svg = d3.select('#graph');
@@ -301,8 +577,7 @@
     // Создаем элемент для подсказки
     const tooltip = d3.select("body").append("div")
       .attr("class", "tooltip")
-      .style("opacity", 0)
-      .style("display", "none");
+      .style("opacity", 0);
 
     // Кастомизация узлов для переноса текста
     const oldLabel = dagreD3.label;
@@ -311,84 +586,57 @@
       const tspan = lines.map((line, i) => `<tspan x="0" dy="${i ? 12 : -lines.length * 6}">${line}</tspan>`).join('');
       return `<text text-anchor="middle" x="0" y="0">${tspan}</text>`;
     };
+    
+    // Рендерим граф
     render(inner, g);
+    
+    // Принудительно устанавливаем стили для стрелок
+    svg.selectAll('.edgePath marker path')
+      .attr('fill', function() {
+        return d3.select(this.parentNode).attr('fill') || '#3c78d8';
+      })
+      .attr('stroke', 'none');
+      
     dagreD3.label = oldLabel;
-
-    // Функция для позиционирования подсказки
-    function positionTooltip(event, node) {
-      const isMobile = window.innerWidth <= 768;
-      const tooltipWidth = isMobile ? 280 : 320;
-      const margin = 15;
-      
-      let x = event.clientX;
-      let y = event.clientY;
-      
-      // Корректировка по горизонтали
-      if (x + tooltipWidth + margin > window.innerWidth) {
-        x = window.innerWidth - tooltipWidth - margin;
-      } else if (x - tooltipWidth - margin < 0) {
-        x = tooltipWidth + margin;
-      }
-      
-      // Корректировка по вертикали
-      const tooltipHeight = 150; // Примерная высота
-      if (y - tooltipHeight - margin < 0) {
-        y = tooltipHeight + margin;
-      }
-      
-      // Для мобильных - центрирование
-      if (isMobile) {
-        x = window.innerWidth / 2;
-        y = window.innerHeight / 2;
-        
-        tooltip.style("width", "90vw")
-               .style("max-width", "90vw")
-               .style("left", "5vw")
-               .style("top", "50%")
-               .style("transform", "translate(0, -50%)");
-      } else {
-        tooltip.style("left", x + "px")
-               .style("top", (y - margin) + "px")
-               .style("transform", "translate(-50%, -100%)");
-      }
-      
-      return { x, y };
-    }
 
     // Обработчики событий для узлов
     inner.selectAll("g.node")
-      .on("mouseover touchstart", function(event) {
-        const nodeId = d3.select(this).datum();
+      .on("mouseover", function(event, nodeId) {
         const node = g.node(nodeId);
-        
-        const { x, y } = positionTooltip(event, node);
+        const xOffset = 15;
+        const yOffset = -20;
+        const tooltipWidth = 280;
+        const windowWidth = window.innerWidth;
+
+        let left = event.pageX + xOffset;
+        if (left + tooltipWidth > windowWidth) {
+          left = event.pageX - tooltipWidth - xOffset;
+        }
+
+        tooltip.transition()
+          .duration(200)
+          .style("opacity", 0.95);
         
         tooltip.html(`
           <div class="tooltip-title">${node.label}</div>
           <div class="tooltip-formula">${node.description.replace(/\n/g, '<br>')}</div>
-        `)
-        .style("display", "block")
-        .transition()
-        .duration(200)
-        .style("opacity", 0.98);
+        `);
+        
+        if (window.innerWidth <= 768) {
+          tooltip.style("left", "50%")
+                 .style("top", "50%")
+                 .style("transform", "translate(-50%, -50%)");
+        } else {
+          tooltip.style("left", left + "px")
+                 .style("top", (event.pageY + yOffset) + "px")
+                 .style("transform", "none");
+        }
       })
-      .on("mouseout touchend", function() {
+      .on("mouseout", function() {
         tooltip.transition()
-          .duration(200)
-          .style("opacity", 0)
-          .on("end", () => tooltip.style("display", "none"));
+          .duration(500)
+          .style("opacity", 0);
       });
-
-    // Для мобильных - закрытие по тапу вне подсказки
-    document.addEventListener('click', function(e) {
-      if (!tooltip.node().contains(e.target) && 
-          !d3.select(e.target).classed('node')) {
-        tooltip.transition()
-          .duration(200)
-          .style("opacity", 0)
-          .on("end", () => tooltip.style("display", "none"));
-      }
-    });
 
     // Корректировка позиционирования текста на ребрах
     inner.selectAll('g.edgeLabel text').each(function() {
@@ -461,5 +709,90 @@
       document.body.removeChild(link);
     }
   </script>
+
+
+
+
+
+
+
+
+
+
+<script>
+
+inner.selectAll("g.node")
+  .on("mouseover", function(event, nodeId) {
+    const node = g.node(nodeId);
+    const tooltipWidth = 280;
+    const margin = 15; // Отступ от края экрана
+    
+    tooltip.html(`
+      <div class="tooltip-title">${node.label}</div>
+      <div class="tooltip-formula">${node.description.replace(/\n/g, '<br>')}</div>
+    `);
+    
+    // Получаем размеры тултипа после вставки контента
+    const tooltipRect = tooltip.node().getBoundingClientRect();
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    const nodeRect = this.getBoundingClientRect();
+
+    if (window.innerWidth <= 768) {
+      // Мобильная версия - привязка к блоку
+      let topPos = nodeRect.bottom + 10;
+      
+      // Проверяем, помещается ли снизу
+      if (topPos + tooltipRect.height > viewportHeight) {
+        topPos = nodeRect.top - tooltipRect.height - 10;
+        // Если не помещается сверху, фиксируем у края
+        if (topPos < margin) topPos = margin;
+      }
+      
+      // Горизонтальное позиционирование
+      let leftPos = nodeRect.left + (nodeRect.width - tooltipRect.width) / 2;
+      // Корректировка, если выходит за границы
+      if (leftPos < margin) leftPos = margin;
+      if (leftPos + tooltipRect.width > viewportWidth - margin) {
+        leftPos = viewportWidth - tooltipRect.width - margin;
+      }
+      
+      tooltip.style("top", topPos + "px")
+             .style("left", leftPos + "px")
+             .style("right", "auto")
+             .style("transform", "none");
+    } else {
+      // Десктопная версия
+      let left = event.pageX + 15;
+      let top = event.pageY - 20;
+      
+      // Проверка правой границы
+      if (left + tooltipWidth > viewportWidth - margin) {
+        left = event.pageX - tooltipWidth - 15;
+      }
+      
+      // Проверка нижней границы
+      if (top + tooltipRect.height > viewportHeight - margin) {
+        top = event.pageY - tooltipRect.height - 10;
+      }
+      
+      // Проверка верхней границы
+      if (top < margin) top = margin;
+      
+      tooltip.style("left", left + "px")
+             .style("top", top + "px");
+    }
+    
+    tooltip.transition().duration(200).style("opacity", 0.95);
+  })
+
+
+</script>
+
+
+
+
+
 </body>
 </html>
+
