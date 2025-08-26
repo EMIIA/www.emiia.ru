@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <head>
   <style>
     .video-overlay {
@@ -76,7 +75,10 @@ color: #3d85c6;
       video.poster = poster; /* Установка постера */
       video.load();
       overlay.classList.add('active');
-      video.play();
+      // Задержка воспроизведения на 1 секунду
+      setTimeout(() => {
+        video.play();
+      }, 1000);
     }
 
     function closeVideo(event) {
@@ -90,4 +92,3 @@ color: #3d85c6;
   </script>
 </body>
 </html>
-
