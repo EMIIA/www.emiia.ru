@@ -1,10 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 
 <head>
   <style>
@@ -39,7 +37,7 @@
       font-size: 28px;
       cursor: pointer;
       transition: color 0.3s;
-      z-index: 1001; /* Чтобы крестик был над видео */
+      z-index: 1001; /* Крестик над видео */
     }
     .close-btn:hover {
       color: #000;
@@ -49,7 +47,7 @@
       video {
         max-width: 98%;
         max-height: 98%;
-        border-radius: 6px; /* Еще меньше закругление на мобильных */
+        border-radius: 6px; /* Меньше закругление на мобильных */
       }
       .close-btn {
         font-size: 35px;
@@ -61,20 +59,21 @@ color: #3d85c6;
   </style>
 </head>
 <body>
-  <a href="#" onclick="openVideo('https://www.emiia.ru/emiia_ai_video_v2_min.mp4')">Открыть видео</a>
+  <a href="#" onclick="openVideo('https://www.emiia.ru/emiia_ai_video_v2_min.mp4', 'https://www.emiia.ru/gif_960_732.gif')">Открыть видео</a>
 
   <div class="video-overlay" id="videoOverlay" onclick="closeVideo(event)">
     <span class="close-btn" onclick="closeVideo(event)">&times;</span>
-    <video controls id="videoPlayer">
+    <video controls id="videoPlayer" poster="">
       <source src="" type="video/mp4">
     </video>
   </div>
 
   <script>
-    function openVideo(src) {
+    function openVideo(src, poster) {
       const overlay = document.getElementById('videoOverlay');
       const video = document.getElementById('videoPlayer');
       video.querySelector('source').src = src;
+      video.poster = poster; /* Установка постера */
       video.load();
       overlay.classList.add('active');
       video.play();
@@ -91,3 +90,4 @@ color: #3d85c6;
   </script>
 </body>
 </html>
+
