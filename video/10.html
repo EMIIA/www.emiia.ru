@@ -58,7 +58,7 @@ color: #3d85c6;
   </style>
 </head>
 <body>
-  <a href="#" onclick="openVideo('https://www.emiia.ru/emiia_ai_video_v2_min.mp4', 'https://www.emiia.ru/gif_960_732.gif')">Открыть видео</a>
+  <a href="#" onclick="openVideo('https://www.emiia.ru/emiia_ai_video_v2_min.mp4', 'https://')">Открыть видео</a>
 
   <div class="video-overlay" id="videoOverlay" onclick="closeVideo(event)">
     <span class="close-btn" onclick="closeVideo(event)">&times;</span>
@@ -78,7 +78,7 @@ color: #3d85c6;
       // Задержка воспроизведения на 1 секунду
       setTimeout(() => {
         video.play();
-      }, 1000);
+      }, 0);
     }
 
     function closeVideo(event) {
