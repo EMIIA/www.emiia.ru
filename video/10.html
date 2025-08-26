@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .video-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.3); /* Полупрозрачный светлый фон */
+      backdrop-filter: blur(10px); /* Эффект матового стекла */
+      -webkit-backdrop-filter: blur(10px); /* Для Safari */
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    .video-overlay.active {
+      display: flex;
+    }
+    video {
+      max-width: 95%; /* Ближе к краям */
+      max-height: 95%;
+      border-radius: 8px; /* Меньшее закругление углов */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      color: #333;
+      font-size: 28px;
+      cursor: pointer;
+      transition: color 0.3s;
+      z-index: 1001; /* Чтобы крестик был над видео */
+    }
+    .close-btn:hover {
+      color: #000;
+    }
+    /* Адаптация для мобильных */
+    @media (max-width: 768px) {
+      video {
+        max-width: 98%;
+        max-height: 98%;
+        border-radius: 6px; /* Еще меньше закругление на мобильных */
+      }
+      .close-btn {
+        font-size: 30px;
+        top: 10px;
+        right: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#" onclick="openVideo('https://www.emiia.ru/emiia_ai_video_v2_min.mp4')">Открыть видео</a>
+
+  <div class="video-overlay" id="videoOverlay" onclick="closeVideo(event)">
+    <span class="close-btn" onclick="closeVideo(event)">&times;</span>
+    <video controls id="videoPlayer">
+      <source src="" type="video/mp4">
+    </video>
+  </div>
+
+  <script>
+    function openVideo(src) {
+      const overlay = document.getElementById('videoOverlay');
+      const video = document.getElementById('videoPlayer');
+      video.querySelector('source').src = src;
+      video.load();
+      overlay.classList.add('active');
+      video.play();
+    }
+
+    function closeVideo(event) {
+      if (event.target.id === 'videoOverlay' || event.target.classList.contains('close-btn')) {
+        const overlay = document.getElementById('videoOverlay');
+        const video = document.getElementById('videoPlayer');
+        video.pause();
+        overlay.classList.remove('active');
+      }
+    }
+  </script>
+</body>
+</html>
