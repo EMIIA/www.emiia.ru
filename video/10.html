@@ -1,9 +1,20 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head>
+
+
+
+
+
+
+
+
+
+
   <style>
     .video-overlay {
       display: none;
@@ -12,9 +23,9 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(255, 255, 255, 0.3); /* Полупрозрачный светлый фон */
-      backdrop-filter: blur(10px); /* Эффект матового стекла */
-      -webkit-backdrop-filter: blur(10px); /* Для Safari */
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       z-index: 1000;
       justify-content: center;
       align-items: center;
@@ -23,42 +34,84 @@
       display: flex;
     }
     video {
-      max-width: 95%; /* Ближе к краям */
+      max-width: 95%;
       max-height: 95%;
-      border-radius: 8px; /* Меньшее закругление углов */
+      border-radius: 8px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
     .close-btn {
       position: absolute;
       top: 15px;
       right: 15px;
-      color: #333;
+
       font-size: 28px;
       cursor: pointer;
       transition: color 0.3s;
-      z-index: 1001; /* Крестик над видео */
+      z-index: 1001;
     }
-    .close-btn:hover {
-      color: #000;
+    
+    /* Стили для ссылки с иконкой */
+    .video-link {
+      display: inline-flex; /* Горизонтальное расположение */
+      align-items: center; /* Выравнивание по центру по вертикали */
+      text-decoration: none; /* Убираем подчеркивание */
+      color: #333; /* Цвет текста */
+      line-height: normal; /* Предотвращает влияние высоты строки */
     }
-    /* Адаптация для мобильных */
+    .video-link svg {
+      margin-left: 5px; /* Отступ слева от текста */
+      transform: translateY(2px); /* Смещение SVG вниз, устойчиво к масштабированию */
+    }
     @media (max-width: 768px) {
       video {
         max-width: 98%;
         max-height: 98%;
-        border-radius: 6px; /* Меньше закругление на мобильных */
+        border-radius: 6px;
       }
-      .close-btn {
-        font-size: 35px;
-        top: 10px;
-        right: 10px;
-color: #3d85c6;
+      
+      .video-link svg {
+        transform: translateY(1px); /* Меньшее смещение для мобильных */
       }
-    }
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #3d85c690; /* Начальный цвет (полупрозрачный) */
+    font-size: 35px;
+    cursor: pointer;
+    transition: color 0.3s; /* Плавный переход для цвета */
+}
+
+.close-btn:hover {
+    color: red; /* Серый цвет при наведении */
+}
+
   </style>
+
+
+
+
+
+
+
 </head>
 <body>
-  <a href="#" onclick="openVideo('https://www.emiia.ru/emiia_ai_video_v2_min.mp4', 'https://')">Открыть видео</a>
+
+
+
+
+
+<a href="#" class="video-link" onclick="openVideo('https://www.emiia.ru/emiia_ai_video_v2_min.mp4', 'https://')">
+    Открыть видео
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"  viewBox="0 -2 18 18">
+      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+      <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445"/>
+    </svg>
+  </a>
+
+
+
 
   <div class="video-overlay" id="videoOverlay" onclick="closeVideo(event)">
     <span class="close-btn" onclick="closeVideo(event)">&times;</span>
@@ -92,3 +145,5 @@ color: #3d85c6;
   </script>
 </body>
 </html>
+
+
