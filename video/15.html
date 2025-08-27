@@ -56,19 +56,12 @@
     /* Скрываем controls сразу после открытия */
     video.hide-controls::-webkit-media-controls-panel {
       display: none !important;
-      opacity: 0 !important;
-      transition: opacity 0.4s ease-in-out !important;
     }
     video.hide-controls::-webkit-media-controls-play-button {
       display: none !important;
     }
     video.hide-controls::-webkit-media-controls-start-playback-button {
       display: none !important;
-    }
-    /* Плавное появление controls после выхода из полноэкранного режима */
-    video.show-controls-slowly::-webkit-media-controls-panel {
-      opacity: 0 !important;
-      transition: opacity 0.4s ease-in-out !important;
     }
     .close-btn {
       position: fixed;
@@ -173,7 +166,6 @@
       
       // Скрываем controls на 2 секунды
       video.classList.add('hide-controls');
-      video.classList.remove('show-controls-slowly');
       
       // Устанавливаем источник и загружаем
       video.querySelector('source').src = src;
@@ -194,27 +186,25 @@
       isFullscreen = true;
       const video = document.getElementById('videoPlayer');
       video.classList.remove('hide-controls');
-      video.classList.remove('show-controls-slowly');
     }
 
     function handleFullscreenEnd() {
       isFullscreen = false;
       const video = document.getElementById('videoPlayer');
+      const videoWrapper = document.querySelector('.video-wrapper');
       
-      // Плавное появление controls после выхода из полноэкранного режима
-      video.classList.add('show-controls-slowly');
+      // Сначала скрываем видео для плавного появления
+      video.style.opacity = '0';
+      videoWrapper.style.opacity = '0';
+      videoWrapper.style.transform = 'scale(0.9) translateY(20px)';
       
+      // Плавно показываем видео и обертку через короткую задержку
       setTimeout(() => {
-        // Постепенно показываем controls
-        const panel = video.querySelector('::-webkit-media-controls-panel');
-        if (panel) {
-          panel.style.opacity = '1';
-        }
-        
-        setTimeout(() => {
-          video.classList.remove('show-controls-slowly');
-        }, 400);
-      }, 100);
+        video.style.opacity = '1';
+        videoWrapper.style.opacity = '1';
+        videoWrapper.style.transform = 'scale(1) translateY(0)';
+        video.classList.remove('hide-controls');
+      }, 50);
     }
 
     function fadeInVideo() {
@@ -234,8 +224,10 @@
         
         // Через 2 секунды показываем controls обратно
         setTimeout(() => {
-          video.classList.remove('hide-controls');
-        }, 1000);
+          if (!isFullscreen) {
+            video.classList.remove('hide-controls');
+          }
+        }, 2000);
       }, 100);
     }
 
@@ -254,7 +246,6 @@
         
         // Убедимся что controls снова видны при закрытии
         video.classList.remove('hide-controls');
-        video.classList.remove('show-controls-slowly');
         
         // Плавно скрываем все элементы одновременно
         closeBtn.style.opacity = '0';
