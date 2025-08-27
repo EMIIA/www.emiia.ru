@@ -65,6 +65,11 @@
     video.hide-controls::-webkit-media-controls-start-playback-button {
       display: none !important;
     }
+    /* Плавное появление controls после выхода из полноэкранного режима */
+    video.show-controls-slowly::-webkit-media-controls-panel {
+      opacity: 0 !important;
+      transition: opacity 0.4s ease-in-out !important;
+    }
     .close-btn {
       position: fixed;
       top: 25px;
@@ -153,10 +158,8 @@
 
   <script>
     let isFullscreen = false;
-    let isClosing = false;
 
     function openVideo(src, poster) {
-      isClosing = false;
       const overlay = document.getElementById('videoOverlay');
       const video = document.getElementById('videoPlayer');
       const videoWrapper = document.querySelector('.video-wrapper');
@@ -170,6 +173,7 @@
       
       // Скрываем controls на 2 секунды
       video.classList.add('hide-controls');
+      video.classList.remove('show-controls-slowly');
       
       // Устанавливаем источник и загружаем
       video.querySelector('source').src = src;
@@ -190,20 +194,27 @@
       isFullscreen = true;
       const video = document.getElementById('videoPlayer');
       video.classList.remove('hide-controls');
+      video.classList.remove('show-controls-slowly');
     }
 
     function handleFullscreenEnd() {
       isFullscreen = false;
       const video = document.getElementById('videoPlayer');
       
-      // Если идет процесс закрытия, выходим
-      if (isClosing) return;
+      // Плавное появление controls после выхода из полноэкранного режима
+      video.classList.add('show-controls-slowly');
       
-      // Небольшая задержка для стабилизации после полноэкранного режима
       setTimeout(() => {
-        // Принудительно скрываем видео перед возможным закрытием
-        video.style.opacity = '0';
-      }, 50);
+        // Постепенно показываем controls
+        const panel = video.querySelector('::-webkit-media-controls-panel');
+        if (panel) {
+          panel.style.opacity = '1';
+        }
+        
+        setTimeout(() => {
+          video.classList.remove('show-controls-slowly');
+        }, 400);
+      }, 100);
     }
 
     function fadeInVideo() {
@@ -223,9 +234,7 @@
         
         // Через 2 секунды показываем controls обратно
         setTimeout(() => {
-          if (!isFullscreen) {
-            video.classList.remove('hide-controls');
-          }
+          video.classList.remove('hide-controls');
         }, 1000);
       }, 100);
     }
@@ -234,7 +243,6 @@
       if (event.target.classList.contains('close-btn') || event.target.id === 'videoOverlay') {
         event.stopPropagation();
         
-        isClosing = true;
         const overlay = document.getElementById('videoOverlay');
         const video = document.getElementById('videoPlayer');
         const videoWrapper = document.querySelector('.video-wrapper');
@@ -246,19 +254,19 @@
         
         // Убедимся что controls снова видны при закрытии
         video.classList.remove('hide-controls');
+        video.classList.remove('show-controls-slowly');
         
-        // Принудительно скрываем видео перед анимацией (особенно для iOS)
+        // Плавно скрываем все элементы одновременно
+        closeBtn.style.opacity = '0';
         video.style.opacity = '0';
         videoWrapper.style.opacity = '0';
         videoWrapper.style.transform = 'scale(0.9) translateY(20px)';
-        closeBtn.style.opacity = '0';
         
         // Ждем завершения всех анимаций перед скрытием оверлея
         setTimeout(() => {
           overlay.classList.remove('active');
           video.pause();
           video.currentTime = 0;
-          isClosing = false;
         }, 600);
       }
     }
