@@ -1,19 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head>
-
-
-
-
-
-
-
-
-
 
   <style>
     .video-overlay {
@@ -29,9 +19,12 @@
       z-index: 1000;
       justify-content: center;
       align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
     }
     .video-overlay.active {
       display: flex;
+      opacity: 1;
     }
     video {
       max-width: 95%;
@@ -43,7 +36,6 @@
       position: absolute;
       top: 15px;
       right: 15px;
-
       font-size: 28px;
       cursor: pointer;
       transition: color 0.3s;
@@ -73,45 +65,31 @@
         transform: translateY(1px); /* Меньшее смещение для мобильных */
       }
 
-.close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    color: #3d85c690; /* Начальный цвет (полупрозрачный) */
-    font-size: 35px;
-    cursor: pointer;
-    transition: color 0.3s; /* Плавный переход для цвета */
-}
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        color: #3d85c690; /* Начальный цвет (полупрозрачный) */
+        font-size: 35px;
+        cursor: pointer;
+        transition: color 0.3s; /* Плавный переход для цвета */
+    }
 
-.close-btn:hover {
-    color: red; /* Серый цвет при наведении */
-}
-
+    .close-btn:hover {
+        color: red; /* Серый цвет при наведении */
+    }
   </style>
-
-
-
-
-
-
 
 </head>
 <body>
 
-
-
-
-
-<a href="#" class="video-link" onclick="openVideo('https://www.emiia.ru/emiia_ai_video_v2_min.mp4', 'https://')">
+  <a href="#" class="video-link" onclick="openVideo('https://www.emiia.ru/emiia_ai_video_v2_min.mp4', 'https://')">
     Открыть видео
     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"  viewBox="0 -2 18 18">
       <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
       <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445"/>
     </svg>
   </a>
-
-
-
 
   <div class="video-overlay" id="videoOverlay" onclick="closeVideo(event)">
     <span class="close-btn" onclick="closeVideo(event)">&times;</span>
@@ -127,7 +105,15 @@
       video.querySelector('source').src = src;
       video.poster = poster; /* Установка постера */
       video.load();
-      overlay.classList.add('active');
+      
+      // Показываем оверлей перед началом анимации
+      overlay.style.display = 'flex';
+      
+      // Запускаем анимацию появления
+      setTimeout(() => {
+        overlay.classList.add('active');
+      }, 300);
+      
       // Задержка воспроизведения на 1 секунду
       setTimeout(() => {
         video.play();
@@ -138,12 +124,17 @@
       if (event.target.id === 'videoOverlay' || event.target.classList.contains('close-btn')) {
         const overlay = document.getElementById('videoOverlay');
         const video = document.getElementById('videoPlayer');
-        video.pause();
+        
+        // Убираем активный класс для анимации скрытия
         overlay.classList.remove('active');
+        
+        // Ждем завершения анимации перед полным скрытием
+        setTimeout(() => {
+          video.pause();
+          overlay.style.display = 'none';
+        }, 500); // Должно совпадать с временем transition (0.3s = 300ms)
       }
     }
   </script>
 </body>
 </html>
-
-
