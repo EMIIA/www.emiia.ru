@@ -2736,7 +2736,6 @@ hyphens: auto;">
   background-color: #f8f9fa;
 
 
-
   -webkit-mask-image:
     linear-gradient(to top, transparent 0%, black 33%),   /* снизу -> вверх */
     linear-gradient(to bottom, transparent 0%, black 33%),/* сверху -> вниз */
@@ -2772,7 +2771,7 @@ mask-image:
 
 
 
-
+ 
 
 
 
@@ -3241,16 +3240,52 @@ mask-image:
 
        
 
-<picture class="blurred-edges">
-  <source media="(max-width: 799px)" srcset="https://www.emiia.ru/vdnh_857_990.gif" />
-  <source media="(min-width: 800px)" srcset="https://www.emiia.ru/vdnh_1628_990.gif" />
-  <img src="https://www.emiia.ru/relise/mobile_5.png" alt="Chris standing up holding his daughter Elva" />
-</picture>
+
        
 
        
        
-       
+<picture class="blurred-edges" style="margin-left: -15px; display: block; max-width: calc(100% + 15px);">
+  <source media="(max-width: 799px)" srcset="https://www.emiia.ru/vdnh_857_990.gif" />
+  <source media="(min-width: 800px)" srcset="https://www.emiia.ru/vdnh_1628_990.gif" />
+  <img src="https://www.emiia.ru/relise/mobile_5.png" alt="Chris standing up holding his daughter Elva" style="max-width: 100%; height: auto;" />
+</picture>
+
+
+
+
+
+
+
+
+
+<script>
+// Сразу после тега picture добавляем скрипт для управления смещением
+document.addEventListener('DOMContentLoaded', function() {
+    const picture = document.querySelector('.blurred-edges');
+    
+    function updateMargin() {
+        if (window.innerWidth <= 799) {
+            // Для мобильных
+            picture.style.marginLeft = '-10px';
+            picture.style.maxWidth = 'calc(100% + 10px)';
+        } else {
+            // Для десктопа
+            picture.style.marginLeft = '-30px';
+            picture.style.maxWidth = 'calc(100% + 30px)';
+        }
+    }
+    
+    // Вызываем при загрузке и при изменении размера окна
+    updateMargin();
+    window.addEventListener('resize', updateMargin);
+});
+</script>
+
+
+
+
+
             
             
             <div class="uk-position-center uk-panel"><h1 class="uk-transition-slide-bottom-small"></h1></div>
