@@ -4333,6 +4333,9 @@ mask-image:
   position: relative;
   background-color: rgb(63, 105, 170);
   width: 100%;
+  /* Исправляем для iOS */
+  -webkit-overflow-scrolling: touch;
+  transform: translateZ(0); /* Аппаратное ускорение */
 }
 
 .logos:before, .logos:after {
@@ -4342,6 +4345,8 @@ mask-image:
   width: 75px;
   height: 100%;
   z-index: 2;
+  /* Исправляем для градиентов в iOS */
+  pointer-events: none;
 }
 
 .logos:before {
@@ -4357,30 +4362,55 @@ mask-image:
 .logos-container {
   display: flex;
   width: max-content;
+  /* Аппаратное ускорение для контейнера */
+  transform: translateZ(0);
 }
 
 .logos-track {
   display: flex;
-  animation: scrollReverse 20s linear infinite;
+  animation: scrollReverse 25s linear infinite;
+  /* Критически важные исправления для iOS */
+  will-change: transform; /* Подсказка браузеру */
+  backface-visibility: hidden; /* Исправление дрожания */
+  perspective: 1000px; /* Аппаратное ускорение */
+  transform: translateZ(0);
 }
 
-.logos:hover .logos-track {
-  animation-play-state: paused;
+/* Пауза при hover для десктопов */
+@media (hover: hover) {
+  .logos:hover .logos-track {
+    animation-play-state: paused;
+  }
 }
 
 .logo-item {
   flex: 0 0 auto;
-  margin: -5px 0px;
+  margin: -5px 15px; /* Добавил горизонтальные отступы */
+  /* Исправления для изображений */
+  transform: translateZ(0);
 }
 
 .logo-item img {
   height: 100px;
   display: block;
-margin-top: -5px;
+  margin-top: -5px;
+  /* Исправления для iOS */
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
-/* Анимация для обратной прокрутки (справа налево) */
+/* Анимация с исправлениями для iOS */
 @keyframes scrollReverse {
+  0% {
+    transform: translate3d(-50%, 0, 0); /* Используем translate3d */
+  }
+  100% {
+    transform: translate3d(0%, 0, 0);
+  }
+}
+
+/* Альтернативная анимация если первая не работает */
+@keyframes scrollReverseAlt {
   0% {
     transform: translateX(-50%);
   }
@@ -4388,9 +4418,15 @@ margin-top: -5px;
     transform: translateX(0%);
   }
 }
+
+/* Медиа-запрос для iOS устройств */
+@supports (-webkit-touch-callout: none) {
+  .logos-track {
+    animation-name: scrollReverseAlt;
+    animation-duration: 30s; /* Немного медленнее для iOS */
+  }
+}
 </style>
-
-
 
 
 
