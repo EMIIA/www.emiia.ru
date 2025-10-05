@@ -41,6 +41,7 @@
 
 
 
+
 <html lang="ru"><head>
 <meta content="yes" name="apple-mobile-web-app-capable" />
   <meta charset="utf-8">
@@ -4325,6 +4326,69 @@ mask-image:
 
 
 
+<style>
+.logos {
+  overflow: hidden;
+  padding: 5px 0 7px 0;
+  position: relative;
+  background-color: rgb(63, 105, 170);
+  width: 100%;
+}
+
+.logos:before, .logos:after {
+  position: absolute;
+  top: 0;
+  content: '';
+  width: 75px;
+  height: 100%;
+  z-index: 2;
+}
+
+.logos:before {
+  left: 0;
+  background: linear-gradient(to right, rgb(63, 105, 170), rgba(255,255,255,0));
+}
+
+.logos:after {
+  right: 0;
+  background: linear-gradient(to left, rgb(63, 105, 170), rgba(255,255,255,0));
+}
+
+.logos-container {
+  display: flex;
+  width: max-content;
+}
+
+.logos-track {
+  display: flex;
+  animation: scrollReverse 20s linear infinite;
+}
+
+.logos:hover .logos-track {
+  animation-play-state: paused;
+}
+
+.logo-item {
+  flex: 0 0 auto;
+  margin: -5px 0px;
+}
+
+.logo-item img {
+  height: 100px;
+  display: block;
+margin-top: -5px;
+}
+
+/* Анимация для обратной прокрутки (справа налево) */
+@keyframes scrollReverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+</style>
 
 
 
@@ -4339,8 +4403,27 @@ mask-image:
     <h2>Партнеры</h2> 
     <br/>
     <br/>
+
+
+
     
-    <p class="buttond"  style="text-align: center"><a  alt="ЭМИИА"   title="Projects" target="_self" style="cursor: pointer; font-size:15.4px;  text-decoration: none; padding:0px; color:#3d85c6; background-color:transparent; border-radius:0px; border: 0px solid #000000; margin-left: 0%;"><img src="https://www.emiia.ru/relise/partners.svg" width="300" height="150" alt="ЭМИИА ИИ — машинное радиозрение (радиовидение)"   title="Projects" ></a></p>
+   <div class="logos">
+  <div class="logos-container">
+    <div class="logos-track">
+      <div class="logo-item"><img src="https://www.emiia.ru/relise/partners.svg" alt="Logo"></div>
+      <div class="logo-item"><img src="https://www.emiia.ru/relise/partners.svg" alt="Logo"></div>
+      <div class="logo-item"><img src="https://www.emiia.ru/relise/partners.svg" alt="Logo"></div>
+      <div class="logo-item"><img src="https://www.emiia.ru/relise/partners.svg" alt="Logo"></div>
+      
+      <!-- Дубликат -->
+      <div class="logo-item"><img src="https://www.emiia.ru/relise/partners.svg" alt="Logo"></div>
+      <div class="logo-item"><img src="https://www.emiia.ru/relise/partners.svg" alt="Logo"></div>
+      <div class="logo-item"><img src="https://www.emiia.ru/relise/partners.svg" alt="Logo"></div>
+      <div class="logo-item"><img src="https://www.emiia.ru/relise/partners.svg" alt="Logo"></div>
+    </div>
+  </div>
+</div>
+
 
 <br/>
 <br/>
