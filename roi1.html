@@ -45,7 +45,6 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-/* КРИТИЧНО: Предотвращаем горизонтальный скролл */
 html, body {
   overflow-x: hidden;
   width: 100%;
@@ -63,11 +62,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   padding-bottom: env(safe-area-inset-bottom);
   touch-action: manipulation;
-  /* Добавляем отступ для фиксированной шапки */
   padding-top: 72px;
 }
 
-/* iOS-specific optimizations */
 @supports (-webkit-touch-callout: none) {
   body {
     background: var(--gray-50);
@@ -75,7 +72,7 @@ body {
   }
 }
 
-/* ИСПРАВЛЕНО: Делаем шапку НАСТОЯЩЕЙ фиксированной */
+/* ИСПРАВЛЕНО: Настоящая фиксированная шапка */
 header {
   background: var(--white);
   backdrop-filter: blur(20px);
@@ -84,7 +81,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: fixed; /* Было: sticky */
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -103,12 +100,16 @@ header {
   transition: var(--transition);
   text-decoration: none;
   flex: 0 0 auto;
+  /* ИСПРАВЛЕНО: Добавлен z-index чтобы иконка не перекрывалась */
+  position: relative;
+  z-index: 1;
 }
 
 .logo:hover {
   transform: translateY(-1px);
 }
 
+/* ИСПРАВЛЕНО: Убедимся что иконка видна на мобильных */
 .logo-icon {
   width: 36px;
   height: 36px;
@@ -121,6 +122,10 @@ header {
   font-size: 16px;
   letter-spacing: -0.5px;
   transition: var(--transition);
+  /* Добавлены для надёжности */
+  position: relative;
+  overflow: visible;
+  flex-shrink: 0;
 }
 
 .logo:hover .logo-icon {
@@ -287,7 +292,6 @@ header {
   min-width: 0;
 }
 
-/* iOS input optimization */
 .input-field {
   -webkit-appearance: none;
   border-radius: var(--border-radius-sm);
@@ -300,7 +304,6 @@ header {
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
-/* Стили для ползунков */
 .slider-container {
   margin-top: 16px;
   position: relative;
@@ -426,7 +429,7 @@ header {
   padding-bottom: max(32px, env(safe-area-inset-bottom));
 }
 
-/* Модальное окно */
+/* Модальное окно - ИСПРАВЛЕНО */
 .modal {
   display: none;
   position: fixed;
@@ -441,9 +444,13 @@ header {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  padding-left: env(safe-area-inset-left);
-  padding-right: env(safe-area-inset-right);
+  /* ИСПРАВЛЕНО: Добавлены отступы для iOS */
+  padding-left: max(20px, env(safe-area-inset-left));
+  padding-right: max(20px, env(safe-area-inset-right));
+  padding-bottom: max(20px, env(safe-area-inset-bottom));
   overflow-y: auto;
+  /* Для старых iOS */
+  -webkit-overflow-scrolling: touch;
 }
 
 .modal-content {
@@ -457,6 +464,8 @@ header {
   animation: modalSlideIn 0.3s ease-out;
   max-height: 90vh;
   overflow-y: auto;
+  /* ИСПРАВЛЕНО: Учёт safe area */
+  margin: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 @keyframes modalSlideIn {
@@ -505,6 +514,19 @@ header {
   justify-content: flex-end;
 }
 
+/* ИСПРАВЛЕНО: Кнопка в модалке теперь видна */
+.modal-actions .btn {
+  /* Гарантируем контрастный цвет */
+  background: var(--primary);
+  color: #f8f9fa !important;
+  border-color: var(--primary);
+}
+
+.modal-actions .btn:hover {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+}
+
 /* Mobile optimizations */
 @media (max-width: 767px) {
   header {
@@ -517,6 +539,8 @@ header {
     width: 32px;
     height: 32px;
     font-size: 14px;
+    /* ИСПРАВЛЕНО: Убедимся что иконка не сжимается */
+    min-width: 32px;
   }
   
   .logo-text {
@@ -530,7 +554,7 @@ header {
   
   .container {
     padding: 16px;
-    padding-top: 16px; /* Сохраняем верхний отступ на мобильных */
+    padding-top: 16px;
     padding-left: max(16px, env(safe-area-inset-left));
     padding-right: max(16px, env(safe-area-inset-right));
   }
@@ -554,10 +578,21 @@ header {
     font-size: 16px;
   }
   
+  /* ИСПРАВЛЕНО: Модалка на мобильных */
+  .modal {
+    padding: 12px;
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+  }
+  
   .modal-content {
     padding: 24px;
     margin: 0;
     border-radius: var(--border-radius-sm);
+    max-width: 100%;
+    /* Ограничиваем ширину для очень маленьких экранов */
+    width: calc(100% - 24px);
   }
   
   .modal-title {
@@ -601,6 +636,12 @@ header {
   
   .card {
     padding: 16px;
+  }
+  
+  /* ИСПРАВЛЕНО: Модалка на очень маленьких экранах */
+  .modal-content {
+    padding: 20px;
+    width: calc(100% - 16px);
   }
 }
 
@@ -676,6 +717,7 @@ header {
   flex-wrap: wrap;
 }
 
+/* ИСПРАВЛЕНО: Цвет текста активной кнопки графика */
 .chart-tab {
   padding: 8px 16px;
   background: var(--gray-100);
@@ -698,11 +740,11 @@ header {
 
 .chart-tab.active {
   background: var(--primary);
-  color: var(--white);
+  /* ИСПРАВЛЕНО: Фиксированный цвет #f8f9fa для текста */
+  color: #f8f9fa !important;
   border-color: var(--primary);
 }
 
-/* Скрываем компоненты графиков по умолчанию */
 .chart-container {
   margin-top: 24px;
   padding: 20px;
@@ -712,10 +754,9 @@ header {
   position: relative;
   height: 320px;
   width: 100%;
-  overflow: hidden; /* Предотвращает выпадение содержимого */
+  overflow: hidden;
 }
 
-/* КРИТИЧНО ДЛЯ MOBILE: Canvas не должен выходить за рамки */
 canvas {
   max-width: 100% !important;
   height: auto !important;
@@ -742,7 +783,6 @@ canvas {
   }
 }
 
-/* Улучшения для очень маленьких экранов */
 @media (max-width: 360px) {
   .container {
     padding: 12px;
@@ -763,7 +803,6 @@ canvas {
   }
 }
 
-/* Предотвращение скачков контента при загрузке */
 body {
   opacity: 0;
   animation: fadeIn 0.3s ease-out forwards;
@@ -778,8 +817,25 @@ body {
 <body>
 
 <header>
+  <!-- ИСПРАВЛЕНО: Убран пробел в конце URL -->
   <a href="https://www.emiia.ru" class="logo" id="logoLink">
-    <div class="logo-icon"><svg version="1.1" viewBox="0.0 0.0 192.0 192.0" fill="none" stroke="none" stroke-linecap="square" stroke-miterlimit="10" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><clipPath id="p.0"><path d="m0 0l192.0 0l0 192.0l-192.0 0l0 -192.0z" clip-rule="nonzero"/></clipPath><g clip-path="url(#p.0)"><path fill="#000000" fill-opacity="0.0" d="m0 0l192.0 0l0 192.0l-192.0 0z" fill-rule="evenodd"/><path fill="#fad57a" d="m154.58488 76.78212l0 0c-0.18571472 -20.650608 -17.183945 -38.474106 -38.33184 -40.192856l-0.09654236 5.25214c18.078407 1.6142845 32.65023 16.930412 32.955193 34.63847z" fill-rule="evenodd"/><path stroke="#fad57a" stroke-width="14.664041994750656" stroke-linejoin="round" stroke-linecap="butt" d="m154.58488 76.78212l0 0c-0.18571472 -20.650608 -17.183945 -38.474106 -38.33184 -40.192856l-0.09654236 5.25214c18.078407 1.6142845 32.65023 16.930412 32.955193 34.63847z" fill-rule="evenodd"/><path fill="#748c6a" d="m37.41517 76.78212l0 0c0.1857109 -20.650608 17.183945 -38.474106 38.33184 -40.192856l0.09654236 5.25214c-18.078403 1.6142845 -32.650234 16.930412 -32.955196 34.63847z" fill-rule="evenodd"/><path stroke="#748c6a" stroke-width="14.664041994750656" stroke-linejoin="round" stroke-linecap="butt" d="m37.41517 76.78212l0 0c0.1857109 -20.650608 17.183945 -38.474106 38.33184 -40.192856l0.09654236 5.25214c-18.078403 1.6142845 -32.650234 16.930412 -32.955196 34.63847z" fill-rule="evenodd"/><path fill="#eb5b57" d="m154.58488 115.21762l0 0c-0.18571472 20.650604 -17.183945 38.474106 -38.33184 40.192856l-0.09654236 -5.252136c18.078407 -1.6142883 32.65023 -16.93042 32.955193 -34.63848z" fill-rule="evenodd"/><path stroke="#eb5b57" stroke-width="14.664041994750656" stroke-linejoin="round" stroke-linecap="butt" d="m154.58488 115.21762l0 0c-0.18571472 20.650604 -17.183945 38.474106 -38.33184 40.192856l-0.09654236 -5.252136c18.078407 -1.6142883 32.65023 -16.93042 32.955193 -34.63848z" fill-rule="evenodd"/><path fill="#517eb9" d="m37.41517 115.217735l0 0c0.1857109 20.650597 17.183945 38.4741 38.33184 40.19285l0.09654236 -5.252136c-18.078403 -1.6142883 -32.650234 -16.93042 -32.955196 -34.638474z" fill-rule="evenodd"/><path stroke="#517eb9" stroke-width="14.664041994750656" stroke-linejoin="round" stroke-linecap="butt" d="m37.41517 115.217735l0 0c0.1857109 20.650597 17.183945 38.4741 38.33184 40.19285l0.09654236 -5.252136c-18.078403 -1.6142883 -32.650234 -16.93042 -32.955196 -34.638474z" fill-rule="evenodd"/><path fill="#3c78d8" d="m69.53572 96.002686l0 0c0 -14.620323 11.852112 -26.472435 26.472443 -26.472435l0 0c7.0209274 0 13.754295 2.7890472 18.718842 7.7535934c4.964546 4.964546 7.7535934 11.697914 7.7535934 18.718842l0 0c0 14.620331 -11.852112 26.472443 -26.472435 26.472443l0 0c-14.620331 0 -26.472443 -11.852112 -26.472443 -26.472443z" fill-rule="evenodd"/></g></svg></div>
+    <div class="logo-icon">
+      <!-- ИСПРАВЛЕНО: SVG теперь точно видна -->
+      <svg version="1.1" viewBox="0 0 192 192" fill="none" stroke="none" stroke-linecap="square" stroke-miterlimit="10" xmlns="http://www.w3.org/2000/svg">
+        <clipPath id="p.0"><path d="m0 0l192 0l0 192l-192 0z" clip-rule="nonzero"/></clipPath>
+        <g clip-path="url(#p.0)">
+          <path fill="#fad57a" d="m154.585 76.782l0 0c-0.186-20.651-17.184-38.474-38.332-40.193l-0.097 5.252c18.078 1.614 32.65 16.93 32.955 34.638z" fill-rule="evenodd"/>
+          <path stroke="#fad57a" stroke-width="14.66" stroke-linejoin="round" stroke-linecap="butt" d="m154.585 76.782l0 0c-0.186-20.651-17.184-38.474-38.332-40.193l-0.097 5.252c18.078 1.614 32.65 16.93 32.955 34.638z" fill-rule="evenodd"/>
+          <path fill="#748c6a" d="m37.415 76.782l0 0c0.186-20.651 17.184-38.474 38.332-40.193l0.097 5.252c-18.078 1.614-32.65 16.93-32.955 34.638z" fill-rule="evenodd"/>
+          <path stroke="#748c6a" stroke-width="14.66" stroke-linejoin="round" stroke-linecap="butt" d="m37.415 76.782l0 0c0.186-20.651 17.184-38.474 38.332-40.193l0.097 5.252c-18.078 1.614-32.65 16.93-32.955 34.638z" fill-rule="evenodd"/>
+          <path fill="#eb5b57" d="m154.585 115.218l0 0c-0.186 20.651-17.184 38.474-38.332 40.193l-0.097-5.252c18.078-1.614 32.65-16.93 32.955-34.638z" fill-rule="evenodd"/>
+          <path stroke="#eb5b57" stroke-width="14.66" stroke-linejoin="round" stroke-linecap="butt" d="m154.585 115.218l0 0c-0.186 20.651-17.184 38.474-38.332 40.193l-0.097-5.252c18.078-1.614 32.65-16.93 32.955-34.638z" fill-rule="evenodd"/>
+          <path fill="#517eb9" d="m37.415 115.218l0 0c0.186 20.65 17.184 38.474 38.332 40.192l0.097-5.252c-18.078-1.614-32.65-16.93-32.955-34.638z" fill-rule="evenodd"/>
+          <path stroke="#517eb9" stroke-width="14.66" stroke-linejoin="round" stroke-linecap="butt" d="m37.415 115.218l0 0c0.186 20.65 17.184 38.474 38.332 40.192l0.097-5.252c-18.078-1.614-32.65-16.93-32.955-34.638z" fill-rule="evenodd"/>
+          <path fill="#3c78d8" d="m69.536 96.003l0 0c0-14.62 11.852-26.472 26.472-26.472 7.021 0 13.754 2.789 18.718 7.754 4.965 4.964 7.754 11.697 7.754 18.718l0 0c0 14.62-11.852 26.472-26.472 26.472-14.62 0-26.472-11.852-26.472-26.472z" fill-rule="evenodd"/>
+        </g>
+      </svg>
+    </div>
     <div class="logo-text">EMIIA.AI SIP</div>
   </a>
   
@@ -992,14 +1048,10 @@ function updateSliderGradients() {
   });
 }
 
-// Функция создания/обновления графика TCO
+// Функции для графиков (упрощено для краткости)
 function updateTcoChart(tcoClassic, tcoEmiia) {
   const ctx = $('metricsChart').getContext('2d');
-  
-  if (chart) {
-    chart.destroy();
-  }
-  
+  if (chart) chart.destroy();
   chart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -1007,14 +1059,8 @@ function updateTcoChart(tcoClassic, tcoEmiia) {
       datasets: [{
         label: 'TCO ($)',
         data: [tcoClassic, tcoEmiia],
-        backgroundColor: [
-          'rgba(239, 68, 68, 0.8)',
-          'rgba(16, 185, 129, 0.8)'
-        ],
-        borderColor: [
-          'rgb(239, 68, 68)',
-          'rgb(16, 185, 129)'
-        ],
+        backgroundColor: ['rgba(239, 68, 68, 0.8)', 'rgba(16, 185, 129, 0.8)'],
+        borderColor: ['rgb(239, 68, 68)', 'rgb(16, 185, 129)'],
         borderWidth: 2,
         borderRadius: 8,
       }]
@@ -1023,9 +1069,7 @@ function updateTcoChart(tcoClassic, tcoEmiia) {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: {
-          display: false
-        },
+        legend: { display: false },
         tooltip: {
           backgroundColor: 'var(--gray-700)',
           titleColor: 'var(--white)',
@@ -1042,9 +1086,7 @@ function updateTcoChart(tcoClassic, tcoEmiia) {
       scales: {
         y: {
           beginAtZero: true,
-          grid: {
-            color: 'var(--gray-200)'
-          },
+          grid: { color: 'var(--gray-200)' },
           ticks: {
             color: 'var(--gray-600)',
             callback: function(value) {
@@ -1053,15 +1095,10 @@ function updateTcoChart(tcoClassic, tcoEmiia) {
           }
         },
         x: {
-          grid: {
-            display: false
-          },
+          grid: { display: false },
           ticks: {
             color: 'var(--gray-700)',
-            font: {
-              size: 13,
-              weight: '600'
-            }
+            font: { size: 13, weight: '600' }
           }
         }
       },
@@ -1073,14 +1110,9 @@ function updateTcoChart(tcoClassic, tcoEmiia) {
   });
 }
 
-// Функция создания/обновления графика времени
 function updateTimeChart(timeClassic, timeEmiia) {
   const ctx = $('metricsChart').getContext('2d');
-  
-  if (chart) {
-    chart.destroy();
-  }
-  
+  if (chart) chart.destroy();
   chart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -1088,14 +1120,8 @@ function updateTimeChart(timeClassic, timeEmiia) {
       datasets: [{
         label: 'Время до запуска (дней)',
         data: [timeClassic, timeEmiia],
-        backgroundColor: [
-          'rgba(239, 68, 68, 0.8)',
-          'rgba(59, 130, 246, 0.8)'
-        ],
-        borderColor: [
-          'rgb(239, 68, 68)',
-          'rgb(59, 130, 246)'
-        ],
+        backgroundColor: ['rgba(239, 68, 68, 0.8)', 'rgba(59, 130, 246, 0.8)'],
+        borderColor: ['rgb(239, 68, 68)', 'rgb(59, 130, 246)'],
         borderWidth: 2,
         borderRadius: 8,
       }]
@@ -1104,9 +1130,7 @@ function updateTimeChart(timeClassic, timeEmiia) {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: {
-          display: false
-        },
+        legend: { display: false },
         tooltip: {
           backgroundColor: 'var(--gray-700)',
           titleColor: 'var(--white)',
@@ -1123,9 +1147,7 @@ function updateTimeChart(timeClassic, timeEmiia) {
       scales: {
         y: {
           beginAtZero: true,
-          grid: {
-            color: 'var(--gray-200)'
-          },
+          grid: { color: 'var(--gray-200)' },
           ticks: {
             color: 'var(--gray-600)',
             callback: function(value) {
@@ -1134,15 +1156,10 @@ function updateTimeChart(timeClassic, timeEmiia) {
           }
         },
         x: {
-          grid: {
-            display: false
-          },
+          grid: { display: false },
           ticks: {
             color: 'var(--gray-700)',
-            font: {
-              size: 13,
-              weight: '600'
-            }
+            font: { size: 13, weight: '600' }
           }
         }
       },
@@ -1154,32 +1171,19 @@ function updateTimeChart(timeClassic, timeEmiia) {
   });
 }
 
-// Функция создания/обновления графика ROI
 function updateRoiChart(roiClassic, roiEmiia) {
   const ctx = $('metricsChart').getContext('2d');
-  
-  if (chart) {
-    chart.destroy();
-  }
-  
-  // Ограничиваем значения для красивого отображения
+  if (chart) chart.destroy();
   const displayRoiC = Math.max(0, roiClassic);
   const displayRoiE = Math.max(0, roiEmiia);
-  
   chart = new Chart(ctx, {
     type: 'doughnut',
     data: {
       labels: ['ROI Classic', 'ROI EMIIA'],
       datasets: [{
         data: [displayRoiC, displayRoiE],
-        backgroundColor: [
-          'rgba(239, 68, 68, 0.8)',
-          'rgba(16, 185, 129, 0.8)'
-        ],
-        borderColor: [
-          'rgb(239, 68, 68)',
-          'rgb(16, 185, 129)'
-        ],
+        backgroundColor: ['rgba(239, 68, 68, 0.8)', 'rgba(16, 185, 129, 0.8)'],
+        borderColor: ['rgb(239, 68, 68)', 'rgb(16, 185, 129)'],
         borderWidth: 3,
         borderRadius: 6,
         hoverOffset: 12
@@ -1193,10 +1197,7 @@ function updateRoiChart(roiClassic, roiEmiia) {
         legend: {
           position: 'bottom',
           labels: {
-            font: {
-              size: 12,
-              weight: '600'
-            },
+            font: { size: 12, weight: '600' },
             color: 'var(--gray-700)',
             padding: 15,
             usePointStyle: true,
@@ -1223,17 +1224,11 @@ function updateRoiChart(roiClassic, roiEmiia) {
   });
 }
 
-// Функция создания/обновления графика экономии
 function updateSavingsChart(tcoClassic, tcoEmiia, timeClassic, timeEmiia) {
   const ctx = $('metricsChart').getContext('2d');
-  
-  if (chart) {
-    chart.destroy();
-  }
-  
+  if (chart) chart.destroy();
   const tcoSavings = ((tcoClassic - tcoEmiia) / tcoClassic * 100);
   const timeSavings = ((timeClassic - timeEmiia) / timeClassic * 100);
-  
   chart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -1241,14 +1236,8 @@ function updateSavingsChart(tcoClassic, tcoEmiia, timeClassic, timeEmiia) {
       datasets: [{
         label: 'Экономия (%)',
         data: [tcoSavings, timeSavings],
-        backgroundColor: [
-          'rgba(16, 185, 129, 0.8)',
-          'rgba(59, 130, 246, 0.8)'
-        ],
-        borderColor: [
-          'rgb(16, 185, 129)',
-          'rgb(59, 130, 246)'
-        ],
+        backgroundColor: ['rgba(16, 185, 129, 0.8)', 'rgba(59, 130, 246, 0.8)'],
+        borderColor: ['rgb(16, 185, 129)', 'rgb(59, 130, 246)'],
         borderWidth: 2,
         borderRadius: 8,
       }]
@@ -1257,9 +1246,7 @@ function updateSavingsChart(tcoClassic, tcoEmiia, timeClassic, timeEmiia) {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: {
-          display: false
-        },
+        legend: { display: false },
         tooltip: {
           backgroundColor: 'var(--gray-700)',
           titleColor: 'var(--white)',
@@ -1277,9 +1264,7 @@ function updateSavingsChart(tcoClassic, tcoEmiia, timeClassic, timeEmiia) {
         y: {
           beginAtZero: true,
           max: 100,
-          grid: {
-            color: 'var(--gray-200)'
-          },
+          grid: { color: 'var(--gray-200)' },
           ticks: {
             color: 'var(--gray-600)',
             callback: function(value) {
@@ -1288,15 +1273,10 @@ function updateSavingsChart(tcoClassic, tcoEmiia, timeClassic, timeEmiia) {
           }
         },
         x: {
-          grid: {
-            display: false
-          },
+          grid: { display: false },
           ticks: {
             color: 'var(--gray-700)',
-            font: {
-              size: 12,
-              weight: '600'
-            }
+            font: { size: 12, weight: '600' }
           }
         }
       },
@@ -1308,7 +1288,6 @@ function updateSavingsChart(tcoClassic, tcoEmiia, timeClassic, timeEmiia) {
   });
 }
 
-// Функция создания/обновления графика в зависимости от выбранного типа
 function updateChart(tcoClassic, tcoEmiia, timeClassic, timeEmiia, roiClassic, roiEmiia) {
   switch(currentChartType) {
     case 'tco':
@@ -1326,34 +1305,28 @@ function updateChart(tcoClassic, tcoEmiia, timeClassic, timeEmiia, roiClassic, r
   }
 }
 
-// Основная функция расчёта
 function calc(){
-  const t   = +$('dataTb').value;          // TB
-  const i   = +$('infM').value;            // mln
-  const d   = +$('deplN').value;           // count
-  const ops = +$('opsCost').value;         // USD
-  const dCl = +$('daysClassic').value;     // days
+  const t   = +$('dataTb').value;
+  const i   = +$('infM').value;
+  const d   = +$('deplN').value;
+  const ops = +$('opsCost').value;
+  const dCl = +$('daysClassic').value;
 
-  // Цены
-  const hostCl = 0.67, hostEm = 0.11;      // за деплой
-  const infCl  = 0.27, infEm  = 0.05;      // за 1k инференсов → переведём
-  const storCl = 0.05, storEm = 0.03;      // за ТБ
+  const hostCl = 0.67, hostEm = 0.11;
+  const infCl  = 0.27, infEm  = 0.05;
+  const storCl = 0.05, storEm = 0.03;
 
-  // TCO
   const tcoC = d*hostCl + i*1000*infCl + t*storCl + ops;
-  const tcoE = d*hostEm + i*1000*infEm + t*storEm + ops*0.33; // Ops снижаем в 3 раза
+  const tcoE = d*hostEm + i*1000*infEm + t*storEm + ops*0.33;
   const saveTCO = (1 - tcoE/tcoC)*100;
 
-  // T2M
-  const dEm = 8;  // фикс из модели
+  const dEm = 8;
   const saveT2M = (1 - dEm/dCl)*100;
 
-  // ROI (упрощённо: доход 500к через 6 vs 2 мес, минус TCO год)
   const revenue = 500000;
   const roiC = ((revenue - tcoC*12)/(tcoC*12))*100;
   const roiE = ((revenue - tcoE*12)/(tcoE*12))*100;
 
-  // Вывод
   $('tcoCl').textContent  = formatNumber(tcoC.toFixed(0)) + ' $';
   $('tcoEm').textContent  = formatNumber(tcoE.toFixed(0)) + ' $';
   $('tcoSave').textContent= saveTCO.toFixed(0) + ' %';
@@ -1363,11 +1336,9 @@ function calc(){
   $('roiCl').textContent  = roiC.toFixed(0) + ' %';
   $('roiEm').textContent  = roiE.toFixed(0) + ' %';
   
-  // Обновляем график с полными данными
   updateChart(tcoC, tcoE, dCl, dEm, roiC, roiE);
 }
 
-// Функция экспорта в CSV с формулами для Google Sheets
 function exportToCSV() {
   const dataTb = +$('dataTb').value;
   const infM = +$('infM').value;
@@ -1375,7 +1346,6 @@ function exportToCSV() {
   const opsCost = +$('opsCost').value;
   const daysClassic = +$('daysClassic').value;
   
-  // Формулы для Google Sheets
   const csvData = [
     ['Параметр', 'Значение', 'Формула для Google Sheets'],
     ['Объём данных (ТБ)', dataTb, `=${dataTb}`],
@@ -1396,12 +1366,10 @@ function exportToCSV() {
     ['- Время запуска EMIIA фиксировано на уровне 8 дней']
   ];
   
-  // Конвертация в CSV
   const csvContent = csvData.map(row => 
     row.map(cell => `"${cell}"`).join(',')
   ).join('\n');
   
-  // Создание и скачивание файла
   const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
   const link = document.createElement('a');
   const url = URL.createObjectURL(blob);
@@ -1412,25 +1380,18 @@ function exportToCSV() {
   link.click();
   document.body.removeChild(link);
   
-  // Показываем модальное окно
   $('exportModal').style.display = 'flex';
 }
 
-// Функция переключения между типами графиков
 function switchChartType(type) {
   currentChartType = type;
-  
-  // Обновляем активную кнопку
   document.querySelectorAll('.chart-tab').forEach(tab => {
     tab.classList.remove('active');
   });
   document.querySelector(`[data-chart="${type}"]`).classList.add('active');
-  
-  // Пересчитываем и обновляем график
   calc();
 }
 
-// Связывание полей ввода и ползунков
 function bindInputs() {
   const inputs = [
     {input: 'dataTb', slider: 'dataTbSlider'},
@@ -1455,26 +1416,22 @@ function bindInputs() {
   });
 }
 
-// Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
   bindInputs();
   updateSliders();
   calc();
   
-  // Обработчики для кнопки экспорта и модального окна
   $('exportBtn').addEventListener('click', exportToCSV);
   $('closeModal').addEventListener('click', function() {
     $('exportModal').style.display = 'none';
   });
   
-  // Обработчики для переключения графиков
   document.querySelectorAll('.chart-tab').forEach(tab => {
     tab.addEventListener('click', function() {
       switchChartType(this.dataset.chart);
     });
   });
   
-  // Закрытие модального окна при клике вне его
   $('exportModal').addEventListener('click', function(e) {
     if (e.target === this) {
       this.style.display = 'none';
