@@ -36,6 +36,10 @@
   --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08);
   --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
   --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  /* НОВЫЕ ПЕРЕМЕННЫЕ ДЛЯ ГРАФИКОВ */
+  --chart-grid-color: var(--gray-200);
+  --chart-text-color: var(--gray-600);
+  --chart-axis-color: var(--gray-700);
 }
 
 * {
@@ -72,7 +76,6 @@ body {
   }
 }
 
-/* ИСПРАВЛЕНО: Настоящая фиксированная шапка */
 header {
   background: var(--white);
   backdrop-filter: blur(20px);
@@ -100,7 +103,6 @@ header {
   transition: var(--transition);
   text-decoration: none;
   flex: 0 0 auto;
-  /* ИСПРАВЛЕНО: Добавлен z-index чтобы иконка не перекрывалась */
   position: relative;
   z-index: 1;
 }
@@ -109,7 +111,6 @@ header {
   transform: translateY(-1px);
 }
 
-/* ИСПРАВЛЕНО: Убедимся что иконка видна на мобильных */
 .logo-icon {
   width: 36px;
   height: 36px;
@@ -122,10 +123,10 @@ header {
   font-size: 16px;
   letter-spacing: -0.5px;
   transition: var(--transition);
-  /* Добавлены для надёжности */
   position: relative;
   overflow: visible;
   flex-shrink: 0;
+  min-width: 36px; /* ГАРАНТИРУЕМ РАЗМЕР */
 }
 
 .logo:hover .logo-icon {
@@ -177,7 +178,6 @@ header {
   transform: translateY(0);
 }
 
-/* ФИКСИРОВАННЫЙ ЦВЕТ: #f8f9fa для текста кнопки */
 .btn-primary {
   background: #6d9eeb;
   color: #f8f9fa !important;
@@ -290,12 +290,6 @@ header {
   -webkit-appearance: none;
   appearance: none;
   min-width: 0;
-}
-
-.input-field {
-  -webkit-appearance: none;
-  border-radius: var(--border-radius-sm);
-  font-size: 16px;
 }
 
 .input-field:focus {
@@ -429,7 +423,6 @@ header {
   padding-bottom: max(32px, env(safe-area-inset-bottom));
 }
 
-/* Модальное окно - ИСПРАВЛЕНО */
 .modal {
   display: none;
   position: fixed;
@@ -444,12 +437,10 @@ header {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  /* ИСПРАВЛЕНО: Добавлены отступы для iOS */
   padding-left: max(20px, env(safe-area-inset-left));
   padding-right: max(20px, env(safe-area-inset-right));
   padding-bottom: max(20px, env(safe-area-inset-bottom));
   overflow-y: auto;
-  /* Для старых iOS */
   -webkit-overflow-scrolling: touch;
 }
 
@@ -464,7 +455,6 @@ header {
   animation: modalSlideIn 0.3s ease-out;
   max-height: 90vh;
   overflow-y: auto;
-  /* ИСПРАВЛЕНО: Учёт safe area */
   margin: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
@@ -514,9 +504,7 @@ header {
   justify-content: flex-end;
 }
 
-/* ИСПРАВЛЕНО: Кнопка в модалке теперь видна */
 .modal-actions .btn {
-  /* Гарантируем контрастный цвет */
   background: var(--primary);
   color: #f8f9fa !important;
   border-color: var(--primary);
@@ -539,7 +527,6 @@ header {
     width: 32px;
     height: 32px;
     font-size: 14px;
-    /* ИСПРАВЛЕНО: Убедимся что иконка не сжимается */
     min-width: 32px;
   }
   
@@ -578,7 +565,7 @@ header {
     font-size: 16px;
   }
   
-  /* ИСПРАВЛЕНО: Модалка на мобильных */
+  /* ИСПРАВЛЕНО: Более пропорциональная кнопка в модалке */
   .modal {
     padding: 12px;
     padding-left: max(12px, env(safe-area-inset-left));
@@ -591,7 +578,6 @@ header {
     margin: 0;
     border-radius: var(--border-radius-sm);
     max-width: 100%;
-    /* Ограничиваем ширину для очень маленьких экранов */
     width: calc(100% - 24px);
   }
   
@@ -601,14 +587,18 @@ header {
   
   .modal-actions {
     flex-direction: column;
+    align-items: center; /* Центрируем кнопку */
   }
   
+  /* ИСПРАВЛЕНО: Кнопка теперь шире и пропорциональнее */
   .modal-actions .btn {
-    width: 100%;
+    width: 90%; /* Ширина 90% вместо 100% */
+    max-width: 320px; /* Максимальная ширина */
+    padding: 14px 24px; /* Увеличен padding */
+    font-size: 16px; /* Увеличен размер шрифта */
     justify-content: center;
   }
   
-  /* Убираем ховер-эффекты на мобильных */
   .card:hover {
     transform: none;
     box-shadow: var(--shadow);
@@ -638,10 +628,16 @@ header {
     padding: 16px;
   }
   
-  /* ИСПРАВЛЕНО: Модалка на очень маленьких экранах */
   .modal-content {
     padding: 20px;
     width: calc(100% - 16px);
+  }
+  
+  /* ИСПРАВЛЕНО: Кнопка на очень маленьких экранах */
+  .modal-actions .btn {
+    width: 95%;
+    padding: 12px 20px;
+    font-size: 15px;
   }
 }
 
@@ -672,6 +668,10 @@ header {
     --gray-800: #f1f5f9;
     --gray-900: #f8fafc;
     --white: #1e293b;
+    /* ИСПРАВЛЕНО: Цвета для графиков в тёмной теме */
+    --chart-grid-color: #475569;
+    --chart-text-color: #e2e8f0;
+    --chart-axis-color: #cbd5e1;
   }
   
   body {
@@ -717,7 +717,6 @@ header {
   flex-wrap: wrap;
 }
 
-/* ИСПРАВЛЕНО: Цвет текста активной кнопки графика */
 .chart-tab {
   padding: 8px 16px;
   background: var(--gray-100);
@@ -740,7 +739,6 @@ header {
 
 .chart-tab.active {
   background: var(--primary);
-  /* ИСПРАВЛЕНО: Фиксированный цвет #f8f9fa для текста */
   color: #f8f9fa !important;
   border-color: var(--primary);
 }
@@ -817,10 +815,8 @@ body {
 <body>
 
 <header>
-  <!-- ИСПРАВЛЕНО: Убран пробел в конце URL -->
   <a href="https://www.emiia.ru" class="logo" id="logoLink">
     <div class="logo-icon">
-      <!-- ИСПРАВЛЕНО: SVG теперь точно видна -->
       <svg version="1.1" viewBox="0 0 192 192" fill="none" stroke="none" stroke-linecap="square" stroke-miterlimit="10" xmlns="http://www.w3.org/2000/svg">
         <clipPath id="p.0"><path d="m0 0l192 0l0 192l-192 0z" clip-rule="nonzero"/></clipPath>
         <g clip-path="url(#p.0)">
@@ -1048,10 +1044,19 @@ function updateSliderGradients() {
   });
 }
 
-// Функции для графиков (упрощено для краткости)
+// Функция получения CSS-переменной (для графиков)
+function getCssVariable(variableName) {
+  return getComputedStyle(document.documentElement).getPropertyValue(variableName).trim();
+}
+
+// Функция создания/обновления графика TCO
 function updateTcoChart(tcoClassic, tcoEmiia) {
   const ctx = $('metricsChart').getContext('2d');
-  if (chart) chart.destroy();
+  
+  if (chart) {
+    chart.destroy();
+  }
+  
   chart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -1059,8 +1064,14 @@ function updateTcoChart(tcoClassic, tcoEmiia) {
       datasets: [{
         label: 'TCO ($)',
         data: [tcoClassic, tcoEmiia],
-        backgroundColor: ['rgba(239, 68, 68, 0.8)', 'rgba(16, 185, 129, 0.8)'],
-        borderColor: ['rgb(239, 68, 68)', 'rgb(16, 185, 129)'],
+        backgroundColor: [
+          'rgba(239, 68, 68, 0.8)',
+          'rgba(16, 185, 129, 0.8)'
+        ],
+        borderColor: [
+          'rgb(239, 68, 68)',
+          'rgb(16, 185, 129)'
+        ],
         borderWidth: 2,
         borderRadius: 8,
       }]
@@ -1069,7 +1080,9 @@ function updateTcoChart(tcoClassic, tcoEmiia) {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
+        legend: {
+          display: false
+        },
         tooltip: {
           backgroundColor: 'var(--gray-700)',
           titleColor: 'var(--white)',
@@ -1086,19 +1099,26 @@ function updateTcoChart(tcoClassic, tcoEmiia) {
       scales: {
         y: {
           beginAtZero: true,
-          grid: { color: 'var(--gray-200)' },
+          grid: {
+            color: getCssVariable('--chart-grid-color')
+          },
           ticks: {
-            color: 'var(--gray-600)',
+            color: getCssVariable('--chart-text-color'),
             callback: function(value) {
               return '$' + formatNumber(value);
             }
           }
         },
         x: {
-          grid: { display: false },
+          grid: {
+            display: false
+          },
           ticks: {
-            color: 'var(--gray-700)',
-            font: { size: 13, weight: '600' }
+            color: getCssVariable('--chart-text-color'),
+            font: {
+              size: 13,
+              weight: '600'
+            }
           }
         }
       },
@@ -1110,9 +1130,14 @@ function updateTcoChart(tcoClassic, tcoEmiia) {
   });
 }
 
+// Функция создания/обновления графика времени
 function updateTimeChart(timeClassic, timeEmiia) {
   const ctx = $('metricsChart').getContext('2d');
-  if (chart) chart.destroy();
+  
+  if (chart) {
+    chart.destroy();
+  }
+  
   chart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -1120,8 +1145,14 @@ function updateTimeChart(timeClassic, timeEmiia) {
       datasets: [{
         label: 'Время до запуска (дней)',
         data: [timeClassic, timeEmiia],
-        backgroundColor: ['rgba(239, 68, 68, 0.8)', 'rgba(59, 130, 246, 0.8)'],
-        borderColor: ['rgb(239, 68, 68)', 'rgb(59, 130, 246)'],
+        backgroundColor: [
+          'rgba(239, 68, 68, 0.8)',
+          'rgba(59, 130, 246, 0.8)'
+        ],
+        borderColor: [
+          'rgb(239, 68, 68)',
+          'rgb(59, 130, 246)'
+        ],
         borderWidth: 2,
         borderRadius: 8,
       }]
@@ -1130,7 +1161,9 @@ function updateTimeChart(timeClassic, timeEmiia) {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
+        legend: {
+          display: false
+        },
         tooltip: {
           backgroundColor: 'var(--gray-700)',
           titleColor: 'var(--white)',
@@ -1147,19 +1180,26 @@ function updateTimeChart(timeClassic, timeEmiia) {
       scales: {
         y: {
           beginAtZero: true,
-          grid: { color: 'var(--gray-200)' },
+          grid: {
+            color: getCssVariable('--chart-grid-color')
+          },
           ticks: {
-            color: 'var(--gray-600)',
+            color: getCssVariable('--chart-text-color'),
             callback: function(value) {
               return formatNumber(value) + ' дн';
             }
           }
         },
         x: {
-          grid: { display: false },
+          grid: {
+            display: false
+          },
           ticks: {
-            color: 'var(--gray-700)',
-            font: { size: 13, weight: '600' }
+            color: getCssVariable('--chart-text-color'),
+            font: {
+              size: 13,
+              weight: '600'
+            }
           }
         }
       },
@@ -1171,19 +1211,31 @@ function updateTimeChart(timeClassic, timeEmiia) {
   });
 }
 
+// Функция создания/обновления графика ROI
 function updateRoiChart(roiClassic, roiEmiia) {
   const ctx = $('metricsChart').getContext('2d');
-  if (chart) chart.destroy();
+  
+  if (chart) {
+    chart.destroy();
+  }
+  
   const displayRoiC = Math.max(0, roiClassic);
   const displayRoiE = Math.max(0, roiEmiia);
+  
   chart = new Chart(ctx, {
     type: 'doughnut',
     data: {
       labels: ['ROI Classic', 'ROI EMIIA'],
       datasets: [{
         data: [displayRoiC, displayRoiE],
-        backgroundColor: ['rgba(239, 68, 68, 0.8)', 'rgba(16, 185, 129, 0.8)'],
-        borderColor: ['rgb(239, 68, 68)', 'rgb(16, 185, 129)'],
+        backgroundColor: [
+          'rgba(239, 68, 68, 0.8)',
+          'rgba(16, 185, 129, 0.8)'
+        ],
+        borderColor: [
+          'rgb(239, 68, 68)',
+          'rgb(16, 185, 129)'
+        ],
         borderWidth: 3,
         borderRadius: 6,
         hoverOffset: 12
@@ -1197,8 +1249,11 @@ function updateRoiChart(roiClassic, roiEmiia) {
         legend: {
           position: 'bottom',
           labels: {
-            font: { size: 12, weight: '600' },
-            color: 'var(--gray-700)',
+            font: {
+              size: 12,
+              weight: '600'
+            },
+            color: getCssVariable('--chart-text-color'),
             padding: 15,
             usePointStyle: true,
           }
@@ -1224,11 +1279,17 @@ function updateRoiChart(roiClassic, roiEmiia) {
   });
 }
 
+// Функция создания/обновления графика экономии
 function updateSavingsChart(tcoClassic, tcoEmiia, timeClassic, timeEmiia) {
   const ctx = $('metricsChart').getContext('2d');
-  if (chart) chart.destroy();
+  
+  if (chart) {
+    chart.destroy();
+  }
+  
   const tcoSavings = ((tcoClassic - tcoEmiia) / tcoClassic * 100);
   const timeSavings = ((timeClassic - timeEmiia) / timeClassic * 100);
+  
   chart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -1236,8 +1297,14 @@ function updateSavingsChart(tcoClassic, tcoEmiia, timeClassic, timeEmiia) {
       datasets: [{
         label: 'Экономия (%)',
         data: [tcoSavings, timeSavings],
-        backgroundColor: ['rgba(16, 185, 129, 0.8)', 'rgba(59, 130, 246, 0.8)'],
-        borderColor: ['rgb(16, 185, 129)', 'rgb(59, 130, 246)'],
+        backgroundColor: [
+          'rgba(16, 185, 129, 0.8)',
+          'rgba(59, 130, 246, 0.8)'
+        ],
+        borderColor: [
+          'rgb(16, 185, 129)',
+          'rgb(59, 130, 246)'
+        ],
         borderWidth: 2,
         borderRadius: 8,
       }]
@@ -1246,7 +1313,9 @@ function updateSavingsChart(tcoClassic, tcoEmiia, timeClassic, timeEmiia) {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
+        legend: {
+          display: false
+        },
         tooltip: {
           backgroundColor: 'var(--gray-700)',
           titleColor: 'var(--white)',
@@ -1264,19 +1333,26 @@ function updateSavingsChart(tcoClassic, tcoEmiia, timeClassic, timeEmiia) {
         y: {
           beginAtZero: true,
           max: 100,
-          grid: { color: 'var(--gray-200)' },
+          grid: {
+            color: getCssVariable('--chart-grid-color')
+          },
           ticks: {
-            color: 'var(--gray-600)',
+            color: getCssVariable('--chart-text-color'),
             callback: function(value) {
               return value + '%';
             }
           }
         },
         x: {
-          grid: { display: false },
+          grid: {
+            display: false
+          },
           ticks: {
-            color: 'var(--gray-700)',
-            font: { size: 12, weight: '600' }
+            color: getCssVariable('--chart-text-color'),
+            font: {
+              size: 12,
+              weight: '600'
+            }
           }
         }
       },
@@ -1288,6 +1364,7 @@ function updateSavingsChart(tcoClassic, tcoEmiia, timeClassic, timeEmiia) {
   });
 }
 
+// Функция создания/обновления графика в зависимости от выбранного типа
 function updateChart(tcoClassic, tcoEmiia, timeClassic, timeEmiia, roiClassic, roiEmiia) {
   switch(currentChartType) {
     case 'tco':
@@ -1305,6 +1382,7 @@ function updateChart(tcoClassic, tcoEmiia, timeClassic, timeEmiia, roiClassic, r
   }
 }
 
+// Основная функция расчёта
 function calc(){
   const t   = +$('dataTb').value;
   const i   = +$('infM').value;
@@ -1339,6 +1417,7 @@ function calc(){
   updateChart(tcoC, tcoE, dCl, dEm, roiC, roiE);
 }
 
+// Функция экспорта в CSV
 function exportToCSV() {
   const dataTb = +$('dataTb').value;
   const infM = +$('infM').value;
@@ -1383,6 +1462,7 @@ function exportToCSV() {
   $('exportModal').style.display = 'flex';
 }
 
+// Функция переключения между типами графиков
 function switchChartType(type) {
   currentChartType = type;
   document.querySelectorAll('.chart-tab').forEach(tab => {
@@ -1392,6 +1472,7 @@ function switchChartType(type) {
   calc();
 }
 
+// Связывание полей ввода и ползунков
 function bindInputs() {
   const inputs = [
     {input: 'dataTb', slider: 'dataTbSlider'},
@@ -1416,6 +1497,7 @@ function bindInputs() {
   });
 }
 
+// Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
   bindInputs();
   updateSliders();
