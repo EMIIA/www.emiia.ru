@@ -2,11 +2,12 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>EMIIA.AI SIP – калькулятор экономии</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root {
   --primary: #2563eb;
@@ -35,6 +36,9 @@
   --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08);
   --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
   --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --chart-grid-color: var(--gray-200);
+  --chart-text-color: var(--gray-600);
+  --chart-axis-color: var(--gray-700);
 }
 
 * {
@@ -42,6 +46,13 @@
   margin: 0;
   padding: 0;
   -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
 }
 
 body {
@@ -52,12 +63,15 @@ body {
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding-bottom: env(safe-area-inset-bottom);
+  touch-action: manipulation;
+  padding-top: 72px;
 }
 
-/* iOS-specific optimizations */
 @supports (-webkit-touch-callout: none) {
   body {
     background: var(--gray-50);
+    -webkit-overflow-scrolling: touch;
   }
 }
 
@@ -69,10 +83,15 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 100;
+  left: 0;
+  right: 0;
+  z-index: 1000;
   -webkit-backdrop-filter: blur(20px);
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .logo {
@@ -82,6 +101,9 @@ header {
   cursor: pointer;
   transition: var(--transition);
   text-decoration: none;
+  flex: 0 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 .logo:hover {
@@ -91,17 +113,19 @@ header {
 .logo-icon {
   width: 36px;
   height: 36px;
-  
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  
   font-family: 'JetBrains Mono', monospace;
   font-weight: 700;
   font-size: 16px;
   letter-spacing: -0.5px;
   transition: var(--transition);
+  position: relative;
+  overflow: visible;
+  flex-shrink: 0;
+  min-width: 36px;
 }
 
 .logo:hover .logo-icon {
@@ -113,11 +137,13 @@ header {
   font-weight: 700;
   color: var(--gray-900);
   letter-spacing: -0.25px;
+  white-space: nowrap;
 }
 
 .header-actions {
   display: flex;
   gap: 12px;
+  align-items: center;
 }
 
 .btn {
@@ -136,6 +162,8 @@ header {
   box-shadow: var(--shadow);
   font-family: 'Inter', sans-serif;
   letter-spacing: -0.1px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .btn:hover {
@@ -151,7 +179,7 @@ header {
 
 .btn-primary {
   background: #6d9eeb;
-  color: var(--white);
+  color: #f8f9fa !important;
   border-color: var(--primary);
 }
 
@@ -164,6 +192,10 @@ header {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+  padding-left: max(20px, env(safe-area-inset-left));
+  padding-right: max(20px, env(safe-area-inset-right));
+  width: 100%;
+  min-width: 0;
 }
 
 .cards-grid {
@@ -172,6 +204,8 @@ header {
   gap: 20px;
   max-width: 1000px;
   margin: 0 auto;
+  width: 100%;
+  min-width: 0;
 }
 
 @media (min-width: 768px) {
@@ -194,6 +228,9 @@ header {
   transition: var(--transition);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .card:hover {
@@ -251,12 +288,7 @@ header {
   font-family: 'Inter', sans-serif;
   -webkit-appearance: none;
   appearance: none;
-}
-
-/* iOS input optimization */
-.input-field {
-  -webkit-appearance: none;
-  border-radius: var(--border-radius-sm);
+  min-width: 0;
 }
 
 .input-field:focus {
@@ -265,10 +297,10 @@ header {
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
-/* Стили для ползунков */
 .slider-container {
   margin-top: 16px;
   position: relative;
+  width: 100%;
 }
 
 .slider {
@@ -279,6 +311,7 @@ header {
   background: var(--gray-300);
   outline: none;
   margin: 20px 0;
+  min-width: 0;
 }
 
 .slider::-webkit-slider-thumb {
@@ -327,6 +360,7 @@ header {
   align-items: center;
   padding: 14px 0;
   border-bottom: 1px solid var(--gray-100);
+  gap: 12px;
 }
 
 .metric-row:last-child {
@@ -338,6 +372,7 @@ header {
   color: var(--gray-600);
   font-weight: 500;
   letter-spacing: -0.1px;
+  flex-shrink: 0;
 }
 
 .metric-value {
@@ -345,6 +380,8 @@ header {
   font-size: 15px;
   font-family: 'JetBrains Mono', monospace;
   letter-spacing: -0.1px;
+  text-align: right;
+  word-break: break-all;
 }
 
 .metric-positive {
@@ -382,9 +419,9 @@ header {
   border-top: 1.5px solid var(--gray-200);
   margin-top: 40px;
   font-weight: 500;
+  padding-bottom: max(32px, env(safe-area-inset-bottom));
 }
 
-/* Модальное окно */
 .modal {
   display: none;
   position: fixed;
@@ -395,10 +432,15 @@ header {
   background: rgba(15, 23, 42, 0.6);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  z-index: 1000;
+  z-index: 1001;
   align-items: center;
   justify-content: center;
   padding: 20px;
+  padding-left: max(20px, env(safe-area-inset-left));
+  padding-right: max(20px, env(safe-area-inset-right));
+  padding-bottom: max(20px, env(safe-area-inset-bottom));
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .modal-content {
@@ -410,6 +452,9 @@ header {
   box-shadow: var(--shadow-lg);
   border: 1.5px solid var(--gray-200);
   animation: modalSlideIn 0.3s ease-out;
+  max-height: 90vh;
+  overflow-y: auto;
+  margin: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 @keyframes modalSlideIn {
@@ -458,16 +503,30 @@ header {
   justify-content: flex-end;
 }
 
+.modal-actions .btn {
+  background: #6d9eeb;
+  color: #f8f9fa !important;
+  border-color: var(--primary);
+}
+
+.modal-actions .btn:hover {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+}
+
 /* Mobile optimizations */
 @media (max-width: 767px) {
   header {
     padding: 14px 16px;
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
   }
   
   .logo-icon {
     width: 32px;
     height: 32px;
     font-size: 14px;
+    min-width: 32px;
   }
   
   .logo-text {
@@ -481,11 +540,19 @@ header {
   
   .container {
     padding: 16px;
+    padding-top: 16px;
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
   }
   
   .card {
     padding: 20px;
     border-radius: var(--border-radius-sm);
+    margin-bottom: 0;
+  }
+  
+  .cards-grid {
+    gap: 16px;
   }
   
   .card-title {
@@ -494,12 +561,22 @@ header {
   
   .input-field {
     padding: 16px;
-    font-size: 16px; /* Prevent zoom on iOS */
+    font-size: 16px;
+  }
+  
+  .modal {
+    padding: 12px;
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
   }
   
   .modal-content {
     padding: 24px;
-    margin: 20px;
+    margin: 0;
+    border-radius: var(--border-radius-sm);
+    max-width: 100%;
+    width: calc(100% - 24px);
   }
   
   .modal-title {
@@ -508,11 +585,55 @@ header {
   
   .modal-actions {
     flex-direction: column;
+    align-items: center;
   }
   
   .modal-actions .btn {
-    width: 100%;
+    width: 90%;
+    max-width: 320px;
+    padding: 14px 24px;
+    font-size: 16px;
     justify-content: center;
+  }
+  
+  .card:hover {
+    transform: none;
+    box-shadow: var(--shadow);
+  }
+  
+  .btn:hover {
+    transform: none;
+  }
+}
+
+/* Small mobile fixes */
+@media (max-width: 480px) {
+  .logo-text {
+    font-size: 14px;
+  }
+  
+  .btn {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+  
+  .cards-grid {
+    gap: 16px;
+  }
+  
+  .card {
+    padding: 16px;
+  }
+  
+  .modal-content {
+    padding: 20px;
+    width: calc(100% - 16px);
+  }
+  
+  .modal-actions .btn {
+    width: 95%;
+    padding: 12px 20px;
+    font-size: 15px;
   }
 }
 
@@ -543,6 +664,9 @@ header {
     --gray-800: #f1f5f9;
     --gray-900: #f8fafc;
     --white: #1e293b;
+    --chart-grid-color: #475569;
+    --chart-text-color: #e2e8f0;
+    --chart-axis-color: #cbd5e1;
   }
   
   body {
@@ -579,15 +703,133 @@ header {
   opacity: 0.7;
   pointer-events: none;
 }
+
+/* Стили для графика */
+.chart-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.chart-tab {
+  padding: 8px 16px;
+  background: var(--gray-100);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--border-radius-xs);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--gray-600);
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.chart-tab:hover {
+  background: var(--gray-200);
+}
+
+.chart-tab.active {
+  background: var(--primary);
+  color: #f8f9fa !important;
+  border-color: var(--primary);
+}
+
+.chart-container {
+  margin-top: 24px;
+  padding: 20px;
+  background: var(--gray-50);
+  border-radius: var(--border-radius-sm);
+  border: 1.5px solid var(--gray-200);
+  position: relative;
+  height: 320px;
+  width: 100%;
+  overflow: hidden;
+}
+
+canvas {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block;
+}
+
+@media (max-width: 767px) {
+  .chart-tabs {
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  
+  .chart-tab {
+    padding: 10px 12px;
+    font-size: 12px;
+    flex: 1;
+    min-width: 80px;
+  }
+  
+  .chart-container {
+    height: 280px;
+    padding: 16px;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    padding: 12px;
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+  }
+  
+  .card {
+    padding: 16px;
+  }
+  
+  .chart-tabs {
+    flex-direction: column;
+  }
+  
+  .chart-tab {
+    flex: none;
+  }
+}
+
+body {
+  opacity: 0;
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 </style>
 </head>
 <body>
 
 <header>
   <a href="https://www.emiia.ru" class="logo" id="logoLink">
-    <div class="logo-icon"><svg version="1.1" viewBox="0.0 0.0 192.0 192.0" fill="none" stroke="none" stroke-linecap="square" stroke-miterlimit="10" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><clipPath id="p.0"><path d="m0 0l192.0 0l0 192.0l-192.0 0l0 -192.0z" clip-rule="nonzero"/></clipPath><g clip-path="url(#p.0)"><path fill="#000000" fill-opacity="0.0" d="m0 0l192.0 0l0 192.0l-192.0 0z" fill-rule="evenodd"/><path fill="#fad57a" d="m154.58488 76.78212l0 0c-0.18571472 -20.650608 -17.183945 -38.474106 -38.33184 -40.192856l-0.09654236 5.25214c18.078407 1.6142845 32.65023 16.930412 32.955193 34.63847z" fill-rule="evenodd"/><path stroke="#fad57a" stroke-width="14.664041994750656" stroke-linejoin="round" stroke-linecap="butt" d="m154.58488 76.78212l0 0c-0.18571472 -20.650608 -17.183945 -38.474106 -38.33184 -40.192856l-0.09654236 5.25214c18.078407 1.6142845 32.65023 16.930412 32.955193 34.63847z" fill-rule="evenodd"/><path fill="#748c6a" d="m37.41517 76.78212l0 0c0.1857109 -20.650608 17.183945 -38.474106 38.33184 -40.192856l0.09654236 5.25214c-18.078403 1.6142845 -32.650234 16.930412 -32.955196 34.63847z" fill-rule="evenodd"/><path stroke="#748c6a" stroke-width="14.664041994750656" stroke-linejoin="round" stroke-linecap="butt" d="m37.41517 76.78212l0 0c0.1857109 -20.650608 17.183945 -38.474106 38.33184 -40.192856l0.09654236 5.25214c-18.078403 1.6142845 -32.650234 16.930412 -32.955196 34.63847z" fill-rule="evenodd"/><path fill="#eb5b57" d="m154.58488 115.21762l0 0c-0.18571472 20.650604 -17.183945 38.474106 -38.33184 40.192856l-0.09654236 -5.252136c18.078407 -1.6142883 32.65023 -16.93042 32.955193 -34.63848z" fill-rule="evenodd"/><path stroke="#eb5b57" stroke-width="14.664041994750656" stroke-linejoin="round" stroke-linecap="butt" d="m154.58488 115.21762l0 0c-0.18571472 20.650604 -17.183945 38.474106 -38.33184 40.192856l-0.09654236 -5.252136c18.078407 -1.6142883 32.65023 -16.93042 32.955193 -34.63848z" fill-rule="evenodd"/><path fill="#517eb9" d="m37.41517 115.217735l0 0c0.1857109 20.650597 17.183945 38.4741 38.33184 40.19285l0.09654236 -5.252136c-18.078403 -1.6142883 -32.650234 -16.93042 -32.955196 -34.638474z" fill-rule="evenodd"/><path stroke="#517eb9" stroke-width="14.664041994750656" stroke-linejoin="round" stroke-linecap="butt" d="m37.41517 115.217735l0 0c0.1857109 20.650597 17.183945 38.4741 38.33184 40.19285l0.09654236 -5.252136c-18.078403 -1.6142883 -32.650234 -16.93042 -32.955196 -34.638474z" fill-rule="evenodd"/><path fill="#3c78d8" d="m69.53572 96.002686l0 0c0 -14.620323 11.852112 -26.472435 26.472443 -26.472435l0 0c7.0209274 0 13.754295 2.7890472 18.718842 7.7535934c4.964546 4.964546 7.7535934 11.697914 7.7535934 18.718842l0 0c0 14.620331 -11.852112 26.472443 -26.472435 26.472443l0 0c-14.620331 0 -26.472443 -11.852112 -26.472443 -26.472443z" fill-rule="evenodd"/></g></svg></div>
+    <div class="logo-icon">
+      <svg version="1.1" viewBox="0 0 192 192" fill="none" stroke="none" stroke-linecap="square" stroke-miterlimit="10" xmlns="http://www.w3.org/2000/svg">
+        <clipPath id="p.0"><path d="m0 0l192 0l0 192l-192 0z" clip-rule="nonzero"/></clipPath>
+        <g clip-path="url(#p.0)">
+          <path fill="#fad57a" d="m154.585 76.782l0 0c-0.186-20.651-17.184-38.474-38.332-40.193l-0.097 5.252c18.078 1.614 32.65 16.93 32.955 34.638z" fill-rule="evenodd"/>
+          <path stroke="#fad57a" stroke-width="14.66" stroke-linejoin="round" stroke-linecap="butt" d="m154.585 76.782l0 0c-0.186-20.651-17.184-38.474-38.332-40.193l-0.097 5.252c18.078 1.614 32.65 16.93 32.955 34.638z" fill-rule="evenodd"/>
+          <path fill="#748c6a" d="m37.415 76.782l0 0c0.186-20.651 17.184-38.474 38.332-40.193l0.097 5.252c-18.078 1.614-32.65 16.93-32.955 34.638z" fill-rule="evenodd"/>
+          <path stroke="#748c6a" stroke-width="14.66" stroke-linejoin="round" stroke-linecap="butt" d="m37.415 76.782l0 0c0.186-20.651 17.184-38.474 38.332-40.193l0.097 5.252c-18.078 1.614-32.65 16.93-32.955 34.638z" fill-rule="evenodd"/>
+          <path fill="#eb5b57" d="m154.585 115.218l0 0c-0.186 20.651-17.184 38.474-38.332 40.193l-0.097-5.252c18.078-1.614 32.65-16.93 32.955-34.638z" fill-rule="evenodd"/>
+          <path stroke="#eb5b57" stroke-width="14.66" stroke-linejoin="round" stroke-linecap="butt" d="m154.585 115.218l0 0c-0.186 20.651-17.184 38.474-38.332 40.193l-0.097-5.252c18.078-1.614 32.65-16.93 32.955-34.638z" fill-rule="evenodd"/>
+          <path fill="#517eb9" d="m37.415 115.218l0 0c0.186 20.65 17.184 38.474 38.332 40.192l0.097-5.252c-18.078-1.614-32.65-16.93-32.955-34.638z" fill-rule="evenodd"/>
+          <path stroke="#517eb9" stroke-width="14.66" stroke-linejoin="round" stroke-linecap="butt" d="m37.415 115.218l0 0c0.186 20.65 17.184 38.474 38.332 40.192l0.097-5.252c-18.078-1.614-32.65-16.93-32.955-34.638z" fill-rule="evenodd"/>
+          <path fill="#3c78d8" d="m69.536 96.003l0 0c0-14.62 11.852-26.472 26.472-26.472 7.021 0 13.754 2.789 18.718 7.754 4.965 4.964 7.754 11.697 7.754 18.718l0 0c0 14.62-11.852 26.472-26.472 26.472-14.62 0-26.472-11.852-26.472-26.472z" fill-rule="evenodd"/>
+        </g>
+      </svg>
+    </div>
     <div class="logo-text">EMIIA.AI SIP</div>
   </a>
+  
   <div class="header-actions">
     <button class="btn btn-primary" id="exportBtn">
       Экспорт CSV
@@ -607,7 +849,7 @@ header {
           <span>Объём данных</span>
           <span class="input-value" id="dataTbValue">100 ТБ</span>
         </div>
-        <input id="dataTb" type="number" value="100" min="0" step="1" class="input-field" inputmode="numeric">
+        <input id="dataTb" type="number" value="100" min="0" step="1" class="input-field" inputmode="decimal">
         <div class="slider-container">
           <input type="range" min="0" max="500" value="100" class="slider" id="dataTbSlider">
         </div>
@@ -618,7 +860,7 @@ header {
           <span>Инференсы</span>
           <span class="input-value" id="infMValue">10 млн</span>
         </div>
-        <input id="infM" type="number" value="10" min="0" step="1" class="input-field" inputmode="numeric">
+        <input id="infM" type="number" value="10" min="0" step="1" class="input-field" inputmode="decimal">
         <div class="slider-container">
           <input type="range" min="0" max="50" value="10" class="slider" id="infMSlider">
         </div>
@@ -629,7 +871,7 @@ header {
           <span>Развёртывания</span>
           <span class="input-value" id="deplNValue">5 раз</span>
         </div>
-        <input id="deplN" type="number" value="5" min="0" step="1" class="input-field" inputmode="numeric">
+        <input id="deplN" type="number" value="5" min="0" step="1" class="input-field" inputmode="decimal">
         <div class="slider-container">
           <input type="range" min="0" max="20" value="5" class="slider" id="deplNSlider">
         </div>
@@ -640,7 +882,7 @@ header {
           <span>Команда Ops</span>
           <span class="input-value" id="opsCostValue">$15,000</span>
         </div>
-        <input id="opsCost" type="number" value="15000" min="0" step="1000" class="input-field" inputmode="numeric">
+        <input id="opsCost" type="number" value="15000" min="0" step="1000" class="input-field" inputmode="decimal">
         <div class="slider-container">
           <input type="range" min="0" max="50000" value="15000" step="1000" class="slider" id="opsCostSlider">
         </div>
@@ -651,7 +893,7 @@ header {
           <span>Время до запуска</span>
           <span class="input-value" id="daysClassicValue">50 дней</span>
         </div>
-        <input id="daysClassic" type="number" value="50" min="0" step="1" class="input-field" inputmode="numeric">
+        <input id="daysClassic" type="number" value="50" min="0" step="1" class="input-field" inputmode="decimal">
         <div class="slider-container">
           <input type="range" min="0" max="100" value="50" class="slider" id="daysClassicSlider">
         </div>
@@ -703,12 +945,25 @@ header {
         <span class="metric-label">ROI EMIIA (12 мес)</span>
         <span class="metric-value metric-positive" id="roiEm">0 %</span>
       </div>
+      
+      <!-- График всех метрик -->
+      <div class="divider"></div>
+      <div class="chart-tabs">
+        <button class="chart-tab active" data-chart="tco">TCO</button>
+        <button class="chart-tab" data-chart="time">Время</button>
+        <button class="chart-tab" data-chart="roi">ROI</button>
+        <button class="chart-tab" data-chart="savings">Экономия</button>
+      </div>
+      <div class="chart-container">
+        <canvas id="metricsChart"></canvas>
+      </div>
     </div>
   </div>
 </div>
 
 <div class="footer">
-  EMIIA.AI SIP – ПРОСТРАНСТВЕННЫЙ ИНТЕЛЛЕКТ
+  EMIIA.AI SIP – ПРОСТРАНСТВЕННЫЙ ИНТЕЛЛЕКТ<br>
+βeta — справочные данные
 </div>
 
 <!-- Модальное окно для информации об экспорте -->
@@ -735,6 +990,10 @@ header {
 
 <script>
 const $ = id => document.getElementById(id);
+
+// Глобальная переменная для графика
+let chart;
+let currentChartType = 'tco';
 
 // Функция форматирования чисел
 function formatNumber(num) {
@@ -781,34 +1040,375 @@ function updateSliderGradients() {
   });
 }
 
+// Функция получения CSS-переменной (для графиков)
+function getCssVariable(variableName) {
+  return getComputedStyle(document.documentElement).getPropertyValue(variableName).trim();
+}
+
+// Функция создания/обновления графика TCO
+function updateTcoChart(tcoClassic, tcoEmiia) {
+  const ctx = $('metricsChart').getContext('2d');
+  
+  if (chart) {
+    chart.destroy();
+  }
+  
+  chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Classic', 'EMIIA'],
+      datasets: [{
+        label: 'TCO ($)',
+        data: [tcoClassic, tcoEmiia],
+        backgroundColor: [
+          'rgba(239, 68, 68, 0.8)',
+          'rgba(16, 185, 129, 0.8)'
+        ],
+        borderColor: [
+          'rgb(239, 68, 68)',
+          'rgb(16, 185, 129)'
+        ],
+        borderWidth: 2,
+        borderRadius: 8,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          backgroundColor: '#f8f9fa',
+          titleColor: '#0f172a',
+          bodyColor: '#1e293b',
+          padding: 12,
+          cornerRadius: 8,
+          borderColor: getCssVariable('--gray-200'),
+          borderWidth: 1.5,
+          callbacks: {
+            label: function(context) {
+              return `  TCO: $${formatNumber(context.parsed.y.toFixed(0))}`;
+            }
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          grid: {
+            color: getCssVariable('--chart-grid-color')
+          },
+          ticks: {
+            color: getCssVariable('--chart-text-color'),
+            callback: function(value) {
+              return '$' + formatNumber(value);
+            }
+          }
+        },
+        x: {
+          grid: {
+            display: false
+          },
+          ticks: {
+            color: getCssVariable('--chart-text-color'),
+            font: {
+              size: 13,
+              weight: '600'
+            }
+          }
+        }
+      },
+      animation: {
+        duration: 600,
+        easing: 'easeOutQuart'
+      }
+    }
+  });
+}
+
+// Функция создания/обновления графика времени
+function updateTimeChart(timeClassic, timeEmiia) {
+  const ctx = $('metricsChart').getContext('2d');
+  
+  if (chart) {
+    chart.destroy();
+  }
+  
+  chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Classic', 'EMIIA'],
+      datasets: [{
+        label: 'Время до запуска (дней)',
+        data: [timeClassic, timeEmiia],
+        backgroundColor: [
+          'rgba(239, 68, 68, 0.8)',
+          'rgba(59, 130, 246, 0.8)'
+        ],
+        borderColor: [
+          'rgb(239, 68, 68)',
+          'rgb(59, 130, 246)'
+        ],
+        borderWidth: 2,
+        borderRadius: 8,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          backgroundColor: '#f8f9fa',
+          titleColor: '#0f172a',
+          bodyColor: '#1e293b',
+          padding: 12,
+          cornerRadius: 8,
+          borderColor: getCssVariable('--gray-200'),
+          borderWidth: 1.5,
+          callbacks: {
+            label: function(context) {
+              return `  Время: ${formatNumber(context.parsed.y)} дней`;
+            }
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          grid: {
+            color: getCssVariable('--chart-grid-color')
+          },
+          ticks: {
+            color: getCssVariable('--chart-text-color'),
+            callback: function(value) {
+              return formatNumber(value) + ' дн';
+            }
+          }
+        },
+        x: {
+          grid: {
+            display: false
+          },
+          ticks: {
+            color: getCssVariable('--chart-text-color'),
+            font: {
+              size: 13,
+              weight: '600'
+            }
+          }
+        }
+      },
+      animation: {
+        duration: 600,
+        easing: 'easeOutQuart'
+      }
+    }
+  });
+}
+
+// Функция создания/обновления графика ROI
+function updateRoiChart(roiClassic, roiEmiia) {
+  const ctx = $('metricsChart').getContext('2d');
+  
+  if (chart) {
+    chart.destroy();
+  }
+  
+  const displayRoiC = Math.max(0, roiClassic);
+  const displayRoiE = Math.max(0, roiEmiia);
+  
+  chart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['ROI Classic', 'ROI EMIIA'],
+      datasets: [{
+        data: [displayRoiC, displayRoiE],
+        backgroundColor: [
+          'rgba(239, 68, 68, 0.8)',
+          'rgba(16, 185, 129, 0.8)'
+        ],
+        borderColor: [
+          'rgb(239, 68, 68)',
+          'rgb(16, 185, 129)'
+        ],
+        borderWidth: 3,
+        borderRadius: 6,
+        hoverOffset: 12
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '60%',
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            font: {
+              size: 12,
+              weight: '600'
+            },
+            color: getCssVariable('--chart-text-color'),
+            padding: 15,
+            usePointStyle: true,
+          }
+        },
+        tooltip: {
+          backgroundColor: '#f8f9fa',
+          titleColor: '#0f172a',
+          bodyColor: '#1e293b',
+          padding: 10,
+          cornerRadius: 6,
+          borderColor: getCssVariable('--gray-200'),
+          borderWidth: 1.5,
+          callbacks: {
+            label: function(context) {
+              return `  ${context.label}: ${context.parsed.toFixed(0)}%`;
+            }
+          }
+        }
+      },
+      animation: {
+        duration: 800,
+        easing: 'easeOutQuart'
+      }
+    }
+  });
+}
+
+// Функция создания/обновления графика экономии
+function updateSavingsChart(tcoClassic, tcoEmiia, timeClassic, timeEmiia) {
+  const ctx = $('metricsChart').getContext('2d');
+  
+  if (chart) {
+    chart.destroy();
+  }
+  
+  const tcoSavings = ((tcoClassic - tcoEmiia) / tcoClassic * 100);
+  const timeSavings = ((timeClassic - timeEmiia) / timeClassic * 100);
+  
+  chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Экономия TCO', 'Ускорение T2M'],
+      datasets: [{
+        label: 'Экономия (%)',
+        data: [tcoSavings, timeSavings],
+        backgroundColor: [
+          'rgba(16, 185, 129, 0.8)',
+          'rgba(59, 130, 246, 0.8)'
+        ],
+        borderColor: [
+          'rgb(16, 185, 129)',
+          'rgb(59, 130, 246)'
+        ],
+        borderWidth: 2,
+        borderRadius: 8,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          backgroundColor: '#f8f9fa',
+          titleColor: '#0f172a',
+          bodyColor: '#1e293b',
+          padding: 12,
+          cornerRadius: 8,
+          borderColor: getCssVariable('--gray-200'),
+          borderWidth: 1.5,
+          callbacks: {
+            label: function(context) {
+              return `  Экономия: ${context.parsed.y.toFixed(1)}%`;
+            }
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 100,
+          grid: {
+            color: getCssVariable('--chart-grid-color')
+          },
+          ticks: {
+            color: getCssVariable('--chart-text-color'),
+            callback: function(value) {
+              return value + '%';
+            }
+          }
+        },
+        x: {
+          grid: {
+            display: false
+          },
+          ticks: {
+            color: getCssVariable('--chart-text-color'),
+            font: {
+              size: 12,
+              weight: '600'
+            }
+          }
+        }
+      },
+      animation: {
+        duration: 600,
+        easing: 'easeOutQuart'
+      }
+    }
+  });
+}
+
+// Функция создания/обновления графика в зависимости от выбранного типа
+function updateChart(tcoClassic, tcoEmiia, timeClassic, timeEmiia, roiClassic, roiEmiia) {
+  switch(currentChartType) {
+    case 'tco':
+      updateTcoChart(tcoClassic, tcoEmiia);
+      break;
+    case 'time':
+      updateTimeChart(timeClassic, timeEmiia);
+      break;
+    case 'roi':
+      updateRoiChart(roiClassic, roiEmiia);
+      break;
+    case 'savings':
+      updateSavingsChart(tcoClassic, tcoEmiia, timeClassic, timeEmiia);
+      break;
+  }
+}
+
 // Основная функция расчёта
 function calc(){
-  const t   = +$('dataTb').value;          // TB
-  const i   = +$('infM').value;            // mln
-  const d   = +$('deplN').value;           // count
-  const ops = +$('opsCost').value;         // USD
-  const dCl = +$('daysClassic').value;     // days
+  const t   = +$('dataTb').value;
+  const i   = +$('infM').value;
+  const d   = +$('deplN').value;
+  const ops = +$('opsCost').value;
+  const dCl = +$('daysClassic').value;
 
-  // Цены
-  const hostCl = 0.67, hostEm = 0.11;      // за деплой
-  const infCl  = 0.27, infEm  = 0.05;      // за 1k инференсов → переведём
-  const storCl = 0.05, storEm = 0.03;      // за ТБ
+  const hostCl = 0.67, hostEm = 0.11;
+  const infCl  = 0.27, infEm  = 0.05;
+  const storCl = 0.05, storEm = 0.03;
 
-  // TCO
   const tcoC = d*hostCl + i*1000*infCl + t*storCl + ops;
-  const tcoE = d*hostEm + i*1000*infEm + t*storEm + ops*0.33; // Ops снижаем в 3 раза
+  const tcoE = d*hostEm + i*1000*infEm + t*storEm + ops*0.33;
   const saveTCO = (1 - tcoE/tcoC)*100;
 
-  // T2M
-  const dEm = 8;  // фикс из модели
+  const dEm = 8;
   const saveT2M = (1 - dEm/dCl)*100;
 
-  // ROI (упрощённо: доход 500к через 6 vs 2 мес, минус TCO год)
   const revenue = 500000;
   const roiC = ((revenue - tcoC*12)/(tcoC*12))*100;
   const roiE = ((revenue - tcoE*12)/(tcoE*12))*100;
 
-  // Вывод
   $('tcoCl').textContent  = formatNumber(tcoC.toFixed(0)) + ' $';
   $('tcoEm').textContent  = formatNumber(tcoE.toFixed(0)) + ' $';
   $('tcoSave').textContent= saveTCO.toFixed(0) + ' %';
@@ -817,9 +1417,11 @@ function calc(){
   $('t2mSave').textContent= saveT2M.toFixed(0) + ' %';
   $('roiCl').textContent  = roiC.toFixed(0) + ' %';
   $('roiEm').textContent  = roiE.toFixed(0) + ' %';
+  
+  updateChart(tcoC, tcoE, dCl, dEm, roiC, roiE);
 }
 
-// Функция экспорта в CSV с формулами для Google Sheets
+// Функция экспорта в CSV
 function exportToCSV() {
   const dataTb = +$('dataTb').value;
   const infM = +$('infM').value;
@@ -827,7 +1429,6 @@ function exportToCSV() {
   const opsCost = +$('opsCost').value;
   const daysClassic = +$('daysClassic').value;
   
-  // Формулы для Google Sheets
   const csvData = [
     ['Параметр', 'Значение', 'Формула для Google Sheets'],
     ['Объём данных (ТБ)', dataTb, `=${dataTb}`],
@@ -848,12 +1449,10 @@ function exportToCSV() {
     ['- Время запуска EMIIA фиксировано на уровне 8 дней']
   ];
   
-  // Конвертация в CSV
   const csvContent = csvData.map(row => 
     row.map(cell => `"${cell}"`).join(',')
   ).join('\n');
   
-  // Создание и скачивание файла
   const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
   const link = document.createElement('a');
   const url = URL.createObjectURL(blob);
@@ -864,8 +1463,17 @@ function exportToCSV() {
   link.click();
   document.body.removeChild(link);
   
-  // Показываем модальное окно
   $('exportModal').style.display = 'flex';
+}
+
+// Функция переключения между типами графиков
+function switchChartType(type) {
+  currentChartType = type;
+  document.querySelectorAll('.chart-tab').forEach(tab => {
+    tab.classList.remove('active');
+  });
+  document.querySelector(`[data-chart="${type}"]`).classList.add('active');
+  calc();
 }
 
 // Связывание полей ввода и ползунков
@@ -893,19 +1501,23 @@ function bindInputs() {
   });
 }
 
-// Инициализация
+// Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
   bindInputs();
   updateSliders();
   calc();
   
-  // Обработчики для кнопки экспорта и модального окна
   $('exportBtn').addEventListener('click', exportToCSV);
   $('closeModal').addEventListener('click', function() {
     $('exportModal').style.display = 'none';
   });
   
-  // Закрытие модального окна при клике вне его
+  document.querySelectorAll('.chart-tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+      switchChartType(this.dataset.chart);
+    });
+  });
+  
   $('exportModal').addEventListener('click', function(e) {
     if (e.target === this) {
       this.style.display = 'none';
