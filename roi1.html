@@ -36,7 +36,6 @@
   --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08);
   --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
   --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  /* НОВЫЕ ПЕРЕМЕННЫЕ ДЛЯ ГРАФИКОВ */
   --chart-grid-color: var(--gray-200);
   --chart-text-color: var(--gray-600);
   --chart-axis-color: var(--gray-700);
@@ -126,7 +125,7 @@ header {
   position: relative;
   overflow: visible;
   flex-shrink: 0;
-  min-width: 36px; /* ГАРАНТИРУЕМ РАЗМЕР */
+  min-width: 36px;
 }
 
 .logo:hover .logo-icon {
@@ -565,7 +564,6 @@ header {
     font-size: 16px;
   }
   
-  /* ИСПРАВЛЕНО: Более пропорциональная кнопка в модалке */
   .modal {
     padding: 12px;
     padding-left: max(12px, env(safe-area-inset-left));
@@ -587,15 +585,14 @@ header {
   
   .modal-actions {
     flex-direction: column;
-    align-items: center; /* Центрируем кнопку */
+    align-items: center;
   }
   
-  /* ИСПРАВЛЕНО: Кнопка теперь шире и пропорциональнее */
   .modal-actions .btn {
-    width: 90%; /* Ширина 90% вместо 100% */
-    max-width: 320px; /* Максимальная ширина */
-    padding: 14px 24px; /* Увеличен padding */
-    font-size: 16px; /* Увеличен размер шрифта */
+    width: 90%;
+    max-width: 320px;
+    padding: 14px 24px;
+    font-size: 16px;
     justify-content: center;
   }
   
@@ -633,7 +630,6 @@ header {
     width: calc(100% - 16px);
   }
   
-  /* ИСПРАВЛЕНО: Кнопка на очень маленьких экранах */
   .modal-actions .btn {
     width: 95%;
     padding: 12px 20px;
@@ -668,7 +664,6 @@ header {
     --gray-800: #f1f5f9;
     --gray-900: #f8fafc;
     --white: #1e293b;
-    /* ИСПРАВЛЕНО: Цвета для графиков в тёмной теме */
     --chart-grid-color: #475569;
     --chart-text-color: #e2e8f0;
     --chart-axis-color: #cbd5e1;
@@ -720,7 +715,7 @@ header {
 .chart-tab {
   padding: 8px 16px;
   background: var(--gray-100);
-  border: 0.0px solid var(--gray-200);
+  border: 1.5px solid var(--gray-200);
   border-radius: var(--border-radius-xs);
   font-size: 13px;
   font-weight: 500;
@@ -738,7 +733,7 @@ header {
 }
 
 .chart-tab.active {
-  background: #6d9eeb !important;
+  background: var(--primary);
   color: #f8f9fa !important;
   border-color: var(--primary);
 }
@@ -748,7 +743,7 @@ header {
   padding: 20px;
   background: var(--gray-50);
   border-radius: var(--border-radius-sm);
-  border: 0.0px solid var(--gray-200);
+  border: 1.5px solid var(--gray-200);
   position: relative;
   height: 320px;
   width: 100%;
@@ -971,7 +966,6 @@ body {
 βeta — справочные данные
 </div>
 
-
 <!-- Модальное окно для информации об экспорте -->
 <div class="modal" id="exportModal">
   <div class="modal-content">
@@ -1086,11 +1080,13 @@ function updateTcoChart(tcoClassic, tcoEmiia) {
           display: false
         },
         tooltip: {
-          backgroundColor: 'var(--gray-700)',
-          titleColor: 'var(--white)',
-          bodyColor: 'var(--white)',
+          backgroundColor: '#f8f9fa',
+          titleColor: '#0f172a',
+          bodyColor: '#1e293b',
           padding: 12,
           cornerRadius: 8,
+          borderColor: getCssVariable('--gray-200'),
+          borderWidth: 1.5,
           callbacks: {
             label: function(context) {
               return `TCO: $${formatNumber(context.parsed.y.toFixed(0))}`;
@@ -1167,11 +1163,13 @@ function updateTimeChart(timeClassic, timeEmiia) {
           display: false
         },
         tooltip: {
-          backgroundColor: 'var(--gray-700)',
-          titleColor: 'var(--white)',
-          bodyColor: 'var(--white)',
+          backgroundColor: '#f8f9fa',
+          titleColor: '#0f172a',
+          bodyColor: '#1e293b',
           padding: 12,
           cornerRadius: 8,
+          borderColor: getCssVariable('--gray-200'),
+          borderWidth: 1.5,
           callbacks: {
             label: function(context) {
               return `Время: ${formatNumber(context.parsed.y)} дней`;
@@ -1261,11 +1259,13 @@ function updateRoiChart(roiClassic, roiEmiia) {
           }
         },
         tooltip: {
-          backgroundColor: 'var(--gray-700)',
-          titleColor: 'var(--white)',
-          bodyColor: 'var(--white)',
+          backgroundColor: '#f8f9fa',
+          titleColor: '#0f172a',
+          bodyColor: '#1e293b',
           padding: 10,
           cornerRadius: 6,
+          borderColor: getCssVariable('--gray-200'),
+          borderWidth: 1.5,
           callbacks: {
             label: function(context) {
               return `${context.label}: ${context.parsed.toFixed(0)}%`;
@@ -1319,11 +1319,13 @@ function updateSavingsChart(tcoClassic, tcoEmiia, timeClassic, timeEmiia) {
           display: false
         },
         tooltip: {
-          backgroundColor: 'var(--gray-700)',
-          titleColor: 'var(--white)',
-          bodyColor: 'var(--white)',
+          backgroundColor: '#f8f9fa',
+          titleColor: '#0f172a',
+          bodyColor: '#1e293b',
           padding: 12,
           cornerRadius: 8,
+          borderColor: getCssVariable('--gray-200'),
+          borderWidth: 1.5,
           callbacks: {
             label: function(context) {
               return `Экономия: ${context.parsed.y.toFixed(1)}%`;
