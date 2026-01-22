@@ -5,13 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>EMIIA.AI SIP – калькулятор экономии</title>
 
-
-
-
-
-
-
-
 <!-- Open Graph Meta Tags -->
 <meta property="og:title" content="EMIIA.AI SIP – калькулятор экономии">
 <meta property="og:description" content="Рассчитайте экономию от использования продуктов и платформы EMIIA.AI SIP: TCO, ROI и время выхода на рынок">
@@ -27,15 +20,9 @@
 <meta name="twitter:description" content="Рассчитайте экономию от использования продуктов и платформы EMIIA.AI SIP">
 <meta name="twitter:image" content="https://www.emiia.ru/1200x630_roi.png">
 
-
-
-
-
-
-
-
 <link href="/css2_roi.css?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="/chart_roi.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/chart.js"></script>
 <style>
 :root {
   --primary: #2563eb;
@@ -44,6 +31,10 @@
   --secondary: #10b981;
   --secondary-light: #34d399;
   --secondary-dark: #059669;
+  --capex-color: #8b5cf6;
+  --capex-light: #a78bfa;
+  --opex-color: #f59e0b;
+  --opex-light: #fbbf24;
   --gray-50: #f8fafc;
   --gray-100: #f1f5f9;
   --gray-200: #e2e8f0;
@@ -64,9 +55,6 @@
   --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08);
   --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
   --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  --chart-grid-color: var(--gray-200);
-  --chart-text-color: var(--gray-600);
-  --chart-axis-color: var(--gray-700);
 }
 
 * {
@@ -94,13 +82,6 @@ body {
   padding-bottom: env(safe-area-inset-bottom);
   touch-action: manipulation;
   padding-top: 72px;
-}
-
-@supports (-webkit-touch-callout: none) {
-  body {
-    background: var(--gray-50);
-    -webkit-overflow-scrolling: touch;
-  }
 }
 
 header {
@@ -192,6 +173,8 @@ header {
   letter-spacing: -0.1px;
   white-space: nowrap;
   flex-shrink: 0;
+  justify-content: center;
+  text-align: center;
 }
 
 .btn:hover {
@@ -259,6 +242,8 @@ header {
   width: 100%;
   min-width: 0;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .card:hover {
@@ -424,12 +409,77 @@ header {
   color: var(--gray-700);
 }
 
+.metric-capex {
+  color: var(--capex-color);
+}
+
+.metric-opex {
+  color: var(--opex-color);
+}
+
 .results-highlight {
   background: linear-gradient(135deg, var(--gray-50), var(--gray-100));
   border-radius: var(--border-radius-sm);
   padding: 20px;
   margin: 24px 0;
   border: 1.5px solid var(--gray-200);
+}
+
+.savings-breakdown {
+  background: linear-gradient(135deg, var(--gray-50), var(--gray-100));
+  border-radius: var(--border-radius-sm);
+  padding: 20px;
+  margin: 24px 0;
+  border: 1.5px solid var(--gray-200);
+}
+
+.savings-breakdown h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gray-700);
+  margin-bottom: 16px;
+  letter-spacing: -0.1px;
+}
+
+.savings-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.savings-item:last-child {
+  border-bottom: none;
+}
+
+.savings-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--gray-600);
+  font-weight: 500;
+}
+
+.savings-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.savings-dot.capex {
+  background-color: var(--capex-color);
+}
+
+.savings-dot.opex {
+  background-color: var(--opex-color);
+}
+
+.savings-amount {
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
 }
 
 .divider {
@@ -535,6 +585,9 @@ header {
   background: #6d9eeb;
   color: #f8f9fa !important;
   border-color: var(--primary);
+  justify-content: center;
+  text-align: center;
+  width: 100%;
 }
 
 .modal-actions .btn:hover {
@@ -546,15 +599,12 @@ header {
 @media (max-width: 767px) {
   header {
     padding: 14px 16px;
-    padding-left: max(16px, env(safe-area-inset-left));
-    padding-right: max(16px, env(safe-area-inset-right));
   }
   
   .logo-icon {
     width: 32px;
     height: 32px;
     font-size: 14px;
-    min-width: 32px;
   }
   
   .logo-text {
@@ -569,14 +619,11 @@ header {
   .container {
     padding: 16px;
     padding-top: 16px;
-    padding-left: max(16px, env(safe-area-inset-left));
-    padding-right: max(16px, env(safe-area-inset-right));
   }
   
   .card {
     padding: 20px;
     border-radius: var(--border-radius-sm);
-    margin-bottom: 0;
   }
   
   .cards-grid {
@@ -594,16 +641,10 @@ header {
   
   .modal {
     padding: 12px;
-    padding-left: max(12px, env(safe-area-inset-left));
-    padding-right: max(12px, env(safe-area-inset-right));
-    padding-bottom: max(12px, env(safe-area-inset-bottom));
   }
   
   .modal-content {
     padding: 24px;
-    margin: 0;
-    border-radius: var(--border-radius-sm);
-    max-width: 100%;
     width: calc(100% - 24px);
   }
   
@@ -613,20 +654,17 @@ header {
   
   .modal-actions {
     flex-direction: column;
-    align-items: center;
   }
   
   .modal-actions .btn {
-    width: 90%;
-    max-width: 320px;
+    width: 100%;
     padding: 14px 24px;
-    font-size: 16px;
     justify-content: center;
+    text-align: center;
   }
   
   .card:hover {
     transform: none;
-    box-shadow: var(--shadow);
   }
   
   .btn:hover {
@@ -634,114 +672,26 @@ header {
   }
 }
 
-/* Small mobile fixes */
-@media (max-width: 480px) {
-  .logo-text {
-    font-size: 14px;
-  }
-  
-  .btn {
-    padding: 8px 12px;
-    font-size: 12px;
-  }
-  
-  .cards-grid {
-    gap: 16px;
-  }
-  
-  .card {
-    padding: 16px;
-  }
-  
-  .modal-content {
-    padding: 20px;
-    width: calc(100% - 16px);
-  }
-  
-  .modal-actions .btn {
-    width: 95%;
-    padding: 12px 20px;
-    font-size: 15px;
-  }
-}
-
-/* iPhone notch/padding optimizations */
-@supports (padding: max(0px)) {
-  .container {
-    padding-left: max(20px, env(safe-area-inset-left));
-    padding-right: max(20px, env(safe-area-inset-right));
-  }
-  
-  header {
-    padding-left: max(20px, env(safe-area-inset-left));
-    padding-right: max(20px, env(safe-area-inset-right));
-  }
-}
-
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --gray-50: #0f172a;
-    --gray-100: #1e293b;
-    --gray-200: #334155;
-    --gray-300: #475569;
-    --gray-400: #64748b;
-    --gray-500: #94a3b8;
-    --gray-600: #cbd5e1;
-    --gray-700: #e2e8f0;
-    --gray-800: #f1f5f9;
-    --gray-900: #f8fafc;
-    --white: #1e293b;
-    --chart-grid-color: #475569;
-    --chart-text-color: #e2e8f0;
-    --chart-axis-color: #cbd5e1;
-  }
-  
-  body {
-    background: var(--gray-50);
-    color: var(--gray-800);
-  }
-  
-  .card {
-    background: var(--white);
-    border-color: var(--gray-200);
-  }
-  
-  .input-field {
-    background: var(--gray-100);
-    border-color: var(--gray-300);
-    color: var(--gray-800);
-  }
-  
-  .results-highlight {
-    background: linear-gradient(135deg, var(--gray-100), var(--gray-200));
-  }
-}
-
-/* Focus styles for accessibility */
-.btn:focus-visible,
-.input-field:focus-visible,
-.slider:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-
-/* Loading state for buttons */
-.btn.loading {
-  opacity: 0.7;
-  pointer-events: none;
-}
-
 /* Стили для графика */
 .chart-tabs {
   display: flex;
+  flex-direction: column;
   gap: 8px;
-  margin-bottom: 16px;
-  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.chart-tab-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.chart-tab-row.single {
+  grid-template-columns: 1fr;
 }
 
 .chart-tab {
-  padding: 8px 16px;
+  padding: 10px 12px;
   background: var(--gray-100);
   border: 1.5px solid var(--gray-200);
   border-radius: var(--border-radius-xs);
@@ -749,11 +699,10 @@ header {
   font-weight: 500;
   cursor: pointer;
   transition: var(--transition);
-  color: var(--gray-600);
-  flex: 1;
-  min-width: 0;
+  color: var(--gray-700);
   text-align: center;
   white-space: nowrap;
+  min-width: 0;
 }
 
 .chart-tab:hover {
@@ -762,12 +711,12 @@ header {
 
 .chart-tab.active {
   background: var(--primary);
-  color: #f8f9fa !important;
+  color: white !important;
   border-color: var(--primary);
 }
 
 .chart-container {
-  margin-top: 24px;
+  margin-top: 16px;
   padding: 20px;
   background: var(--gray-50);
   border-radius: var(--border-radius-sm);
@@ -787,41 +736,56 @@ canvas {
 @media (max-width: 767px) {
   .chart-tabs {
     gap: 6px;
-    margin-bottom: 12px;
+    margin-bottom: 6px;
+  }
+  
+  .chart-tab-row {
+    gap: 6px;
+  }
+  
+  .chart-tab-row.single {
+    grid-template-columns: 1fr;
   }
   
   .chart-tab {
-    padding: 10px 12px;
+    padding: 8px 10px;
     font-size: 12px;
-    flex: 1;
-    min-width: 80px;
   }
   
   .chart-container {
     height: 280px;
     padding: 16px;
-    margin-top: 20px;
+    margin-top: 12px;
   }
 }
 
-@media (max-width: 360px) {
-  .container {
-    padding: 12px;
-    padding-left: max(12px, env(safe-area-inset-left));
-    padding-right: max(12px, env(safe-area-inset-right));
-  }
-  
-  .card {
-    padding: 16px;
-  }
-  
-  .chart-tabs {
-    flex-direction: column;
-  }
-  
-  .chart-tab {
-    flex: none;
-  }
+/* Специальные стили для правой карточки */
+.right-card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.right-card-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-height: 0;
+}
+
+.right-card-section {
+  margin-bottom: 20px;
+}
+
+.right-card-section:last-child {
+  margin-bottom: 0;
+}
+
+.right-card-spacer {
+  flex: 1;
+  min-height: 20px;
 }
 
 body {
@@ -926,64 +890,126 @@ body {
           <input type="range" min="0" max="100" value="50" class="slider" id="daysClassicSlider">
         </div>
       </div>
+      
+      <!-- Перенесен блок "Экономия по типам затрат" сюда, в левую карточку -->
+      <div class="savings-breakdown">
+        <h3>Экономия по типам затрат</h3>
+        <div class="savings-item">
+          <span class="savings-label">
+            <span class="savings-dot capex"></span>
+            Экономия CAPEX
+          </span>
+          <span class="savings-amount metric-capex" id="capexSavings">0 $</span>
+        </div>
+        <div class="savings-item">
+          <span class="savings-label">
+            <span class="savings-dot opex"></span>
+            Экономия OPEX
+          </span>
+          <span class="savings-amount metric-opex" id="opexSavings">0 $</span>
+        </div>
+        <div class="savings-item">
+          <span class="savings-label">
+            <span class="savings-dot capex"></span>
+            Экономия CAPEX (%)
+          </span>
+          <span class="savings-amount metric-capex" id="capexSavingsPercent">0 %</span>
+        </div>
+        <div class="savings-item">
+          <span class="savings-label">
+            <span class="savings-dot opex"></span>
+            Экономия OPEX (%)
+          </span>
+          <span class="savings-amount metric-opex" id="opexSavingsPercent">0 %</span>
+        </div>
+      </div>
     </div>
 
     <div class="card">
-      <div class="card-header">
-        <div class="card-title">Результаты расчета</div>
-      </div>
-      
-      <div class="results-highlight">
-        <div class="metric-row">
-          <span class="metric-label">TCO Classic</span>
-          <span class="metric-value metric-negative" id="tcoCl">0 $</span>
+      <div class="right-card-content">
+        <div class="card-header">
+          <div class="card-title">Результаты расчета</div>
         </div>
-        <div class="metric-row">
-          <span class="metric-label">TCO EMIIA</span>
-          <span class="metric-value metric-positive" id="tcoEm">0 $</span>
+        
+        <div class="right-card-metrics">
+          <div class="right-card-section">
+            <div class="results-highlight">
+              <div class="metric-row">
+                <span class="metric-label">TCO Classic</span>
+                <span class="metric-value metric-negative" id="tcoCl">0 $</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">TCO EMIIA</span>
+                <span class="metric-value metric-positive" id="tcoEm">0 $</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">Экономия TCO</span>
+                <span class="metric-value metric-positive" id="tcoSave">0 %</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="right-card-section">
+            <div class="divider"></div>
+            
+            <div class="metric-row">
+              <span class="metric-label">Время запуска Classic</span>
+              <span class="metric-value metric-neutral" id="t2mCl">0 дн</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Время запуска EMIIA</span>
+              <span class="metric-value metric-positive" id="t2mEm">0 дн</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Ускорение T2M</span>
+              <span class="metric-value metric-positive" id="t2mSave">0 %</span>
+            </div>
+          </div>
+          
+          <div class="right-card-section">
+            <div class="divider"></div>
+            
+            <div class="metric-row">
+              <span class="metric-label">ROI Classic (12 мес)</span>
+              <span class="metric-value metric-neutral" id="roiCl">0 %</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">ROI EMIIA (12 мес)</span>
+              <span class="metric-value metric-positive" id="roiEm">0 %</span>
+            </div>
+          </div>
+          
+          <div class="right-card-spacer"></div>
+          
+          <div class="right-card-section">
+            <div class="divider"></div>
+            
+            <!-- Три ряда кнопок для графиков -->
+            <div class="chart-tabs">
+              <!-- Первый ряд: 2 кнопки -->
+              <div class="chart-tab-row">
+                <button class="chart-tab active" data-chart="tco">TCO</button>
+                <button class="chart-tab" data-chart="time">T2M</button>
+              </div>
+              
+              <!-- Второй ряд: 2 кнопки -->
+              <div class="chart-tab-row">
+                <button class="chart-tab" data-chart="roi">ROI</button>
+                <button class="chart-tab" data-chart="savings">Экономия</button>
+              </div>
+              
+              <!-- Третий ряд: 2 кнопки (CAPEX и OPEX отдельно) -->
+              <div class="chart-tab-row">
+                <button class="chart-tab" data-chart="capex">CAPEX</button>
+                <button class="chart-tab" data-chart="opex">OPEX</button>
+              </div>
+            </div>
+            
+            <div class="chart-container">
+              <canvas id="metricsChart"></canvas>
+            </div>
+          </div>
         </div>
-        <div class="metric-row">
-          <span class="metric-label">Экономия TCO</span>
-          <span class="metric-value metric-positive" id="tcoSave">0 %</span>
-        </div>
-      </div>
-      
-      <div class="divider"></div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Время запуска Classic</span>
-        <span class="metric-value metric-neutral" id="t2mCl">0 дн</span>
-      </div>
-      <div class="metric-row">
-        <span class="metric-label">Время запуска EMIIA</span>
-        <span class="metric-value metric-positive" id="t2mEm">0 дн</span>
-      </div>
-      <div class="metric-row">
-        <span class="metric-label">Ускорение T2M</span>
-        <span class="metric-value metric-positive" id="t2mSave">0 %</span>
-      </div>
-      
-      <div class="divider"></div>
-      
-      <div class="metric-row">
-        <span class="metric-label">ROI Classic (12 мес)</span>
-        <span class="metric-value metric-neutral" id="roiCl">0 %</span>
-      </div>
-      <div class="metric-row">
-        <span class="metric-label">ROI EMIIA (12 мес)</span>
-        <span class="metric-value metric-positive" id="roiEm">0 %</span>
-      </div>
-      
-      <!-- График всех метрик -->
-      <div class="divider"></div>
-      <div class="chart-tabs">
-        <button class="chart-tab active" data-chart="tco">TCO</button>
-        <button class="chart-tab" data-chart="time">Время</button>
-        <button class="chart-tab" data-chart="roi">ROI</button>
-        <button class="chart-tab" data-chart="savings">Экономия</button>
-      </div>
-      <div class="chart-container">
-        <canvas id="metricsChart"></canvas>
       </div>
     </div>
   </div>
@@ -994,7 +1020,6 @@ body {
 βeta — справочные данные
 </div>
 
-<!-- Модальное окно для информации об экспорте -->
 <div class="modal" id="exportModal">
   <div class="modal-content">
     <div class="modal-header">
@@ -1006,6 +1031,7 @@ body {
       <ul>
         <li>Текущие значения параметров</li>
         <li>Формулы для расчета TCO, ROI и экономии</li>
+        <li>Разбивка на CAPEX и OPEX</li>
         <li>Автоматическая адаптация для Google Sheets</li>
       </ul>
       <p>Импортируйте файл в Google Sheets и изменяйте параметры прямо в таблице для пересчета.</p>
@@ -1020,8 +1046,23 @@ body {
 const $ = id => document.getElementById(id);
 
 // Глобальная переменная для графика
-let chart;
+let chart = null;
 let currentChartType = 'tco';
+
+// Данные для графиков
+let chartData = {
+  tco: { classic: 0, emiia: 0 },
+  time: { classic: 0, emiia: 0 },
+  roi: { classic: 0, emiia: 0 },
+  savings: { 
+    tco: 0, 
+    time: 0,
+    capexPercent: 0,
+    opexPercent: 0 
+  },
+  capex: { capexClassic: 0, capexEmiia: 0 },
+  opex: { opexClassic: 0, opexEmiia: 0 }
+};
 
 // Функция форматирования чисел
 function formatNumber(num) {
@@ -1068,13 +1109,8 @@ function updateSliderGradients() {
   });
 }
 
-// Функция получения CSS-переменной (для графиков)
-function getCssVariable(variableName) {
-  return getComputedStyle(document.documentElement).getPropertyValue(variableName).trim();
-}
-
 // Функция создания/обновления графика TCO
-function updateTcoChart(tcoClassic, tcoEmiia) {
+function updateTcoChart() {
   const ctx = $('metricsChart').getContext('2d');
   
   if (chart) {
@@ -1087,7 +1123,7 @@ function updateTcoChart(tcoClassic, tcoEmiia) {
       labels: ['Classic', 'EMIIA'],
       datasets: [{
         label: 'TCO ($)',
-        data: [tcoClassic, tcoEmiia],
+        data: [chartData.tco.classic, chartData.tco.emiia],
         backgroundColor: [
           'rgba(239, 68, 68, 0.8)',
           'rgba(16, 185, 129, 0.8)'
@@ -1108,12 +1144,12 @@ function updateTcoChart(tcoClassic, tcoEmiia) {
           display: false
         },
         tooltip: {
-          backgroundColor: '#f8f9fa',
+          backgroundColor: '#f8fafc',
           titleColor: '#0f172a',
           bodyColor: '#1e293b',
           padding: 12,
           cornerRadius: 8,
-          borderColor: getCssVariable('--gray-200'),
+          borderColor: '#e2e8f0',
           borderWidth: 1.5,
           callbacks: {
             label: function(context) {
@@ -1126,10 +1162,10 @@ function updateTcoChart(tcoClassic, tcoEmiia) {
         y: {
           beginAtZero: true,
           grid: {
-            color: getCssVariable('--chart-grid-color')
+            color: '#e2e8f0'
           },
           ticks: {
-            color: getCssVariable('--chart-text-color'),
+            color: '#475569',
             callback: function(value) {
               return '$' + formatNumber(value);
             }
@@ -1140,7 +1176,7 @@ function updateTcoChart(tcoClassic, tcoEmiia) {
             display: false
           },
           ticks: {
-            color: getCssVariable('--chart-text-color'),
+            color: '#475569',
             font: {
               size: 13,
               weight: '600'
@@ -1157,7 +1193,7 @@ function updateTcoChart(tcoClassic, tcoEmiia) {
 }
 
 // Функция создания/обновления графика времени
-function updateTimeChart(timeClassic, timeEmiia) {
+function updateTimeChart() {
   const ctx = $('metricsChart').getContext('2d');
   
   if (chart) {
@@ -1170,7 +1206,7 @@ function updateTimeChart(timeClassic, timeEmiia) {
       labels: ['Classic', 'EMIIA'],
       datasets: [{
         label: 'Время до запуска (дней)',
-        data: [timeClassic, timeEmiia],
+        data: [chartData.time.classic, chartData.time.emiia],
         backgroundColor: [
           'rgba(239, 68, 68, 0.8)',
           'rgba(59, 130, 246, 0.8)'
@@ -1191,12 +1227,12 @@ function updateTimeChart(timeClassic, timeEmiia) {
           display: false
         },
         tooltip: {
-          backgroundColor: '#f8f9fa',
+          backgroundColor: '#f8fafc',
           titleColor: '#0f172a',
           bodyColor: '#1e293b',
           padding: 12,
           cornerRadius: 8,
-          borderColor: getCssVariable('--gray-200'),
+          borderColor: '#e2e8f0',
           borderWidth: 1.5,
           callbacks: {
             label: function(context) {
@@ -1209,10 +1245,10 @@ function updateTimeChart(timeClassic, timeEmiia) {
         y: {
           beginAtZero: true,
           grid: {
-            color: getCssVariable('--chart-grid-color')
+            color: '#e2e8f0'
           },
           ticks: {
-            color: getCssVariable('--chart-text-color'),
+            color: '#475569',
             callback: function(value) {
               return formatNumber(value) + ' дн';
             }
@@ -1223,7 +1259,7 @@ function updateTimeChart(timeClassic, timeEmiia) {
             display: false
           },
           ticks: {
-            color: getCssVariable('--chart-text-color'),
+            color: '#475569',
             font: {
               size: 13,
               weight: '600'
@@ -1240,15 +1276,15 @@ function updateTimeChart(timeClassic, timeEmiia) {
 }
 
 // Функция создания/обновления графика ROI
-function updateRoiChart(roiClassic, roiEmiia) {
+function updateRoiChart() {
   const ctx = $('metricsChart').getContext('2d');
   
   if (chart) {
     chart.destroy();
   }
   
-  const displayRoiC = Math.max(0, roiClassic);
-  const displayRoiE = Math.max(0, roiEmiia);
+  const displayRoiC = Math.max(0, chartData.roi.classic);
+  const displayRoiE = Math.max(0, chartData.roi.emiia);
   
   chart = new Chart(ctx, {
     type: 'doughnut',
@@ -1281,18 +1317,18 @@ function updateRoiChart(roiClassic, roiEmiia) {
               size: 12,
               weight: '600'
             },
-            color: getCssVariable('--chart-text-color'),
+            color: '#475569',
             padding: 15,
             usePointStyle: true,
           }
         },
         tooltip: {
-          backgroundColor: '#f8f9fa',
+          backgroundColor: '#f8fafc',
           titleColor: '#0f172a',
           bodyColor: '#1e293b',
           padding: 10,
           cornerRadius: 6,
-          borderColor: getCssVariable('--gray-200'),
+          borderColor: '#e2e8f0',
           borderWidth: 1.5,
           callbacks: {
             label: function(context) {
@@ -1310,30 +1346,39 @@ function updateRoiChart(roiClassic, roiEmiia) {
 }
 
 // Функция создания/обновления графика экономии
-function updateSavingsChart(tcoClassic, tcoEmiia, timeClassic, timeEmiia) {
+function updateSavingsChart() {
   const ctx = $('metricsChart').getContext('2d');
   
   if (chart) {
     chart.destroy();
   }
   
-  const tcoSavings = ((tcoClassic - tcoEmiia) / tcoClassic * 100);
-  const timeSavings = ((timeClassic - timeEmiia) / timeClassic * 100);
+  // Берем данные из сохраненных расчетов
+  const data = [
+    chartData.savings.tco,  // TCO экономия
+    chartData.savings.time, // T2M экономия
+    chartData.savings.capexPercent, // CAPEX экономия в %
+    chartData.savings.opexPercent  // OPEX экономия в %
+  ];
   
   chart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['Экономия TCO', 'Ускорение T2M'],
+      labels: ['TCO', 'T2M', 'CAPEX', 'OPEX'],
       datasets: [{
         label: 'Экономия (%)',
-        data: [tcoSavings, timeSavings],
+        data: data,
         backgroundColor: [
-          'rgba(16, 185, 129, 0.8)',
-          'rgba(59, 130, 246, 0.8)'
+          'rgba(16, 185, 129, 0.8)',    // зеленый для TCO
+          'rgba(59, 130, 246, 0.8)',    // синий для T2M
+          'rgba(139, 92, 246, 0.8)',    // фиолетовый для CAPEX
+          'rgba(245, 158, 11, 0.8)'     // оранжевый для OPEX
         ],
         borderColor: [
           'rgb(16, 185, 129)',
-          'rgb(59, 130, 246)'
+          'rgb(59, 130, 246)',
+          'rgb(139, 92, 246)',
+          'rgb(245, 158, 11)'
         ],
         borderWidth: 2,
         borderRadius: 8,
@@ -1347,14 +1392,23 @@ function updateSavingsChart(tcoClassic, tcoEmiia, timeClassic, timeEmiia) {
           display: false
         },
         tooltip: {
-          backgroundColor: '#f8f9fa',
+          backgroundColor: '#f8fafc',
           titleColor: '#0f172a',
           bodyColor: '#1e293b',
           padding: 12,
           cornerRadius: 8,
-          borderColor: getCssVariable('--gray-200'),
+          borderColor: '#e2e8f0',
           borderWidth: 1.5,
           callbacks: {
+            title: function(tooltipItems) {
+              const titles = [
+                'Экономия Total Cost of Ownership',
+                'Ускорение Time to Market',
+                'Экономия капитальных затрат',
+                'Экономия операционных расходов'
+              ];
+              return titles[tooltipItems[0].dataIndex];
+            },
             label: function(context) {
               return `  Экономия: ${context.parsed.y.toFixed(1)}%`;
             }
@@ -1366,10 +1420,10 @@ function updateSavingsChart(tcoClassic, tcoEmiia, timeClassic, timeEmiia) {
           beginAtZero: true,
           max: 100,
           grid: {
-            color: getCssVariable('--chart-grid-color')
+            color: '#e2e8f0'
           },
           ticks: {
-            color: getCssVariable('--chart-text-color'),
+            color: '#475569',
             callback: function(value) {
               return value + '%';
             }
@@ -1380,7 +1434,7 @@ function updateSavingsChart(tcoClassic, tcoEmiia, timeClassic, timeEmiia) {
             display: false
           },
           ticks: {
-            color: getCssVariable('--chart-text-color'),
+            color: '#475569',
             font: {
               size: 12,
               weight: '600'
@@ -1396,26 +1450,198 @@ function updateSavingsChart(tcoClassic, tcoEmiia, timeClassic, timeEmiia) {
   });
 }
 
+// Функция создания/обновления графика CAPEX
+function updateCapexChart() {
+  const ctx = $('metricsChart').getContext('2d');
+  
+  if (chart) {
+    chart.destroy();
+  }
+  
+  chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Classic', 'EMIIA'],
+      datasets: [{
+        label: 'CAPEX ($)',
+        data: [chartData.capex.capexClassic, chartData.capex.capexEmiia],
+        backgroundColor: [
+          'rgba(139, 92, 246, 0.8)',
+          'rgba(167, 139, 250, 0.8)'
+        ],
+        borderColor: [
+          'rgb(139, 92, 246)',
+          'rgb(167, 139, 250)'
+        ],
+        borderWidth: 2,
+        borderRadius: 8,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          backgroundColor: '#f8fafc',
+          titleColor: '#0f172a',
+          bodyColor: '#1e293b',
+          padding: 12,
+          cornerRadius: 8,
+          borderColor: '#e2e8f0',
+          borderWidth: 1.5,
+          callbacks: {
+            label: function(context) {
+              return `  CAPEX: $${formatNumber(context.parsed.y.toFixed(0))}`;
+            }
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          grid: {
+            color: '#e2e8f0'
+          },
+          ticks: {
+            color: '#475569',
+            callback: function(value) {
+              return '$' + formatNumber(value);
+            }
+          }
+        },
+        x: {
+          grid: {
+            display: false
+          },
+          ticks: {
+            color: '#475569',
+            font: {
+              size: 13,
+              weight: '600'
+            }
+          }
+        }
+      },
+      animation: {
+        duration: 600,
+        easing: 'easeOutQuart'
+      }
+    }
+  });
+}
+
+// Функция создания/обновления графика OPEX
+function updateOpexChart() {
+  const ctx = $('metricsChart').getContext('2d');
+  
+  if (chart) {
+    chart.destroy();
+  }
+  
+  chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Classic', 'EMIIA'],
+      datasets: [{
+        label: 'OPEX ($)',
+        data: [chartData.opex.opexClassic, chartData.opex.opexEmiia],
+        backgroundColor: [
+          'rgba(245, 158, 11, 0.8)',
+          'rgba(251, 191, 36, 0.8)'
+        ],
+        borderColor: [
+          'rgb(245, 158, 11)',
+          'rgb(251, 191, 36)'
+        ],
+        borderWidth: 2,
+        borderRadius: 8,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          backgroundColor: '#f8fafc',
+          titleColor: '#0f172a',
+          bodyColor: '#1e293b',
+          padding: 12,
+          cornerRadius: 8,
+          borderColor: '#e2e8f0',
+          borderWidth: 1.5,
+          callbacks: {
+            label: function(context) {
+              return `  OPEX: $${formatNumber(context.parsed.y.toFixed(0))}`;
+            }
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          grid: {
+            color: '#e2e8f0'
+          },
+          ticks: {
+            color: '#475569',
+            callback: function(value) {
+              return '$' + formatNumber(value);
+            }
+          }
+        },
+        x: {
+          grid: {
+            display: false
+          },
+          ticks: {
+            color: '#475569',
+            font: {
+              size: 13,
+              weight: '600'
+            }
+          }
+        }
+      },
+      animation: {
+        duration: 600,
+        easing: 'easeOutQuart'
+      }
+    }
+  });
+}
+
 // Функция создания/обновления графика в зависимости от выбранного типа
-function updateChart(tcoClassic, tcoEmiia, timeClassic, timeEmiia, roiClassic, roiEmiia) {
+function updateChart() {
   switch(currentChartType) {
     case 'tco':
-      updateTcoChart(tcoClassic, tcoEmiia);
+      updateTcoChart();
       break;
     case 'time':
-      updateTimeChart(timeClassic, timeEmiia);
+      updateTimeChart();
       break;
     case 'roi':
-      updateRoiChart(roiClassic, roiEmiia);
+      updateRoiChart();
       break;
     case 'savings':
-      updateSavingsChart(tcoClassic, tcoEmiia, timeClassic, timeEmiia);
+      updateSavingsChart();
+      break;
+    case 'capex':
+      updateCapexChart();
+      break;
+    case 'opex':
+      updateOpexChart();
       break;
   }
 }
 
 // Основная функция расчёта
-function calc(){
+function calc() {
   const t   = +$('dataTb').value;
   const i   = +$('infM').value;
   const d   = +$('deplN').value;
@@ -1426,27 +1652,99 @@ function calc(){
   const infCl  = 0.27, infEm  = 0.05;
   const storCl = 0.05, storEm = 0.03;
 
-  const tcoC = d*hostCl + i*1000*infCl + t*storCl + ops;
-  const tcoE = d*hostEm + i*1000*infEm + t*storEm + ops*0.33;
-  const saveTCO = (1 - tcoE/tcoC)*100;
+  // Существующие расчеты TCO (оставляем как есть)
+  const tcoC = d * hostCl + i * 1000 * infCl + t * storCl + ops;
+  const tcoE = d * hostEm + i * 1000 * infEm + t * storEm + ops * 0.33;
 
-  const dEm = 8;
-  const saveT2M = (1 - dEm/dCl)*100;
+  // Существующие расчеты времени
+  const dEm = 8; // EMIIA: 8 дней (фиксировано)
+  const saveT2M = (1 - dEm / dCl) * 100;
 
+  // Существующие расчеты ROI
   const revenue = 500000;
-  const roiC = ((revenue - tcoC*12)/(tcoC*12))*100;
-  const roiE = ((revenue - tcoE*12)/(tcoE*12))*100;
+  const roiC = tcoC > 0 ? ((revenue - tcoC * 12) / (tcoC * 12)) * 100 : 0;
+  const roiE = tcoE > 0 ? ((revenue - tcoE * 12) / (tcoE * 12)) * 100 : 0;
 
-  $('tcoCl').textContent  = formatNumber(tcoC.toFixed(0)) + ' $';
-  $('tcoEm').textContent  = formatNumber(tcoE.toFixed(0)) + ' $';
-  $('tcoSave').textContent= saveTCO.toFixed(0) + ' %';
-  $('t2mCl').textContent  = formatNumber(dCl) + ' дн';
-  $('t2mEm').textContent  = formatNumber(dEm) + ' дн';
-  $('t2mSave').textContent= saveT2M.toFixed(0) + ' %';
-  $('roiCl').textContent  = roiC.toFixed(0) + ' %';
-  $('roiEm').textContent  = roiE.toFixed(0) + ' %';
-  
-  updateChart(tcoC, tcoE, dCl, dEm, roiC, roiE);
+  // ============ ДОБАВЛЯЕМ CAPEX/OPEX РАСЧЕТЫ ============
+
+  // 1. Определяем, что входит в CAPEX и OPEX для Classic
+  // CAPEX для Classic (капитальные затраты на инфраструктуру):
+  // - Оборудование для обработки (часть от хостинга и хранения)
+  // - Развертывания (инфраструктура)
+  // - Часть команды Ops (начальные настройки)
+
+  // OPEX для Classic (операционные расходы):
+  // - Инференсы (вычисления)
+  // - Большая часть команды Ops (ежемесячная)
+  // - Часть хранения и хостинга
+
+  // Для простоты разделим пропорционально:
+  const CAPEX_PERCENT_CLASSIC = 0.35;  // 35% CAPEX для Classic
+  const OPEX_PERCENT_CLASSIC = 0.65;   // 65% OPEX для Classic
+
+  // Для EMIIA (SaaS) CAPEX минимальный:
+  const CAPEX_PERCENT_EMIIA = 0.10;    // 10% CAPEX для EMIIA (обучение)
+  const OPEX_PERCENT_EMIIA = 0.90;     // 90% OPEX для EMIIA
+
+  // 2. Рассчитываем CAPEX/OPEX
+  const capexClassic = tcoC * CAPEX_PERCENT_CLASSIC;
+  const opexClassic = tcoC * OPEX_PERCENT_CLASSIC;
+
+  const capexEmiia = tcoE * CAPEX_PERCENT_EMIIA;
+  const opexEmiia = tcoE * OPEX_PERCENT_EMIIA;
+
+  // 3. Экономия в деньгах
+  const capexSavings = capexClassic - capexEmiia;
+  const opexSavings = opexClassic - opexEmiia;
+
+  // 4. Экономия в процентах
+  const capexSavingsPercent = capexClassic > 0 ? (capexSavings / capexClassic) * 100 : 0;
+  const opexSavingsPercent = opexClassic > 0 ? (opexSavings / opexClassic) * 100 : 0;
+
+  // 5. Общая экономия TCO
+  const tcoSavings = tcoC > 0 ? ((tcoC - tcoE) / tcoC) * 100 : 0;
+
+  // ============ ОБНОВЛЯЕМ ИНТЕРФЕЙС ============
+
+  // Обновляем существующие поля
+  $('tcoCl').textContent = formatNumber(Math.round(tcoC)) + ' $';
+  $('tcoEm').textContent = formatNumber(Math.round(tcoE)) + ' $';
+  $('tcoSave').textContent = Math.round(tcoSavings) + ' %';
+  $('t2mCl').textContent = formatNumber(dCl) + ' дн';
+  $('t2mEm').textContent = formatNumber(dEm) + ' дн';
+  $('t2mSave').textContent = Math.round(saveT2M) + ' %';
+  $('roiCl').textContent = Math.round(roiC) + ' %';
+  $('roiEm').textContent = Math.round(roiE) + ' %';
+
+  // Обновляем новые поля CAPEX/OPEX
+  $('capexSavings').textContent = formatNumber(Math.round(capexSavings)) + ' $';
+  $('opexSavings').textContent = formatNumber(Math.round(opexSavings)) + ' $';
+  $('capexSavingsPercent').textContent = Math.round(capexSavingsPercent) + ' %';
+  $('opexSavingsPercent').textContent = Math.round(opexSavingsPercent) + ' %';
+
+  // ============ ДЛЯ ГРАФИКОВ ============
+
+  // Обновляем данные для графиков (добавляем CAPEX и OPEX отдельно)
+  chartData.tco = { classic: tcoC, emiia: tcoE };
+  chartData.time = { classic: dCl, emiia: dEm };
+  chartData.roi = { classic: roiC, emiia: roiE };
+  chartData.savings = { 
+    tco: tcoSavings, 
+    time: saveT2M,
+    capexPercent: capexSavingsPercent,
+    opexPercent: opexSavingsPercent 
+  };
+  chartData.capex = {
+    capexClassic: capexClassic,
+    capexEmiia: capexEmiia
+  };
+  chartData.opex = {
+    opexClassic: opexClassic,
+    opexEmiia: opexEmiia
+  };
+
+  // Обновляем график
+  updateChart();
 }
 
 // Функция экспорта в CSV
@@ -1457,6 +1755,14 @@ function exportToCSV() {
   const opsCost = +$('opsCost').value;
   const daysClassic = +$('daysClassic').value;
   
+  // Рассчитываем значения для CSV
+  const tcoC = deplN * 0.67 + infM * 1000 * 0.27 + dataTb * 0.05 + opsCost;
+  const tcoE = deplN * 0.11 + infM * 1000 * 0.05 + dataTb * 0.03 + opsCost * 0.33;
+  const capexC = tcoC * 0.35;
+  const capexE = tcoE * 0.10;
+  const opexC = tcoC * 0.65;
+  const opexE = tcoE * 0.90;
+  
   const csvData = [
     ['Параметр', 'Значение', 'Формула для Google Sheets'],
     ['Объём данных (ТБ)', dataTb, `=${dataTb}`],
@@ -1465,16 +1771,19 @@ function exportToCSV() {
     ['Команда Ops ($/мес)', opsCost, `=${opsCost}`],
     ['Время до запуска (дней)', daysClassic, `=${daysClassic}`],
     [''],
-    ['Метрика', 'Classic', 'EMIIA', 'Экономия'],
-    ['TCO ($)', `=${deplN}*0.67+${infM}*1000*0.27+${dataTb}*0.05+${opsCost}`, `=${deplN}*0.11+${infM}*1000*0.05+${dataTb}*0.03+${opsCost}*0.33`, '=1-C3/B3'],
-    ['Время запуска (дней)', `=${daysClassic}`, '=8', '=1-C4/B4'],
-    ['ROI 12 мес (%)', `=(500000-B3*12)/(B3*12)`, `=(500000-C3*12)/(C3*12)`, '=C5-B5'],
+    ['Метрика', 'Classic', 'EMIIA', 'Экономия', 'Экономия %'],
+    ['TCO ($)', tcoC.toFixed(0), tcoE.toFixed(0), (tcoC - tcoE).toFixed(0), `=((A8-B8)/A8)*100`],
+    ['CAPEX ($)', capexC.toFixed(0), capexE.toFixed(0), (capexC - capexE).toFixed(0), `=((A9-B9)/A9)*100`],
+    ['OPEX ($)', opexC.toFixed(0), opexE.toFixed(0), (opexC - opexE).toFixed(0), `=((A10-B10)/A10)*100`],
+    ['Время запуска (дней)', daysClassic, '8', (daysClassic - 8).toFixed(0), `=((A11-8)/A11)*100`],
+    ['ROI 12 мес (%)', ((500000 - tcoC * 12) / (tcoC * 12) * 100).toFixed(0), ((500000 - tcoE * 12) / (tcoE * 12) * 100).toFixed(0), '', `=B12-A12`],
     [''],
     ['Примечания:'],
     ['- Формулы автоматически адаптируются в формат электронных таблиц'],
     ['- Изменяйте значения в колонке "Значение" для пересчёта'],
-    ['- TCO EMIIA включает снижение затрат на Ops на 67%'],
-    ['- Время запуска EMIIA фиксировано на уровне 8 дней']
+    ['- CAPEX включает: оборудование, лицензии, разработку инфраструктуры'],
+    ['- OPEX включает: вычисления, команду Ops, обслуживание, электричество'],
+    ['- EMIIA снижает OPEX на 67% за счет автоматизации']
   ];
   
   const csvContent = csvData.map(row => 
@@ -1501,7 +1810,7 @@ function switchChartType(type) {
     tab.classList.remove('active');
   });
   document.querySelector(`[data-chart="${type}"]`).classList.add('active');
-  calc();
+  updateChart();
 }
 
 // Связывание полей ввода и ползунков
