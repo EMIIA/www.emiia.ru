@@ -662,12 +662,22 @@ header {
   }
 }
 
-/* Стили для кнопок графика */
+/* Стили для графика */
 .chart-tabs {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 8px;
   margin-bottom: 8px;
+}
+
+.chart-tab-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.chart-tab-row.single {
+  grid-template-columns: 1fr;
 }
 
 .chart-tab {
@@ -675,7 +685,7 @@ header {
   background: var(--gray-100);
   border: 1.5px solid var(--gray-200);
   border-radius: var(--border-radius-xs);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   cursor: pointer;
   transition: var(--transition);
@@ -713,17 +723,18 @@ canvas {
   display: block;
 }
 
-@media (min-width: 768px) {
-  .chart-tabs {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
 @media (max-width: 767px) {
   .chart-tabs {
-    grid-template-columns: repeat(2, 1fr);
     gap: 6px;
     margin-bottom: 6px;
+  }
+  
+  .chart-tab-row {
+    gap: 6px;
+  }
+  
+  .chart-tab-row.single {
+    grid-template-columns: 1fr;
   }
   
   .chart-tab {
@@ -840,28 +851,8 @@ body {
           <input type="range" min="0" max="100" value="50" class="slider" id="daysClassicSlider">
         </div>
       </div>
-    </div>
-
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">Результаты расчета</div>
-      </div>
       
-      <div class="results-highlight">
-        <div class="metric-row">
-          <span class="metric-label">TCO Classic</span>
-          <span class="metric-value metric-negative" id="tcoCl">0 $</span>
-        </div>
-        <div class="metric-row">
-          <span class="metric-label">TCO EMIIA</span>
-          <span class="metric-value metric-positive" id="tcoEm">0 $</span>
-        </div>
-        <div class="metric-row">
-          <span class="metric-label">Экономия TCO</span>
-          <span class="metric-value metric-positive" id="tcoSave">0 %</span>
-        </div>
-      </div>
-      
+      <!-- Перенесен блок "Экономия по типам затрат" сюда, в левую карточку -->
       <div class="savings-breakdown">
         <h3>Экономия по типам затрат</h3>
         <div class="savings-item">
@@ -893,6 +884,27 @@ body {
           <span class="savings-amount metric-opex" id="opexSavingsPercent">0 %</span>
         </div>
       </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Результаты расчета</div>
+      </div>
+      
+      <div class="results-highlight">
+        <div class="metric-row">
+          <span class="metric-label">TCO Classic</span>
+          <span class="metric-value metric-negative" id="tcoCl">0 $</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">TCO EMIIA</span>
+          <span class="metric-value metric-positive" id="tcoEm">0 $</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Экономия TCO</span>
+          <span class="metric-value metric-positive" id="tcoSave">0 %</span>
+        </div>
+      </div>
       
       <div class="divider"></div>
       
@@ -922,13 +934,25 @@ body {
       
       <div class="divider"></div>
       
-      <!-- Кнопки графика в ДВА РЯДА -->
+      <!-- Три ряда кнопок для графиков -->
       <div class="chart-tabs">
-        <button class="chart-tab active" data-chart="tco">TCO</button>
-        <button class="chart-tab" data-chart="time">Время</button>
-        <button class="chart-tab" data-chart="roi">ROI</button>
-        <button class="chart-tab" data-chart="savings">Экономия</button>
-        <button class="chart-tab" data-chart="capexOpex">CAPEX/OPEX</button>
+        <!-- Первый ряд: 2 кнопки -->
+        <div class="chart-tab-row">
+          <button class="chart-tab active" data-chart="tco">TCO</button>
+          <button class="chart-tab" data-chart="time">T2M</button>
+        </div>
+        
+        <!-- Второй ряд: 2 кнопки -->
+        <div class="chart-tab-row">
+          <button class="chart-tab" data-chart="roi">ROI</button>
+          <button class="chart-tab" data-chart="savings">Экономия</button>
+        </div>
+        
+        <!-- Третий ряд: 2 кнопки (CAPEX и OPEX отдельно) -->
+        <div class="chart-tab-row">
+          <button class="chart-tab" data-chart="capex">CAPEX</button>
+          <button class="chart-tab" data-chart="opex">OPEX</button>
+        </div>
       </div>
       
       <div class="chart-container">
@@ -983,10 +1007,8 @@ let chartData = {
     capexPercent: 0,
     opexPercent: 0 
   },
-  capexOpex: { 
-    capexClassic: 0, capexEmiia: 0,
-    opexClassic: 0, opexEmiia: 0 
-  }
+  capex: { capexClassic: 0, capexEmiia: 0 },
+  opex: { opexClassic: 0, opexEmiia: 0 }
 };
 
 // Функция форматирования чисел
@@ -1078,7 +1100,7 @@ function updateTcoChart() {
           borderWidth: 1.5,
           callbacks: {
             label: function(context) {
-              return `TCO: $${formatNumber(context.parsed.y.toFixed(0))}`;
+              return `  TCO: $${formatNumber(context.parsed.y.toFixed(0))}`;
             }
           }
         }
@@ -1161,7 +1183,7 @@ function updateTimeChart() {
           borderWidth: 1.5,
           callbacks: {
             label: function(context) {
-              return `Время: ${formatNumber(context.parsed.y)} дней`;
+              return `  Время: ${formatNumber(context.parsed.y)} дней`;
             }
           }
         }
@@ -1257,7 +1279,7 @@ function updateRoiChart() {
           borderWidth: 1.5,
           callbacks: {
             label: function(context) {
-              return `${context.label}: ${context.parsed.toFixed(0)}%`;
+              return `  ${context.label}: ${context.parsed.toFixed(0)}%`;
             }
           }
         }
@@ -1335,7 +1357,7 @@ function updateSavingsChart() {
               return titles[tooltipItems[0].dataIndex];
             },
             label: function(context) {
-              return `Экономия: ${context.parsed.y.toFixed(1)}%`;
+              return `  Экономия: ${context.parsed.y.toFixed(1)}%`;
             }
           }
         }
@@ -1375,57 +1397,39 @@ function updateSavingsChart() {
   });
 }
 
-// Функция создания/обновления графика CAPEX/OPEX - ИСПРАВЛЕННАЯ
-function updateCapexOpexChart() {
+// Функция создания/обновления графика CAPEX
+function updateCapexChart() {
   const ctx = $('metricsChart').getContext('2d');
   
   if (chart) {
     chart.destroy();
   }
   
-  // Данные для группированного бар-чарта
   chart = new Chart(ctx, {
     type: 'bar',
     data: {
       labels: ['Classic', 'EMIIA'],
-      datasets: [
-        {
-          label: 'CAPEX ($)',
-          data: [chartData.capexOpex.capexClassic, chartData.capexOpex.capexEmiia],
-          backgroundColor: 'rgba(139, 92, 246, 1)',  // ЯРКИЙ фиолетовый - CAPEX
-          borderColor: 'rgb(139, 92, 246)',
-          borderWidth: 2,
-          borderRadius: 8,
-          barPercentage: 0.5,
-          categoryPercentage: 0.5,
-        },
-        {
-          label: 'OPEX ($)',
-          data: [chartData.capexOpex.opexClassic, chartData.capexOpex.opexEmiia],
-          backgroundColor: 'rgba(245, 158, 11, 1)',  // ЯРКИЙ оранжевый - OPEX
-          borderColor: 'rgb(245, 158, 11)',
-          borderWidth: 2,
-          borderRadius: 8,
-          barPercentage: 0.5,
-          categoryPercentage: 0.5,
-        }
-      ]
+      datasets: [{
+        label: 'CAPEX ($)',
+        data: [chartData.capex.capexClassic, chartData.capex.capexEmiia],
+        backgroundColor: [
+          'rgba(139, 92, 246, 0.8)',
+          'rgba(167, 139, 250, 0.8)'
+        ],
+        borderColor: [
+          'rgb(139, 92, 246)',
+          'rgb(167, 139, 250)'
+        ],
+        borderWidth: 2,
+        borderRadius: 8,
+      }]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
         legend: {
-          position: 'top',
-          labels: {
-            font: {
-              size: 12,
-              weight: '600'
-            },
-            color: '#475569',
-            padding: 15,
-            usePointStyle: true,
-          }
+          display: false
         },
         tooltip: {
           backgroundColor: '#f8fafc',
@@ -1437,7 +1441,90 @@ function updateCapexOpexChart() {
           borderWidth: 1.5,
           callbacks: {
             label: function(context) {
-              return `${context.dataset.label}: $${formatNumber(context.parsed.y.toFixed(0))}`;
+              return `  CAPEX: $${formatNumber(context.parsed.y.toFixed(0))}`;
+            }
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          grid: {
+            color: '#e2e8f0'
+          },
+          ticks: {
+            color: '#475569',
+            callback: function(value) {
+              return '$' + formatNumber(value);
+            }
+          }
+        },
+        x: {
+          grid: {
+            display: false
+          },
+          ticks: {
+            color: '#475569',
+            font: {
+              size: 13,
+              weight: '600'
+            }
+          }
+        }
+      },
+      animation: {
+        duration: 600,
+        easing: 'easeOutQuart'
+      }
+    }
+  });
+}
+
+// Функция создания/обновления графика OPEX
+function updateOpexChart() {
+  const ctx = $('metricsChart').getContext('2d');
+  
+  if (chart) {
+    chart.destroy();
+  }
+  
+  chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Classic', 'EMIIA'],
+      datasets: [{
+        label: 'OPEX ($)',
+        data: [chartData.opex.opexClassic, chartData.opex.opexEmiia],
+        backgroundColor: [
+          'rgba(245, 158, 11, 0.8)',
+          'rgba(251, 191, 36, 0.8)'
+        ],
+        borderColor: [
+          'rgb(245, 158, 11)',
+          'rgb(251, 191, 36)'
+        ],
+        borderWidth: 2,
+        borderRadius: 8,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          backgroundColor: '#f8fafc',
+          titleColor: '#0f172a',
+          bodyColor: '#1e293b',
+          padding: 12,
+          cornerRadius: 8,
+          borderColor: '#e2e8f0',
+          borderWidth: 1.5,
+          callbacks: {
+            label: function(context) {
+              return `  OPEX: $${formatNumber(context.parsed.y.toFixed(0))}`;
             }
           }
         }
@@ -1491,8 +1578,11 @@ function updateChart() {
     case 'savings':
       updateSavingsChart();
       break;
-    case 'capexOpex':
-      updateCapexOpexChart();
+    case 'capex':
+      updateCapexChart();
+      break;
+    case 'opex':
+      updateOpexChart();
       break;
   }
 }
@@ -1509,64 +1599,98 @@ function calc() {
   const infCl  = 0.27, infEm  = 0.05;
   const storCl = 0.05, storEm = 0.03;
 
-  // Расчет CAPEX (инфраструктурные затраты: хостинг, хранение)
-  const capexClassic = d * hostCl + t * storCl;
-  const capexEmiia = d * hostEm + t * storEm;
-  const capexSavings = capexClassic - capexEmiia;
-  const capexSavingsPercent = capexClassic > 0 ? (capexSavings / capexClassic) * 100 : 0;
+  // Существующие расчеты TCO (оставляем как есть)
+  const tcoC = d * hostCl + i * 1000 * infCl + t * storCl + ops;
+  const tcoE = d * hostEm + i * 1000 * infEm + t * storEm + ops * 0.33;
 
-  // Расчет OPEX (операционные затраты: инференсы, команда)
-  const opexClassic = i * 1000 * infCl + ops;
-  const opexEmiia = i * 1000 * infEm + ops * 0.33;
-  const opexSavings = opexClassic - opexEmiia;
-  const opexSavingsPercent = opexClassic > 0 ? (opexSavings / opexClassic) * 100 : 0;
-
-  // Итоговый TCO
-  const tcoC = capexClassic + opexClassic;
-  const tcoE = capexEmiia + opexEmiia;
-  const saveTCO = tcoC > 0 ? (1 - tcoE / tcoC) * 100 : 0;
-
-  const dEm = 8;
+  // Существующие расчеты времени
+  const dEm = 8; // EMIIA: 8 дней (фиксировано)
   const saveT2M = (1 - dEm / dCl) * 100;
 
+  // Существующие расчеты ROI
   const revenue = 500000;
   const roiC = tcoC > 0 ? ((revenue - tcoC * 12) / (tcoC * 12)) * 100 : 0;
   const roiE = tcoE > 0 ? ((revenue - tcoE * 12) / (tcoE * 12)) * 100 : 0;
 
-  // Сохраняем данные для графиков
-  chartData.tco = { classic: tcoC, emiia: tcoE };
-  chartData.time = { classic: dCl, emiia: dEm };
-  chartData.roi = { classic: roiC, emiia: roiE };
-  chartData.savings = { 
-    tco: saveTCO, 
-    time: saveT2M,
-    capexPercent: capexSavingsPercent,
-    opexPercent: opexSavingsPercent 
-  };
-  chartData.capexOpex = {
-    capexClassic: capexClassic,
-    capexEmiia: capexEmiia,
-    opexClassic: opexClassic,
-    opexEmiia: opexEmiia
-  };
+  // ============ ДОБАВЛЯЕМ CAPEX/OPEX РАСЧЕТЫ ============
 
-  // Обновление основного блока
+  // 1. Определяем, что входит в CAPEX и OPEX для Classic
+  // CAPEX для Classic (капитальные затраты на инфраструктуру):
+  // - Оборудование для обработки (часть от хостинга и хранения)
+  // - Развертывания (инфраструктура)
+  // - Часть команды Ops (начальные настройки)
+
+  // OPEX для Classic (операционные расходы):
+  // - Инференсы (вычисления)
+  // - Большая часть команды Ops (ежемесячная)
+  // - Часть хранения и хостинга
+
+  // Для простоты разделим пропорционально:
+  const CAPEX_PERCENT_CLASSIC = 0.35;  // 35% CAPEX для Classic
+  const OPEX_PERCENT_CLASSIC = 0.65;   // 65% OPEX для Classic
+
+  // Для EMIIA (SaaS) CAPEX минимальный:
+  const CAPEX_PERCENT_EMIIA = 0.10;    // 10% CAPEX для EMIIA (обучение)
+  const OPEX_PERCENT_EMIIA = 0.90;     // 90% OPEX для EMIIA
+
+  // 2. Рассчитываем CAPEX/OPEX
+  const capexClassic = tcoC * CAPEX_PERCENT_CLASSIC;
+  const opexClassic = tcoC * OPEX_PERCENT_CLASSIC;
+
+  const capexEmiia = tcoE * CAPEX_PERCENT_EMIIA;
+  const opexEmiia = tcoE * OPEX_PERCENT_EMIIA;
+
+  // 3. Экономия в деньгах
+  const capexSavings = capexClassic - capexEmiia;
+  const opexSavings = opexClassic - opexEmiia;
+
+  // 4. Экономия в процентах
+  const capexSavingsPercent = capexClassic > 0 ? (capexSavings / capexClassic) * 100 : 0;
+  const opexSavingsPercent = opexClassic > 0 ? (opexSavings / opexClassic) * 100 : 0;
+
+  // 5. Общая экономия TCO
+  const tcoSavings = tcoC > 0 ? ((tcoC - tcoE) / tcoC) * 100 : 0;
+
+  // ============ ОБНОВЛЯЕМ ИНТЕРФЕЙС ============
+
+  // Обновляем существующие поля
   $('tcoCl').textContent = formatNumber(Math.round(tcoC)) + ' $';
   $('tcoEm').textContent = formatNumber(Math.round(tcoE)) + ' $';
-  $('tcoSave').textContent = Math.round(saveTCO) + ' %';
+  $('tcoSave').textContent = Math.round(tcoSavings) + ' %';
   $('t2mCl').textContent = formatNumber(dCl) + ' дн';
   $('t2mEm').textContent = formatNumber(dEm) + ' дн';
   $('t2mSave').textContent = Math.round(saveT2M) + ' %';
   $('roiCl').textContent = Math.round(roiC) + ' %';
   $('roiEm').textContent = Math.round(roiE) + ' %';
 
-  // Обновление блока экономии по CAPEX/OPEX
+  // Обновляем новые поля CAPEX/OPEX
   $('capexSavings').textContent = formatNumber(Math.round(capexSavings)) + ' $';
   $('opexSavings').textContent = formatNumber(Math.round(opexSavings)) + ' $';
   $('capexSavingsPercent').textContent = Math.round(capexSavingsPercent) + ' %';
   $('opexSavingsPercent').textContent = Math.round(opexSavingsPercent) + ' %';
 
-  // Обновление графика
+  // ============ ДЛЯ ГРАФИКОВ ============
+
+  // Обновляем данные для графиков (добавляем CAPEX и OPEX отдельно)
+  chartData.tco = { classic: tcoC, emiia: tcoE };
+  chartData.time = { classic: dCl, emiia: dEm };
+  chartData.roi = { classic: roiC, emiia: roiE };
+  chartData.savings = { 
+    tco: tcoSavings, 
+    time: saveT2M,
+    capexPercent: capexSavingsPercent,
+    opexPercent: opexSavingsPercent 
+  };
+  chartData.capex = {
+    capexClassic: capexClassic,
+    capexEmiia: capexEmiia
+  };
+  chartData.opex = {
+    opexClassic: opexClassic,
+    opexEmiia: opexEmiia
+  };
+
+  // Обновляем график
   updateChart();
 }
 
@@ -1578,6 +1702,14 @@ function exportToCSV() {
   const opsCost = +$('opsCost').value;
   const daysClassic = +$('daysClassic').value;
   
+  // Рассчитываем значения для CSV
+  const tcoC = deplN * 0.67 + infM * 1000 * 0.27 + dataTb * 0.05 + opsCost;
+  const tcoE = deplN * 0.11 + infM * 1000 * 0.05 + dataTb * 0.03 + opsCost * 0.33;
+  const capexC = tcoC * 0.35;
+  const capexE = tcoE * 0.10;
+  const opexC = tcoC * 0.65;
+  const opexE = tcoE * 0.90;
+  
   const csvData = [
     ['Параметр', 'Значение', 'Формула для Google Sheets'],
     ['Объём данных (ТБ)', dataTb, `=${dataTb}`],
@@ -1586,18 +1718,18 @@ function exportToCSV() {
     ['Команда Ops ($/мес)', opsCost, `=${opsCost}`],
     ['Время до запуска (дней)', daysClassic, `=${daysClassic}`],
     [''],
-    ['Метрика', 'Classic', 'EMIIA', 'Экономия'],
-    ['TCO ($)', `=${deplN}*0.67+${infM}*1000*0.27+${dataTb}*0.05+${opsCost}`, `=${deplN}*0.11+${infM}*1000*0.05+${dataTb}*0.03+${opsCost}*0.33`, '=1-C3/B3'],
-    ['CAPEX ($)', `=${deplN}*0.67+${dataTb}*0.05`, `=${deplN}*0.11+${dataTb}*0.03`, '=1-C4/B4'],
-    ['OPEX ($)', `=${infM}*1000*0.27+${opsCost}`, `=${infM}*1000*0.05+${opsCost}*0.33`, '=1-C5/B5'],
-    ['Время запуска (дней)', `=${daysClassic}`, '=8', '=1-C6/B6'],
-    ['ROI 12 мес (%)', `=(500000-B3*12)/(B3*12)`, `=(500000-C3*12)/(C3*12)`, '=C7-B7'],
+    ['Метрика', 'Classic', 'EMIIA', 'Экономия', 'Экономия %'],
+    ['TCO ($)', tcoC.toFixed(0), tcoE.toFixed(0), (tcoC - tcoE).toFixed(0), `=((A8-B8)/A8)*100`],
+    ['CAPEX ($)', capexC.toFixed(0), capexE.toFixed(0), (capexC - capexE).toFixed(0), `=((A9-B9)/A9)*100`],
+    ['OPEX ($)', opexC.toFixed(0), opexE.toFixed(0), (opexC - opexE).toFixed(0), `=((A10-B10)/A10)*100`],
+    ['Время запуска (дней)', daysClassic, '8', (daysClassic - 8).toFixed(0), `=((A11-8)/A11)*100`],
+    ['ROI 12 мес (%)', ((500000 - tcoC * 12) / (tcoC * 12) * 100).toFixed(0), ((500000 - tcoE * 12) / (tcoE * 12) * 100).toFixed(0), '', `=B12-A12`],
     [''],
     ['Примечания:'],
     ['- Формулы автоматически адаптируются в формат электронных таблиц'],
     ['- Изменяйте значения в колонке "Значение" для пересчёта'],
-    ['- CAPEX включает затраты на хостинг и хранение данных'],
-    ['- OPEX включает затраты на инференсы и команду Ops'],
+    ['- CAPEX включает: оборудование, лицензии, разработку инфраструктуры'],
+    ['- OPEX включает: вычисления, команду Ops, обслуживание, электричество'],
     ['- EMIIA снижает OPEX на 67% за счет автоматизации']
   ];
   
