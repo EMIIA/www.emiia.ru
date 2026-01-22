@@ -239,6 +239,8 @@ header {
   width: 100%;
   min-width: 0;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .card:hover {
@@ -749,6 +751,35 @@ canvas {
   }
 }
 
+/* Специальные стили для правой карточки */
+.right-card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.right-card-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-height: 0;
+}
+
+.right-card-section {
+  margin-bottom: 20px;
+}
+
+.right-card-section:last-child {
+  margin-bottom: 0;
+}
+
+.right-card-spacer {
+  flex: 1;
+  min-height: 20px;
+}
+
 body {
   opacity: 0;
   animation: fadeIn 0.3s ease-out forwards;
@@ -887,76 +918,90 @@ body {
     </div>
 
     <div class="card">
-      <div class="card-header">
-        <div class="card-title">Результаты расчета</div>
-      </div>
-      
-      <div class="results-highlight">
-        <div class="metric-row">
-          <span class="metric-label">TCO Classic</span>
-          <span class="metric-value metric-negative" id="tcoCl">0 $</span>
-        </div>
-        <div class="metric-row">
-          <span class="metric-label">TCO EMIIA</span>
-          <span class="metric-value metric-positive" id="tcoEm">0 $</span>
-        </div>
-        <div class="metric-row">
-          <span class="metric-label">Экономия TCO</span>
-          <span class="metric-value metric-positive" id="tcoSave">0 %</span>
-        </div>
-      </div>
-      
-      <div class="divider"></div>
-      
-      <div class="metric-row">
-        <span class="metric-label">Время запуска Classic</span>
-        <span class="metric-value metric-neutral" id="t2mCl">0 дн</span>
-      </div>
-      <div class="metric-row">
-        <span class="metric-label">Время запуска EMIIA</span>
-        <span class="metric-value metric-positive" id="t2mEm">0 дн</span>
-      </div>
-      <div class="metric-row">
-        <span class="metric-label">Ускорение T2M</span>
-        <span class="metric-value metric-positive" id="t2mSave">0 %</span>
-      </div>
-      
-      <div class="divider"></div>
-      
-      <div class="metric-row">
-        <span class="metric-label">ROI Classic (12 мес)</span>
-        <span class="metric-value metric-neutral" id="roiCl">0 %</span>
-      </div>
-      <div class="metric-row">
-        <span class="metric-label">ROI EMIIA (12 мес)</span>
-        <span class="metric-value metric-positive" id="roiEm">0 %</span>
-      </div>
-      
-      <div class="divider"></div>
-      
-      <!-- Три ряда кнопок для графиков -->
-      <div class="chart-tabs">
-        <!-- Первый ряд: 2 кнопки -->
-        <div class="chart-tab-row">
-          <button class="chart-tab active" data-chart="tco">TCO</button>
-          <button class="chart-tab" data-chart="time">T2M</button>
+      <div class="right-card-content">
+        <div class="card-header">
+          <div class="card-title">Результаты расчета</div>
         </div>
         
-        <!-- Второй ряд: 2 кнопки -->
-        <div class="chart-tab-row">
-          <button class="chart-tab" data-chart="roi">ROI</button>
-          <button class="chart-tab" data-chart="savings">Экономия</button>
+        <div class="right-card-metrics">
+          <div class="right-card-section">
+            <div class="results-highlight">
+              <div class="metric-row">
+                <span class="metric-label">TCO Classic</span>
+                <span class="metric-value metric-negative" id="tcoCl">0 $</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">TCO EMIIA</span>
+                <span class="metric-value metric-positive" id="tcoEm">0 $</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">Экономия TCO</span>
+                <span class="metric-value metric-positive" id="tcoSave">0 %</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="right-card-section">
+            <div class="divider"></div>
+            
+            <div class="metric-row">
+              <span class="metric-label">Время запуска Classic</span>
+              <span class="metric-value metric-neutral" id="t2mCl">0 дн</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Время запуска EMIIA</span>
+              <span class="metric-value metric-positive" id="t2mEm">0 дн</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">Ускорение T2M</span>
+              <span class="metric-value metric-positive" id="t2mSave">0 %</span>
+            </div>
+          </div>
+          
+          <div class="right-card-section">
+            <div class="divider"></div>
+            
+            <div class="metric-row">
+              <span class="metric-label">ROI Classic (12 мес)</span>
+              <span class="metric-value metric-neutral" id="roiCl">0 %</span>
+            </div>
+            <div class="metric-row">
+              <span class="metric-label">ROI EMIIA (12 мес)</span>
+              <span class="metric-value metric-positive" id="roiEm">0 %</span>
+            </div>
+          </div>
+          
+          <div class="right-card-spacer"></div>
+          
+          <div class="right-card-section">
+            <div class="divider"></div>
+            
+            <!-- Три ряда кнопок для графиков -->
+            <div class="chart-tabs">
+              <!-- Первый ряд: 2 кнопки -->
+              <div class="chart-tab-row">
+                <button class="chart-tab active" data-chart="tco">TCO</button>
+                <button class="chart-tab" data-chart="time">T2M</button>
+              </div>
+              
+              <!-- Второй ряд: 2 кнопки -->
+              <div class="chart-tab-row">
+                <button class="chart-tab" data-chart="roi">ROI</button>
+                <button class="chart-tab" data-chart="savings">Экономия</button>
+              </div>
+              
+              <!-- Третий ряд: 2 кнопки (CAPEX и OPEX отдельно) -->
+              <div class="chart-tab-row">
+                <button class="chart-tab" data-chart="capex">CAPEX</button>
+                <button class="chart-tab" data-chart="opex">OPEX</button>
+              </div>
+            </div>
+            
+            <div class="chart-container">
+              <canvas id="metricsChart"></canvas>
+            </div>
+          </div>
         </div>
-        
-        <!-- Третий ряд: 2 кнопки (CAPEX и OPEX отдельно) -->
-        <div class="chart-tab-row">
-          <button class="chart-tab" data-chart="capex">CAPEX</button>
-          <button class="chart-tab" data-chart="opex">OPEX</button>
-        </div>
-      </div>
-      
-      <div class="chart-container">
-        <canvas id="metricsChart"></canvas>
       </div>
     </div>
   </div>
