@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>EMIIA.AI SIP – калькулятор экономии</title>
+
+<!-- Open Graph Meta Tags -->
+<meta property="og:title" content="EMIIA.AI SIP – калькулятор экономии">
+<meta property="og:description" content="Рассчитайте экономию от использования продуктов и платформы EMIIA.AI SIP: TCO, ROI и время выхода на рынок">
+<meta property="og:image" content="https://www.emiia.ru/1200x630_roi.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://www.emiia.ru/roi.html">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="EMIIA.AI SIP – калькулятор экономии">
+<meta name="twitter:description" content="Рассчитайте экономию от использования продуктов и платформы EMIIA.AI SIP">
+<meta name="twitter:image" content="https://www.emiia.ru/1200x630_roi.png">
+
+<link href="/css2_roi.css?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+:root {
+  --primary: #2563eb;
+  --primary-light: #3b82f6;
+  --primary-dark: #1d4ed8;
+  --secondary: #10b981;
+  --secondary-light: #34d399;
+  --secondary-dark: #059669;
+  --capex-color: #8b5cf6;
+  --capex-light: #a78bfa;
+  --opex-color: #f59e0b;
+  --opex-light: #fbbf24;
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-300: #cbd5e1;
+  --gray-400: #94a3b8;
+  --gray-500: #64748b;
+  --gray-600: #475569;
+  --gray-700: #334155;
+  --gray-800: #1e293b;
+  --gray-900: #0f172a;
+  --white: #ffffff;
+  --error: #ef4444;
+  --success: #10b981;
+  --border-radius: 16px;
+  --border-radius-sm: 12px;
+  --border-radius-xs: 8px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--gray-50);
+  color: var(--gray-800);
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding-bottom: env(safe-area-inset-bottom);
+  touch-action: manipulation;
+  padding-top: 72px;
+}
+
+header {
+  background: var(--white);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--gray-200);
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  -webkit-backdrop-filter: blur(20px);
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  flex: 0 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.logo:hover {
+  transform: translateY(-1px);
+}
+
+.logo-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: -0.5px;
+  transition: var(--transition);
+  position: relative;
+  overflow: visible;
+  flex-shrink: 0;
+  min-width: 36px;
+}
+
+.logo:hover .logo-icon {
+  transform: scale(1.05);
+}
+
+.logo-text {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--gray-900);
+  letter-spacing: -0.25px;
+  white-space: nowrap;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.btn {
+  background: var(--white);
+  color: var(--gray-700);
+  border: 0.0px solid var(--gray-300);
+  padding: 10px 20px;
+  border-radius: var(--border-radius-xs);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: var(--shadow);
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.1px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.btn:hover {
+  background: var(--gray-50);
+  border-color: var(--gray-400);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-primary {
+  background: #6d9eeb;
+  color: #f8f9fa !important;
+  border-color: var(--primary);
+}
+
+.btn-primary:hover {
+  background: var(--primary-light);
+  border-color: var(--primary-light);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  padding-left: max(20px, env(safe-area-inset-left));
+  padding-right: max(20px, env(safe-area-inset-right));
+  width: 100%;
+  min-width: 0;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .cards-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  
+  .container {
+    padding: 24px;
+  }
+}
+
+.card {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  border: 1.5px solid var(--gray-200);
+  transition: var(--transition);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.card-header {
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1.5px solid var(--gray-200);
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gray-900);
+  letter-spacing: -0.25px;
+  line-height: 1.3;
+}
+
+.input-group {
+  margin-bottom: 24px;
+}
+
+.input-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 15px;
+  color: var(--gray-700);
+  font-weight: 600;
+  letter-spacing: -0.1px;
+}
+
+.input-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--gray-500);
+  background: var(--gray-100);
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.input-field {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1.5px solid var(--gray-300);
+  border-radius: var(--border-radius-sm);
+  font-size: 16px;
+  transition: var(--transition);
+  background: var(--white);
+  font-family: 'Inter', sans-serif;
+  -webkit-appearance: none;
+  appearance: none;
+  min-width: 0;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.slider-container {
+  margin-top: 16px;
+  position: relative;
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--gray-300);
+  outline: none;
+  margin: 20px 0;
+  min-width: 0;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2px solid var(--primary);
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+}
+
+.slider::-webkit-slider-thumb:hover {
+  background: var(--primary);
+  transform: scale(1.1);
+}
+
+.slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2px solid var(--primary);
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+}
+
+.slider::-webkit-slider-track {
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(to right, var(--secondary) 0%, var(--gray-300) 0%);
+}
+
+.slider::-moz-range-track {
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(to right, var(--secondary) 0%, var(--gray-300) 0%);
+}
+
+.metric-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--gray-100);
+  gap: 12px;
+}
+
+.metric-row:last-child {
+  border-bottom: none;
+}
+
+.metric-label {
+  font-size: 15px;
+  color: var(--gray-600);
+  font-weight: 500;
+  letter-spacing: -0.1px;
+  flex-shrink: 0;
+}
+
+.metric-value {
+  font-weight: 600;
+  font-size: 15px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: -0.1px;
+  text-align: right;
+  word-break: break-all;
+}
+
+.metric-positive {
+  color: var(--success);
+}
+
+.metric-negative {
+  color: var(--error);
+}
+
+.metric-neutral {
+  color: var(--gray-700);
+}
+
+.metric-capex {
+  color: var(--capex-color);
+}
+
+.metric-opex {
+  color: var(--opex-color);
+}
+
+.results-highlight {
+  background: linear-gradient(135deg, var(--gray-50), var(--gray-100));
+  border-radius: var(--border-radius-sm);
+  padding: 20px;
+  margin: 24px 0;
+  border: 1.5px solid var(--gray-200);
+}
+
+.savings-breakdown {
+  background: linear-gradient(135deg, var(--gray-50), var(--gray-100));
+  border-radius: var(--border-radius-sm);
+  padding: 20px;
+  margin: 24px 0;
+  border: 1.5px solid var(--gray-200);
+}
+
+.savings-breakdown h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gray-700);
+  margin-bottom: 16px;
+  letter-spacing: -0.1px;
+}
+
+.savings-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.savings-item:last-child {
+  border-bottom: none;
+}
+
+.savings-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--gray-600);
+  font-weight: 500;
+}
+
+.savings-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.savings-dot.capex {
+  background-color: var(--capex-color);
+}
+
+.savings-dot.opex {
+  background-color: var(--opex-color);
+}
+
+.savings-amount {
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+}
+
+.divider {
+  border: none;
+  height: 1.5px;
+  background: var(--gray-200);
+  margin: 24px 0;
+}
+
+.footer {
+  text-align: center;
+  padding: 32px 20px;
+  color: var(--gray-500);
+  font-size: 12px;
+  border-top: 1.5px solid var(--gray-200);
+  margin-top: 40px;
+  font-weight: 500;
+  padding-bottom: max(32px, env(safe-area-inset-bottom));
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1001;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  padding-left: max(20px, env(safe-area-inset-left));
+  padding-right: max(20px, env(safe-area-inset-right));
+  padding-bottom: max(20px, env(safe-area-inset-bottom));
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.modal-content {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  padding: 32px;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: var(--shadow-lg);
+  border: 1.5px solid var(--gray-200);
+  animation: modalSlideIn 0.3s ease-out;
+  max-height: 90vh;
+  overflow-y: auto;
+  margin: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-header {
+  margin-bottom: 20px;
+}
+
+.modal-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gray-900);
+  letter-spacing: -0.25px;
+  line-height: 1.3;
+}
+
+.modal-body {
+  color: var(--gray-600);
+  line-height: 1.6;
+  margin-bottom: 28px;
+  font-size: 15px;
+}
+
+.modal-body ul {
+  margin: 16px 0;
+  padding-left: 20px;
+}
+
+.modal-body li {
+  margin: 8px 0;
+  line-height: 1.5;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.modal-actions .btn {
+  background: #6d9eeb;
+  color: #f8f9fa !important;
+  border-color: var(--primary);
+}
+
+.modal-actions .btn:hover {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+}
+
+/* Mobile optimizations */
+@media (max-width: 767px) {
+  header {
+    padding: 14px 16px;
+  }
+  
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+  
+  .logo-text {
+    font-size: 16px;
+  }
+  
+  .btn {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+  
+  .container {
+    padding: 16px;
+    padding-top: 16px;
+  }
+  
+  .card {
+    padding: 20px;
+    border-radius: var(--border-radius-sm);
+  }
+  
+  .cards-grid {
+    gap: 16px;
+  }
+  
+  .card-title {
+    font-size: 18px;
+  }
+  
+  .input-field {
+    padding: 16px;
+    font-size: 16px;
+  }
+  
+  .modal {
+    padding: 12px;
+  }
+  
+  .modal-content {
+    padding: 24px;
+    width: calc(100% - 24px);
+  }
+  
+  .modal-title {
+    font-size: 20px;
+  }
+  
+  .modal-actions {
+    flex-direction: column;
+  }
+  
+  .modal-actions .btn {
+    width: 90%;
+    padding: 14px 24px;
+  }
+  
+  .card:hover {
+    transform: none;
+  }
+  
+  .btn:hover {
+    transform: none;
+  }
+}
+
+/* Стили для графика */
+.chart-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.chart-tabs-bottom {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.chart-tab {
+  padding: 10px 12px;
+  background: var(--gray-100);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--border-radius-xs);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--gray-700);
+  text-align: center;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.chart-tab:hover {
+  background: var(--gray-200);
+}
+
+.chart-tab.active {
+  background: var(--primary);
+  color: white !important;
+  border-color: var(--primary);
+}
+
+.chart-container {
+  margin-top: 16px;
+  padding: 20px;
+  background: var(--gray-50);
+  border-radius: var(--border-radius-sm);
+  border: 1.5px solid var(--gray-200);
+  position: relative;
+  height: 320px;
+  width: 100%;
+  overflow: hidden;
+}
+
+canvas {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block;
+}
+
+@media (max-width: 767px) {
+  .chart-tabs {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+  
+  .chart-tabs-bottom {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  
+  .chart-tab {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+  
+  .chart-container {
+    height: 280px;
+    padding: 16px;
+    margin-top: 12px;
+  }
+}
+
+body {
+  opacity: 0;
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="https://www.emiia.ru" class="logo" id="logoLink">
+    <div class="logo-icon">
+      <svg version="1.1" viewBox="0 0 192 192" fill="none" stroke="none" stroke-linecap="square" stroke-miterlimit="10" xmlns="http://www.w3.org/2000/svg">
+        <clipPath id="p.0"><path d="m0 0l192 0l0 192l-192 0z" clip-rule="nonzero"/></clipPath>
+        <g clip-path="url(#p.0)">
+          <path fill="#fad57a" d="m154.585 76.782l0 0c-0.186-20.651-17.184-38.474-38.332-40.193l-0.097 5.252c18.078 1.614 32.65 16.93 32.955 34.638z" fill-rule="evenodd"/>
+          <path stroke="#fad57a" stroke-width="14.66" stroke-linejoin="round" stroke-linecap="butt" d="m154.585 76.782l0 0c-0.186-20.651-17.184-38.474-38.332-40.193l-0.097 5.252c18.078 1.614 32.65 16.93 32.955 34.638z" fill-rule="evenodd"/>
+          <path fill="#748c6a" d="m37.415 76.782l0 0c0.186-20.651 17.184-38.474 38.332-40.193l0.097 5.252c-18.078 1.614-32.65 16.93-32.955 34.638z" fill-rule="evenodd"/>
+          <path stroke="#748c6a" stroke-width="14.66" stroke-linejoin="round" stroke-linecap="butt" d="m37.415 76.782l0 0c0.186-20.651 17.184-38.474 38.332-40.193l0.097 5.252c-18.078 1.614-32.65 16.93-32.955 34.638z" fill-rule="evenodd"/>
+          <path fill="#eb5b57" d="m154.585 115.218l0 0c-0.186 20.651-17.184 38.474-38.332 40.193l-0.097-5.252c18.078-1.614 32.65-16.93 32.955-34.638z" fill-rule="evenodd"/>
+          <path stroke="#eb5b57" stroke-width="14.66" stroke-linejoin="round" stroke-linecap="butt" d="m154.585 115.218l0 0c-0.186 20.651-17.184 38.474-38.332 40.193l-0.097-5.252c18.078-1.614 32.65-16.93 32.955-34.638z" fill-rule="evenodd"/>
+          <path fill="#517eb9" d="m37.415 115.218l0 0c0.186 20.65 17.184 38.474 38.332 40.192l0.097-5.252c-18.078-1.614-32.65-16.93-32.955-34.638z" fill-rule="evenodd"/>
+          <path stroke="#517eb9" stroke-width="14.66" stroke-linejoin="round" stroke-linecap="butt" d="m37.415 115.218l0 0c0.186 20.65 17.184 38.474 38.332 40.192l0.097-5.252c-18.078-1.614-32.65-16.93-32.955-34.638z" fill-rule="evenodd"/>
+          <path fill="#3c78d8" d="m69.536 96.003l0 0c0-14.62 11.852-26.472 26.472-26.472 7.021 0 13.754 2.789 18.718 7.754 4.965 4.964 7.754 11.697 7.754 18.718l0 0c0 14.62-11.852 26.472-26.472 26.472-14.62 0-26.472-11.852-26.472-26.472z" fill-rule="evenodd"/>
+        </g>
+      </svg>
+    </div>
+    <div class="logo-text">EMIIA.AI SIP</div>
+  </a>
+  
+  <div class="header-actions">
+    <button class="btn btn-primary" id="exportBtn">
+      Экспорт CSV
+    </button>
+  </div>
+</header>
+
+<div class="container">
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Параметры расчета</div>
+      </div>
+      
+      <div class="input-group">
+        <div class="input-label">
+          <span>Объём данных</span>
+          <span class="input-value" id="dataTbValue">100 ТБ</span>
+        </div>
+        <input id="dataTb" type="number" value="100" min="0" step="1" class="input-field" inputmode="decimal">
+        <div class="slider-container">
+          <input type="range" min="0" max="500" value="100" class="slider" id="dataTbSlider">
+        </div>
+      </div>
+      
+      <div class="input-group">
+        <div class="input-label">
+          <span>Инференсы</span>
+          <span class="input-value" id="infMValue">10 млн</span>
+        </div>
+        <input id="infM" type="number" value="10" min="0" step="1" class="input-field" inputmode="decimal">
+        <div class="slider-container">
+          <input type="range" min="0" max="50" value="10" class="slider" id="infMSlider">
+        </div>
+      </div>
+      
+      <div class="input-group">
+        <div class="input-label">
+          <span>Развёртывания</span>
+          <span class="input-value" id="deplNValue">5 раз</span>
+        </div>
+        <input id="deplN" type="number" value="5" min="0" step="1" class="input-field" inputmode="decimal">
+        <div class="slider-container">
+          <input type="range" min="0" max="20" value="5" class="slider" id="deplNSlider">
+        </div>
+      </div>
+      
+      <div class="input-group">
+        <div class="input-label">
+          <span>Команда Ops</span>
+          <span class="input-value" id="opsCostValue">$15,000</span>
+        </div>
+        <input id="opsCost" type="number" value="15000" min="0" step="1000" class="input-field" inputmode="decimal">
+        <div class="slider-container">
+          <input type="range" min="0" max="50000" value="15000" step="1000" class="slider" id="opsCostSlider">
+        </div>
+      </div>
+      
+      <div class="input-group">
+        <div class="input-label">
+          <span>Время до запуска</span>
+          <span class="input-value" id="daysClassicValue">50 дней</span>
+        </div>
+        <input id="daysClassic" type="number" value="50" min="0" step="1" class="input-field" inputmode="decimal">
+        <div class="slider-container">
+          <input type="range" min="0" max="100" value="50" class="slider" id="daysClassicSlider">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Результаты расчета</div>
+      </div>
+      
+      <div class="results-highlight">
+        <div class="metric-row">
+          <span class="metric-label">TCO Classic</span>
+          <span class="metric-value metric-negative" id="tcoCl">0 $</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">TCO EMIIA</span>
+          <span class="metric-value metric-positive" id="tcoEm">0 $</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Экономия TCO</span>
+          <span class="metric-value metric-positive" id="tcoSave">0 %</span>
+        </div>
+      </div>
+      
+      <div class="savings-breakdown">
+        <h3>Экономия по типам затрат</h3>
+        <div class="savings-item">
+          <span class="savings-label">
+            <span class="savings-dot capex"></span>
+            Экономия CAPEX
+          </span>
+          <span class="savings-amount metric-capex" id="capexSavings">0 $</span>
+        </div>
+        <div class="savings-item">
+          <span class="savings-label">
+            <span class="savings-dot opex"></span>
+            Экономия OPEX
+          </span>
+          <span class="savings-amount metric-opex" id="opexSavings">0 $</span>
+        </div>
+        <div class="savings-item">
+          <span class="savings-label">
+            <span class="savings-dot capex"></span>
+            Экономия CAPEX (%)
+          </span>
+          <span class="savings-amount metric-capex" id="capexSavingsPercent">0 %</span>
+        </div>
+        <div class="savings-item">
+          <span class="savings-label">
+            <span class="savings-dot opex"></span>
+            Экономия OPEX (%)
+          </span>
+          <span class="savings-amount metric-opex" id="opexSavingsPercent">0 %</span>
+        </div>
+      </div>
+      
+      <div class="divider"></div>
+      
+      <div class="metric-row">
+        <span class="metric-label">Время запуска Classic</span>
+        <span class="metric-value metric-neutral" id="t2mCl">0 дн</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Время запуска EMIIA</span>
+        <span class="metric-value metric-positive" id="t2mEm">0 дн</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">Ускорение T2M</span>
+        <span class="metric-value metric-positive" id="t2mSave">0 %</span>
+      </div>
+      
+      <div class="divider"></div>
+      
+      <div class="metric-row">
+        <span class="metric-label">ROI Classic (12 мес)</span>
+        <span class="metric-value metric-neutral" id="roiCl">0 %</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-label">ROI EMIIA (12 мес)</span>
+        <span class="metric-value metric-positive" id="roiEm">0 %</span>
+      </div>
+      
+      <div class="divider"></div>
+      
+      <!-- Первый ряд кнопок -->
+      <div class="chart-tabs">
+        <button class="chart-tab active" data-chart="tco">TCO</button>
+        <button class="chart-tab" data-chart="time">Время</button>
+        <button class="chart-tab" data-chart="roi">ROI</button>
+      </div>
+      
+      <!-- Второй ряд кнопок -->
+      <div class="chart-tabs-bottom">
+        <button class="chart-tab" data-chart="savings">Экономия</button>
+        <button class="chart-tab" data-chart="capexOpex">CAPEX/OPEX</button>
+      </div>
+      
+      <div class="chart-container">
+        <canvas id="metricsChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  EMIIA.AI SIP – ПРОСТРАНСТВЕННЫЙ ИНТЕЛЛЕКТ<br>
+βeta — справочные данные
+</div>
+
+<div class="modal" id="exportModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-title">Экспорт завершен</div>
+    </div>
+    <div class="modal-body">
+      <p>CSV файл с формулами для электронных таблиц был успешно сгенерирован и загружен.</p>
+      <p><strong>Что включено в файл:</strong></p>
+      <ul>
+        <li>Текущие значения параметров</li>
+        <li>Формулы для расчета TCO, ROI и экономии</li>
+        <li>Разбивка на CAPEX и OPEX</li>
+        <li>Автоматическая адаптация для Google Sheets</li>
+      </ul>
+      <p>Импортируйте файл в Google Sheets и изменяйте параметры прямо в таблице для пересчета.</p>
+    </div>
+    <div class="modal-actions">
+      <button class="btn" id="closeModal">Закрыть</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+
+// Глобальная переменная для графика
+let chart = null;
+let currentChartType = 'tco';
+
+// Данные для графиков
+let chartData = {
+  tco: { classic: 0, emiia: 0 },
+  time: { classic: 0, emiia: 0 },
+  roi: { classic: 0, emiia: 0 },
+  savings: { 
+    tco: 0, 
+    time: 0,
+    capexPercent: 0,
+    opexPercent: 0 
+  },
+  capexOpex: { 
+    capexClassic: 0, capexEmiia: 0,
+    opexClassic: 0, opexEmiia: 0 
+  }
+};
+
+// Функция форматирования чисел
+function formatNumber(num) {
+  return new Intl.NumberFormat('ru-RU').format(num);
+}
+
+// Функция обновления ползунков
+function updateSliders() {
+  const dataTb = +$('dataTb').value;
+  const infM = +$('infM').value;
+  const deplN = +$('deplN').value;
+  const opsCost = +$('opsCost').value;
+  const daysClassic = +$('daysClassic').value;
+  
+  $('dataTbSlider').value = dataTb;
+  $('infMSlider').value = infM;
+  $('deplNSlider').value = deplN;
+  $('opsCostSlider').value = opsCost;
+  $('daysClassicSlider').value = daysClassic;
+  
+  $('dataTbValue').textContent = formatNumber(dataTb) + ' ТБ';
+  $('infMValue').textContent = formatNumber(infM) + ' млн';
+  $('deplNValue').textContent = formatNumber(deplN) + ' раз';
+  $('opsCostValue').textContent = '$' + formatNumber(opsCost);
+  $('daysClassicValue').textContent = formatNumber(daysClassic) + ' дней';
+  
+  // Обновляем градиенты для ползунков
+  updateSliderGradients();
+}
+
+// Функция обновления градиентов ползунков
+function updateSliderGradients() {
+  const sliders = [
+    {slider: $('dataTbSlider'), max: 500},
+    {slider: $('infMSlider'), max: 50},
+    {slider: $('deplNSlider'), max: 20},
+    {slider: $('opsCostSlider'), max: 50000},
+    {slider: $('daysClassicSlider'), max: 100}
+  ];
+  
+  sliders.forEach(item => {
+    const value = (item.slider.value / item.max) * 100;
+    item.slider.style.background = `linear-gradient(to right, var(--secondary) 0%, var(--secondary) ${value}%, var(--gray-300) ${value}%, var(--gray-300) 100%)`;
+  });
+}
+
+// Функция создания/обновления графика TCO
+function updateTcoChart() {
+  const ctx = $('metricsChart').getContext('2d');
+  
+  if (chart) {
+    chart.destroy();
+  }
+  
+  chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Classic', 'EMIIA'],
+      datasets: [{
+        label: 'TCO ($)',
+        data: [chartData.tco.classic, chartData.tco.emiia],
+        backgroundColor: [
+          'rgba(239, 68, 68, 0.8)',
+          'rgba(16, 185, 129, 0.8)'
+        ],
+        borderColor: [
+          'rgb(239, 68, 68)',
+          'rgb(16, 185, 129)'
+        ],
+        borderWidth: 2,
+        borderRadius: 8,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          backgroundColor: '#f8fafc',
+          titleColor: '#0f172a',
+          bodyColor: '#1e293b',
+          padding: 12,
+          cornerRadius: 8,
+          borderColor: '#e2e8f0',
+          borderWidth: 1.5,
+          callbacks: {
+            label: function(context) {
+              return `TCO: $${formatNumber(context.parsed.y.toFixed(0))}`;
+            }
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          grid: {
+            color: '#e2e8f0'
+          },
+          ticks: {
+            color: '#475569',
+            callback: function(value) {
+              return '$' + formatNumber(value);
+            }
+          }
+        },
+        x: {
+          grid: {
+            display: false
+          },
+          ticks: {
+            color: '#475569',
+            font: {
+              size: 13,
+              weight: '600'
+            }
+          }
+        }
+      },
+      animation: {
+        duration: 600,
+        easing: 'easeOutQuart'
+      }
+    }
+  });
+}
+
+// Функция создания/обновления графика времени
+function updateTimeChart() {
+  const ctx = $('metricsChart').getContext('2d');
+  
+  if (chart) {
+    chart.destroy();
+  }
+  
+  chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Classic', 'EMIIA'],
+      datasets: [{
+        label: 'Время до запуска (дней)',
+        data: [chartData.time.classic, chartData.time.emiia],
+        backgroundColor: [
+          'rgba(239, 68, 68, 0.8)',
+          'rgba(59, 130, 246, 0.8)'
+        ],
+        borderColor: [
+          'rgb(239, 68, 68)',
+          'rgb(59, 130, 246)'
+        ],
+        borderWidth: 2,
+        borderRadius: 8,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          backgroundColor: '#f8fafc',
+          titleColor: '#0f172a',
+          bodyColor: '#1e293b',
+          padding: 12,
+          cornerRadius: 8,
+          borderColor: '#e2e8f0',
+          borderWidth: 1.5,
+          callbacks: {
+            label: function(context) {
+              return `Время: ${formatNumber(context.parsed.y)} дней`;
+            }
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          grid: {
+            color: '#e2e8f0'
+          },
+          ticks: {
+            color: '#475569',
+            callback: function(value) {
+              return formatNumber(value) + ' дн';
+            }
+          }
+        },
+        x: {
+          grid: {
+            display: false
+          },
+          ticks: {
+            color: '#475569',
+            font: {
+              size: 13,
+              weight: '600'
+            }
+          }
+        }
+      },
+      animation: {
+        duration: 600,
+        easing: 'easeOutQuart'
+      }
+    }
+  });
+}
+
+// Функция создания/обновления графика ROI
+function updateRoiChart() {
+  const ctx = $('metricsChart').getContext('2d');
+  
+  if (chart) {
+    chart.destroy();
+  }
+  
+  const displayRoiC = Math.max(0, chartData.roi.classic);
+  const displayRoiE = Math.max(0, chartData.roi.emiia);
+  
+  chart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['ROI Classic', 'ROI EMIIA'],
+      datasets: [{
+        data: [displayRoiC, displayRoiE],
+        backgroundColor: [
+          'rgba(239, 68, 68, 0.8)',
+          'rgba(16, 185, 129, 0.8)'
+        ],
+        borderColor: [
+          'rgb(239, 68, 68)',
+          'rgb(16, 185, 129)'
+        ],
+        borderWidth: 3,
+        borderRadius: 6,
+        hoverOffset: 12
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '60%',
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            font: {
+              size: 12,
+              weight: '600'
+            },
+            color: '#475569',
+            padding: 15,
+            usePointStyle: true,
+          }
+        },
+        tooltip: {
+          backgroundColor: '#f8fafc',
+          titleColor: '#0f172a',
+          bodyColor: '#1e293b',
+          padding: 10,
+          cornerRadius: 6,
+          borderColor: '#e2e8f0',
+          borderWidth: 1.5,
+          callbacks: {
+            label: function(context) {
+              return `${context.label}: ${context.parsed.toFixed(0)}%`;
+            }
+          }
+        }
+      },
+      animation: {
+        duration: 800,
+        easing: 'easeOutQuart'
+      }
+    }
+  });
+}
+
+// Функция создания/обновления графика экономии
+function updateSavingsChart() {
+  const ctx = $('metricsChart').getContext('2d');
+  
+  if (chart) {
+    chart.destroy();
+  }
+  
+  // Берем данные из сохраненных расчетов
+  const data = [
+    chartData.savings.tco,  // TCO экономия
+    chartData.savings.time, // T2M экономия
+    chartData.savings.capexPercent, // CAPEX экономия в %
+    chartData.savings.opexPercent  // OPEX экономия в %
+  ];
+  
+  chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['TCO', 'T2M', 'CAPEX', 'OPEX'],
+      datasets: [{
+        label: 'Экономия (%)',
+        data: data,
+        backgroundColor: [
+          'rgba(16, 185, 129, 0.8)',    // зеленый для TCO
+          'rgba(59, 130, 246, 0.8)',    // синий для T2M
+          'rgba(139, 92, 246, 0.8)',    // фиолетовый для CAPEX
+          'rgba(245, 158, 11, 0.8)'     // оранжевый для OPEX
+        ],
+        borderColor: [
+          'rgb(16, 185, 129)',
+          'rgb(59, 130, 246)',
+          'rgb(139, 92, 246)',
+          'rgb(245, 158, 11)'
+        ],
+        borderWidth: 2,
+        borderRadius: 8,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          backgroundColor: '#f8fafc',
+          titleColor: '#0f172a',
+          bodyColor: '#1e293b',
+          padding: 12,
+          cornerRadius: 8,
+          borderColor: '#e2e8f0',
+          borderWidth: 1.5,
+          callbacks: {
+            title: function(tooltipItems) {
+              const titles = [
+                'Экономия Total Cost of Ownership',
+                'Ускорение Time to Market',
+                'Экономия капитальных затрат',
+                'Экономия операционных расходов'
+              ];
+              return titles[tooltipItems[0].dataIndex];
+            },
+            label: function(context) {
+              return `Экономия: ${context.parsed.y.toFixed(1)}%`;
+            }
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 100,
+          grid: {
+            color: '#e2e8f0'
+          },
+          ticks: {
+            color: '#475569',
+            callback: function(value) {
+              return value + '%';
+            }
+          }
+        },
+        x: {
+          grid: {
+            display: false
+          },
+          ticks: {
+            color: '#475569',
+            font: {
+              size: 12,
+              weight: '600'
+            }
+          }
+        }
+      },
+      animation: {
+        duration: 600,
+        easing: 'easeOutQuart'
+      }
+    }
+  });
+}
+
+// Функция создания/обновления графика CAPEX/OPEX
+function updateCapexOpexChart() {
+  const ctx = $('metricsChart').getContext('2d');
+  
+  if (chart) {
+    chart.destroy();
+  }
+  
+  // Создаем группированный бар-чарт
+  chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Classic', 'EMIIA'],
+      datasets: [
+        {
+          label: 'CAPEX ($)',
+          data: [chartData.capexOpex.capexClassic, chartData.capexOpex.capexEmiia],
+          backgroundColor: 'rgba(139, 92, 246, 0.9)',  // ЯРКИЙ фиолетовый
+          borderColor: 'rgb(139, 92, 246)',
+          borderWidth: 2,
+          borderRadius: 8,
+        },
+        {
+          label: 'OPEX ($)',
+          data: [chartData.capexOpex.opexClassic, chartData.capexOpex.opexEmiia],
+          backgroundColor: 'rgba(245, 158, 11, 0.9)',  // ЯРКИЙ оранжевый
+          borderColor: 'rgb(245, 158, 11)',
+          borderWidth: 2,
+          borderRadius: 8,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'top',
+          labels: {
+            font: {
+              size: 12,
+              weight: '600'
+            },
+            color: '#475569',
+            padding: 15,
+            usePointStyle: true,
+          }
+        },
+        tooltip: {
+          backgroundColor: '#f8fafc',
+          titleColor: '#0f172a',
+          bodyColor: '#1e293b',
+          padding: 12,
+          cornerRadius: 8,
+          borderColor: '#e2e8f0',
+          borderWidth: 1.5,
+          callbacks: {
+            label: function(context) {
+              return `${context.dataset.label}: $${formatNumber(context.parsed.y.toFixed(0))}`;
+            }
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          grid: {
+            color: '#e2e8f0'
+          },
+          ticks: {
+            color: '#475569',
+            callback: function(value) {
+              return '$' + formatNumber(value);
+            }
+          }
+        },
+        x: {
+          grid: {
+            display: false
+          },
+          ticks: {
+            color: '#475569',
+            font: {
+              size: 13,
+              weight: '600'
+            }
+          }
+        }
+      },
+      animation: {
+        duration: 600,
+        easing: 'easeOutQuart'
+      }
+    }
+  });
+}
+
+// Функция создания/обновления графика в зависимости от выбранного типа
+function updateChart() {
+  switch(currentChartType) {
+    case 'tco':
+      updateTcoChart();
+      break;
+    case 'time':
+      updateTimeChart();
+      break;
+    case 'roi':
+      updateRoiChart();
+      break;
+    case 'savings':
+      updateSavingsChart();
+      break;
+    case 'capexOpex':
+      updateCapexOpexChart();
+      break;
+  }
+}
+
+// Основная функция расчёта
+function calc() {
+  const t   = +$('dataTb').value;
+  const i   = +$('infM').value;
+  const d   = +$('deplN').value;
+  const ops = +$('opsCost').value;
+  const dCl = +$('daysClassic').value;
+
+  const hostCl = 0.67, hostEm = 0.11;
+  const infCl  = 0.27, infEm  = 0.05;
+  const storCl = 0.05, storEm = 0.03;
+
+  // Расчет CAPEX (инфраструктурные затраты: хостинг, хранение)
+  const capexClassic = d * hostCl + t * storCl;
+  const capexEmiia = d * hostEm + t * storEm;
+  const capexSavings = capexClassic - capexEmiia;
+  const capexSavingsPercent = capexClassic > 0 ? (capexSavings / capexClassic) * 100 : 0;
+
+  // Расчет OPEX (операционные затраты: инференсы, команда)
+  const opexClassic = i * 1000 * infCl + ops;
+  const opexEmiia = i * 1000 * infEm + ops * 0.33;
+  const opexSavings = opexClassic - opexEmiia;
+  const opexSavingsPercent = opexClassic > 0 ? (opexSavings / opexClassic) * 100 : 0;
+
+  // Итоговый TCO
+  const tcoC = capexClassic + opexClassic;
+  const tcoE = capexEmiia + opexEmiia;
+  const saveTCO = tcoC > 0 ? (1 - tcoE / tcoC) * 100 : 0;
+
+  const dEm = 8;
+  const saveT2M = (1 - dEm / dCl) * 100;
+
+  const revenue = 500000;
+  const roiC = tcoC > 0 ? ((revenue - tcoC * 12) / (tcoC * 12)) * 100 : 0;
+  const roiE = tcoE > 0 ? ((revenue - tcoE * 12) / (tcoE * 12)) * 100 : 0;
+
+  // Сохраняем данные для графиков
+  chartData.tco = { classic: tcoC, emiia: tcoE };
+  chartData.time = { classic: dCl, emiia: dEm };
+  chartData.roi = { classic: roiC, emiia: roiE };
+  chartData.savings = { 
+    tco: saveTCO, 
+    time: saveT2M,
+    capexPercent: capexSavingsPercent,
+    opexPercent: opexSavingsPercent 
+  };
+  chartData.capexOpex = {
+    capexClassic: capexClassic,
+    capexEmiia: capexEmiia,
+    opexClassic: opexClassic,
+    opexEmiia: opexEmiia
+  };
+
+  // Обновление основного блока
+  $('tcoCl').textContent = formatNumber(Math.round(tcoC)) + ' $';
+  $('tcoEm').textContent = formatNumber(Math.round(tcoE)) + ' $';
+  $('tcoSave').textContent = Math.round(saveTCO) + ' %';
+  $('t2mCl').textContent = formatNumber(dCl) + ' дн';
+  $('t2mEm').textContent = formatNumber(dEm) + ' дн';
+  $('t2mSave').textContent = Math.round(saveT2M) + ' %';
+  $('roiCl').textContent = Math.round(roiC) + ' %';
+  $('roiEm').textContent = Math.round(roiE) + ' %';
+
+  // Обновление блока экономии по CAPEX/OPEX
+  $('capexSavings').textContent = formatNumber(Math.round(capexSavings)) + ' $';
+  $('opexSavings').textContent = formatNumber(Math.round(opexSavings)) + ' $';
+  $('capexSavingsPercent').textContent = Math.round(capexSavingsPercent) + ' %';
+  $('opexSavingsPercent').textContent = Math.round(opexSavingsPercent) + ' %';
+
+  // Обновление графика
+  updateChart();
+}
+
+// Функция экспорта в CSV
+function exportToCSV() {
+  const dataTb = +$('dataTb').value;
+  const infM = +$('infM').value;
+  const deplN = +$('deplN').value;
+  const opsCost = +$('opsCost').value;
+  const daysClassic = +$('daysClassic').value;
+  
+  const csvData = [
+    ['Параметр', 'Значение', 'Формула для Google Sheets'],
+    ['Объём данных (ТБ)', dataTb, `=${dataTb}`],
+    ['Инференсы (млн)', infM, `=${infM}`],
+    ['Количество развёртываний', deplN, `=${deplN}`],
+    ['Команда Ops ($/мес)', opsCost, `=${opsCost}`],
+    ['Время до запуска (дней)', daysClassic, `=${daysClassic}`],
+    [''],
+    ['Метрика', 'Classic', 'EMIIA', 'Экономия'],
+    ['TCO ($)', `=${deplN}*0.67+${infM}*1000*0.27+${dataTb}*0.05+${opsCost}`, `=${deplN}*0.11+${infM}*1000*0.05+${dataTb}*0.03+${opsCost}*0.33`, '=1-C3/B3'],
+    ['CAPEX ($)', `=${deplN}*0.67+${dataTb}*0.05`, `=${deplN}*0.11+${dataTb}*0.03`, '=1-C4/B4'],
+    ['OPEX ($)', `=${infM}*1000*0.27+${opsCost}`, `=${infM}*1000*0.05+${opsCost}*0.33`, '=1-C5/B5'],
+    ['Время запуска (дней)', `=${daysClassic}`, '=8', '=1-C6/B6'],
+    ['ROI 12 мес (%)', `=(500000-B3*12)/(B3*12)`, `=(500000-C3*12)/(C3*12)`, '=C7-B7'],
+    [''],
+    ['Примечания:'],
+    ['- Формулы автоматически адаптируются в формат электронных таблиц'],
+    ['- Изменяйте значения в колонке "Значение" для пересчёта'],
+    ['- CAPEX включает затраты на хостинг и хранение данных'],
+    ['- OPEX включает затраты на инференсы и команду Ops'],
+    ['- EMIIA снижает OPEX на 67% за счет автоматизации']
+  ];
+  
+  const csvContent = csvData.map(row => 
+    row.map(cell => `"${cell}"`).join(',')
+  ).join('\n');
+  
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement('a');
+  const url = URL.createObjectURL(blob);
+  link.setAttribute('href', url);
+  link.setAttribute('download', `emiiasip_calculator_${new Date().toISOString().split('T')[0]}.csv`);
+  link.style.visibility = 'hidden';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  
+  $('exportModal').style.display = 'flex';
+}
+
+// Функция переключения между типами графиков
+function switchChartType(type) {
+  currentChartType = type;
+  document.querySelectorAll('.chart-tab').forEach(tab => {
+    tab.classList.remove('active');
+  });
+  document.querySelector(`[data-chart="${type}"]`).classList.add('active');
+  updateChart();
+}
+
+// Связывание полей ввода и ползунков
+function bindInputs() {
+  const inputs = [
+    {input: 'dataTb', slider: 'dataTbSlider'},
+    {input: 'infM', slider: 'infMSlider'},
+    {input: 'deplN', slider: 'deplNSlider'},
+    {input: 'opsCost', slider: 'opsCostSlider'},
+    {input: 'daysClassic', slider: 'daysClassicSlider'}
+  ];
+  
+  inputs.forEach(item => {
+    $(item.input).addEventListener('input', function() {
+      $(item.slider).value = this.value;
+      updateSliders();
+      calc();
+    });
+    
+    $(item.slider).addEventListener('input', function() {
+      $(item.input).value = this.value;
+      updateSliders();
+      calc();
+    });
+  });
+}
+
+// Инициализация при загрузке страницы
+document.addEventListener('DOMContentLoaded', function() {
+  bindInputs();
+  updateSliders();
+  calc();
+  
+  $('exportBtn').addEventListener('click', exportToCSV);
+  $('closeModal').addEventListener('click', function() {
+    $('exportModal').style.display = 'none';
+  });
+  
+  document.querySelectorAll('.chart-tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+      switchChartType(this.dataset.chart);
+    });
+  });
+  
+  $('exportModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+      this.style.display = 'none';
+    }
+  });
+});
+</script>
+</body>
+</html>
