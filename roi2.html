@@ -662,18 +662,12 @@ header {
   }
 }
 
-/* Стили для графика */
+/* Стили для кнопок графика */
 .chart-tabs {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-bottom: 8px;
-}
-
-.chart-tabs-bottom {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 8px;
+  margin-bottom: 8px;
 }
 
 .chart-tab {
@@ -681,7 +675,7 @@ header {
   background: var(--gray-100);
   border: 1.5px solid var(--gray-200);
   border-radius: var(--border-radius-xs);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   transition: var(--transition);
@@ -719,16 +713,17 @@ canvas {
   display: block;
 }
 
+@media (min-width: 768px) {
+  .chart-tabs {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (max-width: 767px) {
   .chart-tabs {
     grid-template-columns: repeat(2, 1fr);
     gap: 6px;
     margin-bottom: 6px;
-  }
-  
-  .chart-tabs-bottom {
-    grid-template-columns: 1fr;
-    gap: 6px;
   }
   
   .chart-tab {
@@ -927,15 +922,11 @@ body {
       
       <div class="divider"></div>
       
-      <!-- Первый ряд кнопок -->
+      <!-- Кнопки графика в ДВА РЯДА -->
       <div class="chart-tabs">
         <button class="chart-tab active" data-chart="tco">TCO</button>
         <button class="chart-tab" data-chart="time">Время</button>
         <button class="chart-tab" data-chart="roi">ROI</button>
-      </div>
-      
-      <!-- Второй ряд кнопок -->
-      <div class="chart-tabs-bottom">
         <button class="chart-tab" data-chart="savings">Экономия</button>
         <button class="chart-tab" data-chart="capexOpex">CAPEX/OPEX</button>
       </div>
@@ -1384,7 +1375,7 @@ function updateSavingsChart() {
   });
 }
 
-// Функция создания/обновления графика CAPEX/OPEX
+// Функция создания/обновления графика CAPEX/OPEX - ИСПРАВЛЕННАЯ
 function updateCapexOpexChart() {
   const ctx = $('metricsChart').getContext('2d');
   
@@ -1392,7 +1383,7 @@ function updateCapexOpexChart() {
     chart.destroy();
   }
   
-  // Создаем группированный бар-чарт
+  // Данные для группированного бар-чарта
   chart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -1401,18 +1392,22 @@ function updateCapexOpexChart() {
         {
           label: 'CAPEX ($)',
           data: [chartData.capexOpex.capexClassic, chartData.capexOpex.capexEmiia],
-          backgroundColor: 'rgba(139, 92, 246, 0.9)',  // ЯРКИЙ фиолетовый
+          backgroundColor: 'rgba(139, 92, 246, 1)',  // ЯРКИЙ фиолетовый - CAPEX
           borderColor: 'rgb(139, 92, 246)',
           borderWidth: 2,
           borderRadius: 8,
+          barPercentage: 0.5,
+          categoryPercentage: 0.5,
         },
         {
           label: 'OPEX ($)',
           data: [chartData.capexOpex.opexClassic, chartData.capexOpex.opexEmiia],
-          backgroundColor: 'rgba(245, 158, 11, 0.9)',  // ЯРКИЙ оранжевый
+          backgroundColor: 'rgba(245, 158, 11, 1)',  // ЯРКИЙ оранжевый - OPEX
           borderColor: 'rgb(245, 158, 11)',
           borderWidth: 2,
           borderRadius: 8,
+          barPercentage: 0.5,
+          categoryPercentage: 0.5,
         }
       ]
     },
