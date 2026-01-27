@@ -1,0 +1,1530 @@
+
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гексагональная сетка</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"
+            integrity="sha512-zhHQR0/H5SEBL3Wn6yYSaTTZej12z0hVZKOv3TwCUXT1z5qeqGcXJLLrbERYRScEDDpYIJhPC1fk31gqR783iQ=="
+            crossorigin="anonymous"
+            defer></script>
+    <link rel="stylesheet" href="http://i92217tr.beget.tech/jquery-ui.min.css">
+    <script>
+        function main() {
+            /* Точки должны быть против частовой стрелки со стороны наблюдателя.
+             * Ось Z направлена от экрана к зрителю. */
+            "use strict"
+            const timerInterval = 50;
+
+            class Vertex {
+                constructor() {
+                    this.pos = vec3.create();
+                    this.normal = vec3.create();
+                    this.color = vec3.create();
+                }
+
+                static fromCoords(x, y, z) {
+                    const v = new Vertex();
+                    vec3.set(v.pos, x, y, z);
+                    return v;
+                }
+
+                static fromVec3Color(from, color) {
+                    const v = new Vertex();
+                    v.pos = vec3.clone(from);
+                    v.color = color;
+                    return v;
+                }
+
+                pos;
+                normal;
+                color;
+            }
+
+            class Mesh {
+                constructor() {
+                    this.vertices = [];
+                    this.indices = [];
+                }
+
+                addVertex(v, color) {
+                    this.vertices.push(Vertex.fromVec3Color(v, color));
+                }
+
+                /** Рассчитывает нормали для треугольников. */
+                /* Вершины треугольников идут подрят тройками значений.
+                 * Нормаль рассчитывается как векторное произведение.  */
+                autoNormals() {
+                    let d1 = vec3.create();
+                    let d2 = vec3.create();
+                    let c = vec3.create();
+                    for (let i = 0; i + 2 < this.vertices.length; i += 3) {
+                        vec3.sub(d1, this.vertices[i].pos, this.vertices[i + 1].pos);
+                        vec3.sub(d2, this.vertices[i].pos, this.vertices[i + 2].pos);
+                        vec3.cross(c, d1, d2);
+                        vec3.normalize(c, c);
+                        const res = vec3.clone(c);
+                        this.vertices[i].normal = res;
+                        this.vertices[i + 1].normal = res;
+                        this.vertices[i + 2].normal = res;
+                    }
+                }
+
+                setColor(r, g, b, specular) {
+                    const vcolor = vec4.fromValues(r, g, b, specular);
+                    for (let i = 0; i < this.vertices.length; i++)
+                        this.vertices[i].color = vcolor;
+                }
+
+                scale(a) {
+                    for (let i = 0; i < this.vertices.length; i++)
+                        vec3.scale(this.vertices[i].pos, this.vertices[i].pos, a);
+                }
+
+                /** @type {Vertex[]} */
+                vertices;
+                /** @type {integer[]} */
+                indices;
+            }
+
+            class FBOdepth {
+                constructor(gl) {
+                    this.width = 2048;
+                    this.height = 2048;
+                    this.texture = gl.createTexture();
+                    gl.bindTexture(gl.TEXTURE_2D, this.texture);
+                    const level = 0;
+                    const border = 0;
+                    const data = null;
+                    const internalFormat = gl.DEPTH_COMPONENT32F;
+                    const format = gl.DEPTH_COMPONENT;
+                    const type = gl.FLOAT;
+                    gl.texImage2D(gl.TEXTURE_2D, level, internalFormat,
+                        this.width, this.height, border,
+                        format, type, data);
+
+                    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+                    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+                    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+                    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+                    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_COMPARE_MODE, gl.COMPARE_REF_TO_TEXTURE);
+                    this.fbo = gl.createFramebuffer();
+                    gl.bindFramebuffer(gl.FRAMEBUFFER, this.fbo);
+                    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.TEXTURE_2D, this.texture, level);
+                }
+
+                texture;
+                fbo;
+                width;
+                height;
+            }
+
+            class ProgramGl {
+                constructor(gl) {
+                    this.gl = gl;
+                }
+
+                loadShader(type, source) {
+                    const shader = this.gl.createShader(type);
+                    this.gl.shaderSource(shader, source);
+                    this.gl.compileShader(shader);
+                    if (!this.gl.getShaderParameter(shader, this.gl.COMPILE_STATUS)) {
+                        console.error(`An error occurred compiling the shaders: ${this.gl.getShaderInfoLog(shader)}`);
+                        this.gl.deleteShader(shader);
+                        return null;
+                    }
+                    return shader;
+                }
+
+                initShaderProgram(vsSource, fsSource) {
+                    const vertexShader = this.loadShader(this.gl.VERTEX_SHADER, vsSource);
+                    const fragmentShader = this.loadShader(this.gl.FRAGMENT_SHADER, fsSource);
+                    const shaderProgram = this.gl.createProgram();
+                    this.gl.attachShader(shaderProgram, vertexShader);
+                    this.gl.attachShader(shaderProgram, fragmentShader);
+                    this.gl.linkProgram(shaderProgram);
+                    if (!this.gl.getProgramParameter(shaderProgram, this.gl.LINK_STATUS)) {
+                        console.error(`Unable to initialize the shader program: ${this.gl.getProgramInfoLog(shaderProgram)}`);
+                        return null;
+                    }
+                    return shaderProgram;
+                }
+            }
+
+            class ProgramDepth extends ProgramGl {
+                constructor(gl) {
+                    super(gl);
+                    const vsSource = `#version 300 es
+				precision highp float;
+				layout (location = ${Frame.layPositions}) in vec4 pos;
+				uniform mat4 lightMatrix;
+				uniform mat4 modelMatrix;
+
+				void main(void)
+				{
+					gl_Position = lightMatrix * modelMatrix * pos;
+				}`;
+                    const fsSource = `#version 300 es
+				precision highp float;
+				out vec4 fragColor;
+				void main() {
+					fragColor = vec4(1.0, 1.0, 1.0, 1.0);
+				}`;
+
+                    this.program = this.initShaderProgram(vsSource, fsSource);
+                    this.lightMatrix = gl.getUniformLocation(this.program, "lightMatrix");
+                    this.modelMatrix = gl.getUniformLocation(this.program, "modelMatrix");
+                }
+
+                preexec(frame) {
+                    this.gl.uniformMatrix4fv(this.lightMatrix, false, frame.lightMatrix);
+                    this.gl.uniformMatrix4fv(this.modelMatrix, false, frame.modelMatrix);
+                }
+            }
+
+            class ProgramColors extends ProgramGl {
+                constructor(gl) {
+                    super(gl);
+                    const vsSource = `#version 300 es
+				precision highp float;
+				layout (location = ${Frame.layPositions}) in vec4 pos;
+				layout (location = ${Frame.layNormals}) in vec4 normal;
+				layout (location = ${Frame.layColors}) in vec4 vcolor;
+				uniform mat4 pMatrix;
+				uniform mat4 lightMatrix;
+				uniform mat4 normalMatrix;
+				uniform mat4 modelMatrix;
+				uniform vec3 vLight;
+				out vec4 shadowCoord;
+				out vec4 color;
+				out float light;
+				out float specular;
+				void main(void) {
+					vec3 v_Normal = vec3(modelMatrix * normal);
+					gl_Position = pMatrix * modelMatrix * pos;
+					shadowCoord = lightMatrix * modelMatrix * pos;
+					vec4 transformedNormal = normalMatrix * modelMatrix * normal;
+					light = max(dot(transformedNormal.xyz, vLight), 0.0);
+					color = vcolor;
+					vec3 vertex_normal = normalize(transformedNormal.xyz);
+					vec3 reflection = 2.0 * light * v_Normal - vLight;
+					vec3 to_camera = vec3(0.0, 0.0, 1.0);
+					float cos_angle = dot(normalize(reflection), normalize(to_camera));
+					cos_angle = clamp(cos_angle, 0.0, 1.0);
+					specular = 5.0 * pow(cos_angle, 32.0);
+				}`;
+                    const fsSource = `#version 300 es
+				precision highp float;
+				in vec4 shadowCoord;
+				in vec4 color;
+				in float light;
+				in float specular;
+				uniform highp sampler2DShadow shadowMap;
+				uniform vec3 vLight;
+				out vec4 fragColor;
+				const float ambient = 0.2;
+				void main(void) {
+					vec4 tmp = shadowCoord;
+					vec3 shadcoords = tmp.xyz / tmp.w * 0.5 + 0.5;
+					shadcoords.z -= 0.005;
+					float hit;
+					if (shadowCoord.x >= -1.0 && shadowCoord.x <= 1.0 && shadowCoord.y >= -1.0 && shadowCoord.y <= 1.0)
+						hit = texture(shadowMap, shadcoords);
+					else
+						hit = 1.0;
+					hit += hit * specular * color.w;
+					hit = hit * light * (1.0 - ambient) + ambient;
+					fragColor = vec4(color.xyz * hit, 1.0);
+				}`;
+
+                    this.program = this.initShaderProgram(vsSource, fsSource);
+                    this.pMatrix = gl.getUniformLocation(this.program, "pMatrix");
+                    this.normalMatrix = gl.getUniformLocation(this.program, "normalMatrix");
+                    this.vLight = gl.getUniformLocation(this.program, "vLight");
+                    this.shadowMap = gl.getUniformLocation(this.program, "shadowMap");
+                    this.lightMatrix = gl.getUniformLocation(this.program, "lightMatrix");
+                    this.modelMatrix = gl.getUniformLocation(this.program, "modelMatrix");
+                    gl.useProgram(this.program);
+                }
+
+                preexec(frame) {
+                    this.gl.uniformMatrix4fv(this.pMatrix, false, frame.pMatrix);
+                    this.gl.uniform3fv(this.vLight, frame.vLight);
+                    this.gl.uniformMatrix4fv(this.normalMatrix, true, frame.normalMatrix);
+                    this.gl.uniformMatrix4fv(this.lightMatrix, false, frame.lightMatrix);
+                    this.gl.uniformMatrix4fv(this.modelMatrix, false, frame.modelMatrix);
+                    this.gl.activeTexture(this.gl.TEXTURE0);
+                    this.gl.bindTexture(this.gl.TEXTURE_2D, frame.fbodepth.texture);
+                    this.gl.uniform1i(this.shadowMap, 0); // 0 because gl.TEXTURE_0_
+                }
+            }
+
+            class ProgramBlack extends ProgramGl {
+                constructor(gl) {
+                    super(gl);
+                    const vsSource = `#version 300 es
+				precision highp float;
+				layout (location = ${Frame.layPositions}) in vec4 pos;
+				uniform mat4 pMatrix;
+				uniform mat4 modelMatrix;
+				void main(void) {
+					gl_Position = pMatrix * modelMatrix * pos;
+				}`;
+                    const fsSource = `#version 300 es
+				precision highp float;
+				out vec4 fragColor;
+				void main(void) {
+					fragColor = vec4(0.0, 0.0, 0.0, 1.0);
+				}`;
+
+                    this.program = this.initShaderProgram(vsSource, fsSource);
+                    this.pMatrix = gl.getUniformLocation(this.program, "pMatrix");
+                    this.modelMatrix = gl.getUniformLocation(this.program, "modelMatrix");
+                    gl.useProgram(this.program);
+                }
+
+                preexec(frame) {
+                    this.gl.uniformMatrix4fv(this.pMatrix, false, frame.pMatrix);
+                    this.gl.uniformMatrix4fv(this.modelMatrix, false, frame.modelMatrix);
+                }
+            }
+
+            class Frame {
+                constructor(id, cb_animate_id, cb_shapes_id, divider_id, new_id, height_id) {
+                    const that = this;
+                    const canvas = document.getElementById(id);
+                    this.gl = canvas.getContext("webgl2");
+                    if (this.gl === null) {
+                        const p = document.createElement("p")
+                        p.innerText = "Unable to initialize WebGL. Your browser or machine may not support it.";
+                        p.style.color = "red";
+                        canvas.parentNode.insertBefore(p, canvas);
+                        return;
+                    }
+                    this.gl.clearColor(0.9, 0.9, 1.0, 1.0);
+                    this.gl.clearDepth(1.0);
+                    this.gl.clear(this.gl.COLOR_BUFFER_BIT);
+                    this.gl.enable(this.gl.DEPTH_TEST);
+                    this.gl.depthFunc(this.gl.LEQUAL);
+                    this.gl.enable(this.gl.CULL_FACE);
+
+                    this.program_d = new ProgramDepth(this.gl);
+                    this.program_c = new ProgramColors(this.gl);
+                    this.program_b = new ProgramBlack(this.gl);
+                    this.pMatrix = mat4.create();
+                    this.normalMatrix = mat4.create();
+
+                    const light_hangle = Math.PI / 3;
+                    const light_vangle = Math.PI / 6;
+                    const vec3null = vec3.fromValues(0.0, 0.0, 0.0);
+                    this.vLight = vec3.fromValues(0.0, 0.0, 1.0);
+                    vec3.rotateX(this.vLight, this.vLight, vec3null, -light_vangle);
+                    vec3.rotateY(this.vLight, this.vLight, vec3null, -light_hangle);
+                    vec3.normalize(this.vLight, this.vLight);
+
+                    this.lightMatrix = mat4.create();
+                    // zmin = -2, т.к. иногда высокие горы бывают слишком близко к камере
+                    mat4.ortho(this.lightMatrix, -1, 1, -1, 1, -2, 1);
+                    mat4.rotate(this.lightMatrix,
+                        this.lightMatrix,
+                        light_vangle,
+                        [1.0, 0.0, 0.0]
+                    );
+                    mat4.rotate(this.lightMatrix,
+                        this.lightMatrix,
+                        light_hangle,
+                        [0.0, 1.0, 0.0]
+                    );
+
+                    this.fbodepth = new FBOdepth(this.gl);
+                    this.seed = new Seed();
+                    this.scale = 1;
+                    this.hangle = 0;
+                    this.vangle = 0;
+                    this.modelMatrix = mat4.create();
+                    this.mouse = {}
+
+                    const cb_shapes = document.getElementById(cb_shapes_id);
+                    const cb_frame = document.getElementById(cb_animate_id);
+                    this.divider = document.getElementById(divider_id);
+                    this.height = document.getElementById(height_id);
+                    cb_shapes.addEventListener("change", function () {
+                        that.shapes = cb_shapes.checked;
+                        that.draw();
+                    });
+                    this.shapes = cb_shapes.checked;
+
+                    cb_frame.addEventListener("change", function (e) { that.animate(e.target.checked); });
+                    canvas.addEventListener('mousedown', (event) => { that.onMouseDown(event); });
+                    canvas.addEventListener('mousemove', (event) => { that.onMouseMove(event); });
+                    canvas.addEventListener('mouseup', (event) => { that.onMouseUp(event); });
+                    canvas.addEventListener('mouseout', (event) => { that.onMouseOut(event); });
+                    canvas.addEventListener('wheel', (event) => { that.onMouseWheel(event); event.preventDefault(); });
+                    canvas.frame = this;
+                    document.getElementById(new_id)?.addEventListener("click", function () {
+                        that.seed.random();
+                        that.load();
+                        that.draw();
+                    });
+
+                    this.divider.addEventListener("change", function () {
+                        that.load();
+                        that.draw();
+                    });
+                    this.height.addEventListener("change", function () {
+                        that.load();
+                        that.draw();
+                    });
+                    if (cb_frame.checked)
+                        this.animate(true);
+                    this.inited = true;
+                }
+
+                init() {
+                    this.seed.random();
+                    this.load();
+                    this.onresize();
+                }
+
+                load() { // create map, mesh, load data to GPU
+                    const N = parseInt(this.divider.value);
+                    const coresize = parseFloat(this.height?.value) ?? 1;
+                    this.map = new Map(N);
+                    const mesh = this.createMesh(coresize);
+                    const vertices = mesh.vertices;
+                    this.vertices_cnt = mesh.vertices.length;
+                    this.indices_cnt = mesh.indices.length;
+                    let tmpbuf = [];
+                    for (let i = 0; i < vertices.length; i++)
+                        tmpbuf.push(
+                            vertices[i].pos[0], vertices[i].pos[1], vertices[i].pos[2],
+                            vertices[i].normal[0], vertices[i].normal[1], vertices[i].normal[2],
+                            vertices[i].color[0], vertices[i].color[1], vertices[i].color[2], vertices[i].color[3]
+                        );
+                    const array = new Float32Array(tmpbuf);
+
+                    if (!this.g_vertices)
+                        this.g_vertices = this.gl.createBuffer();
+                    this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.g_vertices);
+                    this.gl.bufferData(this.gl.ARRAY_BUFFER, array, this.gl.STATIC_DRAW);
+                    setAttribute(this.gl, Frame.layPositions, 3);
+                    setAttribute(this.gl, Frame.layNormals, 3);
+                    setAttribute(this.gl, Frame.layColors, 4);
+
+                    if (!this.g_indices)
+                        this.g_indices = this.gl.createBuffer();
+                    this.gl.bindBuffer(this.gl.ELEMENT_ARRAY_BUFFER, this.g_indices);
+                    this.gl.bufferData(this.gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(mesh.indices), this.gl.STATIC_DRAW);
+
+                    function setAttribute(gl, ptr, bytes) {
+                        const bytes_per_float = Float32Array.prototype.BYTES_PER_ELEMENT;
+                        gl.vertexAttribPointer(
+                            ptr,
+                            bytes, // pull out such values per iteration
+                            gl.FLOAT,
+                            false, // don't normalize
+                            bytes_per_float * 10, // stride
+                            bytes_per_float * 3 * ptr, // offset
+                        );
+                        gl.enableVertexAttribArray(ptr);
+                    }
+                }
+
+                draw() {
+                    mat4.identity(this.modelMatrix);
+                    mat4.rotate(this.modelMatrix,
+                        this.modelMatrix,
+                        this.vangle,
+                        [1.0, 0.0, 0.0]
+                    );
+                    mat4.rotate(this.modelMatrix,
+                        this.modelMatrix,
+                        this.hangle,
+                        [0.0, 1.0, 0.0]
+                    );
+
+                    this.gl.useProgram(this.program_d.program);
+                    this.gl.bindFramebuffer(this.gl.FRAMEBUFFER, this.fbodepth.fbo);
+                    this.gl.viewport(0, 0, this.fbodepth.width, this.fbodepth.height);
+                    this.gl.clear(this.gl.DEPTH_BUFFER_BIT);
+                    this.program_d.preexec(this);
+                    this.gl.drawArrays(this.gl.TRIANGLES, 0, this.vertices_cnt);
+
+                    this.gl.bindFramebuffer(this.gl.FRAMEBUFFER, null);
+                    this.gl.useProgram(this.program_c.program);
+                    this.gl.viewport(0, 0, this.gl.canvas.clientWidth, this.gl.canvas.clientHeight);
+                    this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
+                    this.program_c.preexec(this);
+                    this.gl.drawArrays(this.gl.TRIANGLES, 0, this.vertices_cnt);
+                    if (this.shapes) {
+                        this.gl.useProgram(this.program_b.program);
+                        this.program_b.preexec(this);
+                        this.gl.drawElements(this.gl.LINES, this.indices_cnt, this.gl.UNSIGNED_SHORT, 0);
+                    }
+                }
+
+                onresize() {
+                    this.gl.canvas.width = this.gl.canvas.clientWidth;
+                    this.gl.canvas.height = this.gl.canvas.clientHeight;
+                    const aspect = this.gl.canvas.clientWidth / this.gl.canvas.clientHeight;
+
+                    if (aspect >= 1)
+                        mat4.ortho(this.pMatrix, -aspect, aspect, -1, 1, -10, 10);
+                    else
+                        mat4.ortho(this.pMatrix, -1, 1, -1 / aspect, 1 / aspect, -10, 10);
+                    this.draw();
+                }
+
+                animate(run) {
+                    const that = this;
+                    if (run)
+                        this.timer = setInterval(draw, timerInterval);
+                    else {
+                        clearInterval(this.timer);
+                        this.timer = null;
+                    }
+
+                    function draw() {
+                        that.hangle += Math.PI / (5 * timerInterval);
+                        if (that.hangle > 2 * Math.PI)
+                            that.hangle -= 2 * Math.PI;
+                        that.draw();
+                    }
+                }
+
+                onMouseDown(event) {
+                    this.mouse.down = true;
+                    this.mouse.x = event.x;
+                    this.mouse.y = event.y;
+                    this.mouse.hangle = this.hangle;
+                    this.mouse.vangle = this.vangle;
+                }
+
+                onMouseUp(event) {
+                    this.mouse.down = false;
+                    this.processMouseMove(event.x, event.y);
+                }
+
+                onMouseOut() {
+                    this.mouse.down = false;
+                }
+
+                onMouseMove(event) {
+                    if (this.mouse.down)
+                        this.processMouseMove(event.x, event.y);
+                }
+
+                onMouseWheel(event) {
+                    if (event.deltaY > 0) {
+                        this.scale /= 1.1;
+                        this.load();
+                        this.draw();
+                    } else {
+                        this.scale *= 1.1;
+                        this.load();
+                        this.draw();
+                    }
+                }
+
+                processMouseMove(x, y) {
+                    this.hangle = this.mouse.hangle + 2 * (x - this.mouse.x) / this.gl.canvas.width;
+                    this.vangle = this.mouse.vangle + 2 * (y - this.mouse.y) / this.gl.canvas.height;
+                    this.draw();
+                }
+
+                static get layPositions() { return 0; }
+                static get layNormals() { return 1; }
+                static get layColors() { return 2; }
+
+                // массив в GPU
+                g_vertices;
+            }
+
+            class Frame1 extends Frame {
+                constructor() {
+                    super("glcanvas1", "cb_frame1", "cb_shapes1", "divider1", "new1", "height1");
+                    if (!this.inited) return;
+                    this.scale = 0.95;
+                    this.init();
+                }
+
+                createMesh(coresize) {
+                    const res = new Mesh();
+                    const N = this.map.N;
+                    this.map.fillHeights(this.seed, coresize);
+                    this.map.fillSpaceCoords();
+                    this.map.fillNeighbors();
+                    for (let t = 0; t < 5; t++)
+                        for (let s = 0; s < 2 * N; s++)
+                            for (let r = 0; r < N; r++) {
+                                const coord1 = this.map.byCoords(r, s, t).pos;
+                                const coord2 = this.map.byCoords(r + 1, s, t).pos;
+                                const coord3 = this.map.byCoords(r + 1, s + 1, t).pos;
+                                const coord4 = this.map.byCoords(r, s + 1, t).pos;
+                                res.addVertex(coord1);
+                                res.addVertex(coord2);
+                                res.addVertex(coord3);
+                                res.addVertex(coord1);
+                                res.addVertex(coord3);
+                                res.addVertex(coord4);
+                            }
+                    res.indices = [];
+                    for (let i = 0; i + 2 < res.vertices.length; i += 3)
+                        res.indices.push(i, i + 1, i + 1, i + 2, i + 2, i);
+                    res.scale(this.scale);
+                    res.autoNormals();
+                    res.setColor(0.7, 1, 0.7, 0.0);
+                    return res;
+                }
+            }
+
+            class Frame2 extends Frame {
+                constructor() {
+                    super("glcanvas2", "cb_frame2", "cb_shapes2", "divider2", "new2", "height2");
+                    if (!this.inited) return;
+                    const that = this;
+                    this.scale = 0.75;
+                    this.grassColor = vec4.fromValues(0.7, 1, 0.7, 0.0);
+                    this.waterColor = vec4.fromValues(0.2, 0.5, 1, 1.0);
+                    this.sandColor = vec4.fromValues(1, 1, 0.5, 0.0);
+                    this.snowColor = vec4.fromValues(1, 1, 1, 1.0);
+                    this.waterLevel = document.getElementById("water2");
+                    this.cbWater = document.getElementById("cb_water2");
+                    this.waterLevel.addEventListener("change", function () {
+                        that.load();
+                        that.draw();
+                    });
+                    this.cbWater.addEventListener("change", function () {
+                        that.load();
+                        that.draw();
+                    });
+                    this.init();
+                }
+
+                createMesh(coresize) {
+                    const that = this;
+                    const res = new Mesh();
+                    const N = this.map.N;
+                    const waterLevel = parseFloat(this.waterLevel.value) ?? 0;
+                    this.map.fillHeights(this.seed, coresize);
+                    this.map.fillIds();
+                    this.map.fillNeighbors();
+                    this.map.fillSpaceCoords();
+                    fillEdges();
+                    // для отладки можно раскомментировать:
+                    //this.map.fillIds();
+                    draw();
+                    res.scale(this.scale);
+                    res.autoNormals();
+                    return res;
+
+                    function draw() {
+                        for (let l = 0; l < 5; l++)
+                            for (let y = 0; y < 2 * N; y++)
+                                for (let x = 0; x < N; x++)
+                                    drawCell(that.map.map[l][y][x]);
+                        drawCell(that.map.nord);
+                        drawCell(that.map.south);
+                        function drawCell(cell) {
+                            // рисуем верх и черные линии границ
+                            let vl = res.vertices.length;
+                            res.indices.push(vl, vl + 2);
+                            for (let i = 1; i + 1 < cell.edges.length; i++) {
+                                res.addVertex(cell.edges[0].pos, cell.color);
+                                let vl = res.vertices.length;
+                                res.indices.push(vl, vl + 1);
+                                res.addVertex(cell.edges[i + 1].pos, cell.color);
+                                res.addVertex(cell.edges[i].pos, cell.color);
+                            }
+                            res.indices.push(res.vertices.length - 2, vl);
+
+                            for (let i = 0; i < cell.edges.length; i++) {
+                                let i1 = i + 1;
+                                if (i1 == cell.edges.length) i1 = 0;
+                                const v1 = cell.edges[i].pos;
+                                const v2 = cell.edges[i1].pos;
+                                const neib = cell.edges[i].neighbor;
+                                neib.bordered = true;
+                                let j = 0;
+                                while (j < neib.edges.length && neib.edges[j].neighbor != cell) j++;
+                                if (neib.edges[j].bordered)
+                                    continue;
+                                const v4 = neib.edges[j].pos;
+                                j++;
+                                if (j == neib.edges.length) j = 0;
+                                const v3 = neib.edges[j].pos;
+                                res.addVertex(v1, cell.color);
+                                res.addVertex(v2, cell.color);
+                                res.addVertex(v3, cell.color);
+                                res.addVertex(v2, cell.color);
+                                res.addVertex(v4, cell.color);
+                                res.addVertex(v3, cell.color);
+                            }
+                        }
+                    }
+
+                    function fillEdges() {
+                        for (let t = 0; t < 5; t++)
+                            for (let s = 0; s < 2 * N; s++)
+                                for (let r = 0; r < N; r++)
+                                    processCell(that.map.map[t][s][r]);
+                        processCell(that.map.nord);
+                        processCell(that.map.south);
+
+                        function processCell(cell) {
+                            if (!that.cbWater.checked)
+                                cell.color = that.grassColor;
+                            else if (cell.h <= waterLevel) {
+                                cell.h = waterLevel;
+                                cell.color = that.waterColor;
+                            } else if (cell.h < waterLevel + 0.03)
+                                cell.color = that.sandColor;
+                            else if (cell.h > waterLevel + 0.2)
+                                cell.color = that.snowColor;
+                            else
+                                cell.color = that.grassColor;
+
+                            // границы. [vec3, node]
+                            const edges = [];
+                            const v = cell.norm;
+                            let d;
+                            for (let i = 0; i < cell.neighbors.length; i++) {
+                                let i1 = i + 1;
+                                if (i1 == cell.neighbors.length) i1 = 0;
+                                const node1 = cell.neighbors[i];
+                                const node2 = cell.neighbors[i1];
+                                const v1 = node1.norm;
+                                const v2 = node2.norm;
+                                let p = vec3.clone(v);
+                                vec3.add(p, p, v1);
+                                vec3.add(p, p, v2);
+                                vec3.normalize(p, p);
+                                if (i == 0) {
+                                    vec3.scale(p, p, cell.h);
+                                    d = v[0] * p[0] + v[1] * p[1] + v[2] * p[2];
+                                } else {
+                                    let t = d / (v[0] * p[0] + v[1] * p[1] + v[2] * p[2]);
+                                    vec3.scale(p, p, t);
+                                }
+                                edges.push({ pos: p, neighbor: node2 });
+                            }
+
+                            cell.edges = edges;
+                        }
+                    }
+                }
+            }
+
+            class Frame3 extends Frame {
+                constructor() {
+                    super("glcanvas3", "cb_frame3", "cb_shapes3", "divider3", "new3", "height3");
+                    if (!this.inited) return;
+                    this.scale = 0.95;
+                    this.init();
+                }
+
+                createMesh(coresize) {
+                    const res = new Mesh();
+                    const N = this.map.N;
+                    let v0 = vec3.create();
+
+                    let maxh = 0;
+                    for (let l = 0; l < 6; l++)
+                        for (let j = 0; j < N; j++)
+                            for (let i = 0; i < N; i++) {
+                                let x = (i + 0) / N - 0.5;
+                                let y = (j + 0) / N - 0.5;
+                                let v = vec3.fromValues(x, y, 0.5);
+
+                                switch (l) {
+                                    case 1:
+                                        vec3.rotateY(v, v, v0, Math.PI / 2);
+                                        break;
+                                    case 2:
+                                        vec3.rotateY(v, v, v0, Math.PI);
+                                        break;
+                                    case 3:
+                                        vec3.rotateY(v, v, v0, -Math.PI / 2);
+                                        break;
+                                    case 4:
+                                        vec3.rotateX(v, v, v0, Math.PI / 2);
+                                        break;
+                                    case 5:
+                                        vec3.rotateX(v, v, v0, -Math.PI / 2);
+                                        break;
+                                }
+                                let h = this.seed.height(v);
+                                if (maxh < h) maxh = h;
+                            }
+                    if (maxh == 0) maxh = 1;
+
+                    for (let l = 0; l < 6; l++)
+                        for (let j = 0; j < N; j++)
+                            for (let i = 0; i < N; i++) {
+                                let x1 = (i + 0) / N - 0.5;
+                                let x2 = (i + 1) / N - 0.5;
+                                let y1 = (j + 0) / N - 0.5;
+                                let y2 = (j + 1) / N - 0.5;
+                                let v = [
+                                    vec3.fromValues(x1, y1, 0.5),
+                                    vec3.fromValues(x1, y2, 0.5),
+                                    vec3.fromValues(x2, y2, 0.5),
+                                    vec3.fromValues(x2, y1, 0.5),
+                                ];
+                                switch (l) {
+                                    case 1:
+                                        for (let k = 0; k < 4; k++)
+                                            vec3.rotateY(v[k], v[k], v0, Math.PI / 2);
+                                        break;
+                                    case 2:
+                                        for (let k = 0; k < 4; k++)
+                                            vec3.rotateY(v[k], v[k], v0, Math.PI);
+                                        break;
+                                    case 3:
+                                        for (let k = 0; k < 4; k++)
+                                            vec3.rotateY(v[k], v[k], v0, -Math.PI / 2);
+                                        break;
+                                    case 4:
+                                        for (let k = 0; k < 4; k++)
+                                            vec3.rotateX(v[k], v[k], v0, Math.PI / 2);
+                                        break;
+                                    case 5:
+                                        for (let k = 0; k < 4; k++)
+                                            vec3.rotateX(v[k], v[k], v0, -Math.PI / 2);
+                                        break;
+                                }
+                                for (let k = 0; k < 4; k++) {
+                                    vec3.normalize(v[k], v[k]);
+                                    let h = this.seed.height(v[k]);
+                                    h = coresize + (1 - coresize) * h / maxh;
+                                    vec3.scale(v[k], v[k], h);
+                                }
+
+                                let vl = res.vertices.length;
+                                res.indices.push(vl, vl + 1, vl + 1, vl + 2, vl + 2, vl + 5, vl + 5, vl);
+
+                                res.addVertex(v[0]);
+                                res.addVertex(v[3]);
+                                res.addVertex(v[2]);
+                                res.addVertex(v[0]);
+                                res.addVertex(v[2]);
+                                res.addVertex(v[1]);
+                            }
+                    res.scale(this.scale);
+                    res.autoNormals();
+                    res.setColor(0.7, 1, 0.7, 0.0);
+                    return res;
+                }
+            }
+
+            class Frame4 extends Frame {
+                constructor() {
+                    super("glcanvas4", "cb_frame4", "cb_shapes4", "divider4", "new4", "height4");
+                    if (!this.inited) return;
+                    this.scale = 0.95;
+                    this.init();
+                }
+
+                createMesh(coresize) {
+                    const res = new Mesh();
+                    const N = this.map.N;
+
+                    let maxh = 0;
+                    for (let j = 0; j <= 2 * N; j++)
+                        for (let i = 0; i < 4 * N; i++) {
+                            const lat = Math.PI / 2 * j / N - Math.PI / 2;
+                            const lon = Math.PI / 2 * i / N;
+                            let v = vec3.fromAngles(lat, lon);
+                            let h = this.seed.height(v);
+                            if (maxh < h) maxh = h;
+                        }
+                    if (maxh == 0) maxh = 1;
+
+                    for (let j = 0; j < 2 * N; j++)
+                        for (let i = 0; i < 4 * N; i++) {
+                            const lat1 = Math.PI / 2 * (j + 0) / N - Math.PI / 2;
+                            const lat2 = Math.PI / 2 * (j + 1) / N - Math.PI / 2;
+                            const lon1 = Math.PI / 2 * (i + 0) / N;
+                            const lon2 = Math.PI / 2 * (i + 1) / N;
+                            let v = [
+                                vec3.fromAngles(lat1, lon1),
+                                vec3.fromAngles(lat1, lon2),
+                                vec3.fromAngles(lat2, lon2),
+                                vec3.fromAngles(lat2, lon1)
+                            ];
+
+                            for (let k = 0; k < 4; k++) {
+                                let h = this.seed.height(v[k]);
+                                h = coresize + (1 - coresize) * h / maxh;
+                                vec3.scale(v[k], v[k], h);
+                            }
+
+                            let vl = res.vertices.length;
+                            res.indices.push(vl, vl + 1, vl + 1, vl + 2, vl + 2, vl + 5, vl + 5, vl);
+
+                            res.addVertex(v[0]);
+                            res.addVertex(v[1]);
+                            res.addVertex(v[2]);
+                            res.addVertex(v[0]);
+                            res.addVertex(v[2]);
+                            res.addVertex(v[3]);
+                        }
+                    res.scale(this.scale);
+                    res.autoNormals();
+                    res.setColor(0.7, 1, 0.7, 0.0);
+                    return res;
+                }
+            }
+
+            /** Карта
+             * Узлы, из которых формируется поверхность.
+             * Сожержит:
+             * - массив map[l][y][x], элементами которого являются Узлы;
+             * - две отдельных переменных nord и south, которые тоже являются Узлы;
+             * - число N, описывающее размер карты.
+             * 0 ≤ y < 2N, 0 ≤ x < N.
+             * Узел — информация о точке на карте.
+             * Узел может содержать:
+             * - высоту, т.е. расстояние от центра (число h);
+             * - геокоординаты (числа lon, lat);
+             * - список соседей (массив neighbors).
+             * Сожержимое Узлов наполняется в зависимости от условий (как именно будет отображаться поверхность). */
+            class Map {
+                constructor(N) {
+                    this.N = N;
+                    this.nord = {};
+                    this.south = {};
+                    const map = this.map = new Array(5);
+                    for (let l = 0; l < 5; l++) {
+                        const segment = map[l] = new Array(2 * N);
+                        for (let y = 0; y < 2 * N; y++) {
+                            const row = segment[y] = new Array(N);
+                            for (let x = 0; x < N; x++)
+                                row[x] = {};
+                        }
+                    }
+                }
+
+                /** Вычисляет 3D координаты путем продолжения точки с треугольника икосаэдра на сферу
+                 * @param {any} N на сколько частей разбиение
+                 * @param {any} r столбец, 0 ≤ r < N
+                 * @param {any} s строка, 0 ≤ s < 2N
+                 * @param {any} t лист, 0 ≤ t < 5
+                 * @returns
+                 */
+                static normal(N, r, s, t) {
+                    const φ = (1 + Math.sqrt(5)) / 2; // золотое сечение
+                    const α = Math.PI / 2 - 2 * Math.atan(1 / φ); // ~ 26,6°
+                    let β = 2 * Math.PI / 5; // 72°
+                    let i, j, v0, v1, v2,
+                        result = vec3.create(),
+                        center = vec3.create();
+                    if (s <= r) {
+                        v0 = vec3.fromAngles(-α, 0);
+                        v1 = vec3.fromValues(0, -1, 0);
+                        v2 = vec3.fromAngles(-α, β);
+                        i = s;
+                        j = r - s;
+                    } else if (s <= N) {
+                        v0 = vec3.fromAngles(-α, 0);
+                        v1 = vec3.fromAngles(α, β / 2);
+                        v2 = vec3.fromAngles(-α, β);
+                        i = r;
+                        j = s - r;
+                    } else if (s <= r + N) {
+                        v0 = vec3.fromAngles(α, β / 2);
+                        v1 = vec3.fromAngles(-α, β);
+                        v2 = vec3.fromAngles(α, 3 * β / 2);
+                        i = s - N;
+                        j = r - s + N;
+                    } else {
+                        v0 = vec3.fromAngles(α, β / 2);
+                        v1 = vec3.fromValues(0, 1, 0);
+                        v2 = vec3.fromAngles(α, 3 * β / 2);
+                        i = r;
+                        j = s - r - N;
+                    }
+                    i /= N;
+                    j /= N;
+                    for (let k = 0; k < 3; k++)
+                        result[k] = (1 - i - j) * v0[k] + j * v1[k] + i * v2[k];
+                    vec3.rotateY(result, result, center, t * β);
+                    vec3.normalize(result, result);
+                    return result;
+                }
+
+                /** Возвращает узел по его прямоугольным координатам.
+                 * Координаты могут на единицу отличаться от нормированных, что используется для поиска соседей узлов, т.е. -1 ≤ s ≤ 2N, -1 ≤ r ≤ N.
+                 * @param {int} r 0 ≤ r ≤ N
+                 * @param {int} s 0 ≤ s ≤ 2N
+                 * @param {int} t 0 ≤ t < 5
+                 */
+                byCoords(r, s, t) {
+                    const N = this.N;
+                    if (r == -1) {
+                        if (s < N) {
+                            t--;
+                            r += N;
+                            s += N;
+                        } else if (s == N && N == 1)
+                            return this.nord;
+                        else {
+                            t--;
+                            r = 2 * N - s - 1;
+                            s = 2 * N - 1;
+                        }
+                    } else if (r == N) {
+                        if (s == 0)
+                            return this.south;
+                        else if (s < N) {
+                            t++;
+                            r = N - s;
+                            s = 0;
+                        } else {
+                            t++;
+                            r -= N;
+                            s -= N;
+                        }
+                    } else if (s == -1) {
+                        if (r == 0 && N == 1)
+                            return this.south;
+                        else {
+                            t--;
+                            s = N - r - 1;
+                            r = N - 1;
+                        }
+                    } else if (s == 2 * N) {
+                        if (r == 0)
+                            return this.nord;
+                        else {
+                            t++;
+                            s = 2 * N - r;
+                            r = 0;
+                        }
+                    }
+                    if (t == -1)
+                        t = 4;
+                    else if (t == 5)
+                        t = 0;
+                    return this.map[t][s][r];
+                }
+
+                /** Заполняет высоты в узлах
+                 * @param {Seed} seed
+                 * @param {float} coresize 0 < coresize ≤ 1. Минимальная высота (максимальная = 1).
+                 */
+                fillHeights(seed, coresize) {
+                    const N = this.N;
+                    if (coresize == 1) {
+                        for (let l = 0; l < 5; l++)
+                            for (let y = 0; y < 2 * N; y++)
+                                for (let x = 0; x < N; x++)
+                                    this.map[l][y][x].h = 1;
+                        this.nord.h = 1;
+                        this.south.h = 1;
+                        return;
+                    }
+
+                    // Заполняем высоты, пока не нормированные
+                    for (let l = 0; l < 5; l++)
+                        for (let y = 0; y < 2 * N; y++)
+                            for (let x = 0; x < N; x++) {
+                                const v = Map.normal(N, x, y, l);
+                                this.map[l][y][x].h = seed.height(v);
+                            }
+                    this.nord.h = seed.height(vec3.fromValues(0, 1, 0));
+                    this.south.h = seed.height(vec3.fromValues(0, -1, 0));
+
+                    // Ищем максимальную и минимальную высоты
+                    let maxh = this.nord.h;
+                    let minh = this.nord.h;
+                    if (maxh < this.south.h)
+                        maxh = this.south.h;
+                    if (minh > this.south.h)
+                        minh = this.south.h;
+
+                    for (let l = 0; l < 5; l++)
+                        for (let y = 0; y < 2 * N; y++)
+                            for (let x = 0; x < N; x++) {
+                                if (maxh < this.map[l][y][x].h)
+                                    maxh = this.map[l][y][x].h;
+                                if (minh > this.map[l][y][x].h)
+                                    minh = this.map[l][y][x].h;
+                            }
+                    // Нормируем высоты, чтобы минимальная была coresize, а максимальная была 1.0.
+                    if (maxh > minh)
+                        for (let l = 0; l < 5; l++)
+                            for (let y = 0; y < 2 * N; y++)
+                                for (let x = 0; x < N; x++)
+                                    this.map[l][y][x].h = coresize + (this.map[l][y][x].h - minh) / (maxh - minh) * (1 - coresize);
+                    else
+                        for (let l = 0; l < 5; l++)
+                            for (let y = 0; y < 2 * N; y++)
+                                for (let x = 0; x < N; x++)
+                                    this.map[l][y][x].h = 1;
+                    this.nord.h = coresize + this.nord.h / maxh * (1 - coresize);
+                    this.south.h = coresize + this.south.h / maxh * (1 - coresize);
+                }
+
+                /** Заполняет узлы информацией о соседних узлах.
+                 * У каждого узла появляется массив neighbors, сождержащий 5 или 6 указателей на соседние с ним узлы. */
+                fillNeighbors() {
+                    const N = this.N;
+                    for (let l = 0; l < 5; l++)
+                        for (let y = 0; y < 2 * N; y++)
+                            for (let x = 0; x < N; x++) {
+                                const neighbors = [];
+                                neighbors.push(this.byCoords(x, y + 1, l));
+                                neighbors.push(this.byCoords(x + 1, y + 1, l));
+                                neighbors.push(this.byCoords(x + 1, y, l));
+                                neighbors.push(this.byCoords(x, y - 1, l));
+                                neighbors.push(this.byCoords(x - 1, y - 1, l));
+                                neighbors.push(this.byCoords(x - 1, y, l));
+                                this.map[l][y][x].neighbors = delDupes(neighbors);
+                            }
+                    this.nord.neighbors = [];
+                    for (let l = 4; l >= 0; l--)
+                        this.nord.neighbors.push(this.byCoords(0, 2 * N - 1, l));
+                    this.south.neighbors = [];
+                    for (let l = 0; l < 5; l++)
+                        this.south.neighbors.push(this.byCoords(N - 1, 0, l));
+
+                    /** Удаляет дубли из массива, сохраняя порядок элементов */
+                    function delDupes(arr) {
+                        const res = [];
+                        for (let i = 0; i < arr.length; i++)
+                            if (i == 0 || arr[i] != arr[i - 1])
+                                res.push(arr[i]);
+                        if (res[0] == res[res.length - 1])
+                            res.pop();
+                        return res;
+                    }
+                }
+
+                /** Добавляет каждому узлу строку id, идентификатор.
+                 * Используется для отладки. */
+                fillIds() {
+                    for (let t = 0; t < 5; t++)
+                        for (let s = 0; s < 2 * this.N; s++)
+                            for (let r = 0; r < this.N; r++)
+                                this.map[t][s][r].id = `r=${r},s=${s},t=${t}`;
+                    this.nord.id = 'nord';
+                    this.nord.r = 'nord';
+                    this.south.id = 'south';
+                }
+
+                fillSpaceCoords() {
+                    for (let t = 0; t < 5; t++)
+                        for (let s = 0; s < 2 * this.N; s++)
+                            for (let r = 0; r < this.N; r++) {
+                                const cell = this.byCoords(r, s, t);
+                                cell.norm = Map.normal(this.N, r, s, t);
+                                vec3.normalize(cell.norm, cell.norm);
+                                cell.pos = vec3.create();
+                                vec3.scale(cell.pos, cell.norm, cell.h);
+                            }
+                    this.nord.norm = vec3.fromValues(0, 1, 0);
+                    this.nord.pos = vec3.fromValues(0, this.nord.h, 0);
+                    this.south.norm = vec3.fromValues(0, -1, 0);
+                    this.south.pos = vec3.fromValues(0, -this.south.h, 0);
+                }
+            }
+
+            class Seed {
+                random() {
+                    var res = [];
+                    for (let i = 0; i < 10; i++)
+                        res.push(rnd());
+                    this.seed = res;
+
+                    /** Возвращает случайный ненулевой вектор в сфере единичного радиуса */
+                    function rnd() {
+                        while (true) {
+                            const x = Math.random() * 2 - 1;
+                            const y = Math.random() * 2 - 1;
+                            const z = Math.random() * 2 - 1;
+                            const res = vec3.fromValues(x, y, z);
+                            const l = vec3.length(res);
+                            if (0.2 < l && l <= 0.9)
+                                return res;
+                        }
+                    }
+                }
+
+                height(normal) {
+                    let h = 0;
+                    for (let i = 0; i < this.seed.length; i++) {
+                        const l = vec3.length(this.seed[i]);
+                        const v = vec3.clone(normal);
+                        vec3.scale(v, v, l);
+                        const d = vec3.sqrDist(this.seed[i], v);
+                        h += 1 / (l * d + 0.02); // + на всякий случай, чтобы не было 1/0.
+                    }
+                    return h;
+                }
+            }
+
+            $("p.error").remove();
+            $(".resizable").resizable({
+                stop: function () {
+                    this.querySelector("canvas")?.frame?.onresize();
+                }
+            });
+
+            /** Create vec3 from geocoords
+             * @param {number} φ latitude
+             * @param {number} θ longitude
+             */
+            vec3.fromAngles = (φ, θ) => vec3.fromValues(
+                Math.cos(φ) * Math.cos(θ),
+                Math.sin(φ),
+                -Math.cos(φ) * Math.sin(θ)
+            );
+
+            new Frame1();
+            new Frame2();
+            new Frame3();
+            new Frame4();
+        }
+    </script>
+    <style>
+        p.error {
+            color: red;
+        }
+
+        label {
+            display: block;
+        }
+    </style>
+</head>
+<body onload="main()">
+    <h1>Гексагональная сетка</h1>
+    <p>Далее размещены материалы к статье <a href="https://habr.com/ru/articles/857406/">«Гексагональная сетка для игр с круглой Землей»</a>.</p>
+
+    <p>Цилиндр на сфере:</p>
+    <label><input type="checkbox" id="cb_frame4" />Вращение</label>
+    <label><input type="checkbox" id="cb_shapes4" checked />Сетка</label>
+    <input id="new4" type="button" value="Случайная" />
+    <label>Делитель (1–32)<input type="number" id="divider4" min="1" max="32" value="1"></label>
+    <label>Минимальная высота (0.1–1)<input type="number" id="height4" step="0.1" min="0.1" max="1" value="1.0"></label>
+    <p class="error">Браузер не поддерживает Javascript. Работа программы невозможна.</p>
+    <canvas id="glcanvas4" class="resizable" width="640" height="480"></canvas>
+
+    <p>Куб на сфере:</p>
+    <label><input type="checkbox" id="cb_frame3" />Вращение</label>
+    <label><input type="checkbox" id="cb_shapes3" checked />Сетка</label>
+    <input id="new3" type="button" value="Случайная" />
+    <label>Делитель (1–32)<input type="number" id="divider3" min="1" max="32" value="1"></label>
+    <label>Минимальная высота (0.1–1)<input type="number" id="height3" step="0.1" min="0.1" max="1" value="1.0"></label>
+    <p class="error">Браузер не поддерживает Javascript. Работа программы невозможна.</p>
+    <canvas id="glcanvas3" class="resizable" width="640" height="480"></canvas>
+
+    <p>Икосаэдр:</p>
+    <label><input type="checkbox" id="cb_frame1" />Вращение</label>
+    <label><input type="checkbox" id="cb_shapes1" checked />Сетка</label>
+    <input id="new1" type="button" value="Случайная" />
+    <label>Делитель (1–32)<input type="number" id="divider1" min="1" max="32" value="1"></label>
+    <label>Минимальная высота (0.1–1)<input type="number" id="height1" step="0.1" min="0.1" max="1" value="1.0"></label>
+    <p class="error">Браузер не поддерживает Javascript. Работа программы невозможна.</p>
+    <canvas id="glcanvas1" class="resizable" width="640" height="480"></canvas>
+
+    <p>Многогранник Гольдберга:</p>
+    <label><input type="checkbox" id="cb_frame2" />Вращение</label>
+    <label><input type="checkbox" id="cb_shapes2" checked />Сетка</label>
+    <input id="new2" type="button" value="Случайная" />
+    <label>Делитель (1–32)<input type="number" id="divider2" min="1" max="32" value="1"></label>
+    <label>Минимальная высота (0.1–1)<input type="number" id="height2" step="0.1" min="0.05" max="1" value="1.0"></label>
+    <label><input type="checkbox" id="cb_water2" /></label>
+    <label>Вода (0–1)<input type="number" id="water2" step="0.05" min="0" max="1" value="1.0"></label>
+    <p class="error">Браузер не поддерживает Javascript. Работа программы невозможна.</p>
+    <canvas id="glcanvas2" class="resizable" width="640" height="480"></canvas>
+
+    <p>Картинки к статье.</p>
+    <div>
+        <svg width="300" height="200" viewBox="0 0 100 100">
+            <g fill="none" stroke="black" id="mesh1">
+                <polyline points="0,00 10,00 20,10 30,10 40,00 50,00 60,10 70,10 80,00 90,00 100,10" />
+                <polyline points="0,20 10,20 20,10 30,10 40,20 50,20 60,10 70,10 80,20 90,20 100,10" />
+            </g>
+            <use xlink:href="#mesh1" x="0" y="20" />
+            <use xlink:href="#mesh1" x="0" y="40" />
+            <use xlink:href="#mesh1" x="0" y="60" />
+            <use xlink:href="#mesh1" x="0" y="80" />
+        </svg>
+    </div>
+    <div>
+        <svg width="400" height="300" viewBox="-1 -1 115 70">
+            <g transform="matrix(1 2 1 -2 0 40)" id="spart1">
+                <polyline fill="none" stroke="black" stroke-width="0.5" points="0,0 10,0 10,20 0,20 0,0" />
+                <polyline fill="none" stroke="#888" stroke-width="0.1" points="0,0 10,10 0,10 10,20" />
+            </g>
+            <use xlink:href="#spart1" x="20" y="0" />
+            <use xlink:href="#spart1" x="40" y="0" />
+            <use xlink:href="#spart1" x="60" y="0" />
+            <use xlink:href="#spart1" x="80" y="0" />
+        </svg>
+    </div>
+    <div>
+        <svg width="400" height="300" viewBox="-1 -1 115 70">
+            <g transform="matrix(1 2 1 -2 0 40)" id="spart2">
+                <polyline fill="none" stroke="black" stroke-width="0.5" points="0,0 10,0 10,20 0,20 0,0" />
+                <polyline fill="none" stroke="#888" stroke-width="0.1" points="0,0 10,10 0,10 10,20" />
+                <polyline fill="none" stroke="#888" stroke-width="0.1" points="5,0 10,5 0,5 10,15 0,15 5,20 5,0" />
+            </g>
+            <use xlink:href="#spart2" x="20" y="0" />
+            <use xlink:href="#spart2" x="40" y="0" />
+            <use xlink:href="#spart2" x="60" y="0" />
+            <use xlink:href="#spart2" x="80" y="0" />
+        </svg>
+    </div>
+    <div>
+        <svg width="400" height="300" viewBox="-1 -1 130 70">
+            <style type="text/css">
+                text {
+                    font-size: 5px;
+                }
+            </style>
+            <use xlink:href="#spart2" x="10" y="10" />
+            <use xlink:href="#spart2" x="30" y="10" />
+            <use xlink:href="#spart2" x="50" y="10" />
+            <use xlink:href="#spart2" x="70" y="10" />
+            <use xlink:href="#spart2" x="90" y="10" />
+            <g fill="none" stroke-width="0.5">
+                <polyline stroke="#00F" points="10,40 125,40 122,37 125,40, 122,43" />
+                <polyline stroke="#00F" points="10,75 10,0 7,3 10,0 13,3" />
+                <polyline stroke="#888" points="10,10 125,10" />
+                <polyline stroke="#888" points="10,30 125,30" />
+                <polyline stroke="#888" points="10,50 125,50" />
+                <polyline stroke="#888" points="10,70 125,70" />
+                <polyline stroke="#F80" points="50,0 50,10 60,30 60,80" />
+                <polyline stroke="#F80" points="70,0 70,10 60,30" />
+                <polyline stroke="#F80" points="90,0 90,50 100,70 100,80" />
+                <polyline stroke="#F80" points="110,0 110,50 100,70 100,80" />
+            </g>
+            <text x="2" y="10">90°</text>
+            <text x="2" y="30">27°</text>
+            <text x="4" y="40">0°</text>
+            <text x="0" y="50">-27°</text>
+            <text x="0" y="70">-90°</text>
+            <text x="60" y="75" style="fill: #840">180°</text>
+            <text x="90" y="75" style="fill: #840">288°</text>
+            <text x="101" y="75" style="fill: #840">360°</text>
+        </svg>
+    </div>
+    <div>
+        <svg width="500" height="250" viewBox="0 -7 100 60">
+            <style type="text/css">
+                text {
+                    font-size: 5px;
+                }
+
+                circle.dot {
+                    fill: white;
+                    stroke: black;
+                    stroke-width: 0.5px;
+                }
+            </style>
+            <g id="spart3">
+                <polyline fill="none" stroke="#888" stroke-width="0.5" points="
+                      5,40 20,25 0,25 20,5 0,5 5,0 5,40
+                      10,40 20,30 0,30 20,10 0,10 10,0 10,40
+                      15,40 20,35 0,35 20,15 0,15 15,0 15,40
+                      0,40 20,20 0,20 20,0" />
+                <polyline fill="none" stroke="black" points="0,0 20,0 20,40 0,40 0,0" />
+                <circle cx="0" cy="0" r="0.8" class="dot" />
+                <circle cx="5" cy="0" r="0.8" class="dot" />
+                <circle cx="10" cy="0" r="0.8" class="dot" />
+                <circle cx="15" cy="0" r="0.8" class="dot" />
+                <circle cx="20" cy="0" r="0.8" class="dot" />
+                <circle cx="20" cy="5" r="0.8" class="dot" />
+                <circle cx="20" cy="10" r="0.8" class="dot" />
+                <circle cx="20" cy="15" r="0.8" class="dot" />
+                <circle cx="20" cy="20" r="0.8" class="dot" />
+                <circle cx="20" cy="25" r="0.8" class="dot" />
+                <circle cx="20" cy="30" r="0.8" class="dot" />
+                <circle cx="20" cy="35" r="0.8" class="dot" />
+                <circle cx="20" cy="40" r="0.8" class="dot" />
+                <text x="-1" y="45">0</text>
+                <text x="4" y="45">1</text>
+                <text x="9" y="45">2</text>
+                <text x="14" y="45">3</text>
+                <text x="19" y="45" style="fill: #888">4</text>
+                <text x="-5" y="42">0</text>
+                <text x="-5" y="37">1</text>
+                <text x="-5" y="32">2</text>
+                <text x="-5" y="27">3</text>
+                <text x="-5" y="22">4</text>
+                <text x="-5" y="17">5</text>
+                <text x="-5" y="12">6</text>
+                <text x="-5" y="7">7</text>
+                <text x="-5" y="2" style="fill: #888">8</text>
+            </g>
+            <text x="9" y="50">r</text>
+            <text x="-10" y="22">s</text>
+            <text x="7" y="-2">t=0</text>
+            <text x="37" y="-2">t=1</text>
+            <text x="87" y="-2">t=4</text>
+            <text x="60" y="22">…</text>
+            <use xlink:href="#spart3" x="30" y="00" />
+            <use xlink:href="#spart3" x="80" y="00" />
+        </svg>
+    </div>
+    <div>
+        <svg width="500" height="300" viewBox="0 -1 80 84">
+            <defs>
+                <marker id="triangle"
+                        viewBox="0 0 10 10"
+                        refX="5"
+                        refY="5"
+                        markerUnits="strokeWidth"
+                        markerWidth="5"
+                        markerHeight="5"
+                        orient="auto-start-reverse">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="context-fill" />
+                </marker>
+            </defs>
+            <g id="spart4">
+                <polyline fill="none" stroke="#888" stroke-width="0.5" points="
+                      10,80 40,50 0,50 40,10 0,10 10,0 10,80
+                      20,80 40,60 0,60 40,20 0,20 20,0 20,80
+                      30,80 40,70 0,70 40,30 0,30 30,0 30,80
+                      0,80 40,40 0,40 40,0" />
+                <polyline fill="none" stroke="black" stroke-width="1" points="0,0 40,0 40,80 0,80 0,0" />
+                <g fill="red" stroke="red" marker-start="url(#triangle)" marker-end="url(#triangle)">
+                    <polyline points="10,40 30,40" />
+                    <polyline points="20,30 20,50" />
+                    <polyline points="10,50 30,30" />
+                </g>
+            </g>
+            <use xlink:href="#spart4" x="0" y="0" transform="matrix(0.4 0.6 -0.4 0.6 80 4)" />
+        </svg>
+    </div>
+    <div>
+        <svg width="800" height="400" viewBox="0 -1 100 100">
+            <defs>
+                <marker id="circle"
+                        markerWidth="4"
+                        markerHeight="4"
+                        refX="2"
+                        refY="2"
+                        markerUnits="strokeWidth">
+                    <circle cx="2" cy="2" r="2" stroke="context-stroke" fill="context-fill" />
+                </marker>
+            </defs>
+            <g transform="matrix(0.8 0.5 -0.1 0.6 -20 5)">
+                <g id="spart5">
+                    <polyline fill="none" stroke="#888" stroke-width="0.5" points="
+                      10,80 40,50 0,50 40,10 0,10 10,0 10,80
+                      20,80 40,60 0,60 40,20 0,20 20,0 20,80
+                      30,80 40,70 0,70 40,30 0,30 30,0 30,80
+                      0,80 40,40 0,40 40,0" />
+                    <polyline fill="none" stroke="black" stroke-width="1" points="0,0 40,0 40,80 0,80 0,0" />
+                </g>
+                <use xlink:href="#spart5" x="60" y="-40" />
+                <text x="56" y="46">0</text>
+                <text x="69" y="45">1</text>
+                <text x="79" y="45">2</text>
+                <text x="89" y="45">3</text>
+                <text x="55" y="35">1</text>
+                <text x="55" y="25">2</text>
+                <text x="55" y="15">3</text>
+                <text x="55" y="5">4</text>
+                <text x="55" y="-5">5</text>
+                <text x="55" y="-15">6</text>
+                <text x="55" y="-25">7</text>
+                <g fill="red" stroke="red" marker-start="url(#triangle)" marker-end="url(#triangle)">
+                    <polyline points="50,30 70,30" />
+                    <polyline points="60,20 60,40" />
+                    <polyline points="50,40 70,20" />
+                </g>
+                <g fill="red" stroke="red" stroke-width="0.7" marker-start="url(#circle)" marker-end="url(#triangle)">
+                    <polyline points="50,40 30,40" />
+                    <polyline points="50,30 30,30" />
+                </g>
+            </g>
+        </svg>
+    </div>
+    <div>
+        <svg width="800" height="400" viewBox="0 -1 100 100">
+            <defs>
+                <marker id="circle"
+                        markerWidth="4"
+                        markerHeight="4"
+                        refX="2"
+                        refY="2"
+                        markerUnits="strokeWidth">
+                    <circle cx="2" cy="2" r="2" stroke="context-stroke" fill="context-fill" />
+                </marker>
+            </defs>
+            <g transform="matrix(0.8 0.5 -0.1 0.6 -20 5)">
+                <g id="spart5">
+                    <polyline fill="none" stroke="#888" stroke-width="0.5" points="
+                      10,80 40,50 0,50 40,10 0,10 10,0 10,80
+                      20,80 40,60 0,60 40,20 0,20 20,0 20,80
+                      30,80 40,70 0,70 40,30 0,30 30,0 30,80
+                      0,80 40,40 0,40 40,0" />
+                    <polyline fill="none" stroke="black" stroke-width="1" points="0,0 40,0 40,80 0,80 0,0" />
+                </g>
+                <use xlink:href="#spart5" x="60" y="-40" />
+                <use xlink:href="#spart5" x="120" y="-80" />
+
+                <g fill="red" stroke="red" stroke-width="0.7" marker-start="url(#circle)" marker-end="url(#triangle)">
+                    <polyline points="50,50 30,50" fill="blue" stroke="blue" />
+                    <polyline points="50,40 30,40" />
+                    <polyline points="50,30 30,30" />
+                    <polyline points="50,20 30,20" />
+                    <polyline points="50,10 30,10" fill="blue" stroke="blue" />
+                    <polyline points="50,0 30,10" fill="blue" stroke="blue" />
+                    <polyline points="50,-10 20,10" />
+                    <polyline points="50,-20 10,10" />
+                    <polyline points="50,-30 00,10" />
+                    <polyline points="60,-40 60,-50" fill="green" stroke="green" />
+                    <polyline points="70,-40 120,-70" />
+                    <polyline points="80,-40 120,-60" />
+                    <polyline points="90,-40 120,-50" />
+                    <polyline points="100,-40 120,-40" />
+                    <polyline points="100,-30 120,-30" />
+                    <polyline points="100,-20 120,-20" />
+                    <polyline points="100,-10 120,-10" />
+                    <polyline points="100,0 120,0" />
+                    <polyline points="100,10 130,0" />
+                    <polyline points="100,20 140,0" />
+                    <polyline points="100,30 150,0" />
+                    <polyline points="100,40 110,40" fill="green" stroke="green" />
+                    <polyline points="90,50 30,80" />
+                    <polyline points="80,50 30,70" />
+                    <polyline points="70,50 30,60" />
+                    <polyline points="60,50 30,50" fill="blue" stroke="blue" />
+                </g>
+            </g>
+            <text x="31" y="4">nord</text>
+            <text x="66" y="86">south</text>
+        </svg>
+    </div>
+    <div>
+        <svg width="300" height="200" viewBox="0 0 51 51">
+            <g fill="none" stroke="black">
+                <polyline points="10,0 20,10 30,10 40,0" />
+                <polyline points="0,20 10,20 20,10 30,10 40,20 50,20" />
+                <polyline points="0,20 10,20 20,30 30,30 40,20 50,20" />
+                <polyline points="10,40 20,30 30,30 40,40" />
+            </g>
+            <g stroke="blue" fill="blue" marker-start="url(#circle)" marker-end="url(#circle)">
+                <circle cx="5" cy="30" r="2"></circle>
+                <circle cx="5" cy="10" r="2"></circle>
+                <circle cx="45" cy="10" r="2"></circle>
+                <circle cx="45" cy="30" r="2"></circle>
+                <circle cx="25" cy="3" r="2"></circle>
+                <circle cx="25" cy="20" r="2"></circle>
+                <circle cx="25" cy="40" r="2"></circle>
+
+            </g>
+        </svg>
+    </div>
+</body>
+</html>
+
