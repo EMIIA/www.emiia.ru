@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>H3 Multi-Resolution Grid</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script src="https://unpkg.com/h3-js@4.3.0/dist/h3-js.umd.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            overflow: hidden;
+            background: #f5f5f5;
+        }
+        
+        #map {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        #controls {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            max-width: 380px;
+            backdrop-filter: blur(10px);
+        }
+        
+        h1 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .control-group {
+            margin-bottom: 15px;
+        }
+        
+        .control-group label {
+            display: block;
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        select, input[type="range"] {
+            width: 100%;
+            padding: 6px 10px;
+            border: 2px solid #e1e5e9;
+            border-radius: 4px;
+            background: white;
+            font-size: 14px;
+        }
+        
+        input[type="range"] {
+            padding: 0;
+            height: 24px;
+        }
+        
+        .value-display {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+            margin-top: 5px;
+            font-family: monospace;
+        }
+        
+        .toggle-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background-color: #4d90fe;
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        button {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex: 1;
+        }
+        
+        #clear-btn {
+            background: #ff3b30;
+            color: white;
+        }
+        
+        #clear-btn:hover {
+            background: #e0352a;
+        }
+        
+        #export-btn {
+            background: #34c759;
+            color: white;
+        }
+        
+        #export-btn:hover {
+            background: #2daa4c;
+        }
+        
+        #dbm-btn {
+            background: #9c27b0;
+            color: white;
+        }
+        
+        #dbm-btn:hover {
+            background: #7b1fa2;
+        }
+        
+        .emiia-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .emiia-buttons button {
+            flex: 1;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .stats {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: #495057;
+        }
+        
+        .stat-value {
+            font-weight: 600;
+            font-family: monospace;
+            color: #333;
+        }
+        
+        .cell-list-container {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 10px;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            background: white;
+        }
+        
+        .cell-item {
+            padding: 8px 12px;
+            border-bottom: 1px solid #f1f3f4;
+            font-family: monospace;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+        }
+        
+        .cell-item:hover {
+            background: #f8f9fa;
+        }
+        
+        .cell-item:last-child {
+            border-bottom: none;
+        }
+        
+        .remove-btn {
+            background: #ff3b30;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-size: 11px;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+            min-width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .remove-btn:hover {
+            opacity: 1;
+        }
+        
+        #status {
+            margin-top: 10px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            display: none;
+        }
+        
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block !important;
+        }
+        
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block !important;
+        }
+        
+        .coordinates {
+            font-size: 11px;
+            color: #6c757d;
+            margin-top: 4px;
+            font-style: italic;
+        }
+        
+        .cell-content {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .cell-id {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-family: monospace;
+            font-size: 11px;
+        }
+        
+        .cell-coords {
+            font-size: 10px;
+            color: #888;
+            margin-top: 2px;
+            font-family: monospace;
+        }
+        
+        .mapboxgl-popup {
+            max-width: 300px;
+            font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        }
+        
+        .mapboxgl-popup-content {
+            padding: 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    
+    <div id="controls">
+        <h1>EMIIA.AI SDK (MRV/MAP)</h1>
+        
+        <div class="toggle-group">
+            <label for="grid-toggle" style="flex: 1; font-size: 14px; color: #333;">
+                Координатная сеткае
+            </label>
+            <label class="toggle-switch">
+                <input type="checkbox" id="grid-toggle">
+                <span class="toggle-slider"></span>
+            </label>
+        </div>
+        
+        <div class="control-group">
+            <label for="resolution-select">Resolution:</label>
+            <select id="resolution-select">
+                <option value="7">7 (～1.2km)</option>
+                <option value="8" selected>8 (～460m)</option>
+                <option value="9">9 (～175m)</option>
+                <option value="10">10 (～66m)</option>
+                <option value="11">11 (～25m)</option>
+                <option value="12">12 (～9m)</option>
+                <option value="13">13 (～3m)</option>
+                <option value="14">14 (～1m)</option>
+                <option value="15">15 (～0.25m)</option>
+            </select>
+        </div>
+        
+        <div class="control-group">
+            <label for="height-slider">Высота шестигранников (0-5000%):</label>
+            <input type="range" id="height-slider" min="0" max="5000" value="100" step="1">
+            <div class="value-display" id="height-value">100% (1.00x)</div>
+        </div>
+        
+        <div class="toggle-group">
+            <label for="heatmap-toggle" style="flex: 1; font-size: 14px; color: #333;">
+                Тепловая карта
+            </label>
+            <label class="toggle-switch">
+                <input type="checkbox" id="heatmap-toggle">
+                <span class="toggle-slider"></span>
+            </label>
+        </div>
+        
+        <div class="emiia-buttons">
+            <button id="export-btn">EMIIA.AI MAP</button>
+            <button id="dbm-btn">EMIIA.AI DBM</button>
+        </div>
+        
+        <div class="buttons">
+            <button id="clear-btn">CLEAR</button>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <span>Всего ячеек:</span>
+                <span id="cell-count" class="stat-value">0</span>
+            </div>
+            <div class="stat-item">
+                <span>Текущее Res:</span>
+                <span id="current-resolution" class="stat-value">8</span>
+            </div>
+            <div class="stat-item">
+                <span>3D Cells:</span>
+                <span id="current-cells" class="stat-value">0</span>
+            </div>
+            <div class="stat-item">
+                <span>Режим:</span>
+                <span id="mode-display" class="stat-value">3D</span>
+            </div>
+            <div class="stat-item">
+                <span>Сетка активна:</span>
+                <span id="grid-status" class="stat-value">Нет</span>
+            </div>
+            <div class="stat-item">
+                <span>Grid Cells:</span>
+                <span id="grid-cells-count" class="stat-value">0</span>
+            </div>
+            <div class="stat-item">
+                <span>Grid Res:</span>
+                <span id="grid-resolution" class="stat-value">-</span>
+            </div>
+            <div class="stat-item">
+                <span>Радиус:</span>
+                <span id="grid-radius" class="stat-value">-</span>
+            </div>
+        </div>
+        
+        <div id="cell-list-container" class="cell-list-container">
+            <!-- Cells will be added here -->
+        </div>
+        
+        <div id="status"></div>
+    </div>
+
+<script>
+// ================== КОНСТАНТЫ ==================
+const MAPBOX_TOKEN = 'pk.eyJ1Ijoia211bm96IiwiYSI6ImNsY3A3NDloaDA2bnozcGxiN2U1Y2I2bWIifQ.WY4_mVStBm5c9CjvWsVy3w';
+const INITIAL_VIEW = {
+    center: [-122.4194, 37.7749],
+    zoom: 13,
+    pitch: 60,
+    bearing: 0
+};
+
+// Ограничения для разрешений - 9000 ячеек для 15 уровня
+const getMaxGridCells = (resolution) => {
+    const limits = {
+        0: 2000, 1: 2000, 2: 2000, 3: 2000,
+        4: 2000, 5: 2000, 6: 2000, 7: 2000,
+        8: 3000, 9: 3000, 10: 3000, 11: 2000,
+        12: 1500, 13: 1000, 14: 500, 15: 9000
+    };
+    return limits[resolution] || 2000;
+};
+
+const GRID_UPDATE_DELAY = 300;
+const HEXAGON_SCALE_FACTOR = 1.0;
+
+// Размеры ячеек в метрах для расчета радиуса
+const CELL_SIZE_METERS = {
+    0: 1108000, 1: 418000, 2: 158000, 3: 59000,
+    4: 22000, 5: 8000, 6: 3000, 7: 1200,
+    8: 460, 9: 175, 10: 66, 11: 25,
+    12: 9, 13: 3, 14: 1, 15: 0.25
+};
+
+// Таблица оптимального зума для разрешений
+const ZOOM_TO_RESOLUTION = {
+    10: 7, 11: 8, 12: 9, 13: 10,
+    14: 11, 15: 12, 16: 13, 17: 14,
+    18: 15, 19: 15, 20: 15, 21: 15, 22: 15
+};
+
+// ================== ПЕРЕМЕННЫЕ ==================
+let map = null;
+let cells = new Map();
+let currentResolution = 8;
+let mapLoaded = false;
+let popup = null;
+let heightMultiplier = 1.0;
+let heatmapMode = false;
+let gridMode = false;
+let gridLayerId = null;
+let gridTimeout = null;
+let manualResolutionChange = false;
+
+// ================== ФУНКЦИИ ==================
+function showStatus(message, type = 'success') {
+    const statusEl = document.getElementById('status');
+    statusEl.textContent = message;
+    statusEl.className = type === 'error' ? 'status-error' : 'status-success';
+    statusEl.style.display = 'block';
+    
+    setTimeout(() => {
+        statusEl.style.display = 'none';
+    }, 3000);
+}
+
+function getCellColor(resolution) {
+    // Используем СИНИЙ цвет (#4285F4) для ВСЕХ уровней
+    return '#4285F4';
+}
+
+function getRandomHeight() {
+    // Случайная высота от 3 до 152 метров (чтобы начиналось с 3)
+    return Math.floor(Math.random() * 150) + 3;
+}
+
+function formatCoordinates(lng, lat) {
+    return `${lng.toFixed(10)}, ${lat.toFixed(10)}`;
+}
+
+function getActualHeight(baseHeight) {
+    if (heatmapMode) {
+        return 3 * heightMultiplier; // В режиме тепловой карты всегда 3 метра
+    }
+    return baseHeight * heightMultiplier;
+}
+
+// Рассчитать необходимый радиус для покрытия видимой области
+function calculateRequiredRadius() {
+    if (!map || !mapLoaded) return 15;
+    
+    const bounds = map.getBounds();
+    const zoom = map.getZoom();
+    const center = bounds.getCenter();
+    const ne = bounds.getNorthEast();
+    
+    const dx = Math.abs(ne.lng - center.lng) * 111320 * Math.cos(center.lat * Math.PI / 180);
+    const dy = Math.abs(ne.lat - center.lat) * 111320;
+    const visibleRadius = Math.sqrt(dx * dx + dy * dy);
+    
+    const cellSize = CELL_SIZE_METERS[currentResolution] || 460;
+    let requiredRadius = Math.ceil(visibleRadius / cellSize) + 10;
+    
+    if (currentResolution <= 7) {
+        requiredRadius = Math.min(requiredRadius, 15);
+    } else if (currentResolution <= 10) {
+        requiredRadius = Math.min(requiredRadius, 20);
+    } else if (currentResolution <= 13) {
+        requiredRadius = Math.min(requiredRadius, 25);
+    } else if (currentResolution === 14) {
+        requiredRadius = Math.min(requiredRadius, 30);
+    } else if (currentResolution === 15) {
+        requiredRadius = Math.min(requiredRadius, 35);
+    }
+    
+    return Math.max(requiredRadius, 10);
+}
+
+// Адаптация разрешения под текущий зум
+function adaptResolutionToZoom() {
+    if (!map || !mapLoaded || manualResolutionChange) return;
+    
+    const zoom = Math.round(map.getZoom());
+    let newResolution = currentResolution;
+    
+    if (zoom < 10 && currentResolution > 7) {
+        newResolution = 7;
+    } else if (zoom === 10 && currentResolution > 7) {
+        newResolution = 7;
+    } else if (zoom === 11 && currentResolution > 8) {
+        newResolution = 8;
+    } else if (zoom === 12 && currentResolution > 9) {
+        newResolution = 9;
+    } else if (zoom === 13 && currentResolution > 10) {
+        newResolution = 10;
+    } else if (zoom === 14 && currentResolution > 11) {
+        newResolution = 11;
+    } else if (zoom === 15 && currentResolution > 12) {
+        newResolution = 12;
+    } else if (zoom === 16 && currentResolution > 13) {
+        newResolution = 13;
+    } else if (zoom === 17 && currentResolution > 14) {
+        newResolution = 14;
+    } else if (zoom >= 18 && currentResolution < 15) {
+        newResolution = 15;
+    }
+    
+    if (newResolution !== currentResolution) {
+        currentResolution = newResolution;
+        
+        document.getElementById('resolution-select').value = newResolution;
+        document.getElementById('current-resolution').textContent = newResolution;
+        
+        cells.forEach(cell => {
+            cell.isCurrentResolution = cell.resolution === currentResolution;
+        });
+        
+        updateDisplay();
+        renderCells();
+        updateGrid();
+        
+        showStatus(`Авто-адаптация: Res ${newResolution} (Zoom ${zoom})`);
+    }
+}
+
+// Получить адаптивное разрешение для сетки
+function getAdaptiveResolution() {
+    if (!map || !mapLoaded) return currentResolution;
+    
+    const zoom = Math.floor(map.getZoom());
+    
+    if (zoom < 10 && currentResolution > 8) {
+        return Math.min(8, currentResolution);
+    } else if (zoom < 12 && currentResolution > 10) {
+        return Math.min(10, currentResolution);
+    } else if (zoom < 14 && currentResolution > 12) {
+        return Math.min(12, currentResolution);
+    } else if (zoom < 16 && currentResolution > 13) {
+        return Math.min(13, currentResolution);
+    }
+    
+    return currentResolution;
+}
+
+// Получить ячейки сетки для всей видимой области
+function getVisibleGridCells() {
+    if (!map || !mapLoaded) return { cells: [], resolution: currentResolution, radius: 0, count: 0 };
+    
+    try {
+        const center = map.getCenter();
+        const zoom = Math.floor(map.getZoom());
+        
+        const gridResolution = getAdaptiveResolution();
+        const requiredRadius = calculateRequiredRadius();
+        
+        document.getElementById('grid-resolution').textContent = gridResolution;
+        document.getElementById('grid-radius').textContent = requiredRadius;
+        
+        const centerCell = h3.latLngToCell(center.lat, center.lng, gridResolution);
+        
+        let allCells = h3.gridDisk(centerCell, requiredRadius);
+        
+        if (gridResolution === 15) {
+            try {
+                for (let i = 1; i <= 3; i++) {
+                    const extraRing = h3.gridRing(centerCell, requiredRadius + i);
+                    allCells = [...allCells, ...extraRing];
+                }
+            } catch (e) {
+                console.log('Additional rings not available for res 15');
+            }
+        }
+        
+        const uniqueCells = [...new Set(allCells)];
+        const maxCells = getMaxGridCells(gridResolution);
+        
+        return { 
+            cells: uniqueCells.slice(0, maxCells), 
+            resolution: gridResolution,
+            radius: requiredRadius,
+            count: uniqueCells.length,
+            zoom: zoom
+        };
+        
+    } catch (error) {
+        console.error('Error getting grid cells:', error);
+        return { cells: [], resolution: currentResolution, radius: 0, count: 0, zoom: 13 };
+    }
+}
+
+// Создать линию границы шестигранника
+function createHexagonLine(cellId, resolution) {
+    try {
+        const boundary = h3.cellToBoundary(cellId);
+        const mapboxBoundary = boundary.map(coord => [coord[1], coord[0]]);
+        mapboxBoundary.push(mapboxBoundary[0]);
+        
+        return {
+            type: 'Feature',
+            properties: {
+                id: cellId,
+                resolution: resolution,
+                isGrid: true
+            },
+            geometry: {
+                type: 'LineString',
+                coordinates: mapboxBoundary
+            }
+        };
+    } catch (error) {
+        console.error('Error creating hexagon line:', error);
+        return null;
+    }
+}
+
+// Отобразить или скрыть сетку
+function toggleGrid(show) {
+    gridMode = show;
+    document.getElementById('grid-status').textContent = show ? 'Да' : 'Нет';
+    
+    if (show) {
+        updateGrid();
+        map.on('moveend', debouncedUpdateGrid);
+        map.on('zoomend', debouncedUpdateGrid);
+    } else {
+        removeGrid();
+        map.off('moveend', debouncedUpdateGrid);
+        map.off('zoomend', debouncedUpdateGrid);
+    }
+}
+
+// Удалить сетку
+function removeGrid() {
+    if (gridLayerId && map.getLayer(gridLayerId)) {
+        map.removeLayer(gridLayerId);
+    }
+    if (map.getSource('h3-grid-source')) {
+        map.removeSource('h3-grid-source');
+    }
+    gridLayerId = null;
+    
+    if (gridTimeout) {
+        clearTimeout(gridTimeout);
+        gridTimeout = null;
+    }
+    
+    document.getElementById('grid-cells-count').textContent = '0';
+    document.getElementById('grid-resolution').textContent = '-';
+    document.getElementById('grid-radius').textContent = '-';
+}
+
+// Дебаунсинг обновления сетки
+function debouncedUpdateGrid() {
+    if (gridTimeout) {
+        clearTimeout(gridTimeout);
+    }
+    
+    gridTimeout = setTimeout(() => {
+        if (gridMode && mapLoaded) {
+            updateGrid();
+        }
+    }, GRID_UPDATE_DELAY);
+}
+
+// Обновить сетку
+function updateGrid() {
+    if (!mapLoaded || !gridMode) return;
+    
+    const gridData = getVisibleGridCells();
+    document.getElementById('grid-cells-count').textContent = gridData.count;
+    
+    if (gridData.cells.length === 0) {
+        removeGrid();
+        return;
+    }
+    
+    const lineFeatures = [];
+    gridData.cells.forEach(cellId => {
+        const feature = createHexagonLine(cellId, gridData.resolution);
+        if (feature) {
+            lineFeatures.push(feature);
+        }
+    });
+    
+    if (lineFeatures.length === 0) return;
+    
+    // СИНИЙ цвет (#4285F4) для ВСЕХ уровней сетки, линии на 50% тоньше
+    let lineColor, lineWidth;
+    const lineColorAll = '#4285F4';
+    
+    if (gridData.resolution <= 7) {
+        lineColor = lineColorAll;
+        lineWidth = 1.25; // Было 2.5, теперь 1.25 (на 50% тоньше)
+    } else if (gridData.resolution <= 10) {
+        lineColor = lineColorAll;
+        lineWidth = 1; // Было 2, теперь 1 (на 50% тоньше)
+    } else if (gridData.resolution <= 13) {
+        lineColor = lineColorAll;
+        lineWidth = 0.75; // Было 1.5, теперь 0.75 (на 50% тоньше)
+    } else if (gridData.resolution === 14) {
+        lineColor = lineColorAll;
+        lineWidth = 0.5; // Было 1, теперь 0.5 (на 50% тоньше)
+    } else if (gridData.resolution === 15) {
+        lineColor = lineColorAll;
+        lineWidth = 0.5; // Было 1, теперь 0.5 (на 50% тоньше)
+    } else {
+        lineColor = lineColorAll;
+        lineWidth = 0.5;
+    }
+    
+    const sourceId = 'h3-grid-source';
+    
+    if (map.getSource(sourceId)) {
+        map.getSource(sourceId).setData({
+            type: 'FeatureCollection',
+            features: lineFeatures
+        });
+        
+        if (gridLayerId && map.getLayer(gridLayerId)) {
+            map.setPaintProperty(gridLayerId, 'line-color', lineColor);
+            map.setPaintProperty(gridLayerId, 'line-width', lineWidth);
+        }
+    } else {
+        map.addSource(sourceId, {
+            type: 'geojson',
+            data: {
+                type: 'FeatureCollection',
+                features: lineFeatures
+            }
+        });
+        
+        gridLayerId = 'h3-grid-layer';
+        map.addLayer({
+            id: gridLayerId,
+            type: 'line',
+            source: sourceId,
+            paint: {
+                'line-color': lineColor,
+                'line-width': lineWidth,
+                'line-opacity': 0.9
+            }
+        });
+        
+        setupGridInteractivity();
+    }
+    
+    showStatus(`Сетка: ${lineFeatures.length} ячеек | Res: ${gridData.resolution} | Радиус: ${gridData.radius}`);
+}
+
+// Настройка интерактивности сетки
+function setupGridInteractivity() {
+    if (!popup) {
+        popup = new mapboxgl.Popup({
+            closeButton: false,
+            closeOnClick: false
+        });
+    }
+    
+    if (!gridLayerId) return;
+    
+    map.off('mouseenter', gridLayerId);
+    map.off('mouseleave', gridLayerId);
+    
+    map.on('mouseenter', gridLayerId, (e) => {
+        if (e.features && e.features.length > 0) {
+            const feature = e.features[0];
+            const cellId = feature.properties.id;
+            const resolution = feature.properties.resolution;
+            
+            map.getCanvas().style.cursor = 'pointer';
+            
+            map.setPaintProperty(gridLayerId, 'line-width', [
+                'case',
+                ['==', ['get', 'id'], cellId],
+                1.5,
+                ['<=', ['get', 'resolution'], 7] ? 1.25 :
+                ['<=', ['get', 'resolution'], 10] ? 1 :
+                ['<=', ['get', 'resolution'], 13] ? 0.75 : 0.5
+            ]);
+            
+            popup.setLngLat(e.lngLat)
+                .setHTML(`
+                    <div style="font-family: monospace; font-size: 12px;">
+                        <strong>Grid Cell</strong><br>
+                        ID: ${cellId}<br>
+                        Resolution: ${resolution}
+                    </div>
+                `)
+                .addTo(map);
+        }
+    });
+    
+    map.on('mouseleave', gridLayerId, () => {
+        map.getCanvas().style.cursor = '';
+        
+        if (gridLayerId && map.getLayer(gridLayerId)) {
+            map.setPaintProperty(gridLayerId, 'line-width', [
+                'case',
+                ['<=', ['get', 'resolution'], 7], 1.25,
+                ['<=', ['get', 'resolution'], 10], 1,
+                ['<=', ['get', 'resolution'], 13], 0.75, 0.5
+            ]);
+        }
+        
+        if (popup) {
+            popup.remove();
+        }
+    });
+}
+
+// ================== УПРАВЛЕНИЕ ЯЧЕЙКАМИ ==================
+function addHexagon(lng, lat, resolution) {
+    try {
+        const cellId = h3.latLngToCell(lat, lng, resolution);
+        
+        if (cells.has(cellId)) {
+            showStatus('Cell already exists', 'error');
+            return false;
+        }
+        
+        const boundary = h3.cellToBoundary(cellId);
+        const center = h3.cellToLatLng(cellId);
+        const baseHeight = getRandomHeight(); // Случайная высота начиная с 3 метров
+        
+        cells.set(cellId, {
+            id: cellId,
+            boundary: boundary,
+            center: center,
+            resolution: resolution,
+            baseHeight: baseHeight,
+            color: '#4285F4', // СИНИЙ цвет для всех уровней
+            isCurrentResolution: resolution === currentResolution,
+            coordinates: formatCoordinates(lng, lat),
+            centerLngLat: { lng: lng, lat: lat }
+        });
+        
+        updateDisplay();
+        renderCells();
+        return true;
+        
+    } catch (error) {
+        console.error('Error adding hexagon:', error);
+        showStatus('Error adding hexagon', 'error');
+        return false;
+    }
+}
+
+function removeCell(cellId) {
+    if (cells.delete(cellId)) {
+        updateDisplay();
+        renderCells();
+        showStatus(`Removed: ${cellId}`);
+        return true;
+    }
+    return false;
+}
+
+function clearAll() {
+    removeAllLayers();
+    cells.clear();
+    updateDisplay();
+    showStatus('All hexagons cleared');
+}
+
+function removeAllLayers() {
+    if (!map || !mapLoaded) return;
+    
+    const layers = [
+        'h3-cells-3d', 'h3-cells-3d-top', 'h3-cells-3d-line',
+        'h3-cells-2d', 'h3-cells-2d-line'
+    ];
+    
+    layers.forEach(layerId => {
+        try {
+            if (map.getLayer(layerId)) {
+                map.removeLayer(layerId);
+            }
+        } catch (e) {}
+    });
+    
+    const sources = ['h3-cells-3d-source', 'h3-cells-2d-source'];
+    sources.forEach(sourceId => {
+        try {
+            if (map.getSource(sourceId)) {
+                map.removeSource(sourceId);
+            }
+        } catch (e) {}
+    });
+}
+
+// ================== ЭКСПОРТ ДАННЫХ ==================
+function exportToJSON() {
+    if (cells.size === 0) {
+        showStatus('No cells to export', 'error');
+        return;
+    }
+    
+    const exportData = {
+        metadata: {
+            exportedAt: new Date().toISOString(),
+            totalCells: cells.size,
+            currentResolution: currentResolution,
+            heatmapMode: heatmapMode,
+            heightMultiplier: heightMultiplier
+        },
+        cells: []
+    };
+    
+    cells.forEach((cellData, cellId) => {
+        const actualHeight = getActualHeight(cellData.baseHeight);
+        const isCurrentRes = cellData.resolution === currentResolution;
+        
+        exportData.cells.push({
+            id: cellId,
+            resolution: cellData.resolution,
+            coordinates: cellData.coordinates,
+            center: cellData.centerLngLat,
+            baseHeight: cellData.baseHeight,
+            actualHeight: actualHeight,
+            color: cellData.color,
+            mode: isCurrentRes ? '3D' : '2D',
+            properties: {
+                isCurrentResolution: isCurrentRes,
+                heatmapMode: heatmapMode
+            }
+        });
+    });
+    
+    const jsonString = JSON.stringify(exportData, null, 2);
+    
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `emii_ai_map_export_${new Date().toISOString().slice(0, 10)}.json`;
+    document.body.appendChild(a);
+    a.click();
+    
+    setTimeout(() => {
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }, 100);
+    
+    showStatus(`Exported ${cells.size} cells to JSON file`);
+}
+
+// ================== ОБНОВЛЕНИЕ ИНТЕРФЕЙСА ==================
+function updateDisplay() {
+    let currentCount = 0;
+    
+    cells.forEach(cell => {
+        if (cell.resolution === currentResolution) {
+            currentCount++;
+        }
+    });
+    
+    document.getElementById('cell-count').textContent = cells.size;
+    document.getElementById('current-resolution').textContent = currentResolution;
+    document.getElementById('current-cells').textContent = currentCount;
+    document.getElementById('mode-display').textContent = heatmapMode ? 'Тепловая карта' : '3D';
+    document.getElementById('grid-status').textContent = gridMode ? 'Да' : 'Нет';
+    
+    const cellListEl = document.getElementById('cell-list-container');
+    cellListEl.innerHTML = '';
+    
+    if (cells.size === 0) {
+        const emptyMsg = document.createElement('div');
+        emptyMsg.className = 'cell-item';
+        emptyMsg.textContent = 'Click on map to add hexagons';
+        emptyMsg.style.color = '#6c757d';
+        emptyMsg.style.fontStyle = 'italic';
+        cellListEl.appendChild(emptyMsg);
+        return;
+    }
+    
+    const sortedCells = Array.from(cells.entries())
+        .sort(([idA, dataA], [idB, dataB]) => {
+            if (dataA.resolution === currentResolution && dataB.resolution !== currentResolution) return -1;
+            if (dataA.resolution !== currentResolution && dataB.resolution === currentResolution) return 1;
+            return idA.localeCompare(idB);
+        });
+    
+    sortedCells.forEach(([cellId, cellData]) => {
+        const cellEl = document.createElement('div');
+        cellEl.className = 'cell-item';
+        
+        const cellContent = document.createElement('div');
+        cellContent.className = 'cell-content';
+        
+        const idSpan = document.createElement('div');
+        idSpan.className = 'cell-id';
+        idSpan.textContent = cellId;
+        idSpan.title = cellId;
+        
+        const coordsSpan = document.createElement('div');
+        coordsSpan.className = 'cell-coords';
+        coordsSpan.textContent = cellData.coordinates || 'Coordinates not available';
+        
+        const details = document.createElement('div');
+        details.className = 'coordinates';
+        const actualHeight = getActualHeight(cellData.baseHeight);
+        details.innerHTML = `
+            Res: <strong>${cellData.resolution}</strong> | 
+            Height: <strong>${actualHeight.toFixed(2)}m</strong> | 
+            Mode: <strong>${cellData.isCurrentResolution ? '3D' : '2D'}</strong>
+        `;
+        
+        cellContent.appendChild(idSpan);
+        cellContent.appendChild(coordsSpan);
+        cellContent.appendChild(details);
+        
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'remove-btn';
+        removeBtn.textContent = '×';
+        removeBtn.title = 'Remove cell';
+        removeBtn.onclick = () => removeCell(cellId);
+        
+        cellEl.appendChild(cellContent);
+        cellEl.appendChild(removeBtn);
+        cellListEl.appendChild(cellEl);
+    });
+}
+
+// ================== ОТРИСОВКА НА КАРТЕ ==================
+function renderCells() {
+    if (!mapLoaded) return;
+    
+    const layersToRemove = [
+        'h3-cells-3d', 'h3-cells-3d-top', 'h3-cells-3d-line',
+        'h3-cells-2d', 'h3-cells-2d-line'
+    ];
+    
+    layersToRemove.forEach(layerId => {
+        try {
+            if (map.getLayer(layerId)) {
+                map.removeLayer(layerId);
+            }
+        } catch (e) {}
+    });
+    
+    const sourcesToRemove = ['h3-cells-3d-source', 'h3-cells-2d-source'];
+    sourcesToRemove.forEach(sourceId => {
+        try {
+            if (map.getSource(sourceId)) {
+                map.removeSource(sourceId);
+            }
+        } catch (e) {}
+    });
+    
+    if (cells.size === 0) return;
+    
+    const cells3D = [];
+    const cells2D = [];
+    
+    cells.forEach(cell => {
+        const boundary = cell.boundary;
+        const mapboxBoundary = boundary.map(coord => [coord[1], coord[0]]);
+        const actualHeight = getActualHeight(cell.baseHeight);
+        
+        const feature = {
+            type: 'Feature',
+            properties: {
+                id: cell.id,
+                resolution: cell.resolution,
+                color: '#4285F4', // СИНИЙ цвет для ВСЕХ уровней
+                height: actualHeight,
+                baseHeight: cell.baseHeight,
+                currentHeight: actualHeight,
+                isCurrentResolution: cell.isCurrentResolution,
+                coordinates: cell.coordinates,
+                heatmapMode: heatmapMode
+            },
+            geometry: {
+                type: 'Polygon',
+                coordinates: [mapboxBoundary]
+            }
+        };
+        
+        if (cell.isCurrentResolution) {
+            cells3D.push(feature);
+        } else {
+            cells2D.push(feature);
+        }
+    });
+    
+    // Рендерим 2D ячейки (старые разрешения)
+    if (cells2D.length > 0) {
+        map.addSource('h3-cells-2d-source', {
+            type: 'geojson',
+            data: {
+                type: 'FeatureCollection',
+                features: cells2D
+            }
+        });
+        
+        map.addLayer({
+            id: 'h3-cells-2d',
+            type: 'fill',
+            source: 'h3-cells-2d-source',
+            paint: {
+                'fill-color': '#4285F4', // СИНИЙ цвет для ВСЕХ уровней
+                'fill-opacity': 0.3,
+                'fill-outline-color': '#333'
+            }
+        });
+    }
+    
+    // Рендерим 3D ячейки (текущее разрешение)
+    if (cells3D.length > 0) {
+        map.addSource('h3-cells-3d-source', {
+            type: 'geojson',
+            data: {
+                type: 'FeatureCollection',
+                features: cells3D
+            }
+        });
+        
+        // Основной 3D слой - СИНИЙ цвет для ВСЕХ уровней
+        map.addLayer({
+            id: 'h3-cells-3d',
+            type: 'fill-extrusion',
+            source: 'h3-cells-3d-source',
+            paint: {
+                'fill-extrusion-color': '#4285F4', // СИНИЙ цвет для ВСЕХ уровней
+                'fill-extrusion-height': ['get', 'height'],
+                'fill-extrusion-base': 0,
+                'fill-extrusion-opacity': heatmapMode ? 0.9 : 0.8
+            }
+        });
+        
+        // Верхняя грань для интерактивности
+        map.addLayer({
+            id: 'h3-cells-3d-top',
+            type: 'fill',
+            source: 'h3-cells-3d-source',
+            paint: {
+                'fill-color': '#4285F4', // СИНИЙ цвет для ВСЕХ уровней
+                'fill-opacity': 0.01
+            }
+        });
+        
+        // Линии 3D обводки - ЗЕЛЕНАЯ для ВСЕХ уровней
+        const lineColor = '#00ff00';
+        
+        map.addLayer({
+            id: 'h3-cells-3d-line',
+            type: 'line',
+            source: 'h3-cells-3d-source',
+            paint: {
+                'line-color': lineColor,
+                'line-width': 2,
+                'line-opacity': 0.9
+            }
+        });
+        
+        setupCellTooltips();
+    }
+}
+
+// Настройка тултипов для ячеек
+function setupCellTooltips() {
+    if (!popup) {
+        popup = new mapboxgl.Popup({
+            closeButton: false,
+            closeOnClick: false
+        });
+    }
+    
+    const layers = ['h3-cells-3d-top', 'h3-cells-3d', 'h3-cells-3d-line'];
+    layers.forEach(layerId => {
+        try {
+            map.off('mouseenter', layerId);
+            map.off('mouseleave', layerId);
+            map.off('click', layerId);
+        } catch (e) {}
+    });
+    
+    map.on('mouseenter', 'h3-cells-3d-top', (e) => {
+        if (e.features && e.features.length > 0) {
+            const feature = e.features[0];
+            const cellId = feature.properties.id;
+            const resolution = feature.properties.resolution;
+            const currentHeight = feature.properties.currentHeight;
+            const coordinates = feature.properties.coordinates || 'N/A';
+            
+            map.getCanvas().style.cursor = 'pointer';
+            
+            popup.setLngLat(e.lngLat)
+                .setHTML(`
+                    <div style="font-family: monospace; font-size: 12px;">
+                        <strong>Cell ID:</strong> ${cellId}<br>
+                        <strong>Res:</strong> ${resolution}<br>
+                        <strong>Height:</strong> ${currentHeight.toFixed(2)}m<br>
+                        <strong>Coords:</strong> ${coordinates}
+                    </div>
+                `)
+                .addTo(map);
+        }
+    });
+    
+    map.on('mouseleave', 'h3-cells-3d-top', () => {
+        map.getCanvas().style.cursor = '';
+        if (popup) {
+            popup.remove();
+        }
+    });
+    
+    map.on('click', 'h3-cells-3d-top', (e) => {
+        if (e.features && e.features.length > 0) {
+            const cellId = e.features[0].properties.id;
+            removeCell(cellId);
+        }
+    });
+}
+
+// ================== ИНИЦИАЛИЗАЦИЯ КАРТЫ ==================
+function initializeMap() {
+    mapboxgl.accessToken = MAPBOX_TOKEN;
+    
+    map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/light-v11',
+        center: INITIAL_VIEW.center,
+        zoom: INITIAL_VIEW.zoom,
+        pitch: INITIAL_VIEW.pitch,
+        bearing: INITIAL_VIEW.bearing
+    });
+    
+    map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+    
+    map.on('load', () => {
+        console.log('Map loaded');
+        console.log('H3 library version:', h3.version);
+        mapLoaded = true;
+    });
+    
+    map.on('click', (e) => {
+        const features = map.queryRenderedFeatures(e.point, {
+            layers: ['h3-cells-3d-top', 'h3-cells-3d', 'h3-cells-3d-line']
+        });
+        
+        if (features.length > 0) {
+            const cellId = features[0].properties.id;
+            removeCell(cellId);
+        } else {
+            if (addHexagon(e.lngLat.lng, e.lngLat.lat, currentResolution)) {
+                showStatus(`Added Res ${currentResolution} hexagon at ${formatCoordinates(e.lngLat.lng, e.lngLat.lat)}`);
+            }
+        }
+    });
+    
+    map.on('zoomend', () => {
+        adaptResolutionToZoom();
+        
+        if (gridMode) {
+            debouncedUpdateGrid();
+        }
+    });
+    
+    map.on('moveend', () => {
+        if (gridMode) {
+            debouncedUpdateGrid();
+        }
+    });
+}
+
+// ================== ОБРАБОТЧИКИ СОБЫТИЙ ==================
+function setupEventListeners() {
+    document.getElementById('clear-btn').addEventListener('click', clearAll);
+    
+    document.getElementById('grid-toggle').addEventListener('change', (e) => {
+        toggleGrid(e.target.checked);
+        showStatus(e.target.checked ? 'Сетка включена' : 'Сетка выключена');
+    });
+    
+    const heightSlider = document.getElementById('height-slider');
+    const heightValue = document.getElementById('height-value');
+    
+    heightSlider.addEventListener('input', (e) => {
+        heightMultiplier = parseInt(e.target.value) / 100;
+        heightValue.textContent = `${e.target.value}% (${heightMultiplier.toFixed(2)}x)`;
+        updateDisplay();
+        renderCells();
+    });
+    
+    const heatmapToggle = document.getElementById('heatmap-toggle');
+    heatmapToggle.addEventListener('change', (e) => {
+        heatmapMode = e.target.checked;
+        updateDisplay();
+        renderCells();
+        showStatus(heatmapMode ? 'Режим тепловой карты включен' : 'Режим тепловой карты выключен');
+    });
+    
+    document.getElementById('export-btn').addEventListener('click', exportToJSON);
+    
+    document.getElementById('dbm-btn').addEventListener('click', () => {
+        showStatus('EMIIA.DBM function coming soon...');
+    });
+    
+    document.getElementById('resolution-select').addEventListener('change', (e) => {
+        const newRes = parseInt(e.target.value);
+        const oldRes = currentResolution;
+        
+        manualResolutionChange = true;
+        setTimeout(() => {
+            manualResolutionChange = false;
+        }, 3000);
+        
+        currentResolution = newRes;
+        
+        cells.forEach(cell => {
+            cell.isCurrentResolution = cell.resolution === currentResolution;
+        });
+        
+        updateDisplay();
+        renderCells();
+        
+        if (gridMode) {
+            setTimeout(() => {
+                updateGrid();
+            }, 800);
+        }
+        
+        showStatus(`Changed resolution: ${oldRes}→${newRes}. Old: 2D, New: 3D`);
+    });
+}
+
+// ================== ЗАПУСК ==================
+document.addEventListener('DOMContentLoaded', () => {
+    if (typeof h3 === 'undefined' || typeof mapboxgl === 'undefined') {
+        alert('Libraries not loaded');
+        return;
+    }
+    
+    console.log('H3 library loaded, version:', h3.version);
+    
+    setupEventListeners();
+    initializeMap();
+});
+
+window.addEventListener('error', (e) => {
+    console.error('Error:', e.error);
+    showStatus(`Error: ${e.message}`, 'error');
+});
+</script>
+</body>
+</html>
