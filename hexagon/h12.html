@@ -1,0 +1,973 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EMIIA.AI H12</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            overflow: hidden;
+            background: #f5f5f5;
+        }
+        
+        #map {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        #controls {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            max-width: 320px;
+min-width: 320px;
+            backdrop-filter: blur(10px);
+        }
+        
+        h1 {
+            font-size: 20px;
+            color: #383838;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .control-group {
+            margin-bottom: 15px;
+        }
+        
+        .control-group label {
+            display: block;
+            font-size: 14px;
+            color: #383838;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 4px;
+            background: white;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+        
+        select:focus {
+            outline: none;
+            border-color: #e1e5e9;
+        }
+        
+        /* Bootstrap-like switch */
+        .form-check {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 0;
+            min-height: 0;
+        }
+        
+        .form-check-input {
+            width: 0;
+            height: 0;
+            opacity: 0;
+            position: absolute;
+        }
+        
+        .form-check-label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            font-size: 14px;
+            font-weight: 500;
+            color: #3d85c6;
+        }
+        
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+            margin-right: 10px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: #3d85c6;
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(30px);
+        }
+        
+        input:focus + .slider {
+            box-shadow: 0 0 1px #3d85c6;
+        }
+        
+        .switch-text {
+            margin-left: 5px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .stats {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: #495057;
+        }
+        
+        .stat-value {
+            font-weight: 600;
+            font-family: monospace;
+            color: #333;
+        }
+        
+        .grid-active .stat-value {
+            color: #3d85c6;
+        }
+        
+        .grid-inactive .stat-value {
+            color: #666;
+        }
+        
+        /* Всплывающая подсказка */
+        .mapboxgl-popup {
+            max-width: 300px;
+            font-family: 'SF Mono', Monaco, Consolas, 'Courier New', monospace;
+            z-index: 2000;
+        }
+        
+        .mapboxgl-popup-content {
+            padding: 12px 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border: 1px solid #e1e5e9;
+            animation: fadeIn 0.2s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tooltip-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-size: 12px;
+        }
+        
+        .tooltip-label {
+            color: #666;
+            font-weight: 500;
+            margin-right: 10px;
+            min-width: 40px;
+        }
+        
+        .tooltip-value {
+            color: #333;
+            font-family: 'SF Mono', Monaco, Consolas, 'Courier New', monospace;
+            font-weight: 500;
+            word-break: break-all;
+        }
+
+
+
+
+
+
+ a.mapboxgl-ctrl-logo{
+    width: 0;
+    height: 0;
+    margin: 0 0 -4px-4px;
+    display: block;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    overflow: hidden;
+    background-image: url(data:image/svg+xml;charset=utf-8,%3Csvg width='88' height='23' viewBox='0 0 88 23' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' fill-rule='evenodd'%3E %3Cdefs%3E %3Cpath id='logo' d='M11.5 2.25c5.105 0 9.25 4.145 9.25 9.25s-4.145 9.25-9.25 9.25-9.25-4.145-9.25-9.25 4.145-9.25 9.25-9.25zM6.997 15.983c-.051-.338-.828-5.802 2.233-8.873a4.395 4.395 0 013.13-1.28c1.27 0 2.49.51 3.39 1.42.91.9 1.42 2.12 1.42 3.39 0 1.18-.449 2.301-1.28 3.13C12.72 16.93 7 16 7 16l-.003-.017zM15.3 10.5l-2 .8-.8 2-.8-2-2-.8 2-.8.8-2 .8 2 2 .8z'/%3E %3Cpath id='text' d='M50.63 8c.13 0 .23.1.23.23V9c.7-.76 1.7-1.18 2.73-1.18 2.17 0 3.95 1.85 3.95 4.17s-1.77 4.19-3.94 4.19c-1.04 0-2.03-.43-2.74-1.18v3.77c0 .13-.1.23-.23.23h-1.4c-.13 0-.23-.1-.23-.23V8.23c0-.12.1-.23.23-.23h1.4zm-3.86.01c.01 0 .01 0 .01-.01.13 0 .22.1.22.22v7.55c0 .12-.1.23-.23.23h-1.4c-.13 0-.23-.1-.23-.23V15c-.7.76-1.69 1.19-2.73 1.19-2.17 0-3.94-1.87-3.94-4.19 0-2.32 1.77-4.19 3.94-4.19 1.03 0 2.02.43 2.73 1.18v-.75c0-.12.1-.23.23-.23h1.4zm26.375-.19a4.24 4.24 0 00-4.16 3.29c-.13.59-.13 1.19 0 1.77a4.233 4.233 0 004.17 3.3c2.35 0 4.26-1.87 4.26-4.19 0-2.32-1.9-4.17-4.27-4.17zM60.63 5c.13 0 .23.1.23.23v3.76c.7-.76 1.7-1.18 2.73-1.18 1.88 0 3.45 1.4 3.84 3.28.13.59.13 1.2 0 1.8-.39 1.88-1.96 3.29-3.84 3.29-1.03 0-2.02-.43-2.73-1.18v.77c0 .12-.1.23-.23.23h-1.4c-.13 0-.23-.1-.23-.23V5.23c0-.12.1-.23.23-.23h1.4zm-34 11h-1.4c-.13 0-.23-.11-.23-.23V8.22c.01-.13.1-.22.23-.22h1.4c.13 0 .22.11.23.22v.68c.5-.68 1.3-1.09 2.16-1.1h.03c1.09 0 2.09.6 2.6 1.55.45-.95 1.4-1.55 2.44-1.56 1.62 0 2.93 1.25 2.9 2.78l.03 5.2c0 .13-.1.23-.23.23h-1.41c-.13 0-.23-.11-.23-.23v-4.59c0-.98-.74-1.71-1.62-1.71-.8 0-1.46.7-1.59 1.62l.01 4.68c0 .13-.11.23-.23.23h-1.41c-.13 0-.23-.11-.23-.23v-4.59c0-.98-.74-1.71-1.62-1.71-.85 0-1.54.79-1.6 1.8v4.5c0 .13-.1.23-.23.23zm53.615 0h-1.61c-.04 0-.08-.01-.12-.03-.09-.06-.13-.19-.06-.28l2.43-3.71-2.39-3.65a.213.213 0 01-.03-.12c0-.12.09-.21.21-.21h1.61c.13 0 .24.06.3.17l1.41 2.37 1.4-2.37a.34.34 0 01.3-.17h1.6c.04 0 .08.01.12.03.09.06.13.19.06.28l-2.37 3.65 2.43 3.7c0 .05.01.09.01.13 0 .12-.09.21-.21.21h-1.61c-.13 0-.24-.06-.3-.17l-1.44-2.42-1.44 2.42a.34.34 0 01-.3.17zm-7.12-1.49c-1.33 0-2.42-1.12-2.42-2.51 0-1.39 1.08-2.52 2.42-2.52 1.33 0 2.42 1.12 2.42 2.51 0 1.39-1.08 2.51-2.42 2.52zm-19.865 0c-1.32 0-2.39-1.11-2.42-2.48v-.07c.02-1.38 1.09-2.49 2.4-2.49 1.32 0 2.41 1.12 2.41 2.51 0 1.39-1.07 2.52-2.39 2.53zm-8.11-2.48c-.01 1.37-1.09 2.47-2.41 2.47s-2.42-1.12-2.42-2.51c0-1.39 1.08-2.52 2.4-2.52 1.33 0 2.39 1.11 2.41 2.48l.02.08zm18.12 2.47c-1.32 0-2.39-1.11-2.41-2.48v-.06c.02-1.38 1.09-2.48 2.41-2.48s2.42 1.12 2.42 2.51c0 1.39-1.09 2.51-2.42 2.51z'/%3E %3C/defs%3E %3Cmask id='clip'%3E %3Crect x='0' y='0' width='100%25' height='100%25' fill='white'/%3E %3Cuse xlink:href='%23logo'/%3E %3Cuse xlink:href='%23text'/%3E %3C/mask%3E %3Cg id='outline' opacity='0.3' stroke='%23000' stroke-width='3'%3E %3Ccircle mask='url(%23clip)' cx='11.5' cy='11.5' r='9.25'/%3E %3Cuse xlink:href='%23text' mask='url(%23clip)'/%3E %3C/g%3E %3Cg id='fill' opacity='0.9' fill='%23fff'%3E %3Cuse xlink:href='%23logo'/%3E %3Cuse xlink:href='%23text'/%3E %3C/g%3E %3C/svg%3E);
+}
+
+
+
+
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    
+    <div id="controls">
+        <h1>
+  <svg version="1.1" viewBox="30 30 132 132" xmlns="http://www.w3.org/2000/svg" 
+      style="height: 1.1em; width: auto; vertical-align: -3px; margin-right: 3px;">
+    <g>
+      <path fill="#fad57a" d="m154.585 76.782l0 0c-0.186-20.651-17.184-38.474-38.332-40.193l-0.097 5.252c18.078 1.614 32.65 16.93 32.955 34.638z" fill-rule="evenodd"></path>
+      <path stroke="#fad57a" stroke-width="14.66" stroke-linejoin="round" stroke-linecap="butt" d="m154.585 76.782l0 0c-0.186-20.651-17.184-38.474-38.332-40.193l-0.097 5.252c18.078 1.614 32.65 16.93 32.955 34.638z" fill-rule="evenodd"></path>
+      <path fill="#748c6a" d="m37.415 76.782l0 0c0.186-20.651 17.184-38.474 38.332-40.193l0.097 5.252c-18.078 1.614-32.65 16.93-32.955 34.638z" fill-rule="evenodd"></path>
+      <path stroke="#748c6a" stroke-width="14.66" stroke-linejoin="round" stroke-linecap="butt" d="m37.415 76.782l0 0c0.186-20.651 17.184-38.474 38.332-40.193l0.097 5.252c-18.078 1.614-32.65 16.93-32.955 34.638z" fill-rule="evenodd"></path>
+      <path fill="#eb5b57" d="m154.585 115.218l0 0c-0.186 20.651-17.184 38.474-38.332 40.193l-0.097-5.252c18.078-1.614 32.65-16.93 32.955-34.638z" fill-rule="evenodd"></path>
+      <path stroke="#eb5b57" stroke-width="14.66" stroke-linejoin="round" stroke-linecap="butt" d="m154.585 115.218l0 0c-0.186 20.651-17.184 38.474-38.332 40.193l-0.097-5.252c18.078-1.614 32.65-16.93 32.955-34.638z" fill-rule="evenodd"></path>
+      <path fill="#517eb9" d="m37.415 115.218l0 0c0.186 20.65 17.184 38.474 38.332 40.192l0.097-5.252c-18.078-1.614-32.65-16.93-32.955-34.638z" fill-rule="evenodd"></path>
+      <path stroke="#517eb9" stroke-width="14.66" stroke-linejoin="round" stroke-linecap="butt" d="m37.415 115.218l0 0c0.186 20.65 17.184 38.474 38.332 40.192l0.097-5.252c-18.078-1.614-32.65-16.93-32.955-34.638z" fill-rule="evenodd"></path>
+      <path fill="#3c78d8" d="m69.536 96.003l0 0c0-14.62 11.852-26.472 26.472-26.472 7.021 0 13.754 2.789 18.718 7.754 4.965 4.964 7.754 11.697 7.754 18.718l0 0c0 14.62-11.852 26.472-26.472 26.472-14.62 0-26.472-11.852-26.472-26.472z" fill-rule="evenodd"></path>
+    </g>
+  </svg>
+  EMIIA.AI SDK (MRV/MAP)
+</h1>
+        
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="grid-toggle">
+            <label class="form-check-label" for="grid-toggle">
+                <div class="switch">
+                    <input type="checkbox" id="toggle-switch">
+                    <span class="slider"></span>
+                </div>
+                <span class="switch-text">Hexagon Grid H12</span>
+            </label>
+        </div>
+        
+        <div class="control-group">
+            <label for="resolution-select">Resolution:</label>
+            <select id="resolution-select">
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15" selected>15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+            </select>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-item" id="grid-status-item">
+                <span>Grid:</span>
+                <span id="grid-status" class="stat-value">Выкл</span>
+            </div>
+            <div class="stat-item">
+                <span>Center:</span>
+                <span id="center-coords" class="stat-value">37.7749, -122.4194</span>
+            </div>
+            <div class="stat-item">
+                <span>level:</span>
+                <span id="map-zoom" class="stat-value">12</span>
+            </div>
+            <div class="stat-item">
+                <span>Selection:</span>
+                <span id="marked-count" class="stat-value">0</span>
+            </div>
+        </div>
+    </div>
+
+<script>
+// ================== СТАБИЛЬНЫЙ H3 АЛГОРИТМ ==================
+class StableH3Grid {
+    constructor() {
+        this.EARTH_RADIUS = 6371000.0;
+        this.SQRT3 = Math.sqrt(3);
+        this.APOTHEM_FACTOR = this.SQRT3 / 2;
+        
+        // РАЗМЕРЫ ЯЧЕЕК
+        this.VISIBLE_EDGE_LENGTHS = {
+            10: 66000,   // 66m
+            11: 25000,   // 25m
+            12: 9000,    // 9m
+            13: 3000,    // 3m
+            14: 1000,    // 1m
+            15: 250,     // 0.25m → 250m
+            16: 100,     // 0.1m → 100m
+            17: 40,      // 0.04m → 40m
+            18: 16,      // 0.016m → 16m
+            19: 6,       // 0.006m → 6m
+            20: 2.5,     // 0.0025m → 2.5m
+            21: 1,       // 0.001m → 1m
+            22: 0.4      // 0.0004m → 0.4m
+        };
+    }
+    
+    getVisibleEdgeLength(resolution) {
+        return this.VISIBLE_EDGE_LENGTHS[resolution] || 250;
+    }
+    
+    getApothem(resolution) {
+        return this.getVisibleEdgeLength(resolution) * this.APOTHEM_FACTOR;
+    }
+    
+    getCenterDistance(resolution) {
+        return this.SQRT3 * this.getApothem(resolution);
+    }
+    
+    // Генерация ячеек (фиксированный радиус)
+    generateCells(centerLat, centerLng, resolution) {
+        const centerDistance = this.getCenterDistance(resolution);
+        const apothem = this.getApothem(resolution);
+        
+        // ФИКСИРОВАННЫЙ РАДИУС для всех уровней
+        const radius = 75; // Фиксированный радиус для стабильной сетки
+        
+        const cells = [];
+        const centerLatRad = centerLat * Math.PI / 180;
+        const cosCenterLat = Math.cos(centerLatRad);
+        const metersToLat = 180 / (Math.PI * this.EARTH_RADIUS);
+        
+        let cellIndex = 0;
+        
+        // Генерируем ячейки
+        for (let q = -radius; q <= radius; q++) {
+            for (let r = -radius; r <= radius; r++) {
+                if (Math.abs(q + r) <= radius) {
+                    // Вычисляем центр ячейки
+                    const x = centerDistance * (q + r/2);
+                    const y = centerDistance * this.SQRT3/2 * r;
+                    
+                    const dLat = y * metersToLat;
+                    const dLng = x * metersToLat / cosCenterLat;
+                    
+                    const cellLat = centerLat + dLat;
+                    const cellLng = centerLng + dLng;
+                    
+                    // Вычисляем вершины
+                    const vertices = this.createHexagonVertices(cellLat, cellLng, apothem);
+                    
+                    cells.push({
+                        center: { lat: cellLat, lng: cellLng },
+                        vertices: vertices,
+                        id: `H3-${resolution}-${q}-${r}`,
+                        index: cellIndex,
+                        q: q,
+                        r: r,
+                        resolution: resolution,
+                        marked: false // Флаг для пометки ячейки
+                    });
+                    
+                    cellIndex++;
+                }
+            }
+        }
+        
+        return cells;
+    }
+    
+    createHexagonVertices(centerLat, centerLng, apothem) {
+        const vertices = [];
+        const centerLatRad = centerLat * Math.PI / 180;
+        
+        for (let i = 0; i < 6; i++) {
+            const angle = 2 * Math.PI * i / 6 - Math.PI / 6;
+            const dx = apothem * Math.cos(angle);
+            const dy = apothem * Math.sin(angle);
+            
+            const dLat = dy / this.EARTH_RADIUS * (180 / Math.PI);
+            const dLng = dx / (this.EARTH_RADIUS * Math.cos(centerLatRad)) * (180 / Math.PI);
+            
+            vertices.push([
+                centerLat + dLat,
+                centerLng + dLng
+            ]);
+        }
+        
+        return vertices;
+    }
+    
+    createGeoJSON(cells) {
+        const features = [];
+        
+        cells.forEach((cell, index) => {
+            const coordinates = cell.vertices.map(v => [v[1], v[0]]);
+            coordinates.push(coordinates[0]);
+            
+            features.push({
+                type: 'Feature',
+                properties: {
+                    id: cell.id,
+                    index: cell.index,
+                    center_lat: cell.center.lat,
+                    center_lng: cell.center.lng,
+                    marked: cell.marked || false
+                },
+                geometry: {
+                    type: 'Polygon',
+                    coordinates: [coordinates]
+                }
+            });
+        });
+        
+        return {
+            type: 'FeatureCollection',
+            features: features
+        };
+    }
+}
+
+// ================== КОНСТАНТЫ ==================
+const MAPBOX_TOKEN = 'pk.eyJ1IjoicHJvY3Jhc3RpbmF0aW8iLCJhIjoiY2o4b3FtcW42MDZpNjJ4bnQxMWR0ejl4dSJ9.3ORIDvrfCQZ_UUyc1f2pUw';
+const INITIAL_VIEW = {
+    center: [-122.4194, 37.7749],
+    zoom: 12,
+
+    pitch: 30,
+attributionControl: false,
+    bearing: 0
+};
+
+
+
+
+
+// ================== ПЕРЕМЕННЫЕ ==================
+let map = null;
+let h3Grid = new StableH3Grid();
+let currentResolution = 15;
+let mapLoaded = false;
+let generatedCells = [];
+let currentSource = null;
+let isGenerating = false;
+let gridActive = false;
+let lastCenter = null;
+let markedCells = new Set(); // Множество для отслеживания помеченных ячеек
+let tooltip = null; // Для всплывающей подсказки
+let tooltipTimeout = null; // Таймер для задержки показа подсказки
+let currentPopup = null; // Текущая подсказка
+
+// ================== ФУНКЦИИ ==================
+
+function updateGridStatus(active) {
+    gridActive = active;
+    const gridStatus = document.getElementById('grid-status');
+    const gridStatusItem = document.getElementById('grid-status-item');
+    
+    if (active) {
+        gridStatus.textContent = 'Вкл';
+        gridStatusItem.className = 'stat-item grid-active';
+        document.getElementById('toggle-switch').checked = true;
+    } else {
+        gridStatus.textContent = 'Выкл';
+        gridStatusItem.className = 'stat-item grid-inactive';
+        document.getElementById('toggle-switch').checked = false;
+    }
+}
+
+function updateCenterDisplay(center) {
+    if (!center) return;
+    const lat = center.lat.toFixed(6);
+    const lng = center.lng.toFixed(6);
+    document.getElementById('center-coords').textContent = `${lat}, ${lng}`;
+}
+
+function updateMarkedCount() {
+    document.getElementById('marked-count').textContent = markedCells.size;
+}
+
+// Создание всплывающей подсказки
+function createTooltip(feature) {
+    if (!feature || !feature.properties) return '';
+    
+    const props = feature.properties;
+    const lat = props.center_lat.toFixed(12);
+    const lng = props.center_lng.toFixed(12);
+    
+    return `
+        <div class="tooltip-row">
+            <span class="tooltip-label">ID:</span>
+            <span class="tooltip-value">${props.id}</span>
+        </div>
+        <div class="tooltip-row">
+            <span class="tooltip-label">Lat:</span>
+            <span class="tooltip-value">${lat}</span>
+        </div>
+        <div class="tooltip-row">
+            <span class="tooltip-label">Lng:</span>
+            <span class="tooltip-value">${lng}</span>
+        </div>
+    `;
+}
+
+// Генерация сетки
+function generateGrid() {
+    if (!map || !mapLoaded || isGenerating || !gridActive) return;
+    
+    const center = map.getCenter();
+    lastCenter = center;
+    
+    isGenerating = true;
+    
+    setTimeout(() => {
+        try {
+            // Генерация ячеек
+            generatedCells = h3Grid.generateCells(
+                center.lat, 
+                center.lng, 
+                currentResolution
+            );
+            
+            // Восстанавливаем пометки из markedCells
+            markedCells.forEach(cellId => {
+                const cell = generatedCells.find(c => c.id === cellId);
+                if (cell) {
+                    cell.marked = true;
+                }
+            });
+            
+            // Обновляем отображение центра
+            updateCenterDisplay(center);
+            
+            // Отображение на карте
+            displayGrid();
+            
+        } catch (error) {
+            console.error('Ошибка генерации:', error);
+        } finally {
+            isGenerating = false;
+        }
+    }, 10);
+}
+
+// Отображение сетки на карте
+function displayGrid() {
+    if (!map || generatedCells.length === 0 || !gridActive) return;
+    
+    // Создаем GeoJSON
+    const geoJSON = h3Grid.createGeoJSON(generatedCells);
+    
+    // Очищаем старые слои
+    cleanupLayers();
+    
+    try {
+        // Создаем источник данных
+        currentSource = `cells-source-stable`;
+        
+        map.addSource(currentSource, {
+            type: 'geojson',
+            data: geoJSON
+        });
+        
+        // СЛОЙ ДЛЯ КЛИКОВ (невидимый) - по полю внутри гексагона
+        map.addLayer({
+            id: 'cells-click-layer',
+            type: 'fill',
+            source: currentSource,
+            paint: {
+                'fill-color': 'transparent', // Полностью прозрачный
+                'fill-opacity': 0
+            }
+        });
+        
+        // Слой для непомеченных ячеек (красные линии)
+        map.addLayer({
+            id: 'cells-boundaries-layer',
+            type: 'line',
+            source: currentSource,
+            filter: ['==', ['get', 'marked'], false],
+            paint: {
+                'line-color': '#3d85c6',
+                'line-width': [
+                    'interpolate', ['linear'], ['zoom'],
+                    0, 0.05,
+                    5, 0.1,
+                    10, 0.2,
+                    15, 0.3,
+                    18, 0.4,
+                    20, 0.5,
+                    21, 0.6,
+                    22, 0.7
+                ],
+                'line-opacity': [
+                    'interpolate', ['linear'], ['zoom'],
+                    0, 0.2,
+                    10, 0.5,
+                    15, 0.7,
+                    20, 0.9,
+                    22, 1.0
+                ]
+            }
+        });
+        
+        // ЗАЛИВКА для помеченных ячеек (полупрозрачная зеленый)
+        map.addLayer({
+            id: 'cells-marked-fill-layer',
+            type: 'fill',
+            source: currentSource,
+            filter: ['==', ['get', 'marked'], true],
+            paint: {
+                'fill-color': '#3d85c6',
+                'fill-opacity': 0.2 // Полупрозрачная заливка
+            }
+        });
+        
+        // Слой для помеченных ячеек (ЖИРНЫЕ линии)
+        map.addLayer({
+            id: 'cells-marked-layer',
+            type: 'line',
+            source: currentSource,
+            filter: ['==', ['get', 'marked'], true],
+            paint: {
+                'line-color': '#3d85c6',
+                'line-width': [
+                    'interpolate', ['linear'], ['zoom'],
+                    0, 0.12,    // Толще красных
+                    5, 0.25,
+                    10, 0.5,
+                    15, 0.75,
+                    18, 1.0,
+                    20, 1.25,
+                    21, 1.5,
+                    22, 1.75
+                ],
+                'line-opacity': [
+                    'interpolate', ['linear'], ['zoom'],
+                    0, 0.5,
+                    10, 0.8,
+                    15, 0.9,
+                    20, 1.0,
+                    22, 1.0
+                ]
+            }
+        });
+        
+        // Настройка обработчиков
+        setupClickHandler();
+        setupTooltipHandler();
+        
+    } catch (error) {
+        console.error('Ошибка при отображении:', error);
+    }
+}
+
+// Обработчик кликов по ячейкам
+function setupClickHandler() {
+    if (!map || !currentSource) return;
+    
+    // Убираем старый обработчик
+    map.off('click', 'cells-click-layer');
+    
+    // Обработчик клика по невидимой заливке (по полю внутри гексагона)
+    map.on('click', 'cells-click-layer', (e) => {
+        const features = map.queryRenderedFeatures(e.point, {
+            layers: ['cells-click-layer']
+        });
+        
+        if (!features.length) return;
+        
+        const feature = features[0];
+        const cellId = feature.properties.id;
+        const cellIndex = feature.properties.index;
+        const isMarked = feature.properties.marked;
+        
+        // Находим ячейку в массиве
+        const cell = generatedCells[cellIndex];
+        if (cell) {
+            // Переключаем состояние
+            const newMarkedState = !isMarked;
+            cell.marked = newMarkedState;
+            
+            if (newMarkedState) {
+                markedCells.add(cellId);
+            } else {
+                markedCells.delete(cellId);
+            }
+            
+            updateMarkedCount();
+            
+            // Обновляем отображение
+            updateMarkedCell(cellId, newMarkedState);
+        }
+        
+        e.preventDefault();
+    });
+}
+
+// Обработчик всплывающих подсказок
+function setupTooltipHandler() {
+    if (!map || !currentSource) return;
+    
+    // Убираем старые обработчики
+    map.off('mousemove', 'cells-click-layer');
+    map.off('mouseleave', 'cells-click-layer');
+    map.off('mouseenter', 'cells-click-layer');
+    
+    // Обработчик наведения мыши на ячейку
+    map.on('mouseenter', 'cells-click-layer', () => {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+    
+    map.on('mouseleave', 'cells-click-layer', () => {
+        map.getCanvas().style.cursor = '';
+        
+        // Очищаем таймер и подсказку при уходе мыши
+        if (tooltipTimeout) {
+            clearTimeout(tooltipTimeout);
+            tooltipTimeout = null;
+        }
+        
+        if (currentPopup) {
+            currentPopup.remove();
+            currentPopup = null;
+        }
+    });
+    
+    // Обработчик движения мыши с задержкой для подсказки
+    map.on('mousemove', 'cells-click-layer', (e) => {
+        // Очищаем предыдущий таймер
+        if (tooltipTimeout) {
+            clearTimeout(tooltipTimeout);
+            tooltipTimeout = null;
+        }
+        
+        // Удаляем текущую подсказку
+        if (currentPopup) {
+            currentPopup.remove();
+            currentPopup = null;
+        }
+        
+        // Ставим новый таймер на 500мс
+        tooltipTimeout = setTimeout(() => {
+            const features = map.queryRenderedFeatures(e.point, {
+                layers: ['cells-click-layer']
+            });
+            
+            if (features.length && !currentPopup) {
+                const feature = features[0];
+                const popupContent = createTooltip(feature);
+                
+                currentPopup = new mapboxgl.Popup({
+                    closeButton: false,
+                    closeOnClick: false,
+                    className: 'custom-tooltip',
+                    anchor: 'bottom',
+                    offset: 10
+                })
+                    .setLngLat(e.lngLat)
+                    .setHTML(popupContent)
+                    .addTo(map);
+            }
+        }, 500); // Задержка 500мс перед показом
+    });
+}
+
+// Обновление отображения помеченной ячейки
+function updateMarkedCell(cellId, marked) {
+    if (!map || !currentSource) return;
+    
+    // Получаем текущие данные
+    const source = map.getSource(currentSource);
+    const data = source._data;
+    
+    // Находим feature по cellId
+    const featureIndex = data.features.findIndex(f => f.properties.id === cellId);
+    if (featureIndex !== -1) {
+        // Обновляем свойство marked
+        data.features[featureIndex].properties.marked = marked;
+        
+        // Обновляем источник данных
+        source.setData(data);
+    }
+}
+
+// Переключение сетки с очисткой пометок
+function toggleGrid() {
+    if (isGenerating) return;
+    
+    if (!gridActive) {
+        // Включаем сетку
+        updateGridStatus(true);
+        generateGrid();
+    } else {
+        // Выключаем сетку - ОЧИЩАЕМ ВСЕ ПОМЕТКИ
+        markedCells.clear();
+        updateMarkedCount();
+        
+        // Очищаем подсказку если есть
+        if (currentPopup) {
+            currentPopup.remove();
+            currentPopup = null;
+        }
+        
+        if (tooltipTimeout) {
+            clearTimeout(tooltipTimeout);
+            tooltipTimeout = null;
+        }
+        
+        updateGridStatus(false);
+        cleanupLayers();
+        generatedCells = [];
+    }
+}
+
+// Очистка всех слоев
+function cleanupLayers() {
+    if (!map) return;
+    
+    try {
+        if (map.getLayer('cells-click-layer')) {
+            map.removeLayer('cells-click-layer');
+        }
+        if (map.getLayer('cells-boundaries-layer')) {
+            map.removeLayer('cells-boundaries-layer');
+        }
+        if (map.getLayer('cells-marked-fill-layer')) {
+            map.removeLayer('cells-marked-fill-layer');
+        }
+        if (map.getLayer('cells-marked-layer')) {
+            map.removeLayer('cells-marked-layer');
+        }
+    } catch (e) {}
+    
+    try {
+        if (map.getSource('cells-source-stable')) {
+            map.removeSource('cells-source-stable');
+        }
+    } catch (e) {}
+    
+    currentSource = null;
+}
+
+// ================== ИНИЦИАЛИЗАЦИЯ КАРТЫ ==================
+
+function initializeMap() {
+    mapboxgl.accessToken = MAPBOX_TOKEN;
+    
+    map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/light-v11',
+        center: INITIAL_VIEW.center,
+        zoom: INITIAL_VIEW.zoom,
+        pitch: INITIAL_VIEW.pitch,
+        bearing: INITIAL_VIEW.bearing,
+        maxZoom: 24,
+        attributionControl: false,
+        minZoom: 0,
+        antialias: true
+    });
+    
+    
+    
+    // Обновляем зум карты
+    map.on('zoom', () => {
+        const zoom = map.getZoom();
+        document.getElementById('map-zoom').textContent = zoom.toFixed(1);
+    });
+    
+    // Обновляем центр карты
+    map.on('move', () => {
+        const center = map.getCenter();
+        updateCenterDisplay(center);
+    });
+    
+    map.on('load', () => {
+        mapLoaded = true;
+        const center = map.getCenter();
+        updateCenterDisplay(center);
+        document.getElementById('map-zoom').textContent = map.getZoom().toFixed(1);
+        updateMarkedCount();
+    });
+}
+
+// ================== ОБРАБОТЧИКИ СОБЫТИЙ ==================
+
+function setupEventListeners() {
+    // Обработчик переключателя
+    document.getElementById('toggle-switch').addEventListener('change', toggleGrid);
+    
+    // Обработчик для текстовой метки
+    document.querySelector('.form-check-label').addEventListener('click', (e) => {
+        if (e.target.tagName !== 'INPUT') {
+            document.getElementById('toggle-switch').click();
+        }
+    });
+    
+    // Обработчик изменения уровня
+    document.getElementById('resolution-select').addEventListener('change', (e) => {
+        currentResolution = parseInt(e.target.value);
+        
+        // Если сетка активна, перегенерируем с новым уровнем
+        if (gridActive && !isGenerating) {
+            // Очищаем пометки при смене уровня
+            markedCells.clear();
+            updateMarkedCount();
+            
+            generateGrid();
+        }
+    });
+}
+
+// ================== ЗАПУСК ==================
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (typeof mapboxgl === 'undefined') {
+        alert('Mapbox библиотека не загружена');
+        return;
+    }
+    
+    setupEventListeners();
+    initializeMap();
+});
+</script>
+</body>
+</html>
