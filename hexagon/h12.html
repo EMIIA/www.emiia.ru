@@ -697,6 +697,54 @@
             fill: currentColor;
             stroke: currentColor;
         }
+
+
+
+
+
+
+
+
+
+/* ================== FIX FOR iOS TAP HIGHLIGHT ================== */
+/* Remove gray highlight on tap for iOS devices */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Ensure all interactive elements have no highlight */
+.form-check-label,
+.switch,
+.switch-text,
+.custom-select-trigger,
+.custom-option,
+.header1,
+.header1 a,
+.mapboxgl-popup-close-button,
+button,
+[onclick] {
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+/* Custom active states for better UX */
+.form-check-label:active,
+.switch:active,
+.custom-select-trigger:active {
+    opacity: 0.9;
+    transform: scale(0.98);
+    transition: all 0.1s ease;
+}
+
+/* For the toggle button in bottom right */
+.header1 a:active {
+    transform: scale(0.95);
+    background-color: rgba(61, 133, 198, 0.1);
+}
+
+
+
     </style>
 </head>
 <body>
