@@ -119,6 +119,10 @@
     max-width: 90vw;    /* Разрешаем занимать до 90% ширины экрана */
     min-width: 300px;   /* Твой базовый размер */
     width: max-content; /* Ширина подстроится под самую длинную строку текста */
+
+
+
+
 }
 
 
@@ -130,6 +134,8 @@
         #controls.collapsed {
             padding-bottom: 10px;
             height: auto;
+
+
         }
         
         .header {
@@ -144,11 +150,73 @@
 
 
 
+/* Эффект тумана снизу */
+
+
+
+
+
+
+#controls:not(.collapsed):after {
+    content: "";
+    position: absolute;
+    top: 55px; 
+    left: 0;
+    right: 0;
+    height: 30px; /* Увеличили высоту для еще более плавного перехода */
+    background: linear-gradient(to bottom, 
+        rgba(255, 255, 255, 1) 0%,      /* Плотный старт */
+        rgba(255, 255, 255, 0.9) 50%,   /* Мягкий полутон (третий слой) */
+        rgba(255, 255, 255, 0) 100%     /* Полное растворение */
+    );
+    pointer-events: none;
+    z-index: 15;
+}
+
+
+
+
+
+
+/* Эффект тумана СНИЗУ */
+#controls:not(.collapsed):before {
+    content: "";
+    position: absolute;
+    bottom: 0; 
+    left: 0;
+    right: 0;
+    height: 40px; /* Снизу можно чуть побольше для красоты */
+    background: linear-gradient(to top, 
+        rgba(255, 255, 255, 1) 0%,      /* Плотный у основания */
+        rgba(255, 255, 255, 0.9) 50%,   /* Твой мягкий полутон */
+        rgba(255, 255, 255, 0) 100%     /* Растворение вверх */
+    );
+    pointer-events: none;
+    z-index: 15;
+    border-radius: 0 0 38px 38px; /* Чтобы не вылезало за скругление низа */
+}
+
+
+
+
+
+
+
+
+}
+
+/* Когда меню свернуто, туман не нужен */
+#controls.collapsed:after {
+    display: none;
+}
 
 /* Когда контейнер свернут расстояние при свернутом менбю сверну и снизу*/
 #controls.collapsed {
     padding-top: 12px;    /* Минимальный отступ сверху */
     padding-bottom: 0px; /* Минимальный отступ снизу */
+
+
+
 }
 
 
@@ -167,6 +235,8 @@
             color: #383838;
             font-weight: 600;
             font-family: 'Montserrat', sans-serif;
+
+
         }
 
 
@@ -651,6 +721,9 @@
                     </g>
                 </svg>
                 <span class="header-text">EMIIA.AI SDK</span>
+
+
+
             </div>
 
 <svg class="toggle-icon" id="toggle-icon" xmlns="http://www.w3.org/2000/svg" 
@@ -859,7 +932,9 @@
             </div>
             
             <!-- Настройки и аккаунт -->
-            <div class="account-settings">
+
+
+            <div class="account-settings" style="margin-bottom: 30px;">
                 <span class="account-text">Настройки и аккаунт</span>
                 <svg class="account-icon" xmlns="http://www.w3.org/2000/svg " width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                     <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0"/>
@@ -868,6 +943,8 @@
             </div>
         </div>
     </div>
+
+
 
 <script>
 // ================== СТАБИЛЬНЫЙ H3 АЛГОРИТМ ==================
