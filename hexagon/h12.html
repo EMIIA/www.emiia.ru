@@ -117,8 +117,13 @@
 #controls {
     /* ... твои позиции ... */
     max-width: 90vw;    /* Разрешаем занимать до 90% ширины экрана */
-    min-width: 280px;   /* Твой базовый размер */
+    min-width: 300px;   /* Твой базовый размер */
     width: max-content; /* Ширина подстроится под самую длинную строку текста */
+}
+
+
+#controls div, #controls span {
+    white-space: nowrap;
 }
 
 
@@ -168,7 +173,7 @@
 .header-left {
     display: flex;
     align-items: center;
-    gap: 32px;                 /* Отступ между лого и текстом */
+    gap: 43px;                 /* Отступ между лого и текстом */
     flex-grow: 1;              /* Позволяет блоку расширяться */
 }
 
