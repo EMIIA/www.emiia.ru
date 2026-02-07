@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -199,7 +200,6 @@
 
 
 
-}
 
 /* Когда меню свернуто, туман не нужен */
 #controls.collapsed:after {
@@ -741,6 +741,28 @@ button,
     background-color: rgba(61, 133, 198, 0.1);
 }
 
+
+
+
+
+
+
+
+
+#controls {
+    position: absolute;
+    bottom: 80px;  /* десктоп — поднято выше */
+    left: 25px;
+    z-index: 1000;
+    /* остальные стили */
+}
+
+/* Только для мобильных — опускаем ниже */
+@media (max-width: 768px) {
+    #controls {
+        bottom: 20px;
+    }
+}
 
 
     </style>
@@ -2040,7 +2062,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <!-- ВОССТАНОВЛЕННЫЙ БЛОК СПРАВА ВНИЗУ -->
 <div class="header1">
-    <a class="header1" href="javascript:void(0)" onclick="showPopup()" 
+    <a href="javascript:void(0)" onclick="showPopup()" 
    style="display: inline-block; padding: 0px; border-radius: 20px; transition: all 0.2s ease; "
    onmouseout="this.style.background='none'; this.style.transform='scale(1)';"
    ontouchstart="this.style.background='rgba(61, 133, 198, 0.08)'; this.style.transform='scale(0.98)';"
