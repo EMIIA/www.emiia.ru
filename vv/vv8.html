@@ -3372,13 +3372,13 @@ const exclamationPopup = new mapboxgl.Popup({
 // HTML для первого знака
 const redLinesHTML1 = `
 <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #eee;">
-    <div style="color: #ff0000; font-size: 14px; margin-bottom: 8px;">
+    <div style="color: #3d85c6; font-size: 14px; margin-bottom: 8px;">
         Нарушение промышленной безопасности.
     </div>
-    <div style="color: #ff0000; font-size: 14px;">
+    <div style="color: #3d85c6; font-size: 14px;">
         <a href="https://www.emiia.ai/" 
            target="_blank" 
-           style="color: #ff0000; text-decoration: none;">
+           style="color: #3d85c6; text-decoration: none;">
             ОТЧЁТ ❯
         </a>
     </div>
@@ -3388,13 +3388,13 @@ const redLinesHTML1 = `
 // HTML для второго знака
 const redLinesHTML2 = `
 <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #eee;">
-    <div style="color: #ff0000; font-size: 14px; margin-bottom: 8px;">
+    <div style="color: #3d85c6; font-size: 14px; margin-bottom: 8px;">
         Перегрев электропроводки. 
     </div>
-    <div style="color: #ff0000; font-size: 14px;">
+    <div style="color: #3d85c6; font-size: 14px;">
         <a href="https://www.emiia.ai/" 
            target="_blank" 
-           style="color: #ff0000; text-decoration: none;">
+           style="color:#3d85c6; text-decoration: none;">
             ОТЧЁТ ❯
         </a>
     </div>
@@ -3713,13 +3713,13 @@ map.addLayer({
 // HTML для popup всех трех новых знаков (одинаковый текст как у первого)
 const newRedLinesHTML = `
 <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #eee;">
-    <div style="color: #ff0000; font-size: 14px; margin-bottom: 8px;">
-        Нарушение промышленной безопасности.
+    <div style="color:  #3d85c6; font-size: 14px; margin-bottom: 8px;">
+        Истекает срок замены огнетушителя.
     </div>
-    <div style="color: #ff0000; font-size: 14px;">
+    <div style="color:  #3d85c6; font-size: 14px;">
         <a href="https://www.emiia.ai/" 
            target="_blank" 
-           style="color: #ff0000; text-decoration: none;">
+           style="color:  #3d85c6; text-decoration: none;">
             ОТЧЁТ ❯
         </a>
     </div>
@@ -4204,9 +4204,10 @@ function resetStopPoints2() {
 
 // Функции для принудительного обновления слоев точек остановок
 function refreshStopPointsLayer1() {
-    if (map.getLayer('stop-points-layer-1')) {
-        map.removeLayer('stop-points-layer-1');
-    }
+    if (window.svgLayersHidden) {
+    map.setPaintProperty('stop-points-layer-1', 'icon-opacity', 0);
+    map.setLayoutProperty('stop-points-layer-1', 'visibility', 'none');
+}
     
     map.addLayer({
         'id': 'stop-points-layer-1',
@@ -4226,9 +4227,13 @@ function refreshStopPointsLayer1() {
 }
 
 function refreshStopPointsLayer2() {
-    if (map.getLayer('stop-points-layer-2')) {
-        map.removeLayer('stop-points-layer-2');
-    }
+    if (window.svgLayersHidden) {
+    map.setPaintProperty('stop-points-layer-2', 'icon-opacity', 0);
+    map.setLayoutProperty('stop-points-layer-2', 'visibility', 'none');
+}
+
+
+
     
     map.addLayer({
         'id': 'stop-points-layer-2',
@@ -4272,7 +4277,7 @@ function formatISSData(issData) {
     
     return `
         <div class="iss-data">
-            <h3>ВкусВилл Dark Store: #33</h3>
+            <h3>Dark Store: #33</h3>
             <div class="data-grid">
                 <div class="data-item">
                     <strong>Широта:</strong> ${issData.latitude ? issData.latitude.toFixed(4) : 'N/A'}°
@@ -6996,172 +7001,100 @@ textarea::placeholder {
 <!-- ВСТАВЬТЕ В КОНЕЦ </body>, ПЕРЕД ЗАКРЫВАЮЩИМ ТЕГОМ -->
 
 <script>
-// === УПРАВЛЕНИЕ АНИМИРОВАННЫМИ SVG (СТАТИЧНЫМИ ИКОНКАМИ) ===
-// === ОБРАБОТЧИК ДЛЯ ПУНКТА "СООБЩЕНИЯ" (SVG-СЛОИ) ===
+// === УПРАВЛЕНИЕ ВСЕМИ SVG СЛОЯМИ ===
 (function() {
     'use strict';
     
-    // Состояние видимости SVG-слоев (по умолчанию ВЫКЛЮЧЕНЫ)
-    let svgLayersVisible = false;
+    // Глобальное состояние
+    window.svgLayersHidden = true; // По умолчанию СКРЫТЫ
     
-    // Все SVG-слои, которые управляются этим пунктом
+    // Все контролируемые слои
     const svgLayers = [
-        'layer-1',                   // восклицательный знак (красный)
-        'layer-2',                   // энергия (красная молния)
-        'layer-3',                   // термометр и влажность
-        'layer-4',                   // жёлтый восклицательный знак 1
-        'layer-5',                   // жёлтый восклицательный знак 2
-        'layer-6',                   // жёлтый восклицательный знак 3
-        'stop-points-layer-1',       // точки остановок 1
-        'stop-points-layer-2',       // точки остановок 2
-        'passed-route-line-1',       // пройденный путь 1
-        'passed-route-line-2',       // пройденный путь 2
-        'future-route-line-1',       // предстоящий путь 1
-        'future-route-line-2',       // предстоящий путь 2
-        'line-background',           // бегущая линия фон
-        'line-dashed'                // бегущая линия пунктир
+        'layer-1', 'layer-2', 'layer-3', 'layer-4', 'layer-5', 'layer-6',
+        'stop-points-layer-1', 'stop-points-layer-2',
+        'passed-route-line-1', 'passed-route-line-2',
+        'future-route-line-1', 'future-route-line-2',
+        'line-background', 'line-dashed'
     ];
     
-    // Функция переключения видимости SVG-слоев
-    function toggleSVGLayers() {
-        svgLayersVisible = !svgLayersVisible;
+    // Функция скрытия/показа
+    window.toggleAllSVGLayers = function() {
+        window.svgLayersHidden = !window.svgLayersHidden;
         
-        svgLayers.forEach(layerId => {
+        svgLayers.forEach(function(layerId) {
             try {
                 if (map.getLayer(layerId)) {
-                    // Для слоёв точек остановок отключаем minzoom при скрытии
-                    if (layerId === 'stop-points-layer-1' || layerId === 'stop-points-layer-2') {
-                        if (svgLayersVisible) {
-                            // Показываем: включаем minzoom обратно и делаем visible
-                            map.setLayerZoomRange(layerId, 20, 24);
-                            map.setLayoutProperty(layerId, 'visibility', 'visible');
-                        } else {
-                            // Скрываем: отключаем minzoom и делаем none
-                            map.setLayerZoomRange(layerId, 0, 24);
-                            map.setLayoutProperty(layerId, 'visibility', 'none');
-                        }
-                    } else {
-                        // Обычные слои
-                        map.setLayoutProperty(layerId, 'visibility', 
-                            svgLayersVisible ? 'visible' : 'none');
+                    // Главное — opacity в paint, visibility дополнительно
+                    var layer = map.getLayer(layerId);
+                    
+                    if (layer.type === 'symbol') {
+                        map.setPaintProperty(layerId, 'icon-opacity', window.svgLayersHidden ? 0 : 1);
                     }
+                    else if (layer.type === 'line') {
+                        map.setPaintProperty(layerId, 'line-opacity', window.svgLayersHidden ? 0 : 1);
+                    }
+                    
+                    map.setLayoutProperty(layerId, 'visibility', window.svgLayersHidden ? 'none' : 'visible');
                 }
-            } catch (e) {
-                console.log('Слой не найден:', layerId);
-            }
+            } catch(e) {}
         });
         
-        updateMenuIcon();
-        console.log('SVG-слои:', svgLayersVisible ? 'ВКЛЮЧЕНЫ' : 'ВЫКЛЮЧЕНЫ');
-    }
-    
-    // Обновление иконки и текста в меню
-    function updateMenuIcon() {
-        const messagesItem = document.querySelector('[data-action="messages"]');
-        if (!messagesItem) return;
-        
-        const svg = messagesItem.querySelector('svg');
-        const span = messagesItem.querySelector('span');
-        
-        if (svgLayersVisible) {
-            // Активное состояние — зеленый цвет
-            messagesItem.style.background = 'rgba(144, 238, 144, 0.2)';
-            if (svg) {
-                svg.style.color = '#90EE90';
-                svg.querySelectorAll('path').forEach(path => {
-                    path.setAttribute('stroke', '#90EE90');
-                    path.setAttribute('fill', '#90EE90');
-                });
-            }
-            if (span) span.style.color = '#90EE90';
-        } else {
-            // Неактивное состояние — стандартный цвет
-            messagesItem.style.background = '';
-            if (svg) {
-                svg.style.color = '#f8f9fa';
-                svg.querySelectorAll('path').forEach(path => {
-                    path.setAttribute('stroke', '#f8f9fa');
-                    path.setAttribute('fill', '#f8f9fa');
-                });
-            }
-            if (span) span.style.color = '#f8f9fa';
+        // Обновляем визуал кнопки
+        var btn = document.querySelector('[data-action="messages"]');
+        if (btn) {
+            btn.style.background = window.svgLayersHidden ? '' : 'rgba(144, 238, 144, 0.3)';
         }
-    }
+        
+        console.log('SVG:', window.svgLayersHidden ? 'СКРЫТЫ' : 'ПОКАЗАНЫ');
+    };
     
-    // Скрыть все SVG-слои при инициализации
-    function hideAllSVGLayers() {
-        svgLayers.forEach(layerId => {
+    // Первоначальное скрытие
+    function initialHide() {
+        svgLayers.forEach(function(layerId) {
             try {
                 if (map.getLayer(layerId)) {
-                    // Для слоёв точек остановок отключаем minzoom при скрытии
-                    if (layerId === 'stop-points-layer-1' || layerId === 'stop-points-layer-2') {
-                        map.setLayerZoomRange(layerId, 0, 24);
+                    var layer = map.getLayer(layerId);
+                    
+                    if (layer.type === 'symbol') {
+                        map.setPaintProperty(layerId, 'icon-opacity', 0);
                     }
+                    else if (layer.type === 'line') {
+                        map.setPaintProperty(layerId, 'line-opacity', 0);
+                    }
+                    
                     map.setLayoutProperty(layerId, 'visibility', 'none');
                 }
-            } catch (e) {}
+            } catch(e) {}
         });
     }
     
-    // Инициализация обработчика
+    // Навешиваем обработчик
     function init() {
-        // Сначала скрываем все слои
-        hideAllSVGLayers();
+        // Сначала скрываем всё
+        initialHide();
         
-        const messagesItem = document.querySelector('[data-action="messages"]');
-        if (!messagesItem) {
-            setTimeout(init, 500);
+        var btn = document.querySelector('[data-action="messages"]');
+        if (!btn) {
+            setTimeout(init, 300);
             return;
         }
         
-        // Удаляем старые обработчики через клонирование
-        const newItem = messagesItem.cloneNode(true);
-        messagesItem.parentNode.replaceChild(newItem, messagesItem);
-        
-        // Навешиваем новый обработчик
-        newItem.addEventListener('click', function(e) {
+        // Чистый обработчик
+        btn.onclick = function(e) {
             e.stopPropagation();
             e.preventDefault();
+            window.toggleAllSVGLayers();
             
-            // Переключаем SVG-слои
-            toggleSVGLayers();
-            
-            // Закрываем меню
-            closeDotsMenu();
-        });
+            // Закрыть меню
+            var menu = document.getElementById('dotsMenu');
+            var overlay = document.getElementById('dotsOverlay');
+            if (menu) {
+                menu.style.display = 'none';
+                if (overlay) overlay.style.display = 'none';
+            }
+        };
         
-        // Устанавливаем начальное состояние иконки
-        updateMenuIcon();
-        
-        console.log('✅ Обработчик "Сообщения" (SVG) инициализирован');
-    }
-    
-    // Функция закрытия меню (должна быть доступна из глобальной области)
-    function closeDotsMenu() {
-        const dotsMenu = document.getElementById('dotsMenu');
-        const dotsOverlay = document.getElementById('dotsOverlay');
-        
-        if (!dotsMenu) return;
-        
-        // Закрыть все подменю
-        const allSubmenuParents = dotsMenu.querySelectorAll('.submenu-parent');
-        const allSubmenus = dotsMenu.querySelectorAll('.submenu');
-        
-        allSubmenuParents.forEach(parent => parent.classList.remove('active'));
-        allSubmenus.forEach(submenu => submenu.classList.remove('active'));
-        
-        // Анимация закрытия
-        dotsMenu.style.opacity = '0';
-        dotsMenu.style.transform = 'translateY(10px) scale(0.95)';
-        
-        if (dotsOverlay) {
-            dotsOverlay.style.opacity = '0';
-        }
-        
-        setTimeout(() => {
-            dotsMenu.style.display = 'none';
-            if (dotsOverlay) dotsOverlay.style.display = 'none';
-        }, 300);
+        console.log('✅ SVG контроллер активен');
     }
     
     // Запуск
@@ -7171,25 +7104,113 @@ textarea::placeholder {
         init();
     }
     
-    // Резервные попытки
+    // Повторные попытки
+    setTimeout(init, 500);
     setTimeout(init, 1000);
-    setTimeout(init, 2000);
-    setTimeout(init, 3000);
     
 })();
 </script>
 
 <style>
-.menu-item-with-icon[data-action="messages"] svg {
-    transition: all 0.3s ease;
-    color: #f8f9fa;
-    fill: #f8f9fa;
-}
-
-.menu-item-with-icon[data-action="messages"]:hover {
-    background: #cccccc69;
-}
+.menu-item-with-icon[data-action="messages"]:hover { background: #cccccc69; }
 </style>
+
+
+
+
+
+
+
+<script>
+// === ПЕРЕОПРЕДЕЛЕНИЕ ФУНКЦИЙ ОБНОВЛЕНИЯ ТОЧЕК ОСТАНОВОК ===
+// Этот код должен выполняться ПОСЛЕ создания refreshStopPointsLayer1/2
+
+(function() {
+    'use strict';
+    
+    // Ждём, пока Mapbox и основные функции загрузятся
+    function waitForMapboxAndOverride() {
+        if (typeof map === 'undefined' || !map.getSource || typeof refreshStopPointsLayer1 !== 'function') {
+            setTimeout(waitForMapboxAndOverride, 100);
+            return;
+        }
+        
+        console.log('🔄 Переопределяем функции точек остановок...');
+        
+        // Сохраняем оригинальные функции
+        const originalRefresh1 = window.refreshStopPointsLayer1;
+        const originalRefresh2 = window.refreshStopPointsLayer2;
+        
+        // Переопределяем функцию 1
+        window.refreshStopPointsLayer1 = function() {
+            // Удаляем старый слой если есть
+            if (map.getLayer('stop-points-layer-1')) {
+                map.removeLayer('stop-points-layer-1');
+            }
+            
+            // Создаём новый с учётом глобальной видимости
+            const isVisible = window.svgLayersGlobalVisible;
+            
+            map.addLayer({
+                'id': 'stop-points-layer-1',
+                'type': 'symbol',
+                'source': 'stop-points-1',
+                'minzoom': 20,
+                'layout': {
+                    'icon-image': ['case',
+                        ['==', ['get', 'isCompleted'], true], 'gray-dot',
+                        'red-dot'
+                    ],
+                    'icon-offset': [0, 0],
+                    'icon-allow-overlap': true,
+                    'icon-ignore-placement': true,
+                    'visibility': isVisible ? 'visible' : 'none'
+                },
+                'paint': {
+                    'icon-opacity': isVisible ? 1 : 0
+                }
+            }, 'layer-with-pulsing-dot-1');
+        };
+        
+        // Переопределяем функцию 2
+        window.refreshStopPointsLayer2 = function() {
+            // Удаляем старый слой если есть
+            if (map.getLayer('stop-points-layer-2')) {
+                map.removeLayer('stop-points-layer-2');
+            }
+            
+            // Создаём новый с учётом глобальной видимости
+            const isVisible = window.svgLayersGlobalVisible;
+            
+            map.addLayer({
+                'id': 'stop-points-layer-2',
+                'type': 'symbol',
+                'source': 'stop-points-2',
+                'minzoom': 20,
+                'layout': {
+                    'icon-image': ['case',
+                        ['==', ['get', 'isCompleted'], true], 'gray-dot',
+                        'red-dot'
+                    ],
+                    'icon-offset': [0, 0],
+                    'icon-allow-overlap': true,
+                    'icon-ignore-placement': true,
+                    'visibility': isVisible ? 'visible' : 'none'
+                },
+                'paint': {
+                    'icon-opacity': isVisible ? 1 : 0
+                }
+            }, 'stop-points-layer-1');
+        };
+        
+        console.log('✅ Функции переопределены');
+    }
+    
+    // Запускаем переопределение
+    waitForMapboxAndOverride();
+    
+})();
+</script>
 
 
 
