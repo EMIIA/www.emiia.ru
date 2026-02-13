@@ -5,8 +5,37 @@
 <html>
 <head>
     <title>EMIIA.AI H12</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+
+
+
+
+
+<meta charset="UTF-8">
+
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+
+
+<!-- PWA -->
+<link rel="shortcut icon" href="https://sos.emiia.ai/vv.ico" type="image/x-icon">
+<meta name="theme-color" content="#f8f9fa">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="https://sos.emiia.ai/vv.webmanifest">
+
+
+
+
+
+
+
+
+
+
 
     <style>
         .header1 {
@@ -1937,9 +1966,15 @@ function initializeMap() {
 
 
 
+let modelAdded = false;
 
+// === РЕГУЛИРОВКА РЕЛЬЕФА ===
+// 0 = без рельефа, 0.5 = средний, 1 = полный
+const reliefValue = 0; // Меняйте здесь значение
 
 map.on('load', () => {
+    console.log('Map loaded, zoom:', map.getZoom());
+    
     const layers = map.getStyle().layers;
     let labelLayerId;
     for (let i = 0; i < layers.length; i++) {
@@ -1954,10 +1989,22 @@ map.on('load', () => {
         type: 'vector'
     });
 
+    // === РЕГУЛИРОВКА РЕЛЬЕФА ===
+    if (reliefValue === 0) {
+        if (map.getTerrain()) {
+            map.setTerrain(null);
+        }
+    } else {
+        map.setTerrain({
+            source: 'openmaptiles',
+            exaggeration: reliefValue
+        });
+    }
+
     map.setLight({
         'anchor': 'viewport',
         'color': '#ffffff',
-        'intensity': 0.2,  // Уменьшил с 0.3 до 0.2
+        'intensity': 0.2,
         'position': [1.15, 90, 80]
     });
 
@@ -2020,37 +2067,24 @@ map.on('load', () => {
                 ['linear'],
                 ['zoom'],
                 14, 0,
-                15.5, 0.4,  // Уменьшил с 0.15 до 0.1
+                15.5, 0.4,
+
+
                 18, 0.0
             ],
-            'fill-extrusion-vertical-gradient': false
+            'fill-extrusion-color': '#d0e0f0'
         }
     }, labelLayerId);
+
+    // === ЗАГРУЗКА 3D МОДЕЛИ ===
+    setTimeout(add3DModelSafe, 1000); // Увеличил задержку до 1 секунды
 });
 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// === ОБРАБОТЧИК STYLE.LOAD ДЛЯ 3D МОДЕЛИ ===
-   // === 3D МОДЕЛЬ С ЗАЩИТОЙ ОТ ДВОЙНОЙ ЗАГРУЗКИ ===
-let modelAdded = false;
-
+// === 3D МОДЕЛЬ ===
 function add3DModelSafe() {
     if (modelAdded || !map) return;
     
     try {
-        // Проверяем существование источника
         if (map.getSource('model20')) {
             console.log('3D модель уже существует');
             modelAdded = true;
@@ -2108,7 +2142,7 @@ function add3DModelSafe() {
             'id': 'tower20',
             'type': 'model',
             'source': 'model20',
-            'minzoom': 15, // Уменьшили для надежности
+            'minzoom': 15,
             'maxzoom': 24,
             'layout': {
                 'model-id': ['get', 'model-uri']
@@ -2139,30 +2173,34 @@ function add3DModelSafe() {
 
     } catch (error) {
         console.error('❌ Ошибка добавления 3D модели:', error);
-        modelAdded = false;
     }
 }
 
-// Обработчики событий
-map.on('load', () => {
-    console.log('Map loaded, zoom:', map.getZoom());
-    setTimeout(add3DModelSafe, 500); // Задержка для гарантии
-});
-
+// Дополнительные обработчики для надежности
 map.on('style.load', () => {
     console.log('Style loaded/reloaded');
     if (!modelAdded) {
-        setTimeout(add3DModelSafe, 500);
+        setTimeout(add3DModelSafe, 1000);
     }
 });
 
-// Резервный вызов через 2 секунды
+// Резервный вызов через 3 секунды
 setTimeout(() => {
     if (!modelAdded) {
         console.log('Резервная попытка добавления модели...');
         add3DModelSafe();
     }
-}, 2000);
+}, 3000);
+
+
+
+
+
+
+
+
+
+
 
 
 
