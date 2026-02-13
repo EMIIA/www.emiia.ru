@@ -33,10 +33,6 @@
 
 
 
-
-
-
-
     <style>
         .header1 {
             padding: 0rem;
@@ -812,6 +808,154 @@ button,
 
 
     </style>
+
+
+
+
+
+
+
+<style>
+
+/* ===== PWA FIXES ===== */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    height: -webkit-fill-available; /* Для iOS */
+    overflow: hidden;
+    background: #f8f9fa; /* Цвет как у карты */
+}
+
+html {
+    height: -webkit-fill-available;
+}
+
+#map {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: #f8f9fa;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Фикс для iOS safe areas */
+@supports (padding: max(0px)) {
+    #map {
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+/* Элементы управления с учетом safe areas */
+#controls {
+    position: absolute;
+    bottom: 20px;
+    bottom: max(20px, env(safe-area-inset-bottom, 20px));
+    left: 25px;
+    left: max(25px, env(safe-area-inset-left, 25px));
+    z-index: 1000;
+    margin: 0;
+}
+
+.header1 {
+    padding: 0;
+    position: fixed;
+    bottom: 20px;
+    bottom: max(20px, env(safe-area-inset-bottom, 20px));
+    right: 5%;
+    right: max(5%, env(safe-area-inset-right, 5%));
+    z-index: 20000;
+}
+
+@media (max-width: 768px) {
+    .header1 {
+        bottom: 0px;
+        bottom: max(0px, env(safe-area-inset-bottom, 0px));
+        right: 1%;
+        right: max(1%, env(safe-area-inset-right, 1%));
+    }
+    
+    #controls {
+        bottom: 20px;
+        bottom: max(20px, env(safe-area-inset-bottom, 20px));
+        left: 18px;
+        left: max(18px, env(safe-area-inset-left, 18px));
+    }
+}
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Фикс для iOS, чтобы убрать серую полосу
+(function() {
+    function fixIOSDisplay() {
+        // Устанавливаем высоту документа на всю доступную высоту
+        document.documentElement.style.height = '100%';
+        document.body.style.height = '100%';
+        
+        // Принудительно обновляем позицию карты
+        const mapElement = document.getElementById('map');
+        if (mapElement) {
+            mapElement.style.height = '100%';
+        }
+        
+        // Скрываем возможные артефакты
+        const style = document.createElement('style');
+        style.textContent = `
+            body::after {
+                display: none !important;
+            }
+            * {
+                -webkit-tap-highlight-color: transparent;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    // Запускаем после загрузки и при изменении ориентации
+    window.addEventListener('load', fixIOSDisplay);
+    window.addEventListener('resize', fixIOSDisplay);
+    window.addEventListener('orientationchange', fixIOSDisplay);
+    
+    // Также запускаем сразу
+    if (document.readyState === 'complete') {
+        fixIOSDisplay();
+    } else {
+        document.addEventListener('DOMContentLoaded', fixIOSDisplay);
+    }
+})();
+</script>
+
+
+
+
+
+
+
+
+
+
+
 </head>
 <body>
     <div id="map"></div>
