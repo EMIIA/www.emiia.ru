@@ -29,8 +29,7 @@
 
 
 
-
-    <style>
+<style>
         .header1 {
             padding: 0rem;
             position: fixed;
@@ -46,6 +45,63 @@
             }
         }
     </style>
+    
+
+
+
+
+
+
+
+<script>
+// Функция для фиксации элементов внизу
+function fixBottomElements() {
+    const mapElement = document.getElementById('map');
+    const button = document.querySelector('.header1');
+    const controls = document.getElementById('controls');
+    
+    if (!mapElement) return;
+    
+    // Получаем значение bottom карты
+    const mapStyles = window.getComputedStyle(mapElement);
+    const mapBottom = parseFloat(mapStyles.bottom);
+    
+    // Если карта уходит вниз (отрицательное значение)
+    if (mapBottom < 0) {
+        // Для .header1 - базовые значения как были
+        if (button) {
+            if (window.innerWidth <= 768) {
+                button.style.bottom = '0px'; // как в медиа-запросе
+            } else {
+                button.style.bottom = '50px'; // как в исходном CSS
+            }
+        }
+        
+        // Для #controls - базовые значения как были
+        if (controls) {
+            if (window.innerWidth <= 768) {
+                controls.style.bottom = '20px'; // как в медиа-запросе
+            } else {
+                controls.style.bottom = '80px'; // как в исходном CSS
+            }
+        }
+    }
+}
+
+// Запускаем после загрузки и при изменении размеров
+window.addEventListener('load', fixBottomElements);
+window.addEventListener('resize', fixBottomElements);
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', fixBottomElements);
+} else {
+    fixBottomElements();
+}
+</script>
+
+
+
+
 
     <style>
         .loader {
