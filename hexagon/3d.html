@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -1938,7 +1939,6 @@ function initializeMap() {
 
 
 
-
 map.on('load', () => {
     const layers = map.getStyle().layers;
     let labelLayerId;
@@ -1951,15 +1951,14 @@ map.on('load', () => {
 
     map.addSource('openmaptiles', {
         url: 'https://sos.emiia.ai/tiles.json',
-        type: 'vector',
+        type: 'vector'
     });
 
-    // Настраиваем освещение ДО добавления слоев
     map.setLight({
         'anchor': 'viewport',
         'color': '#ffffff',
-        'intensity': 0.3,
-        'position': [1.15, 90, 80]  // Верхнее освещение - меньше теней на углах
+        'intensity': 0.2,  // Уменьшил с 0.3 до 0.2
+        'position': [1.15, 90, 80]
     });
 
     // Подложка
@@ -1998,7 +1997,7 @@ map.on('load', () => {
         }
     }, labelLayerId);
 
-    // 3D здания с отключенным градиентом
+    // 3D здания
     map.addLayer({
         'id': '3d-buildings',
         'source': 'openmaptiles',
@@ -2007,7 +2006,6 @@ map.on('load', () => {
         'minzoom': 14,
         'maxzoom': 19,
         'paint': {
-            // Однотонный цвет без интерполяции по высоте
             'fill-extrusion-color': '#f0f0f0',
             'fill-extrusion-height': [
                 'interpolate',
@@ -2022,15 +2020,13 @@ map.on('load', () => {
                 ['linear'],
                 ['zoom'],
                 14, 0,
-                15.5, 0.15,  // Уменьшили непрозрачность
+                15.5, 0.4,  // Уменьшил с 0.15 до 0.1
                 18, 0.0
             ],
-            // Отключаем вертикальный градиент - это убирает блики!
             'fill-extrusion-vertical-gradient': false
         }
     }, labelLayerId);
 });
-
 
  
 
