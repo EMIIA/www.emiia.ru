@@ -926,6 +926,166 @@ document.querySelectorAll('.custom-select-trigger').forEach(trigger => {
 
 
 
+<style>
+
+
+
+
+.marker {
+        background-image: url('https://sos.emiia.ai/vv_g_m_STORE_21_90EE90.svg');
+        background-size: cover;
+  width: 80px;
+  height: 80px;
+  border-radius: 0%;
+  cursor: pointer;
+      }
+
+      .mapboxgl-popup {
+        max-width: 200px;
+
+      }
+
+      .mapboxgl-popup-content {
+        text-align: left;
+        font-family: 'Montserrat', montserrat !important; 
+        border-radius: 20px;
+        background-color: #f8f9fa;
+      }
+
+
+
+
+:root {
+  --popup-bg-color: #f8f9fa;
+  --popup-text-color: #3d85c6;
+  --close-button-color: #3d85c6;
+  --close-button-hover-color: #383838;
+  --close-button-bg-hover: rgba(0, 0, 0, 0.1);
+}
+
+.marker1 {
+  background-image: url('https://sos.emiia.ai/vv_svg.svg');
+  background-size: cover;
+  width: 110px;
+  height: 110px;
+  border-radius: 0%;
+  cursor: pointer;
+}
+
+.mapboxgl-popup {
+  max-width: 290px;
+}
+
+.mapboxgl-popup-content {
+  text-align: left;
+  font-family: 'Montserrat', montserrat !important; 
+  border-radius: 20px;
+  background-color: var(--popup-bg-color);
+  color: var(--popup-text-color);
+  padding: 15px;
+}
+
+/* Правильное окрашивание хвостика для всех положений */
+.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
+  border-bottom-color: var(--popup-bg-color) !important;
+}
+
+.mapboxgl-popup-anchor-top-left .mapboxgl-popup-tip {
+  border-bottom-color: var(--popup-bg-color) !important;
+}
+
+.mapboxgl-popup-anchor-top-right .mapboxgl-popup-tip {
+  border-bottom-color: var(--popup-bg-color) !important;
+}
+
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+  border-top-color: var(--popup-bg-color) !important;
+}
+
+.mapboxgl-popup-anchor-bottom-left .mapboxgl-popup-tip {
+  border-top-color: var(--popup-bg-color) !important;
+}
+
+.mapboxgl-popup-anchor-bottom-right .mapboxgl-popup-tip {
+  border-top-color: var(--popup-bg-color) !important;
+}
+
+.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
+  border-right-color: var(--popup-bg-color) !important;
+}
+
+.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
+  border-left-color: var(--popup-bg-color) !important;
+}
+
+/* Стили для кнопки закрытия (крестика) */
+.mapboxgl-popup-close-button {
+  color: var(--close-button-color);
+  font-size: 18px;
+  padding: 8px;
+  margin: 2px;
+  border: none;
+  background: none;
+  border-radius: 10px;
+}
+
+.mapboxgl-popup-close-button:hover {
+  background-color: var(--close-button-bg-hover);
+  color: var(--close-button-hover-color);
+}
+
+.mapboxgl-popup-close-button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+
+
+
+
+
+/* Стили для кнопки закрытия (крестика) */
+.mapboxgl-popup-close-button {
+  color: var(--close-button-color);
+  font-size: 24px; /* Увеличил с 18px до 24px */
+  padding: 12px; /* Увеличил с 8px до 12px */
+  margin: 4px; /* Увеличил с 2px до 4px */
+  border: none;
+  background: none;
+  border-radius: 12px; /* Увеличил с 10px до 12px */
+  width: 40px; /* Добавил фиксированную ширину */
+  height: 40px; /* Добавил фиксированную высоту */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+/* Увеличение на мобильных устройствах */
+@media (max-width: 768px) {
+  .mapboxgl-popup-close-button {
+    font-size: 28px; /* Еще больше на мобильных */
+    padding: 14px;
+    margin: 6px;
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* Ховер-эффекты для лучшей UX */
+.mapboxgl-popup-close-button:hover {
+  background: rgba(0, 0, 0, 0.1);
+  transform: scale(1.1);
+}
+
+.mapboxgl-popup-close-button:active {
+  transform: scale(0.95);
+}
+
+
+
+
+</style>
 
 
 
@@ -933,8 +1093,29 @@ document.querySelectorAll('.custom-select-trigger').forEach(trigger => {
 
 
 
+<style>
+/* Убираем мерцание маркеров при приближении и отдалении */
+
+/* Минимальный фикс мерцания маркеров iOS */
+.marker, .marker1, .mapboxgl-marker {
+    opacity: 1 !important;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    will-change: transform;
+    -webkit-transition: none !important;
+    transition: none !important;
+}
+
+@supports (-webkit-touch-callout: none) {
+    .marker, .marker1 {
+        filter: none !important;
+        -webkit-filter: none !important;
+    }
+}
 
 
+</style>
 
 
 
@@ -2089,6 +2270,65 @@ function initializeMap() {
 
 
 
+var geojson = {
+  'type': 'FeatureCollection',
+  'features': [
+    {
+      'type': 'Feature',
+      'geometry': {
+        'type': 'Point',
+        'coordinates': [37.63563151,55.83852133]
+      },
+      'properties': {
+        'title': 'EMIIA.AI SIP <br>AI DARK STORE #33',
+        'description': 'EMIIA.AI API: JSON DATASET OUTPUT ❯ <br>EMIIA.AI DBM: ID R: [#3D4581] <br>'
+      }
+    }
+  ]
+};
+
+// add markers to map
+geojson.features.forEach(function (marker) {
+  // create a HTML element for each feature
+  var el = document.createElement('div');
+  el.className = 'marker1';
+
+  // make a marker for each feature and add it to the map
+  var markerObj = new mapboxgl.Marker(el)
+    .setLngLat(marker.geometry.coordinates)
+    .setPopup(
+      new mapboxgl.Popup({ offset: 25 }) // add popups
+        .setHTML(
+          '<h3>' +
+            marker.properties.title +
+            '</h3><p>' +
+            marker.properties.description +
+            '</p>'
+        )
+    )
+    .addTo(map);
+
+  // Функция для плавного показа/скрытия маркера в зависимости от зума
+  function updateMarkerVisibility() {
+    var zoom = map.getZoom();
+    var opacity = Math.max(0, Math.min(1, (17 - zoom) / 2));
+    
+    el.style.opacity = opacity;
+    
+    if (zoom >= 17) {
+      el.style.display = 'none';
+    } else {
+      el.style.display = 'block';
+    }
+  }
+
+  // Слушаем событие изменения зума
+  map.on('zoom', updateMarkerVisibility);
+
+  // Проверяем видимость при загрузке
+  updateMarkerVisibility();
+});
+
 
 
 
@@ -2487,13 +2727,45 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+
+
+<script>
+function handlePwaClick(e) {
+    if (e) {
+        e.preventDefault(); // Останавливаем стандартное открытие в Safari
+        e.stopPropagation(); // Не даем карте Mapbox перехватить клик
+    }
+
+    // Укажи здесь адрес страницы, на которую нужен переход
+    const targetUrl = "https://sos.emiia.ai/vv1.html";
+
+    // Проверяем, запущено ли как PWA
+    const isPWA = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
+
+    if (isPWA) {
+        // ВАЖНО: В PWA используем это, чтобы остаться внутри приложения без вкладок
+        window.location.href = targetUrl;
+    } else {
+        // В обычном браузере просто переходим
+        window.location.assign(targetUrl);
+    }
+}
+
+
+
+</script>
+
+
+
 <!-- ВОССТАНОВЛЕННЫЙ БЛОК СПРАВА ВНИЗУ -->
 <div class="header1">
-    <a href="javascript:void(0)" onclick="showPopup()" 
-   style="display: inline-block; padding: 0px; border-radius: 20px; transition: all 0.2s ease; "
-   onmouseout="this.style.background='none'; this.style.transform='scale(1)';"
-   ontouchstart="this.style.background='rgba(61, 133, 198, 0.08)'; this.style.transform='scale(0.98)';"
-   ontouchend="this.style.background='none'; this.style.transform='scale(1)';">
+    <a href="javascript:void(0)" onclick="handlePwaClick(event)" 
+       style="display: inline-block; padding: 0; border-radius: 50%; transition: all 0.2s ease;"
+       onmouseout="this.style.background='none'; this.style.transform='scale(1)';"
+       ontouchstart="this.style.background='rgba(61, 133, 198, 0.2)'; this.style.transform='scale(0.95)';"
+       ontouchend="this.style.background='none'; this.style.transform='scale(1)';"
+    >
+
 
 
 
