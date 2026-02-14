@@ -214,6 +214,11 @@ optionsBox.forEach(box => {
 
 padding-bottom: 0 !important;
 
+-webkit-transform: translateZ(0); /* Создает новый слой отрисовки */
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+
 }
 
 
@@ -226,8 +231,8 @@ padding-bottom: 0 !important;
         position: fixed;
         /* Если в PWA кнопка на месте, оставляем 10px. 
            В браузере Safari она сама поднимется над нижней панелью */
-        bottom: 18px !important; 
-        left: 30px !important;
+        bottom: 17px !important; 
+        left: 29px !important;
         
         /* КЛЮЧЕВОЕ: убираем padding-bottom, который раздувал меню вниз */
         padding-bottom: 20px; 
@@ -886,6 +891,24 @@ button,
 
 
 
+const controls = document.getElementById('controls');
+
+// Когда пользователь начинает касаться меню, мы превентивно 
+// забираем фокус у любого активного элемента (карты)
+controls.addEventListener('touchstart', () => {
+    // Если фокус на карте или инпуте — снимаем его
+    if (document.activeElement) {
+        document.activeElement.blur();
+    }
+}, { passive: true });
+
+// Предотвращаем "замирание" при открытии селектов
+document.querySelectorAll('.custom-select-trigger').forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+        // Фокусируемся на самом элементе, чтобы iOS понимала, где идет работа
+        e.currentTarget.focus();
+    });
+});
 
 
 
