@@ -180,9 +180,7 @@ body {
     overflow: hidden;
     transform-origin: bottom left;
 
-height: 100dvh; 
-    margin: 0;
-    overflow: hidden;
+padding-bottom: 0 !important;
 
 }
 
@@ -194,12 +192,20 @@ height: 100dvh;
 @media (max-width: 768px) {
     #controls {
         position: fixed;
-        /* Ставим положительный отступ. Благодаря 100dvh у body, 
-           кнопка сама поднимется над панелью браузера */
-        bottom: 15px !important; 
-        left: 20px !important; /* Твой отступ слева без изменений */
+        /* Если в PWA кнопка на месте, оставляем 10px. 
+           В браузере Safari она сама поднимется над нижней панелью */
+        bottom: 13px !important; 
+        left: 20px !important;
         
-        padding-bottom: 20px;
+        /* КЛЮЧЕВОЕ: убираем padding-bottom, который раздувал меню вниз */
+        padding-bottom: 20px; 
+        
+        /* Убеждаемся, что фон меню не течет вниз */
+        box-sizing: border-box;
+        
+        /* Если меню раскрывается, оно не должно иметь лишних отступов снизу */
+        margin-bottom: 0 !important;
+        overflow-y: auto;
     }
 }
 
