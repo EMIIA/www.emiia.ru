@@ -12,18 +12,48 @@
 
 
 
-<meta charset="UTF-8">
-
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 
 <!-- PWA -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <link rel="shortcut icon" href="https://sos.emiia.ai/vv.ico" type="image/x-icon">
 <meta name="theme-color" content="#f8f9fa">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="https://sos.emiia.ai/vv.webmanifest">
+
+<!-- PWA STYLE -->
+<style>
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#map {
+    position: fixed;
+    top: -100px; /* Вылазим за верх */
+    bottom: -100px; /* Вылазим за низ */
+    left: 0;
+    right: 0;
+    background: #f8f9fa;
+    /* Принудительно игнорируем все безопасные зоны */
+    margin: 0 !important;
+    padding: 0 !important;
+}
+}
+</style>
+
+
+
+
+
+
+
+
 
 
 
@@ -103,13 +133,11 @@
 
 
 
-    
-  <script src="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.js"></script>
+<!-- 3D -->
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.js"></script>
 <script src="/mapbox-gl.js" type="text/javascript"></script>
 
-
 <link href="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css" rel="stylesheet">
-
 <link href="/mapbox-gl.css" rel="stylesheet">
 
 
@@ -134,7 +162,7 @@
         
        
         
-        #controls {
+    #controls {
     position: absolute;
     bottom: 20px;  /* ← Эту строчку замени на: */
     bottom: 80px;  /* для десктопа */
@@ -159,7 +187,10 @@
 
 @media (max-width: 768px) {
     #controls {
-        bottom: 20px;
+        /* 20px — это ваш желаемый отступ от края/полоски */
+        /* env() добавит высоту системного индикатора в PWA на iOS */
+        bottom: calc(20px + env(safe-area-inset-bottom));
+        left: 20px; /* чуть сужаем отступ для мобилок */
     }
 }
 
@@ -814,28 +845,7 @@ button,
 
 
 
-<style>
 
-body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    overflow: hidden;
-}
-
-#map {
-    position: fixed;
-    top: -100px; /* Вылазим за верх */
-    bottom: -100px; /* Вылазим за низ */
-    left: 0;
-    right: 0;
-    background: #f8f9fa;
-    /* Принудительно игнорируем все безопасные зоны */
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-</style>
 
 
 
@@ -2211,10 +2221,10 @@ function add3DModelSafe() {
         });
 
         modelAdded = true;
-        console.log('✅ 3D модель успешно добавлена');
+        console.log('3D модель успешно добавлена');
 
     } catch (error) {
-        console.error('❌ Ошибка добавления 3D модели:', error);
+        console.error('Ошибка добавления 3D модели:', error);
     }
 }
 
