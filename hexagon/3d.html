@@ -185,14 +185,24 @@ body {
 }
 
 
+
+
+
+
 @media (max-width: 768px) {
     #controls {
-        /* 20px — это ваш желаемый отступ от края/полоски */
-        /* env() добавит высоту системного индикатора в PWA на iOS */
-        bottom: calc(20px + env(safe-area-inset-bottom));
-        left: 20px; /* чуть сужаем отступ для мобилок */
+        /* Жесткая фиксация в 10px от края экрана */
+        bottom: 15px !important; 
+        left: 20px !important;
+        
+        /* Гарантируем, что никакие системные отступы не добавятся */
+        padding-bottom: 20px; /* внутренний отступ самой панели оставляем */
     }
 }
+
+
+
+
 
 
 .header-text, .control-item-label { 
