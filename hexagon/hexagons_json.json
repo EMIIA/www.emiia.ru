@@ -16,7 +16,7 @@
           "q": -1,
           "r": 0
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.918Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -68,7 +68,7 @@
           "q": -1,
           "r": 1
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.918Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -120,7 +120,7 @@
           "q": 0,
           "r": -1
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.918Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -172,7 +172,7 @@
           "q": 0,
           "r": 0
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.918Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -224,7 +224,7 @@
           "q": -4,
           "r": -2
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -276,7 +276,7 @@
           "q": -4,
           "r": -1
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -328,7 +328,7 @@
           "q": -4,
           "r": 0
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -380,7 +380,7 @@
           "q": -4,
           "r": 1
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -432,7 +432,7 @@
           "q": -4,
           "r": 2
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -484,7 +484,7 @@
           "q": -4,
           "r": 3
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -536,7 +536,7 @@
           "q": -4,
           "r": 4
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -588,7 +588,7 @@
           "q": -3,
           "r": -2
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -640,7 +640,7 @@
           "q": -3,
           "r": -1
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -692,7 +692,7 @@
           "q": -3,
           "r": 3
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -744,7 +744,7 @@
           "q": -2,
           "r": -3
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -796,7 +796,7 @@
           "q": -2,
           "r": -2
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -848,7 +848,7 @@
           "q": -2,
           "r": 3
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -900,7 +900,7 @@
           "q": -1,
           "r": -3
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -952,7 +952,7 @@
           "q": -1,
           "r": 2
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -993,6 +993,58 @@
     {
       "type": "Feature",
       "properties": {
+        "id": "50956df91ef3cfdc48feb8",
+        "resolution": 19,
+        "size": 6,
+        "center": {
+          "lat": 55.83822002070313,
+          "lng": 37.635651705169515
+        },
+        "coordinates": {
+          "q": 0,
+          "r": -4
+        },
+        "exportDate": "2026-03-03T07:12:33.919Z"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              37.63572377498156,
+              55.83819665564243
+            ],
+            [
+              37.63572377498156,
+              55.83824338576384
+            ],
+            [
+              37.635651705169515,
+              55.838266750824545
+            ],
+            [
+              37.63557963535747,
+              55.83824338576384
+            ],
+            [
+              37.63557963535747,
+              55.83819665564243
+            ],
+            [
+              37.635651705169515,
+              55.83817329058172
+            ],
+            [
+              37.63572377498156,
+              55.83819665564243
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "id": "ce1cf97d4daf29cfe5bae5",
         "resolution": 19,
         "size": 6,
@@ -1004,7 +1056,7 @@
           "q": 0,
           "r": -3
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -1056,7 +1108,7 @@
           "q": 0,
           "r": 1
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -1108,7 +1160,7 @@
           "q": 0,
           "r": 2
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -1160,7 +1212,7 @@
           "q": 1,
           "r": -4
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -1212,7 +1264,7 @@
           "q": 1,
           "r": -3
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -1264,7 +1316,7 @@
           "q": 1,
           "r": -2
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -1316,7 +1368,7 @@
           "q": 1,
           "r": -1
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -1368,7 +1420,7 @@
           "q": 1,
           "r": 0
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -1420,7 +1472,7 @@
           "q": 1,
           "r": 1
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -1472,7 +1524,7 @@
           "q": 2,
           "r": -5
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -1524,7 +1576,7 @@
           "q": 2,
           "r": -4
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -1576,7 +1628,7 @@
           "q": 2,
           "r": -3
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -1628,7 +1680,7 @@
           "q": 2,
           "r": -2
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -1680,7 +1732,7 @@
           "q": 2,
           "r": -1
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -1732,7 +1784,7 @@
           "q": 2,
           "r": 0
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -1784,7 +1836,7 @@
           "q": 2,
           "r": 1
         },
-        "exportDate": "2026-03-02T09:08:15.434Z"
+        "exportDate": "2026-03-03T07:12:33.919Z"
       },
       "geometry": {
         "type": "Polygon",
@@ -1824,8 +1876,8 @@
     }
   ],
   "metadata": {
-    "totalCount": 35,
-    "exportTimestamp": "2026-03-02T09:08:15.435Z",
+    "totalCount": 36,
+    "exportTimestamp": "2026-03-03T07:12:33.919Z",
     "application": "EMIIA.AI H12",
     "description": "Помеченные гексагоны для 3D визуализации"
   }
