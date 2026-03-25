@@ -46,20 +46,18 @@
 
     /* --- HEADER (Matrix Styles Copy) --- */
     header {
-        background: rgba(255, 255, 255, 0.95); /* bg-white/95 */
-        backdrop-filter: blur(4px);           /* backdrop-blur-sm */
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(4px);
         -webkit-backdrop-filter: blur(4px);
         border-bottom: 1px solid var(--gray-border);
         position: sticky;
         top: 0;
         z-index: 50;
-        /* Safe Area Handling like Main Code */
         padding-top: max(0.75rem, env(safe-area-inset-top));
     }
 
-    /* Container mimicking max-w-5xl mx-auto px-4 py-3 */
     .header-inner {
-        max-width: 64rem; /* max-w-5xl */
+        max-width: 64rem;
         margin-left: auto;
         margin-right: auto;
         padding-left: 1rem;
@@ -69,6 +67,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: 0.75rem;
     }
     @media (min-width: 768px) {
         .header-inner {
@@ -79,38 +78,75 @@
         }
     }
 
-    .logo { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; text-decoration: none; color: var(--text-main); }
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        text-decoration: none;
+        color: var(--text-main);
+        min-width: 0;
+        flex-shrink: 0;
+    }
     
-    /* Matrix Logo Icon Logic: w-10 h-10 -> md:w-8 md:h-8 */
+    /* FIXED: Logo Icon for Mobile Safari */
     .logo-icon {
-        width: 2.5rem;  /* 40px */
-        height: 2.5rem; /* 40px */
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        min-height: 40px;
+        flex-shrink: 0;
         display: flex;
         align-items: center;
         justify-content: center;
+        -webkit-flex-shrink: 0;
     }
-    @media (min-width: 768px) { 
-        .logo-icon { width: 2rem; height: 2rem; } /* 32px */
+    @media (min-width: 768px) {
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
+            min-height: 32px;
+        }
+    }
+
+    /* FIXED: SVG sizing */
+    .logo-icon svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+        flex-shrink: 0;
     }
 
     /* Matrix Logo Text Logic: text-base -> md:text-sm */
-    .logo-text { 
-        font-family: 'JetBrains Mono', monospace; 
-        font-size: 1rem; /* 16px text-base */
-        color: #1f2937; /* gray-800 */
-        font-weight: 500; 
+    .logo-text {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 1rem;
+        color: #1f2937;
+        font-weight: 500;
         letter-spacing: -0.025em;
+        white-space: nowrap;
+        min-width: 0;
     }
-    @media (min-width: 768px) { .logo-text { font-size: 0.875rem; } } /* 14px text-sm */
+    @media (min-width: 768px) {
+        .logo-text {
+            font-size: 0.875rem;
+        }
+    }
 
     /* Right Text Logic: text-[10px] -> sm:text-xs */
-    .header-right { 
-        font-family: 'JetBrains Mono', monospace; 
-        font-size: 10px; 
-        color: #9ca3af; /* gray-400 */
+    .header-right {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px;
+        color: #9ca3af;
         white-space: nowrap;
+        flex-shrink: 0;
     }
-    @media (min-width: 640px) { .header-right { font-size: 0.75rem; } } /* 12px text-xs */
+    @media (min-width: 640px) {
+        .header-right {
+            font-size: 0.75rem;
+        }
+    }
 
     /* --- Graph Container --- */
     #graph-container {
@@ -130,14 +166,15 @@
         fill: var(--brand-dark);
         stroke: #fff;
         stroke-width: 2px;
-        rx: var(--radius-lg); ry: var(--radius-lg);
+        rx: var(--radius-lg);
+        ry: var(--radius-lg);
         cursor: pointer;
         transition: fill 0.2s ease;
     }
     .node.active rect { fill: var(--brand-medium); }
     .node text { fill: #ffffff; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; pointer-events: none; }
 
-    /* --- EDGE STYLES (Strict Logic) --- */
+    /* --- EDGE STYLES --- */
     .edge-path-visual {
         fill: none;
         stroke: var(--gray-border);
@@ -163,7 +200,7 @@
 
     /* --- TOOLTIP --- */
     .tooltip {
-        position: fixed; 
+        position: fixed;
         width: 300px;
         padding: 12px 16px;
         background: #ffffff;
@@ -185,16 +222,16 @@
     .tooltip-title { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 13px; margin-bottom: 6px; color: var(--brand-dark); border-bottom: 1px solid var(--gray-border); padding-bottom: 6px; }
     .tooltip-formula { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-main); white-space: pre-wrap; word-break: break-word; }
 
-    /* --- FOOTER (Matrix Styles Copy) --- */
+    /* --- FOOTER --- */
     footer {
         border-top: 1px solid var(--gray-border);
         padding: 12px 20px;
         background: #fff;
-        padding-bottom: max(1.5rem, env(safe-area-inset-bottom)); /* Safe area for mobile */
+        padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
     }
     
     .footer-content {
-        max-width: 64rem; /* max-w-5xl */
+        max-width: 64rem;
         margin: 0 auto;
         display: flex;
         justify-content: space-between;
@@ -210,12 +247,12 @@
 </head>
 <body>
 
-<!-- Header (Matrix Structure) -->
+<!-- Header -->
 <header>
     <div class="header-inner">
         <a href="https://www.emiia.ru" class="logo">
             <div class="logo-icon">
-               <svg version="1.1" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                <svg version="1.1" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
                     <clipPath id="p.0"><path d="m0 0l192 0l0 192l-192 0z" clip-rule="nonzero"/></clipPath>
                     <g clip-path="url(#p.0)">
                         <path fill="#3d85c6" d="m154.585 76.782l0 0c-0.186-20.651-17.184-38.474-38.332-40.193l-0.097 5.252c18.078 1.614 32.65 16.93 32.955 34.638z" fill-rule="evenodd"/>
@@ -228,7 +265,7 @@
                         <path stroke="#3d85c6" stroke-width="14.66" d="m37.415 115.218l0 0c0.186 20.65 17.184 38.474 38.332 40.192l0.097-5.252c-18.078-1.614-32.65-16.93-32.955-34.638z" fill-rule="evenodd"/>
                         <path fill="#3c78d8" d="m69.536 96.003l0 0c0-14.62 11.852-26.472 26.472-26.472 7.021 0 13.754 2.789 18.718 7.754 4.965 4.964 7.754 11.697 7.754 18.718l0 0c0 14.62-11.852 26.472-26.472 26.472-14.62 0-26.472-11.852-26.472-26.472z" fill-rule="evenodd"/>
                     </g>
-               </svg>
+                </svg>
             </div>
             <span class="logo-text">EMIIA.AI SIP</span>
         </a>
@@ -257,25 +294,32 @@
 <script>
     // --- SETUP & DATA ---
     const g = new dagreD3.graphlib.Graph()
-      .setGraph({ 
-          rankdir: 'TB', 
-          ranksep: 120,   
-          edgesep: 40,    
-          nodesep: 80,   
-          marginx: 20, 
-          marginy: 20 
+      .setGraph({
+          rankdir: 'TB',
+          ranksep: 120,
+          edgesep: 40,
+          nodesep: 80,
+          marginx: 20,
+          marginy: 20
       })
       .setDefaultEdgeLabel(function() { return {}; });
     g.graph().edge = g.graph().edge || {};
     g.graph().edge.arrowhead = 'normal';
 
     function wrapText(text, width) {
-      const words = text.split(/\s+/); let lines = []; let currentLine = '';
-      const padding = 40; const maxWidth = width - padding;
+      const words = text.split(/\s+/);
+      let lines = [];
+      let currentLine = '';
+      const padding = 40;
+      const maxWidth = width - padding;
       words.forEach(word => {
         const testLine = currentLine + (currentLine ? ' ' : '') + word;
-        if (testLine.length * 6 > maxWidth && currentLine) { lines.push(currentLine); currentLine = word; } 
-        else currentLine = testLine;
+        if (testLine.length * 6 > maxWidth && currentLine) {
+          lines.push(currentLine);
+          currentLine = word;
+        } else {
+          currentLine = testLine;
+        }
       });
       if (currentLine) lines.push(currentLine);
       return lines;
@@ -340,14 +384,14 @@
       const tspan = lines.map((line, i) => `<tspan x="0" dy="${i ? 12 : -lines.length * 6}">${line}</tspan>`).join('');
       return `<text text-anchor="middle" x="0" y="0">${tspan}</text>`;
     };
-    
+
     render(inner, g);
     dagreD3.label = oldLabel;
 
-    // --- EDGE POST-PROCESSING (Strict Manhattan Paths) ---
+    // --- EDGE POST-PROCESSING ---
     function createLogicalPath(source, target) {
         const sX = source.x;
-        const sY = source.y + source.height / 2; 
+        const sY = source.y + source.height / 2;
         const tX = target.x;
         const tY = target.y - target.height / 2;
         const midY = (sY + tY) / 2;
@@ -384,7 +428,7 @@
 
     function getCurrentTransform() { return d3.zoomTransform(svg.node()); }
 
-    const HEADER_HEIGHT = 80; // Slightly increased just in case
+    const HEADER_HEIGHT = 80;
     const TOOLTIP_W = 300;
 
     function updateTooltipPosition() {
@@ -401,7 +445,8 @@
         }
 
         if (screenY < HEADER_HEIGHT || screenX < 0 || screenX > window.innerWidth) {
-            tooltip.classed("visible", false); return;
+            tooltip.classed("visible", false);
+            return;
         }
 
         let left = screenX - TOOLTIP_W / 2;
@@ -417,7 +462,7 @@
           inner.attr('transform', event.transform);
           updateTooltipPosition();
       });
-    
+
     svg.call(zoom);
 
     // --- EVENTS ---
@@ -429,14 +474,14 @@
         const nodeGroup = this;
         hideTooltip();
         d3.select(nodeGroup).classed("active", true);
-        
+
         tooltipState.isOpen = true;
         tooltipState.type = 'node';
-        tooltipState.target = nodeGroup; 
+        tooltipState.target = nodeGroup;
         tooltipState.html = `<div class="tooltip-title">${node.label}</div><div class="tooltip-formula">${node.description.replace(/\n/g, '<br>')}</div>`;
-        
+
         tooltip.html(tooltipState.html);
-        updateTooltipPosition(); 
+        updateTooltipPosition();
     });
 
     inner.selectAll(".edge-hitbox").on("click", function(event) {
@@ -444,7 +489,7 @@
         const parentGroup = this.parentNode;
         const visualPath = d3.select(parentGroup).select(".edge-path-visual");
         const edgeData = d3.select(parentGroup).datum();
-        
+
         let desc = "Связь элементов";
         if(edgeData) {
             const edgeObj = g.edge(edgeData);
@@ -457,7 +502,7 @@
 
         hideTooltip();
         visualPath.classed("active", true);
-        
+
         tooltipState.isOpen = true;
         tooltipState.type = 'edge';
         tooltipState.target = [gx, gy];
@@ -476,37 +521,34 @@
     const yCenterOffset = (svgHeight - graphHeight) / 2;
     svg.call(zoom.transform, d3.zoomIdentity.translate(xCenterOffset, yCenterOffset));
 
-    // ==========================================
-    // ПРАВИЛЬНАЯ ФУНКЦИЯ ЭКСПОРТА
-    // ==========================================
     function downloadCSV() {
       const dataTb = 100;
       const infM = 10;
       const deplN = 5;
       const opsCost = 15000;
       const daysClassic = 50;
-      
+
       const hostCl = 0.67, hostEm = 0.11;
       const infCl = 0.27, infEm = 0.05;
       const storCl = 0.05, storEm = 0.03;
-      
+
       const tcoC = deplN * hostCl + infM * 1000 * infCl + dataTb * storCl + opsCost;
       const tcoE = deplN * hostEm + infM * 1000 * infEm + dataTb * storEm + opsCost * 0.33;
-      
+
       const capexC = tcoC * 0.35;
       const capexE = tcoE * 0.10;
       const opexC = tcoC * 0.65;
       const opexE = tcoE * 0.90;
-      
+
       const revenue = 500000;
       const roiC = tcoC > 0 ? ((revenue - tcoC * 12) / (tcoC * 12)) * 100 : 0;
       const roiE = tcoE > 0 ? ((revenue - tcoE * 12) / (tcoE * 12)) * 100 : 0;
-      
+
       const csvData = [
         ['Параметр', 'Значение', 'Формула для Google Sheets'],
         ['Объём данных (ТБ)', dataTb, `=${dataTb}`],
         ['Инференсы (млн)', infM, `=${infM}`],
-        ['Количество развёртываний', deplN, `=${deplN}`],
+        ['К��личество развёртываний', deplN, `=${deplN}`],
         ['Команда Ops ($/мес)', opsCost, `=${opsCost}`],
         ['Время до запуска (дней)', daysClassic, `=${daysClassic}`],
         [''],
@@ -524,19 +566,19 @@
         ['- OPEX включает: вычисления, команду Ops, обслуживание, электричество'],
         ['- EMIIA снижает OPEX на 67% за счет автоматизации']
       ];
-      
-      const csvContent = csvData.map(row => 
+
+      const csvContent = csvData.map(row =>
         row.map(cell => `"${cell}"`).join(',')
       ).join('\n');
-      
+
       const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
       const link = document.createElement('a');
       const url = URL.createObjectURL(blob);
-      
+
       link.setAttribute('href', url);
       link.setAttribute('download', `emiiasip_calculator_${new Date().toISOString().split('T')[0]}.csv`);
       link.style.visibility = 'hidden';
-      
+
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
