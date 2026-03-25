@@ -3,33 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>EMIIA.AI OAI AGENT – анализ рынка, сегменты, потенцииал</title>
+<title>EMIIA.AI OAI AGENT – анализ рынка, тренды, перспективы</title>
 
-
-
-<!-- Open Graph Meta Tags -->
+<!-- Open Graph -->
 <meta property="og:title" content="EMIIA.AI SIP – индикаторы клиентской рентабельности">
 <meta property="og:description" content="Пользовательская экономика EMIIA.AI SIP">
 <meta property="og:image" content="https://www.emiia.ru/1200x630_roi.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:url" content="https://www.emiia.ru/roi.html">
-<meta property="og:type" content="website">
-
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="EMIIA.AI SIP – индикаторы клиентской рентабельности">
-<meta name="twitter:description" content="Пользовательская экономика EMIIA.AI SIP>
-<meta name="twitter:image" content="https://www.emiia.ru/1200x630_roi.png">
-
-
-  
-
-<!-- Open Graph -->
-<meta property="og:title" content="EMIIA.AI OAI AGENT – Financial Analysis">
-<meta property="og:description" content="Operational AI-agent: Financial analysis EMIIA.AI SIP 2030">
-<meta property="og:image" content="https://www.emiia.ru/1200x630_roi.png">
-<meta property="og:url" content="https://www.emiia.ru/oai-agent.html">
+<meta property="og:url" content="https://www.emiia.ru/emiia_ai_oai.html">
 <meta property="og:type" content="website">
 
 <!-- Fonts -->
@@ -43,12 +23,12 @@
     :root {
         --brand-dark: #3c78d8;
         --brand-medium: #6d9eeb;
-        --brand-light: #a4c2f4;
         --gray-bg: #FFFFFF;
         --gray-border: #E5E5E5;
         --text-main: #111;
         --text-muted: #64748b;
         --radius-lg: 12px;
+        --header-height: 72px;
     }
 
     body {
@@ -63,11 +43,11 @@
         height: 100vh;
     }
 
-    /* --- HEADER --- */
+    /* --- HEADER (Matrix Styles) --- */
     header {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
+        background: rgba(255, 255, 255, 0.95); 
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
         border-bottom: 1px solid var(--gray-border);
         padding: 16px 20px;
         display: flex;
@@ -76,18 +56,42 @@
         position: fixed;
         top: 0; left: 0; right: 0;
         z-index: 1000;
-        height: 72px;
+        height: var(--header-height);
         box-sizing: border-box;
     }
 
     .logo { display: flex; align-items: center; gap: 12px; cursor: pointer; text-decoration: none; color: var(--text-main); }
-    .logo-text { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #1f2937; font-weight: 500; letter-spacing: -0.025em; }
-    .header-right { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-muted); }
+    
+    .logo-text { 
+        font-family: 'JetBrains Mono', monospace; 
+        font-size: 16px; 
+        color: #1f2937; 
+        font-weight: 500; 
+        letter-spacing: -0.025em;
+    }
+    @media (min-width: 768px) { .logo-text { font-size: 14px; } }
+
+    .logo-icon {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    @media (min-width: 768px) { .logo-icon { width: 32px; height: 32px; } }
+
+    .header-right { 
+        font-family: 'JetBrains Mono', monospace; 
+        font-size: 10px; 
+        color: #9ca3af;
+        white-space: nowrap;
+    }
+    @media (min-width: 640px) { .header-right { font-size: 12px; } }
 
     /* --- Graph Container --- */
     #graph-container {
         flex: 1;
-        margin-top: 72px; 
+        margin-top: var(--header-height); 
         width: 100%;
         position: relative;
         background: #ffffff;
@@ -120,7 +124,6 @@
     .edge-path-visual.active {
         stroke: var(--brand-dark);
         stroke-width: 2.5px;
-        stroke-dasharray: 6, 3;
     }
 
     .edge-hitbox {
@@ -129,17 +132,14 @@
         stroke-width: 20px;
         cursor: pointer;
         stroke-linecap: round;
-        marker-start: none;
-        marker-mid: none;
-        marker-end: none;
     }
 
     .edgePath marker path { fill: var(--gray-border); stroke: none; transition: fill 0.2s; }
     .edgePath.active marker path { fill: var(--brand-dark); }
 
-    /* --- TOOLTIP (Fixed logic) --- */
+    /* --- TOOLTIP --- */
     .tooltip {
-        position: fixed; /* Relative to viewport */
+        position: fixed; 
         width: 300px;
         padding: 12px 16px;
         background: #ffffff;
@@ -149,30 +149,37 @@
         font-size: 12px;
         box-shadow: 0 10px 25px rgba(0,0,0,0.08);
         line-height: 1.5;
-        z-index: 2000;
+        z-index: 950;
         color: var(--text-main);
         opacity: 0;
         visibility: hidden;
-        transition: opacity 0.05s; /* Fast reaction */
+        transition: opacity 0.05s;
     }
     
-    .tooltip.visible {
-        opacity: 1;
-        visibility: visible;
-    }
+    .tooltip.visible { opacity: 1; visibility: visible; }
     
     .tooltip-title { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 13px; margin-bottom: 6px; color: var(--brand-dark); border-bottom: 1px solid var(--gray-border); padding-bottom: 6px; }
     .tooltip-formula { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-main); white-space: pre-wrap; word-break: break-word; }
 
-    /* --- FOOTER --- */
+    /* --- FOOTER (Matrix Styles) --- */
     footer {
         border-top: 1px solid var(--gray-border);
         padding: 12px 20px;
-        display: flex; justify-content: space-between; align-items: center;
-        font-size: 10px; color: var(--text-muted);
-        font-family: 'JetBrains Mono', monospace;
-        background: #fff; height: 48px;
+        background: #fff;
+        padding-bottom: max(12px, env(safe-area-inset-bottom));
     }
+    
+    .footer-content {
+        max-width: 72rem;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 10px;
+        color: var(--text-muted);
+        font-family: 'JetBrains Mono', monospace;
+    }
+    
     .footer-link { display: flex; align-items: center; gap: 6px; color: var(--text-muted); text-decoration: none; cursor: pointer; }
     .footer-link svg { width: 14px; height: 14px; }
 </style>
@@ -182,7 +189,7 @@
 <!-- Header -->
 <header>
   <a href="https://www.emiia.ru" class="logo">
-    <div style="width: 36px; height: 36px;">
+    <div class="logo-icon">
        <svg version="1.1" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
             <clipPath id="p.0"><path d="m0 0l192 0l0 192l-192 0z" clip-rule="nonzero"/></clipPath>
             <g clip-path="url(#p.0)">
@@ -210,19 +217,28 @@
 
 <!-- Footer -->
 <footer>
-    <div>ANALYTICS 2030</div>
-    <a onclick="downloadCSV()" class="footer-link">
-        CSV
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-        </svg>
-    </a>
+    <div class="footer-content">
+        <div>ANALYTICS 2030</div>
+        <a onclick="downloadCSV()" class="footer-link">
+            CSV
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+        </a>
+    </div>
 </footer>
 
 <script>
     // --- SETUP & DATA ---
     const g = new dagreD3.graphlib.Graph()
-      .setGraph({ rankdir: 'TB', ranksep: 60, edgesep: 25, nodesep: 40, marginx: 20, marginy: 20 })
+      .setGraph({ 
+          rankdir: 'TB', 
+          ranksep: 150,   
+          edgesep: 50,    
+          nodesep: 100,   
+          marginx: 20, 
+          marginy: 20 
+      })
       .setDefaultEdgeLabel(function() { return {}; });
     g.graph().edge = g.graph().edge || {};
     g.graph().edge.arrowhead = 'normal';
@@ -239,7 +255,7 @@
       return lines;
     }
 
-    // Nodes & Edges Definition (Same as before)
+    // Nodes
     g.setNode('Zatraty', { label: 'Затраты', width: 130, height: 50, description: 'Категория: Затраты\nВсе финансовые расходы компании' });
     g.setNode('TCO', { label: 'TCO: $1,5 млрд/год', width: 170, height: 50, description: 'Формула: CapEx + OpEx = $1,5 млрд/год\n\nКомпоненты:\n- CapEx: капитальные затраты\n- OpEx: операционные расходы\n- Включает RSC и CAC' });
     g.setNode('CAC', { label: 'CAC: $3', width: 130, height: 50, description: 'Customer Acquisition Cost\nСтоимость привлечения клиента\n\nЧасть OpEx: $3 на каждого нового пользователя' });
@@ -258,6 +274,7 @@
     g.setNode('TargetMarket', { label: 'Целевой рынок (TARGET - пользователи): 1,67 млрд', width: 320, height: 50, description: 'Совокупный адресуемый рынок (TARGET)\n\nОбъединяет облака, IoT и RTLS' });
     g.setNode('TargetCapacity', { label: 'Емкость рынка: $1,2 трлн/год', width: 220, height: 50, description: 'Максимальный потенциал рынка\n\n$1,2 трлн/год для всех сегментов:\nB2B, B2C, B2G, B2M, M2M, AI' });
 
+    // Edges
     g.setEdge('Zatraty', 'TCO', { description: 'Связь затрат с совокупной стоимостью владения (TCO)' });
     g.setEdge('Zatraty', 'CAC', { description: 'Влияние затрат на привлечение клиентов' });
     g.setEdge('Zatraty', 'RSC', { description: 'Влияние затрат на удержание' });
@@ -301,22 +318,21 @@
     render(inner, g);
     dagreD3.label = oldLabel;
 
-    // Inject Hitboxes
-    inner.selectAll("g.edgePath").each(function() {
+    // Edge Post-Processing (Hitbox injection)
+    inner.selectAll("g.edgePath").each(function(d) {
         const group = d3.select(this);
-        const visualPath = group.select("path");
-        const pathData = visualPath.attr("d");
+        const visualPath = group.select("path.path");
         visualPath.classed("edge-path-visual", true);
-        if (pathData) group.insert("path", ":first-child").attr("d", pathData).attr("class", "edge-hitbox");
+        
+        if (visualPath.attr("d")) {
+            group.insert("path", ":first-child")
+                .attr("d", visualPath.attr("d"))
+                .attr("class", "edge-hitbox");
+        }
     });
 
-    // --- STATE MANAGEMENT FOR TOOLTIP ---
-    let tooltipState = {
-        isOpen: false,
-        type: null, // 'node' or 'edge'
-        target: null, // DOM element for nodes, [x,y] for edges
-        html: ""
-    };
+    // --- STATE MANAGEMENT ---
+    let tooltipState = { isOpen: false, type: null, target: null, html: "" };
 
     function hideTooltip() {
         tooltip.classed("visible", false);
@@ -324,55 +340,32 @@
         inner.selectAll(".active").classed("active", false);
     }
 
-    // --- MATH: PROJECT COORDINATES ---
-    // Get current zoom transform
-    function getCurrentTransform() {
-        // We will attach zoom behavior later, so d3.zoomTransform(svg.node()) will work
-        return d3.zoomTransform(svg.node());
-    }
+    function getCurrentTransform() { return d3.zoomTransform(svg.node()); }
 
-    // Convert Graph Coords to Screen Coords
-    function graphToScreen(x, y) {
-        const t = getCurrentTransform();
-        // t.apply([x, y]) returns [sx, sy] screen coordinates
-        return t.apply([x, y]);
-    }
+    const HEADER_HEIGHT = 72;
+    const TOOLTIP_W = 300;
 
-    // --- UPDATE TOOLTIP POSITION (The Core Fix) ---
     function updateTooltipPosition() {
         if (!tooltipState.isOpen) return;
-
-        let left = 0;
-        let top = 0;
-        const w = 300;
-        const h = 150;
-        const pad = 15;
+        let screenX = 0, screenY = 0;
 
         if (tooltipState.type === 'node') {
-            // For nodes, we use getBoundingClientRect of the stored DOM element
-            // This accounts for any transform automatically
             const nodeRect = tooltipState.target.getBoundingClientRect();
-            left = nodeRect.left + nodeRect.width / 2; // Center X
-            top = nodeRect.bottom; // Bottom Y
+            screenX = nodeRect.left + nodeRect.width / 2;
+            screenY = nodeRect.bottom;
         } else if (tooltipState.type === 'edge') {
-            // For edges, we project the stored graph coordinates
-            const [sx, sy] = graphToScreen(tooltipState.target[0], tooltipState.target[1]);
-            left = sx;
-            top = sy;
+            const t = getCurrentTransform();
+            [screenX, screenY] = t.apply(tooltipState.target);
         }
 
-        // Adjust to center and offset
-        let finalLeft = left - w / 2;
-        let finalTop = top + 10;
+        if (screenY < HEADER_HEIGHT || screenX < 0 || screenX > window.innerWidth) {
+            tooltip.classed("visible", false); return;
+        }
 
-        // Viewport boundaries
-        if (finalLeft < pad) finalLeft = pad;
-        if (finalLeft + w > window.innerWidth - pad) finalLeft = window.innerWidth - w - pad;
-        if (finalTop + h > window.innerHeight - pad) finalTop = top - h - 10; // Flip up
-
-        tooltip
-            .style("left", finalLeft + "px")
-            .style("top", finalTop + "px");
+        let left = screenX - TOOLTIP_W / 2;
+        let top = screenY + 10;
+        tooltip.style("left", left + "px").style("top", top + "px");
+        tooltip.classed("visible", true);
     }
 
     // --- ZOOM BEHAVIOR ---
@@ -380,46 +373,32 @@
       .scaleExtent([0.4, 2])
       .on('zoom', (event) => {
           inner.attr('transform', event.transform);
-          // UPDATE TOOLTIP ON EVERY ZOOM MOVE
           updateTooltipPosition();
       });
     
     svg.call(zoom);
 
     // --- EVENTS ---
-    
-    // Global Click (Close)
-    svg.on("click", function(event) {
-        // Only hide if clicking background
-        // We stop propagation on nodes/edges, so this only fires for bg
-        hideTooltip();
-    });
+    svg.on("click", function(event) { hideTooltip(); });
 
-    // Node Click
     inner.selectAll("g.node").on("click", function(event, nodeId) {
         event.stopPropagation();
-        
         const node = g.node(nodeId);
         const nodeGroup = this;
-
-        // Update State
         hideTooltip();
         d3.select(nodeGroup).classed("active", true);
         
         tooltipState.isOpen = true;
         tooltipState.type = 'node';
-        tooltipState.target = nodeGroup; // Store DOM element
+        tooltipState.target = nodeGroup; 
         tooltipState.html = `<div class="tooltip-title">${node.label}</div><div class="tooltip-formula">${node.description.replace(/\n/g, '<br>')}</div>`;
         
         tooltip.html(tooltipState.html);
-        updateTooltipPosition(); // Calculate initial pos
-        tooltip.classed("visible", true);
+        updateTooltipPosition(); 
     });
 
-    // Edge Click
     inner.selectAll(".edge-hitbox").on("click", function(event) {
         event.stopPropagation();
-
         const parentGroup = this.parentNode;
         const visualPath = d3.select(parentGroup).select(".edge-path-visual");
         const edgeData = d3.select(parentGroup).datum();
@@ -430,25 +409,20 @@
             if(edgeObj && edgeObj.description) desc = edgeObj.description;
         }
 
-        // 1. Get Screen Click Coords
-        const [cx, cy] = d3.pointer(event, svg.node()); // Coords relative to SVG element
-        
-        // 2. Invert to Graph Coords (This is the key for "sticking")
+        const [cx, cy] = d3.pointer(event, svg.node());
         const t = getCurrentTransform();
-        const [gx, gy] = t.invert([cx, cy]); // Convert screen click to internal graph coords
+        const [gx, gy] = t.invert([cx, cy]);
 
-        // Update State
         hideTooltip();
         visualPath.classed("active", true);
         
         tooltipState.isOpen = true;
         tooltipState.type = 'edge';
-        tooltipState.target = [gx, gy]; // Store GRAPH coordinates, not screen
+        tooltipState.target = [gx, gy];
         tooltipState.html = `<div class="tooltip-title">Формула связи</div><div class="tooltip-formula">${desc}</div>`;
 
         tooltip.html(tooltipState.html);
         updateTooltipPosition();
-        tooltip.classed("visible", true);
     });
 
     // Initial Centering
@@ -460,15 +434,74 @@
     const yCenterOffset = (svgHeight - graphHeight) / 2;
     svg.call(zoom.transform, d3.zoomIdentity.translate(xCenterOffset, yCenterOffset));
 
-    // CSV
+    // ==========================================
+    // ПРАВИЛЬНАЯ ФУНКЦИЯ ЭКСПОРТА (ВОССТАНОВЛЕНА)
+    // ==========================================
     function downloadCSV() {
-      const data = [ ["Категория", "Метрика", "Значение"], ["Затраты", "TCO", "1.5B"] ];
-      const csvContent = data.map(r => r.join(",")).join("\n");
+      const dataTb = 100;  // Дефолтные значения для образца, 
+      const infM = 10;    // так как в этом файле нет инпутов, 
+      const deplN = 5;    // берем значения из узлов графа
+      const opsCost = 15000;
+      const daysClassic = 50;
+      
+      // Дублируем логику расчетов для формул CSV
+      const hostCl = 0.67, hostEm = 0.11;
+      const infCl = 0.27, infEm = 0.05;
+      const storCl = 0.05, storEm = 0.03;
+      
+      const tcoC = deplN * hostCl + infM * 1000 * infCl + dataTb * storCl + opsCost;
+      const tcoE = deplN * hostEm + infM * 1000 * infEm + dataTb * storEm + opsCost * 0.33;
+      
+      const capexC = tcoC * 0.35;
+      const capexE = tcoE * 0.10;
+      const opexC = tcoC * 0.65;
+      const opexE = tcoE * 0.90;
+      
+      const revenue = 500000;
+      const roiC = tcoC > 0 ? ((revenue - tcoC * 12) / (tcoC * 12)) * 100 : 0;
+      const roiE = tcoE > 0 ? ((revenue - tcoE * 12) / (tcoE * 12)) * 100 : 0;
+      
+      // Формируем массив данных (Полная версия)
+      const csvData = [
+        ['Параметр', 'Значение', 'Формула для Google Sheets'],
+        ['Объём данных (ТБ)', dataTb, `=${dataTb}`],
+        ['Инференсы (млн)', infM, `=${infM}`],
+        ['Количество развёртываний', deplN, `=${deplN}`],
+        ['Команда Ops ($/мес)', opsCost, `=${opsCost}`],
+        ['Время до запуска (дней)', daysClassic, `=${daysClassic}`],
+        [''],
+        ['Метрика', 'Classic', 'EMIIA', 'Экономия', 'Экономия %'],
+        ['TCO ($)', tcoC.toFixed(0), tcoE.toFixed(0), (tcoC - tcoE).toFixed(0), `=((B9-C9)/B9)*100`],
+        ['CAPEX ($)', capexC.toFixed(0), capexE.toFixed(0), (capexC - capexE).toFixed(0), `=((B10-C10)/B10)*100`],
+        ['OPEX ($)', opexC.toFixed(0), opexE.toFixed(0), (opexC - opexE).toFixed(0), `=((B11-C11)/B11)*100`],
+        ['Время запуска (дней)', daysClassic, '8', (daysClassic - 8).toFixed(0), `=((B12-8)/B12)*100`],
+        ['ROI 12 мес (%)', roiC.toFixed(0), roiE.toFixed(0), '', `=C13-B13`],
+        [''],
+        ['Примечания:'],
+        ['- Формулы автоматически адаптируются в формат электронных таблиц'],
+        ['- Изменяйте значения в колонке "Значение" для пересчёта'],
+        ['- CAPEX включает: оборудование, лицензии, разработку инфраструктуры'],
+        ['- OPEX включает: вычисления, команду Ops, обслуживание, электричество'],
+        ['- EMIIA снижает OPEX на 67% за счет автоматизации']
+      ];
+      
+      // Преобразуем массив в строку CSV
+      const csvContent = csvData.map(row => 
+        row.map(cell => `"${cell}"`).join(',')
+      ).join('\n');
+      
+      // Создаем Blob и ссылку для скачивания
       const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
       const link = document.createElement('a');
-      link.setAttribute('href', URL.createObjectURL(blob));
-      link.setAttribute('download', 'analysis.csv');
-      document.body.appendChild(link); link.click(); document.body.removeChild(link);
+      const url = URL.createObjectURL(blob);
+      
+      link.setAttribute('href', url);
+      link.setAttribute('download', `emiiasip_calculator_${new Date().toISOString().split('T')[0]}.csv`);
+      link.style.visibility = 'hidden';
+      
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
 </script>
 
