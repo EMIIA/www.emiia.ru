@@ -28,7 +28,6 @@
         --text-main: #111;
         --text-muted: #64748b;
         --radius-lg: 12px;
-        --header-height: 72px;
     }
 
     body {
@@ -41,61 +40,86 @@
         display: flex;
         flex-direction: column;
         height: 100vh;
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
     }
 
-    /* --- HEADER (Matrix Styles) --- */
+    /* --- HEADER (Matrix Styles Copy) --- */
     header {
-        background: rgba(255, 255, 255, 0.95); 
-        backdrop-filter: blur(4px);
+        background: rgba(255, 255, 255, 0.95); /* bg-white/95 */
+        backdrop-filter: blur(4px);           /* backdrop-blur-sm */
         -webkit-backdrop-filter: blur(4px);
         border-bottom: 1px solid var(--gray-border);
-        padding: 16px 20px;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        /* Safe Area Handling like Main Code */
+        padding-top: max(0.75rem, env(safe-area-inset-top));
+    }
+
+    /* Container mimicking max-w-5xl mx-auto px-4 py-3 */
+    .header-inner {
+        max-width: 64rem; /* max-w-5xl */
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        position: fixed;
-        top: 0; left: 0; right: 0;
-        z-index: 1000;
-        height: var(--header-height);
-        box-sizing: border-box;
+    }
+    @media (min-width: 768px) {
+        .header-inner {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
     }
 
-    .logo { display: flex; align-items: center; gap: 12px; cursor: pointer; text-decoration: none; color: var(--text-main); }
+    .logo { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; text-decoration: none; color: var(--text-main); }
     
-    .logo-text { 
-        font-family: 'JetBrains Mono', monospace; 
-        font-size: 16px; 
-        color: #1f2937; 
-        font-weight: 500; 
-        letter-spacing: -0.025em;
-    }
-    @media (min-width: 768px) { .logo-text { font-size: 14px; } }
-
+    /* Matrix Logo Icon Logic: w-10 h-10 -> md:w-8 md:h-8 */
     .logo-icon {
-        width: 40px;
-        height: 40px;
+        width: 2.5rem;  /* 40px */
+        height: 2.5rem; /* 40px */
         display: flex;
         align-items: center;
         justify-content: center;
     }
-    @media (min-width: 768px) { .logo-icon { width: 32px; height: 32px; } }
+    @media (min-width: 768px) { 
+        .logo-icon { width: 2rem; height: 2rem; } /* 32px */
+    }
 
+    /* Matrix Logo Text Logic: text-base -> md:text-sm */
+    .logo-text { 
+        font-family: 'JetBrains Mono', monospace; 
+        font-size: 1rem; /* 16px text-base */
+        color: #1f2937; /* gray-800 */
+        font-weight: 500; 
+        letter-spacing: -0.025em;
+    }
+    @media (min-width: 768px) { .logo-text { font-size: 0.875rem; } } /* 14px text-sm */
+
+    /* Right Text Logic: text-[10px] -> sm:text-xs */
     .header-right { 
         font-family: 'JetBrains Mono', monospace; 
         font-size: 10px; 
-        color: #9ca3af;
+        color: #9ca3af; /* gray-400 */
         white-space: nowrap;
     }
-    @media (min-width: 640px) { .header-right { font-size: 12px; } }
+    @media (min-width: 640px) { .header-right { font-size: 0.75rem; } } /* 12px text-xs */
 
     /* --- Graph Container --- */
     #graph-container {
         flex: 1;
-        margin-top: var(--header-height); 
         width: 100%;
         position: relative;
         background: #ffffff;
         touch-action: none;
+        overflow: hidden;
     }
     
     #graph { width: 100%; height: 100%; cursor: grab; }
@@ -161,16 +185,16 @@
     .tooltip-title { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 13px; margin-bottom: 6px; color: var(--brand-dark); border-bottom: 1px solid var(--gray-border); padding-bottom: 6px; }
     .tooltip-formula { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-main); white-space: pre-wrap; word-break: break-word; }
 
-    /* --- FOOTER --- */
+    /* --- FOOTER (Matrix Styles Copy) --- */
     footer {
         border-top: 1px solid var(--gray-border);
         padding: 12px 20px;
         background: #fff;
-        padding-bottom: max(12px, env(safe-area-inset-bottom));
+        padding-bottom: max(1.5rem, env(safe-area-inset-bottom)); /* Safe area for mobile */
     }
     
     .footer-content {
-        max-width: 72rem;
+        max-width: 64rem; /* max-w-5xl */
         margin: 0 auto;
         display: flex;
         justify-content: space-between;
@@ -186,28 +210,30 @@
 </head>
 <body>
 
-<!-- Header -->
+<!-- Header (Matrix Structure) -->
 <header>
-  <a href="https://www.emiia.ru" class="logo">
-    <div class="logo-icon">
-       <svg version="1.1" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
-            <clipPath id="p.0"><path d="m0 0l192 0l0 192l-192 0z" clip-rule="nonzero"/></clipPath>
-            <g clip-path="url(#p.0)">
-                <path fill="#3d85c6" d="m154.585 76.782l0 0c-0.186-20.651-17.184-38.474-38.332-40.193l-0.097 5.252c18.078 1.614 32.65 16.93 32.955 34.638z" fill-rule="evenodd"/>
-                <path stroke="#3d85c6" stroke-width="14.66" d="m154.585 76.782l0 0c-0.186-20.651-17.184-38.474-38.332-40.193l-0.097 5.252c18.078 1.614 32.65 16.93 32.955 34.638z" fill-rule="evenodd"/>
-                <path fill="#3d85c6" d="m37.415 76.782l0 0c0.186-20.651 17.184-38.474 38.332-40.193l0.097 5.252c-18.078 1.614-32.65 16.93-32.955 34.638z" fill-rule="evenodd"/>
-                <path stroke="#3d85c6" stroke-width="14.66" d="m37.415 76.782l0 0c0.186-20.651 17.184-38.474 38.332-40.193l0.097 5.252c-18.078 1.614-32.65 16.93-32.955 34.638z" fill-rule="evenodd"/>
-                <path fill="#3d85c6" d="m154.585 115.218l0 0c-0.186 20.651-17.184 38.474-38.332 40.193l-0.097-5.252c18.078-1.614 32.65-16.93 32.955-34.638z" fill-rule="evenodd"/>
-                <path stroke="#3d85c6" stroke-width="14.66" d="m154.585 115.218l0 0c-0.186 20.651-17.184 38.474-38.332 40.193l-0.097-5.252c18.078-1.614 32.65-16.93 32.955-34.638z" fill-rule="evenodd"/>
-                <path fill="#3d85c6" d="m37.415 115.218l0 0c0.186 20.65 17.184 38.474 38.332 40.192l0.097-5.252c-18.078-1.614-32.65-16.93-32.955-34.638z" fill-rule="evenodd"/>
-                <path stroke="#3d85c6" stroke-width="14.66" d="m37.415 115.218l0 0c0.186 20.65 17.184 38.474 38.332 40.192l0.097-5.252c-18.078-1.614-32.65-16.93-32.955-34.638z" fill-rule="evenodd"/>
-                <path fill="#3c78d8" d="m69.536 96.003l0 0c0-14.62 11.852-26.472 26.472-26.472 7.021 0 13.754 2.789 18.718 7.754 4.965 4.964 7.754 11.697 7.754 18.718l0 0c0 14.62-11.852 26.472-26.472 26.472-14.62 0-26.472-11.852-26.472-26.472z" fill-rule="evenodd"/>
-            </g>
-       </svg>
+    <div class="header-inner">
+        <a href="https://www.emiia.ru" class="logo">
+            <div class="logo-icon">
+               <svg version="1.1" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                    <clipPath id="p.0"><path d="m0 0l192 0l0 192l-192 0z" clip-rule="nonzero"/></clipPath>
+                    <g clip-path="url(#p.0)">
+                        <path fill="#3d85c6" d="m154.585 76.782l0 0c-0.186-20.651-17.184-38.474-38.332-40.193l-0.097 5.252c18.078 1.614 32.65 16.93 32.955 34.638z" fill-rule="evenodd"/>
+                        <path stroke="#3d85c6" stroke-width="14.66" d="m154.585 76.782l0 0c-0.186-20.651-17.184-38.474-38.332-40.193l-0.097 5.252c18.078 1.614 32.65 16.93 32.955 34.638z" fill-rule="evenodd"/>
+                        <path fill="#3d85c6" d="m37.415 76.782l0 0c0.186-20.651 17.184-38.474 38.332-40.193l0.097 5.252c-18.078 1.614-32.65 16.93-32.955 34.638z" fill-rule="evenodd"/>
+                        <path stroke="#3d85c6" stroke-width="14.66" d="m37.415 76.782l0 0c0.186-20.651 17.184-38.474 38.332-40.193l0.097 5.252c-18.078 1.614-32.65 16.93-32.955 34.638z" fill-rule="evenodd"/>
+                        <path fill="#3d85c6" d="m154.585 115.218l0 0c-0.186 20.651-17.184 38.474-38.332 40.193l-0.097-5.252c18.078-1.614 32.65-16.93 32.955-34.638z" fill-rule="evenodd"/>
+                        <path stroke="#3d85c6" stroke-width="14.66" d="m154.585 115.218l0 0c-0.186 20.651-17.184 38.474-38.332 40.193l-0.097-5.252c18.078-1.614 32.65-16.93 32.955-34.638z" fill-rule="evenodd"/>
+                        <path fill="#3d85c6" d="m37.415 115.218l0 0c0.186 20.65 17.184 38.474 38.332 40.192l0.097-5.252c-18.078-1.614-32.65-16.93-32.955-34.638z" fill-rule="evenodd"/>
+                        <path stroke="#3d85c6" stroke-width="14.66" d="m37.415 115.218l0 0c0.186 20.65 17.184 38.474 38.332 40.192l0.097-5.252c-18.078-1.614-32.65-16.93-32.955-34.638z" fill-rule="evenodd"/>
+                        <path fill="#3c78d8" d="m69.536 96.003l0 0c0-14.62 11.852-26.472 26.472-26.472 7.021 0 13.754 2.789 18.718 7.754 4.965 4.964 7.754 11.697 7.754 18.718l0 0c0 14.62-11.852 26.472-26.472 26.472-14.62 0-26.472-11.852-26.472-26.472z" fill-rule="evenodd"/>
+                    </g>
+               </svg>
+            </div>
+            <span class="logo-text">EMIIA.AI SIP</span>
+        </a>
+        <div class="header-right">OAI AGENT 2030</div>
     </div>
-    <span class="logo-text">EMIIA.AI SIP</span>
-  </a>
-  <div class="header-right">OAI AGENT 2030</div>
 </header>
 
 <!-- Graph Container -->
@@ -230,7 +256,6 @@
 
 <script>
     // --- SETUP & DATA ---
-    // Увеличенные отступы для красивой прокладки линий
     const g = new dagreD3.graphlib.Graph()
       .setGraph({ 
           rankdir: 'TB', 
@@ -319,45 +344,29 @@
     render(inner, g);
     dagreD3.label = oldLabel;
 
-    // ==========================================
-    // FIX: ЛОГИЧНЫЕ ПУТИ (MANHATTAN ROUTING)
-    // ==========================================
-    // Функция создания строго пути: Вниз -> Прямо -> Вниз
+    // --- EDGE POST-PROCESSING (Strict Manhattan Paths) ---
     function createLogicalPath(source, target) {
         const sX = source.x;
-        const sY = source.y + source.height / 2; // Выход снизу центра
-        
+        const sY = source.y + source.height / 2; 
         const tX = target.x;
-        const tY = target.y - target.height / 2; // Вход сверху центра
-        
-        const midY = (sY + tY) / 2; // Середина по вертикали
-        
-        // Если узлы близко или очень далеко, можно добавить вариативность, 
-        // но для общей схемы простая "лесенка" работает идеально.
-        // M (start) L (down) L (across) L (down to end)
-        
+        const tY = target.y - target.height / 2;
+        const midY = (sY + tY) / 2;
         return `M ${sX},${sY} L ${sX},${midY} L ${tX},${midY} L ${tX},${tY}`;
     }
 
     inner.selectAll("g.edgePath").each(function(d) {
         const group = d3.select(this);
         const edge = g.edge(d);
-        
-        // Получаем данные узлов
         const sourceNode = g.node(d.v);
         const targetNode = g.node(d.w);
 
         if (sourceNode && targetNode) {
-            // Генерируем правильный путь
             const pathD = createLogicalPath(sourceNode, targetNode);
-            
-            // Применяем к визуальному пути
             const visualPath = group.select("path.path");
             visualPath.attr("d", pathD);
             visualPath.classed("edge-path-visual", true);
 
-            // Создаем Hitbox по тому же пути
-            group.select(".edge-hitbox").remove(); // Удаляем старый если есть
+            group.select(".edge-hitbox").remove();
             group.insert("path", ":first-child")
                  .attr("d", pathD)
                  .attr("class", "edge-hitbox");
@@ -375,7 +384,7 @@
 
     function getCurrentTransform() { return d3.zoomTransform(svg.node()); }
 
-    const HEADER_HEIGHT = 72;
+    const HEADER_HEIGHT = 80; // Slightly increased just in case
     const TOOLTIP_W = 300;
 
     function updateTooltipPosition() {
