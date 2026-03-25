@@ -106,13 +106,11 @@
             height: 100%; 
             min-height: 300px;
         }
-        /* Убираем лишние отступы на десктопе внутри правой колонки */
         .md-flex-reverse-gap > * {
             margin-top: 0 !important;
             padding-top: 0 !important;
             border-top: none !important;
         }
-        /* Восстанавливаем сетку внутри */
         .md-metrics-grid > div {
             margin-bottom: 1.5rem;
             padding-bottom: 1.5rem;
@@ -140,7 +138,8 @@
 <header class="border-b border-thin sticky top-0 bg-white/95 backdrop-blur-sm z-50" style="padding-top: max(0.75rem, env(safe-area-inset-top));">
     <div class="max-w-5xl mx-auto px-4 md:px-6 py-3 md:py-4 flex justify-between items-center">
         <a href="https://www.emiia.ru" class="flex items-center gap-2">
-            <div class="w-7 h-7 md:w-8 md:h-8 flex items-center justify-center">
+            <!-- Логотип: увеличен для мобильных -->
+            <div class="w-10 h-10 md:w-8 md:h-8 flex items-center justify-center">
                 <svg version="1.1" viewBox="0 0 192 192" fill="none" stroke="none" stroke-linecap="square" stroke-miterlimit="10" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
                     <clipPath id="p.0"><path d="m0 0l192 0l0 192l-192 0z" clip-rule="nonzero"/></clipPath>
                     <g clip-path="url(#p.0)">
@@ -156,7 +155,8 @@
                     </g>
                 </svg>
             </div>
-            <span class="text-xs text-gray-800 font-mono md:text-sm tracking-tight">EMIIA.AI SIP</span>
+            <!-- Текст: увеличен для мобильных -->
+            <span class="text-base text-gray-800 font-mono md:text-sm tracking-tight">EMIIA.AI SIP</span>
         </a>
         <div class="text-xs text-gray-400 font-mono hidden sm:block">EFFICIENCY CALCULATOR</div>
     </div>
@@ -175,7 +175,6 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-16">
         
         <!-- Left: Controls -->
-        <!-- flex flex-col для моб - чтобы mt-auto работал, но mt-auto только для десктопа -->
         <div class="md:col-span-1 fade-up flex flex-col gap-6 md:gap-8" style="animation-delay: 0.1s">
             
             <!-- Input Groups Wrapper -->
@@ -227,7 +226,6 @@
             </div>
 
             <!-- CAPEX/OPEX Breakdown -->
-            <!-- md:mt-auto прижимает блок к низу только на десктопе -->
             <div class="pt-6 md:pt-8 border-t border-thin md:mt-auto">
                 <h3 class="text-xs uppercase tracking-widest text-gray-400 font-semibold mb-4">Структура экономии</h3>
                 <div class="grid grid-cols-2 gap-4 text-sm">
@@ -252,7 +250,6 @@
         </div>
 
         <!-- Right: Results & Charts -->
-        <!-- md:flex md:flex-col - делаем флексом только на десктопе -->
         <div class="md:col-span-2 fade-up md:flex md:flex-col" style="animation-delay: 0.2s">
             
             <!-- Metrics Blocks (Top) -->
@@ -304,7 +301,6 @@
             </div>
 
             <!-- Charts Section -->
-            <!-- md:mt-auto прижимает к низу, md:flex-1 растягивает по высоте -->
             <div class="pt-2 md:pt-4 md:mt-auto md:flex-1 md:flex md:flex-col">
                 <div class="chart-tabs-container flex gap-2 mb-4 flex-shrink-0">
                     <button class="chart-tab active flex-shrink-0 px-3 py-1.5 text-xs font-medium border border-black rounded-full font-mono" data-chart="tco">TCO</button>
@@ -315,7 +311,6 @@
                     <button class="chart-tab flex-shrink-0 px-3 py-1.5 text-xs font-medium border border-gray-200 rounded-full hover:border-gray-400 font-mono" data-chart="opex">OPEX</button>
                 </div>
 
-                <!-- Контейнер графика -->
                 <div class="chart-container">
                     <canvas id="metricsChart"></canvas>
                 </div>
@@ -465,23 +460,26 @@
         Chart.defaults.font.family = "'JetBrains Mono', monospace";
         Chart.defaults.font.size = 11;
 
+        // Общие настройки подсказок
+        const commonTooltipOptions = {
+            backgroundColor: '#3d85c6', // Темно-синий цвет
+            titleColor: '#ffffff',
+            bodyColor: '#ffffff',
+            borderColor: '#3d85c6',
+            borderWidth: 1,
+            padding: 10,
+            cornerRadius: 8, // Скругление подсказок
+            titleFont: { family: "'JetBrains Mono', monospace" },
+            bodyFont: { family: "'JetBrains Mono', monospace" },
+            displayColors: false
+        };
+
         const commonOptions = {
             responsive: true,
             maintainAspectRatio: false,
             plugins: { 
                 legend: { display: false },
-                tooltip: {
-                    backgroundColor: '#3d85c6',
-                    titleColor: '#ffffff',
-                    bodyColor: '#ffffff',
-                    borderColor: '#3d85c6',
-                    borderWidth: 1,
-                    padding: 10,
-                    cornerRadius: 4,
-                    titleFont: { family: "'JetBrains Mono', monospace" },
-                    bodyFont: { family: "'JetBrains Mono', monospace" },
-                    displayColors: false
-                }
+                tooltip: commonTooltipOptions
             },
             scales: {
                 y: { beginAtZero: true, grid: { color: '#F0F0F0' }, ticks: { color: '#AAA' } },
@@ -489,12 +487,14 @@
             }
         };
 
+        const barRadius = 8; // Скругление столбиков
+
         if (currentChartType === 'tco') {
             chart = new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: ['Classic', 'EMIIA'],
-                    datasets: [{ data: [chartData.tco.classic, chartData.tco.emiia], backgroundColor: [BRAND_COLORS.gray, BRAND_COLORS.darkBlue], borderWidth: 0, borderRadius: 4 }]
+                    datasets: [{ data: [chartData.tco.classic, chartData.tco.emiia], backgroundColor: [BRAND_COLORS.gray, BRAND_COLORS.darkBlue], borderWidth: 0, borderRadius: barRadius }]
                 },
                 options: { ...commonOptions, plugins: { ...commonOptions.plugins, tooltip: { ...commonOptions.plugins.tooltip, callbacks: { label: (c) => '$' + formatNumber(c.raw) } } } }
             });
@@ -503,7 +503,7 @@
                 type: 'bar',
                 data: {
                     labels: ['Classic', 'EMIIA'],
-                    datasets: [{ data: [chartData.time.classic, chartData.time.emiia], backgroundColor: [BRAND_COLORS.gray, BRAND_COLORS.darkBlue], borderWidth: 0, borderRadius: 4 }]
+                    datasets: [{ data: [chartData.time.classic, chartData.time.emiia], backgroundColor: [BRAND_COLORS.gray, BRAND_COLORS.darkBlue], borderWidth: 0, borderRadius: barRadius }]
                 },
                 options: { ...commonOptions, plugins: { ...commonOptions.plugins, tooltip: { ...commonOptions.plugins.tooltip, callbacks: { label: (c) => c.raw + ' дней' } } } }
             });
@@ -514,14 +514,22 @@
                     labels: ['ROI Classic', 'ROI EMIIA'],
                     datasets: [{ data: [chartData.roi.classic, chartData.roi.emiia], backgroundColor: [BRAND_COLORS.gray, BRAND_COLORS.darkBlue], borderWidth: 0 }]
                 },
-                options: { responsive: true, maintainAspectRatio: false, cutout: '70%', plugins: { legend: { display: true, position: 'bottom', labels: { font: { family: "'JetBrains Mono', monospace" } } } } }
+                options: { 
+                    responsive: true, 
+                    maintainAspectRatio: false, 
+                    cutout: '70%', 
+                    plugins: { 
+                        legend: { display: true, position: 'bottom', labels: { font: { family: "'JetBrains Mono', monospace" } } },
+                        tooltip: commonTooltipOptions // Применяем общие настройки подсказок
+                    } 
+                }
             });
         } else if (currentChartType === 'savings') {
             chart = new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: ['TCO', 'T2M', 'CAPEX', 'OPEX'],
-                    datasets: [{ label: 'Экономия %', data: [chartData.savings.tco, chartData.savings.time, chartData.savings.capexPercent, chartData.savings.opexPercent], backgroundColor: BRAND_COLORS.mediumBlue, borderWidth: 0, borderRadius: 4 }]
+                    datasets: [{ label: 'Экономия %', data: [chartData.savings.tco, chartData.savings.time, chartData.savings.capexPercent, chartData.savings.opexPercent], backgroundColor: BRAND_COLORS.mediumBlue, borderWidth: 0, borderRadius: barRadius }]
                 },
                 options: commonOptions
             });
@@ -530,7 +538,7 @@
                 type: 'bar',
                 data: {
                     labels: ['Classic CAPEX', 'EMIIA CAPEX'],
-                    datasets: [{ data: [chartData.capex.capexClassic, chartData.capex.capexEmiia], backgroundColor: [BRAND_COLORS.lightBlue, BRAND_COLORS.darkBlue], borderWidth: 0, borderRadius: 4 }]
+                    datasets: [{ data: [chartData.capex.capexClassic, chartData.capex.capexEmiia], backgroundColor: [BRAND_COLORS.lightBlue, BRAND_COLORS.darkBlue], borderWidth: 0, borderRadius: barRadius }]
                 },
                 options: commonOptions
             });
@@ -539,7 +547,7 @@
                 type: 'bar',
                 data: {
                     labels: ['Classic OPEX', 'EMIIA OPEX'],
-                    datasets: [{ data: [chartData.opex.opexClassic, chartData.opex.opexEmiia], backgroundColor: [BRAND_COLORS.lightBlue, BRAND_COLORS.darkBlue], borderWidth: 0, borderRadius: 4 }]
+                    datasets: [{ data: [chartData.opex.opexClassic, chartData.opex.opexEmiia], backgroundColor: [BRAND_COLORS.lightBlue, BRAND_COLORS.darkBlue], borderWidth: 0, borderRadius: barRadius }]
                 },
                 options: commonOptions
             });
