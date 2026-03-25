@@ -9,7 +9,7 @@
 <meta property="og:title" content="EMIIA.AI SIP – индикаторы клиентской рентабельности">
 <meta property="og:description" content="Пользовательская экономика EMIIA.AI SIP">
 <meta property="og:image" content="https://www.emiia.ru/1200x630_roi.png">
-<meta property="og:url" content="https://www.emiia.ru/emiia_ai_oai.html">
+<meta property="og:url" content="https://www.emiia.ru/roi.html">
 <meta property="og:type" content="website">
 
 <!-- Fonts -->
@@ -113,7 +113,7 @@
     .node.active rect { fill: var(--brand-medium); }
     .node text { fill: #ffffff; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; pointer-events: none; }
 
-    /* --- EDGE STYLES --- */
+    /* --- EDGE STYLES (Strict Logic) --- */
     .edge-path-visual {
         fill: none;
         stroke: var(--gray-border);
@@ -161,7 +161,7 @@
     .tooltip-title { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 13px; margin-bottom: 6px; color: var(--brand-dark); border-bottom: 1px solid var(--gray-border); padding-bottom: 6px; }
     .tooltip-formula { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-main); white-space: pre-wrap; word-break: break-word; }
 
-    /* --- FOOTER (Matrix Styles) --- */
+    /* --- FOOTER --- */
     footer {
         border-top: 1px solid var(--gray-border);
         padding: 12px 20px;
@@ -230,12 +230,13 @@
 
 <script>
     // --- SETUP & DATA ---
+    // Увеличенные отступы для красивой прокладки линий
     const g = new dagreD3.graphlib.Graph()
       .setGraph({ 
           rankdir: 'TB', 
-          ranksep: 150,   
-          edgesep: 50,    
-          nodesep: 100,   
+          ranksep: 120,   
+          edgesep: 40,    
+          nodesep: 80,   
           marginx: 20, 
           marginy: 20 
       })
@@ -318,16 +319,48 @@
     render(inner, g);
     dagreD3.label = oldLabel;
 
-    // Edge Post-Processing (Hitbox injection)
+    // ==========================================
+    // FIX: ЛОГИЧНЫЕ ПУТИ (MANHATTAN ROUTING)
+    // ==========================================
+    // Функция создания строго пути: Вниз -> Прямо -> Вниз
+    function createLogicalPath(source, target) {
+        const sX = source.x;
+        const sY = source.y + source.height / 2; // Выход снизу центра
+        
+        const tX = target.x;
+        const tY = target.y - target.height / 2; // Вход сверху центра
+        
+        const midY = (sY + tY) / 2; // Середина по вертикали
+        
+        // Если узлы близко или очень далеко, можно добавить вариативность, 
+        // но для общей схемы простая "лесенка" работает идеально.
+        // M (start) L (down) L (across) L (down to end)
+        
+        return `M ${sX},${sY} L ${sX},${midY} L ${tX},${midY} L ${tX},${tY}`;
+    }
+
     inner.selectAll("g.edgePath").each(function(d) {
         const group = d3.select(this);
-        const visualPath = group.select("path.path");
-        visualPath.classed("edge-path-visual", true);
+        const edge = g.edge(d);
         
-        if (visualPath.attr("d")) {
+        // Получаем данные узлов
+        const sourceNode = g.node(d.v);
+        const targetNode = g.node(d.w);
+
+        if (sourceNode && targetNode) {
+            // Генерируем правильный путь
+            const pathD = createLogicalPath(sourceNode, targetNode);
+            
+            // Применяем к визуальному пути
+            const visualPath = group.select("path.path");
+            visualPath.attr("d", pathD);
+            visualPath.classed("edge-path-visual", true);
+
+            // Создаем Hitbox по тому же пути
+            group.select(".edge-hitbox").remove(); // Удаляем старый если есть
             group.insert("path", ":first-child")
-                .attr("d", visualPath.attr("d"))
-                .attr("class", "edge-hitbox");
+                 .attr("d", pathD)
+                 .attr("class", "edge-hitbox");
         }
     });
 
@@ -435,16 +468,15 @@
     svg.call(zoom.transform, d3.zoomIdentity.translate(xCenterOffset, yCenterOffset));
 
     // ==========================================
-    // ПРАВИЛЬНАЯ ФУНКЦИЯ ЭКСПОРТА (ВОССТАНОВЛЕНА)
+    // ПРАВИЛЬНАЯ ФУНКЦИЯ ЭКСПОРТА
     // ==========================================
     function downloadCSV() {
-      const dataTb = 100;  // Дефолтные значения для образца, 
-      const infM = 10;    // так как в этом файле нет инпутов, 
-      const deplN = 5;    // берем значения из узлов графа
+      const dataTb = 100;
+      const infM = 10;
+      const deplN = 5;
       const opsCost = 15000;
       const daysClassic = 50;
       
-      // Дублируем логику расчетов для формул CSV
       const hostCl = 0.67, hostEm = 0.11;
       const infCl = 0.27, infEm = 0.05;
       const storCl = 0.05, storEm = 0.03;
@@ -461,7 +493,6 @@
       const roiC = tcoC > 0 ? ((revenue - tcoC * 12) / (tcoC * 12)) * 100 : 0;
       const roiE = tcoE > 0 ? ((revenue - tcoE * 12) / (tcoE * 12)) * 100 : 0;
       
-      // Формируем массив данных (Полная версия)
       const csvData = [
         ['Параметр', 'Значение', 'Формула для Google Sheets'],
         ['Объём данных (ТБ)', dataTb, `=${dataTb}`],
@@ -485,12 +516,10 @@
         ['- EMIIA снижает OPEX на 67% за счет автоматизации']
       ];
       
-      // Преобразуем массив в строку CSV
       const csvContent = csvData.map(row => 
         row.map(cell => `"${cell}"`).join(',')
       ).join('\n');
       
-      // Создаем Blob и ссылку для скачивания
       const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
       const link = document.createElement('a');
       const url = URL.createObjectURL(blob);
