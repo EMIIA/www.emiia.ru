@@ -7,7 +7,7 @@
 
 <!-- Open Graph Meta Tags -->
 <meta property="og:title" content="EMIIA.AI SIP – калькулятор экономии">
-<meta property="og:description" content="Сравните и рассчитайте экономию от использования продуктов платформы EMIIA.AI SIP: TCO, ROI и время выхода на рынок">
+<meta property="og:description" content="Сравните и рассчитайте экономию от использования продуктов платформы EMIIA.AI SIP">
 <meta property="og:image" content="https://www.emiia.ru/1200x630_roi.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -93,14 +93,12 @@
 
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
-    /* Контейнер графика */
     .chart-container {
         position: relative;
-        height: 280px; /* Фикс для мобильных */
+        height: 280px;
         width: 100%;
     }
     
-    /* Десктоп: График растягивается */
     @media (min-width: 768px) {
         .chart-container { 
             height: 100%; 
@@ -130,6 +128,18 @@
         scrollbar-width: none;
     }
     .chart-tabs-container::-webkit-scrollbar { display: none; }
+
+
+
+
+
+
+
+
+
+
+
+
 </style>
 </head>
 <body class="min-h-screen">
@@ -138,7 +148,6 @@
 <header class="border-b border-thin sticky top-0 bg-white/95 backdrop-blur-sm z-50" style="padding-top: max(0.75rem, env(safe-area-inset-top));">
     <div class="max-w-5xl mx-auto px-4 md:px-6 py-3 md:py-4 flex justify-between items-center">
         <a href="https://www.emiia.ru" class="flex items-center gap-2">
-            <!-- Логотип: увеличен для мобильных -->
             <div class="w-10 h-10 md:w-8 md:h-8 flex items-center justify-center">
                 <svg version="1.1" viewBox="0 0 192 192" fill="none" stroke="none" stroke-linecap="square" stroke-miterlimit="10" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
                     <clipPath id="p.0"><path d="m0 0l192 0l0 192l-192 0z" clip-rule="nonzero"/></clipPath>
@@ -155,7 +164,6 @@
                     </g>
                 </svg>
             </div>
-            <!-- Текст: увеличен для мобильных -->
             <span class="text-base text-gray-800 font-mono md:text-sm tracking-tight">EMIIA.AI SIP</span>
         </a>
         <div class="text-xs text-gray-400 font-mono hidden sm:block">EFFICIENCY CALCULATOR</div>
@@ -337,14 +345,18 @@
     </div>
 </footer>
 
+
+
+
 <!-- Modal -->
 <div class="modal" id="exportModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.95); z-index: 2000; align-items: center; justify-content: center; padding: 1rem;">
-    <div class="bg-white p-8 max-w-md w-full border border-black shadow-lg">
+    <div class="bg-white p-8 max-w-md w-full border shadow-lg rounded-2xl" style="border-color: #3c78d8; border-width: 1px;">
         <h3 class="text-xl mb-4 font-mono font-bold">Экспорт завершен</h3>
-        <p class="text-sm text-gray-600 mb-6 font-mono">CSV файл с формулами успешно сгенерирован.</p>
-        <button class="w-full bg-black text-white py-3 text-sm font-bold hover:bg-gray-800 transition font-mono" id="closeModal">Закрыть</button>
+        <p class="text-sm text-gray-600 mb-6 font-mono">CSV файл с формулами для электронных таблиц успешно сгенерирован.</p>
+        <button class="w-full text-white py-3 text-sm font-bold hover:opacity-90 transition font-mono rounded-lg" id="closeModal" style="background-color: #3c78d8;">Закрыть</button>
     </div>
 </div>
+
 
 <script>
     const $ = id => document.getElementById(id);
@@ -460,15 +472,14 @@
         Chart.defaults.font.family = "'JetBrains Mono', monospace";
         Chart.defaults.font.size = 11;
 
-        // Общие настройки подсказок
         const commonTooltipOptions = {
-            backgroundColor: '#3d85c6', // Темно-синий цвет
+            backgroundColor: '#3d85c6',
             titleColor: '#ffffff',
             bodyColor: '#ffffff',
             borderColor: '#3d85c6',
             borderWidth: 1,
             padding: 10,
-            cornerRadius: 8, // Скругление подсказок
+            cornerRadius: 8,
             titleFont: { family: "'JetBrains Mono', monospace" },
             bodyFont: { family: "'JetBrains Mono', monospace" },
             displayColors: false
@@ -487,7 +498,7 @@
             }
         };
 
-        const barRadius = 8; // Скругление столбиков
+        const barRadius = 8;
 
         if (currentChartType === 'tco') {
             chart = new Chart(ctx, {
@@ -520,7 +531,7 @@
                     cutout: '70%', 
                     plugins: { 
                         legend: { display: true, position: 'bottom', labels: { font: { family: "'JetBrains Mono', monospace" } } },
-                        tooltip: commonTooltipOptions // Применяем общие настройки подсказок
+                        tooltip: commonTooltipOptions
                     } 
                 }
             });
@@ -554,19 +565,74 @@
         }
     }
 
+    // ========== ОБНОВЛЕННАЯ ФУНКЦИЯ ЭКСПОРТА (ИЗ ОБРАЗЦА) ==========
     function exportToCSV() {
-        const t = +$('dataTb').value;
-        const i = +$('infM').value;
-        const d = +$('deplN').value;
-        const ops = +$('opsCost').value;
-        let csvContent = "data:text/csv;charset=utf-8,Parameter,Value\n";
-        csvContent += `Data Volume (TB),${t}\nInferences (M),${i}\nDeployments,${d}\nOps Cost,$${ops}`;
-        const link = document.createElement("a");
-        link.setAttribute("href", encodeURI(csvContent));
-        link.setAttribute("download", "emiia_sip_calc.csv");
+        const dataTb = +$('dataTb').value;
+        const infM = +$('infM').value;
+        const deplN = +$('deplN').value;
+        const opsCost = +$('opsCost').value;
+        const daysClassic = +$('daysClassic').value;
+        
+        // Рассчитываем значения для CSV (дублируем логику calc для надежности файла)
+        const hostCl = 0.67, hostEm = 0.11;
+        const infCl = 0.27, infEm = 0.05;
+        const storCl = 0.05, storEm = 0.03;
+        
+        const tcoC = deplN * hostCl + infM * 1000 * infCl + dataTb * storCl + opsCost;
+        const tcoE = deplN * hostEm + infM * 1000 * infEm + dataTb * storEm + opsCost * 0.33;
+        
+        const capexC = tcoC * 0.35;
+        const capexE = tcoE * 0.10;
+        const opexC = tcoC * 0.65;
+        const opexE = tcoE * 0.90;
+        
+        const revenue = 500000;
+        const roiC = tcoC > 0 ? ((revenue - tcoC * 12) / (tcoC * 12)) * 100 : 0;
+        const roiE = tcoE > 0 ? ((revenue - tcoE * 12) / (tcoE * 12)) * 100 : 0;
+        
+        // Формируем массив данных
+        const csvData = [
+            ['Параметр', 'Значение', 'Формула для Google Sheets'],
+            ['Объём данных (ТБ)', dataTb, `=${dataTb}`],
+            ['Инференсы (млн)', infM, `=${infM}`],
+            ['Количество развёртываний', deplN, `=${deplN}`],
+            ['Команда Ops ($/мес)', opsCost, `=${opsCost}`],
+            ['Время до запуска (дней)', daysClassic, `=${daysClassic}`],
+            [''],
+            ['Метрика', 'Classic', 'EMIIA', 'Экономия', 'Экономия %'],
+            ['TCO ($)', tcoC.toFixed(0), tcoE.toFixed(0), (tcoC - tcoE).toFixed(0), `=((B9-C9)/B9)*100`],
+            ['CAPEX ($)', capexC.toFixed(0), capexE.toFixed(0), (capexC - capexE).toFixed(0), `=((B10-C10)/B10)*100`],
+            ['OPEX ($)', opexC.toFixed(0), opexE.toFixed(0), (opexC - opexE).toFixed(0), `=((B11-C11)/B11)*100`],
+            ['Время запуска (дней)', daysClassic, '8', (daysClassic - 8).toFixed(0), `=((B12-8)/B12)*100`],
+            ['ROI 12 мес (%)', roiC.toFixed(0), roiE.toFixed(0), '', `=C13-B13`],
+            [''],
+            ['Примечания:'],
+            ['- Формулы автоматически адаптируются в формат электронных таблиц'],
+            ['- Изменяйте значения в колонке "Значение" для пересчёта'],
+            ['- CAPEX включает: оборудование, лицензии, разработку инфраструктуры'],
+            ['- OPEX включает: вычисления, команду Ops, обслуживание, электричество'],
+            ['- EMIIA снижает OPEX на 67% за счет автоматизации']
+        ];
+        
+        // Преобразуем массив в строку CSV
+        const csvContent = csvData.map(row => 
+            row.map(cell => `"${cell}"`).join(',')
+        ).join('\n');
+        
+        // Создаем Blob и ссылку для скачивания
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        
+        link.setAttribute('href', url);
+        link.setAttribute('download', `emiiasip_calculator_${new Date().toISOString().split('T')[0]}.csv`);
+        link.style.visibility = 'hidden';
+        
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+        
+        // Показываем модальное окно
         $('exportModal').style.display = 'flex';
     }
 
@@ -585,8 +651,11 @@
                 updateChart();
             });
         });
+        
+        // Слушатели для экспорта и модального окна
         $('exportBtn').addEventListener('click', exportToCSV);
         $('closeModal').addEventListener('click', () => $('exportModal').style.display = 'none');
+        
         calc();
     });
 </script>
