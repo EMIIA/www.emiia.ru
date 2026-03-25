@@ -44,7 +44,7 @@
         padding-right: env(safe-area-inset-right);
     }
 
-    /* --- HEADER --- */
+    /* --- HEADER (Matrix Styles Copy) --- */
     header {
         background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(4px);
@@ -89,6 +89,7 @@
         flex-shrink: 0;
     }
     
+    /* FIXED: Logo Icon for Mobile Safari */
     .logo-icon {
         width: 40px;
         height: 40px;
@@ -109,6 +110,7 @@
         }
     }
 
+    /* FIXED: SVG sizing */
     .logo-icon svg {
         width: 100%;
         height: 100%;
@@ -116,6 +118,7 @@
         flex-shrink: 0;
     }
 
+    /* Matrix Logo Text Logic: text-base -> md:text-sm */
     .logo-text {
         font-family: 'JetBrains Mono', monospace;
         font-size: 1rem;
@@ -131,6 +134,7 @@
         }
     }
 
+    /* Right Text Logic: text-[10px] -> sm:text-xs */
     .header-right {
         font-family: 'JetBrains Mono', monospace;
         font-size: 10px;
@@ -194,56 +198,29 @@
     .edgePath marker path { fill: var(--gray-border); stroke: none; transition: fill 0.2s; }
     .edgePath.active marker path { fill: var(--brand-dark); }
 
-    /* --- TOOLTIP (UPDATED DESIGN) --- */
+    /* --- TOOLTIP --- */
     .tooltip {
         position: fixed;
-        /* Адаптивная ширина: 340px на десктопе, 90% на мобильном */
-        width: 340px; 
-        max-width: calc(100vw - 40px); 
-        
-        /* Увеличенные отступы */
-        padding: 20px 24px; 
-        
+        width: 300px;
+        padding: 12px 16px;
         background: #ffffff;
-        border: 1px solid #d1d5db; /* Чуть темнее для контраста */
+        border: 1px solid var(--gray-border);
         border-radius: var(--radius-lg);
         pointer-events: none;
-        
-        /* Увеличенный шрифт для мобильных */
-        font-size: 14px; 
-        
-        box-shadow: 0 15px 40px rgba(0,0,0,0.12); /* Более заметная тень */
-        line-height: 1.6; /* Межстрочный интервал */
+        font-size: 12px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        line-height: 1.5;
         z-index: 950;
         color: var(--text-main);
         opacity: 0;
         visibility: hidden;
-        transition: opacity 0.15s ease;
-        
-        /* Безопасная зона, чтобы не перекрывалась челкой/кнопками */
-        margin-bottom: env(safe-area-inset-bottom);
+        transition: opacity 0.05s;
     }
     
     .tooltip.visible { opacity: 1; visibility: visible; }
     
-    .tooltip-title { 
-        font-family: 'Inter', sans-serif; 
-        font-weight: 700; 
-        font-size: 15px; /* Крупнее заголовок */
-        margin-bottom: 12px; 
-        color: var(--brand-dark); 
-        border-bottom: 1px solid var(--gray-border); 
-        padding-bottom: 10px; 
-        line-height: 1.3;
-    }
-    
-    .tooltip-formula { 
-        font-family: 'JetBrains Mono', monospace; 
-        font-size: 13px; /* Крупнее формулы */
-        color: var(--text-main); 
-        white-space: pre-wrap; 
-        word-break: break-word; 
-    }
+    .tooltip-title { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 13px; margin-bottom: 6px; color: var(--brand-dark); border-bottom: 1px solid var(--gray-border); padding-bottom: 6px; }
+    .tooltip-formula { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-main); white-space: pre-wrap; word-break: break-word; }
 
     /* --- FOOTER --- */
     footer {
@@ -452,8 +429,7 @@
     function getCurrentTransform() { return d3.zoomTransform(svg.node()); }
 
     const HEADER_HEIGHT = 80;
-    // Update width in JS to match CSS for positioning logic
-    const TOOLTIP_W = 340; 
+    const TOOLTIP_W = 300;
 
     function updateTooltipPosition() {
         if (!tooltipState.isOpen) return;
@@ -468,23 +444,13 @@
             [screenX, screenY] = t.apply(tooltipState.target);
         }
 
-        // Basic boundary check
-        const maxW = window.innerWidth;
-        const actualWidth = Math.min(TOOLTIP_W, maxW - 40); // Account for max-width
-        
-        let left = screenX - actualWidth / 2;
-        let top = screenY + 10;
-
-        // Clamp left position
-        if (left < 20) left = 20;
-        if (left + actualWidth > maxW - 20) left = maxW - actualWidth - 20;
-
-        // Check top overflow
-        if (screenY < HEADER_HEIGHT) {
-             hideTooltip();
-             return;
+        if (screenY < HEADER_HEIGHT || screenX < 0 || screenX > window.innerWidth) {
+            tooltip.classed("visible", false);
+            return;
         }
 
+        let left = screenX - TOOLTIP_W / 2;
+        let top = screenY + 10;
         tooltip.style("left", left + "px").style("top", top + "px");
         tooltip.classed("visible", true);
     }
@@ -582,7 +548,7 @@
         ['Параметр', 'Значение', 'Формула для Google Sheets'],
         ['Объём данных (ТБ)', dataTb, `=${dataTb}`],
         ['Инференсы (млн)', infM, `=${infM}`],
-        ['Количество развёртываний', deplN, `=${deplN}`],
+        ['К��личество развёртываний', deplN, `=${deplN}`],
         ['Команда Ops ($/мес)', opsCost, `=${opsCost}`],
         ['Время до запуска (дней)', daysClassic, `=${daysClassic}`],
         [''],
