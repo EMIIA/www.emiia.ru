@@ -20,533 +20,553 @@
 <meta name="twitter:description" content="Рассчитайте экономию от использования продуктов платформы EMIIA.AI SIP">
 <meta name="twitter:image" content="https://www.emiia.ru/1200x630_roi.png">
 
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: #FFFFFF;
+        color: #111;
+        -webkit-font-smoothing: antialiased;
+        -webkit-tap-highlight-color: transparent;
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+    }
+    
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
 
+    input[type=range] {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 2px;
+        background: #E5E5E5;
+        outline: none;
+        margin: 8px 0;
+    }
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.gooleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #FFFFFF;
-            color: #111;
-            -webkit-font-smoothing: antialiased;
-            -webkit-tap-highlight-color: transparent;
-            padding-left: env(safe-area-inset-left);
-            padding-right: env(safe-area-inset-right);
-        }
-        
-        .font-mono { font-family: 'JetBrains Mono', monospace; }
+    input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #3c78d8;
+        cursor: pointer;
+        border: 2px solid #fff;
+        box-shadow: 0 0 0 1px #3c78d8;
+    }
 
-        input[type=range] {
-            -webkit-appearance: none;
-            width: 100%;
-            height: 2px;
-            background: #E5E5E5;
-            outline: none;
-            margin: 8px 0;
-        }
+    input[type=range]::-moz-range-thumb {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #3c78d8;
+        cursor: pointer;
+        border: 2px solid #fff;
+    }
 
-        input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: #3c78d8;
-            cursor: pointer;
-            border: 2px solid #fff;
-            box-shadow: 0 0 0 1px #3c78d8;
-        }
+    .input-minimal {
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid #E5E5E5;
+        border-radius: 0;
+        padding: 8px 0;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 16px;
+        transition: border-color 0.3s;
+        width: 100%;
+    }
 
-        input[type=range]::-moz-range-thumb {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: #3c78d8;
-            cursor: pointer;
-            border: 2px solid #fff;
-        }
+    .input-minimal:focus {
+        outline: none;
+        border-color: #3c78d8;
+    }
 
-        .input-minimal {
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid #E5E5E5;
-            border-radius: 0;
-            padding: 8px 0;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 16px;
-            transition: border-color 0.3s;
-            width: 100%;
-        }
+    .border-thin { border-color: #E5E5E5; }
+    
+    .fade-up {
+        opacity: 0;
+        transform: translateY(10px);
+        animation: fadeUp 0.5s forwards ease-out;
+    }
 
-        .input-minimal:focus {
-            outline: none;
-            border-color: #3c78d8;
-        }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
-        .border-thin { border-color: #E5E5E5; }
-        
-        .fade-up {
-            opacity: 0;
-            transform: translateY(10px);
-            animation: fadeUp 0.5s forwards ease-out;
+    /* Контейнер графика */
+    .chart-container {
+        position: relative;
+        height: 280px; /* Фиксированная высота для мобильных */
+        width: 100%;
+    }
+    
+    /* Десктоп: График растягивается на всю доступную высоту */
+    @media (min-width: 768px) {
+        .chart-container { 
+            height: 100%; 
+            min-height: 300px; /* Минимум, чтобы не сплющилось */
         }
-
-        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-
-        .chart-container {
-            position: relative;
-            height: 280px;
-            width: 100%;
-        }
-        
-        @media (min-width: 768px) {
-            .chart-container { height: 320px; }
-        }
-        
-        .chart-tabs-container {
-            overflow-x: auto;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-        }
-        .chart-tabs-container::-webkit-scrollbar { display: none; }
-    </style>
+    }
+    
+    .chart-tabs-container {
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+    .chart-tabs-container::-webkit-scrollbar { display: none; }
+</style>
 </head>
 <body class="min-h-screen">
 
-    <!-- Header -->
-    <header class="border-b border-thin sticky top-0 bg-white/95 backdrop-blur-sm z-50" style="padding-top: max(0.75rem, env(safe-area-inset-top));">
-        <div class="max-w-5xl mx-auto px-4 md:px-6 py-3 md:py-4 flex justify-between items-center">
-            <a href="https://www.emiia.ru" class="flex items-center gap-2">
-                <div class="w-7 h-7 md:w-8 md:h-8 flex items-center justify-center">
-                    <svg version="1.1" viewBox="0 0 192 192" fill="none" stroke="none" stroke-linecap="square" stroke-miterlimit="10" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
-                        <clipPath id="p.0"><path d="m0 0l192 0l0 192l-192 0z" clip-rule="nonzero"/></clipPath>
-                        <g clip-path="url(#p.0)">
-                            <path fill="#3d85c6" d="m154.585 76.782l0 0c-0.186-20.651-17.184-38.474-38.332-40.193l-0.097 5.252c18.078 1.614 32.65 16.93 32.955 34.638z" fill-rule="evenodd"/>
-                            <path stroke="#3d85c6" stroke-width="14.66" stroke-linejoin="round" stroke-linecap="butt" d="m154.585 76.782l0 0c-0.186-20.651-17.184-38.474-38.332-40.193l-0.097 5.252c18.078 1.614 32.65 16.93 32.955 34.638z" fill-rule="evenodd"/>
-                            <path fill="#3d85c6" d="m37.415 76.782l0 0c0.186-20.651 17.184-38.474 38.332-40.193l0.097 5.252c-18.078 1.614-32.65 16.93-32.955 34.638z" fill-rule="evenodd"/>
-                            <path stroke="#3d85c6" stroke-width="14.66" stroke-linejoin="round" stroke-linecap="butt" d="m37.415 76.782l0 0c0.186-20.651 17.184-38.474 38.332-40.193l0.097 5.252c-18.078 1.614-32.65 16.93-32.955 34.638z" fill-rule="evenodd"/>
-                            <path fill="#3d85c6" d="m154.585 115.218l0 0c-0.186 20.651-17.184 38.474-38.332 40.193l-0.097-5.252c18.078-1.614 32.65-16.93 32.955-34.638z" fill-rule="evenodd"/>
-                            <path stroke="#3d85c6" stroke-width="14.66" stroke-linejoin="round" stroke-linecap="butt" d="m154.585 115.218l0 0c-0.186 20.651-17.184 38.474-38.332 40.193l-0.097-5.252c18.078-1.614 32.65-16.93 32.955-34.638z" fill-rule="evenodd"/>
-                            <path fill="#3d85c6" d="m37.415 115.218l0 0c0.186 20.65 17.184 38.474 38.332 40.192l0.097-5.252c-18.078-1.614-32.65-16.93-32.955-34.638z" fill-rule="evenodd"/>
-                            <path stroke="#3d85c6" stroke-width="14.66" stroke-linejoin="round" stroke-linecap="butt" d="m37.415 115.218l0 0c0.186 20.65 17.184 38.474 38.332 40.192l0.097-5.252c-18.078-1.614-32.65-16.93-32.955-34.638z" fill-rule="evenodd"/>
-                            <path fill="#3c78d8" d="m69.536 96.003l0 0c0-14.62 11.852-26.472 26.472-26.472 7.021 0 13.754 2.789 18.718 7.754 4.965 4.964 7.754 11.697 7.754 18.718l0 0c0 14.62-11.852 26.472-26.472 26.472-14.62 0-26.472-11.852-26.472-26.472z" fill-rule="evenodd"/>
-                        </g>
-                    </svg>
-                </div>
-                <span class="text-xs text-gray-800 font-mono md:text-sm tracking-tight">EMIIA.AI SIP</span>
-            </a>
-            <div class="text-xs text-gray-400 font-mono hidden sm:block">EFFICIENCY CALCULATOR</div>
-        </div>
-    </header>
+<!-- Header -->
+<header class="border-b border-thin sticky top-0 bg-white/95 backdrop-blur-sm z-50" style="padding-top: max(0.75rem, env(safe-area-inset-top));">
+    <div class="max-w-5xl mx-auto px-4 md:px-6 py-3 md:py-4 flex justify-between items-center">
+        <a href="https://www.emiia.ru" class="flex items-center gap-2">
+            <div class="w-7 h-7 md:w-8 md:h-8 flex items-center justify-center">
+                <svg version="1.1" viewBox="0 0 192 192" fill="none" stroke="none" stroke-linecap="square" stroke-miterlimit="10" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                    <clipPath id="p.0"><path d="m0 0l192 0l0 192l-192 0z" clip-rule="nonzero"/></clipPath>
+                    <g clip-path="url(#p.0)">
+                        <path fill="#3d85c6" d="m154.585 76.782l0 0c-0.186-20.651-17.184-38.474-38.332-40.193l-0.097 5.252c18.078 1.614 32.65 16.93 32.955 34.638z" fill-rule="evenodd"/>
+                        <path stroke="#3d85c6" stroke-width="14.66" stroke-linejoin="round" stroke-linecap="butt" d="m154.585 76.782l0 0c-0.186-20.651-17.184-38.474-38.332-40.193l-0.097 5.252c18.078 1.614 32.65 16.93 32.955 34.638z" fill-rule="evenodd"/>
+                        <path fill="#3d85c6" d="m37.415 76.782l0 0c0.186-20.651 17.184-38.474 38.332-40.193l0.097 5.252c-18.078 1.614-32.65 16.93-32.955 34.638z" fill-rule="evenodd"/>
+                        <path stroke="#3d85c6" stroke-width="14.66" stroke-linejoin="round" stroke-linecap="butt" d="m37.415 76.782l0 0c0.186-20.651 17.184-38.474 38.332-40.193l0.097 5.252c-18.078 1.614-32.65 16.93-32.955 34.638z" fill-rule="evenodd"/>
+                        <path fill="#3d85c6" d="m154.585 115.218l0 0c-0.186 20.651-17.184 38.474-38.332 40.193l-0.097-5.252c18.078-1.614 32.65-16.93 32.955-34.638z" fill-rule="evenodd"/>
+                        <path stroke="#3d85c6" stroke-width="14.66" stroke-linejoin="round" stroke-linecap="butt" d="m154.585 115.218l0 0c-0.186 20.651-17.184 38.474-38.332 40.193l-0.097-5.252c18.078-1.614 32.65-16.93 32.955-34.638z" fill-rule="evenodd"/>
+                        <path fill="#3d85c6" d="m37.415 115.218l0 0c0.186 20.65 17.184 38.474 38.332 40.192l0.097-5.252c-18.078-1.614-32.65-16.93-32.955-34.638z" fill-rule="evenodd"/>
+                        <path stroke="#3d85c6" stroke-width="14.66" stroke-linejoin="round" stroke-linecap="butt" d="m37.415 115.218l0 0c0.186 20.65 17.184 38.474 38.332 40.192l0.097-5.252c-18.078-1.614-32.65-16.93-32.955-34.638z" fill-rule="evenodd"/>
+                        <path fill="#3c78d8" d="m69.536 96.003l0 0c0-14.62 11.852-26.472 26.472-26.472 7.021 0 13.754 2.789 18.718 7.754 4.965 4.964 7.754 11.697 7.754 18.718l0 0c0 14.62-11.852 26.472-26.472 26.472-14.62 0-26.472-11.852-26.472-26.472z" fill-rule="evenodd"/>
+                    </g>
+                </svg>
+            </div>
+            <span class="text-xs text-gray-800 font-mono md:text-sm tracking-tight">EMIIA.AI SIP</span>
+        </a>
+        <div class="text-xs text-gray-400 font-mono hidden sm:block">EFFICIENCY CALCULATOR</div>
+    </div>
+</header>
 
-    <!-- Main -->
-    <main class="max-w-5xl mx-auto px-4 md:px-6 py-8 md:py-16">
+<!-- Main -->
+<main class="max-w-5xl mx-auto px-4 md:px-6 py-8 md:py-16">
+    
+    <!-- Title -->
+    <div class="mb-8 md:mb-12 fade-up">
+        <h1 class="text-2xl md:text-4xl mb-2 font-mono font-bold tracking-tight">Матрица эффективности</h1>
+        <p class="text-gray-500 text-sm md:text-base font-mono">Сравнение TCO, ROI и сроков внедрения EMIIA.AI против классической инфраструктуры.</p>
+    </div>
+
+    <!-- Calculator Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-16">
         
-        <!-- Title -->
-        <div class="mb-8 md:mb-12 fade-up">
-            <h1 class="text-2xl md:text-4xl mb-2 font-mono font-bold tracking-tight">Матрица эффективности</h1>
-            <p class="text-gray-500 text-sm md:text-base font-mono">Сравнение TCO, ROI и сроков внедрения EMIIA.AI против классической инфраструктуры.</p>
-        </div>
-
-        <!-- Calculator Grid -->
-        <!-- По умолчанию grid растягивает колонки по высоте самой высокой (Left Col) -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-16">
+        <!-- Left: Controls -->
+        <div class="md:col-span-1 fade-up flex flex-col gap-6 md:gap-8" style="animation-delay: 0.1s">
             
-            <!-- Left: Controls -->
-            <!-- flex flex-col для управления потоком внутри -->
-            <div class="md:col-span-1 fade-up flex flex-col gap-6 md:gap-8" style="animation-delay: 0.1s">
-                
-                <!-- Input Groups Wrapper -->
-                <div class="space-y-6 md:space-y-8">
-                    <div>
-                        <label class="block text-xs uppercase tracking-widest text-gray-400 font-semibold mb-2">Объём данных (ТБ)</label>
-                        <div class="flex items-center gap-4">
-                            <input type="number" id="dataTb" value="100" class="input-minimal text-lg font-light flex-1">
-                            <span class="text-xs text-gray-400 font-mono w-12 text-right" id="dataTbVal">100</span>
-                        </div>
-                        <input type="range" id="dataTbSlider" min="0" max="500" value="100">
+            <!-- Input Groups Wrapper -->
+            <div class="space-y-6 md:space-y-8">
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-gray-400 font-semibold mb-2">Объём данных (ТБ)</label>
+                    <div class="flex items-center gap-4">
+                        <input type="number" id="dataTb" value="100" class="input-minimal text-lg font-light flex-1">
+                        <span class="text-xs text-gray-400 font-mono w-12 text-right" id="dataTbVal">100</span>
                     </div>
-
-                    <div>
-                        <label class="block text-xs uppercase tracking-widest text-gray-400 font-semibold mb-2">Инференсы (млн)</label>
-                        <div class="flex items-center gap-4">
-                            <input type="number" id="infM" value="10" class="input-minimal text-lg font-light flex-1">
-                            <span class="text-xs text-gray-400 font-mono w-12 text-right" id="infMVal">10</span>
-                        </div>
-                        <input type="range" id="infMSlider" min="0" max="50" value="10">
-                    </div>
-
-                    <div>
-                        <label class="block text-xs uppercase tracking-widest text-gray-400 font-semibold mb-2">Развёртывания (шт)</label>
-                        <div class="flex items-center gap-4">
-                            <input type="number" id="deplN" value="5" class="input-minimal text-lg font-light flex-1">
-                            <span class="text-xs text-gray-400 font-mono w-12 text-right" id="deplNVal">5</span>
-                        </div>
-                        <input type="range" id="deplNSlider" min="0" max="20" value="5">
-                    </div>
-
-                    <div>
-                        <label class="block text-xs uppercase tracking-widest text-gray-400 font-semibold mb-2">Бюджет Ops ($/мес)</label>
-                        <div class="flex items-center gap-4">
-                            <input type="number" id="opsCost" value="15000" class="input-minimal text-lg font-light flex-1">
-                            <span class="text-xs text-gray-400 font-mono w-12 text-right" id="opsCostVal">15k</span>
-                        </div>
-                        <input type="range" id="opsCostSlider" min="0" max="50000" value="15000" step="1000">
-                    </div>
-
-                    <div>
-                        <label class="block text-xs uppercase tracking-widest text-gray-400 font-semibold mb-2">Срок внедрения (дней)</label>
-                        <div class="flex items-center gap-4">
-                            <input type="number" id="daysClassic" value="50" class="input-minimal text-lg font-light flex-1">
-                            <span class="text-xs text-gray-400 font-mono w-12 text-right" id="daysClassicVal">50</span>
-                        </div>
-                        <input type="range" id="daysClassicSlider" min="0" max="100" value="50">
-                    </div>
+                    <input type="range" id="dataTbSlider" min="0" max="500" value="100">
                 </div>
 
-                <!-- CAPEX/OPEX Breakdown -->
-                <!-- mt-auto толкает этот блок в самый низ левой колонки -->
-                <div class="pt-6 md:pt-8 border-t border-thin mt-auto">
-                    <h3 class="text-xs uppercase tracking-widest text-gray-400 font-semibold mb-4">Структура экономии</h3>
-                    <div class="grid grid-cols-2 gap-4 text-sm">
-                        <div>
-                            <span class="block text-gray-400 text-xs mb-1">CAPEX Save</span>
-                            <span class="font-mono text-sm text-[#3c78d8]" id="capexSavings">$0</span>
-                        </div>
-                        <div class="text-right">
-                            <span class="block text-gray-400 text-xs mb-1">OPEX Save</span>
-                            <span class="font-mono text-sm text-[#3c78d8]" id="opexSavings">$0</span>
-                        </div>
-                        <div>
-                            <span class="block text-gray-400 text-xs mb-1">CAPEX %</span>
-                            <span class="font-mono text-sm text-[#6d9eeb]" id="capexSavingsPercent">0%</span>
-                        </div>
-                        <div class="text-right">
-                            <span class="block text-gray-400 text-xs mb-1">OPEX %</span>
-                            <span class="font-mono text-sm text-[#6d9eeb]" id="opexSavingsPercent">0%</span>
-                        </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-gray-400 font-semibold mb-2">Инференсы (млн)</label>
+                    <div class="flex items-center gap-4">
+                        <input type="number" id="infM" value="10" class="input-minimal text-lg font-light flex-1">
+                        <span class="text-xs text-gray-400 font-mono w-12 text-right" id="infMVal">10</span>
                     </div>
+                    <input type="range" id="infMSlider" min="0" max="50" value="10">
+                </div>
+
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-gray-400 font-semibold mb-2">Развёртывания (шт)</label>
+                    <div class="flex items-center gap-4">
+                        <input type="number" id="deplN" value="5" class="input-minimal text-lg font-light flex-1">
+                        <span class="text-xs text-gray-400 font-mono w-12 text-right" id="deplNVal">5</span>
+                    </div>
+                    <input type="range" id="deplNSlider" min="0" max="20" value="5">
+                </div>
+
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-gray-400 font-semibold mb-2">Бюджет Ops ($/мес)</label>
+                    <div class="flex items-center gap-4">
+                        <input type="number" id="opsCost" value="15000" class="input-minimal text-lg font-light flex-1">
+                        <span class="text-xs text-gray-400 font-mono w-12 text-right" id="opsCostVal">15k</span>
+                    </div>
+                    <input type="range" id="opsCostSlider" min="0" max="50000" value="15000" step="1000">
+                </div>
+
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-gray-400 font-semibold mb-2">Срок внедрения (дней)</label>
+                    <div class="flex items-center gap-4">
+                        <input type="number" id="daysClassic" value="50" class="input-minimal text-lg font-light flex-1">
+                        <span class="text-xs text-gray-400 font-mono w-12 text-right" id="daysClassicVal">50</span>
+                    </div>
+                    <input type="range" id="daysClassicSlider" min="0" max="100" value="50">
                 </div>
             </div>
 
-            <!-- Right: Results & Charts -->
-            <!-- flex flex-col для управления потоком внутри -->
-            <div class="md:col-span-2 fade-up flex flex-col" style="animation-delay: 0.2s">
-                
-                <!-- Metrics Blocks (Top) -->
-                <div>
-                    <div class="grid grid-cols-3 gap-2 md:gap-4 mb-6 pb-6 border-b border-thin">
+            <!-- CAPEX/OPEX Breakdown -->
+            <!-- mt-auto прижимает блок к низу левой колонки -->
+            <div class="pt-6 md:pt-8 border-t border-thin mt-auto">
+                <h3 class="text-xs uppercase tracking-widest text-gray-400 font-semibold mb-4">Структура экономии</h3>
+                <div class="grid grid-cols-2 gap-4 text-sm">
+                    <div>
+                        <span class="block text-gray-400 text-xs mb-1">CAPEX Save</span>
+                        <span class="font-mono text-sm text-[#3c78d8]" id="capexSavings">$0</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="block text-gray-400 text-xs mb-1">OPEX Save</span>
+                        <span class="font-mono text-sm text-[#3c78d8]" id="opexSavings">$0</span>
+                    </div>
+                    <div>
+                        <span class="block text-gray-400 text-xs mb-1">CAPEX %</span>
+                        <span class="font-mono text-sm text-[#6d9eeb]" id="capexSavingsPercent">0%</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="block text-gray-400 text-xs mb-1">OPEX %</span>
+                        <span class="font-mono text-sm text-[#6d9eeb]" id="opexSavingsPercent">0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Results & Charts -->
+        <div class="md:col-span-2 fade-up flex flex-col" style="animation-delay: 0.2s">
+            
+            <!-- Metrics Blocks (Top) -->
+            <div>
+                <div class="grid grid-cols-3 gap-2 md:gap-4 mb-6 pb-6 border-b border-thin">
+                    <div>
+                        <span class="block text-xs text-gray-400 uppercase mb-1">TCO Classic</span>
+                        <div class="text-lg md:text-2xl font-light text-black font-mono" id="tcoCl">$0</div>
+                    </div>
+                    <div>
+                        <span class="block text-xs text-gray-400 uppercase mb-1">TCO EMIIA</span>
+                        <div class="text-lg md:text-2xl font-light text-[#3c78d8] font-mono" id="tcoEm">$0</div>
+                    </div>
+                    <div class="text-right md:text-left">
+                        <span class="block text-xs text-gray-400 uppercase mb-1">Экономия</span>
+                        <div class="text-lg md:text-2xl font-bold text-black font-mono" id="tcoSave">0%</div>
+                    </div>
+                </div>
+
+                <div class="mb-6 pb-6 border-b border-thin">
+                    <div class="grid grid-cols-3 gap-2 md:gap-8 text-sm">
                         <div>
-                            <span class="block text-xs text-gray-400 uppercase mb-1">TCO Classic</span>
-                            <div class="text-lg md:text-2xl font-light text-black font-mono" id="tcoCl">$0</div>
+                            <span class="block text-xs text-gray-400 uppercase mb-1">T2M Classic</span>
+                            <div class="text-base md:text-xl font-medium font-mono" id="t2mCl">0 дн</div>
                         </div>
                         <div>
-                            <span class="block text-xs text-gray-400 uppercase mb-1">TCO EMIIA</span>
-                            <div class="text-lg md:text-2xl font-light text-[#3c78d8] font-mono" id="tcoEm">$0</div>
+                            <span class="block text-xs text-gray-400 uppercase mb-1">T2M EMIIA</span>
+                            <div class="text-base md:text-xl font-medium font-mono text-[#3c78d8]" id="t2mEm">0 дн</div>
                         </div>
                         <div class="text-right md:text-left">
-                            <span class="block text-xs text-gray-400 uppercase mb-1">Экономия</span>
-                            <div class="text-lg md:text-2xl font-bold text-black font-mono" id="tcoSave">0%</div>
-                        </div>
-                    </div>
-
-                    <div class="mb-6 pb-6 border-b border-thin">
-                        <div class="grid grid-cols-3 gap-2 md:gap-8 text-sm">
-                            <div>
-                                <span class="block text-xs text-gray-400 uppercase mb-1">T2M Classic</span>
-                                <div class="text-base md:text-xl font-medium font-mono" id="t2mCl">0 дн</div>
-                            </div>
-                            <div>
-                                <span class="block text-xs text-gray-400 uppercase mb-1">T2M EMIIA</span>
-                                <div class="text-base md:text-xl font-medium font-mono text-[#3c78d8]" id="t2mEm">0 дн</div>
-                            </div>
-                            <div class="text-right md:text-left">
-                                <span class="block text-xs text-gray-400 uppercase mb-1">Ускорение</span>
-                                <div class="text-base md:text-xl font-bold text-black font-mono" id="t2mSave">0%</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mb-6 pb-6 border-b border-thin">
-                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
-                            <div>
-                                <span class="block text-xs text-gray-400 uppercase mb-2">ROI (12 мес)</span>
-                                <div class="flex gap-4 items-baseline">
-                                    <span class="text-sm text-gray-500 font-mono">Classic: <span id="roiCl">0%</span></span>
-                                    <span class="text-lg font-bold font-mono">EMIIA: <span class="text-[#3c78d8]" id="roiEm">0%</span></span>
-                                </div>
-                            </div>
-                            <button class="text-xs border-b border-black pb-1 hover:border-gray-400 transition font-mono" id="exportBtn">Экспорт CSV</button>
+                            <span class="block text-xs text-gray-400 uppercase mb-1">Ускорение</span>
+                            <div class="text-base md:text-xl font-bold text-black font-mono" id="t2mSave">0%</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Charts Section -->
-                <!-- mt-auto толкает этот блок в самый низ правой колонки -->
-                <div class="pt-2 md:pt-4 mt-auto">
-                    <div class="chart-tabs-container flex gap-2 mb-4">
-                        <button class="chart-tab active flex-shrink-0 px-3 py-1.5 text-xs font-medium border border-black rounded-full font-mono" data-chart="tco">TCO</button>
-                        <button class="chart-tab flex-shrink-0 px-3 py-1.5 text-xs font-medium border border-gray-200 rounded-full hover:border-gray-400 font-mono" data-chart="time">T2M</button>
-                        <button class="chart-tab flex-shrink-0 px-3 py-1.5 text-xs font-medium border border-gray-200 rounded-full hover:border-gray-400 font-mono" data-chart="roi">ROI</button>
-                        <button class="chart-tab flex-shrink-0 px-3 py-1.5 text-xs font-medium border border-gray-200 rounded-full hover:border-gray-400 font-mono" data-chart="savings">Экономия</button>
-                        <button class="chart-tab flex-shrink-0 px-3 py-1.5 text-xs font-medium border border-gray-200 rounded-full hover:border-gray-400 font-mono" data-chart="capex">CAPEX</button>
-                        <button class="chart-tab flex-shrink-0 px-3 py-1.5 text-xs font-medium border border-gray-200 rounded-full hover:border-gray-400 font-mono" data-chart="opex">OPEX</button>
-                    </div>
-
-                    <div class="chart-container">
-                        <canvas id="metricsChart"></canvas>
+                <div class="mb-6 pb-6 border-b border-thin">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
+                        <div>
+                            <span class="block text-xs text-gray-400 uppercase mb-2">ROI (12 мес)</span>
+                            <div class="flex gap-4 items-baseline">
+                                <span class="text-sm text-gray-500 font-mono">Classic: <span id="roiCl">0%</span></span>
+                                <span class="text-lg font-bold font-mono">EMIIA: <span class="text-[#3c78d8]" id="roiEm">0%</span></span>
+                            </div>
+                        </div>
+                        <button class="text-xs border-b border-black pb-1 hover:border-gray-400 transition font-mono" id="exportBtn">Экспорт CSV</button>
                     </div>
                 </div>
-
-            </div>
-        </div>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="border-t border-thin mt-12 py-6 md:py-8 px-4 md:px-6" style="padding-bottom: max(1.5rem, env(safe-area-inset-bottom));">
-        <div class="max-w-5xl mx-auto flex flex-col justify-center items-center gap-4 text-center">
-            
-            <div class="flex flex-col md:flex-row justify-between items-center gap-2 w-full text-xs text-gray-400 font-mono">
-                <span>EMIIA.AI SIP – ПРОСТРАНСТВЕННЫЙ ИНТЕЛЛЕКТ</span>
-                <span>ДЕТАЛЬНЫЙ РАСЧЕТ: EMIIA@EMIIA.RU</span>
             </div>
 
-            <div class="w-full pt-4 mt-2 border-t border-gray-100 text-[10px] md:text-[11px] text-gray-300 leading-relaxed max-w-3xl font-mono">
-                *Все расчеты и показатели, представленные на данной странице, носят исключительно информационный и справочный характер. Данный материал не является публичной офертой, предложением или гарантией доходности. Точные условия сотрудничества, итоговая стоимость внедрения и финансовые результаты определяются индивидуально и фиксируются в договоре.
+            <!-- Charts Section -->
+            <!-- 
+                mt-auto: на мобильных толкает блок вниз.
+                md:flex-1 md:flex md:flex-col: на десктопе заставляет этот блок растягиваться, заполняя всё свободное место.
+                justify-end: прижимает содержимое (график) к низу блока.
+            -->
+            <div class="pt-2 md:pt-4 mt-auto md:flex-1 md:flex md:flex-col md:justify-end">
+                <div class="chart-tabs-container flex gap-2 mb-4">
+                    <button class="chart-tab active flex-shrink-0 px-3 py-1.5 text-xs font-medium border border-black rounded-full font-mono" data-chart="tco">TCO</button>
+                    <button class="chart-tab flex-shrink-0 px-3 py-1.5 text-xs font-medium border border-gray-200 rounded-full hover:border-gray-400 font-mono" data-chart="time">T2M</button>
+                    <button class="chart-tab flex-shrink-0 px-3 py-1.5 text-xs font-medium border border-gray-200 rounded-full hover:border-gray-400 font-mono" data-chart="roi">ROI</button>
+                    <button class="chart-tab flex-shrink-0 px-3 py-1.5 text-xs font-medium border border-gray-200 rounded-full hover:border-gray-400 font-mono" data-chart="savings">Экономия</button>
+                    <button class="chart-tab flex-shrink-0 px-3 py-1.5 text-xs font-medium border border-gray-200 rounded-full hover:border-gray-400 font-mono" data-chart="capex">CAPEX</button>
+                    <button class="chart-tab flex-shrink-0 px-3 py-1.5 text-xs font-medium border border-gray-200 rounded-full hover:border-gray-400 font-mono" data-chart="opex">OPEX</button>
+                </div>
+
+                <!-- График теперь займет 100% высоты родителя (на десктопе) -->
+                <div class="chart-container">
+                    <canvas id="metricsChart"></canvas>
+                </div>
             </div>
 
-        </div>
-    </footer>
-
-    <!-- Modal -->
-    <div class="modal" id="exportModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.95); z-index: 2000; align-items: center; justify-content: center; padding: 1rem;">
-        <div class="bg-white p-8 max-w-md w-full border border-black shadow-lg">
-            <h3 class="text-xl mb-4 font-mono font-bold">Экспорт завершен</h3>
-            <p class="text-sm text-gray-600 mb-6 font-mono">CSV файл с формулами успешно сгенерирован.</p>
-            <button class="w-full bg-black text-white py-3 text-sm font-bold hover:bg-gray-800 transition font-mono" id="closeModal">Закрыть</button>
         </div>
     </div>
 
-    <script>
-        const $ = id => document.getElementById(id);
-        let chart = null;
-        let currentChartType = 'tco';
+</main>
 
-        const BRAND_COLORS = {
-            darkBlue: '#3c78d8',
-            mediumBlue: '#6d9eeb',
-            lightBlue: '#a4c2f4',
-            gray: '#e5e5e5',
-            black: '#111'
-        };
+<!-- Footer -->
+<footer class="border-t border-thin mt-12 py-6 md:py-8 px-4 md:px-6" style="padding-bottom: max(1.5rem, env(safe-area-inset-bottom));">
+    <div class="max-w-5xl mx-auto flex flex-col justify-center items-center gap-4 text-center">
+        
+        <div class="flex flex-col md:flex-row justify-between items-center gap-2 w-full text-xs text-gray-400 font-mono">
+            <span>EMIIA.AI SIP – ПРОСТРАНСТВЕННЫЙ ИНТЕЛЛЕКТ</span>
+            <span>ДЕТАЛЬНЫЙ РАСЧЕТ: EMIIA@EMIIA.RU</span>
+        </div>
 
-        let chartData = {
-            tco: { classic: 0, emiia: 0 },
-            time: { classic: 0, emiia: 0 },
-            roi: { classic: 0, emiia: 0 },
-            savings: { tco: 0, time: 0, capexPercent: 0, opexPercent: 0 },
-            capex: { capexClassic: 0, capexEmiia: 0 },
-            opex: { opexClassic: 0, opexEmiia: 0 }
-        };
+        <div class="w-full pt-4 mt-2 border-t border-gray-100 text-[10px] md:text-[11px] text-gray-300 leading-relaxed max-w-3xl font-mono">
+            *Все расчеты и показатели, представленные на данной странице, носят исключительно информационный и справочный характер. Данный материал не является публичной офертой, предложением или гарантией доходности. Точные условия сотрудничества, итоговая стоимость внедрения и финансовые результаты определяются индивидуально и фиксируются в договоре.
+        </div>
 
-        function formatNumber(num) {
-            return new Intl.NumberFormat('ru-RU').format(Math.round(num));
-        }
+    </div>
+</footer>
 
-        function kFormatter(num) {
-            return Math.abs(num) > 999 ? Math.sign(num)*((Math.abs(num)/1000).toFixed(0)) + 'k' : Math.sign(num)*Math.abs(num)
-        }
+<!-- Modal -->
+<div class="modal" id="exportModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.95); z-index: 2000; align-items: center; justify-content: center; padding: 1rem;">
+    <div class="bg-white p-8 max-w-md w-full border border-black shadow-lg">
+        <h3 class="text-xl mb-4 font-mono font-bold">Экспорт завершен</h3>
+        <p class="text-sm text-gray-600 mb-6 font-mono">CSV файл с формулами успешно сгенерирован.</p>
+        <button class="w-full bg-black text-white py-3 text-sm font-bold hover:bg-gray-800 transition font-mono" id="closeModal">Закрыть</button>
+    </div>
+</div>
 
-        function calc() {
-            const t   = +$('dataTb').value;
-            const i   = +$('infM').value;
-            const d   = +$('deplN').value;
-            const ops = +$('opsCost').value;
-            const dCl = +$('daysClassic').value;
+<script>
+    const $ = id => document.getElementById(id);
+    let chart = null;
+    let currentChartType = 'tco';
 
-            const hostCl = 0.67, hostEm = 0.11;
-            const infCl  = 0.27, infEm  = 0.05;
-            const storCl = 0.05, storEm = 0.03;
+    const BRAND_COLORS = {
+        darkBlue: '#3c78d8',
+        mediumBlue: '#6d9eeb',
+        lightBlue: '#a4c2f4',
+        gray: '#e5e5e5',
+        black: '#111'
+    };
 
-            // TCO Calculation
-            const tcoC = d * hostCl + i * 1000 * infCl + t * storCl + ops;
-            const tcoE = d * hostEm + i * 1000 * infEm + t * storEm + ops * 0.33;
+    let chartData = {
+        tco: { classic: 0, emiia: 0 },
+        time: { classic: 0, emiia: 0 },
+        roi: { classic: 0, emiia: 0 },
+        savings: { tco: 0, time: 0, capexPercent: 0, opexPercent: 0 },
+        capex: { capexClassic: 0, capexEmiia: 0 },
+        opex: { opexClassic: 0, opexEmiia: 0 }
+    };
 
-            // Time Calculation (Logic Fix: 20% of Classic)
-            const accelerationFactor = 0.2; 
-            const dEm = Math.round(dCl * accelerationFactor);
-            const dEmFinal = dCl > 0 ? dEm : 0;
-            const saveT2M = dCl > 0 ? (1 - dEmFinal / dCl) * 100 : 0;
+    function formatNumber(num) {
+        return new Intl.NumberFormat('ru-RU').format(Math.round(num));
+    }
 
-            // ROI Calculation
-            const revenue = 500000;
-            const roiC = tcoC > 0 ? ((revenue - tcoC * 12) / (tcoC * 12)) * 100 : 0;
-            const roiE = tcoE > 0 ? ((revenue - tcoE * 12) / (tcoE * 12)) * 100 : 0;
+    function kFormatter(num) {
+        return Math.abs(num) > 999 ? Math.sign(num)*((Math.abs(num)/1000).toFixed(0)) + 'k' : Math.sign(num)*Math.abs(num)
+    }
 
-            // CAPEX/OPEX Calculation
-            const CAPEX_PERCENT_CLASSIC = 0.35;
-            const OPEX_PERCENT_CLASSIC = 0.65;
-            const CAPEX_PERCENT_EMIIA = 0.10;
-            const OPEX_PERCENT_EMIIA = 0.90;
+    function calc() {
+        const t   = +$('dataTb').value;
+        const i   = +$('infM').value;
+        const d   = +$('deplN').value;
+        const ops = +$('opsCost').value;
+        const dCl = +$('daysClassic').value;
 
-            const capexClassic = tcoC * CAPEX_PERCENT_CLASSIC;
-            const opexClassic = tcoC * OPEX_PERCENT_CLASSIC;
-            const capexEmiia = tcoE * CAPEX_PERCENT_EMIIA;
-            const opexEmiia = tcoE * OPEX_PERCENT_EMIIA;
+        const hostCl = 0.67, hostEm = 0.11;
+        const infCl  = 0.27, infEm  = 0.05;
+        const storCl = 0.05, storEm = 0.03;
 
-            const capexSavings = capexClassic - capexEmiia;
-            const opexSavings = opexClassic - opexEmiia;
-            const capexSavingsPercent = capexClassic > 0 ? (capexSavings / capexClassic) * 100 : 0;
-            const opexSavingsPercent = opexClassic > 0 ? (opexSavings / opexClassic) * 100 : 0;
-            const tcoSavings = tcoC > 0 ? ((tcoC - tcoE) / tcoC) * 100 : 0;
+        // TCO Calculation
+        const tcoC = d * hostCl + i * 1000 * infCl + t * storCl + ops;
+        const tcoE = d * hostEm + i * 1000 * infEm + t * storEm + ops * 0.33;
 
-            // Update UI Values
-            $('tcoCl').textContent = '$' + formatNumber(tcoC);
-            $('tcoEm').textContent = '$' + formatNumber(tcoE);
-            $('tcoSave').textContent = Math.round(tcoSavings) + '%';
-            
-            $('t2mCl').textContent = formatNumber(dCl) + ' дн';
-            $('t2mEm').textContent = formatNumber(dEmFinal) + ' дн';
-            $('t2mSave').textContent = Math.round(saveT2M) + '%';
-            
-            $('roiCl').textContent = Math.round(roiC) + '%';
-            $('roiEm').textContent = Math.round(roiE) + '%';
+        // Time Calculation (Logic Fix: 20% of Classic)
+        const accelerationFactor = 0.2; 
+        const dEm = Math.round(dCl * accelerationFactor);
+        const dEmFinal = dCl > 0 ? dEm : 0;
+        const saveT2M = dCl > 0 ? (1 - dEmFinal / dCl) * 100 : 0;
 
-            $('capexSavings').textContent = '$' + formatNumber(capexSavings);
-            $('opexSavings').textContent = '$' + formatNumber(opexSavings);
-            $('capexSavingsPercent').textContent = Math.round(capexSavingsPercent) + '%';
-            $('opexSavingsPercent').textContent = Math.round(opexSavingsPercent) + '%';
+        // ROI Calculation
+        const revenue = 500000;
+        const roiC = tcoC > 0 ? ((revenue - tcoC * 12) / (tcoC * 12)) * 100 : 0;
+        const roiE = tcoE > 0 ? ((revenue - tcoE * 12) / (tcoE * 12)) * 100 : 0;
 
-            $('dataTbVal').textContent = t;
-            $('infMVal').textContent = i;
-            $('deplNVal').textContent = d;
-            $('opsCostVal').textContent = kFormatter(ops);
-            $('daysClassicVal').textContent = dCl;
+        // CAPEX/OPEX Calculation
+        const CAPEX_PERCENT_CLASSIC = 0.35;
+        const OPEX_PERCENT_CLASSIC = 0.65;
+        const CAPEX_PERCENT_EMIIA = 0.10;
+        const OPEX_PERCENT_EMIIA = 0.90;
 
-            // Update Chart Data
-            chartData.tco = { classic: tcoC, emiia: tcoE };
-            chartData.time = { classic: dCl, emiia: dEmFinal };
-            chartData.roi = { classic: Math.max(0, roiC), emiia: Math.max(0, roiE) };
-            chartData.savings = { tco: tcoSavings, time: saveT2M, capexPercent: capexSavingsPercent, opexPercent: opexSavingsPercent };
-            chartData.capex = { capexClassic: capexClassic, capexEmiia: capexEmiia };
-            chartData.opex = { opexClassic: opexClassic, opexEmiia: opexEmiia };
+        const capexClassic = tcoC * CAPEX_PERCENT_CLASSIC;
+        const opexClassic = tcoC * OPEX_PERCENT_CLASSIC;
+        const capexEmiia = tcoE * CAPEX_PERCENT_EMIIA;
+        const opexEmiia = tcoE * OPEX_PERCENT_EMIIA;
 
-            updateChart();
-        }
+        const capexSavings = capexClassic - capexEmiia;
+        const opexSavings = opexClassic - opexEmiia;
+        const capexSavingsPercent = capexClassic > 0 ? (capexSavings / capexClassic) * 100 : 0;
+        const opexSavingsPercent = opexClassic > 0 ? (opexSavings / opexClassic) * 100 : 0;
+        const tcoSavings = tcoC > 0 ? ((tcoC - tcoE) / tcoC) * 100 : 0;
 
-        function updateChart() {
-            const ctx = $('metricsChart').getContext('2d');
-            if (chart) chart.destroy();
+        // Update UI Values
+        $('tcoCl').textContent = '$' + formatNumber(tcoC);
+        $('tcoEm').textContent = '$' + formatNumber(tcoE);
+        $('tcoSave').textContent = Math.round(tcoSavings) + '%';
+        
+        $('t2mCl').textContent = formatNumber(dCl) + ' дн';
+        $('t2mEm').textContent = formatNumber(dEmFinal) + ' дн';
+        $('t2mSave').textContent = Math.round(saveT2M) + '%';
+        
+        $('roiCl').textContent = Math.round(roiC) + '%';
+        $('roiEm').textContent = Math.round(roiE) + '%';
 
-            Chart.defaults.font.family = "'JetBrains Mono', monospace";
-            Chart.defaults.font.size = 11;
+        $('capexSavings').textContent = '$' + formatNumber(capexSavings);
+        $('opexSavings').textContent = '$' + formatNumber(opexSavings);
+        $('capexSavingsPercent').textContent = Math.round(capexSavingsPercent) + '%';
+        $('opexSavingsPercent').textContent = Math.round(opexSavingsPercent) + '%';
 
-            const commonOptions = {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
-                scales: {
-                    y: { beginAtZero: true, grid: { color: '#F0F0F0' }, ticks: { color: '#AAA' } },
-                    x: { grid: { display: false }, ticks: { color: '#111', weight: '500' } }
+        $('dataTbVal').textContent = t;
+        $('infMVal').textContent = i;
+        $('deplNVal').textContent = d;
+        $('opsCostVal').textContent = kFormatter(ops);
+        $('daysClassicVal').textContent = dCl;
+
+        // Update Chart Data
+        chartData.tco = { classic: tcoC, emiia: tcoE };
+        chartData.time = { classic: dCl, emiia: dEmFinal };
+        chartData.roi = { classic: Math.max(0, roiC), emiia: Math.max(0, roiE) };
+        chartData.savings = { tco: tcoSavings, time: saveT2M, capexPercent: capexSavingsPercent, opexPercent: opexSavingsPercent };
+        chartData.capex = { capexClassic: capexClassic, capexEmiia: capexEmiia };
+        chartData.opex = { opexClassic: opexClassic, opexEmiia: opexEmiia };
+
+        updateChart();
+    }
+
+    function updateChart() {
+        const ctx = $('metricsChart').getContext('2d');
+        if (chart) chart.destroy();
+
+        Chart.defaults.font.family = "'JetBrains Mono', monospace";
+        Chart.defaults.font.size = 11;
+
+        // Общие настройки, включая цвет подсказок
+        const commonOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { 
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: '#3d85c6', // Темно-синий цвет подсказок
+                    titleColor: '#ffffff',
+                    bodyColor: '#ffffff',
+                    borderColor: '#3d85c6',
+                    borderWidth: 1,
+                    padding: 10,
+                    cornerRadius: 4,
+                    titleFont: { family: "'JetBrains Mono', monospace" },
+                    bodyFont: { family: "'JetBrains Mono', monospace" },
+                    displayColors: false
                 }
-            };
-
-            if (currentChartType === 'tco') {
-                chart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Classic', 'EMIIA'],
-                        datasets: [{ data: [chartData.tco.classic, chartData.tco.emiia], backgroundColor: [BRAND_COLORS.gray, BRAND_COLORS.darkBlue], borderWidth: 0, borderRadius: 4 }]
-                    },
-                    options: { ...commonOptions, plugins: { ...commonOptions.plugins, tooltip: { callbacks: { label: (c) => '$' + formatNumber(c.raw) } } } }
-                });
-            } else if (currentChartType === 'time') {
-                chart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Classic', 'EMIIA'],
-                        datasets: [{ data: [chartData.time.classic, chartData.time.emiia], backgroundColor: [BRAND_COLORS.gray, BRAND_COLORS.darkBlue], borderWidth: 0, borderRadius: 4 }]
-                    },
-                    options: { ...commonOptions, plugins: { ...commonOptions.plugins, tooltip: { callbacks: { label: (c) => c.raw + ' дней' } } } }
-                });
-            } else if (currentChartType === 'roi') {
-                chart = new Chart(ctx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['ROI Classic', 'ROI EMIIA'],
-                        datasets: [{ data: [chartData.roi.classic, chartData.roi.emiia], backgroundColor: [BRAND_COLORS.gray, BRAND_COLORS.darkBlue], borderWidth: 0 }]
-                    },
-                    options: { responsive: true, maintainAspectRatio: false, cutout: '70%', plugins: { legend: { display: true, position: 'bottom', labels: { font: { family: "'JetBrains Mono', monospace" } } } } }
-                });
-            } else if (currentChartType === 'savings') {
-                chart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['TCO', 'T2M', 'CAPEX', 'OPEX'],
-                        datasets: [{ label: 'Экономия %', data: [chartData.savings.tco, chartData.savings.time, chartData.savings.capexPercent, chartData.savings.opexPercent], backgroundColor: BRAND_COLORS.mediumBlue, borderWidth: 0, borderRadius: 4 }]
-                    },
-                    options: commonOptions
-                });
-            } else if (currentChartType === 'capex') {
-                chart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Classic CAPEX', 'EMIIA CAPEX'],
-                        datasets: [{ data: [chartData.capex.capexClassic, chartData.capex.capexEmiia], backgroundColor: [BRAND_COLORS.lightBlue, BRAND_COLORS.darkBlue], borderWidth: 0, borderRadius: 4 }]
-                    },
-                    options: commonOptions
-                });
-            } else if (currentChartType === 'opex') {
-                chart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Classic OPEX', 'EMIIA OPEX'],
-                        datasets: [{ data: [chartData.opex.opexClassic, chartData.opex.opexEmiia], backgroundColor: [BRAND_COLORS.lightBlue, BRAND_COLORS.darkBlue], borderWidth: 0, borderRadius: 4 }]
-                    },
-                    options: commonOptions
-                });
+            },
+            scales: {
+                y: { beginAtZero: true, grid: { color: '#F0F0F0' }, ticks: { color: '#AAA' } },
+                x: { grid: { display: false }, ticks: { color: '#111', weight: '500' } }
             }
-        }
+        };
 
-        function exportToCSV() {
-            const t = +$('dataTb').value;
-            const i = +$('infM').value;
-            const d = +$('deplN').value;
-            const ops = +$('opsCost').value;
-            let csvContent = "data:text/csv;charset=utf-8,Parameter,Value\n";
-            csvContent += `Data Volume (TB),${t}\nInferences (M),${i}\nDeployments,${d}\nOps Cost,$${ops}`;
-            const link = document.createElement("a");
-            link.setAttribute("href", encodeURI(csvContent));
-            link.setAttribute("download", "emiia_sip_calc.csv");
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            $('exportModal').style.display = 'flex';
+        if (currentChartType === 'tco') {
+            chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Classic', 'EMIIA'],
+                    datasets: [{ data: [chartData.tco.classic, chartData.tco.emiia], backgroundColor: [BRAND_COLORS.gray, BRAND_COLORS.darkBlue], borderWidth: 0, borderRadius: 4 }]
+                },
+                options: { ...commonOptions, plugins: { ...commonOptions.plugins, tooltip: { ...commonOptions.plugins.tooltip, callbacks: { label: (c) => '$' + formatNumber(c.raw) } } } }
+            });
+        } else if (currentChartType === 'time') {
+            chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Classic', 'EMIIA'],
+                    datasets: [{ data: [chartData.time.classic, chartData.time.emiia], backgroundColor: [BRAND_COLORS.gray, BRAND_COLORS.darkBlue], borderWidth: 0, borderRadius: 4 }]
+                },
+                options: { ...commonOptions, plugins: { ...commonOptions.plugins, tooltip: { ...commonOptions.plugins.tooltip, callbacks: { label: (c) => c.raw + ' дней' } } } }
+            });
+        } else if (currentChartType === 'roi') {
+            chart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['ROI Classic', 'ROI EMIIA'],
+                    datasets: [{ data: [chartData.roi.classic, chartData.roi.emiia], backgroundColor: [BRAND_COLORS.gray, BRAND_COLORS.darkBlue], borderWidth: 0 }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, cutout: '70%', plugins: { legend: { display: true, position: 'bottom', labels: { font: { family: "'JetBrains Mono', monospace" } } } } }
+            });
+        } else if (currentChartType === 'savings') {
+            chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['TCO', 'T2M', 'CAPEX', 'OPEX'],
+                    datasets: [{ label: 'Экономия %', data: [chartData.savings.tco, chartData.savings.time, chartData.savings.capexPercent, chartData.savings.opexPercent], backgroundColor: BRAND_COLORS.mediumBlue, borderWidth: 0, borderRadius: 4 }]
+                },
+                options: commonOptions
+            });
+        } else if (currentChartType === 'capex') {
+            chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Classic CAPEX', 'EMIIA CAPEX'],
+                    datasets: [{ data: [chartData.capex.capexClassic, chartData.capex.capexEmiia], backgroundColor: [BRAND_COLORS.lightBlue, BRAND_COLORS.darkBlue], borderWidth: 0, borderRadius: 4 }]
+                },
+                options: commonOptions
+            });
+        } else if (currentChartType === 'opex') {
+            chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Classic OPEX', 'EMIIA OPEX'],
+                    datasets: [{ data: [chartData.opex.opexClassic, chartData.opex.opexEmiia], backgroundColor: [BRAND_COLORS.lightBlue, BRAND_COLORS.darkBlue], borderWidth: 0, borderRadius: 4 }]
+                },
+                options: commonOptions
+            });
         }
+    }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const inputs = ['dataTb', 'infM', 'deplN', 'opsCost', 'daysClassic'];
-            inputs.forEach(id => {
-                $(id).addEventListener('input', calc);
-                $(id + 'Slider').addEventListener('input', (e) => { $(id).value = e.target.value; calc(); });
-            });
-            document.querySelectorAll('.chart-tab').forEach(tab => {
-                tab.addEventListener('click', function() {
-                    document.querySelectorAll('.chart-tab').forEach(t => { t.classList.remove('active', 'border-black'); t.classList.add('border-gray-200'); });
-                    this.classList.add('active', 'border-black');
-                    this.classList.remove('border-gray-200');
-                    currentChartType = this.dataset.chart;
-                    updateChart();
-                });
-            });
-            $('exportBtn').addEventListener('click', exportToCSV);
-            $('closeModal').addEventListener('click', () => $('exportModal').style.display = 'none');
-            calc();
+    function exportToCSV() {
+        const t = +$('dataTb').value;
+        const i = +$('infM').value;
+        const d = +$('deplN').value;
+        const ops = +$('opsCost').value;
+        let csvContent = "data:text/csv;charset=utf-8,Parameter,Value\n";
+        csvContent += `Data Volume (TB),${t}\nInferences (M),${i}\nDeployments,${d}\nOps Cost,$${ops}`;
+        const link = document.createElement("a");
+        link.setAttribute("href", encodeURI(csvContent));
+        link.setAttribute("download", "emiia_sip_calc.csv");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        $('exportModal').style.display = 'flex';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const inputs = ['dataTb', 'infM', 'deplN', 'opsCost', 'daysClassic'];
+        inputs.forEach(id => {
+            $(id).addEventListener('input', calc);
+            $(id + 'Slider').addEventListener('input', (e) => { $(id).value = e.target.value; calc(); });
         });
-    </script>
+        document.querySelectorAll('.chart-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.chart-tab').forEach(t => { t.classList.remove('active', 'border-black'); t.classList.add('border-gray-200'); });
+                this.classList.add('active', 'border-black');
+                this.classList.remove('border-gray-200');
+                currentChartType = this.dataset.chart;
+                updateChart();
+            });
+        });
+        $('exportBtn').addEventListener('click', exportToCSV);
+        $('closeModal').addEventListener('click', () => $('exportModal').style.display = 'none');
+        calc();
+    });
+</script>
 </body>
 </html>
