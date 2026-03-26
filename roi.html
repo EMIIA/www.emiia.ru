@@ -2,8 +2,10 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#ffffff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="white">
 <title>EMIIA.AI SIP – матрица эффективности</title>
 
 <meta property="og:title" content="EMIIA.AI SIP – калькулятор экономии">
@@ -29,19 +31,16 @@
         box-sizing: border-box;
     }
     
-    html {
+    html, body {
+        width: 100%;
+        height: 100%;
         background: #FFFFFF !important;
-        -webkit-backdrop-filter: none !important;
-        backdrop-filter: none !important;
+        color: #111;
+        -webkit-font-smoothing: antialiased;
     }
 
     body {
         font-family: 'Inter', sans-serif;
-        background: #FFFFFF !important;
-        color: #111;
-        -webkit-font-smoothing: antialiased;
-        -webkit-backdrop-filter: none !important;
-        backdrop-filter: none !important;
     }
 
     .font-mono { font-family: 'JetBrains Mono', monospace; }
@@ -124,59 +123,60 @@
     }
     .chart-tabs-container::-webkit-scrollbar { display: none; }
 
-    /* === КРИТИЧЕСКИЙ ФИХ ДЛЯ iOS TELEGRAM === */
-    /* Служебный элемент, который блокирует прозрачную полосу над шапкой */
-    .header-safe-area-filler {
+    /* === БЕЛАЯ ПОЛОСА НАД HEADER (закрывает safe-area) === */
+    .safe-area-spacer {
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
+        width: 100%;
         height: env(safe-area-inset-top);
         background: #FFFFFF;
-        z-index: 9998; /* ниже header, но выше всего остального */
-        -webkit-backdrop-filter: none !important;
-        backdrop-filter: none !important;
+        z-index: 10000;
+        pointer-events: none;
     }
 
-    /* Сама шапка */
+    /* === ФИКСИРОВАННАЯ ШАПКА === */
     header {
         position: fixed;
         top: env(safe-area-inset-top);
         left: 0;
         right: 0;
+        width: 100%;
+        height: 64px;
         z-index: 9999;
-        background: #FFFFFF !important;
-        -webkit-backdrop-filter: none !important;
-        backdrop-filter: none !important;
+        background: #FFFFFF;
         border-bottom: 1px solid #E5E5E5;
+        display: flex;
+        align-items: center;
     }
     
     header > div {
+        width: 100%;
         background: #FFFFFF;
     }
-    
-    .sticky, .backdrop-blur-sm, .bg-white\/95 {
-        -webkit-backdrop-filter: none !important;
-        backdrop-filter: none !important;
-        background: #FFFFFF !important;
+
+    /* === КОНТЕНТ НИЖЕ HEADER + SAFE-AREA === */
+    main {
+        margin-top: calc(env(safe-area-inset-top) + 64px);
+        background: #FFFFFF;
     }
 
-    /* Main контент начинается ниже header + safe-area */
-    main {
-        padding-top: 72px; /* запасной отступ */
+    footer {
+        background: #FFFFFF;
     }
 </style>
 </head>
 <body>
 
-<!-- Служебный элемент: заполняет пространство safe-area (notch) белым цветом -->
-<div class="header-safe-area-filler"></div>
+<!-- БЕЛЫЙ СПЕЙСЕР ДЛЯ SAFE-AREA (закрывает прозрачную полосу в iOS) -->
+<div class="safe-area-spacer"></div>
 
 <!-- Header -->
 <header>
-    <div class="max-w-5xl mx-auto px-4 md:px-6 py-3 md:py-4 flex justify-between items-center">
+    <div class="max-w-5xl mx-auto px-4 md:px-6 flex justify-between items-center w-full">
         <a href="https://www.emiia.ru" class="flex items-center gap-2">
-            <div class="w-10 h-10 md:w-8 md:h-8 flex items-center justify-center">
+            <div class="w-10 h-10 md:w-8 md:h-8 flex items-center justify-center flex-shrink-0">
                 <svg version="1.1" viewBox="0 0 192 192" fill="none" stroke="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
                     <path fill="#3d85c6" d="m154.585 76.782c-0.186-20.651-17.184-38.474-38.332-40.193l-0.097 5.252c18.078 1.614 32.65 16.93 32.955 34.638z"/>
                     <path stroke="#3d85c6" stroke-width="14.66" d="m154.585 76.782c-0.186-20.651-17.184-38.474-38.332-40.193l-0.097 5.252c18.078 1.614 32.65 16.93 32.955 34.638z"/>
