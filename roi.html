@@ -1,8 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#ffffff">
 <title>EMIIA.AI SIP – матрица эффективности</title>
 
 <meta property="og:title" content="EMIIA.AI SIP – калькулятор экономии">
@@ -28,9 +29,15 @@
         box-sizing: border-box;
     }
     
-    html, body {
-        height: 100%;
-        background: #FFFFFF !important; /* принудительный белый фон для WebView */
+    html {
+        background: #FFFFFF !important;
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        background: #FFFFFF !important;
         color: #111;
         -webkit-font-smoothing: antialiased;
         -webkit-backdrop-filter: none !important;
@@ -117,10 +124,24 @@
     }
     .chart-tabs-container::-webkit-scrollbar { display: none; }
 
-    /* ФИКС ДЛЯ TELEGRAM / iOS WebView - ФИКСИРОВАННАЯ ШАПКА + SAFE AREA */
-    header {
+    /* === КРИТИЧЕСКИЙ ФИХ ДЛЯ iOS TELEGRAM === */
+    /* Служебный элемент, который блокирует прозрачную полосу над шапкой */
+    .header-safe-area-filler {
         position: fixed;
         top: 0;
+        left: 0;
+        right: 0;
+        height: env(safe-area-inset-top);
+        background: #FFFFFF;
+        z-index: 9998; /* ниже header, но выше всего остального */
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
+    }
+
+    /* Сама шапка */
+    header {
+        position: fixed;
+        top: env(safe-area-inset-top);
         left: 0;
         right: 0;
         z-index: 9999;
@@ -128,32 +149,28 @@
         -webkit-backdrop-filter: none !important;
         backdrop-filter: none !important;
         border-bottom: 1px solid #E5E5E5;
-        /* Учитываем статус-бар / вырез */
-        padding-top: env(safe-area-inset-top);
-        /* Обеспечим аппаратное ускорение, чтобы избежать мерцания в некоторых WebView */
-        transform: translateZ(0);
     }
     
     header > div {
         background: #FFFFFF;
     }
     
-    /* Отключаем классы, которые могли бы добавить прозрачность/blur */
     .sticky, .backdrop-blur-sm, .bg-white\/95 {
         -webkit-backdrop-filter: none !important;
         backdrop-filter: none !important;
         background: #FFFFFF !important;
     }
 
-    /* Немного будущее: гарантия, что основной контейнер не будет перекрываться фикс. шапкой,
-       но реальная высота вычисляется JS и выставляется как padding-top у body */
+    /* Main контент начинается ниже header + safe-area */
     main {
-        /* запасной отступ на случай, если JS не выполнится */
-        padding-top: 72px;
+        padding-top: 72px; /* запасной отступ */
     }
 </style>
 </head>
 <body>
+
+<!-- Служебный элемент: заполняет пространство safe-area (notch) белым цветом -->
+<div class="header-safe-area-filler"></div>
 
 <!-- Header -->
 <header>
@@ -307,44 +324,7 @@
 </div>
 
 <script>
-/* Утилитарный селектор */
 const $ = id => document.getElementById(id);
-
-/* === Функция: корректировка отступа body под фиксированный header === */
-function adjustBodyForFixedHeader() {
-    const hdr = document.querySelector('header');
-    if (!hdr) return;
-    // Принудительная гарантия стилей (на случай, если webview применяет прозрачность)
-    hdr.style.position = 'fixed';
-    hdr.style.top = '0';
-    hdr.style.left = '0';
-    hdr.style.right = '0';
-    hdr.style.zIndex = '9999';
-    hdr.style.background = '#FFFFFF';
-    hdr.style.webkitBackdropFilter = 'none';
-    hdr.style.backdropFilter = 'none';
-
-    // Делаем запрос в следующем кадре, чтобы получить окончательную высоту после рендеринга
-    requestAnimationFrame(() => {
-        const h = hdr.offsetHeight || 0;
-        // Устанавливаем padding-top у body ровно равный высоте header
-        document.body.style.paddingTop = h + 'px';
-        // Также ставим запас в main (на случай CSS fallback)
-        const main = document.querySelector('main');
-        if (main) main.style.paddingTop = '0'; // используется body padding
-    });
-}
-
-/* Debounce для resize/orientation */
-let _resizeTimer = null;
-function handleResize() {
-    if (_resizeTimer) clearTimeout(_resizeTimer);
-    _resizeTimer = setTimeout(() => {
-        adjustBodyForFixedHeader();
-    }, 120);
-}
-
-/* === Существует основной скрипт приложения (включая расчёты и графики) === */
 let chart = null;
 let currentChartType = 'tco';
 
@@ -422,7 +402,7 @@ function exportToCSV() {
     const capexC = tcoC*0.35, capexE = tcoE*0.10, opexC = tcoC*0.65, opexE = tcoE*0.90;
     const roiC = tcoC>0 ? ((500000 - tcoC*12)/(tcoC*12))*100 : 0;
     const roiE = tcoE>0 ? ((500000 - tcoE*12)/(tcoE*12))*100 : 0;
-    const csvData = [['Параметр','Значение','Формула для Google Sheets'],['Объём данных (ТБ)',dataTb,`=${dataTb}`],['Инференсы (млн)',infM,`=${infM}`],['Количество развёртываний',deplN,`=${deplN}`],['Команда Ops ($/мес)',opsCost,`=${opsCost}`],['Время до запуска (дней)',daysClassic,`=${daysClassic}`],[''],['Метрика','Classic','EMIIA','Экономия','Экономия %'],['TCO ($)',tcoC.toFixed(0),tcoE.toFixed(0),(tcoC-tcoE).toFixed(0),`=((B9-C9)/B9)*100`],['CAPEX ($)',capexC.toFixed(0),capexE.toFixed(0),(capexC-capexE).toFixed(0),`=((B10-C10)/B10)*100`],['OPEX ($)',opexC.toFixed(0),opexE.toFixed(0),(opexC-opexE).toFixed(0),`=((B11-C11)/B11)*100`],['Время запуска (дней)',daysClassic,'8',(daysClassic-8).toFixed(0),`=((B12-8)/B12)*100`],['ROI 12 мес (%)',roiC.toFixed(0),roiE.toFixed(0),'',`=C13-B13`],[''],['Примечания:'],['- Формулы автоматически адаптируются в формат электронных таблиц'],['- Изменяй��е значения в колонке "Значение" для пересчёта'],['- CAPEX включает: оборудование, лицензии, разработку инфраструктуры'],['- OPEX включает: вычисления, команду Ops, обслуживание, электричество'],['- EMIIA снижает OPEX на 67% за счет автоматизации']];
+    const csvData = [['Параметр','Значение','Формула для Google Sheets'],['Объём данных (ТБ)',dataTb,`=${dataTb}`],['Инференсы (млн)',infM,`=${infM}`],['Количество развёртываний',deplN,`=${deplN}`],['Команда Ops ($/мес)',opsCost,`=${opsCost}`],['Время до запуска (дней)',daysClassic,`=${daysClassic}`],[''],['Метрика','Classic','EMIIA','Экономия','Экономия %'],['TCO ($)',tcoC.toFixed(0),tcoE.toFixed(0),(tcoC-tcoE).toFixed(0),`=((B9-C9)/B9)*100`],['CAPEX ($)',capexC.toFixed(0),capexE.toFixed(0),(capexC-capexE).toFixed(0),`=((B10-C10)/B10)*100`],['OPEX ($)',opexC.toFixed(0),opexE.toFixed(0),(opexC-opexE).toFixed(0),`=((B11-C11)/B11)*100`],['Время запуска (дней)',daysClassic,'8',(daysClassic-8).toFixed(0),`=((B12-8)/B12)*100`],['ROI 12 мес (%)',roiC.toFixed(0),roiE.toFixed(0),'',`=C13-B13`],[''],['Примечания:'],['- Формулы автоматически адаптируются в формат электронных таблиц'],['- Изменяйте значения в колонке "Значение" для пересчёта'],['- CAPEX включает: оборудование, лицензии, разработку инфраструктуры'],['- OPEX включает: вычисления, команду Ops, обслуживание, электричество'],['- EMIIA снижает OPEX на 67% за счет автоматизации']];
     const csvContent = csvData.map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
@@ -435,18 +415,11 @@ function exportToCSV() {
     $('exportModal').style.display = 'flex';
 }
 
-/* === Инициализация событий и вызов функций === */
 document.addEventListener('DOMContentLoaded', function() {
-    // Корректируем отступ под фиксированную шапку
-    adjustBodyForFixedHeader();
-
-    // Привязка инпутов
     ['dataTb','infM','deplN','opsCost','daysClassic'].forEach(id => {
         $(id).addEventListener('input', calc);
-        const slider = $(id + 'Slider');
-        if (slider) slider.addEventListener('input', (e) => { $(id).value = e.target.value; calc(); });
+        $(id + 'Slider').addEventListener('input', (e) => { $(id).value = e.target.value; calc(); });
     });
-
     document.querySelectorAll('.chart-tab').forEach(tab => {
         tab.addEventListener('click', function() {
             document.querySelectorAll('.chart-tab').forEach(t => { t.classList.remove('active', 'border-black'); t.classList.add('border-gray-200'); });
@@ -459,19 +432,7 @@ document.addEventListener('DOMContentLoaded', function() {
     $('exportBtn').addEventListener('click', exportToCSV);
     $('closeModal').addEventListener('click', () => $('exportModal').style.display = 'none');
     $('exportModal').addEventListener('click', (e) => { if (e.target === $('exportModal')) $('exportModal').style.display = 'none'; });
-
-    // Инициалный расчет и отрисовка графика
     calc();
-
-    // Еще раз скорректируем отступ после первой отрисовки (на случай динамического изменения высоты header)
-    setTimeout(adjustBodyForFixedHeader, 50);
-});
-
-/* Обработчики resize/orientation */
-window.addEventListener('resize', handleResize);
-window.addEventListener('orientationchange', () => {
-    // даём время для перерасчёта safe-area в некоторых WebView
-    setTimeout(adjustBodyForFixedHeader, 220);
 });
 </script>
 </body>
