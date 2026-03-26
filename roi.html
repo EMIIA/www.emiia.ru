@@ -269,21 +269,21 @@
             <div class="md-metrics-grid">
                 <div class="grid grid-cols-3 gap-2 md:gap-4 mb-6 pb-6 border-b border-thin">
                     <div><span class="block text-xs text-gray-400 uppercase mb-1">TCO Classic</span><div class="text-lg md:text-2xl font-light text-black font-mono" id="tcoCl">$0</div></div>
-                    <div><span class="block text-xs text-gray-400 uppercase mb-1">TCO EMIIA</span><div class="text-lg md:text-2xl font-light text-[#3c78d8] font-mono" id="tcoEm">$0</div></div>
+                    <div><span class="block text-xs text-gray-400 uppercase mb-1">TCO EMIIA.AI</span><div class="text-lg md:text-2xl font-light text-[#3c78d8] font-mono" id="tcoEm">$0</div></div>
                     <div class="text-right md:text-left"><span class="block text-xs text-gray-400 uppercase mb-1">Экономия</span><div class="text-lg md:text-2xl font-bold text-black font-mono" id="tcoSave">0%</div></div>
                 </div>
 
                 <div class="mb-6 pb-6 border-b border-thin">
                     <div class="grid grid-cols-3 gap-2 md:gap-8 text-sm">
                         <div><span class="block text-xs text-gray-400 uppercase mb-1">T2M Classic</span><div class="text-base md:text-xl font-medium font-mono" id="t2mCl">0 дн</div></div>
-                        <div><span class="block text-xs text-gray-400 uppercase mb-1">T2M EMIIA</span><div class="text-base md:text-xl font-medium font-mono text-[#3c78d8]" id="t2mEm">0 дн</div></div>
+                        <div><span class="block text-xs text-gray-400 uppercase mb-1">T2M EMIIA.AI</span><div class="text-base md:text-xl font-medium font-mono text-[#3c78d8]" id="t2mEm">0 дн</div></div>
                         <div class="text-right md:text-left"><span class="block text-xs text-gray-400 uppercase mb-1">Ускорение</span><div class="text-base md:text-xl font-bold text-black font-mono" id="t2mSave">0%</div></div>
                     </div>
                 </div>
 
                 <div class="mb-6 pb-6 border-b border-thin">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
-                        <div><span class="block text-xs text-gray-400 uppercase mb-2">ROI (12 мес)</span><div class="flex gap-4 items-baseline"><span class="text-sm text-gray-500 font-mono">Classic: <span id="roiCl">0%</span></span><span class="text-lg font-bold font-mono">EMIIA: <span class="text-[#3c78d8]" id="roiEm">0%</span></span></div></div>
+                        <div><span class="block text-xs text-gray-400 uppercase mb-2">ROI (12 мес)</span><div class="flex gap-4 items-baseline"><span class="text-sm text-gray-500 font-mono">Classic: <span id="roiCl">0%</span></span><span class="text-lg font-bold font-mono">EMIIA.AI: <span class="text-[#3c78d8]" id="roiEm">0%</span></span></div></div>
                         <button class="text-xs border-b border-black pb-1 hover:border-gray-400 transition font-mono" id="exportBtn">Экспорт CSV</button>
                     </div>
                 </div>
@@ -386,20 +386,20 @@ function updateChart() {
     Chart.defaults.font.size = 11;
 
 
-    const commonTooltipOptions = { backgroundColor: '#3c78d8', titleColor: '#fff', bodyColor: '#fff', borderColor: '#f8f9fa', borderWidth: 1, padding: 10, cornerRadius: 8, titleFont: { family: "'JetBrains Mono', monospace" }, bodyFont: { family: "'JetBrains Mono', monospace" }, displayColors: false };
+    const commonTooltipOptions = { backgroundColor: '#3c78d8', titleColor: '#fff', bodyColor: '#fff', borderColor: '#f8f9fa', borderWidth: 1, padding: 10, cornerRadius: 14, titleFont: { family: "'JetBrains Mono', monospace" }, bodyFont: { family: "'JetBrains Mono', monospace" }, displayColors: false };
 
 
     const commonOptions = { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: commonTooltipOptions }, scales: { y: { beginAtZero: true, grid: { color: '#F0F0F0' }, ticks: { color: '#AAA' } }, x: { grid: { display: false }, ticks: { color: '#111' } } } };
 
 
 
-    const barRadius = 8;
-    if (currentChartType === 'tco') chart = new Chart(ctx, { type: 'bar', data: { labels: ['Classic', 'EMIIA'], datasets: [{ data: [chartData.tco.classic, chartData.tco.emiia], backgroundColor: [BRAND_COLORS.gray, BRAND_COLORS.darkBlue], borderRadius: barRadius }] }, options: { ...commonOptions, plugins: { ...commonOptions.plugins, tooltip: { ...commonOptions.plugins.tooltip, callbacks: { label: (c) => '$' + formatNumber(c.raw) } } } } });
-    else if (currentChartType === 'time') chart = new Chart(ctx, { type: 'bar', data: { labels: ['Classic', 'EMIIA'], datasets: [{ data: [chartData.time.classic, chartData.time.emiia], backgroundColor: [BRAND_COLORS.gray, BRAND_COLORS.darkBlue], borderRadius: barRadius }] }, options: { ...commonOptions, plugins: { ...commonOptions.plugins, tooltip: { ...commonOptions.plugins.tooltip, callbacks: { label: (c) => c.raw + ' дней' } } } } });
-    else if (currentChartType === 'roi') chart = new Chart(ctx, { type: 'doughnut', data: { labels: ['ROI Classic', 'ROI EMIIA'], datasets: [{ data: [chartData.roi.classic, chartData.roi.emiia], backgroundColor: [BRAND_COLORS.gray, BRAND_COLORS.darkBlue] }] }, options: { responsive: true, maintainAspectRatio: false, cutout: '70%', plugins: { legend: { display: true, position: 'bottom', labels: { font: { family: "'JetBrains Mono', monospace" } } }, tooltip: commonTooltipOptions } } });
+    const barRadius = 34;
+    if (currentChartType === 'tco') chart = new Chart(ctx, { type: 'bar', data: { labels: ['Classic', 'EMIIA.AI'], datasets: [{ data: [chartData.tco.classic, chartData.tco.emiia], backgroundColor: [BRAND_COLORS.gray, BRAND_COLORS.darkBlue], borderRadius: barRadius }] }, options: { ...commonOptions, plugins: { ...commonOptions.plugins, tooltip: { ...commonOptions.plugins.tooltip, callbacks: { label: (c) => '$' + formatNumber(c.raw) } } } } });
+    else if (currentChartType === 'time') chart = new Chart(ctx, { type: 'bar', data: { labels: ['Classic', 'EMIIA.AI'], datasets: [{ data: [chartData.time.classic, chartData.time.emiia], backgroundColor: [BRAND_COLORS.gray, BRAND_COLORS.darkBlue], borderRadius: barRadius }] }, options: { ...commonOptions, plugins: { ...commonOptions.plugins, tooltip: { ...commonOptions.plugins.tooltip, callbacks: { label: (c) => c.raw + ' дней' } } } } });
+    else if (currentChartType === 'roi') chart = new Chart(ctx, { type: 'doughnut', data: { labels: ['ROI Classic', 'ROI EMIIA.AI'], datasets: [{ data: [chartData.roi.classic, chartData.roi.emiia], backgroundColor: [BRAND_COLORS.gray, BRAND_COLORS.darkBlue] }] }, options: { responsive: true, maintainAspectRatio: false, cutout: '70%', plugins: { legend: { display: true, position: 'bottom', labels: { font: { family: "'JetBrains Mono', monospace" } } }, tooltip: commonTooltipOptions } } });
     else if (currentChartType === 'savings') chart = new Chart(ctx, { type: 'bar', data: { labels: ['TCO', 'T2M', 'CAPEX', 'OPEX'], datasets: [{ data: [chartData.savings.tco, chartData.savings.time, chartData.savings.capexPercent, chartData.savings.opexPercent], backgroundColor: BRAND_COLORS.mediumBlue, borderRadius: barRadius }] }, options: commonOptions });
-    else if (currentChartType === 'capex') chart = new Chart(ctx, { type: 'bar', data: { labels: ['Classic CAPEX', 'EMIIA CAPEX'], datasets: [{ data: [chartData.capex.capexClassic, chartData.capex.capexEmiia], backgroundColor: [BRAND_COLORS.lightBlue, BRAND_COLORS.darkBlue], borderRadius: barRadius }] }, options: commonOptions });
-    else if (currentChartType === 'opex') chart = new Chart(ctx, { type: 'bar', data: { labels: ['Classic OPEX', 'EMIIA OPEX'], datasets: [{ data: [chartData.opex.opexClassic, chartData.opex.opexEmiia], backgroundColor: [BRAND_COLORS.lightBlue, BRAND_COLORS.darkBlue], borderRadius: barRadius }] }, options: commonOptions });
+    else if (currentChartType === 'capex') chart = new Chart(ctx, { type: 'bar', data: { labels: ['Classic CAPEX', 'EMIIA.AI CAPEX'], datasets: [{ data: [chartData.capex.capexClassic, chartData.capex.capexEmiia], backgroundColor: [BRAND_COLORS.lightBlue, BRAND_COLORS.darkBlue], borderRadius: barRadius }] }, options: commonOptions });
+    else if (currentChartType === 'opex') chart = new Chart(ctx, { type: 'bar', data: { labels: ['Classic OPEX', 'EMIIA.AI OPEX'], datasets: [{ data: [chartData.opex.opexClassic, chartData.opex.opexEmiia], backgroundColor: [BRAND_COLORS.lightBlue, BRAND_COLORS.darkBlue], borderRadius: barRadius }] }, options: commonOptions });
 }
 
 function exportToCSV() {
@@ -410,7 +410,7 @@ function exportToCSV() {
     const capexC = tcoC*0.35, capexE = tcoE*0.10, opexC = tcoC*0.65, opexE = tcoE*0.90;
     const roiC = tcoC>0 ? ((500000 - tcoC*12)/(tcoC*12))*100 : 0;
     const roiE = tcoE>0 ? ((500000 - tcoE*12)/(tcoE*12))*100 : 0;
-    const csvData = [['Параметр','Значение','Формула для Google Sheets'],['Объём данных (ТБ)',dataTb,`=${dataTb}`],['Инференсы (млн)',infM,`=${infM}`],['Количество развёртываний',deplN,`=${deplN}`],['Команда Ops ($/мес)',opsCost,`=${opsCost}`],['Время до запуска (дней)',daysClassic,`=${daysClassic}`],[''],['Метрика','Classic','EMIIA','Экономия','Экономия %'],['TCO ($)',tcoC.toFixed(0),tcoE.toFixed(0),(tcoC-tcoE).toFixed(0),`=((B9-C9)/B9)*100`],['CAPEX ($)',capexC.toFixed(0),capexE.toFixed(0),(capexC-capexE).toFixed(0),`=((B10-C10)/B10)*100`],['OPEX ($)',opexC.toFixed(0),opexE.toFixed(0),(opexC-opexE).toFixed(0),`=((B11-C11)/B11)*100`],['Время запуска (дней)',daysClassic,'8',(daysClassic-8).toFixed(0),`=((B12-8)/B12)*100`],['ROI 12 мес (%)',roiC.toFixed(0),roiE.toFixed(0),'',`=C13-B13`],[''],['Примечания:'],['- Формулы автоматически адаптируются в формат электронных таблиц'],['- Изменяйте значения в колонке "Значение" для пересчёта'],['- CAPEX включает: оборудование, лицензии, разработку инфраструктуры'],['- OPEX включает: вычисления, команду Ops, обслуживание, электричество'],['- EMIIA снижает OPEX на 67% за счет автоматизации']];
+    const csvData = [['Параметр','Значение','Формула для Sheets'],['Объём данных (ТБ)',dataTb,`=${dataTb}`],['Инференсы (млн)',infM,`=${infM}`],['Количество развёртываний',deplN,`=${deplN}`],['Команда Ops ($/мес)',opsCost,`=${opsCost}`],['Время до запуска (дней)',daysClassic,`=${daysClassic}`],[''],['Метрика','Classic','EMIIA','Экономия','Экономия %'],['TCO ($)',tcoC.toFixed(0),tcoE.toFixed(0),(tcoC-tcoE).toFixed(0),`=((B9-C9)/B9)*100`],['CAPEX ($)',capexC.toFixed(0),capexE.toFixed(0),(capexC-capexE).toFixed(0),`=((B10-C10)/B10)*100`],['OPEX ($)',opexC.toFixed(0),opexE.toFixed(0),(opexC-opexE).toFixed(0),`=((B11-C11)/B11)*100`],['Время запуска (дней)',daysClassic,'8',(daysClassic-8).toFixed(0),`=((B12-8)/B12)*100`],['ROI 12 мес (%)',roiC.toFixed(0),roiE.toFixed(0),'',`=C13-B13`],[''],['Примечания:'],['- Формулы автоматически адаптируются в формат электронных таблиц'],['- Изменяйте значения в колонке "Значение" для пересчёта'],['- CAPEX включает: оборудование, лицензии, разработку инфраструктуры'],['- OPEX включает: вычисления, команду Ops, обслуживание, электричество'],['- EMIIA снижает OPEX на 67% за счет автоматизации']];
     const csvContent = csvData.map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
