@@ -1,13 +1,10 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" style="background: #fff; padding: 0; margin: 0;">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
 <meta name="theme-color" content="#ffffff">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="white">
 <title>EMIIA.AI SIP – матрица эффективности</title>
-
 <meta property="og:title" content="EMIIA.AI SIP – калькулятор экономии">
 <meta property="og:description" content="Сравните и рассчитайте экономию от использования продуктов платформы EMIIA.AI SIP">
 <meta property="og:image" content="https://www.emiia.ru/1200x630_roi.png">
@@ -15,35 +12,72 @@
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="https://www.emiia.ru/roi.html">
 <meta property="og:type" content="website">
-
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="EMIIA.AI SIP – калькулятор экономии">
 <meta name="twitter:description" content="Рассчитайте экономию от использования продуктов платформы EMIIA.AI SIP">
 <meta name="twitter:image" content="https://www.emiia.ru/1200x630_roi.png">
-
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100vw;
+        background: #ffffff;
+        color: #111;
+        font-family: 'Inter', sans-serif;
+        -webkit-font-smoothing: antialiased;
+    }
+
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
     }
-    
-    html, body {
-        width: 100%;
-        height: 100%;
-        background: #FFFFFF !important;
-        color: #111;
-        -webkit-font-smoothing: antialiased;
-    }
-
-    body {
-        font-family: 'Inter', sans-serif;
-    }
 
     .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+    /* Header - полностью фиксирован */
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: max(56px, calc(env(safe-area-inset-top) + 56px));
+        background: #ffffff !important;
+        border-bottom: 1px solid #E5E5E5;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        padding-top: max(0px, env(safe-area-inset-top));
+        box-sizing: border-box;
+    }
+
+    header > div {
+        width: 100%;
+        background: #ffffff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 1rem;
+    }
+
+    /* Body отступ для header */
+    body {
+        padding-top: max(56px, calc(env(safe-area-inset-top) + 56px));
+    }
+
+    main {
+        background: #ffffff;
+        padding: 2rem 1rem;
+    }
+
+    @media (min-width: 768px) {
+        main {
+            padding: 4rem 1.5rem;
+        }
+    }
 
     input[type=range] {
         -webkit-appearance: none;
@@ -83,7 +117,7 @@
     }
 
     .border-thin { border-color: #E5E5E5; }
-    
+
     .fade-up {
         opacity: 0;
         transform: translateY(10px);
@@ -97,7 +131,7 @@
         height: 280px;
         width: 100%;
     }
-    
+
     @media (min-width: 768px) {
         .chart-container { 
             height: 100%; 
@@ -114,68 +148,26 @@
              border-bottom: none;
         }
     }
-    
+
     .chart-tabs-container {
         overflow-x: auto;
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
     }
+
     .chart-tabs-container::-webkit-scrollbar { display: none; }
 
-    /* === БЕЛАЯ ПОЛОСА НАД HEADER (закрывает safe-area) === */
-    .safe-area-spacer {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        height: env(safe-area-inset-top);
-        background: #FFFFFF;
-        z-index: 10000;
-        pointer-events: none;
-    }
-
-    /* === ФИКСИРОВАННАЯ ШАПКА === */
-    header {
-        position: fixed;
-        top: env(safe-area-inset-top);
-        left: 0;
-        right: 0;
-        width: 100%;
-        height: 64px;
-        z-index: 9999;
-        background: #FFFFFF;
-        border-bottom: 1px solid #E5E5E5;
-        display: flex;
-        align-items: center;
-    }
-    
-    header > div {
-        width: 100%;
-        background: #FFFFFF;
-    }
-
-    /* === КОНТЕНТ НИЖЕ HEADER + SAFE-AREA === */
-    main {
-        margin-top: calc(env(safe-area-inset-top) + 64px);
-        background: #FFFFFF;
-    }
-
     footer {
-        background: #FFFFFF;
+        background: #ffffff;
     }
 </style>
 </head>
-<body>
+<body style="background: #fff; margin: 0; padding-top: max(56px, calc(env(safe-area-inset-top) + 56px));">
 
-<!-- БЕЛЫЙ СПЕЙСЕР ДЛЯ SAFE-AREA (закрывает прозрачную полосу в iOS) -->
-<div class="safe-area-spacer"></div>
-
-<!-- Header -->
-<header>
-    <div class="max-w-5xl mx-auto px-4 md:px-6 flex justify-between items-center w-full">
-        <a href="https://www.emiia.ru" class="flex items-center gap-2">
+<header style="background: #fff;">
+    <div>
+        <a href="https://www.emiia.ru" class="flex items-center gap-2" style="text-decoration: none;">
             <div class="w-10 h-10 md:w-8 md:h-8 flex items-center justify-center flex-shrink-0">
                 <svg version="1.1" viewBox="0 0 192 192" fill="none" stroke="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
                     <path fill="#3d85c6" d="m154.585 76.782c-0.186-20.651-17.184-38.474-38.332-40.193l-0.097 5.252c18.078 1.614 32.65 16.93 32.955 34.638z"/>
@@ -195,16 +187,13 @@
     </div>
 </header>
 
-<!-- Main -->
-<main class="max-w-5xl mx-auto px-4 md:px-6 py-8 md:py-16">
-    
+<main class="max-w-5xl mx-auto px-4 md:px-6">
     <div class="mb-8 md:mb-12 fade-up">
         <h1 class="text-2xl md:text-4xl mb-2 font-mono font-bold tracking-tight">Матрица эффективности</h1>
         <p class="text-gray-500 text-sm md:text-base font-mono">Сравнение TCO, ROI и сроков внедрения EMIIA.AI против классической инфраструктуры.</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-16">
-        
         <div class="md:col-span-1 fade-up flex flex-col gap-6 md:gap-8" style="animation-delay: 0.1s">
             <div class="space-y-6 md:space-y-8">
                 <div>
@@ -215,7 +204,6 @@
                     </div>
                     <input type="range" id="dataTbSlider" min="0" max="500" value="100">
                 </div>
-
                 <div>
                     <label class="block text-xs uppercase tracking-widest text-gray-400 font-semibold mb-2">Инференсы (млн)</label>
                     <div class="flex items-center gap-4">
@@ -224,7 +212,6 @@
                     </div>
                     <input type="range" id="infMSlider" min="0" max="50" value="10">
                 </div>
-
                 <div>
                     <label class="block text-xs uppercase tracking-widest text-gray-400 font-semibold mb-2">Развёртывания (шт)</label>
                     <div class="flex items-center gap-4">
@@ -233,7 +220,6 @@
                     </div>
                     <input type="range" id="deplNSlider" min="0" max="20" value="5">
                 </div>
-
                 <div>
                     <label class="block text-xs uppercase tracking-widest text-gray-400 font-semibold mb-2">Бюджет Ops ($/мес)</label>
                     <div class="flex items-center gap-4">
@@ -242,7 +228,6 @@
                     </div>
                     <input type="range" id="opsCostSlider" min="0" max="50000" value="15000" step="1000">
                 </div>
-
                 <div>
                     <label class="block text-xs uppercase tracking-widest text-gray-400 font-semibold mb-2">Срок внедрения (дней)</label>
                     <div class="flex items-center gap-4">
@@ -252,7 +237,6 @@
                     <input type="range" id="daysClassicSlider" min="0" max="100" value="50">
                 </div>
             </div>
-
             <div class="pt-6 md:pt-8 border-t border-thin md:mt-auto">
                 <h3 class="text-xs uppercase tracking-widest text-gray-400 font-semibold mb-4">Структура экономии</h3>
                 <div class="grid grid-cols-2 gap-4 text-sm">
@@ -263,7 +247,6 @@
                 </div>
             </div>
         </div>
-
         <div class="md:col-span-2 fade-up md:flex md:flex-col" style="animation-delay: 0.2s">
             <div class="md-metrics-grid">
                 <div class="grid grid-cols-3 gap-2 md:gap-4 mb-6 pb-6 border-b border-thin">
@@ -271,7 +254,6 @@
                     <div><span class="block text-xs text-gray-400 uppercase mb-1">TCO EMIIA</span><div class="text-lg md:text-2xl font-light text-[#3c78d8] font-mono" id="tcoEm">$0</div></div>
                     <div class="text-right md:text-left"><span class="block text-xs text-gray-400 uppercase mb-1">Экономия</span><div class="text-lg md:text-2xl font-bold text-black font-mono" id="tcoSave">0%</div></div>
                 </div>
-
                 <div class="mb-6 pb-6 border-b border-thin">
                     <div class="grid grid-cols-3 gap-2 md:gap-8 text-sm">
                         <div><span class="block text-xs text-gray-400 uppercase mb-1">T2M Classic</span><div class="text-base md:text-xl font-medium font-mono" id="t2mCl">0 дн</div></div>
@@ -279,7 +261,6 @@
                         <div class="text-right md:text-left"><span class="block text-xs text-gray-400 uppercase mb-1">Ускорение</span><div class="text-base md:text-xl font-bold text-black font-mono" id="t2mSave">0%</div></div>
                     </div>
                 </div>
-
                 <div class="mb-6 pb-6 border-b border-thin">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
                         <div><span class="block text-xs text-gray-400 uppercase mb-2">ROI (12 мес)</span><div class="flex gap-4 items-baseline"><span class="text-sm text-gray-500 font-mono">Classic: <span id="roiCl">0%</span></span><span class="text-lg font-bold font-mono">EMIIA: <span class="text-[#3c78d8]" id="roiEm">0%</span></span></div></div>
@@ -287,7 +268,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="pt-2 md:pt-4 md:mt-auto md:flex-1 md:flex md:flex-col">
                 <div class="chart-tabs-container flex gap-2 mb-4 flex-shrink-0">
                     <button class="chart-tab active flex-shrink-0 px-3 py-1.5 text-xs font-medium border border-black rounded-full font-mono" data-chart="tco">TCO</button>
@@ -303,14 +283,14 @@
     </div>
 </main>
 
-<footer class="border-t border-thin mt-12 py-6 md:py-8 px-4 md:px-6">
+<footer class="border-t border-thin mt-12 py-6 md:py-8 px-4 md:px-6 bg-white">
     <div class="max-w-5xl mx-auto flex flex-col justify-center items-center gap-4 text-center">
         <div class="flex flex-col md:flex-row justify-between items-center gap-2 w-full text-xs text-gray-400 font-mono">
             <span>EMIIA.AI SIP – ПРОСТРАНСТВЕННЫЙ ИНТЕЛЛЕКТ</span>
             <span>ДЕТАЛЬНЫЙ РАСЧЕТ: EMIIA@EMIIA.RU</span>
         </div>
         <div class="w-full pt-4 mt-2 border-t border-gray-100 text-[10px] md:text-[11px] text-gray-300 leading-relaxed max-w-3xl font-mono">
-            *Все расчеты и показатели, представленные на данной странице, носят исключительно информационный и справочный характер. Данный материал не является публичной офертой, предложением или гарантией доходности. Точные условия сотрудничества, итоговая стоимость внедрения и финансовые результаты определяются индивидуально и фиксируются в договоре.
+            *Все расчеты и показатели, представленные на данной странице, носят исключительно информационный и справочный характер.
         </div>
     </div>
 </footer>
@@ -318,7 +298,7 @@
 <div class="modal" id="exportModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.95); z-index: 2000; align-items: center; justify-content: center; padding: 1rem;">
     <div class="bg-white p-8 max-w-md w-full border shadow-lg rounded-2xl" style="border-color: #3c78d8; border-width: 1px;">
         <h3 class="text-xl mb-4 font-mono font-bold">Экспорт завершен</h3>
-        <p class="text-sm text-gray-600 mb-6 font-mono">CSV файл с формулами для электронных таблиц успешно сгенерирован.</p>
+        <p class="text-sm text-gray-600 mb-6 font-mono">CSV файл успешно сгенерирован.</p>
         <button class="w-full text-white py-3 text-sm font-bold hover:opacity-90 transition font-mono rounded-lg" id="closeModal" style="background-color: #3c78d8;">Закрыть</button>
     </div>
 </div>
@@ -402,13 +382,13 @@ function exportToCSV() {
     const capexC = tcoC*0.35, capexE = tcoE*0.10, opexC = tcoC*0.65, opexE = tcoE*0.90;
     const roiC = tcoC>0 ? ((500000 - tcoC*12)/(tcoC*12))*100 : 0;
     const roiE = tcoE>0 ? ((500000 - tcoE*12)/(tcoE*12))*100 : 0;
-    const csvData = [['Параметр','Значение','Формула для Google Sheets'],['Объём данных (ТБ)',dataTb,`=${dataTb}`],['Инференсы (млн)',infM,`=${infM}`],['Количество развёртываний',deplN,`=${deplN}`],['Команда Ops ($/мес)',opsCost,`=${opsCost}`],['Время до запуска (дней)',daysClassic,`=${daysClassic}`],[''],['Метрика','Classic','EMIIA','Экономия','Экономия %'],['TCO ($)',tcoC.toFixed(0),tcoE.toFixed(0),(tcoC-tcoE).toFixed(0),`=((B9-C9)/B9)*100`],['CAPEX ($)',capexC.toFixed(0),capexE.toFixed(0),(capexC-capexE).toFixed(0),`=((B10-C10)/B10)*100`],['OPEX ($)',opexC.toFixed(0),opexE.toFixed(0),(opexC-opexE).toFixed(0),`=((B11-C11)/B11)*100`],['Время запуска (дней)',daysClassic,'8',(daysClassic-8).toFixed(0),`=((B12-8)/B12)*100`],['ROI 12 мес (%)',roiC.toFixed(0),roiE.toFixed(0),'',`=C13-B13`],[''],['Примечания:'],['- Формулы автоматически адаптируются в формат электронных таблиц'],['- Изменяйте значения в колонке "Значение" для пересчёта'],['- CAPEX включает: оборудование, лицензии, разработку инфраструктуры'],['- OPEX включает: вычисления, команду Ops, обслуживание, электричество'],['- EMIIA снижает OPEX на 67% за счет автоматизации']];
+    const csvData = [['Параметр','Значение'],['Объём данных (ТБ)',dataTb],['Инференсы (м��н)',infM],['Развёртывания',deplN],['Бюджет Ops',opsCost],['Время запуска',daysClassic],[''],['Метрика','Classic','EMIIA','Экономия'],['TCO',tcoC.toFixed(0),tcoE.toFixed(0),(tcoC-tcoE).toFixed(0)],['CAPEX',capexC.toFixed(0),capexE.toFixed(0),(capexC-capexE).toFixed(0)],['OPEX',opexC.toFixed(0),opexE.toFixed(0),(opexC-opexE).toFixed(0)],['T2M',daysClassic,'8',(daysClassic-8).toFixed(0)],['ROI 12мес',roiC.toFixed(0),roiE.toFixed(0),(roiE-roiC).toFixed(0)]];
     const csvContent = csvData.map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
     const url = URL.createObjectURL(blob);
     link.setAttribute('href', url);
-    link.setAttribute('download', `emiiasip_calculator_${new Date().toISOString().split('T')[0]}.csv`);
+    link.setAttribute('download', `calculator_${new Date().toISOString().split('T')[0]}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
