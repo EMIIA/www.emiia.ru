@@ -130,7 +130,7 @@
     }
     .chart-tabs-container::-webkit-scrollbar { display: none; }
 
-    /* ===== ИСПРАВЛЕНИЕ ДЛЯ TELEGRAM WEBVIEW ===== */
+    /* ===== ШАПКА - STICKY TOP-0 ===== */
     header {
         background: #FFFFFF !important;
         backdrop-filter: none !important;
@@ -148,12 +148,13 @@
         background: #FFFFFF !important;
     }
     
-    /* Псевдоэлемент для перекрытия области "челки" */
+    /* Псевдоэлемент для перекрытия области "челки" в Telegram */
     @supports (padding-top: env(safe-area-inset-top)) {
         header {
             padding-top: max(0.75rem, env(safe-area-inset-top));
             background: #FFFFFF;
-            position: relative;
+            position: sticky;
+            top: 0;
         }
         
         header::before {
@@ -172,7 +173,7 @@
 </head>
 <body class="min-h-screen">
 
-<!-- Header - исправленный для Telegram -->
+<!-- Header - фиксированный sticky -->
 <header>
     <div class="max-w-5xl mx-auto px-4 md:px-6 py-3 md:py-4 flex justify-between items-center">
         <a href="https://www.emiia.ru" class="flex items-center gap-2">
@@ -674,7 +675,6 @@
         $('exportBtn').addEventListener('click', exportToCSV);
         $('closeModal').addEventListener('click', () => $('exportModal').style.display = 'none');
         
-        // Закрытие модального окна по клику на overlay
         $('exportModal').addEventListener('click', (e) => {
             if (e.target === $('exportModal')) $('exportModal').style.display = 'none';
         });
