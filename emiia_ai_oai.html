@@ -5,12 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>EMIIA.AI OAI AGENT – анализ рынка, тренды, перспективы</title>
 
-<!-- Open Graph -->
-<meta property="og:title" content="EMIIA.AI SIP – индикаторы клиентской рентабельности">
-<meta property="og:description" content="Пользовательская экономика EMIIA.AI SIP">
+<!-- Open Graph Meta Tags (расширенные для большой картинки в Telegram) -->
+<meta property="og:title" content="EMIIA.AI OAI AGENT – анализ рынка, тренды, перспективы">
+<meta property="og:description" content="Интерактивный граф экономической модели EMIIA.AI SIP. Анализ TCO, CAC, RSC, LTV и рыночных показателей. Визуализация пользовательской экономики.">
 <meta property="og:image" content="https://www.emiia.ru/1200x630_oai.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:url" content="https://www.emiia.ru/emiia_ai_oai.html">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="EMIIA.AI">
+
+<!-- Twitter Card (для совместимости) -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="EMIIA.AI OAI AGENT – анализ рынка, тренды, перспективы">
+<meta name="twitter:description" content="Интерактивный граф экономической модели EMIIA.AI SIP. Анализ TCO, CAC, RSC, LTV и рыночных показателей.">
+<meta name="twitter:image" content="https://www.emiia.ru/1200x630_oai.png">
+
+<!-- Дополнительные метатеги для лучшего отображения -->
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="EMIIA.AI OAI AGENT - экономическая модель и анализ рынка">
 
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -18,11 +31,6 @@
 <!-- D3 Libraries -->
 <script src="https://www.emiia.ru/d3.v7.min.js"></script>
 <script src="https://www.emiia.ru/dagre-d3.min.js"></script>
-
-
-
-
-
 
 <style>
     :root {
@@ -51,9 +59,7 @@
 
     /* --- HEADER --- */
     header {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
+        background: #FFFFFF;
         border-bottom: 1px solid var(--gray-border);
         position: sticky;
         top: 0;
@@ -196,7 +202,7 @@
     .edgePath marker path { fill: var(--gray-border); stroke: none; transition: fill 0.2s; }
     .edgePath.active marker path { fill: var(--brand-dark); }
 
-    /* --- TOOLTIP (ЕДИНСТВЕННОЕ ОПРЕДЕЛЕНИЕ) --- */
+    /* --- TOOLTIP --- */
     .tooltip {
         position: fixed;
         width: 300px;
@@ -207,9 +213,6 @@
         border-radius: 36px;
         pointer-events: none;
         font-size: 14px;
-
-
-
         box-shadow: 0 15px 40px rgba(0,0,0,0.12);
         line-height: 1.6;
         z-index: 950;
@@ -277,39 +280,30 @@
         }
     }
 
+    /* --- FOOTER --- */
+    footer {
+        border-top: 1px solid var(--gray-border);
+        padding-top: 25px;
+        padding-bottom: max(2.5rem, env(safe-area-inset-bottom));
+        padding-left: 25px;
+        padding-right: 25px;
+        background: #fff;
+    }
 
+    .footer-content {
+        max-width: 64rem;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 10px;
+        color: var(--text-muted);
+        font-family: 'JetBrains Mono', monospace;
+    }
 
-
-/* --- FOOTER --- */
-footer {
-    border-top: 1px solid var(--gray-border);
-    padding-top: 25px;
-    padding-bottom: max(2.5rem, env(safe-area-inset-bottom));
-    padding-left: 25px;
-    padding-right: 25px;
-    background: #fff;
-}
-
-.footer-content {
-    max-width: 64rem;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 10px;
-    color: var(--text-muted);
-    font-family: 'JetBrains Mono', monospace;
-}
-
-.footer-link { display: flex; align-items: center; gap: 6px; color: var(--text-muted); text-decoration: none; cursor: pointer; }
-.footer-link svg { width: 14px; height: 14px; }
-
-
-
-
+    .footer-link { display: flex; align-items: center; gap: 6px; color: var(--text-muted); text-decoration: none; cursor: pointer; }
+    .footer-link svg { width: 14px; height: 14px; }
 </style>
-
-
 
 </head>
 <body>
@@ -615,7 +609,7 @@ footer {
         ['Параметр', 'Значение', 'Формула для Google Sheets'],
         ['Объём данных (ТБ)', dataTb, `=${dataTb}`],
         ['Инференсы (млн)', infM, `=${infM}`],
-        ['К��личество развёртываний', deplN, `=${deplN}`],
+        ['Количество развёртываний', deplN, `=${deplN}`],
         ['Команда Ops ($/мес)', opsCost, `=${opsCost}`],
         ['Время до запуска (дней)', daysClassic, `=${daysClassic}`],
         [''],
