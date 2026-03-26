@@ -32,6 +32,7 @@
         -webkit-tap-highlight-color: transparent;
         padding-left: env(safe-area-inset-left);
         padding-right: env(safe-area-inset-right);
+        background: #FFFFFF;
     }
     
     .font-mono { font-family: 'JetBrains Mono', monospace; }
@@ -129,23 +130,50 @@
     }
     .chart-tabs-container::-webkit-scrollbar { display: none; }
 
-
-
-
-
-
-
-
-
-
-
-
+    /* ===== ИСПРАВЛЕНИЕ ДЛЯ TELEGRAM WEBVIEW ===== */
+    header {
+        background: #FFFFFF !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border-bottom: 1px solid #E5E5E5;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+    }
+    
+    /* Убираем эффект размытия у любых элементов */
+    .backdrop-blur-sm, .bg-white\/95 {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: #FFFFFF !important;
+    }
+    
+    /* Псевдоэлемент для перекрытия области "челки" */
+    @supports (padding-top: env(safe-area-inset-top)) {
+        header {
+            padding-top: max(0.75rem, env(safe-area-inset-top));
+            background: #FFFFFF;
+            position: relative;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: env(safe-area-inset-top);
+            background: #FFFFFF;
+            z-index: -1;
+            pointer-events: none;
+        }
+    }
 </style>
 </head>
 <body class="min-h-screen">
 
-<!-- Header -->
-<header class="border-b border-thin sticky top-0 bg-white/95 backdrop-blur-sm z-50" style="padding-top: max(0.75rem, env(safe-area-inset-top));">
+<!-- Header - исправленный для Telegram -->
+<header>
     <div class="max-w-5xl mx-auto px-4 md:px-6 py-3 md:py-4 flex justify-between items-center">
         <a href="https://www.emiia.ru" class="flex items-center gap-2">
             <div class="w-10 h-10 md:w-8 md:h-8 flex items-center justify-center">
@@ -167,11 +195,8 @@
             <span class="text-base text-gray-800 font-mono md:text-sm tracking-tight">EMIIA.AI SIP</span>
         </a>
         
-
-
-<div class="text-[10px] sm:text-xs text-gray-400 font-mono whitespace-nowrap">EFFICIENCY CALCULATOR</div>
-
-
+        <div class="text-[10px] sm:text-xs text-gray-400 font-mono whitespace-nowrap">EFFICIENCY CALCULATOR</div>
+    </div>
 </header>
 
 <!-- Main -->
@@ -349,9 +374,6 @@
     </div>
 </footer>
 
-
-
-
 <!-- Modal -->
 <div class="modal" id="exportModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.95); z-index: 2000; align-items: center; justify-content: center; padding: 1rem;">
     <div class="bg-white p-8 max-w-md w-full border shadow-lg rounded-2xl" style="border-color: #3c78d8; border-width: 1px;">
@@ -360,7 +382,6 @@
         <button class="w-full text-white py-3 text-sm font-bold hover:opacity-90 transition font-mono rounded-lg" id="closeModal" style="background-color: #3c78d8;">Закрыть</button>
     </div>
 </div>
-
 
 <script>
     const $ = id => document.getElementById(id);
@@ -569,7 +590,6 @@
         }
     }
 
-    // ========== ОБНОВЛЕННАЯ ФУНКЦИЯ ЭКСПОРТА (ИЗ ОБРАЗЦА) ==========
     function exportToCSV() {
         const dataTb = +$('dataTb').value;
         const infM = +$('infM').value;
@@ -577,7 +597,6 @@
         const opsCost = +$('opsCost').value;
         const daysClassic = +$('daysClassic').value;
         
-        // Рассчитываем значения для CSV (дублируем логику calc для надежности файла)
         const hostCl = 0.67, hostEm = 0.11;
         const infCl = 0.27, infEm = 0.05;
         const storCl = 0.05, storEm = 0.03;
@@ -594,7 +613,6 @@
         const roiC = tcoC > 0 ? ((revenue - tcoC * 12) / (tcoC * 12)) * 100 : 0;
         const roiE = tcoE > 0 ? ((revenue - tcoE * 12) / (tcoE * 12)) * 100 : 0;
         
-        // Формируем массив данных
         const csvData = [
             ['Параметр', 'Значение', 'Формула для Google Sheets'],
             ['Объём данных (ТБ)', dataTb, `=${dataTb}`],
@@ -618,12 +636,10 @@
             ['- EMIIA снижает OPEX на 67% за счет автоматизации']
         ];
         
-        // Преобразуем массив в строку CSV
         const csvContent = csvData.map(row => 
             row.map(cell => `"${cell}"`).join(',')
         ).join('\n');
         
-        // Создаем Blob и ссылку для скачивания
         const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
         const link = document.createElement('a');
         const url = URL.createObjectURL(blob);
@@ -636,7 +652,6 @@
         link.click();
         document.body.removeChild(link);
         
-        // Показываем модальное окно
         $('exportModal').style.display = 'flex';
     }
 
@@ -656,9 +671,13 @@
             });
         });
         
-        // Слушатели для экспорта и модального окна
         $('exportBtn').addEventListener('click', exportToCSV);
         $('closeModal').addEventListener('click', () => $('exportModal').style.display = 'none');
+        
+        // Закрытие модального окна по клику на overlay
+        $('exportModal').addEventListener('click', (e) => {
+            if (e.target === $('exportModal')) $('exportModal').style.display = 'none';
+        });
         
         calc();
     });
