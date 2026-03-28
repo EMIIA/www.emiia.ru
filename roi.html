@@ -124,7 +124,6 @@
     }
     .chart-tabs-container::-webkit-scrollbar { display: none; }
 
-    /* === БЕЛАЯ ПОЛОСА НАД HEADER (закрывает safe-area) === */
     .safe-area-spacer {
         position: fixed;
         top: 0;
@@ -137,7 +136,6 @@
         pointer-events: none;
     }
 
-    /* === ФИКСИРОВАННАЯ ШАПКА === */
     header {
         position: fixed;
         top: env(safe-area-inset-top);
@@ -157,7 +155,6 @@
         background: #FFFFFF;
     }
 
-    /* === КОНТЕНТ НИЖЕ HEADER + SAFE-AREA === */
     main {
         margin-top: calc(env(safe-area-inset-top) + 64px);
         background: #FFFFFF;
@@ -166,18 +163,12 @@
     footer {
         background: #FFFFFF;
     }
-
-
-
-
 </style>
 </head>
 <body>
 
-<!-- БЕЛЫЙ СПЕЙСЕР ДЛЯ SAFE-AREA (закрывает прозрачную полосу в iOS) -->
 <div class="safe-area-spacer"></div>
 
-<!-- Header -->
 <header>
     <div class="max-w-5xl mx-auto px-4 md:px-6 flex justify-between items-center w-full">
         <a href="https://www.emiia.ru" class="flex items-center gap-2">
@@ -200,7 +191,6 @@
     </div>
 </header>
 
-<!-- Main -->
 <main class="max-w-5xl mx-auto px-4 md:px-6 py-8 md:py-12">
     
     <div class="mb-8 md:mb-12 fade-up">
@@ -321,7 +311,7 @@
 </footer>
 
 <div class="modal" id="exportModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.95); z-index: 2000; align-items: center; justify-content: center; padding: 1rem;">
-    <div class="bg-white p-8 max-w-md w-full border shadow-lg rounded-2xl" style="border-color: #3c78d8; border-width: 1px;">
+    <div class="bg-white p-8 max-w-md w-full border shadow-lg rounded-2xl" style="border-color: #E5E4E2; border-width: 1px;">
         <h3 class="text-xl mb-4 font-mono font-bold">Экспорт завершен</h3>
         <p class="text-sm text-gray-600 mb-6 font-mono">CSV файл с формулами для электронных таблиц успешно сгенерирован.</p>
         <button class="w-full text-white py-3 text-sm font-bold hover:opacity-90 transition font-mono rounded-lg" id="closeModal" style="background-color: #3c78d8;">Закрыть</button>
@@ -389,51 +379,188 @@ function updateChart() {
     Chart.defaults.font.family = "'JetBrains Mono', monospace";
     Chart.defaults.font.size = 11;
 
+    const commonTooltipOptions = { 
+        backgroundColor: '#3c78d8', 
+        titleColor: '#fff', 
+        bodyColor: '#fff', 
+        borderColor: '#f8f9fa', 
+        borderWidth: 1, 
+        padding: 12,
+        cornerRadius: 8, 
+        titleFont: { family: "'JetBrains Mono', monospace", size: 12 }, 
+        bodyFont: { family: "'JetBrains Mono', monospace", size: 12 }, 
+        displayColors: false,
+        titleAlign: 'left',
+        bodyAlign: 'left',
+        caretPadding: 15
+    };
 
-const commonTooltipOptions = { 
-  backgroundColor: '#3c78d8', 
-  titleColor: '#fff', 
-  bodyColor: '#fff', 
-  borderColor: '#f8f9fa', 
-  borderWidth: 1, 
-  padding: 12,
-  cornerRadius: 8, 
-  titleFont: { family: "'JetBrains Mono', monospace", size: 12 }, 
-  bodyFont: { family: "'JetBrains Mono', monospace", size: 12 }, 
-  displayColors: false,
-  titleAlign: 'left',
-  bodyAlign: 'left',
-  caretPadding: 15,
-  
-  callbacks: {
-    label: function(context) {
-      let label = context.raw || context.parsed.y;
-      return '  ' + label + '  ';
-    },
-    title: function(tooltipItems) {
-      return '  ' + tooltipItems[0].label + '  ';
-    }
-  }
-};
-
-
-
-    const commonOptions = { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: commonTooltipOptions }, scales: { y: { beginAtZero: true, grid: { color: '#F0F0F0' }, ticks: { color: '#AAA' } }, x: { grid: { display: false }, ticks: { color: '#111' } } } };
-
-
+    const commonOptions = { 
+        responsive: true, 
+        maintainAspectRatio: false, 
+        plugins: { 
+            legend: { display: false }, 
+            tooltip: commonTooltipOptions 
+        }, 
+        scales: { 
+            y: { beginAtZero: true, grid: { color: '#F0F0F0' }, ticks: { color: '#AAA' } }, 
+            x: { grid: { display: false }, ticks: { color: '#111' } } 
+        } 
+    };
 
     const barRadius = 9;
-    if (currentChartType === 'tco') chart = new Chart(ctx, { type: 'bar', data: { labels: ['Classic', 'EMIIA.AI'], datasets: [{ data: [chartData.tco.classic, chartData.tco.emiia], backgroundColor: [BRAND_COLORS.gray, BRAND_COLORS.darkBlue], borderRadius: barRadius }] }, options: { ...commonOptions, plugins: { ...commonOptions.plugins, tooltip: { ...commonOptions.plugins.tooltip, callbacks: { label: (c) => '$' + formatNumber(c.raw) } } } } });
 
-
-
-    else if (currentChartType === 'time') chart = new Chart(ctx, { type: 'bar', data: { labels: ['Classic', 'EMIIA.AI'], datasets: [{ data: [chartData.time.classic, chartData.time.emiia], backgroundColor: [BRAND_COLORS.gray, BRAND_COLORS.darkBlue], borderRadius: barRadius }] }, options: { ...commonOptions, plugins: { ...commonOptions.plugins, tooltip: { ...commonOptions.plugins.tooltip, callbacks: { label: (c) => c.raw + ' дней' } } } } });
-
-
-    else if (currentChartType === 'roi') chart = new Chart(ctx, { type: 'doughnut', data: { labels: ['ROI Classic', 'ROI EMIIA.AI'], datasets: [{ data: [chartData.roi.classic, chartData.roi.emiia], backgroundColor: [BRAND_COLORS.gray, BRAND_COLORS.darkBlue] }] }, options: { responsive: true, maintainAspectRatio: false, cutout: '70%', plugins: { legend: { display: true, position: 'bottom', labels: { font: { family: "'JetBrains Mono', monospace" } } }, tooltip: commonTooltipOptions } } });
-    else if (currentChartType === 'savings') chart = new Chart(ctx, { type: 'bar', data: { labels: ['TCO', 'T2M', 'CAPEX', 'OPEX'], datasets: [{ data: [chartData.savings.tco, chartData.savings.time, chartData.savings.capexPercent, chartData.savings.opexPercent], backgroundColor: BRAND_COLORS.mediumBlue, borderRadius: barRadius }] }, options: commonOptions });
-    else if (currentChartType === 'capex') chart = new Chart(ctx, { type: 'bar', data: { labels: ['Classic CAPEX', 'EMIIA.AI CAPEX'], datasets: [{ data: [chartData.capex.capexClassic, chartData.capex.capexEmiia], backgroundColor: [BRAND_COLORS.lightBlue, BRAND_COLORS.darkBlue], borderRadius: barRadius }] }, options: commonOptions });
-    else if (currentChartType === 'opex') chart = new Chart(ctx, { type: 'bar', data: { labels: ['Classic OPEX', 'EMIIA.AI OPEX'], datasets: [{ data: [chartData.opex.opexClassic, chartData.opex.opexEmiia], backgroundColor: [BRAND_COLORS.lightBlue, BRAND_COLORS.darkBlue], borderRadius: barRadius }] }, options: commonOptions });
+    if (currentChartType === 'tco') {
+        chart = new Chart(ctx, { 
+            type: 'bar', 
+            data: { 
+                labels: ['Classic', 'EMIIA.AI'], 
+                datasets: [{ 
+                    data: [chartData.tco.classic, chartData.tco.emiia], 
+                    backgroundColor: [BRAND_COLORS.gray, BRAND_COLORS.darkBlue], 
+                    borderRadius: barRadius 
+                }] 
+            }, 
+            options: { 
+                ...commonOptions, 
+                plugins: { 
+                    ...commonOptions.plugins, 
+                    tooltip: { 
+                        ...commonOptions.plugins.tooltip, 
+                        callbacks: { 
+                            label: (c) => '$' + formatNumber(c.raw) + ' /мес'
+                        } 
+                    } 
+                } 
+            } 
+        });
+    }
+    else if (currentChartType === 'time') {
+        chart = new Chart(ctx, { 
+            type: 'bar', 
+            data: { 
+                labels: ['Classic', 'EMIIA.AI'], 
+                datasets: [{ 
+                    data: [chartData.time.classic, chartData.time.emiia], 
+                    backgroundColor: [BRAND_COLORS.gray, BRAND_COLORS.darkBlue], 
+                    borderRadius: barRadius 
+                }] 
+            }, 
+            options: { 
+                ...commonOptions, 
+                plugins: { 
+                    ...commonOptions.plugins, 
+                    tooltip: { 
+                        ...commonOptions.plugins.tooltip, 
+                        callbacks: { 
+                            label: (c) => c.raw + ' дней'
+                        } 
+                    } 
+                } 
+            } 
+        });
+    }
+    else if (currentChartType === 'roi') {
+        chart = new Chart(ctx, { 
+            type: 'doughnut', 
+            data: { 
+                labels: ['ROI Classic', 'ROI EMIIA.AI'], 
+                datasets: [{ 
+                    data: [chartData.roi.classic, chartData.roi.emiia], 
+                    backgroundColor: [BRAND_COLORS.gray, BRAND_COLORS.darkBlue] 
+                }] 
+            }, 
+            options: { 
+                responsive: true, 
+                maintainAspectRatio: false, 
+                cutout: '70%', 
+                plugins: { 
+                    legend: { display: true, position: 'bottom', labels: { font: { family: "'JetBrains Mono', monospace" } } }, 
+                    tooltip: {
+                        ...commonTooltipOptions,
+                        callbacks: {
+                            label: (c) => Math.round(c.raw) + '% годовых'
+                        }
+                    }
+                } 
+            } 
+        });
+    }
+    else if (currentChartType === 'savings') {
+        chart = new Chart(ctx, { 
+            type: 'bar', 
+            data: { 
+                labels: ['TCO', 'T2M', 'CAPEX', 'OPEX'], 
+                datasets: [{ 
+                    data: [chartData.savings.tco, chartData.savings.time, chartData.savings.capexPercent, chartData.savings.opexPercent], 
+                    backgroundColor: BRAND_COLORS.mediumBlue, 
+                    borderRadius: barRadius 
+                }] 
+            }, 
+            options: {
+                ...commonOptions,
+                plugins: {
+                    ...commonOptions.plugins,
+                    tooltip: {
+                        ...commonOptions.plugins.tooltip,
+                        callbacks: {
+                            label: (c) => Math.round(c.raw) + '% экономии'
+                        }
+                    }
+                }
+            }
+        });
+    }
+    else if (currentChartType === 'capex') {
+        chart = new Chart(ctx, { 
+            type: 'bar', 
+            data: { 
+                labels: ['Classic CAPEX', 'EMIIA.AI CAPEX'], 
+                datasets: [{ 
+                    data: [chartData.capex.capexClassic, chartData.capex.capexEmiia], 
+                    backgroundColor: [BRAND_COLORS.lightBlue, BRAND_COLORS.darkBlue], 
+                    borderRadius: barRadius 
+                }] 
+            }, 
+            options: {
+                ...commonOptions,
+                plugins: {
+                    ...commonOptions.plugins,
+                    tooltip: {
+                        ...commonOptions.plugins.tooltip,
+                        callbacks: {
+                            label: (c) => '$' + formatNumber(c.raw) + ' /мес'
+                        }
+                    }
+                }
+            }
+        });
+    }
+    else if (currentChartType === 'opex') {
+        chart = new Chart(ctx, { 
+            type: 'bar', 
+            data: { 
+                labels: ['Classic OPEX', 'EMIIA.AI OPEX'], 
+                datasets: [{ 
+                    data: [chartData.opex.opexClassic, chartData.opex.opexEmiia], 
+                    backgroundColor: [BRAND_COLORS.lightBlue, BRAND_COLORS.darkBlue], 
+                    borderRadius: barRadius 
+                }] 
+            }, 
+            options: {
+                ...commonOptions,
+                plugins: {
+                    ...commonOptions.plugins,
+                    tooltip: {
+                        ...commonOptions.plugins.tooltip,
+                        callbacks: {
+                            label: (c) => '$' + formatNumber(c.raw) + ' /мес'
+                        }
+                    }
+                }
+            }
+        });
+    }
 }
 
 function exportToCSV() {
