@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>EMIIA.AI SIP | Калькулятор Compute Token</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #F5F7FA;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #1D1D1F;
+            padding: 24px 16px;
+        }
+
+        .calc-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            border-radius: 28px;
+            padding: 28px 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.03);
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+            margin-bottom: 6px;
+            color: #1A2C3E;
+        }
+
+        .sub {
+            color: #6C8EA0;
+            font-size: 0.8rem;
+            border-left: 3px solid #007AFF;
+            padding-left: 12px;
+            margin-bottom: 28px;
+        }
+
+        .inputs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 28px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .input-group label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #5F7F9A;
+            letter-spacing: 0.3px;
+        }
+
+        .input-group input[type="range"] {
+            width: 100%;
+            height: 5px;
+            background: #E2E8F0;
+            border-radius: 10px;
+            appearance: none;
+            outline: none;
+        }
+
+        .input-group input[type="range"]::-webkit-slider-thumb {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #007AFF;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .value-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #2C4C6E;
+            font-weight: 500;
+        }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            background: #F8FAFE;
+            border-radius: 20px;
+            padding: 18px 20px;
+            margin-bottom: 32px;
+            border: 1px solid #E9EDF2;
+        }
+
+        .metric-item {
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #1A2C3E;
+            line-height: 1.2;
+        }
+
+        .metric-unit {
+            font-size: 0.7rem;
+            font-weight: 400;
+            color: #6C8EA0;
+            margin-left: 2px;
+        }
+
+        .metric-label {
+            font-size: 0.65rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            color: #6C8EA0;
+            letter-spacing: 0.3px;
+            margin-top: 6px;
+        }
+
+        .columns {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 24px;
+        }
+
+        .card {
+            background: #FFFFFF;
+            border: 1px solid #E9EDF2;
+            border-radius: 20px;
+            padding: 18px;
+            transition: all 0.1s ease;
+        }
+
+        .card.platform { border-top: 3px solid #5856D6; }
+        .card.owner { border-top: 3px solid #34C759; }
+        .card.integrator { border-top: 3px solid #FF9500; }
+        .card.prices { border-top: 3px solid #007AFF; }
+
+        .card-header {
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 14px;
+            color: #3A5A7A;
+        }
+
+        .card-balance {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #1A2C3E;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            padding: 6px 0;
+            border-bottom: 1px solid #F0F3F8;
+        }
+
+        .detail-label {
+            color: #6C8EA0;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            color: #1A2C3E;
+        }
+
+        .slider-usage {
+            margin-top: 12px;
+            padding: 6px 0;
+        }
+
+        .slider-usage label {
+            font-size: 0.6rem;
+            font-weight: 500;
+            color: #5F7F9A;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .slider-usage input {
+            width: 100%;
+            height: 4px;
+            accent-color: #007AFF;
+        }
+
+        .badge {
+            background: #F0F4F9;
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.6rem;
+            font-weight: 500;
+            margin-top: 12px;
+            color: #3A5A7A;
+        }
+
+        .price-ref-inner {
+            background: #F8FAFE;
+            border-radius: 16px;
+            padding: 12px;
+            margin-top: 4px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            padding: 6px 0;
+            border-bottom: 1px solid #E9EDF2;
+        }
+
+        .price-row:last-child {
+            border-bottom: none;
+        }
+
+        .price-value {
+            font-weight: 700;
+            color: #007AFF;
+        }
+
+        .update-btn {
+            background: #007AFF;
+            color: white;
+            border: none;
+            border-radius: 24px;
+            padding: 6px 12px;
+            font-size: 0.65rem;
+            font-weight: 500;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 12px;
+            transition: 0.1s;
+        }
+
+        .update-btn:hover {
+            background: #0066D6;
+        }
+
+        .formula-box {
+            background: #F0F4F9;
+            border-radius: 12px;
+            padding: 12px;
+            margin-top: 12px;
+            font-size: 0.65rem;
+            color: #5F7F9A;
+            line-height: 1.4;
+        }
+
+        .formula-box strong {
+            color: #1A2C3E;
+        }
+
+        .footer-note {
+            font-size: 0.6rem;
+            color: #8BA0BC;
+            text-align: center;
+            margin-top: 24px;
+            padding-top: 14px;
+            border-top: 1px solid #E9EDF2;
+        }
+
+        .warning {
+            background: #FFF3CD;
+            border: 1px solid #FFE69C;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 0.7rem;
+            color: #856404;
+            margin-top: 8px;
+            display: none;
+        }
+
+        .warning.show {
+            display: block;
+        }
+
+        @media (max-width: 1000px) {
+            .columns { grid-template-columns: repeat(2, 1fr); }
+            .inputs-grid { grid-template-columns: 1fr; }
+            .calc-container { padding: 20px; }
+            .metrics { gap: 12px; padding: 14px; }
+            .metric-value { font-size: 1.2rem; }
+        }
+
+        @media (max-width: 700px) {
+            .columns { grid-template-columns: 1fr; }
+            .metrics { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 480px) {
+            .metrics { grid-template-columns: 1fr; gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="calc-container">
+    <h1>EMIIA.AI SIP</h1>
+    <div class="sub">Распределение вычислительной мощности · Compute Token · Реестровый баланс</div>
+
+    <div class="inputs-grid">
+        <div class="input-group">
+            <label>Площадь, м² (50–5000)</label>
+            <input type="range" id="sqm" min="50" max="5000" step="1" value="1000">
+            <div class="value-row">
+                <span>значение</span>
+                <span id="sqmVal">1000</span>
+            </div>
+        </div>
+        <div class="input-group">
+            <label>Высота, м (3–6)</label>
+            <input type="range" id="height" min="3" max="6" step="0.1" value="3">
+            <div class="value-row">
+                <span>значение</span>
+                <span id="heightVal">3.0</span>
+            </div>
+        </div>
+        <div class="input-group">
+            <label>Мощность платформы, %</label>
+            <input type="range" id="load" min="30" max="100" step="1" value="30">
+            <div class="value-row">
+                <span>мин. от перерасхода партнёров</span>
+                <span id="loadVal">30</span>
+            </div>
+            <div class="warning" id="loadWarning">Минимум увеличен из-за перерасхода партнёров</div>
+        </div>
+    </div>
+
+    <!-- 4 блока метрик -->
+    <div class="metrics">
+        <div class="metric-item">
+            <div class="metric-value"><span id="resVol">3000</span><span class="metric-unit"> м³</span></div>
+            <div class="metric-label">Объём</div>
+        </div>
+        <div class="metric-item">
+            <div class="metric-value"><span id="resTf">3000</span><span class="metric-unit"> TFLOPS</span></div>
+            <div class="metric-label">Мощность объекта</div>
+        </div>
+        <div class="metric-item">
+            <div class="metric-value"><span id="resRob">10</span><span class="metric-unit"> шт</span></div>
+            <div class="metric-label">Роботов для площади</div>
+        </div>
+        <div class="metric-item">
+            <div class="metric-value"><span id="maxFleet">0</span><span class="metric-unit"> шт</span></div>
+            <div class="metric-label">Макс. флот платформы</div>
+        </div>
+    </div>
+
+    <div class="columns">
+        <!-- Платформа -->
+        <div class="card platform">
+            <div class="card-header">Платформа</div>
+            <div class="card-balance" id="platUSD">$ 0</div>
+            <div class="detail-row">
+                <span class="detail-label">Compute Token (70%)</span>
+                <span class="detail-value" id="platTokens">0 токенов</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Генерирует мощность</span>
+                <span class="detail-value" id="platGenerated">30%</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Доход платформы</span>
+                <span class="detail-value" id="platIncome">$ 0</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Реестровый баланс (долг партнёрам)</span>
+                <span class="detail-value" id="platRegistry">$ 0</span>
+            </div>
+            <div class="badge">Доход = токены сверх 30% × цена</div>
+        </div>
+
+        <!-- Владелец -->
+        <div class="card owner">
+            <div class="card-header">Владелец недвижимости</div>
+            <div class="card-balance" id="ownerUSD">$ 0</div>
+            <div class="detail-row">
+                <span class="detail-label">Остаток токенов</span>
+                <span class="detail-value" id="ownerTokens">0 токенов</span>
+            </div>
+            <div class="slider-usage">
+                <label>Использовано: <span id="ownerUsedPercent">20</span>% (база 20%, макс 110%)</label>
+                <input type="range" id="ownerUse" min="0" max="110" step="1" value="20">
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Перерасход (в доход платформе)</span>
+                <span class="detail-value" id="ownerExtraValue">$ 0</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Реестровый баланс (остаток)</span>
+                <span class="detail-value" id="ownerRegistry">$ 0</span>
+            </div>
+            <div class="badge">Free Tier · безусловно 20%</div>
+        </div>
+
+        <!-- Интегратор -->
+        <div class="card integrator">
+            <div class="card-header">Интегратор</div>
+            <div class="card-balance" id="intUSD">$ 0</div>
+            <div class="detail-row">
+                <span class="detail-label">Остаток токенов</span>
+                <span class="detail-value" id="intTokens">0 токенов</span>
+            </div>
+            <div class="slider-usage">
+                <label>Использовано: <span id="intUsedPercent">10</span>% (база 10%, макс 110%)</label>
+                <input type="range" id="intUse" min="0" max="110" step="1" value="10">
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Перерасход (в доход платформе)</span>
+                <span class="detail-value" id="intExtraValue">$ 0</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Реестровый баланс (остаток)</span>
+                <span class="detail-value" id="intRegistry">$ 0</span>
+            </div>
+            <div class="badge">За обслуживание · безусловно 10%</div>
+        </div>
+
+        <!-- Справочник цен -->
+        <div class="card prices">
+            <div class="card-header">GPU Price Reference</div>
+            <div class="price-ref-inner">
+                <div class="price-row">
+                    <span>FP16/BF16</span>
+                    <span class="price-value" id="priceFP16">$2.50</span>
+                </div>
+                <div class="price-row">
+                    <span>FP8</span>
+                    <span class="price-value" id="priceFP8">$1.80</span>
+                </div>
+                <div class="price-row">
+                    <span>FP4</span>
+                    <span class="price-value" id="priceFP4">$1.20</span>
+                </div>
+                <div class="price-row">
+                    <span>Средняя цена / час</span>
+                    <span class="price-value" id="priceAvg">$1.83</span>
+                </div>
+                <div class="price-row">
+                    <span>Цена токена (мес)</span>
+                    <span class="price-value" id="tokenMonthlyPrice">$1317.60</span>
+                </div>
+                <button class="update-btn" onclick="updatePrices()">Редактировать цены</button>
+            </div>
+            <div class="badge" style="margin-top: 14px;">1 Compute Token = 1 TFLOPS·мес</div>
+            <div class="formula-box" style="margin-top: 8px;">
+                <strong>Логика оригинала:</strong><br>
+                Объём = м² × высота<br>
+                TFLOPS = Объём × 1<br>
+                1 Token = 1 TFLOPS·мес<br>
+                Цена токена = Средняя цена × 720 часов<br>
+                <br>
+                <strong>Распределение:</strong><br>
+                Владелец: 20% базы, макс 110% (перерасход 10%)<br>
+                Интегратор: 10% базы, макс 110% (перерасход 10%)<br>
+                Платформа: 70% токенов + перерасход в доход
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        Владелец получает 20% мощности (может использовать до 110% = перерасход 10%), 
+        интегратор — 10% (может использовать до 110% = перерасход 10%). 
+        При перерасходе мощность платформы автоматически растёт, перерасход идёт в доход платформы.
+        Реестровый баланс платформы = сумма неиспользованных токенов партнёров.
+    </div>
+</div>
+
+<script>
+    // === ЦЕНЫ (как в оригинале, но можно редактировать) ===
+    let priceFP16 = 2.50;
+    let priceFP8 = 1.80;
+    let priceFP4 = 1.20;
+    
+    // === СОСТОЯНИЕ (как в оригинале) ===
+    let sqm = 1000;
+    let h = 3;
+    let ownerUsePercent = 20;  // % от базы 20%
+    let intUsePercent = 10;    // % от базы 10%
+    let platformPercent = 30;  // текущая мощность платформы %
+
+    // === ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ (из оригинала) ===
+
+    function getAvgPrice() {
+        return (priceFP16 + priceFP8 + priceFP4) / 3;
+    }
+
+    function getMonthlyPrice() {
+        return getAvgPrice() * 720;
+    }
+
+    function formatNumber(n) {
+        return n.toLocaleString('en-US', { maximumFractionDigits: 0 });
+    }
+
+    // === КЛЮЧЕВАЯ ЛОГИКА: минимальный процент платформы (из оригинала) ===
+
+    function getRequiredMinPercent() {
+        const volume = sqm * h;
+        const totalTflops = volume;
+        
+        // Базовые квоты
+        const ownerBase = totalTflops * 0.20;
+        const intBase = totalTflops * 0.10;
+        
+        // Фактическое использование (в TFLOPS)
+        const ownerUsed = ownerBase * (ownerUsePercent / 100);
+        const intUsed = intBase * (intUsePercent / 100);
+        
+        // Перерасход (только положительная часть)
+        const ownerExtra = Math.max(0, ownerUsed - ownerBase);
+        const intExtra = Math.max(0, intUsed - intBase);
+        const totalExtra = ownerExtra + intExtra;
+        
+        // Платформа должна покрыть базовые 30% + перерасход партнёров
+        const extraPercent = (totalExtra / totalTflops) * 100;
+        let minP = 30 + extraPercent;
+        if (minP > 100) minP = 100;
+        
+        return minP;
+    }
+
+    // === ОБНОВЛЕНИЕ ИЗ ГЕОМЕТРИИ (из оригинала) ===
+
+    function updateFromGeometry() {
+        sqm = parseInt(document.getElementById('sqm').value);
+        h = parseFloat(document.getElementById('height').value);
+        
+        if (isNaN(sqm)) sqm = 1000;
+        if (isNaN(h)) h = 3;
+        
+        sqm = Math.min(5000, Math.max(50, sqm));
+        h = Math.min(6, Math.max(3, h));
+        
+        document.getElementById('sqm').value = sqm;
+        document.getElementById('height').value = h;
+        
+        let minReq = getRequiredMinPercent();
+        if (platformPercent < minReq) {
+            platformPercent = minReq;
+            document.getElementById('load').value = platformPercent;
+        }
+        
+        updateAll();
+    }
+
+    // === ОБНОВЛЕНИЕ ПЛАТФОРМЫ (из оригинала) ===
+
+    function updateFromPlatform() {
+        let newP = parseInt(document.getElementById('load').value);
+        if (isNaN(newP)) newP = 30;
+        
+        let minReq = getRequiredMinPercent();
+        if (newP < minReq) newP = minReq;
+        if (newP > 100) newP = 100;
+        
+        platformPercent = newP;
+        document.getElementById('load').value = platformPercent;
+        
+        updateAll();
+    }
+
+    // === ОБНОВЛЕНИЕ ИСПОЛЬЗОВАНИЯ (из оригинала, с лимитом 110%) ===
+
+    function updateFromUsage() {
+        ownerUsePercent = parseInt(document.getElementById('ownerUse').value);
+        intUsePercent = parseInt(document.getElementById('intUse').value);
+        
+        if (isNaN(ownerUsePercent)) ownerUsePercent = 20;
+        if (isNaN(intUsePercent)) intUsePercent = 10;
+        
+        // Лимит 110% как в оригинале
+        ownerUsePercent = Math.min(110, Math.max(0, ownerUsePercent));
+        intUsePercent = Math.min(110, Math.max(0, intUsePercent));
+        
+        document.getElementById('ownerUse').value = ownerUsePercent;
+        document.getElementById('intUse').value = intUsePercent;
+        
+        let minReq = getRequiredMinPercent();
+        if (platformPercent < minReq) {
+            platformPercent = minReq;
+            document.getElementById('load').value = platformPercent;
+        }
+        
+        updateAll();
+    }
+
+    // === РЕДАКТИРОВАНИЕ ЦЕН ===
+
+    function updatePrices() {
+        let newFP16 = prompt("Цена FP16/BF16 ($/час):", priceFP16);
+        let newFP8 = prompt("Цена FP8 ($/час):", priceFP8);
+        let newFP4 = prompt("Цена FP4 ($/час):", priceFP4);
+        
+        if (newFP16 !== null && !isNaN(parseFloat(newFP16))) priceFP16 = parseFloat(newFP16);
+        if (newFP8 !== null && !isNaN(parseFloat(newFP8))) priceFP8 = parseFloat(newFP8);
+        if (newFP4 !== null && !isNaN(parseFloat(newFP4))) priceFP4 = parseFloat(newFP4);
+        
+        document.getElementById('priceFP16').innerHTML = '$' + priceFP16.toFixed(2);
+        document.getElementById('priceFP8').innerHTML = '$' + priceFP8.toFixed(2);
+        document.getElementById('priceFP4').innerHTML = '$' + priceFP4.toFixed(2);
+        document.getElementById('priceAvg').innerHTML = '$' + getAvgPrice().toFixed(2);
+        document.getElementById('tokenMonthlyPrice').innerHTML = '$' + getMonthlyPrice().toFixed(2);
+        
+        updateAll();
+    }
+
+    // === ГЛАВНАЯ ФУНКЦИЯ ОБНОВЛЕНИЯ (логика оригинала, сохранена точно) ===
+
+    function updateAll() {
+        const volume = sqm * h;
+        const totalTflops = volume;
+        const robotsArea = Math.floor(sqm / 100);
+        const maxFleet = Math.floor((totalTflops * (platformPercent / 100)) / 50);
+        
+        // Базовые квоты (в TFLOPS·мес)
+        const ownerBase = totalTflops * 0.20;
+        const intBase = totalTflops * 0.10;
+        const platformBase = totalTflops * 0.70;
+        
+        const monthlyPrice = getMonthlyPrice();
+
+        // Фактическое использование (в TFLOPS·мес)
+        const ownerUsed = ownerBase * (ownerUsePercent / 100);
+        const intUsed = intBase * (intUsePercent / 100);
+        
+        // Перерасход (если использовано > базы)
+        const ownerExtra = Math.max(0, ownerUsed - ownerBase);
+        const intExtra = Math.max(0, intUsed - intBase);
+        
+        // Остатки (неиспользованная база)
+        const ownerRemaining = Math.max(0, ownerBase - ownerUsed);
+        const intRemaining = Math.max(0, intBase - intUsed);
+
+        // Балансы в $
+        const ownerBalance = ownerRemaining * monthlyPrice;
+        const intBalance = intRemaining * monthlyPrice;
+
+        // Реестровый баланс платформы = обязательства перед партнёрами
+        const platformObligation = ownerBalance + intBalance;
+        
+        // Доход платформы = перерасход × цена
+        // (платформа продаёт партнёрам доп. мощность сверх их базы)
+        const platformRevenue = (ownerExtra + intExtra) * monthlyPrice;
+
+        // === ОБНОВЛЕНИЕ UI ===
+        
+        // Метрики
+        document.getElementById('resVol').innerHTML = formatNumber(volume);
+        document.getElementById('resTf').innerHTML = formatNumber(totalTflops);
+        document.getElementById('resRob').innerHTML = formatNumber(robotsArea);
+        document.getElementById('maxFleet').innerHTML = formatNumber(maxFleet);
+        document.getElementById('sqmVal').innerHTML = formatNumber(sqm);
+        document.getElementById('heightVal').innerHTML = h.toFixed(1);
+        document.getElementById('loadVal').innerHTML = platformPercent.toFixed(1);
+        
+        // Предупреждение
+        const minReq = getRequiredMinPercent();
+        const warning = document.getElementById('loadWarning');
+        if (minReq > 30) {
+            warning.classList.add('show');
+            warning.textContent = `Минимум ${minReq.toFixed(1)}% из-за перерасхода партнёров`;
+        } else {
+            warning.classList.remove('show');
+        }
+
+        // Платформа
+        document.getElementById('platUSD').innerHTML = '$ ' + formatNumber(Math.floor(platformRevenue));
+        document.getElementById('platTokens').innerHTML = formatNumber(Math.floor(platformBase)) + ' токенов';
+        document.getElementById('platGenerated').innerHTML = platformPercent.toFixed(1) + '%';
+        document.getElementById('platIncome').innerHTML = '$ ' + formatNumber(Math.floor(platformRevenue));
+        document.getElementById('platRegistry').innerHTML = '$ ' + formatNumber(Math.floor(platformObligation));
+
+        // Владелец
+        document.getElementById('ownerUSD').innerHTML = '$ ' + formatNumber(Math.floor(ownerBalance));
+        document.getElementById('ownerTokens').innerHTML = formatNumber(Math.floor(ownerRemaining)) + ' токенов';
+        document.getElementById('ownerUsedPercent').innerHTML = ownerUsePercent;
+        document.getElementById('ownerExtraValue').innerHTML = '$ ' + formatNumber(Math.floor(ownerExtra * monthlyPrice));
+        document.getElementById('ownerRegistry').innerHTML = '$ ' + formatNumber(Math.floor(ownerBalance));
+
+        // Интегратор
+        document.getElementById('intUSD').innerHTML = '$ ' + formatNumber(Math.floor(intBalance));
+        document.getElementById('intTokens').innerHTML = formatNumber(Math.floor(intRemaining)) + ' токенов';
+        document.getElementById('intUsedPercent').innerHTML = intUsePercent;
+        document.getElementById('intExtraValue').innerHTML = '$ ' + formatNumber(Math.floor(intExtra * monthlyPrice));
+        document.getElementById('intRegistry').innerHTML = '$ ' + formatNumber(Math.floor(intBalance));
+    }
+
+    // === ИНИЦИАЛИЗАЦИЯ ===
+
+    document.getElementById('sqm').addEventListener('input', updateFromGeometry);
+    document.getElementById('height').addEventListener('input', updateFromGeometry);
+    document.getElementById('load').addEventListener('input', updateFromPlatform);
+    document.getElementById('ownerUse').addEventListener('input', updateFromUsage);
+    document.getElementById('intUse').addEventListener('input', updateFromUsage);
+
+    // Начальные значения
+    document.getElementById('priceAvg').innerHTML = '$' + getAvgPrice().toFixed(2);
+    document.getElementById('tokenMonthlyPrice').innerHTML = '$' + getMonthlyPrice().toFixed(2);
+    
+    updateAll();
+</script>
+
+</body>
+</html>
