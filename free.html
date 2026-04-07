@@ -10,7 +10,7 @@
 
 <meta property="og:title" content="EMIIA.AI SIP – Compute Token Calculator">
 <meta property="og:description" content="Распределение вычислительной мощности, реестровый баланс, экономика">
-<meta property="og:image" content="https://www.emiia.ru/og-image.png">
+<meta property="og:image" content="https://www.emiia.ru/free.png">
 <meta property="og:url" content="https://www.emiia.ru/free.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="EMIIA.AI SIP">
@@ -50,7 +50,29 @@
     .bg-owner-light { background: #f5f8fd; }
     .bg-int-light { background: #fafbfd; }
     .text-brand { color: #3c78d8; }
+
+
+/* Закругление карточек (главные 3 карточки) */
+.card-accent-plat,
+.card-accent-owner,
+.card-accent-int {
+    border-radius: 30px !important; /* или 16px, 20px — как хочешь */
+}
+
+
+.bg-plat-light,
+.bg-owner-light,
+.bg-int-light,
+.bg-gray-50 {
+    border-radius: 30px !important;
+}
+
+
+.card-accent-plat, .card-accent-owner, .card-accent-int { padding: 18px !important; }
+.bg-plat-light, .bg-owner-light, .bg-int-light, .bg-gray-50 { padding: 16px 20px !important; }
+
 </style>
+
 </head>
 <body>
 <div class="safe-area-spacer"></div>
@@ -79,7 +101,7 @@
 <main class="max-w-5xl mx-auto px-4 md:px-6 py-8 md:py-12">
     <div class="mb-8 md:mb-12 fade-up">
         <h1 class="text-2xl md:text-4xl mb-2 font-mono font-bold tracking-tight">Compute Token Calculator</h1>
-        <p class="text-gray-500 text-sm md:text-base font-mono">Распределение вычислительной мощности, реестровый баланс, экономика GPU.</p>
+        <p class="text-gray-500 text-sm md:text-base font-mono">Распределение вычислительной мощности, реестровый баланс, экономика.</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-6">
