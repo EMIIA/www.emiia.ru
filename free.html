@@ -4,7 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#ffffff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="white">
 <title>EMIIA.AI SIP – Compute Token Calculator</title>
+
+<meta property="og:title" content="EMIIA.AI SIP – Compute Token Calculator">
+<meta property="og:description" content="Распределение вычислительной мощности, реестровый баланс, экономика GPU">
+<meta property="og:image" content="https://www.emiia.ru/og-image.png">
+<meta property="og:url" content="https://www.emiia.ru/compute.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EMIIA.AI SIP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="EMIIA.AI SIP – Compute Token Calculator">
+<meta name="twitter:description" content="Распределение вычислительной мощности, реестровый баланс, экономика GPU">
+
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -24,16 +38,18 @@
     header > div { width: 100%; background: #FFFFFF; }
     main { margin-top: calc(env(safe-area-inset-top) + 64px); background: #FFFFFF; }
     footer { background: #FFFFFF; }
-    .card-accent-plat { border-top: 3px solid #8b5cf6; }
-    .card-accent-owner { border-top: 3px solid #10b981; }
-    .card-accent-int { border-top: 3px solid #f59e0b; }
-    .text-plat { color: #8b5cf6; }
-    .text-owner { color: #10b981; }
-    .text-int { color: #f59e0b; }
+    
+    /* Новые цвета карточек */
+    .card-accent-plat { border-top: 3px solid #3c78d8; }
+    .card-accent-owner { border-top: 3px solid #6d9eeb; }
+    .card-accent-int { border-top: 3px solid #a4c2f4; }
+    .text-plat { color: #3c78d8; }
+    .text-owner { color: #6d9eeb; }
+    .text-int { color: #a4c2f4; }
+    .bg-plat-light { background: #f0f5fc; }
+    .bg-owner-light { background: #f5f8fd; }
+    .bg-int-light { background: #fafbfd; }
     .text-brand { color: #3c78d8; }
-    .bg-plat-light { background: #f5f3ff; }
-    .bg-owner-light { background: #ecfdf5; }
-    .bg-int-light { background: #fffbeb; }
 </style>
 </head>
 <body>
@@ -72,10 +88,10 @@
                 <div>
                     <label class="block text-xs uppercase tracking-widest text-gray-400 font-semibold mb-2">Площадь (м²)</label>
                     <div class="flex items-center gap-4">
-                        <input type="number" id="sqm" value="1000" min="50" max="5000" class="input-minimal text-lg font-light flex-1">
+                        <input type="number" id="sqm" value="1000" min="100" max="5000" class="input-minimal text-lg font-light flex-1">
                         <span class="text-xs text-gray-400 font-mono w-12 text-right" id="sqmDisplay">1000</span>
                     </div>
-                    <input type="range" id="sqmSlider" min="50" max="5000" step="10" value="1000">
+                    <input type="range" id="sqmSlider" min="100" max="5000" step="10" value="1000">
                 </div>
                 <div>
                     <label class="block text-xs uppercase tracking-widest text-gray-400 font-semibold mb-2">Высота (м)</label>
@@ -148,7 +164,7 @@
                 <div class="bg-white border border-thin rounded-lg p-5 card-accent-owner fade-up" style="animation-delay: 0.4s">
                     <div class="flex items-center gap-2 mb-4">
                         <div class="w-2 h-2 rounded-full bg-owner"></div>
-                        <span class="text-xs uppercase tracking-widest text-owner font-semibold font-mono">Владелец</span>
+                        <span class="text-xs uppercase tracking-widest text-owner font-semibold font-mono">Арендодатель</span>
                     </div>
                     <div class="text-2xl font-bold text-black font-mono mb-4" id="ownerUSD">$0</div>
                     <div class="space-y-3 text-sm">
@@ -215,6 +231,9 @@
             <span>EMIIA.AI SIP – ПРОСТРАНСТВЕННЫЙ ИНТЕЛЛЕКТ</span>
             <span>COMPUTE TOKEN ECONOMICS</span>
         </div>
+        <div class="w-full pt-4 mt-2 border-t border-gray-100 text-[10px] md:text-[11px] text-gray-300 leading-relaxed max-w-3xl font-mono">
+            *Все расчеты и показатели, представленные на данной странице, носят исключительно информационный и справочный характер. Данный материал не является публичной офертой, предложением или гарантией доходности. Точные условия сотрудничества, итоговая стоимость внедрения и финансовые результаты определяются индивидуально и фиксируются в договоре.
+        </div>
     </div>
 </footer>
 
@@ -224,6 +243,8 @@ const $ = id => document.getElementById(id);
 let priceFP16 = 2.50, priceFP8 = 1.80, priceFP4 = 1.20;
 let sqm = 1000, h = 3;
 let ownerUsePercent = 20, intUsePercent = 10, platformPercent = 30;
+
+const MIN_SQM = 100;
 
 function getAvgPrice() { return (priceFP16 + priceFP8 + priceFP4) / 3; }
 function getMonthlyPrice() { return getAvgPrice() * 720; }
@@ -283,7 +304,6 @@ function calc() {
     const platformIncomeTokens = totalTflops * (extraPercent / 100);
     const platformRevenue = platformIncomeTokens * monthlyPrice;
 
-    // Обновление UI
     $('resVol').textContent = formatNumber(volume) + ' м³';
     $('resTf').textContent = formatNumber(totalTflops);
     $('resRob').textContent = formatNumber(robotsArea);
@@ -297,7 +317,6 @@ function calc() {
     const minReq = getRequiredMinPercent();
     $('loadMinInfo').textContent = `мин. ${minReq.toFixed(1)}% (включая перерасход партнёров)`;
 
-    // Платформа
     $('platUSD').textContent = '$' + formatNumber(Math.floor(platformRevenue));
     $('platTokens').textContent = formatNumber(Math.floor(platformBase));
     $('platGenerated').textContent = platformPercent.toFixed(1) + '%';
@@ -305,14 +324,12 @@ function calc() {
     $('platIncomeDetail').textContent = formatNumber(Math.floor(platformIncomeTokens)) + ' токенов сверх 30%';
     $('platRegistry').textContent = '$' + formatNumber(Math.floor(platformObligation));
 
-    // Владелец
     $('ownerUSD').textContent = '$' + formatNumber(Math.floor(ownerBalance));
     $('ownerTokens').textContent = formatNumber(Math.floor(ownerRemaining));
     $('ownerExtraValue').textContent = '$' + formatNumber(Math.floor(ownerExtra * monthlyPrice));
     $('ownerExtraTokens').textContent = formatNumber(Math.floor(ownerExtra)) + ' токенов';
     $('ownerRegistry').textContent = '$' + formatNumber(Math.floor(ownerBalance));
 
-    // Интегратор
     $('intUSD').textContent = '$' + formatNumber(Math.floor(intBalance));
     $('intTokens').textContent = formatNumber(Math.floor(intRemaining));
     $('intExtraValue').textContent = '$' + formatNumber(Math.floor(intExtra * monthlyPrice));
@@ -320,23 +337,16 @@ function calc() {
     $('intRegistry').textContent = '$' + formatNumber(Math.floor(intBalance));
 }
 
-// === ПОЛНАЯ ДВУСТОРОННЯЯ СИНХРОНИЗАЦИЯ ===
-
 function syncPlatformToMin() {
     const minReq = getRequiredMinPercent();
-    
-    // Платформа всегда равна минимуму (30% + перерасход)
-    // Это обеспечивает полную синхронизацию с партнёрами
-    platformPercent = minReq;
-    
-    // Обновляем UI
+    platformPercent = Math.max(platformPercent, minReq);
     $('load').value = Math.round(platformPercent);
     $('loadSlider').value = Math.round(platformPercent);
     $('loadDisplay').textContent = Math.round(platformPercent);
 }
 
 function updateFromGeometry() {
-    sqm = Math.min(5000, Math.max(50, parseInt($('sqm').value) || 1000));
+    sqm = Math.min(5000, Math.max(MIN_SQM, parseInt($('sqm').value) || MIN_SQM));
     h = Math.min(6, Math.max(3, parseFloat($('height').value) || 3));
     
     $('sqm').value = sqm;
@@ -349,11 +359,9 @@ function updateFromGeometry() {
 }
 
 function updateFromPlatform() {
-    // Пользователь может вручную увеличить платформу выше минимума
     let newP = parseInt($('load').value) || 30;
     const minReq = getRequiredMinPercent();
     
-    // Не даём опуститься ниже минимума
     if (newP < minReq) newP = minReq;
     if (newP > 100) newP = 100;
     
@@ -364,45 +372,35 @@ function updateFromPlatform() {
 }
 
 function updateFromUsage() {
-    // Читаем значения со слайдеров партнёров
     ownerUsePercent = Math.min(110, Math.max(0, parseInt($('ownerUse').value) || 0));
     intUsePercent = Math.min(110, Math.max(0, parseInt($('intUse').value) || 0));
     
-    // Обновляем отображение процентов
     $('ownerUsedDisplay').textContent = ownerUsePercent + '%';
     $('intUsedDisplay').textContent = intUsePercent + '%';
     
-    // === КЛЮЧЕВОЕ: синхронизируем платформу с минимумом (30% + перерасход)
     syncPlatformToMin();
-    
     calc();
 }
 
-// === ИНИЦИАЛИЗАЦИЯ СОБЫТИЙ ===
-
 document.addEventListener('DOMContentLoaded', function() {
-    // Площадь
     $('sqmSlider').addEventListener('input', (e) => {
         $('sqm').value = e.target.value;
         updateFromGeometry();
     });
     $('sqm').addEventListener('change', updateFromGeometry);
     
-    // Высота
     $('heightSlider').addEventListener('input', (e) => {
         $('height').value = e.target.value;
         updateFromGeometry();
     });
     $('height').addEventListener('change', updateFromGeometry);
     
-    // Мощность платформы (ручное управление)
     $('loadSlider').addEventListener('input', (e) => {
         $('load').value = e.target.value;
         updateFromPlatform();
     });
     $('load').addEventListener('change', updateFromPlatform);
     
-    // Владелец и интегратор (автосинхронизация с платформой)
     $('ownerUse').addEventListener('input', updateFromUsage);
     $('intUse').addEventListener('input', updateFromUsage);
     
