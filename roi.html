@@ -586,21 +586,51 @@ function exportToCSV() {
 
 document.addEventListener('DOMContentLoaded', function() {
     ['dataTb','infM','deplN','opsCost','daysClassic'].forEach(id => {
-        $(id).addEventListener('input', calc);
-        $(id + 'Slider').addEventListener('input', (e) => { $(id).value = e.target.value; calc(); });
+        // Слайдер → текстовое поле
+        $(id + 'Slider').addEventListener('input', (e) => { 
+            $(id).value = e.target.value; 
+            calc(); 
+        });
+        
+        // Текстовое поле → слайдер (ИСПРАВЛЕНИЕ)
+        $(id).addEventListener('input', (e) => {
+            let val = parseFloat(e.target.value) || 0;
+            const slider = $(id + 'Slider');
+            const min = parseFloat(slider.min);
+            const max = parseFloat(slider.max);
+            const step = parseFloat(slider.step) || 1;
+            
+            // Ограничиваем значение в пределах min/max слайдера
+            if (val < min) val = min;
+            if (val > max) val = max;
+            
+            // Округляем до шага слайдера
+            val = Math.round(val / step) * step;
+            
+            slider.value = val;
+            calc();
+        });
     });
+    
     document.querySelectorAll('.chart-tab').forEach(tab => {
         tab.addEventListener('click', function() {
-            document.querySelectorAll('.chart-tab').forEach(t => { t.classList.remove('active', 'border-black'); t.classList.add('border-gray-200'); });
+            document.querySelectorAll('.chart-tab').forEach(t => { 
+                t.classList.remove('active', 'border-black'); 
+                t.classList.add('border-gray-200'); 
+            });
             this.classList.add('active', 'border-black');
             this.classList.remove('border-gray-200');
             currentChartType = this.dataset.chart;
             updateChart();
         });
     });
+    
     $('exportBtn').addEventListener('click', exportToCSV);
     $('closeModal').addEventListener('click', () => $('exportModal').style.display = 'none');
-    $('exportModal').addEventListener('click', (e) => { if (e.target === $('exportModal')) $('exportModal').style.display = 'none'; });
+    $('exportModal').addEventListener('click', (e) => { 
+        if (e.target === $('exportModal')) $('exportModal').style.display = 'none'; 
+    });
+    
     calc();
 });
 </script>
