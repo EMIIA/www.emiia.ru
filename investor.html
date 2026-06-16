@@ -54,10 +54,10 @@
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
     
     /* Кнопки */
-    .btn-primary { background: #3c78d8; color: #fff; border-radius: 9999px; padding: 14px 28px; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; border: 1px solid #3c78d8; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 10px; }
-    .btn-primary:hover { background: #2c68c4; border-color: #2c68c4; }
-    .btn-ghost { background: #fff; color: #111; border: 1px solid #E5E5E5; border-radius: 9999px; padding: 14px 28px; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 10px; }
-    .btn-ghost:hover { border-color: #3c78d8; color: #3c78d8; }
+    .btn-primary { background: #3c78d8; color: #fff; border-radius: 9999px; padding: 14px 28px; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; border: 1px solid #3c78d8; transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; }
+    .btn-primary:hover { background: #2c68c4; border-color: #2c68c4; transform: translateY(-2px); }
+    .btn-ghost { background: #fff; color: #111; border: 1px solid #E5E5E5; border-radius: 9999px; padding: 14px 28px; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; }
+    .btn-ghost:hover { border-color: #3c78d8; color: #3c78d8; transform: translateY(-2px); }
     
     /* Tabs */
     .tab-btn { background: #fff; border: 1px solid #E5E5E5; border-radius: 24px; padding: 16px 20px; transition: all 0.2s ease; cursor: pointer; text-align: left; width: 100%; }
@@ -174,19 +174,19 @@
                             <div class="font-mono text-sm text-black font-medium">450 млн ₽ · 24%</div>
                         </button>
                     </div>
-                    <div class="text-xs text-gray-400 mt-3 font-mono" id="stageDescription">Конвертируемый заем. Минимальный чек — 10 млн ₽.</div>
+                    <div class="text-xs text-gray-400 mt-3 font-mono" id="stageDescription">Конвертируемый заем. Минимальный чек — 1 млн ₽.</div>
                 </div>
 
                 <!-- Сумма -->
                 <div>
                     <label class="label-mini mb-3 block">02 — Сумма инвестиций (млн ₽)</label>
                     <div class="flex items-center gap-4">
-                        <input type="number" id="amountInput" min="10" max="100" value="50" inputmode="numeric" class="input-minimal flex-1">
-                        <span class="text-xs text-gray-400 font-mono w-12 text-right" id="amountDisplay">50</span>
+                        <input type="number" id="amountInput" min="1" max="100" value="5" inputmode="numeric" class="input-minimal flex-1">
+                        <span class="text-xs text-gray-400 font-mono w-12 text-right" id="amountDisplay">5</span>
                     </div>
-                    <input type="range" id="amountSlider" min="10" max="100" step="5" value="50">
+                    <input type="range" id="amountSlider" min="1" max="100" step="1" value="5">
                     <div class="flex justify-between text-[10px] text-gray-400 font-mono">
-                        <span id="sliderMin">10</span>
+                        <span id="sliderMin">1</span>
                         <span id="sliderMax">100</span>
                     </div>
                 </div>
@@ -441,7 +441,10 @@
                     <div class="bg-gray-50 rounded-2xl p-5">
                         <div class="text-xs text-plat font-mono mb-2">2026</div>
                         <div class="font-semibold text-sm mb-2">Подготовка ЦХОД</div>
-                        <div class="text-xs text-gray-500 leading-relaxed">Концепция техкомплекса: ИИ-фабрика, логистический хаб, роботизированный цех.</div>
+                        <div class="text-xs text-gray-500 leading-relaxed mb-3">Концепция техкомплекса: ИИ-фабрика, логистический хаб, роботизированный цех.</div>
+                        <a href="https://www.emiia.ru/datacenter.pdf" target="_blank" class="text-xs text-plat font-mono inline-flex items-center gap-1 hover:underline">
+                            <i class="fa-solid fa-file-pdf"></i> Концепт технологического комплекса
+                        </a>
                     </div>
                     <div class="bg-gray-50 rounded-2xl p-5">
                         <div class="text-xs text-plat font-mono mb-2">2027</div>
@@ -462,7 +465,10 @@
                     <div class="timeline-mobile-dot"></div>
                     <div class="text-xs text-plat font-mono mb-1">2026 · Q3–Q4</div>
                     <div class="font-semibold text-sm mb-1">Раунд 1 · 100 млн ₽ · 6%</div>
-                    <div class="text-xs text-gray-500 leading-relaxed">Конвертируемый заем. Подготовка ЦХОД.</div>
+                    <div class="text-xs text-gray-500 leading-relaxed mb-2">Конвертируемый заем. Подготовка ЦХОД.</div>
+                    <a href="https://www.emiia.ru/datacenter.pdf" target="_blank" class="text-xs text-plat font-mono inline-flex items-center gap-1 hover:underline">
+                        <i class="fa-solid fa-file-pdf"></i> Концепт технологического комплекса
+                    </a>
                 </div>
                 <div class="timeline-mobile-item">
                     <div class="timeline-mobile-dot"></div>
@@ -535,35 +541,37 @@
                 <div class="inline-flex items-center gap-2 px-3 py-1 bg-light-blue rounded-full text-plat text-xs font-mono font-semibold mb-4">
                     <i class="fa-solid fa-lock text-[10px]"></i> Закрытый раунд · NDA
                 </div>
-                <h2 class="text-2xl md:text-3xl font-bold mb-4 leading-tight">Полная финмодель и TEO <br><span class="text-plat">по NDA</span></h2>
+                <h2 class="text-2xl md:text-3xl font-bold mb-4 leading-tight">
+                    Полная финмодель и TEO <span class="text-plat">по NDA</span>
+                </h2>
                 <p class="text-sm text-gray-500 leading-relaxed mb-6">Детальное технико-экономическое обоснование и интерактивная финансовая модель доступны после подписания соглашения о неразглашении.</p>
-                <div class="flex flex-wrap gap-3">
-                    <a href="#" class="btn-primary"><i class="fa-solid fa-file-signature"></i> Скачать NDA (DOCX)</a>
-                    <a href="#" class="btn-ghost"><i class="fa-brands fa-telegram"></i> Telegram-группа</a>
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <a href="https://www.emiia.ru/NDA_EMIIA_en_ru_out_v2.docx" target="_blank" class="btn-primary w-full sm:w-auto sm:flex-1"><i class="fa-solid fa-file-signature"></i> Скачать NDA (DOCX)</a>
+                    <a href="https://t.me/emiiaai" target="_blank" class="btn-ghost w-full sm:w-auto sm:flex-1"><i class="fa-brands fa-telegram"></i> Telegram-группа</a>
                 </div>
             </div>
             <div class="space-y-3">
-                <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-2xl border border-thin">
+                <a href="https://www.emiia.ru/datacenter.pdf" target="_blank" class="flex items-center gap-4 p-4 bg-gray-50 rounded-2xl border border-thin hover:border-plat transition-colors">
                     <div class="w-10 h-10 rounded-full bg-light-blue flex items-center justify-center text-plat shrink-0"><i class="fa-solid fa-file-pdf"></i></div>
                     <div>
                         <div class="font-semibold text-sm">Концепт технологического комплекса</div>
                         <div class="text-xs text-gray-400 font-mono">PDF · обзор ЦХОД</div>
                     </div>
-                </div>
-                <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-2xl border border-thin">
+                </a>
+                <a href="https://www.emiia.ru/NDA_EMIIA_en_ru_out_v2.docx" target="_blank" class="flex items-center gap-4 p-4 bg-gray-50 rounded-2xl border border-thin hover:border-int transition-colors">
                     <div class="w-10 h-10 rounded-full bg-light-purple flex items-center justify-center text-int shrink-0"><i class="fa-solid fa-chart-pie"></i></div>
                     <div>
                         <div class="font-semibold text-sm">Интерактивная финмодель</div>
                         <div class="text-xs text-gray-400 font-mono">XLS · после NDA</div>
                     </div>
-                </div>
-                <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-2xl border border-thin">
+                </a>
+                <a href="https://t.me/emiiaai" target="_blank" class="flex items-center gap-4 p-4 bg-gray-50 rounded-2xl border border-thin hover:border-fleet transition-colors">
                     <div class="w-10 h-10 rounded-full bg-light-green flex items-center justify-center text-fleet shrink-0"><i class="fa-solid fa-comments"></i></div>
                     <div>
                         <div class="font-semibold text-sm">Аналитика и тренды проекта</div>
                         <div class="text-xs text-gray-400 font-mono">Telegram · публичный канал</div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
         
@@ -590,14 +598,14 @@
 // =================== ДАННЫЕ ЭТАПОВ ===================
 const stages = {
   1: { 
-    year: 2026, totalAmount: 100, totalEquity: 6, min: 10, max: 100, step: 5,
+    year: 2026, totalAmount: 100, totalEquity: 6, min: 1, max: 100, step: 1, // Изменено min на 1
     name: 'Конвертируемый заем',
-    description: 'Раунд 1 · 2026 Q3–Q4. Конвертируемый заем. Минимальный чек — 10 млн ₽. Расчётная доля пропорциональна объёму раунда.'
+    description: 'Раунд 1 · 2026 Q3–Q4. Конвертируемый заем. Минимальный чек — 1 млн ₽. Расчётная доля пропорциональна объёму раунда.'
   },
   2: { 
-    year: 2027, totalAmount: 450, totalEquity: 24, min: 50, max: 450, step: 25,
+    year: 2027, totalAmount: 450, totalEquity: 24, min: 1, max: 450, step: 5, // Изменено min на 1
     name: 'Конв. заем / Pre-IPO / Облигации',
-    description: 'Раунд 2 · 2027 Q3–Q4. Конвертируемый заём, Pre-IPO или облигации. Минимальный чек — 50 млн ₽. Расчётная доля пропорциональна объёму раунда.'
+    description: 'Раунд 2 · 2027 Q3–Q4. Конвертируемый заём, Pre-IPO или облигации. Минимальный чек — 1 млн ₽. Расчётная доля пропорциональна объёму раунда.'
   }
 };
 
@@ -609,7 +617,7 @@ const scenarios = {
 };
 
 // =================== СОСТОЯНИЕ ===================
-let state = { stage: 1, amount: 50, scenario: 'call' };
+let state = { stage: 1, amount: 5, scenario: 'call' };
 
 // =================== ФУНКЦИИ РАСЧЁТА ===================
 function calculateEquity(stageId, amount) {
@@ -678,7 +686,6 @@ function updateAll() {
   slider.min = s.min; slider.max = s.max; slider.step = s.step; slider.value = state.amount;
   input.value = state.amount; input.min = s.min; input.max = s.max;
   
-  const pct = ((state.amount - s.min) / (s.max - s.min)) * 100;
   document.getElementById('sliderMin').textContent = s.min;
   document.getElementById('sliderMax').textContent = s.max;
   document.getElementById('amountDisplay').textContent = state.amount;
@@ -717,7 +724,7 @@ function updateAll() {
 function selectStage(stageId) {
   state.stage = stageId;
   const s = stages[stageId];
-  state.amount = Math.round(s.min * 2 / s.step) * s.step;
+  state.amount = 5; // Дефолтное значение при переключении
   if (state.amount > s.max) state.amount = s.max;
   if (state.amount < s.min) state.amount = s.min;
   
@@ -975,4 +982,3 @@ window.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
-
