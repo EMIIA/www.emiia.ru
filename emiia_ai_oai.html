@@ -1,11 +1,9 @@
-
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>EMIIA.AI OAI – анализ рынка, тренды, перспективы</title>
+<title>EMIIA.AI SIP – анализ рынка, тренды, перспективы</title>
 
 <!-- Open Graph Meta Tags (расширенные для большой картинки в Telegram) -->
 <meta property="og:title" content="EMIIA.AI OAI – анализ рынка, тренды, перспективы">
@@ -19,13 +17,13 @@
 
 <!-- Twitter Card (для совместимости) -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="EMIIA.AI OAI – анализ рынка, тренды, перспективы">
+<meta name="twitter:title" content="EMIIA.AI SIP – анализ рынка, тренды, перспективы">
 <meta name="twitter:description" content="Интерактивный граф экономической модели EMIIA.AI SIP. Анализ TCO, CAC, RSC, LTV и рыночных показателей.">
 <meta name="twitter:image" content="https://www.emiia.ru/1200x630_oai.png">
 
 <!-- Дополнительные метатеги для лучшего отображения -->
 <meta property="og:image:type" content="image/png">
-<meta property="og:image:alt" content="EMIIA.AI OAI AGENT - экономическая модель и анализ рынка">
+<meta property="og:image:alt" content="EMIIA.AI SIP - экономическая модель и анализ рынка">
 
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -59,66 +57,55 @@
         padding-right: env(safe-area-inset-right);
     }
 
-    /* --- HEADER --- */
+    /* --- HEADER (Адаптация под стиль Calculator) --- */
     header {
         background: #FFFFFF;
         border-bottom: 1px solid var(--gray-border);
-        position: sticky;
-        top: 0;
-        z-index: 50;
-        padding-top: max(0.75rem, env(safe-area-inset-top));
+        flex-shrink: 0;
+        min-height: 64px; /* Фиксированная высота как в калькуляторе */
+        display: flex;
+        align-items: center;
+        padding-top: env(safe-area-inset-top);
     }
 
     .header-inner {
-        max-width: 64rem;
-        margin-left: auto;
-        margin-right: auto;
+        max-width: 72rem; /* max-w-6xl */
+        margin: 0 auto;
         padding-left: 1rem;
         padding-right: 1rem;
-        padding-top: 0 rem;
-        padding-bottom: 0.75rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: 0.75rem;
+        gap: 0.75rem; /* gap-3 */
+        width: 100%;
     }
     @media (min-width: 768px) {
         .header-inner {
-            padding-left: 1.5rem;
+            padding-left: 1.5rem; /* md:px-6 */
             padding-right: 1.5rem;
-            padding-top: 0 rem;
-            padding-bottom: 1rem;
         }
     }
 
     .logo {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: 0.75rem; /* gap-3 */
         cursor: pointer;
         text-decoration: none;
-        color: var(--text-main);
+        color: #1f2937; /* text-gray-800 */
         min-width: 0;
         flex-shrink: 0;
     }
     
     .logo-icon {
-        width: 40px;
-        height: 40px;
-        min-width: 40px;
-        min-height: 40px;
+        width: 2rem; /* w-8 h-8 */
+        height: 2rem; 
+        min-width: 2rem;
+        min-height: 2rem;
         flex-shrink: 0;
         display: flex;
         align-items: center;
         justify-content: center;
-    }
-    @media (min-width: 768px) {
-        .logo-icon {
-            width: 32px;
-            height: 32px;
-            min-width: 32px;
-            min-height: 32px;
-        }
     }
 
     .logo-icon svg {
@@ -129,28 +116,23 @@
 
     .logo-text {
         font-family: 'JetBrains Mono', monospace;
-        font-size: 1rem;
+        font-size: 0.875rem; /* text-sm */
         color: #1f2937;
         font-weight: 500;
-        letter-spacing: -0.025em;
+        letter-spacing: -0.025em; /* tracking-tight */
         white-space: nowrap;
-    }
-    @media (min-width: 768px) {
-        .logo-text {
-            font-size: 0.875rem;
-        }
     }
 
     .header-right {
         font-family: 'JetBrains Mono', monospace;
-        font-size: 10px;
-        color: #9ca3af;
-        white-space: nowrap;
+        font-size: 10px; /* text-[10px] */
+        color: #9ca3af; /* text-gray-400 */
+        white-space: nowrap; /* whitespace-nowrap */
         flex-shrink: 0;
     }
     @media (min-width: 640px) {
         .header-right {
-            font-size: 0.75rem;
+            font-size: 0.75rem; /* sm:text-xs (12px) */
         }
     }
 
@@ -267,29 +249,21 @@
         }
     }
 
-    @media (max-width: 480px) {
-        .tooltip {
-            width: calc(100vw - 32px);
-            max-width: 300px;
-            padding: 30px 30px 30px 30px !important;
-        }
-        .tooltip-title {
-            font-size: 14px;
-            margin-bottom: 12px;
-        }
-        .tooltip-formula {
-            font-size: 14px;
-        }
-    }
-
     /* --- FOOTER --- */
     footer {
         border-top: 1px solid var(--gray-border);
-        padding-top: 25px;
-        padding-bottom: max(2.5rem, env(safe-area-inset-bottom));
-        padding-left: 25px;
-        padding-right: 25px;
+        padding-top: 1.5rem;
+        padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+        padding-left: 1rem;
+        padding-right: 1rem;
         background: #fff;
+        flex-shrink: 0;
+    }
+    @media (min-width: 768px) {
+        footer {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
     }
 
     .footer-content {
@@ -301,6 +275,11 @@
         font-size: 10px;
         color: var(--text-muted);
         font-family: 'JetBrains Mono', monospace;
+    }
+    @media (min-width: 768px) {
+        .footer-content {
+            font-size: 0.75rem;
+        }
     }
 
     .footer-link { display: flex; align-items: center; gap: 6px; color: var(--text-muted); text-decoration: none; cursor: pointer; }
@@ -330,9 +309,9 @@
                     </g>
                 </svg>
             </div>
-            <span class="logo-text">EMIIA.AI SIP</span>
+            <span class="logo-text">EMIIA.AI INVESTOR</span>
         </a>
-        <div class="header-right">OAI AGENT</div>
+        <div class="header-right">DIAGRAM v1.0</div>
     </div>
 </header>
 
@@ -344,7 +323,11 @@
 <!-- Footer -->
 <footer>
     <div class="footer-content">
-        <div>EMIIA.AI OAI</div>
+        <div>
+            <a href="https://www.emiia.ru/investor.html" target="_blank" style="color: inherit; text-decoration: none;">
+                КАЛЬКУЛЯТОР ИНВЕСТОРА ↗
+            </a>
+        </div>
         <a onclick="downloadCSV()" class="footer-link">
             CSV
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -399,7 +382,7 @@
     g.setNode('ARPPU', { label: 'ARPPU: $120/год', width: 150, height: 50, description: 'Average Revenue Per Paying User\nФормула:\nARPPU = Доход от платящих / их количество\n\n$10/мес × 12 = $120/год' });
     g.setNode('Lifetime', { label: 'Срок жизни: 7 лет', width: 150, height: 50, description: 'Средний срок жизни клиента\nИспользуется для расчета LTV' });
     g.setNode('LTV', { label: 'LTV: $791', width: 130, height: 50, description: 'Lifetime Value\nФормула:\nLTV = (ARPPU - RSC) × Срок жизни\n\nРасчет:\n($120 - $7) × 7 лет = $791' });
-    g.setNode('Rynok', { label: 'EMIIA.AI SIP: Анализ рынка (2030 год)', width: 260, height: 50, description: 'Рыночные показатели и потенциал на 2030 год' });
+    g.setNode('Rynok', { label: 'EMIIA.AI SIP: Анализ рынка (2030/31 гг)', width: 260, height: 50, description: 'Рыночные показатели и потенциал на 2030/31 гг' });
     g.setNode('ActiveUsers', { label: 'Активные пользователи (ACTIVE): 100 млн', width: 280, height: 50, description: 'Текущая активная пользовательская база\n\nИспользуется для расчета ARPU' });
     g.setNode('PayingUsers', { label: 'Платящие пользователи (CORE): 30 млн', width: 270, height: 50, description: 'Пользователи, приносящие доход\n\n30% от активных пользователей' });
     g.setNode('PayingRevenue', { label: 'Выручка (ARR): $3,6 млрд/год', width: 220, height: 50, description: 'Формула:\nВыручка ARR = Платящие пользователи × ARPPU\n\n30 млн × $120 = $3,6 млрд/год' });
@@ -479,6 +462,48 @@
                  .attr("class", "edge-hitbox");
         }
     });
+
+    // --- CUSTOM DISCLAIMER BLOCK INSIDE GRAPH ---
+    let maxY = 0;
+    g.nodes().forEach(function(v) {
+        const node = g.node(v);
+        const bottomY = node.y + node.height / 2;
+        if (bottomY > maxY) maxY = bottomY;
+    });
+
+    const graphWidth = g.graph().width;
+    const disclaimerW = 340;
+    const disclaimerH = 160;
+    const disclaimerX = graphWidth / 2 - disclaimerW / 2;
+    const disclaimerY = maxY + 60;
+
+    const disclaimerGroup = inner.append("g").attr("class", "disclaimer-group");
+
+    disclaimerGroup.append("rect")
+        .attr("x", disclaimerX)
+        .attr("y", disclaimerY)
+        .attr("width", disclaimerW)
+        .attr("height", disclaimerH)
+        .attr("rx", 24)
+        .attr("ry", 24)
+        .attr("fill", "#f9fafb")
+        .attr("stroke", "#E5E5E5")
+        .attr("stroke-width", 1);
+
+    const fo = disclaimerGroup.append("foreignObject")
+        .attr("x", disclaimerX + 16)
+        .attr("y", disclaimerY + 16)
+        .attr("width", disclaimerW - 32)
+        .attr("height", disclaimerH - 32);
+
+    fo.append("xhtml:div")
+        .style("font-family", "'JetBrains Mono', monospace")
+        .style("font-size", "11px")
+        .style("color", "#6b7280")
+        .style("line-height", "1.5")
+        .style("text-align", "left")
+        .html("<strong style='color: #3c78d8; font-weight: 600;'>Дисклеймер.</strong> Представленная диаграмма носит исключительно иллюстративный характер и не является публичной офертой или индивидуальной инвестиционной рекомендацией. Реальные результаты могут отличаться. Решение об инвестициях принимается после изучения полной документации.");
+
 
     // --- STATE MANAGEMENT ---
     let tooltipState = { isOpen: false, type: null, target: null, html: "" };
@@ -576,12 +601,12 @@
     });
 
     // Initial Centering
-    const graphWidth = g.graph().width;
-    const graphHeight = g.graph().height;
     const svgWidth = document.getElementById('graph-container').clientWidth;
     const svgHeight = document.getElementById('graph-container').clientHeight;
+    const totalGraphHeight = maxY + 60 + disclaimerH; 
     const xCenterOffset = (svgWidth - graphWidth) / 2;
-    const yCenterOffset = (svgHeight - graphHeight) / 2;
+    const yCenterOffset = (svgHeight - totalGraphHeight) / 2;
+    
     svg.call(zoom.transform, d3.zoomIdentity.translate(xCenterOffset, yCenterOffset));
 
     function downloadCSV() {
@@ -650,4 +675,3 @@
 
 </body>
 </html>
-
