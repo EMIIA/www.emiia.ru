@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5.0, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>EMIIA.AI — Investor Calculator</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body { width: 100%; background: #FFFFFF !important; color: #111; -webkit-font-smoothing: antialiased; }
+    body { font-family: 'Inter', sans-serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    
+    .safe-area-spacer { position: fixed; top: 0; left: 0; right: 0; width: 100%; height: env(safe-area-inset-top); background: #FFFFFF; z-index: 10000; pointer-events: none; }
+    
+    header { position: fixed; top: env(safe-area-inset-top); left: 0; right: 0; width: 100%; height: 64px; z-index: 9999; background: #FFFFFF; border-bottom: 1px solid #E5E5E5; display: flex; align-items: center; }
+    main { margin-top: calc(env(safe-area-inset-top) + 64px); background: #FFFFFF; }
+    
+    /* Слайдеры */
+    input[type=range] { -webkit-appearance: none; width: 100%; height: 2px; background: #E5E5E5; outline: none; margin: 12px 0; border-radius: 2px; }
+    input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%; background: #3c78d8; cursor: pointer; border: 3px solid #fff; box-shadow: 0 0 0 1px #3c78d8; transition: transform 0.15s ease; }
+    input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+    input[type=range]::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: #3c78d8; cursor: pointer; border: 3px solid #fff; box-shadow: 0 0 0 1px #3c78d8; }
+    
+    /* Инпуты */
+    .input-minimal { background: transparent; border: none; border-bottom: 1px solid #E5E5E5; border-radius: 0; padding: 8px 0; font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 500; width: 100%; color: #111; }
+    .input-minimal:focus { outline: none; border-color: #3c78d8; }
+    
+    /* Типографика */
+    h1, h2, h3 { font-family: 'JetBrains Mono', monospace; }
+    .label-mini { text-transform: uppercase; tracking: 0.1em; color: #9ca3af; font-size: 11px; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
+    .border-thin { border-color: #E5E5E5; }
+    
+    /* Карточки и отступы */
+    .card-style { background: #FFFFFF; border: 1px solid #E5E5E5; border-radius: 30px; padding: 24px; }
+    .bg-light-blue { background: #f0f5fc; }
+    .bg-light-purple { background: #f5f0fc; }
+    .bg-light-green { background: #f0fcf5; }
+    
+    /* Акценты */
+    .text-plat { color: #3c78d8; }
+    .text-int { color: #674ea7; }
+    .text-fleet { color: #38761d; }
+    
+    /* Анимации */
+    .fade-up { opacity: 0; transform: translateY(15px); animation: fadeUp 0.6s forwards ease-out; }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    
+    /* Кнопки */
+    .btn-primary { background: #3c78d8; color: #fff; border-radius: 9999px; padding: 14px 28px; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; border: 1px solid #3c78d8; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 10px; }
+    .btn-primary:hover { background: #2c68c4; border-color: #2c68c4; }
+    .btn-ghost { background: #fff; color: #111; border: 1px solid #E5E5E5; border-radius: 9999px; padding: 14px 28px; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 10px; }
+    .btn-ghost:hover { border-color: #3c78d8; color: #3c78d8; }
+    
+    /* Tabs */
+    .tab-btn { background: #fff; border: 1px solid #E5E5E5; border-radius: 24px; padding: 16px 20px; transition: all 0.2s ease; cursor: pointer; text-align: left; width: 100%; }
+    .tab-btn.active { border-color: #3c78d8; box-shadow: 0 0 0 1px #3c78d8; }
+    
+    /* Сценарии */
+    .scenario-card { background: #fff; border: 1px solid #E5E5E5; border-radius: 24px; padding: 20px; cursor: pointer; transition: all 0.2s ease; position: relative; overflow: hidden; }
+    .scenario-card:hover { border-color: #9ca3af; }
+    .scenario-card.active { border-color: var(--sc-color); box-shadow: 0 0 0 1px var(--sc-color); }
+    .scenario-card.active::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--sc-color); }
+    
+    /* Timeline Desktop */
+    .timeline-track { position: relative; height: 2px; background: #E5E5E5; margin: 60px 0 40px; border-radius: 2px; }
+    .timeline-dot { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 16px; height: 16px; border-radius: 50%; background: #fff; border: 3px solid #3c78d8; box-shadow: 0 0 0 4px rgba(60, 120, 216, 0.15); }
+    .timeline-dot.future { border-color: #674ea7; box-shadow: 0 0 0 4px rgba(103, 78, 167, 0.15); }
+    
+    /* Timeline Mobile */
+    .timeline-mobile { display: none; }
+    @media (max-width: 767px) {
+        .timeline-desktop { display: none; }
+        .timeline-mobile { display: block; }
+        .timeline-mobile-item { position: relative; padding-left: 32px; padding-bottom: 24px; }
+        .timeline-mobile-item:last-child { padding-bottom: 0; }
+        .timeline-mobile-item::before { content: ''; position: absolute; left: 7px; top: 20px; bottom: 0; width: 2px; background: #E5E5E5; }
+        .timeline-mobile-item:last-child::before { display: none; }
+        .timeline-mobile-dot { position: absolute; left: 0; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: #fff; border: 3px solid #3c78d8; box-shadow: 0 0 0 4px rgba(60, 120, 216, 0.15); }
+        .timeline-mobile-item.future .timeline-mobile-dot { border-color: #674ea7; box-shadow: 0 0 0 4px rgba(103, 78, 167, 0.15); }
+    }
+    
+    /* Disclaimer */
+    .disclaimer { background: #f9fafb; border-radius: 24px; padding: 24px; font-size: 12px; color: #6b7280; line-height: 1.6; font-family: 'JetBrains Mono', monospace; border: 1px solid #E5E5E5; }
+    
+    /* Скроллбар */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #fff; }
+    ::-webkit-scrollbar-thumb { background: #E5E5E5; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: #3c78d8; }
+    
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+</style>
+</head>
+<body>
+
+<div class="safe-area-spacer"></div>
+
+<header>
+    <div class="max-w-6xl mx-auto px-4 md:px-6 flex justify-between items-center w-full">
+        <a href="#" class="flex items-center gap-3">
+            <div class="w-8 h-8 flex items-center justify-center flex-shrink-0">
+                <svg version="1.1" viewBox="0 0 192 192" fill="none" stroke="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                    <path fill="#3d85c6" d="m154.585 76.782c-0.186-20.651-17.184-38.474-38.332-40.193l-0.097 5.252c18.078 1.614 32.65 16.93 32.955 34.638z"/>
+                    <path stroke="#3d85c6" stroke-width="14.66" d="m154.585 76.782c-0.186-20.651-17.184-38.474-38.332-40.193l-0.097 5.252c18.078 1.614 32.65 16.93 32.955 34.638z"/>
+                    <path fill="#3d85c6" d="m37.415 76.782c0.186-20.651 17.184-38.474 38.332-40.193l0.097 5.252c-18.078 1.614-32.65 16.93-32.955 34.638z"/>
+                    <path stroke="#3d85c6" stroke-width="14.66" d="m37.415 76.782c0.186-20.651 17.184-38.474 38.332-40.193l0.097 5.252c-18.078 1.614-32.65 16.93-32.955 34.638z"/>
+                    <path fill="#3d85c6" d="m154.585 115.218c-0.186 20.651-17.184 38.474-38.332 40.193l-0.097-5.252c18.078-1.614 32.65-16.93 32.955-34.638z"/>
+                    <path stroke="#3d85c6" stroke-width="14.66" d="m154.585 115.218c-0.186 20.651-17.184 38.474-38.332 40.193l-0.097-5.252c18.078-1.614 32.65-16.93 32.955-34.638z"/>
+                    <path fill="#3d85c6" d="m37.415 115.218c0.186 20.65 17.184 38.474 38.332 40.192l0.097-5.252c-18.078-1.614-32.65-16.93-32.955-34.638z"/>
+                    <path stroke="#3d85c6" stroke-width="14.66" d="m37.415 115.218c0.186 20.65 17.184 38.474 38.332 40.192l0.097-5.252c-18.078-1.614-32.65-16.93-32.955-34.638z"/>
+                    <path fill="#3c78d8" d="m69.536 96.003c0-14.62 11.852-26.472 26.472-26.472 7.021 0 13.754 2.789 18.718 7.754 4.965 4.964 7.754 11.697 7.754 18.718 0 14.62-11.852 26.472-26.472 26.472-14.62 0-26.472-11.852-26.472-26.472z"/>
+                </svg>
+            </div>
+            <span class="text-sm text-gray-800 font-mono tracking-tight">EMIIA.AI INVESTOR</span>
+        </a>
+        <div class="text-[10px] sm:text-xs text-gray-400 font-mono whitespace-nowrap">CALCULATOR v1.0</div>
+    </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-12">
+
+    <!-- HERO -->
+    <div class="mb-10 md:mb-16 fade-up">
+        <h1 class="text-3xl md:text-5xl mb-3 font-bold tracking-tight">Калькулятор инвестора</h1>
+        <p class="text-gray-500 text-sm md:text-base font-mono max-w-2xl">Раунды 2026–2027. Смоделируйте долю, ROI и IRR по сценариям выхода: Call-опцион, Pre-IPO или удержание до 2032.</p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-10 md:mb-16">
+        <div class="card-style fade-up" style="animation-delay: 0.1s; padding: 20px;">
+            <div class="label-mini mb-2">Pre-Money</div>
+            <div class="text-xl md:text-2xl font-bold font-mono text-plat">1,28<span class="text-sm text-gray-400 ml-1">млрд ₽</span></div>
+        </div>
+        <div class="card-style fade-up" style="animation-delay: 0.15s; padding: 20px;">
+            <div class="label-mini mb-2">Лимит залога</div>
+            <div class="text-xl md:text-2xl font-bold font-mono text-black">30<span class="text-sm text-gray-400 ml-1">% доли</span></div>
+        </div>
+        <div class="card-style fade-up" style="animation-delay: 0.2s; padding: 20px;">
+            <div class="label-mini mb-2">ROI (6 лет)</div>
+            <div class="text-xl md:text-2xl font-bold font-mono text-fleet">300<span class="text-sm text-gray-400 ml-1">%</span></div>
+        </div>
+        <div class="card-style fade-up" style="animation-delay: 0.25s; padding: 20px;">
+            <div class="label-mini mb-2">IRR · удержание</div>
+            <div class="text-xl md:text-2xl font-bold font-mono text-black">~26<span class="text-sm text-gray-400 ml-1">% год.</span></div>
+        </div>
+    </div>
+
+    <!-- КАЛЬКУЛЯТОР -->
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 md:gap-12 mb-12 md:mb-16">
+        
+        <!-- ЛЕВАЯ ПАНЕЛЬ -->
+        <div class="lg:col-span-2 fade-up" style="animation-delay: 0.3s">
+            <div class="space-y-8">
+                
+                <!-- Выбор этапа -->
+                <div>
+                    <div class="label-mini mb-4">01 — Этап инвестиций</div>
+                    <div class="grid grid-cols-2 gap-3 md:gap-4">
+                        <button class="tab-btn active" data-stage="1" onclick="selectStage(1)">
+                            <div class="label-mini mb-1" style="color: #9ca3af;">Раунд 1 · 2026</div>
+                            <div class="font-mono text-sm text-black font-medium">100 млн ₽ · 6%</div>
+                        </button>
+                        <button class="tab-btn" data-stage="2" onclick="selectStage(2)">
+                            <div class="label-mini mb-1" style="color: #9ca3af;">Раунд 2 · 2027</div>
+                            <div class="font-mono text-sm text-black font-medium">450 млн ₽ · 24%</div>
+                        </button>
+                    </div>
+                    <div class="text-xs text-gray-400 mt-3 font-mono" id="stageDescription">Конвертируемый заем. Минимальный чек — 10 млн ₽.</div>
+                </div>
+
+                <!-- Сумма -->
+                <div>
+                    <label class="label-mini mb-3 block">02 — Сумма инвестиций (млн ₽)</label>
+                    <div class="flex items-center gap-4">
+                        <input type="number" id="amountInput" min="10" max="100" value="50" inputmode="numeric" class="input-minimal flex-1">
+                        <span class="text-xs text-gray-400 font-mono w-12 text-right" id="amountDisplay">50</span>
+                    </div>
+                    <input type="range" id="amountSlider" min="10" max="100" step="5" value="50">
+                    <div class="flex justify-between text-[10px] text-gray-400 font-mono">
+                        <span id="sliderMin">10</span>
+                        <span id="sliderMax">100</span>
+                    </div>
+                </div>
+
+                <!-- Доля -->
+                <div>
+                    <label class="label-mini mb-3 block">Расчётная доля в ООО «ЭМИИА»</label>
+                    <div class="flex items-baseline gap-2">
+                        <span id="equityValue" class="text-4xl font-bold font-mono text-plat">3,00</span>
+                        <span class="text-xl text-gray-400 font-mono">%</span>
+                    </div>
+                    <div class="mt-6 pt-6 border-t border-thin grid grid-cols-2 gap-4">
+                        <div>
+                            <div class="label-mini mb-1">Доля от раунда</div>
+                            <div class="font-mono text-sm font-medium" id="shareOfRound">50,0%</div>
+                        </div>
+                        <div>
+                            <div class="label-mini mb-1">Post-money</div>
+                            <div class="font-mono text-sm font-medium">1,38 млрд ₽</div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- ПРАВАЯ ПАНЕЛЬ -->
+        <div class="lg:col-span-3 fade-up" style="animation-delay: 0.4s">
+            <div class="space-y-8">
+                
+                <!-- Сценарии -->
+                <div>
+                    <div class="label-mini mb-4">03 — Сценарий выхода</div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
+                        <div class="scenario-card active" data-scenario="call" style="--sc-color: #3c78d8;" onclick="selectScenario('call')">
+                            <div class="flex items-start justify-between mb-2">
+                                <span class="label-mini" style="color: #3c78d8;">Call-опцион</span>
+                                <span class="text-[10px] text-gray-400 font-mono">2029–2030</span>
+                            </div>
+                            <div class="text-sm text-gray-600 font-mono leading-relaxed">Выкуп доли основателями по 3× от вложений</div>
+                        </div>
+                        <div class="scenario-card" data-scenario="preipo" style="--sc-color: #674ea7;" onclick="selectScenario('preipo')">
+                            <div class="flex items-start justify-between mb-2">
+                                <span class="label-mini" style="color: #674ea7;">Pre-IPO Exit</span>
+                                <span class="text-[10px] text-gray-400 font-mono">2028</span>
+                            </div>
+                            <div class="text-sm text-gray-600 font-mono leading-relaxed">Досрочная продажа доли новому фонду</div>
+                        </div>
+                        <div class="scenario-card" data-scenario="hold" style="--sc-color: #38761d;" onclick="selectScenario('hold')">
+                            <div class="flex items-start justify-between mb-2">
+                                <span class="label-mini" style="color: #38761d;">Удержание</span>
+                                <span class="text-[10px] text-gray-400 font-mono">2032</span>
+                            </div>
+                            <div class="text-sm text-gray-600 font-mono leading-relaxed">Полный цикл · IRR ~26% годовых</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Результаты -->
+                <div class="card-style">
+                    <div class="flex justify-between items-center mb-6">
+                        <div>
+                            <div class="label-mini mb-1">Прогнозируемый результат</div>
+                            <div id="scenarioTitle" class="text-lg font-bold font-mono text-black">Call-опцион · 2029–2030</div>
+                        </div>
+                        <div class="px-3 py-1 bg-light-green rounded-full text-fleet text-xs font-mono font-semibold flex items-center gap-1">
+                            <i class="fa-solid fa-arrow-trend-up text-[10px]"></i>
+                            <span id="growthMultiple">3,00×</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                        <div class="bg-light-blue rounded-2xl p-5">
+                            <div class="label-mini mb-2" style="color: #3c78d8;">Стоимость на выходе</div>
+                            <div class="flex items-baseline gap-2">
+                                <span id="exitValue" class="text-3xl font-bold font-mono text-black">150,0</span>
+                                <span class="text-sm text-gray-400 font-mono">млн ₽</span>
+                            </div>
+                            <div class="text-[11px] text-gray-400 mt-2 font-mono">при вложении <span id="investedDisplay" class="text-gray-600">50,0 млн ₽</span></div>
+                        </div>
+                        <div class="bg-light-green rounded-2xl p-5">
+                            <div class="label-mini mb-2" style="color: #38761d;">Чистая прибыль</div>
+                            <div class="flex items-baseline gap-2">
+                                <span id="profitValue" class="text-3xl font-bold font-mono text-black">100,0</span>
+                                <span class="text-sm text-gray-400 font-mono">млн ₽</span>
+                            </div>
+                            <div class="text-[11px] text-gray-400 mt-2 font-mono">за <span id="yearsHeld" class="text-gray-600">3 года</span> удержания</div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-4 pt-6 border-t border-thin">
+                        <div>
+                            <div class="label-mini mb-2">ROI</div>
+                            <div class="flex items-baseline gap-1">
+                                <span id="roiValue" class="text-2xl font-bold font-mono text-black">200</span>
+                                <span class="text-sm text-gray-400 font-mono">%</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="label-mini mb-2">IRR годовых</div>
+                            <div class="flex items-baseline gap-1">
+                                <span id="irrValue" class="text-2xl font-bold font-mono text-black">44,2</span>
+                                <span class="text-sm text-gray-400 font-mono">%</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="label-mini mb-2">Кратность</div>
+                            <div class="flex items-baseline gap-1">
+                                <span id="multValue" class="text-2xl font-bold font-mono text-black">3,00</span>
+                                <span class="text-sm text-gray-400 font-mono">×</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- График -->
+                <div class="card-style">
+                    <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+                        <div class="label-mini">Рост стоимости инвестиции</div>
+                        <div class="flex items-center gap-3 text-[11px]">
+                            <span class="flex items-center gap-1 text-gray-500 font-mono"><span class="w-2 h-2 rounded-full bg-[#3c78d8]"></span> Активный</span>
+                            <span class="flex items-center gap-1 text-gray-500 font-mono"><span class="w-2 h-2 rounded-full bg-gray-300"></span> Сравнение</span>
+                        </div>
+                    </div>
+                    <canvas id="growthChart" class="w-full" style="height: 260px"></canvas>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- СРАВНЕНИЕ СЦЕНАРИЕВ -->
+    <div class="mb-12 md:mb-16 fade-up" style="animation-delay: 0.5s">
+        <div class="label-mini mb-4">04 — Сравнение сценариев</div>
+        <div class="card-style p-2 overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm" style="min-width: 600px">
+                    <thead>
+                        <tr class="border-b border-thin">
+                            <th class="text-left p-4 label-mini font-semibold">Параметр</th>
+                            <th class="text-right p-4 label-mini font-semibold" style="color: #3c78d8;">Call-опцион</th>
+                            <th class="text-right p-4 label-mini font-semibold" style="color: #674ea7;">Pre-IPO 2028</th>
+                            <th class="text-right p-4 label-mini font-semibold" style="color: #38761d;">Удержание 2032</th>
+                        </tr>
+                    </thead>
+                    <tbody id="comparisonTable"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- СТРУКТУРА СДЕЛКИ -->
+    <div class="mb-12 md:mb-16 fade-up" style="animation-delay: 0.6s">
+        <div class="label-mini mb-4">05 — Структура сделки · Лимит обеспечения 30%</div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <div class="card-style flex flex-col items-center justify-center">
+                <div class="relative flex items-center justify-center" style="height: 220px; width: 220px;">
+                    <canvas id="donutChart" width="220" height="220"></canvas>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center">
+                        <div class="text-3xl font-bold font-mono text-black">30%</div>
+                        <div class="text-[11px] text-gray-400 font-mono mt-1">залоговый пакет</div>
+                    </div>
+                </div>
+                <div class="w-full mt-6 space-y-3">
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="flex items-center gap-2 text-gray-600 font-mono text-xs"><span class="w-2 h-2 rounded-full bg-[#3c78d8]"></span> Обеспечительный пакет</span>
+                        <span class="font-mono font-semibold text-black">20%</span>
+                    </div>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="flex items-center gap-2 text-gray-600 font-mono text-xs"><span class="w-2 h-2 rounded-full bg-[#674ea7]"></span> Call-опцион</span>
+                        <span class="font-mono font-semibold text-black">10%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-style" style="border-top: 3px solid #3c78d8;">
+                <div class="flex items-center gap-3 mb-3">
+                    <i class="fa-solid fa-shield-halved text-plat"></i>
+                    <span class="label-mini" style="color: #3c78d8;">Обеспечительный пакет · 20%</span>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Гарант тела долга</h3>
+                <p class="text-sm text-gray-500 leading-relaxed mb-6">Выступает гарантией под тело инвестиций. Возвращается компании после полной выплаты долга.</p>
+                <div class="space-y-3 pt-4 border-t border-thin">
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-gray-400 font-mono text-xs">Срок возврата</span>
+                        <span class="font-mono font-semibold text-black">6 месяцев</span>
+                    </div>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-gray-400 font-mono text-xs">Старт возврата</span>
+                        <span class="font-mono font-semibold text-black">Q3 2029</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-style" style="border-top: 3px solid #674ea7;">
+                <div class="flex items-center gap-3 mb-3">
+                    <i class="fa-solid fa-rotate-left text-int"></i>
+                    <span class="label-mini" style="color: #674ea7;">Call-опцион · 10%</span>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Право обратного выкупа</h3>
+                <p class="text-sm text-gray-500 leading-relaxed mb-6">Безусловное право обратного выкупа доли у инвестора основателями. Цена зафиксирована.</p>
+                <div class="space-y-3 pt-4 border-t border-thin">
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-gray-400 font-mono text-xs">Цена выкупа</span>
+                        <span class="font-mono font-semibold text-plat">1,65 млрд ₽</span>
+                    </div>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-gray-400 font-mono text-xs">Кратность к вложениям</span>
+                        <span class="font-mono font-semibold text-black">3,00×</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ROADMAP -->
+    <div class="mb-12 md:mb-16 fade-up" style="animation-delay: 0.7s">
+        <div class="label-mini mb-4">06 — Дорожная карта</div>
+        <div class="card-style">
+            <!-- Desktop -->
+            <div class="timeline-desktop">
+                <div class="timeline-track">
+                    <div class="timeline-dot" style="left: 8%"></div>
+                    <div class="timeline-dot" style="left: 32%"></div>
+                    <div class="timeline-dot future" style="left: 68%"></div>
+                    <div class="timeline-dot future" style="left: 92%"></div>
+                    
+                    <div class="absolute" style="left: 8%; top: 30px; transform: translateX(-50%); width: 200px; text-align: center;">
+                        <div class="text-xs text-plat font-mono mb-1">2026 · Q3–Q4</div>
+                        <div class="font-semibold text-sm mb-1">Раунд 1</div>
+                        <div class="text-xs text-gray-400 font-mono">100 млн ₽ · 6%</div>
+                    </div>
+                    <div class="absolute" style="left: 32%; bottom: 30px; transform: translateX(-50%); width: 200px; text-align: center;">
+                        <div class="text-xs text-plat font-mono mb-1">2027 · Q3–Q4</div>
+                        <div class="font-semibold text-sm mb-1">Раунд 2</div>
+                        <div class="text-xs text-gray-400 font-mono">450 млн ₽ · 24%</div>
+                    </div>
+                    <div class="absolute" style="left: 68%; top: 30px; transform: translateX(-50%); width: 200px; text-align: center;">
+                        <div class="text-xs text-int font-mono mb-1">2029 · Q3–Q4</div>
+                        <div class="font-semibold text-sm mb-1">Раунд 3</div>
+                        <div class="text-xs text-gray-400 font-mono">1 500 млн ₽ · IPO</div>
+                    </div>
+                    <div class="absolute" style="left: 92%; bottom: 30px; transform: translateX(-50%); width: 200px; text-align: center;">
+                        <div class="text-xs text-fleet font-mono mb-1">2032</div>
+                        <div class="font-semibold text-sm mb-1">Полный выход</div>
+                        <div class="text-xs text-gray-400 font-mono">IRR ~26% годовых</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-32">
+                    <div class="bg-gray-50 rounded-2xl p-5">
+                        <div class="text-xs text-plat font-mono mb-2">2026</div>
+                        <div class="font-semibold text-sm mb-2">Подготовка ЦХОД</div>
+                        <div class="text-xs text-gray-500 leading-relaxed">Концепция техкомплекса: ИИ-фабрика, логистический хаб, роботизированный цех.</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-2xl p-5">
+                        <div class="text-xs text-plat font-mono mb-2">2027</div>
+                        <div class="font-semibold text-sm mb-2">1-я очередь ЦХОД</div>
+                        <div class="text-xs text-gray-500 leading-relaxed">Старт выручки. Масштабирование инфраструктуры и поэтапный возврат обязательств.</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-2xl p-5">
+                        <div class="text-xs text-int font-mono mb-2">2029</div>
+                        <div class="font-semibold text-sm mb-2">2-я очередь ЦХОД</div>
+                        <div class="text-xs text-gray-500 leading-relaxed">Запуск полного комплекса. Раунд 3 — IPO или вторичное размещение облигаций.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile -->
+            <div class="timeline-mobile">
+                <div class="timeline-mobile-item">
+                    <div class="timeline-mobile-dot"></div>
+                    <div class="text-xs text-plat font-mono mb-1">2026 · Q3–Q4</div>
+                    <div class="font-semibold text-sm mb-1">Раунд 1 · 100 млн ₽ · 6%</div>
+                    <div class="text-xs text-gray-500 leading-relaxed">Конвертируемый заем. Подготовка ЦХОД.</div>
+                </div>
+                <div class="timeline-mobile-item">
+                    <div class="timeline-mobile-dot"></div>
+                    <div class="text-xs text-plat font-mono mb-1">2027 · Q3–Q4</div>
+                    <div class="font-semibold text-sm mb-1">Раунд 2 · 450 млн ₽ · 24%</div>
+                    <div class="text-xs text-gray-500 leading-relaxed">Pre-IPO / облигации. Старт 1-й очереди ЦХОД.</div>
+                </div>
+                <div class="timeline-mobile-item future">
+                    <div class="timeline-mobile-dot"></div>
+                    <div class="text-xs text-int font-mono mb-1">2029 · Q3–Q4</div>
+                    <div class="font-semibold text-sm mb-1">Раунд 3 · 1 500 млн ₽</div>
+                    <div class="text-xs text-gray-500 leading-relaxed">IPO или вторичное размещение. 2-я очередь ЦХОД.</div>
+                </div>
+                <div class="timeline-mobile-item future">
+                    <div class="timeline-mobile-dot"></div>
+                    <div class="text-xs text-fleet font-mono mb-1">2032</div>
+                    <div class="font-semibold text-sm mb-1">Полный выход · IRR ~26%</div>
+                    <div class="text-xs text-gray-500 leading-relaxed">Удержание доли до полного цикла.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+            <div class="card-style flex items-start gap-4" style="padding: 20px;">
+                <div class="w-10 h-10 rounded-full bg-light-blue flex items-center justify-center text-plat shrink-0"><i class="fa-solid fa-users"></i></div>
+                <div>
+                    <div class="font-semibold text-sm mb-1">Участие команды — 50 млн ₽</div>
+                    <div class="text-xs text-gray-500 leading-relaxed font-mono">В 2027 году инвестируются в распределённую платформу.</div>
+                </div>
+            </div>
+            <div class="card-style flex items-start gap-4" style="padding: 20px;">
+                <div class="w-10 h-10 rounded-full bg-light-green flex items-center justify-center text-fleet shrink-0"><i class="fa-solid fa-arrows-rotate"></i></div>
+                <div>
+                    <div class="font-semibold text-sm mb-1">Реинвестирование выручки</div>
+                    <div class="text-xs text-gray-500 leading-relaxed font-mono">С 2027 г. — на масштабирование инфраструктуры и возврат обязательств.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЦЕЛЕВЫЕ ПОКАЗАТЕЛИ -->
+    <div class="mb-12 md:mb-16 fade-up" style="animation-delay: 0.8s">
+        <div class="label-mini mb-4">07 — Таргеты 2030/2031</div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="card-style">
+                <i class="fa-solid fa-circle-nodes text-2xl text-plat mb-4"></i>
+                <div class="label-mini mb-2">Активные узлы</div>
+                <div class="text-3xl md:text-4xl font-bold font-mono text-black mb-2">100<span class="text-xl text-gray-400 ml-1">млн</span></div>
+                <div class="text-sm text-gray-500">Люди, устройства, роботы, ИИ-агенты — общая экосистема.</div>
+            </div>
+            <div class="card-style">
+                <i class="fa-solid fa-coins text-2xl text-fleet mb-4"></i>
+                <div class="label-mini mb-2">ARR · годовая выручка</div>
+                <div class="text-3xl md:text-4xl font-bold font-mono text-black mb-2">$3,6<span class="text-xl text-gray-400 ml-1">млрд</span></div>
+                <div class="text-sm text-gray-500">30 млн платящих клиентов CORE × $10/мес.</div>
+            </div>
+            <div class="card-style">
+                <i class="fa-solid fa-microchip text-2xl text-int mb-4"></i>
+                <div class="label-mini mb-2">Инфраструктура</div>
+                <div class="text-3xl md:text-4xl font-bold font-mono text-black mb-2">7,9<span class="text-xl text-gray-400 ml-1">EFLOPS</span></div>
+                <div class="text-sm text-gray-500">FP16 производительность + 8,7 ЭБ хранения.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="mb-12 md:mb-16 fade-up" style="animation-delay: 0.9s">
+        <div class="card-style grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-light-blue rounded-full text-plat text-xs font-mono font-semibold mb-4">
+                    <i class="fa-solid fa-lock text-[10px]"></i> Закрытый раунд · NDA
+                </div>
+                <h2 class="text-2xl md:text-3xl font-bold mb-4 leading-tight">Полная финмодель и TEO <br><span class="text-plat">по NDA</span></h2>
+                <p class="text-sm text-gray-500 leading-relaxed mb-6">Детальное технико-экономическое обоснование и интерактивная финансовая модель доступны после подписания соглашения о неразглашении.</p>
+                <div class="flex flex-wrap gap-3">
+                    <a href="#" class="btn-primary"><i class="fa-solid fa-file-signature"></i> Скачать NDA (DOCX)</a>
+                    <a href="#" class="btn-ghost"><i class="fa-brands fa-telegram"></i> Telegram-группа</a>
+                </div>
+            </div>
+            <div class="space-y-3">
+                <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-2xl border border-thin">
+                    <div class="w-10 h-10 rounded-full bg-light-blue flex items-center justify-center text-plat shrink-0"><i class="fa-solid fa-file-pdf"></i></div>
+                    <div>
+                        <div class="font-semibold text-sm">Концепт технологического комплекса</div>
+                        <div class="text-xs text-gray-400 font-mono">PDF · обзор ЦХОД</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-2xl border border-thin">
+                    <div class="w-10 h-10 rounded-full bg-light-purple flex items-center justify-center text-int shrink-0"><i class="fa-solid fa-chart-pie"></i></div>
+                    <div>
+                        <div class="font-semibold text-sm">Интерактивная финмодель</div>
+                        <div class="text-xs text-gray-400 font-mono">XLS · после NDA</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-2xl border border-thin">
+                    <div class="w-10 h-10 rounded-full bg-light-green flex items-center justify-center text-fleet shrink-0"><i class="fa-solid fa-comments"></i></div>
+                    <div>
+                        <div class="font-semibold text-sm">Аналитика и тренды проекта</div>
+                        <div class="text-xs text-gray-400 font-mono">Telegram · публичный канал</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-8 disclaimer">
+            <strong class="text-gray-700">Дисклеймер.</strong> 
+            Представленный калькулятор носит исключительно иллюстративный характер и не является публичной офертой или индивидуальной инвестиционной рекомендацией. 
+            Все расчёты основаны на целевых прогнозах проекта ЭМИИА и предположениях о кратности возврата (3× для Call-опциона, IRR 26% при удержании до 2032 г., IRR 50–60% при досрочном выходе в 2028 г.). 
+            Реальные результаты могут отличаться. Решение об инвестициях принимается после изучения полной документации по NDA.
+        </div>
+    </div>
+
+</main>
+
+<footer class="border-t border-thin mt-6 py-8 px-4 md:px-6">
+    <div class="max-w-6xl mx-auto flex flex-col justify-center items-center gap-4 text-center">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-2 w-full text-xs text-gray-400 font-mono">
+            <span>EMIIA.AI SIP – ПРОСТРАНСТВЕННЫЙ ИНТЕЛЛЕКТ</span>
+            <span>INVESTOR CALCULATOR v1.0</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+// =================== ДАННЫЕ ЭТАПОВ ===================
+const stages = {
+  1: { 
+    year: 2026, totalAmount: 100, totalEquity: 6, min: 10, max: 100, step: 5,
+    name: 'Конвертируемый заем',
+    description: 'Раунд 1 · 2026 Q3–Q4. Конвертируемый заем. Минимальный чек — 10 млн ₽. Расчётная доля пропорциональна объёму раунда.'
+  },
+  2: { 
+    year: 2027, totalAmount: 450, totalEquity: 24, min: 50, max: 450, step: 25,
+    name: 'Конв. заем / Pre-IPO / Облигации',
+    description: 'Раунд 2 · 2027 Q3–Q4. Конвертируемый заём, Pre-IPO или облигации. Минимальный чек — 50 млн ₽. Расчётная доля пропорциональна объёму раунда.'
+  }
+};
+
+// =================== СЦЕНАРИИ ===================
+const scenarios = {
+  call: { name: 'Call-опцион · 2029–2030', type: 'multiple', multiple: 3.0, exitYear: 2029, color: '#3c78d8' },
+  preipo: { name: 'Pre-IPO Exit · 2028', type: 'irr', irr: 0.55, exitYear: 2028, color: '#674ea7' },
+  hold: { name: 'Удержание · до 2032', type: 'irr', irr: 0.26, exitYear: 2032, color: '#38761d' }
+};
+
+// =================== СОСТОЯНИЕ ===================
+let state = { stage: 1, amount: 50, scenario: 'call' };
+
+// =================== ФУНКЦИИ РАСЧЁТА ===================
+function calculateEquity(stageId, amount) {
+  const s = stages[stageId];
+  return (amount / s.totalAmount) * s.totalEquity;
+}
+
+function calculateScenario(stageId, amount, scenarioId) {
+  const s = stages[stageId];
+  const sc = scenarios[scenarioId];
+  const yearsHeld = Math.max(1, sc.exitYear - s.year);
+  const equity = calculateEquity(stageId, amount);
+  
+  let multiple;
+  if (sc.type === 'multiple') multiple = sc.multiple;
+  else multiple = Math.pow(1 + sc.irr, yearsHeld);
+  
+  const exitValue = amount * multiple;
+  const profit = exitValue - amount;
+  const roi = (profit / amount) * 100;
+  const irr = (Math.pow(multiple, 1 / yearsHeld) - 1) * 100;
+  
+  return { equity, exitValue, profit, roi, irr, multiple, yearsHeld, exitYear: sc.exitYear };
+}
+
+// =================== ФОРМАТИРОВАНИЕ ===================
+function fmt(n, decimals = 1) {
+  return n.toLocaleString('ru-RU', { minimumFractionDigits: decimals, maximumFractionDigits: decimals }).replace(',', '.');
+}
+
+function animateNumber(element, from, to, duration = 600, decimals = 1, suffix = '') {
+  const start = performance.now();
+  function frame(now) {
+    const t = Math.min(1, (now - start) / duration);
+    const eased = 1 - Math.pow(1 - t, 3);
+    const value = from + (to - from) * eased;
+    element.textContent = fmt(value, decimals) + suffix;
+    if (t < 1) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+
+function parseNum(text) {
+  const cleaned = (text || '').toString().replace(/[^\d.,-]/g, '').replace(',', '.');
+  const v = parseFloat(cleaned);
+  return isNaN(v) ? 0 : v;
+}
+
+function pluralize(n, one, few, many) {
+  const mod10 = n % 10, mod100 = n % 100;
+  if (mod10 === 1 && mod100 !== 11) return one;
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 10 || mod100 >= 20)) return few;
+  return many;
+}
+
+// =================== ОБНОВЛЕНИЕ ИНТЕРФЕЙСА ===================
+function updateAll() {
+  const s = stages[state.stage];
+  const result = calculateScenario(state.stage, state.amount, state.scenario);
+  const sc = scenarios[state.scenario];
+  
+  document.getElementById('stageDescription').textContent = s.description;
+  
+  const slider = document.getElementById('amountSlider');
+  const input = document.getElementById('amountInput');
+  slider.min = s.min; slider.max = s.max; slider.step = s.step; slider.value = state.amount;
+  input.value = state.amount; input.min = s.min; input.max = s.max;
+  
+  const pct = ((state.amount - s.min) / (s.max - s.min)) * 100;
+  document.getElementById('sliderMin').textContent = s.min;
+  document.getElementById('sliderMax').textContent = s.max;
+  document.getElementById('amountDisplay').textContent = state.amount;
+  
+  const equityEl = document.getElementById('equityValue');
+  animateNumber(equityEl, parseNum(equityEl.textContent), result.equity, 500, 2);
+  
+  const shareOfRound = (state.amount / s.totalAmount) * 100;
+  document.getElementById('shareOfRound').textContent = fmt(shareOfRound, 1) + '%';
+  
+  document.getElementById('scenarioTitle').textContent = sc.name;
+  document.getElementById('growthMultiple').textContent = fmt(result.multiple, 2) + '×';
+  
+  const exitEl = document.getElementById('exitValue');
+  const profitEl = document.getElementById('profitValue');
+  const roiEl = document.getElementById('roiValue');
+  const irrEl = document.getElementById('irrValue');
+  const multEl = document.getElementById('multValue');
+  
+  animateNumber(exitEl, parseNum(exitEl.textContent), result.exitValue, 600, 1);
+  animateNumber(profitEl, parseNum(profitEl.textContent), result.profit, 600, 1);
+  animateNumber(roiEl, parseNum(roiEl.textContent), result.roi, 600, 0);
+  animateNumber(irrEl, parseNum(irrEl.textContent), result.irr, 600, 1);
+  animateNumber(multEl, parseNum(multEl.textContent), result.multiple, 600, 2);
+  
+  document.getElementById('investedDisplay').textContent = fmt(state.amount, 1) + ' млн ₽';
+  document.getElementById('yearsHeld').textContent = result.yearsHeld + ' ' + pluralize(result.yearsHeld, 'год', 'года', 'лет');
+  
+  document.querySelectorAll('.scenario-card').forEach(c => c.classList.remove('active'));
+  document.querySelector(`.scenario-card[data-scenario="${state.scenario}"]`).classList.add('active');
+  
+  updateComparisonTable();
+  drawGrowthChart();
+}
+
+function selectStage(stageId) {
+  state.stage = stageId;
+  const s = stages[stageId];
+  state.amount = Math.round(s.min * 2 / s.step) * s.step;
+  if (state.amount > s.max) state.amount = s.max;
+  if (state.amount < s.min) state.amount = s.min;
+  
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.tab-btn[data-stage="${stageId}"]`).classList.add('active');
+  updateAll();
+}
+
+function selectScenario(scenarioId) {
+  state.scenario = scenarioId;
+  updateAll();
+}
+
+// =================== СЛайдер + Input ===================
+const slider = document.getElementById('amountSlider');
+const input = document.getElementById('amountInput');
+
+slider.addEventListener('input', e => {
+  state.amount = parseFloat(e.target.value);
+  input.value = state.amount;
+  document.getElementById('amountDisplay').textContent = state.amount;
+  updateAll();
+});
+
+input.addEventListener('input', e => {
+  let v = parseFloat(e.target.value);
+  const s = stages[state.stage];
+  if (isNaN(v)) return;
+  v = Math.max(s.min, Math.min(s.max, v));
+  state.amount = v;
+  slider.value = v;
+  document.getElementById('amountDisplay').textContent = v;
+  updateAll();
+});
+
+input.addEventListener('blur', e => {
+  let v = parseFloat(e.target.value);
+  const s = stages[state.stage];
+  if (isNaN(v)) v = s.min;
+  v = Math.max(s.min, Math.min(s.max, v));
+  state.amount = v;
+  input.value = v;
+  slider.value = v;
+  document.getElementById('amountDisplay').textContent = v;
+  updateAll();
+});
+
+// =================== ТАБЛИЦА СРАВНЕНИЯ ===================
+function updateComparisonTable() {
+  const tbody = document.getElementById('comparisonTable');
+  const scenarios_list = ['call', 'preipo', 'hold'];
+  const rows = [
+    { label: 'Год входа', get: (r) => stages[state.stage].year, fmt: v => v },
+    { label: 'Год выхода', get: (r) => r.exitYear, fmt: v => v },
+    { label: 'Срок удержания', get: (r) => r.yearsHeld, fmt: v => v + ' ' + pluralize(v, 'год', 'года', 'лет') },
+    { label: 'Вложено, млн ₽', get: (r) => state.amount, fmt: v => fmt(v, 1) },
+    { label: 'Доля в ООО, %', get: (r) => r.equity, fmt: v => fmt(v, 2) + ' %' },
+    { label: 'Стоимость на выходе, млн ₽', get: (r) => r.exitValue, fmt: v => fmt(v, 1), highlight: true },
+    { label: 'Чистая прибыль, млн ₽', get: (r) => r.profit, fmt: v => fmt(v, 1), highlight: true },
+    { label: 'ROI, %', get: (r) => r.roi, fmt: v => fmt(v, 0) + ' %', highlight: true },
+    { label: 'IRR годовых, %', get: (r) => r.irr, fmt: v => fmt(v, 1) + ' %', highlight: true },
+    { label: 'Кратность возврата', get: (r) => r.multiple, fmt: v => fmt(v, 2) + '×', highlight: true }
+  ];
+  
+  let html = '';
+  rows.forEach(row => {
+    html += `<tr class="border-b border-thin ${row.highlight ? 'bg-gray-50' : ''}">`;
+    html += `<td class="p-4 text-gray-500 text-xs font-mono">${row.label}</td>`;
+    scenarios_list.forEach(scId => {
+      const r = calculateScenario(state.stage, state.amount, scId);
+      const isActive = scId === state.scenario;
+      const val = row.get(r);
+      const colorClass = isActive ? (scId === 'call' ? 'text-plat' : scId === 'preipo' ? 'text-int' : 'text-fleet') : 'text-gray-700';
+      html += `<td class="p-4 text-right font-mono text-sm ${row.highlight ? 'font-bold' : ''} ${colorClass}">${row.fmt(val)}</td>`;
+    });
+    html += '</tr>';
+  });
+  tbody.innerHTML = html;
+}
+
+// =================== ГРАФИК РОСТА ===================
+function drawGrowthChart() {
+  const canvas = document.getElementById('growthChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.scale(dpr, dpr);
+  
+  const W = rect.width, H = rect.height;
+  const padL = 45, padR = 15, padT = 20, padB = 30;
+  const chartW = Math.max(10, W - padL - padR);
+  const chartH = Math.max(10, H - padT - padB);
+  
+  ctx.clearRect(0, 0, W, H);
+  
+  const s = stages[state.stage];
+  const startYear = s.year, endYear = 2032;
+  const years = Math.max(1, endYear - startYear);
+  
+  let maxVal = 0;
+  ['call', 'preipo', 'hold'].forEach(scId => {
+    const sc = scenarios[scId];
+    const yearsHeld = Math.max(1, sc.exitYear - s.year);
+    const mult = sc.type === 'multiple' ? sc.multiple : Math.pow(1 + sc.irr, yearsHeld);
+    const val = state.amount * mult;
+    if (val > maxVal) maxVal = val;
+  });
+  maxVal = maxVal * 1.15;
+  if (maxVal === 0) maxVal = 1;
+  
+  ctx.strokeStyle = 'rgba(60, 120, 216, 0.08)';
+  ctx.lineWidth = 1;
+  ctx.font = '11px JetBrains Mono';
+  ctx.fillStyle = '#9ca3af';
+  
+  const ySteps = 4;
+  for (let i = 0; i <= ySteps; i++) {
+    const y = padT + (chartH / ySteps) * i;
+    ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(W - padR, y); ctx.stroke();
+    const val = maxVal * (1 - i / ySteps);
+    ctx.textAlign = 'right';
+    ctx.fillText(fmt(val, 0), padL - 8, y + 4);
+  }
+  
+  const xSteps = years;
+  ctx.textAlign = 'center';
+  for (let i = 0; i <= xSteps; i++) {
+    const x = padL + (chartW / xSteps) * i;
+    const year = startYear + i;
+    ctx.fillText(year, x, H - padB + 18);
+    if (i > 0 && i < xSteps) {
+      ctx.strokeStyle = 'rgba(60, 120, 216, 0.04)';
+      ctx.beginPath(); ctx.moveTo(x, padT); ctx.lineTo(x, H - padB); ctx.stroke();
+    }
+  }
+  
+  function drawScenarioLine(scId, isActive) {
+    const sc = scenarios[scId];
+    const points = [];
+    points.push({ x: padL, y: padT + chartH * (1 - state.amount / maxVal), year: startYear, value: state.amount });
+    
+    const exitYear = sc.exitYear;
+    const yearsToExit = Math.max(1, exitYear - startYear);
+    const mult = sc.type === 'multiple' ? sc.multiple : Math.pow(1 + sc.irr, yearsToExit);
+    const exitValue = state.amount * mult;
+    
+    if (sc.type === 'multiple') {
+      const exitX = padL + (chartW / years) * yearsToExit;
+      const exitY = padT + chartH * (1 - exitValue / maxVal);
+      points.push({ x: exitX, y: exitY, year: exitYear, value: exitValue });
+      if (exitYear < endYear) points.push({ x: padL + chartW, y: exitY, year: endYear, value: exitValue });
+    } else {
+      for (let y = 1; y <= yearsToExit; y++) {
+        const val = state.amount * Math.pow(1 + sc.irr, y);
+        const x = padL + (chartW / years) * y;
+        const yCoord = padT + chartH * (1 - val / maxVal);
+        points.push({ x, y: yCoord, year: startYear + y, value: val });
+      }
+      if (exitYear < endYear) {
+        const lastY = points[points.length - 1].y;
+        points.push({ x: padL + chartW, y: lastY, year: endYear, value: exitValue });
+      }
+    }
+    
+    if (isActive) {
+      const grad = ctx.createLinearGradient(0, padT, 0, H - padB);
+      grad.addColorStop(0, 'rgba(60, 120, 216, 0.15)');
+      grad.addColorStop(1, 'rgba(60, 120, 216, 0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.moveTo(points[0].x, H - padB);
+      points.forEach(p => ctx.lineTo(p.x, p.y));
+      ctx.lineTo(points[points.length - 1].x, H - padB);
+      ctx.closePath(); ctx.fill();
+    }
+    
+    ctx.strokeStyle = isActive ? sc.color : '#d1d5db';
+    ctx.lineWidth = isActive ? 2.5 : 1.5;
+    ctx.setLineDash(isActive ? [] : [4, 4]);
+    ctx.beginPath();
+    points.forEach((p, i) => { if (i === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y); });
+    ctx.stroke();
+    ctx.setLineDash([]);
+    
+    if (isActive) {
+      const exitPoint = points.find(p => p.year === exitYear) || points[points.length - 1];
+      ctx.fillStyle = sc.color;
+      ctx.beginPath(); ctx.arc(exitPoint.x, exitPoint.y, 5, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke();
+      
+      ctx.fillStyle = sc.color;
+      ctx.font = 'bold 11px JetBrains Mono';
+      ctx.textAlign = 'left';
+      ctx.fillText(fmt(exitPoint.value, 0), exitPoint.x + 8, exitPoint.y - 8);
+    }
+  }
+  
+  ['call', 'preipo', 'hold'].forEach(scId => { if (scId !== state.scenario) drawScenarioLine(scId, false); });
+  drawScenarioLine(state.scenario, true);
+  
+  ctx.fillStyle = '#111';
+  ctx.beginPath(); ctx.arc(padL, padT + chartH * (1 - state.amount / maxVal), 4, 0, Math.PI * 2); ctx.fill();
+  ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke();
+}
+
+// =================== ДОНАТ-ЧАРТ ===================
+function drawDonutChart() {
+  const canvas = document.getElementById('donutChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const cx = canvas.width / 2, cy = canvas.height / 2;
+  const radius = Math.max(20, Math.min(cx, cy) - 10);
+  const inner = Math.max(10, radius * 0.65);
+  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  ctx.fillStyle = '#3c78d8';
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius, -Math.PI / 2, -Math.PI / 2 + (Math.PI * 2 * 0.20));
+  ctx.arc(cx, cy, inner, -Math.PI / 2 + (Math.PI * 2 * 0.20), -Math.PI / 2, true);
+  ctx.closePath(); ctx.fill();
+  
+  ctx.fillStyle = '#674ea7';
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius, -Math.PI / 2 + (Math.PI * 2 * 0.20), -Math.PI / 2 + (Math.PI * 2 * 0.30));
+  ctx.arc(cx, cy, inner, -Math.PI / 2 + (Math.PI * 2 * 0.30), -Math.PI / 2 + (Math.PI * 2 * 0.20), true);
+  ctx.closePath(); ctx.fill();
+  
+  ctx.strokeStyle = 'rgba(60, 120, 216, 0.1)';
+  ctx.lineWidth = Math.max(1, radius - inner);
+  ctx.beginPath();
+  ctx.arc(cx, cy, (radius + inner) / 2, -Math.PI / 2 + (Math.PI * 2 * 0.30), -Math.PI / 2);
+  ctx.stroke();
+}
+
+// =================== ИНИЦИАЛИЗАЦИЯ ===================
+window.addEventListener('DOMContentLoaded', () => {
+  selectStage(1);
+  drawDonutChart();
+  
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      drawGrowthChart();
+      drawDonutChart();
+    }, 150);
+  });
+});
+</script>
+
+</body>
+</html>
+
