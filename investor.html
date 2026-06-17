@@ -622,12 +622,16 @@ const stages = {
   1: { 
     year: 2026, totalAmount: 100, totalEquity: 6, min: 1, max: 100, step: 1,
     name: 'Конвертируемый заем',
-    description: 'Раунд 1 · 2026 Q3–Q4. Конвертируемый заем. Раунд А (Бридж-транш 100 млн руб. в рамках общего раунда 550 млн руб.). Расчётная доля пропорциональна объёму раунда.'
+    description: 'Раунд 1 · 2026 Q3–Q4. Конвертируемый заем. Раунд А (Бридж-транш 100 млн руб. в рамках общего раунда 550 млн руб.). Расчётная доля пропорциональна объёму раунда.',
+    preMoney: 1280,  // млн ₽
+    postMoney: 1380  // 1280 + 100
   },
   2: { 
     year: 2027, totalAmount: 450, totalEquity: 24, min: 1, max: 450, step: 5,
     name: 'Конв. заем / Pre-IPO / Облигации',
-    description: 'Раунд 2 · 2027 Q3–Q4. Конвертируемый заём, Pre-IPO или облигации. Расчётная доля пропорциональна объёму раунда.'
+    description: 'Раунд 2 · 2027 Q3–Q4. Конвертируемый заём, Pre-IPO или облигации. Расчётная доля пропорциональна объёму раунда.',
+    preMoney: 1380,  // post-money раунда 1
+    postMoney: 1830  // 1380 + 450
   }
 };
 
@@ -663,17 +667,6 @@ function calculateScenario(stageId, amount, scenarioId) {
   const irr = (Math.pow(multiple, 1 / yearsHeld) - 1) * 100;
   
   return { equity, exitValue, profit, roi, irr, multiple, yearsHeld, exitYear: sc.exitYear };
-}
-
-function getPreMoney(stageId) {
-    const s = stages[stageId];
-    // pre-money = (totalAmount / (totalEquity/100)) - totalAmount
-    return (s.totalAmount / (s.totalEquity/100)) - s.totalAmount;
-}
-
-function getPostMoney(stageId) {
-    const s = stages[stageId];
-    return getPreMoney(stageId) + s.totalAmount;
 }
 
 // =================== ФОРМАТИРОВАНИЕ ===================
@@ -721,11 +714,22 @@ function updateAll() {
   const result = calculateScenario(state.stage, state.amount, state.scenario);
   const sc = scenarios[state.scenario];
   
-  // Pre-money и Post-money
-  const preMoney = getPreMoney(state.stage);
-  const postMoney = getPostMoney(state.stage);
-  document.getElementById('preMoneyValue').innerHTML = formatMoneyBln(preMoney).replace(' млрд ₽', '<span class="text-sm text-gray-400 ml-1">млрд ₽</span>').replace(' млн ₽', '<span class="text-sm text-gray-400 ml-1">млн ₽</span>');
-  document.getElementById('postMoneyValue').textContent = formatMoneyBln(postMoney);
+  // Pre-money и Post-money из данных этапа
+  const preMoney = s.preMoney;
+  const postMoney = s.postMoney;
+  
+  const preMoneyEl = document.getElementById('preMoneyValue');
+  const postMoneyEl = document.getElementById('postMoneyValue');
+  
+  // Обновляем Pre-money в верхней карточке
+  if (preMoney >= 1000) {
+    preMoneyEl.innerHTML = fmt(preMoney / 1000, 2) + '<span class="text-sm text-gray-400 ml-1">млрд ₽</span>';
+  } else {
+    preMoneyEl.innerHTML = fmt(preMoney, 0) + '<span class="text-sm text-gray-400 ml-1">млн ₽</span>';
+  }
+  
+  // Обновляем Post-money в левой панели
+  postMoneyEl.textContent = formatMoneyBln(postMoney);
   
   document.getElementById('stageDescription').textContent = s.description;
   
