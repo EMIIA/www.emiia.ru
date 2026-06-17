@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -90,6 +88,9 @@
     .timeline-track { position: relative; height: 2px; background: #E5E5E5; margin: 60px 0 40px; border-radius: 2px; }
     .timeline-dot { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 16px; height: 16px; border-radius: 50%; background: #fff; border: 3px solid #3c78d8; box-shadow: 0 0 0 4px rgba(60, 120, 216, 0.15); }
     .timeline-dot.future { border-color: #674ea7; box-shadow: 0 0 0 4px rgba(103, 78, 167, 0.15); }
+    .timeline-label { position: absolute; transform: translateX(-50%); width: 200px; text-align: center; }
+    .timeline-label.top { bottom: 100%; margin-bottom: 20px; }
+    .timeline-label.bottom { top: 100%; margin-top: 20px; }
     
     /* Timeline Mobile */
     .timeline-mobile { display: none; }
@@ -159,7 +160,7 @@
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-10 md:mb-16">
         <div class="card-style fade-up" style="animation-delay: 0.1s; padding: 20px;">
             <div class="label-mini mb-2">Pre-Money</div>
-            <div class="text-xl md:text-2xl font-bold font-mono text-plat">1,28<span class="text-sm text-gray-400 ml-1">млрд ₽</span></div>
+            <div class="text-xl md:text-2xl font-bold font-mono text-plat" id="preMoneyValue">1,28<span class="text-sm text-gray-400 ml-1">млрд ₽</span></div>
         </div>
         <div class="card-style fade-up" style="animation-delay: 0.15s; padding: 20px;">
             <div class="label-mini mb-2">Лимит залога</div>
@@ -195,7 +196,7 @@
                             <div class="font-mono text-sm text-black font-medium">450 млн ₽ · 24%</div>
                         </button>
                     </div>
-                    <div class="text-xs text-gray-400 mt-3 font-mono" id="stageDescription">Конвертируемый заем. Минимальный чек — 1 млн ₽.</div>
+                    <div class="text-xs text-gray-400 mt-3 font-mono" id="stageDescription">Конвертируемый заем. </div>
                 </div>
 
                 <!-- Сумма -->
@@ -226,7 +227,7 @@
                         </div>
                         <div>
                             <div class="label-mini mb-1">Post-money</div>
-                            <div class="font-mono text-sm font-medium">1,38 млрд ₽</div>
+                            <div class="font-mono text-sm font-medium" id="postMoneyValue">1,38 млрд ₽</div>
                         </div>
                     </div>
                 </div>
@@ -436,22 +437,22 @@
                     <div class="timeline-dot future" style="left: 68%"></div>
                     <div class="timeline-dot future" style="left: 92%"></div>
                     
-                    <div class="absolute" style="left: 8%; top: 30px; transform: translateX(-50%); width: 200px; text-align: center;">
+                    <div class="timeline-label top" style="left: 8%;">
                         <div class="text-xs text-plat font-mono mb-1">2026 · Q3–Q4</div>
                         <div class="font-semibold text-sm mb-1">Раунд 1</div>
                         <div class="text-xs text-gray-400 font-mono">100 млн ₽ · 6%</div>
                     </div>
-                    <div class="absolute" style="left: 32%; bottom: 30px; transform: translateX(-50%); width: 200px; text-align: center;">
+                    <div class="timeline-label bottom" style="left: 32%;">
                         <div class="text-xs text-plat font-mono mb-1">2027 · Q3–Q4</div>
                         <div class="font-semibold text-sm mb-1">Раунд 2</div>
                         <div class="text-xs text-gray-400 font-mono">450 млн ₽ · 24%</div>
                     </div>
-                    <div class="absolute" style="left: 68%; top: 30px; transform: translateX(-50%); width: 200px; text-align: center;">
+                    <div class="timeline-label top" style="left: 68%;">
                         <div class="text-xs text-int font-mono mb-1">2029 · Q3–Q4</div>
                         <div class="font-semibold text-sm mb-1">Раунд 3</div>
                         <div class="text-xs text-gray-400 font-mono">1 500 млн ₽ · IPO</div>
                     </div>
-                    <div class="absolute" style="left: 92%; bottom: 30px; transform: translateX(-50%); width: 200px; text-align: center;">
+                    <div class="timeline-label bottom" style="left: 92%;">
                         <div class="text-xs text-fleet font-mono mb-1">2032</div>
                         <div class="font-semibold text-sm mb-1">Полный выход</div>
                         <div class="text-xs text-gray-400 font-mono">IRR ~26% годовых</div>
@@ -619,14 +620,14 @@
 // =================== ДАННЫЕ ЭТАПОВ ===================
 const stages = {
   1: { 
-    year: 2026, totalAmount: 100, totalEquity: 6, min: 1, max: 100, step: 1, // Изменено min на 1
+    year: 2026, totalAmount: 100, totalEquity: 6, min: 1, max: 100, step: 1,
     name: 'Конвертируемый заем',
-    description: 'Раунд 1 · 2026 Q3–Q4. Конвертируемый заем. Минимальный чек — 1 млн ₽. Расчётная доля пропорциональна объёму раунда.'
+    description: 'Раунд 1 · 2026 Q3–Q4. Конвертируемый заем. Раунд А (Бридж-транш 100 млн руб. в рамках общего раунда 550 млн руб.). Расчётная доля пропорциональна объёму раунда.'
   },
   2: { 
-    year: 2027, totalAmount: 450, totalEquity: 24, min: 1, max: 450, step: 5, // Изменено min на 1
+    year: 2027, totalAmount: 450, totalEquity: 24, min: 1, max: 450, step: 5,
     name: 'Конв. заем / Pre-IPO / Облигации',
-    description: 'Раунд 2 · 2027 Q3–Q4. Конвертируемый заём, Pre-IPO или облигации. Минимальный чек — 1 млн ₽. Расчётная доля пропорциональна объёму раунда.'
+    description: 'Раунд 2 · 2027 Q3–Q4. Конвертируемый заём, Pre-IPO или облигации. Расчётная доля пропорциональна объёму раунда.'
   }
 };
 
@@ -664,9 +665,29 @@ function calculateScenario(stageId, amount, scenarioId) {
   return { equity, exitValue, profit, roi, irr, multiple, yearsHeld, exitYear: sc.exitYear };
 }
 
+function getPreMoney(stageId) {
+    const s = stages[stageId];
+    // pre-money = (totalAmount / (totalEquity/100)) - totalAmount
+    return (s.totalAmount / (s.totalEquity/100)) - s.totalAmount;
+}
+
+function getPostMoney(stageId) {
+    const s = stages[stageId];
+    return getPreMoney(stageId) + s.totalAmount;
+}
+
 // =================== ФОРМАТИРОВАНИЕ ===================
 function fmt(n, decimals = 1) {
   return n.toLocaleString('ru-RU', { minimumFractionDigits: decimals, maximumFractionDigits: decimals }).replace(',', '.');
+}
+
+function formatMoneyBln(value) {
+    const bln = value / 1000;
+    if (bln >= 1) {
+        return fmt(bln, 2) + ' млрд ₽';
+    } else {
+        return fmt(value, 0) + ' млн ₽';
+    }
 }
 
 function animateNumber(element, from, to, duration = 600, decimals = 1, suffix = '') {
@@ -699,6 +720,12 @@ function updateAll() {
   const s = stages[state.stage];
   const result = calculateScenario(state.stage, state.amount, state.scenario);
   const sc = scenarios[state.scenario];
+  
+  // Pre-money и Post-money
+  const preMoney = getPreMoney(state.stage);
+  const postMoney = getPostMoney(state.stage);
+  document.getElementById('preMoneyValue').innerHTML = formatMoneyBln(preMoney).replace(' млрд ₽', '<span class="text-sm text-gray-400 ml-1">млрд ₽</span>').replace(' млн ₽', '<span class="text-sm text-gray-400 ml-1">млн ₽</span>');
+  document.getElementById('postMoneyValue').textContent = formatMoneyBln(postMoney);
   
   document.getElementById('stageDescription').textContent = s.description;
   
@@ -745,7 +772,7 @@ function updateAll() {
 function selectStage(stageId) {
   state.stage = stageId;
   const s = stages[stageId];
-  state.amount = 5; // Дефолтное значение при переключении
+  state.amount = 5;
   if (state.amount > s.max) state.amount = s.max;
   if (state.amount < s.min) state.amount = s.min;
   
@@ -1003,5 +1030,3 @@ window.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
-
-
