@@ -88,7 +88,7 @@
     .timeline-track { position: relative; height: 2px; background: #E5E5E5; margin: 60px 0 40px; border-radius: 2px; }
     .timeline-dot { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 16px; height: 16px; border-radius: 50%; background: #fff; border: 3px solid #3c78d8; box-shadow: 0 0 0 4px rgba(60, 120, 216, 0.15); }
     .timeline-dot.future { border-color: #674ea7; box-shadow: 0 0 0 4px rgba(103, 78, 167, 0.15); }
-    .timeline-label { position: absolute; transform: translateX(-50%); width: 200px; text-align: center; }
+    .timeline-label { position: absolute; transform: translateX(-50%); width: 220px; text-align: center; }
     .timeline-label.top { bottom: 100%; margin-bottom: 20px; }
     .timeline-label.bottom { top: 100%; margin-top: 20px; }
     
@@ -152,15 +152,13 @@
         <h1 class="text-3xl md:text-5xl mb-3 font-bold tracking-tight">Калькулятор инвестора</h1>
         <p class="text-gray-500 text-sm md:text-base font-mono max-w-2xl">Раунды 2026–2027. Смоделируйте долю, ROI и IRR по сценариям выхода: Call-опцион, Pre-IPO или удержание до 2032.</p>
 
-
         <a href="https://www.emiia.ru/emiia_ai_oai" class="inline-block mt-3 text-sm md:text-base font-mono max-w-2xl text-plat hover:underline">
-    Онлайн-диаграмма детализации по рыночным индикаторам (HTML/CSV/EXCEL)↗
-</a>
-<br>
-
-<a href="https://www.emiia.ru/EMIIA.AI_SIP_INVESTOR.pdf" class="inline-block mt-3 text-sm md:text-base font-mono max-w-2xl text-plat hover:underline">
-   Презентация для инвестора (PDF)↗
-</a>
+            Онлайн-диаграмма детализации по рыночным индикаторам (HTML/CSV/EXCEL)↗
+        </a>
+        <br>
+        <a href="https://www.emiia.ru/EMIIA.AI_SIP_INVESTOR.pdf" class="inline-block mt-3 text-sm md:text-base font-mono max-w-2xl text-plat hover:underline">
+           Презентация для инвестора (PDF)↗
+        </a>
       
     </div>
 
@@ -175,11 +173,11 @@
         </div>
         <div class="card-style fade-up" style="animation-delay: 0.2s; padding: 20px;">
             <div class="label-mini mb-2">ROI (6 лет)</div>
-            <div class="text-xl md:text-2xl font-bold font-mono text-fleet">300<span class="text-sm text-gray-400 ml-1">%</span></div>
+            <div class="text-xl md:text-2xl font-bold font-mono text-fleet">~500<span class="text-sm text-gray-400 ml-1">%</span></div>
         </div>
         <div class="card-style fade-up" style="animation-delay: 0.25s; padding: 20px;">
             <div class="label-mini mb-2">IRR · удержание</div>
-            <div class="text-xl md:text-2xl font-bold font-mono text-black">~26<span class="text-sm text-gray-400 ml-1">% год.</span></div>
+            <div class="text-xl md:text-2xl font-bold font-mono text-black">~35<span class="text-sm text-gray-400 ml-1">% год.</span></div>
         </div>
     </div>
 
@@ -269,7 +267,7 @@
                                 <span class="label-mini" style="color: #38761d;">Удержание</span>
                                 <span class="text-[10px] text-gray-400 font-mono">2032</span>
                             </div>
-                            <div class="text-sm text-gray-600 font-mono leading-relaxed">Полный цикл · IRR ~26% годовых</div>
+                            <div class="text-sm text-gray-600 font-mono leading-relaxed">Полный цикл · IRR ~35% годовых</div>
                         </div>
                     </div>
                 </div>
@@ -432,9 +430,9 @@
         </div>
     </div>
 
-    <!-- ROADMAP -->
+    <!-- ROADMAP (С УКАЗАНИЕМ КАПИТАЛИЗАЦИИ И 3-М РАУНДОМ) -->
     <div class="mb-12 md:mb-16 fade-up" style="animation-delay: 0.7s">
-        <div class="label-mini mb-4">06 — Дорожная карта</div>
+        <div class="label-mini mb-4">06 — Дорожная карта и рост капитализации</div>
         <div class="card-style">
             <!-- Desktop -->
             <div class="timeline-desktop">
@@ -447,29 +445,29 @@
                     <div class="timeline-label top" style="left: 8%;">
                         <div class="text-xs text-plat font-mono mb-1">2026 · Q3–Q4</div>
                         <div class="font-semibold text-sm mb-1">Раунд 1</div>
-                        <div class="text-xs text-gray-400 font-mono">100 млн ₽ · 6%</div>
+                        <div class="text-xs text-gray-400 font-mono">100 млн ₽ · Капитализация: 1,38 млрд ₽</div>
                     </div>
                     <div class="timeline-label bottom" style="left: 32%;">
                         <div class="text-xs text-plat font-mono mb-1">2027 · Q3–Q4</div>
                         <div class="font-semibold text-sm mb-1">Раунд 2</div>
-                        <div class="text-xs text-gray-400 font-mono">450 млн ₽ · 24%</div>
+                        <div class="text-xs text-gray-400 font-mono">450 млн ₽ · Капитализация: 2,65 млрд ₽</div>
                     </div>
                     <div class="timeline-label top" style="left: 68%;">
                         <div class="text-xs text-int font-mono mb-1">2029 · Q3–Q4</div>
-                        <div class="font-semibold text-sm mb-1">Раунд 3</div>
-                        <div class="text-xs text-gray-400 font-mono">1 500 млн ₽ · IPO</div>
+                        <div class="font-semibold text-sm mb-1">Раунд 3 / IPO</div>
+                        <div class="text-xs text-gray-400 font-mono">1 500 млн ₽ · Капитализация: ~6,5 млрд ₽</div>
                     </div>
                     <div class="timeline-label bottom" style="left: 92%;">
                         <div class="text-xs text-fleet font-mono mb-1">2032</div>
                         <div class="font-semibold text-sm mb-1">Полный выход</div>
-                        <div class="text-xs text-gray-400 font-mono">IRR ~26% годовых</div>
+                        <div class="text-xs text-gray-400 font-mono">Капитализация: ~8,35 млрд ₽</div>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-32">
                     <div class="bg-gray-50 rounded-2xl p-5">
                         <div class="text-xs text-plat font-mono mb-2">2026</div>
-                        <div class="font-semibold text-sm mb-2">Подготовка ЦХОД</div>
+                        <div class="font-semibold text-sm mb-2">Подготовка ЦХОД (PoC)</div>
                         <div class="text-xs text-gray-500 leading-relaxed mb-3">Концепция техкомплекса: ИИ-фабрика, логистический хаб, роботизированный цех.</div>
                         <a href="https://www.emiia.ru/datacenter.pdf" target="_blank" class="text-xs text-plat font-mono inline-flex items-center gap-1 hover:underline">
                             <i class="fa-solid fa-file-pdf"></i> Концепт технологического комплекса
@@ -493,8 +491,8 @@
                 <div class="timeline-mobile-item">
                     <div class="timeline-mobile-dot"></div>
                     <div class="text-xs text-plat font-mono mb-1">2026 · Q3–Q4</div>
-                    <div class="font-semibold text-sm mb-1">Раунд 1 · 100 млн ₽ · 6%</div>
-                    <div class="text-xs text-gray-500 leading-relaxed mb-2">Конвертируемый заем. *Бридж-транш.</div>
+                    <div class="font-semibold text-sm mb-1">Раунд 1 · 100 млн ₽</div>
+                    <div class="text-xs text-gray-500 leading-relaxed mb-2">Капитализация: 1,38 млрд ₽. Бридж-транш.</div>
                     <a href="https://www.emiia.ru/datacenter.pdf" target="_blank" class="text-xs text-plat font-mono inline-flex items-center gap-1 hover:underline">
                         <i class="fa-solid fa-file-pdf"></i> Концепт технологического комплекса
                     </a>
@@ -502,20 +500,20 @@
                 <div class="timeline-mobile-item">
                     <div class="timeline-mobile-dot"></div>
                     <div class="text-xs text-plat font-mono mb-1">2027 · Q3–Q4</div>
-                    <div class="font-semibold text-sm mb-1">Раунд 2 · 450 млн ₽ · 24%</div>
-                    <div class="text-xs text-gray-500 leading-relaxed">Pre-IPO / облигации. Старт 1-й очереди ЦХОД.</div>
+                    <div class="font-semibold text-sm mb-1">Раунд 2 · 450 млн ₽</div>
+                    <div class="text-xs text-gray-500 leading-relaxed">Капитализация: 2,65 млрд ₽. Старт 1-й очереди ЦХОД.</div>
                 </div>
                 <div class="timeline-mobile-item future">
                     <div class="timeline-mobile-dot"></div>
                     <div class="text-xs text-int font-mono mb-1">2029 · Q3–Q4</div>
                     <div class="font-semibold text-sm mb-1">Раунд 3 · 1 500 млн ₽</div>
-                    <div class="text-xs text-gray-500 leading-relaxed">IPO или вторичное размещение. 2-я очередь ЦХОД.</div>
+                    <div class="text-xs text-gray-500 leading-relaxed">Капитализация: ~6,5 млрд ₽. IPO. 2-я очередь ЦХОД.</div>
                 </div>
                 <div class="timeline-mobile-item future">
                     <div class="timeline-mobile-dot"></div>
                     <div class="text-xs text-fleet font-mono mb-1">2032</div>
-                    <div class="font-semibold text-sm mb-1">Полный выход · IRR ~26%</div>
-                    <div class="text-xs text-gray-500 leading-relaxed">Удержание доли до полного цикла.</div>
+                    <div class="font-semibold text-sm mb-1">Полный выход</div>
+                    <div class="text-xs text-gray-500 leading-relaxed">Капитализация: ~8,35 млрд ₽. IRR ~35%.</div>
                 </div>
             </div>
         </div>
@@ -541,25 +539,34 @@
     <!-- ЦЕЛЕВЫЕ ПОКАЗАТЕЛИ -->
     <div class="mb-12 md:mb-16 fade-up" style="animation-delay: 0.8s">
         <div class="label-mini mb-4">07 — Таргеты 2030/2031</div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div class="card-style">
-                <i class="fa-solid fa-circle-nodes text-2xl text-plat mb-4"></i>
+                <i class="fa-solid fa-microchip text-2xl text-int mb-4"></i>
+                <div class="label-mini mb-2">Вычислительная мощность</div>
+                <div class="text-3xl md:text-4xl font-bold font-mono text-black mb-2">7,9<span class="text-xl text-gray-400 ml-1">EFLOPS</span></div>
+                <div class="text-sm text-gray-500">MxP HPL. FP16/BF16: 7,9 млн TFLOPS | INT8: 15,8 млн TOPS (Sparsity 2:4). Пиковая ИТ-нагрузка — 1 МВт.</div>
+            </div>
+            <div class="card-style">
+                <i class="fa-solid fa-database text-2xl text-plat mb-4"></i>
+                <div class="label-mini mb-2">Хранение данных</div>
+                <div class="text-3xl md:text-4xl font-bold font-mono text-black mb-2">3<span class="text-xl text-gray-400 ml-1">ЭБ</span></div>
+                <div class="text-sm text-gray-500">Плановая емкость распределенной сети: стандартные, холодные и ледяные (ice) хранилища.</div>
+            </div>
+            <div class="card-style">
+                <i class="fa-solid fa-circle-nodes text-2xl text-fleet mb-4"></i>
                 <div class="label-mini mb-2">Активные узлы</div>
                 <div class="text-3xl md:text-4xl font-bold font-mono text-black mb-2">100<span class="text-xl text-gray-400 ml-1">млн</span></div>
-                <div class="text-sm text-gray-500">Люди, устройства, роботы, ИИ-агенты — общая экосистема.</div>
+                <div class="text-sm text-gray-500">Целевая емкость платформы: люди, устройства, ИИ-агенты и роботы в единой экосистеме.</div>
             </div>
             <div class="card-style">
                 <i class="fa-solid fa-coins text-2xl text-fleet mb-4"></i>
                 <div class="label-mini mb-2">ARR · годовая выручка</div>
                 <div class="text-3xl md:text-4xl font-bold font-mono text-black mb-2">$3,6<span class="text-xl text-gray-400 ml-1">млрд</span></div>
-                <div class="text-sm text-gray-500">30 млн платящих клиентов CORE × $10/мес.</div>
+                <div class="text-sm text-gray-500">Монетизация 30 млн платящих нод через B2B-подписку (RaaS) и микротранзакции (Edge AI).</div>
             </div>
-            <div class="card-style">
-                <i class="fa-solid fa-microchip text-2xl text-int mb-4"></i>
-                <div class="label-mini mb-2">Инфраструктура</div>
-                <div class="text-3xl md:text-4xl font-bold font-mono text-black mb-2">7,9<span class="text-xl text-gray-400 ml-1">EFLOPS</span></div>
-                <div class="text-sm text-gray-500">FP16 производительность + 8,7 ЭБ хранения.</div>
-            </div>
+        </div>
+        <div class="mt-6 text-xs text-gray-400 font-mono">
+            *Потенциальная емкость платформы к 2030/2031 гг. Расчет и верификация производительности производятся в соответствии с международным стандартом HPL-MxP (High-Performance Linpack for Mixed Precision) ↗
         </div>
     </div>
 
@@ -604,23 +611,14 @@
             </div>
         </div>
 
-
-
-
-
-
-<div class="mt-8 disclaimer">
-
- <strong style="color:#3c78d8">*Стадия:</strong> Раунд А (бридж-транш в размере 100 млн руб. в рамках общего раунда финансирования на сумму 550 млн руб.). Бридж-транш выступает финансовым «мостом» на время сбора пула соинвесторов и юридического оформления инвестиционной сделки 2-го этапа, обеспечивая оперативный запуск коммерческих пилотных внедрений платформы EMIIA.AI SIP, производство оборудования, запуск демо-зоны, создание ИИ-фабрики, а также разработку проектно-сметной документации ЦХОД и юридическое оформление земельного участка.
-
-</div>
-
-
+        <div class="mt-8 disclaimer">
+            <strong style="color:#3c78d8">*Стадия:</strong> Раунд А (бридж-транш в размере 100 млн руб. в рамках общего раунда финансирования на сумму 550 млн руб.). Бридж-транш выступает финансовым «мостом» на время сбора пула соинвесторов и юридического оформления инвестиционной сделки 2-го этапа, обеспечивая оперативный запуск коммерческих пилотных внедрений платформы EMIIA.AI SIP, производство оборудования, запуск демо-зоны, создание ИИ-фабрики, а также разработку проектно-сметной документации ЦХОД и юридическое оформление земельного участка.
+        </div>
         
         <div class="mt-8 disclaimer">
             <strong style="color:#3c78d8">Дисклеймер.</strong>
             Представленный калькулятор носит исключительно иллюстративный характер и не является публичной офертой или индивидуальной инвестиционной рекомендацией. 
-            Все расчёты основаны на целевых прогнозах проекта ЭМИИА и предположениях о кратности возврата (3× для Call-опциона, IRR 26% при удержании до 2032 г., IRR 50–60% при досрочном выходе в 2028 г.). 
+            Все расчёты основаны на целевых прогнозах проекта ЭМИИА и предположениях о кратности возврата (3× для Call-опциона, IRR ~35% при удержании до 2032 г., IRR 50–60% при досрочном выходе в 2028 г.). 
             Реальные результаты могут отличаться. Решение об инвестициях принимается после изучения полной документации.
         </div>
     </div>
@@ -650,8 +648,8 @@ const stages = {
     year: 2027, totalAmount: 450, totalEquity: 24, min: 1, max: 450, step: 5,
     name: 'Конв. заем / Pre-IPO / Облигации',
     description: 'Раунд 2 · 2027 Q3–Q4. Конвертируемый заём, Pre-IPO или облигации. Расчётная доля пропорциональна объёму раунда.',
-    preMoney: 1380,  // post-money раунда 1
-    postMoney: 1830  // 1380 + 450
+    preMoney: 2200,  // Оценка выросла после успешного PoC
+    postMoney: 2650  // 2200 + 450
   }
 };
 
@@ -659,7 +657,7 @@ const stages = {
 const scenarios = {
   call: { name: 'Call-опцион · 2029–2030', type: 'multiple', multiple: 3.0, exitYear: 2029, color: '#3c78d8' },
   preipo: { name: 'Pre-IPO Exit · 2028', type: 'irr', irr: 0.55, exitYear: 2028, color: '#674ea7' },
-  hold: { name: 'Удержание · до 2032', type: 'irr', irr: 0.26, exitYear: 2032, color: '#38761d' }
+  hold: { name: 'Удержание · до 2032', type: 'irr', irr: 0.35, exitYear: 2032, color: '#38761d' } // IRR поднят до 35%
 };
 
 // =================== СОСТОЯНИЕ ===================
@@ -734,21 +732,18 @@ function updateAll() {
   const result = calculateScenario(state.stage, state.amount, state.scenario);
   const sc = scenarios[state.scenario];
   
-  // Pre-money и Post-money из данных этапа
   const preMoney = s.preMoney;
   const postMoney = s.postMoney;
   
   const preMoneyEl = document.getElementById('preMoneyValue');
   const postMoneyEl = document.getElementById('postMoneyValue');
   
-  // Обновляем Pre-money в верхней карточке
   if (preMoney >= 1000) {
     preMoneyEl.innerHTML = fmt(preMoney / 1000, 2) + '<span class="text-sm text-gray-400 ml-1">млрд ₽</span>';
   } else {
     preMoneyEl.innerHTML = fmt(preMoney, 0) + '<span class="text-sm text-gray-400 ml-1">млн ₽</span>';
   }
   
-  // Обновляем Post-money в левой панели
   postMoneyEl.textContent = formatMoneyBln(postMoney);
   
   document.getElementById('stageDescription').textContent = s.description;
@@ -810,7 +805,7 @@ function selectScenario(scenarioId) {
   updateAll();
 }
 
-// =================== СЛайдер + Input ===================
+// =================== Слайдер + Input ===================
 const slider = document.getElementById('amountSlider');
 const input = document.getElementById('amountInput');
 
@@ -844,7 +839,7 @@ input.addEventListener('blur', e => {
   updateAll();
 });
 
-// =================== ТАБЛИЦА СРАВНЕНИЯ ===================
+// =================== ТАБЛИЦА СРАВНЕНИЯ (С КАПИТАЛИЗАЦИЕЙ) ===================
 function updateComparisonTable() {
   const tbody = document.getElementById('comparisonTable');
   const scenarios_list = ['call', 'preipo', 'hold'];
@@ -854,6 +849,9 @@ function updateComparisonTable() {
     { label: 'Срок удержания', get: (r) => r.yearsHeld, fmt: v => v + ' ' + pluralize(v, 'год', 'года', 'лет') },
     { label: 'Вложено, млн ₽', get: (r) => state.amount, fmt: v => fmt(v, 1) },
     { label: 'Доля в ООО, %', get: (r) => r.equity, fmt: v => fmt(v, 2) + ' %' },
+    { label: 'Капитализация (вход)', get: (r) => stages[state.stage].postMoney, fmt: v => formatMoneyBln(v) },
+    { label: 'Капитализация (выход)', get: (r) => stages[state.stage].postMoney * r.multiple, fmt: v => formatMoneyBln(v), highlight: true },
+    { label: 'Рост капитализации', get: (r) => r.multiple, fmt: v => fmt(v, 2) + '×', highlight: true },
     { label: 'Стоимость на выходе, млн ₽', get: (r) => r.exitValue, fmt: v => fmt(v, 1), highlight: true },
     { label: 'Чистая прибыль, млн ₽', get: (r) => r.profit, fmt: v => fmt(v, 1), highlight: true },
     { label: 'ROI, %', get: (r) => r.roi, fmt: v => fmt(v, 0) + ' %', highlight: true },
