@@ -85,10 +85,10 @@
     .scenario-card.active::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--sc-color); }
     
     /* Timeline Desktop */
-    .timeline-track { position: relative; height: 2px; background: #E5E5E5; margin: 60px 0 40px; border-radius: 2px; }
+    .timeline-track { position: relative; height: 2px; background: #E5E5E5; margin: 60px 110px 40px; border-radius: 2px; }
     .timeline-dot { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 16px; height: 16px; border-radius: 50%; background: #fff; border: 3px solid #3c78d8; box-shadow: 0 0 0 4px rgba(60, 120, 216, 0.15); }
     .timeline-dot.future { border-color: #674ea7; box-shadow: 0 0 0 4px rgba(103, 78, 167, 0.15); }
-    .timeline-label { position: absolute; transform: translateX(-50%); width: 220px; text-align: center; }
+    .timeline-label { position: absolute; transform: translateX(-50%); width: 200px; text-align: center; }
     .timeline-label.top { bottom: 100%; margin-bottom: 20px; }
     .timeline-label.bottom { top: 100%; margin-top: 20px; }
     
@@ -594,13 +594,13 @@
                         <div class="text-xs text-gray-400 font-mono">PDF · обзор ЦХОД</div>
                     </div>
                 </a>
-                <a href="https://www.emiia.ru/NDA_EMIIA_en_ru_out_v2.docx" target="_blank" class="flex items-center gap-4 p-4 bg-gray-50 rounded-2xl border border-thin hover:border-int transition-colors">
+                <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-2xl border border-thin">
                     <div class="w-10 h-10 rounded-full bg-light-purple flex items-center justify-center text-int shrink-0"><i class="fa-solid fa-chart-pie"></i></div>
                     <div>
                         <div class="font-semibold text-sm">Интерактивная финмодель</div>
                         <div class="text-xs text-gray-400 font-mono">XLS · после NDA</div>
                     </div>
-                </a>
+                </div>
                 <a href="https://t.me/emiiaai" target="_blank" class="flex items-center gap-4 p-4 bg-gray-50 rounded-2xl border border-thin hover:border-fleet transition-colors">
                     <div class="w-10 h-10 rounded-full bg-light-green flex items-center justify-center text-fleet shrink-0"><i class="fa-solid fa-comments"></i></div>
                     <div>
@@ -862,13 +862,13 @@ function updateComparisonTable() {
   let html = '';
   rows.forEach(row => {
     html += `<tr class="border-b border-thin ${row.highlight ? 'bg-gray-50' : ''}">`;
-    html += `<td class="p-4 text-gray-500 text-xs font-mono">${row.label}</td>`;
+    html += `<td class="p-4 text-gray-500 text-xs font-mono whitespace-nowrap">${row.label}</td>`;
     scenarios_list.forEach(scId => {
       const r = calculateScenario(state.stage, state.amount, scId);
       const isActive = scId === state.scenario;
       const val = row.get(r);
       const colorClass = isActive ? (scId === 'call' ? 'text-plat' : scId === 'preipo' ? 'text-int' : 'text-fleet') : 'text-gray-700';
-      html += `<td class="p-4 text-right font-mono text-sm ${row.highlight ? 'font-bold' : ''} ${colorClass}">${row.fmt(val)}</td>`;
+      html += `<td class="p-4 text-right font-mono text-sm whitespace-nowrap ${row.highlight ? 'font-bold' : ''} ${colorClass}">${row.fmt(val)}</td>`;
     });
     html += '</tr>';
   });
