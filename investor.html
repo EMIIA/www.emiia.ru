@@ -85,12 +85,12 @@
     .scenario-card.active::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--sc-color); }
     
     /* Timeline Desktop */
-    .timeline-track { position: relative; height: 2px; background: #E5E5E5; margin: 60px 110px 40px; border-radius: 2px; }
+    .timeline-track { position: relative; height: 2px; background: #E5E5E5; margin: 100px 110px 80px; border-radius: 2px; }
     .timeline-dot { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 16px; height: 16px; border-radius: 50%; background: #fff; border: 3px solid #3c78d8; box-shadow: 0 0 0 4px rgba(60, 120, 216, 0.15); }
     .timeline-dot.future { border-color: #674ea7; box-shadow: 0 0 0 4px rgba(103, 78, 167, 0.15); }
     .timeline-label { position: absolute; transform: translateX(-50%); width: 200px; text-align: center; }
-    .timeline-label.top { bottom: 100%; margin-bottom: 20px; }
-    .timeline-label.bottom { top: 100%; margin-top: 20px; }
+    .timeline-label.top { bottom: calc(100% + 25px); }
+    .timeline-label.bottom { top: calc(100% + 25px); }
     
     /* Timeline Mobile */
     .timeline-mobile { display: none; }
@@ -430,7 +430,7 @@
         </div>
     </div>
 
-    <!-- ROADMAP (С УКАЗАНИЕМ КАПИТАЛИЗАЦИИ И 3-М РАУНДОМ) -->
+    <!-- ROADMAP -->
     <div class="mb-12 md:mb-16 fade-up" style="animation-delay: 0.7s">
         <div class="label-mini mb-4">06 — Дорожная карта и рост капитализации</div>
         <div class="card-style">
