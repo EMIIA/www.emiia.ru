@@ -292,10 +292,12 @@
   try { q = new URLSearchParams(location.search); } catch (e) { return; }
   if (q.get('embed') !== '1') return;
 
+  /* панель передаёт vh/off ТОЛЬКО в мобильном полноэкранном режиме.
+     Без них (десктопная панель, обычный визит) — код полностью
+     бездействует: ничего не двигается и не дополняется */
   var vh = parseInt(q.get('vh'), 10);
-  if (!vh || vh < 200)
-    vh = Math.round(window.screen.height / (window.devicePixelRatio || 1));
-  var off = parseInt(q.get('off'), 10); if (isNaN(off)) off = 80;
+  var off = parseInt(q.get('off'), 10);
+  if (!vh || vh < 200 || isNaN(off)) return;
   /* нижняя безопасная зона: строка ввода Safari + home-зона.
      90 — типовой запас; можно переопределить параметром &pad= */
   var safeBar = parseInt(q.get('pad'), 10); if (isNaN(safeBar)) safeBar = 90;
