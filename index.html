@@ -296,6 +296,9 @@
   if (!vh || vh < 200)
     vh = Math.round(window.screen.height / (window.devicePixelRatio || 1));
   var off = parseInt(q.get('off'), 10); if (isNaN(off)) off = 80;
+  /* нижняя безопасная зона: строка ввода Safari + home-зона.
+     90 — типовой запас; можно переопределить параметром &pad= */
+  var safeBar = parseInt(q.get('pad'), 10); if (isNaN(safeBar)) safeBar = 90;
 
   /* ── 1. то, что доступно напрямую: свои стили и vh в них ── */
   function fixVal(v) {
@@ -362,7 +365,22 @@
     }
   }
 
-  function run() { rewriteSheets(); passElements(); }
+  /* ── 3. нижняя безопасная зона: контент кончается выше строки
+        ввода браузера — за полосой только фон, текст не прячется ── */
+  function padBody() {
+    var b = document.body;
+    if (!b) return;
+    var base = parseFloat(b.getAttribute('data-eeb'));
+    if (isNaN(base)) {
+      base = parseFloat(getComputedStyle(b).paddingBottom) || 0;
+      b.setAttribute('data-eeb', base);
+    }
+    var iH = window.innerHeight;
+    var bottomPad = iH - vh - off; if (bottomPad < 0) bottomPad = 0;
+    b.style.paddingBottom = (base + bottomPad + safeBar) + 'px';
+  }
+
+  function run() { rewriteSheets(); passElements(); padBody(); }
   run();
   if (document.readyState === 'loading')
     document.addEventListener('DOMContentLoaded', run);
