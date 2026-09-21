@@ -270,34 +270,109 @@
 
 
 <script>
+/* ============================================================
+   EMIIA.AI — embed-режим: страница знает, что она внутри панели.
+   Включается ТОЛЬКО параметром ?embed=1 в адресе. Без параметра
+   код не делает НИЧЕГО: обычные посетители, PWA и прямой заход
+   в Safari работают как раньше.
+
+   Что делает (DOM и позиционирование НЕ трогает):
+   1) vh-единицы (100vh, 50vh, lvh/svh/dvh) → пиксели от видимой
+      высоты экрана, переданной панелью (&vh=...) — секции стоят
+      по экрану, как в браузере, без растяжки;
+   2) fixed-элементам (бургер, шапки, композеры) добавляется
+      компенсация сдвига фрейма (&off=...): верх/низ встают туда,
+      где они были бы в обычном браузере.
+
+   Вставить перед </body>. Выключить: убрать параметр или сниппет.
+   ============================================================ */
 (function () {
   var q;
   try { q = new URLSearchParams(location.search); } catch (e) { return; }
   if (q.get('embed') !== '1') return;
 
-  /* видимая высота экрана от панели; при ручном открытии — весь экран */
   var vh = parseInt(q.get('vh'), 10);
   if (!vh || vh < 200)
     vh = Math.round(window.screen.height / (window.devicePixelRatio || 1));
-
-  /* off — насколько панель подняла фрейм над экраном (обычно 80);
-     pad — нижний отступ от строки ввода Safari (0–60, подбирается) */
   var off = parseInt(q.get('off'), 10); if (isNaN(off)) off = 80;
-  var pad = parseInt(q.get('pad'), 10); if (isNaN(pad)) pad = 0;
 
-  var s = document.createElement('style');
-  s.id = 'emiia-embed';
-  s.textContent =
-    'html{overflow:hidden!important}' +
-    'body{margin:0!important;position:relative!important;overflow:visible!important}' +
-    'body>*:not(script):not(style):not(link):not(noscript){' +
-      'position:relative!important;' +
-      'top:' + off + 'px!important;' +
-      'height:' + (vh - pad) + 'px!important;' +
-      'overflow-y:auto!important;' +
-      '-webkit-overflow-scrolling:touch!important' +
-    '}';
-  (document.head || document.documentElement).appendChild(s);
+  function fixVal(v) {
+    return v.replace(/(-?\d*\.?\d+)(lvh|svh|dvh|vh)\b/g, function (m, n) {
+      return (parseFloat(n) / 100 * vh) + 'px';
+    });
+  }
+
+  /* один стиль-блок обрабатываем один раз (повторные проходы — мимо) */
+  var done = typeof WeakSet === 'function' ? new WeakSet() : null;
+
+  function fixStyle(style) {
+    var pos = (style.getPropertyValue('position') || '').trim();
+    var iH = window.innerHeight;                    /* высота фрейма */
+    var bottomPad = iH - vh - off; if (bottomPad < 0) bottomPad = 0;
+    for (var k = 0; k < style.length; k++) {
+      var p = style[k], v = style.getPropertyValue(p);
+      if (!v) continue;
+      var nv = v.indexOf('vh') >= 0 ? fixVal(v) : v;
+      if (pos === 'fixed') {
+        if (p === 'top') nv = 'calc(' + nv + ' + ' + off + 'px)';
+        else if (p === 'bottom') nv = 'calc(' + nv + ' + ' + bottomPad + 'px)';
+      }
+      if (nv !== v)
+        try { style.setProperty(p, nv, style.getPropertyPriority(p)); } catch (e) {}
+    }
+  }
+
+  function walkRules(rules) {
+    for (var i = 0; i < rules.length; i++) {
+      var r = rules[i];
+      if (r.cssRules && r.cssRules.length) walkRules(r.cssRules);
+      if (!r.style) continue;
+      if (done && done.has(r.style)) continue;
+      fixStyle(r.style);
+      if (done) done.add(r.style);
+    }
+  }
+
+  function rewrite() {
+    for (var i = 0; i < document.styleSheets.length; i++) {
+      var rules;
+      try { rules = document.styleSheets[i].cssRules; } catch (e) { continue; }
+      if (rules) walkRules(rules);
+    }
+    var all = document.querySelectorAll('[style]');
+    for (var j = 0; j < all.length; j++) {
+      var el = all[j];
+      if (el.getAttribute('data-ee')) continue;
+      var attr = el.getAttribute('style');
+      var fixed = getComputedStyle(el).position === 'fixed';
+      var iH = window.innerHeight;
+      var bottomPad = iH - vh - off; if (bottomPad < 0) bottomPad = 0;
+      var changed = false, nv = attr;
+      if (nv.indexOf('vh') >= 0) { nv = fixVal(nv); changed = true; }
+      if (fixed) {
+        if (/(^|[^-])top\s*:/i.test(attr)) {
+          nv = nv.replace(/(^|[^-])(top\s*:\s*)([^;]+)/i,
+            function (m, a, b, c) { return a + b + 'calc(' + c + ' + ' + off + 'px)'; });
+          changed = true;
+        }
+        if (/bottom\s*:/i.test(attr)) {
+          nv = nv.replace(/(bottom\s*:\s*)([^;]+)/i,
+            function (m, b, c) { return b + 'calc(' + c + ' + ' + bottomPad + 'px)'; });
+          changed = true;
+        }
+      }
+      if (changed) {
+        el.setAttribute('style', nv);
+        el.setAttribute('data-ee', '1');
+      }
+    }
+  }
+
+  rewrite();
+  if (document.readyState === 'loading')
+    document.addEventListener('DOMContentLoaded', rewrite);
+  window.addEventListener('load', rewrite);
+  setTimeout(rewrite, 400); setTimeout(rewrite, 1500);  /* поздние стили */
 })();
 </script>
 
