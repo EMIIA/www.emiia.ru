@@ -272,18 +272,19 @@
 <script>
 /* ============================================================
    EMIIA.AI — embed-режим: страница знает, что она внутри панели.
-   Включается ТОЛЬКО параметром ?embed=1 в адресе. Без параметра
-   код не делает НИЧЕГО: обычные посетители, PWA и прямой заход
-   в Safari работают как раньше.
+   Включается ТОЛЬКО параметром ?embed=1. Без параметра код не
+   делает НИЧЕГО: обычные посетители, PWA и прямой Safari — как было.
 
-   Что делает (DOM и позиционирование НЕ трогает):
-   1) vh-единицы (100vh, 50vh, lvh/svh/dvh) → пиксели от видимой
-      высоты экрана, переданной панелью (&vh=...) — секции стоят
-      по экрану, как в браузере, без растяжки;
-   2) fixed-элементам (бургер, шапки, композеры) добавляется
-      компенсация сдвига фрейма (&off=...): верх/низ встают туда,
-      где они были бы в обычном браузере.
+   Как работает (DOM-структуру не трогает):
+   1) vh-секции (100vh, 50vh, min-height:100vh...) находят по
+      computed-высоте, равной доле высоты фрейма, и переводятся
+      в пиксели видимого экрана (&vh от панели) — растяжки нет;
+   2) fixed/sticky-элементы (шапка с бургером, плавающие кнопки)
+      получают компенсацию сдвига фрейма (&off): стоят где стояли
+      бы в обычном браузере.
 
+   Computed-проход работает и для кросс-доменного CSS (www.*),
+      который из JS прочитать нельзя.
    Вставить перед </body>. Выключить: убрать параметр или сниппет.
    ============================================================ */
 (function () {
@@ -296,83 +297,86 @@
     vh = Math.round(window.screen.height / (window.devicePixelRatio || 1));
   var off = parseInt(q.get('off'), 10); if (isNaN(off)) off = 80;
 
+  /* ── 1. то, что доступно напрямую: свои стили и vh в них ── */
   function fixVal(v) {
     return v.replace(/(-?\d*\.?\d+)(lvh|svh|dvh|vh)\b/g, function (m, n) {
       return (parseFloat(n) / 100 * vh) + 'px';
     });
   }
-
-  /* один стиль-блок обрабатываем один раз (повторные проходы — мимо) */
   var done = typeof WeakSet === 'function' ? new WeakSet() : null;
-
-  function fixStyle(style) {
-    var pos = (style.getPropertyValue('position') || '').trim();
-    var iH = window.innerHeight;                    /* высота фрейма */
-    var bottomPad = iH - vh - off; if (bottomPad < 0) bottomPad = 0;
-    for (var k = 0; k < style.length; k++) {
-      var p = style[k], v = style.getPropertyValue(p);
-      if (!v) continue;
-      var nv = v.indexOf('vh') >= 0 ? fixVal(v) : v;
-      if (pos === 'fixed') {
-        if (p === 'top') nv = 'calc(' + nv + ' + ' + off + 'px)';
-        else if (p === 'bottom') nv = 'calc(' + nv + ' + ' + bottomPad + 'px)';
-      }
-      if (nv !== v)
-        try { style.setProperty(p, nv, style.getPropertyPriority(p)); } catch (e) {}
-    }
-  }
-
   function walkRules(rules) {
     for (var i = 0; i < rules.length; i++) {
       var r = rules[i];
       if (r.cssRules && r.cssRules.length) walkRules(r.cssRules);
       if (!r.style) continue;
       if (done && done.has(r.style)) continue;
-      fixStyle(r.style);
+      var v, p;
+      for (var k = 0; k < r.style.length; k++) {
+        p = r.style[k]; v = r.style.getPropertyValue(p);
+        if (v && v.indexOf('vh') >= 0)
+          try { r.style.setProperty(p, fixVal(v), r.style.getPropertyPriority(p)); } catch (e) {}
+      }
       if (done) done.add(r.style);
     }
   }
-
-  function rewrite() {
+  function rewriteSheets() {
     for (var i = 0; i < document.styleSheets.length; i++) {
       var rules;
       try { rules = document.styleSheets[i].cssRules; } catch (e) { continue; }
       if (rules) walkRules(rules);
     }
-    var all = document.querySelectorAll('[style]');
-    for (var j = 0; j < all.length; j++) {
-      var el = all[j];
-      if (el.getAttribute('data-ee')) continue;
-      var attr = el.getAttribute('style');
-      var fixed = getComputedStyle(el).position === 'fixed';
-      var iH = window.innerHeight;
-      var bottomPad = iH - vh - off; if (bottomPad < 0) bottomPad = 0;
-      var changed = false, nv = attr;
-      if (nv.indexOf('vh') >= 0) { nv = fixVal(nv); changed = true; }
-      if (fixed) {
-        if (/(^|[^-])top\s*:/i.test(attr)) {
-          nv = nv.replace(/(^|[^-])(top\s*:\s*)([^;]+)/i,
-            function (m, a, b, c) { return a + b + 'calc(' + c + ' + ' + off + 'px)'; });
-          changed = true;
-        }
-        if (/bottom\s*:/i.test(attr)) {
-          nv = nv.replace(/(bottom\s*:\s*)([^;]+)/i,
-            function (m, b, c) { return b + 'calc(' + c + ' + ' + bottomPad + 'px)'; });
-          changed = true;
-        }
+  }
+
+  /* ── 2. computed-проход: любые стили, любое происхождение ── */
+  var MULTS = [1, 0.75, 0.5, 0.25];
+  function passElements() {
+    var iH = window.innerHeight;                  /* высота фрейма */
+    var bottomPad = iH - vh - off; if (bottomPad < 0) bottomPad = 0;
+    var els = document.querySelectorAll('body, body *');
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i], cs = getComputedStyle(el);
+
+      /* fixed/sticky: компенсация верха/низа */
+      if (!el.getAttribute('data-eef') &&
+          (cs.position === 'fixed' || cs.position === 'sticky')) {
+        el.setAttribute('data-eef', '1');
+        var t = parseFloat(cs.top), b = parseFloat(cs.bottom);
+        if (!isNaN(t) && cs.top !== 'auto') el.style.top = (t + off) + 'px';
+        if (!isNaN(b) && cs.bottom !== 'auto') el.style.bottom = (b + bottomPad) + 'px';
       }
-      if (changed) {
-        el.setAttribute('style', nv);
-        el.setAttribute('data-ee', '1');
+
+      /* vh-высоты: доля высоты фрейма → пиксели видимого экрана */
+      if (!el.getAttribute('data-eeh')) {
+        var h = parseFloat(cs.height) || 0, mh = parseFloat(cs.minHeight) || 0;
+        var hit = false;
+        for (var m = 0; !hit && m < MULTS.length; m++) {
+          var want = iH * MULTS[m];
+          if (h >= 200 && Math.abs(h - want) <= 3) {
+            el.style.height = Math.round(vh * MULTS[m]) + 'px'; hit = true;
+          } else if (mh >= 200 && Math.abs(mh - want) <= 3) {
+            el.style.minHeight = Math.round(vh * MULTS[m]) + 'px'; hit = true;
+          }
+        }
+        if (hit) el.setAttribute('data-eeh', '1');
       }
     }
   }
 
-  rewrite();
+  function run() { rewriteSheets(); passElements(); }
+  run();
   if (document.readyState === 'loading')
-    document.addEventListener('DOMContentLoaded', rewrite);
-  window.addEventListener('load', rewrite);
-  setTimeout(rewrite, 400); setTimeout(rewrite, 1500);  /* поздние стили */
+    document.addEventListener('DOMContentLoaded', run);
+  window.addEventListener('load', run);
+  setTimeout(run, 400); setTimeout(run, 1500); setTimeout(run, 3500);
+
+  /* поздние изменения (прелоадер, меню, SPA) — дозакрепляем новое */
+  var tId = null;
+  if (typeof MutationObserver === 'function') {
+    new MutationObserver(function () {
+      clearTimeout(tId);
+      tId = setTimeout(passElements, 300);
+    }).observe(document.documentElement, { childList: true, subtree: true });
+  }
 })();
 </script>
 
