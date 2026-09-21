@@ -269,7 +269,37 @@
 
 
 
+<script>
+(function () {
+  var q;
+  try { q = new URLSearchParams(location.search); } catch (e) { return; }
+  if (q.get('embed') !== '1') return;
 
+  /* видимая высота экрана от панели; при ручном открытии — весь экран */
+  var vh = parseInt(q.get('vh'), 10);
+  if (!vh || vh < 200)
+    vh = Math.round(window.screen.height / (window.devicePixelRatio || 1));
+
+  /* off — насколько панель подняла фрейм над экраном (обычно 80);
+     pad — нижний отступ от строки ввода Safari (0–60, подбирается) */
+  var off = parseInt(q.get('off'), 10); if (isNaN(off)) off = 80;
+  var pad = parseInt(q.get('pad'), 10); if (isNaN(pad)) pad = 0;
+
+  var s = document.createElement('style');
+  s.id = 'emiia-embed';
+  s.textContent =
+    'html{overflow:hidden!important}' +
+    'body{margin:0!important;position:relative!important;overflow:visible!important}' +
+    'body>*:not(script):not(style):not(link):not(noscript){' +
+      'position:relative!important;' +
+      'top:' + off + 'px!important;' +
+      'height:' + (vh - pad) + 'px!important;' +
+      'overflow-y:auto!important;' +
+      '-webkit-overflow-scrolling:touch!important' +
+    '}';
+  (document.head || document.documentElement).appendChild(s);
+})();
+</script>
 
 
 
