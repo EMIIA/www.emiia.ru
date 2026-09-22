@@ -382,7 +382,31 @@
     b.style.paddingBottom = (base + bottomPad + safeBar) + 'px';
   }
 
-  function run() { rewriteSheets(); passElements(); padBody(); }
+  /* ── 4. параметры переживают переход по вкладкам: внутренние
+        ссылки получают embed/vh/off — новая страница открывается
+        сразу с правильной вёрсткой ── */
+  function fixLinks() {
+    var as = document.querySelectorAll('a[href]');
+    var tail = 'embed=1&vh=' + vh + '&off=' + off +
+      (q.get('pad') ? '&pad=' + encodeURIComponent(q.get('pad')) : '');
+    for (var i = 0; i < as.length; i++) {
+      var a = as[i];
+      if (a.getAttribute('data-eel')) continue;
+      var h = a.getAttribute('href');
+      if (!h || /^(#|javascript:|mailto:|tel:|data:)/i.test(h)) continue;
+      a.setAttribute('data-eel', '1');
+      try {
+        var u = new URL(a.href, location.href);
+        var sameHost = u.host === location.host ||
+          u.host.replace(/^www\./, '') === location.host.replace(/^www\./, '');
+        if (!sameHost || u.search.indexOf('embed=') >= 0) continue;
+        u.search += (u.search ? '&' : '?') + tail;
+        a.href = u.href;
+      } catch (e) {}
+    }
+  }
+
+  function run() { rewriteSheets(); passElements(); padBody(); fixLinks(); }
   run();
   if (document.readyState === 'loading')
     document.addEventListener('DOMContentLoaded', run);
@@ -394,7 +418,7 @@
   if (typeof MutationObserver === 'function') {
     new MutationObserver(function () {
       clearTimeout(tId);
-      tId = setTimeout(passElements, 300);
+      tId = setTimeout(function () { passElements(); fixLinks(); }, 300);
     }).observe(document.documentElement, { childList: true, subtree: true });
   }
 })();
