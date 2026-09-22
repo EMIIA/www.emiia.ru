@@ -418,6 +418,16 @@
   window.addEventListener('popstate', nav);
   window.addEventListener('hashchange', nav);
 
+  /* ── 6. панель досылает точную видимую высоту, когда полосы Safari
+        сложились (emiia:vh) — пересчитываем зону и вёрстку вживую */
+  window.addEventListener('message', function (e) {
+    var d = e.data || {};
+    if (d && d.type === 'emiia:vh' && d.vh > 200 && Math.abs(d.vh - vh) >= 3) {
+      vh = Math.round(d.vh);
+      run();
+    }
+  });
+
   function run() { rewriteSheets(); passElements(); padBody(); fixLinks(); }
   run();
   if (document.readyState === 'loading')
