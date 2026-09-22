@@ -406,6 +406,16 @@
     }
   }
 
+  /* ── 5. панель помнит эту страницу: сообщаем родителю адрес
+        (neo:nav) — после перехода по страницам хоста панель
+        открывается на той же вкладке, данные живут своей сессией */
+  function nav() {
+    try { parent.postMessage({ type: 'neo:nav', url: location.href }, '*'); } catch (e) {}
+  }
+  nav();
+  window.addEventListener('popstate', nav);
+  window.addEventListener('hashchange', nav);
+
   function run() { rewriteSheets(); passElements(); padBody(); fixLinks(); }
   run();
   if (document.readyState === 'loading')
