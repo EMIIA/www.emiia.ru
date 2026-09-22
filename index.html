@@ -367,19 +367,21 @@
     }
   }
 
-  /* ── 3. нижняя безопасная зона: контент кончается выше строки
-        ввода браузера — за полосой только фон, текст не прячется ── */
+  /* ── 3. нижняя безопасная зона: распорка в конце тела — контент
+        кончается выше строки ввода. Реальный элемент работает на любой
+        вёрстке (паддинг тела на некоторых сайтах прокрутку не растягивает,
+        проверено на живом хабе) ── */
   function padBody() {
-    var b = document.body;
-    if (!b) return;
-    var base = parseFloat(b.getAttribute('data-eeb'));
-    if (isNaN(base)) {
-      base = parseFloat(getComputedStyle(b).paddingBottom) || 0;
-      b.setAttribute('data-eeb', base);
+    var sp = document.getElementById('emiia-embed-safe');
+    if (!sp) {
+      sp = document.createElement('div');
+      sp.id = 'emiia-embed-safe';
+      sp.style.cssText = 'clear:both;pointer-events:none;height:0';
+      document.body.appendChild(sp);
     }
     var iH = window.innerHeight;
     var bottomPad = iH - vh - off; if (bottomPad < 0) bottomPad = 0;
-    b.style.paddingBottom = (base + bottomPad + safeBar) + 'px';
+    sp.style.height = (bottomPad + safeBar) + 'px';
   }
 
   /* ── 4. параметры переживают переход по вкладкам: внутренние
