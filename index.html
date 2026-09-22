@@ -333,7 +333,8 @@
   }
 
   /* ── 2. computed-проход: любые стили, любое происхождение ── */
-  var MULTS = [1, 0.75, 0.5, 0.25];
+  var MULTS = [1, 0.5];   /* только явные экранные доли: эвристика по мелким
+                             долям задевала посторонние блоки живого сайта */
   function passElements() {
     var iH = window.innerHeight;                  /* высота фрейма */
     var bottomPad = iH - vh - off; if (bottomPad < 0) bottomPad = 0;
@@ -428,7 +429,20 @@
     }
   });
 
-  function run() { rewriteSheets(); passElements(); padBody(); fixLinks(); }
+  /* ── 7. клавиатура iOS: поля с кеглем <16px вызывают автозум Safari —
+        сайт «растягивается» и застревает. В embed-режиме поднимаем кегль
+        полей до 16px (зума нет), новые поля подхватывает наблюдатель */
+  function fixInputs() {
+    var ins = document.querySelectorAll('input, textarea, select');
+    for (var i = 0; i < ins.length; i++) {
+      if (ins[i].getAttribute('data-eei')) continue;
+      ins[i].setAttribute('data-eei', '1');
+      var fs = parseFloat(getComputedStyle(ins[i]).fontSize);
+      if (fs && fs < 16) ins[i].style.fontSize = '16px';
+    }
+  }
+
+  function run() { rewriteSheets(); passElements(); padBody(); fixLinks(); fixInputs(); }
   run();
   if (document.readyState === 'loading')
     document.addEventListener('DOMContentLoaded', run);
@@ -440,7 +454,7 @@
   if (typeof MutationObserver === 'function') {
     new MutationObserver(function () {
       clearTimeout(tId);
-      tId = setTimeout(function () { passElements(); fixLinks(); }, 300);
+      tId = setTimeout(function () { passElements(); fixLinks(); fixInputs(); }, 300);
     }).observe(document.documentElement, { childList: true, subtree: true });
   }
 })();
