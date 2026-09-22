@@ -367,18 +367,18 @@
     }
   }
 
-  /* ── 3. нижняя безопасная зона: распорка в конце тела — контент
-        кончается выше строки ввода. Реальный элемент работает на любой
-        вёрстке (паддинг тела на некоторых сайтах прокрутку не растягивает,
-        проверено на живом хабе) ── */
+  /* ── 3. нижняя безопасная зона: распорка — ВСЕГДА последний элемент
+        тела. Скрипт может стоять в начале страницы — распорка, созданная
+        при парсинге, окажется в середине документа и работать не будет
+        (проверено на живом хабе), поэтому каждый проход ставит её в конец ── */
   function padBody() {
     var sp = document.getElementById('emiia-embed-safe');
     if (!sp) {
       sp = document.createElement('div');
       sp.id = 'emiia-embed-safe';
       sp.style.cssText = 'clear:both;pointer-events:none;height:0';
-      document.body.appendChild(sp);
     }
+    if (sp !== document.body.lastElementChild) document.body.appendChild(sp);
     var iH = window.innerHeight;
     var bottomPad = iH - vh - off; if (bottomPad < 0) bottomPad = 0;
     sp.style.height = (bottomPad + safeBar) + 'px';
