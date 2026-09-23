@@ -349,6 +349,15 @@
         var t = parseFloat(cs.top), b = parseFloat(cs.bottom);
         if (!isNaN(t) && cs.top !== 'auto') el.style.top = (t + off) + 'px';
         if (!isNaN(b) && cs.bottom !== 'auto') el.style.bottom = (b + bottomPad) + 'px';
+        /* полноэкранная шторка (меню сайта): низ — НАД строкой ввода,
+           скролл — внутри шторки; иначе последние пункты прячутся
+           за полосой браузера и недокручиваются */
+        var fh = parseFloat(cs.height) || 0;
+        if (fh >= iH * 0.9) {
+          el.style.height = Math.round(vh - safeBar) + 'px';
+          el.style.overflowY = 'auto';
+          el.setAttribute('data-eeh', '1');
+        }
       }
 
       /* vh-высоты: доля высоты фрейма → пиксели видимого экрана */
@@ -455,7 +464,10 @@
     new MutationObserver(function () {
       clearTimeout(tId);
       tId = setTimeout(function () { passElements(); fixLinks(); fixInputs(); }, 300);
-    }).observe(document.documentElement, { childList: true, subtree: true });
+    }).observe(document.documentElement, {
+      childList: true, subtree: true, attributes: true,
+      attributeFilter: ['class', 'style']   /* шторки, открываемые классом */
+    });
   }
 })();
 </script>
