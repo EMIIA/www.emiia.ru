@@ -302,25 +302,41 @@
      90 — типовой запас; можно переопределить параметром &pad= */
   var safeBar = parseInt(q.get('pad'), 10); if (isNaN(safeBar)) safeBar = 90;
 
-  /* ── 1. то, что доступно напрямую: свои стили и vh в них ── */
+  /* ── 1. vh-правила: чиним ТОЛЬКО через CSS — контент не трогаем.
+        1а: свои (читаемые) стили переписываем на месте и дополнительно
+        переиздаём с !important — иначе поздние листы-дубликаты
+        перекроют; 1б: недосягаемые листы пробуем перехватить fetch'ем
+        (CDN часто отдают CORS *) ── */
   function fixVal(v) {
     return v.replace(/(-?\d*\.?\d+)(lvh|svh|dvh|vh)\b/g, function (m, n) {
       return (parseFloat(n) / 100 * vh) + 'px';
     });
   }
   var done = typeof WeakSet === 'function' ? new WeakSet() : null;
-  function walkRules(rules) {
+  var vhOverrides = [];
+  function walkRules(rules, media) {
     for (var i = 0; i < rules.length; i++) {
       var r = rules[i];
-      if (r.cssRules && r.cssRules.length) walkRules(r.cssRules);
-      if (!r.style) continue;
+      if (r.cssRules && r.cssRules.length) {
+        var mq = (r.media && r.media.mediaText) ? r.media.mediaText : media;
+        walkRules(r.cssRules, mq);
+        continue;
+      }
+      if (!r.style || !r.selectorText) continue;
       if (done && done.has(r.style)) continue;
-      var v, p;
+      var v, p, out = [];
       for (var k = 0; k < r.style.length; k++) {
         p = r.style[k]; v = r.style.getPropertyValue(p);
-        if (v && v.indexOf('vh') >= 0)
-          try { r.style.setProperty(p, fixVal(v), r.style.getPropertyPriority(p)); } catch (e) {}
+        if (v && v.indexOf('vh') >= 0) {
+          var nv = fixVal(v);
+          try { r.style.setProperty(p, nv, r.style.getPropertyPriority(p)); } catch (e) {}
+          out.push(p + ':' + nv + ' !important');
+        }
       }
+      if (out.length)
+        vhOverrides.push((media ? '@media ' + media + '{' : '') +
+                         r.selectorText + '{' + out.join(';') + '}' +
+                         (media ? '}' : ''));
       if (done) done.add(r.style);
     }
   }
@@ -328,51 +344,72 @@
     for (var i = 0; i < document.styleSheets.length; i++) {
       var rules;
       try { rules = document.styleSheets[i].cssRules; } catch (e) { continue; }
-      if (rules) walkRules(rules);
+      if (rules) walkRules(rules, null);
+    }
+    if (vhOverrides.length) {
+      var st = document.getElementById('emiia-vhov');
+      if (!st) { st = document.createElement('style'); st.id = 'emiia-vhov'; document.body.appendChild(st); }
+      st.textContent = vhOverrides.join('\n');
+    }
+  }
+  /* 1б: чужие листы — fetch и переиздание vh-правил с !important */
+  function overrideCrossLinks() {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+    for (var i = 0; i < links.length; i++) {
+      (function (l) {
+        if (l.getAttribute('data-eeo')) return;
+        l.setAttribute('data-eeo', '1');
+        var u; try { u = new URL(l.href); } catch (e) { return; }
+        if (u.origin === location.origin) return;
+        fetch(u.href).then(function (r) { return r.ok ? r.text() : null; })
+          .then(function (txt) {
+            if (!txt) return;
+            var re = /([^{}]+)\{([^{}]*[0-9](?:\.\d+)?(?:lvh|svh|dvh|vh)\b[^{}]*)\}/g,
+                m, parts = [];
+            while ((m = re.exec(txt))) {
+              var sel = m[1].trim().split(/\}\s*/).pop();
+              if (!sel || /^@/.test(sel)) continue;
+              var body = m[2].replace(/(-?\d*\.?\d+)(lvh|svh|dvh|vh)\b/g,
+                function (x, n) { return (parseFloat(n) / 100 * vh) + 'px'; });
+              var decls = body.split(';').map(function (d) { return d.trim(); })
+                .filter(Boolean).join(' !important;');
+              parts.push(sel + '{' + decls + ' !important}');
+            }
+            if (parts.length) {
+              var st = document.createElement('style');
+              st.setAttribute('data-eeo-css', u.hostname);
+              st.textContent = parts.join('\n');
+              document.body.appendChild(st);
+            }
+          }).catch(function () {});
+      })(links[i]);
     }
   }
 
-  /* ── 2. computed-проход: любые стили, любое происхождение ── */
-  var MULTS = [1, 0.5];   /* только явные экранные доли: эвристика по мелким
-                             долям задевала посторонние блоки живого сайта */
+  /* ── 2. computed-проход: ТОЛЬКО позиционирование. Высоты контента
+        НЕ трогаем вообще — эвристика «похоже на vh» замораживала
+        случайные блоки (поймано на живом сайте: абзац .lead получил
+        height:338px и наезжал на контент). vh-секции теперь чинятся
+        только точным переизданием CSS-правил (блок 1б) ── */
   function passElements() {
     var iH = window.innerHeight;                  /* высота фрейма */
     var bottomPad = iH - vh - off; if (bottomPad < 0) bottomPad = 0;
-    var els = document.querySelectorAll('body, body *');
+    var els = document.querySelectorAll('body *');
     for (var i = 0; i < els.length; i++) {
       var el = els[i], cs = getComputedStyle(el);
-
-      /* fixed/sticky: компенсация верха/низа */
-      if (!el.getAttribute('data-eef') &&
-          (cs.position === 'fixed' || cs.position === 'sticky')) {
-        el.setAttribute('data-eef', '1');
-        var t = parseFloat(cs.top), b = parseFloat(cs.bottom);
-        if (!isNaN(t) && cs.top !== 'auto') el.style.top = (t + off) + 'px';
-        if (!isNaN(b) && cs.bottom !== 'auto') el.style.bottom = (b + bottomPad) + 'px';
-        /* полноэкранная шторка (меню сайта): низ — НАД строкой ввода,
-           скролл — внутри шторки; иначе последние пункты прячутся
-           за полосой браузера и недокручиваются */
-        var fh = parseFloat(cs.height) || 0;
-        if (fh >= iH * 0.9) {
-          el.style.height = Math.round(vh - safeBar) + 'px';
-          el.style.overflowY = 'auto';
-          el.setAttribute('data-eeh', '1');
-        }
-      }
-
-      /* vh-высоты: доля высоты фрейма → пиксели видимого экрана */
-      if (!el.getAttribute('data-eeh')) {
-        var h = parseFloat(cs.height) || 0, mh = parseFloat(cs.minHeight) || 0;
-        var hit = false;
-        for (var m = 0; !hit && m < MULTS.length; m++) {
-          var want = iH * MULTS[m];
-          if (h >= 200 && Math.abs(h - want) <= 3) {
-            el.style.height = Math.round(vh * MULTS[m]) + 'px'; hit = true;
-          } else if (mh >= 200 && Math.abs(mh - want) <= 3) {
-            el.style.minHeight = Math.round(vh * MULTS[m]) + 'px'; hit = true;
-          }
-        }
-        if (hit) el.setAttribute('data-eeh', '1');
+      if (el.getAttribute('data-eef') ||
+          (cs.position !== 'fixed' && cs.position !== 'sticky')) continue;
+      el.setAttribute('data-eef', '1');
+      var t = parseFloat(cs.top), b = parseFloat(cs.bottom);
+      if (!isNaN(t) && cs.top !== 'auto') el.style.top = (t + off) + 'px';
+      if (!isNaN(b) && cs.bottom !== 'auto') el.style.bottom = (b + bottomPad) + 'px';
+      /* полноэкранная шторка (меню сайта): низ — НАД строкой ввода,
+         скролл — внутри шторки; иначе последние пункты прячутся
+         за полосой браузера и недокручиваются */
+      var fh = parseFloat(cs.height) || 0;
+      if (fh >= iH * 0.9) {
+        el.style.height = Math.round(vh - safeBar) + 'px';
+        el.style.overflowY = 'auto';
       }
     }
   }
@@ -451,7 +488,7 @@
     }
   }
 
-  function run() { rewriteSheets(); passElements(); padBody(); fixLinks(); fixInputs(); }
+  function run() { rewriteSheets(); overrideCrossLinks(); passElements(); padBody(); fixLinks(); fixInputs(); }
   run();
   if (document.readyState === 'loading')
     document.addEventListener('DOMContentLoaded', run);
